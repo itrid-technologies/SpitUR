@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="16dp"
+    tools:context=".ui.user_id.UserId">
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_back"
+        android:id="@+id/back"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back"
+        android:text="Enter Your User ID"
+        android:layout_marginEnd="70dp"
+        android:layout_marginTop="10dp"
+        style="@style/headingText"
+        android:layout_marginStart="6dp"
+        android:textSize="30sp"
+        android:gravity="start"
+        android:id="@+id/tv_enter_userid"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/tv_enter_userid"
+        app:layout_constraintEnd_toEndOf="@id/tv_enter_userid"
+        android:textSize="13sp"
+        android:textColor="@color/hint_color"
+        android:fontFamily="@font/poppin_regular"
+        android:text="This is your id which you will use to  communicate with others"
+        app:layout_constraintTop_toBottomOf="@id/tv_enter_userid"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="50dp"
+        android:id="@+id/tv_id_info"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_id_info"
+        android:layout_margin="20dp"
+        android:hint="User ID"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint_color"
+        android:fontFamily="@font/poppin_regular"
+        android:textSize="15sp"
+        android:drawablePadding="10dp"
+        android:gravity="start|center"
+        android:background="@drawable/round_back"
+        android:backgroundTint="@color/light_blue"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/ic_userid"
+        android:id="@+id/ed_userId"/>
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ed_userId"
+        android:text="Continue"
+        style="@style/buttonStyle"
+        android:background="@drawable/button_round_bg"
+        android:paddingStart="60dp"
+        android:paddingEnd="60dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:id="@+id/btn_continue"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

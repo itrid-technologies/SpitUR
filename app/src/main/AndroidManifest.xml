@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="split.com.app">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Split">
+        <activity
+            android:name=".ui.terms_conditions.TermsAndConditions"
+            android:exported="false" />
+        <activity
+            android:name=".ui.avatar.ChooseAvatar"
+            android:exported="false" />
+        <activity
+            android:name=".ui.user_id.UserId"
+            android:exported="false" />
+        <activity
+            android:name=".ui.full_name.Name"
+            android:exported="false" />
+        <activity
+            android:name=".ui.otp_verification.OtpVerification"
+            android:exported="false" />
+        <activity
+            android:name=".ui.otp_phone_number.OtpNumber"
+            android:exported="false" />
+        <activity
+            android:name=".ui.splash.Splash"
+            android:exported="true"
+            android:screenOrientation="fullSensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>

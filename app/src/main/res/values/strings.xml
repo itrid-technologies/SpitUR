@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Split</string>
+    <string name="get_started">Get Started</string>
+    <string name="earn">Earn</string>
+    <string name="subscribe">Subscribe,</string>
+    <string name="share">Share,</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="enter_verification_code">Enter Verification Code</string>
+    <string name="verify">Verify</string>
+    <string name="label_terms"><![CDATA[Terms &\nConditions]]></string>
+    <string name="label_conditions"><![CDATA[The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: “Client”, “You” and “Your” refers to you, the person log on\n\nRead full Terms & Conditions]]></string>
+    <string name="label_agree"><![CDATA[By continuing you agree Taskez’s Terms of\nServices & Privacy Policy]]></string>
+</resources>
