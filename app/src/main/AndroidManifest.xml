@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Split">
         <activity
+            android:name=".ui.dashboard.Dashboard"
+            android:exported="false" >
+
+        </activity>
+        <activity
             android:name=".ui.terms_conditions.TermsAndConditions"
             android:exported="false" />
         <activity

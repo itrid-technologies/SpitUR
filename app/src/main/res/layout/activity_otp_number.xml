@@ -74,6 +74,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:padding="12dp"
             android:hint="Enter your number"
+            android:cursorVisible="false"
             android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:inputType="number"
@@ -113,11 +114,11 @@
         android:text="@string/send_otp"
         style="@style/buttonStyle"
         android:background="@drawable/button_round_bg"
-        android:paddingStart="54dp"
+        android:paddingStart="80dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:textSize="14dp"
-        android:paddingEnd="54dp"
+        android:paddingEnd="80dp"
         android:fontFamily="@font/poppins_semibold"
         android:id="@+id/send_otp_button"/>
 

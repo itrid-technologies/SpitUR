@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.Home">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Hello,"
+                android:fontFamily="@font/poppin_regular"
+                android:textColor="@color/hint_color"
+                android:textSize="20sp"
+                android:id="@+id/hello"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hello"
+                android:text="Dorek Doyle"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
+                android:layout_marginTop="-10dp"
+                android:textSize="30sp"
+                android:id="@+id/name"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/user"
+                app:civ_border_width="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                android:text="Search"
+                android:gravity="center|start"
+                android:textColor="@color/dark_grey"
+                android:drawableStart="@drawable/search_icon"
+                android:drawablePadding="8dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppin_regular"
+                android:background="@drawable/rect_bg"
+                android:padding="12dp"
+                android:layout_marginTop="6dp"
+                android:id="@+id/search"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/search"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Popular"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_medium"
+                android:background="@drawable/round_back"
+                android:backgroundTint="@color/blue"
+                android:padding="8dp"
+                android:layout_marginTop="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center"
+                android:id="@+id/popular"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/popular"
+                app:layout_constraintBottom_toBottomOf="@id/popular"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="View All"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/light_grey"
+                android:textSize="14sp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/popular"
+                android:layout_marginTop="10dp"
+                android:id="@+id/popularLst"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/popularLst"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Categories"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:id="@+id/categories"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/categories"
+                android:layout_marginTop="10dp"
+                android:id="@+id/categoriesLst"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/categoriesLst"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Movies / Tv Shows"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:id="@+id/movies"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/movies"
+                app:layout_constraintBottom_toBottomOf="@id/movies"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="View All"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/light_grey"
+                android:textSize="14sp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/movies"
+                android:layout_marginTop="10dp"
+                android:id="@+id/moviesList"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/home2">
 
+    <fragment
+        android:id="@+id/home2"
+        android:name="split.com.app.ui.home.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_search2"
+            app:destination="@id/search2"/>
+    </fragment>
+    <fragment
+        android:id="@+id/search2"
+        android:name="split.com.app.ui.search.Search"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_search2_to_plans2"
+            app:destination="@id/plans2"/>
+    </fragment>
+    <fragment
+        android:id="@+id/plans2"
+        android:name="split.com.app.ui.plans.Plans"
+        android:label="fragment_plans"
+        tools:layout="@layout/fragment_plans" >
+        <action
+            android:id="@+id/action_plans2_to_visibility2"
+            app:destination="@id/visibility2"/>
+    </fragment>
+    <fragment
+        android:id="@+id/visibility2"
+        android:name="split.com.app.ui.create_visibility.Visibility"
+        android:label="fragment_visibility"
+        tools:layout="@layout/fragment_visibility" >
+        <action
+            android:id="@+id/action_visibility2_to_cost2"
+            app:destination="@id/cost2" />
+    </fragment>
+    <fragment
+        android:id="@+id/cost2"
+        android:name="split.com.app.ui.create_cost.Cost"
+        android:label="fragment_cost"
+        tools:layout="@layout/fragment_cost" >
+        <action
+            android:id="@+id/action_cost2_to_credentials2"
+            app:destination="@id/credentials2" />
+    </fragment>
+    <fragment
+        android:id="@+id/credentials2"
+        android:name="split.com.app.ui.enter_credentials.Credentials"
+        android:label="fragment_credentials"
+        tools:layout="@layout/fragment_credentials" >
+        <action
+            android:id="@+id/action_credentials2_to_phoneCredentials"
+            app:destination="@id/phoneCredentials" />
+    </fragment>
+    <fragment
+        android:id="@+id/phoneCredentials"
+        android:name="split.com.app.ui.enter_phone_number.PhoneCredentials"
+        android:label="fragment_phone_credentials"
+        tools:layout="@layout/fragment_phone_credentials" >
+        <action
+            android:id="@+id/action_phoneCredentials_to_otpSuccess"
+            app:destination="@id/otpSuccess" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpSuccess"
+        android:name="split.com.app.ui.success_seller.OtpSuccess"
+        android:label="fragment_otp_success"
+        tools:layout="@layout/fragment_otp_success" />
 </navigation>
