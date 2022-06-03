@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    tools:context=".ui.main.view.profile.Profile">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Hello,"
+                android:fontFamily="@font/poppin_regular"
+                android:textColor="@color/hint_color"
+                android:textSize="20sp"
+                android:id="@+id/hello"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hello"
+                android:text="Dorek Doyle"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
+                android:layout_marginTop="-10dp"
+                android:textSize="30sp"
+                android:id="@+id/name"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/user"
+                app:civ_border_width="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                android:src="@drawable/ic_mocard_137"
+                android:id="@+id/background_image"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/background_image"
+                android:text="splitur"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="36dp"
+                style="@style/semiBoldText"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/background_image"
+                app:layout_constraintBottom_toBottomOf="@id/background_image"
+                android:src="@drawable/ic_wallet"
+                android:layout_marginEnd="30dp"
+                android:padding="10dp"
+                />
+
+
+
+            <TextView
+                android:id="@+id/coinValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/background_image"
+                android:text="436"
+                android:textSize="26sp"
+                android:layout_marginStart="30dp"
+                style="@style/semiBoldText"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/coinValue"
+                app:layout_constraintBottom_toBottomOf="@id/coinValue"
+                android:text="Coins"
+                android:padding="5dp"
+                android:textSize="18sp"
+                style="@style/semiBoldText"/>
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toStartOf="@id/swap_icon"
+                app:layout_constraintTop_toBottomOf="@id/background_image"
+                android:src="@drawable/pyment"
+                android:id="@+id/payment_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/payment_icon"
+                app:layout_constraintTop_toBottomOf="@id/payment_icon"
+                android:text="Payments"
+                style="@style/normalText"
+                app:layout_constraintEnd_toEndOf="@id/payment_icon"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:id="@+id/payment"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/swap_icon"
+                app:layout_constraintTop_toBottomOf="@id/background_image"
+                android:src="@drawable/refund"
+                android:layout_marginTop="15dp"
+                android:id="@+id/refund_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/swap_icon"
+                app:layout_constraintTop_toBottomOf="@id/swap_icon"
+                android:text="Swap Coins"
+                style="@style/normalText"
+                app:layout_constraintEnd_toEndOf="@id/swap_icon"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:id="@+id/swap"/>
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/payment_icon"
+                app:layout_constraintEnd_toStartOf="@id/refund_icon"
+                app:layout_constraintTop_toBottomOf="@id/background_image"
+                android:src="@drawable/swap"
+                android:layout_marginTop="15dp"
+                android:id="@+id/swap_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/refund_icon"
+                app:layout_constraintTop_toBottomOf="@id/refund_icon"
+                android:text="Refund"
+                style="@style/normalText"
+                app:layout_constraintEnd_toEndOf="@id/refund_icon"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:id="@+id/refund"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/transaction_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/payment"
+                android:layout_margin="10dp"
+                android:background="@drawable/plan_bg_blue_stroke"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/transaction"
+                    android:padding="10dp"
+                    android:id="@+id/transaction_icon"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Payments"
+                    style="@style/headingText"
+                    android:textSize="24sp"
+                    android:layout_marginStart="15dp"
+                    android:id="@+id/tv_payment"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_payment"
+                    app:layout_constraintTop_toBottomOf="@id/tv_payment"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="-8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Transactions and UPI Payment Methods"
+                    style="@style/normalText"
+                    android:id="@+id/tv_transaction"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/promotion_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/transaction_layout"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/plan_bg_blue_stroke"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/promotion"
+                    android:padding="10dp"
+                    android:id="@+id/promotion_icon"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Promotion"
+                    style="@style/headingText"
+                    android:textSize="24sp"
+                    android:layout_marginStart="15dp"
+                    android:id="@+id/tv_promotion"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_promotion"
+                    app:layout_constraintTop_toBottomOf="@id/tv_promotion"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="-8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Earn Credits when you Invite Friends"
+                    style="@style/normalText"
+                    android:id="@+id/tv_promotion_detail"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="split.com.app">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,41 +13,52 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Split">
         <activity
-            android:name=".ui.dashboard.Dashboard"
-            android:exported="false" >
+            android:name=".ui.main.view.dashboard.Dashboard"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            >
 
         </activity>
         <activity
-            android:name=".ui.terms_conditions.TermsAndConditions"
-            android:exported="false" />
+            android:name=".ui.main.view.terms_conditions.TermsAndConditions"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name=".ui.avatar.ChooseAvatar"
-            android:exported="false" />
+            android:name=".ui.main.view.avatar.ChooseAvatar"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name=".ui.user_id.UserId"
-            android:exported="false" />
+            android:name=".ui.main.view.user_id.UserId"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name=".ui.full_name.Name"
-            android:exported="false" />
+            android:name=".ui.main.view.full_name.Name"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name=".ui.otp_verification.OtpVerification"
-            android:exported="false" />
+            android:name=".ui.main.view.otp_verification.OtpVerification"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name=".ui.otp_phone_number.OtpNumber"
-            android:exported="false" />
+            android:name=".ui.main.view.otp_phone_number.OtpNumber"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name=".ui.splash.Splash"
+            android:name=".ui.main.view.splash.Splash"
             android:exported="true"
-            android:screenOrientation="fullSensor">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

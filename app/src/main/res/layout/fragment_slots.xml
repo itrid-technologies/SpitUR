@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.slots.Slots">
+    tools:context=".ui.main.view.slots.Slots">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -77,6 +77,79 @@
                     style="@style/normalText"
                     android:layout_marginEnd="30dp"
                     android:id="@+id/sub_detail"/>
+
+                <TextView
+                    android:id="@+id/slotValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/rect_bg"
+                    android:backgroundTint="@color/light_blue"
+                    app:layout_constraintTop_toBottomOf="@id/sub_detail"
+                    android:text="5"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppin_regular"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
+                    android:layout_marginTop="20dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    app:layout_constraintEnd_toStartOf="@id/slotValue"
+                    android:background="@drawable/round_back"
+                    android:backgroundTint="@color/light_blue"
+                    android:src="@drawable/red_arrow"
+                    app:layout_constraintTop_toBottomOf="@id/sub_detail"
+                    android:layout_marginTop="20dp"
+                    android:padding="12dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/slotValue"
+                    android:background="@drawable/round_back"
+                    android:layout_marginStart="30dp"
+                    android:backgroundTint="@color/light_blue"
+                    android:src="@drawable/green_arrow"
+                    app:layout_constraintTop_toBottomOf="@id/sub_detail"
+                    android:layout_marginTop="20dp"
+                    android:padding="12dp"/>
+
+
+                <com.konaire.numerickeyboard.NumericKeyboard
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/send_otp_button"
+                    android:layout_gravity="bottom"
+                    app:keySpecial="*"
+                    android:layout_marginBottom="20dp"
+                    app:field="@+id/slotValue"
+                    app:keyTextColor="@color/white" />
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="@string/next"
+                    style="@style/buttonStyle"
+                    android:background="@drawable/button_round_bg"
+                    android:paddingStart="80dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="14dp"
+                    android:paddingEnd="80dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:id="@+id/send_otp_button"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

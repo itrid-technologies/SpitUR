@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
-    tools:context=".ui.success_seller.OtpSuccess">
+    tools:context=".ui.main.view.success_seller.OtpSuccess">
 
     <ScrollView
         android:layout_width="match_parent"

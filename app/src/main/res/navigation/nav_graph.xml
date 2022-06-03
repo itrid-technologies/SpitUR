@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home2"
-        android:name="split.com.app.ui.home.Home"
+        android:name="split.com.app.ui.main.view.home.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/search2"
-        android:name="split.com.app.ui.search.Search"
+        android:name="split.com.app.ui.main.view.search.Search"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/plans2"
-        android:name="split.com.app.ui.plans.Plans"
+        android:name="split.com.app.ui.main.view.plans.Plans"
         android:label="fragment_plans"
         tools:layout="@layout/fragment_plans" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/visibility2"
-        android:name="split.com.app.ui.create_visibility.Visibility"
+        android:name="split.com.app.ui.main.view.create_visibility.Visibility"
         android:label="fragment_visibility"
         tools:layout="@layout/fragment_visibility" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/cost2"
-        android:name="split.com.app.ui.create_cost.Cost"
+        android:name="split.com.app.ui.main.view.create_cost.Cost"
         android:label="fragment_cost"
         tools:layout="@layout/fragment_cost" >
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/credentials2"
-        android:name="split.com.app.ui.enter_credentials.Credentials"
+        android:name="split.com.app.ui.main.view.enter_credentials.Credentials"
         android:label="fragment_credentials"
         tools:layout="@layout/fragment_credentials" >
         <action
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/phoneCredentials"
-        android:name="split.com.app.ui.enter_phone_number.PhoneCredentials"
+        android:name="split.com.app.ui.main.view.enter_phone_number.PhoneCredentials"
         android:label="fragment_phone_credentials"
         tools:layout="@layout/fragment_phone_credentials" >
         <action
@@ -70,7 +70,21 @@
     </fragment>
     <fragment
         android:id="@+id/otpSuccess"
-        android:name="split.com.app.ui.success_seller.OtpSuccess"
+        android:name="split.com.app.ui.main.view.success_seller.OtpSuccess"
         android:label="fragment_otp_success"
         tools:layout="@layout/fragment_otp_success" />
+    <fragment
+        android:id="@+id/profile2"
+        android:name="split.com.app.ui.main.view.profile.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile2_to_refund2"
+            app:destination="@id/refund2" />
+    </fragment>
+    <fragment
+        android:id="@+id/refund2"
+        android:name="split.com.app.ui.main.view.refund.Refund"
+        android:label="fragment_refund"
+        tools:layout="@layout/fragment_refund" />
 </navigation>

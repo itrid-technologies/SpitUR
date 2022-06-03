@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:padding="16dp"
-    tools:context=".ui.user_id.UserId">
+    tools:context=".ui.main.view.user_id.UserId">
 
 
 

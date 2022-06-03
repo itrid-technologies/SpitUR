@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:padding="16dp"
-    tools:context=".ui.otp_verification.OtpVerification">
+    tools:context=".ui.main.view.otp_verification.OtpVerification">
 
 
     <ImageView
