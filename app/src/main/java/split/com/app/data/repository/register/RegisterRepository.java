@@ -1,9 +1,8 @@
-package split.com.app.data.repository;
+package split.com.app.data.repository.register;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 
 import retrofit2.Call;
@@ -11,8 +10,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
-import split.com.app.data.model.RegisterModel;
-import split.com.app.data.model.phone_number.NumberModel;
+import split.com.app.data.model.register.RegisterModel;
 
 public class RegisterRepository {
 

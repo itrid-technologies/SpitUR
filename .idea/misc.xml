@@ -28,6 +28,7 @@
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/drawable/round_back.xml" value="0.263" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/drawable/round_bg_white_strokes.xml" value="0.263" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/drawable/selected_gradient_stroke.xml" value="0.263" />
+        <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/drawable/terms_bg.xml" value="0.2465" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/activity_choose_avatar.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/activity_dashboard.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/activity_main.xml" value="0.371875" />
@@ -40,15 +41,18 @@
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_blank.xml" value="0.19375" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_cost.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_credentials.xml" value="0.371875" />
+        <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_enter_upi_id.xml" value="0.22" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_otp_success.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_phone_credentials.xml" value="0.3578125" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_plans.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_profile.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_refund.xml" value="0.371875" />
+        <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_refund_completion.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_search.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_slots.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_subscription_name.xml" value="0.371875" />
+        <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_user_information.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_visibility.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/home_category_list_item.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/home_popular_list_items.xml" value="0.371875" />

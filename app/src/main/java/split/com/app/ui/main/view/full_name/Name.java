@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,7 +43,8 @@ public class Name extends AppCompatActivity {
                 ActivityUtil.gotoPage(Name.this, UserId.class);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }else {
-                binding.edName.setError("Enter name");
+                binding.errorMessage.setVisibility(View.VISIBLE);
+                binding.errorMessage.setText("Enter name");
             }
         });
 

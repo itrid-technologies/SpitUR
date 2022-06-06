@@ -1,5 +1,7 @@
 package split.com.app.data.api;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -65,6 +67,7 @@ public class ApiManager {
             this.authToken = token;
         }
 
+        @NonNull
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
             Request original = chain.request();

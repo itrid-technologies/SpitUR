@@ -1,14 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.view.profile_information.UserInformation">
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:padding="10dp"
+    android:layout_margin="10dp"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="0dp"
+    app:cardCornerRadius="18dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/profile_bg"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="20dp">
 
-</FrameLayout>
+
+        <View
+            android:id="@+id/SlideUp"
+            android:layout_width="70dp"
+            android:layout_height="3dp"
+            android:background="@color/dark_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/avatar_bg_frame"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/avatar_background"
+            android:importantForAccessibility="no"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SlideUp" />
+
+        <ImageButton
+            android:id="@+id/previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:rotation="180"
+            android:src="@drawable/next"
+            app:layout_constraintBottom_toBottomOf="@id/avatar_bg_frame"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/avatar_bg_frame" />
+
+        <ImageButton
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:src="@drawable/next"
+            app:layout_constraintBottom_toBottomOf="@id/avatar_bg_frame"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/avatar_bg_frame" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_avatars"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="15dp"
+            android:background="@android:color/transparent"
+            android:isScrollContainer="false"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/avatar_bg_frame"
+            app:layout_constraintEnd_toEndOf="@id/avatar_bg_frame"
+            app:layout_constraintStart_toStartOf="@id/avatar_bg_frame"
+            app:layout_constraintTop_toTopOf="@id/avatar_bg_frame" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/avatar_bg_frame"
+            android:text="Full name"
+            style="@style/semiBoldText"
+            android:id="@+id/tv_fullname"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_fullname"
+            android:hint="Rajesh Kumar"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_color"
+            android:fontFamily="@font/poppin_regular"
+            android:textSize="15sp"
+            android:drawablePadding="10dp"
+            android:gravity="start|center"
+            android:background="@drawable/round_back"
+            android:backgroundTint="@color/light_blue"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_user"
+            android:id="@+id/ed_name"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ed_name"
+            android:text="User Id"
+            android:layout_marginTop="10dp"
+            style="@style/semiBoldText"
+            android:id="@+id/tv_id"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_id"
+            android:hint="rajest@sbi"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_color"
+            android:fontFamily="@font/poppin_regular"
+            android:textSize="15sp"
+            android:drawablePadding="10dp"
+            android:gravity="start|center"
+            android:background="@drawable/round_back"
+            android:backgroundTint="@color/light_blue"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_user"
+            android:id="@+id/ed_id"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ed_id"
+            android:text="Email Id"
+            android:layout_marginTop="10dp"
+            style="@style/semiBoldText"
+            android:id="@+id/tv_email"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_email"
+            android:hint="rajest@gmail.com"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_color"
+            android:fontFamily="@font/poppin_regular"
+            android:textSize="15sp"
+            android:drawablePadding="10dp"
+            android:gravity="start|center"
+            android:background="@drawable/round_back"
+            android:backgroundTint="@color/light_blue"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_user"
+            android:id="@+id/ed_email"/>
+
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ed_email"
+            android:text="Save"
+            style="@style/buttonStyle"
+            android:background="@drawable/button_round_bg"
+            android:paddingStart="80dp"
+            android:paddingEnd="80dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:id="@+id/btn_save"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

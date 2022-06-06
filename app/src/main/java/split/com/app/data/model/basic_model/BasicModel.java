@@ -1,8 +1,8 @@
-package split.com.app.data.model.send_otp;
+package split.com.app.data.model.basic_model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class OtpModel{
+public class BasicModel {
 
 	@SerializedName("message")
 	private String message;

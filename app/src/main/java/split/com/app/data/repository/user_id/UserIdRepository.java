@@ -1,2 +1,44 @@
-package split.com.app.data.repository.user_id;public class UserIdRepository {
+package split.com.app.data.repository.user_id;
+
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import split.com.app.data.api.ApiManager;
+import split.com.app.data.api.ApiService;
+import split.com.app.data.model.basic_model.BasicModel;
+
+public class UserIdRepository {
+    private ApiService apiService;
+
+    public UserIdRepository() {
+    }
+
+    public MutableLiveData<BasicModel> checkUserId(String id) {
+        final MutableLiveData<BasicModel> BasicModelMutableLiveData = new MutableLiveData<>();
+        apiService = ApiManager.getClientAuthentication().create(ApiService.class);
+        Call<BasicModel> call = apiService.checkUserIdExistence(id);
+        call.enqueue(new Callback<BasicModel>() {
+            @Override
+            public void onResponse(Call<BasicModel> call, Response<BasicModel> response) {
+                if(response.body()!=null)
+                {
+                    BasicModelMutableLiveData.setValue(response.body());
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<BasicModel> call, Throwable t) {
+                Log.e("Avatar Error",t.getMessage());
+            }
+        });
+
+        return BasicModelMutableLiveData;
+    }
 }

@@ -1,15 +1,15 @@
 package split.com.app.data.api;
 
-import androidx.databinding.ObservableField;
-
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import split.com.app.data.model.RegisterModel;
+import split.com.app.data.model.otp_verification.AuthenticationModel;
+import split.com.app.data.model.register.RegisterModel;
 import split.com.app.data.model.get_avatar.AvatarModel;
 import split.com.app.data.model.phone_number.NumberModel;
+import split.com.app.data.model.basic_model.BasicModel;
 
 public interface ApiService {
 
@@ -18,7 +18,24 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("users/phoneAlreadyExist")
-    Call<NumberModel> checkNumberExistence(@Field("phone") ObservableField<String> number);
+    Call<NumberModel> checkNumberExistence(@Field("phone") String number);
 
 
+    @FormUrlEncoded
+    @POST("users/register")
+    Call<RegisterModel> register(@Field("phone") String number,
+                                 @Field("name") String name,
+                                 @Field("avatar") String avatar,
+                                 @Field("userId") String id);
+    @FormUrlEncoded
+    @POST("users/sendOtp")
+    Call<BasicModel> sendOTP(@Field("phone") String number);
+
+    @FormUrlEncoded
+    @POST("users/authentication")
+    Call<AuthenticationModel> authenticateUser(@Field("phone") String number,
+                                               @Field("otp") String otp);
+    @FormUrlEncoded
+    @POST("users/usernameExists")
+    Call<BasicModel> checkUserIdExistence(@Field("userId") String id);
 }

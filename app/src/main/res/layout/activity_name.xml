@@ -52,7 +52,17 @@
         android:drawableLeft="@drawable/ic_user"
         android:id="@+id/ed_name"/>
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/ed_name"
+        app:layout_constraintEnd_toEndOf="@id/ed_name"
+        app:layout_constraintTop_toBottomOf="@id/ed_name"
+        style="@style/normalText"
+        android:textColor="@color/error"
+        android:padding="3dp"
+        android:visibility="gone"
+        android:id="@+id/errorMessage"/>
 
     <Button
         android:layout_width="wrap_content"

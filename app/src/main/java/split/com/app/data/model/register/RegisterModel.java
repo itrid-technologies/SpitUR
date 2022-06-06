@@ -1,4 +1,4 @@
-package split.com.app.data.model;
+package split.com.app.data.model.register;
 
 import com.google.gson.annotations.SerializedName;
 

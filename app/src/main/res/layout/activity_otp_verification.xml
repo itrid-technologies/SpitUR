@@ -1,46 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:padding="16dp"
-    tools:context=".ui.main.view.otp_verification.OtpVerification">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_back"
-        android:id="@+id/back"/>
+        <variable
+            name="viewmodel"
+            type="OtpVerificationViewModel" />
 
-    <TextView
+        <import type="split.com.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/back"
-        android:text="@string/enter_verification_code"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="10dp"
-        style="@style/headingText"
-        android:layout_marginStart="6dp"
-        android:textSize="30sp"
-        android:gravity="start"
-        android:id="@+id/tv_enter_code"/>
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:padding="16dp"
+        tools:context=".ui.main.view.otp_verification.OtpVerification">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_enter_code"
-        android:text="Resend"
-        android:textColor="@color/hint_color"
-        android:paddingEnd="10dp"
-        android:id="@+id/remaining_time"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_back"
+            android:id="@+id/back"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/back"
+            android:text="@string/enter_verification_code"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="10dp"
+            style="@style/headingText"
+            android:layout_marginStart="6dp"
+            android:textSize="30sp"
+            android:gravity="start"
+            android:id="@+id/tv_enter_code"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_enter_code"
+            android:text="00:00"
+            android:textColor="@color/hint_color"
+            android:paddingEnd="10dp"
+            android:id="@+id/remaining_time"/>
 
 
 
@@ -57,6 +69,7 @@
             android:textStyle="bold"
             app:cursorWidth="0dp"
             app:hideLineWhenFilled="true"
+            android:text="@={viewmodel.otp}"
             android:itemBackground="@drawable/otp_bg"
             app:itemCount="4"
             app:itemHeight="60dp"
@@ -81,35 +94,36 @@
 
 
 
-    <com.konaire.numerickeyboard.NumericKeyboard
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/verify_button"
-        android:layout_gravity="bottom"
-        app:keySpecial="*"
-        android:layout_marginBottom="20dp"
-        app:field="@+id/otp"
-        app:keyTextColor="@color/white" />
+        <com.konaire.numerickeyboard.NumericKeyboard
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/verify_button"
+            android:layout_gravity="bottom"
+            app:keySpecial="*"
+            android:layout_marginBottom="20dp"
+            app:field="@+id/otp"
+            app:keyTextColor="@color/white" />
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="@string/verify"
-        style="@style/buttonStyle"
-        android:background="@drawable/button_round_bg"
-        android:paddingStart="80dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:textSize="14dp"
-        android:paddingEnd="80dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:id="@+id/verify_button"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/verify"
+            style="@style/buttonStyle"
+            android:background="@drawable/button_round_bg"
+            android:paddingStart="80dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="14dp"
+            android:paddingEnd="80dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:id="@+id/verify_button"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

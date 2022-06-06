@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import split.com.app.R;
 import split.com.app.databinding.FragmentRefundBinding;
+import split.com.app.ui.main.view.dashboard.Dashboard;
 
 
 public class Refund extends Fragment {
@@ -23,7 +25,7 @@ public class Refund extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentRefundBinding.inflate(inflater, container, false);
-
+        Dashboard.hideNav(true);
         return binding.getRoot();
     }
 
@@ -37,6 +39,10 @@ public class Refund extends Fragment {
     private void initClickListeners() {
         binding.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
+        });
+
+        binding.btnNext.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_refund2_to_enterUpiId);
         });
 
 

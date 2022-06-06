@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import split.com.app.databinding.FragmentOtpSuccessBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.utils.ActivityUtil;
 
 
 public class OtpSuccess extends Fragment {
@@ -34,8 +35,7 @@ public class OtpSuccess extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.btnHome.setOnClickListener(view1 -> {
-            Intent intent = new Intent(requireContext(), Dashboard.class);
-            startActivity(intent);
+            ActivityUtil.gotoHome(requireContext());
         });
 
     }

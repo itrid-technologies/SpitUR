@@ -10,8 +10,7 @@ public class Data{
 	@SerializedName("phone")
 	private String phone;
 
-	@SerializedName("created")
-	private String created;
+
 
 	@SerializedName("name")
 	private String name;
@@ -28,8 +27,7 @@ public class Data{
 	@SerializedName("userId")
 	private String userId;
 
-	@SerializedName("updated")
-	private Object updated;
+
 
 	@SerializedName("updatedAt")
 	private String updatedAt;
@@ -45,9 +43,7 @@ public class Data{
 		return phone;
 	}
 
-	public String getCreated(){
-		return created;
-	}
+
 
 	public String getName(){
 		return name;
@@ -69,9 +65,6 @@ public class Data{
 		return userId;
 	}
 
-	public Object getUpdated(){
-		return updated;
-	}
 
 	public String getUpdatedAt(){
 		return updatedAt;

@@ -21,8 +21,11 @@ public class AvatarRepository {
 
     public MutableLiveData<AvatarModel> getAvatar() {
         final MutableLiveData<AvatarModel> avatarModelMutableLiveData = new MutableLiveData<>();
+
         apiService = ApiManager.getClientAuthentication().create(ApiService.class);
+
         Call<AvatarModel> call = apiService.getAvatar();
+
         call.enqueue(new Callback<AvatarModel>() {
             @Override
             public void onResponse(Call<AvatarModel> call, Response<AvatarModel> response) {

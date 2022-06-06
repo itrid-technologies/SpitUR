@@ -20,5 +20,8 @@
     <color name="icons_bg">#00388C</color>
     <color name="orange">#F7931A</color>
     <color name="transparent">#00000000</color>
+    <color name="profile_bg">#262A34</color>
+    <color name="terms_bg">#1C2431</color>
+    <color name="error">#FFDD2C00</color>
 
 </resources>

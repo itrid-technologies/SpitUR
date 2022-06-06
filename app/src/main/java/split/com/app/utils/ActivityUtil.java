@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
-
+import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.view.otp_phone_number.OtpNumber;
 
 
@@ -31,8 +31,8 @@ public class ActivityUtil {
         context.startActivity(intent);
     }
 
-    public static void gotoLogin(Context context) {
-        Intent intent = new Intent(context, OtpNumber.class);
+    public static void gotoHome(Context context) {
+        Intent intent = new Intent(context, Dashboard.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }

@@ -86,5 +86,23 @@
         android:id="@+id/refund2"
         android:name="split.com.app.ui.main.view.refund.Refund"
         android:label="fragment_refund"
-        tools:layout="@layout/fragment_refund" />
+        tools:layout="@layout/fragment_refund" >
+        <action
+            android:id="@+id/action_refund2_to_enterUpiId"
+            app:destination="@id/enterUpiId" />
+    </fragment>
+    <fragment
+        android:id="@+id/enterUpiId"
+        android:name="split.com.app.ui.main.view.refund_upi_id.EnterUpiId"
+        android:label="fragment_enter_upi_id"
+        tools:layout="@layout/fragment_enter_upi_id" >
+        <action
+            android:id="@+id/action_enterUpiId_to_refundCompletion"
+            app:destination="@id/refundCompletion" />
+    </fragment>
+    <fragment
+        android:id="@+id/refundCompletion"
+        android:name="split.com.app.ui.main.view.refund_complete.RefundCompletion"
+        android:label="fragment_refund_completion"
+        tools:layout="@layout/fragment_refund_completion" />
 </navigation>
