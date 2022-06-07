@@ -14,6 +14,7 @@ import split.com.app.databinding.ActivityOtpVerificationBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel;
 import split.com.app.utils.ActivityUtil;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 
 public class OtpVerification extends AppCompatActivity {
@@ -95,7 +96,7 @@ public class OtpVerification extends AppCompatActivity {
                     preferences.saveData(this, "userId", authenticationModel.getData().getUserId());
                     preferences.saveData(this, "userOtp", authenticationModel.getData().getOtpHash());
                     preferences.saveData(this, "userName", authenticationModel.getData().getName());
-                    preferences.saveData(this, "userAvatar", authenticationModel.getData().getAvatar());
+                    preferences.saveData(this, "userAvatar", Constants.IMG_PATH + authenticationModel.getData().getAvatar());
                     preferences.saveData(this, "userCreatedAt", authenticationModel.getData().getCreatedAt());
                     preferences.saveData(this, "userAccessToken", authenticationModel.getData().getToken());
 

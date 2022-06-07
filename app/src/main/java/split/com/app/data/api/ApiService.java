@@ -4,7 +4,10 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import split.com.app.data.model.home_categories.CategoriesModel;
 import split.com.app.data.model.otp_verification.AuthenticationModel;
 import split.com.app.data.model.register.RegisterModel;
 import split.com.app.data.model.get_avatar.AvatarModel;
@@ -38,4 +41,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("users/usernameExists")
     Call<BasicModel> checkUserIdExistence(@Field("userId") String id);
+
+    @GET("groups/get_categories")
+    Call<CategoriesModel> getAllCategories(@Header("Authorization") String token);
 }

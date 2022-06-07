@@ -15,6 +15,7 @@ import split.com.app.R;
 import split.com.app.databinding.FragmentRefundCompletionBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.utils.ActivityUtil;
+import split.com.app.utils.Split;
 
 
 public class RefundCompletion extends Fragment {
@@ -43,7 +44,7 @@ public class RefundCompletion extends Fragment {
         });
 
         binding.btnHome.setOnClickListener(view -> {
-            ActivityUtil.gotoHome(requireContext());
+            ActivityUtil.gotoHome(Split.getAppContext());
         });
     }
 }

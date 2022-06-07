@@ -10,21 +10,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import split.com.app.R;
+import split.com.app.data.model.home_categories.CategoryDataItems;
+import split.com.app.utils.Constants;
+import split.com.app.utils.Split;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryVH> {
 
-    private final List<Integer> Icons;
-    private final List<String> Names;
+    private final List<CategoryDataItems> categoryDataItems;
     private final Context context;
 
 
-    public CategoryAdapter(Context context, List<Integer> popIcons, List<String> popNames) {
-        this.context = context;
-        this.Icons = popIcons;
-        this.Names = popNames;
+    public CategoryAdapter(Context appContext, List<CategoryDataItems> category_list) {
+        this.context = appContext;
+        this.categoryDataItems = category_list;
     }
 
     @NonNull
@@ -36,15 +39,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.CategoryVH holder, int position) {
-        final Integer currentIcon = Icons.get(position);
-        final String currentName = Names.get(position);
-        holder.icon.setImageResource(currentIcon);
-        holder.name.setText(currentName);
+        CategoryDataItems current_item =  categoryDataItems.get(position);
+        Glide.with(context)
+                .load(Constants.IMG_PATH + current_item.getIcon())
+                .placeholder(R.drawable.player_icon)
+                .into(holder.icon);
+        holder.name.setText(current_item.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return Names.size();
+        return categoryDataItems.size();
     }
 
     public static class CategoryVH extends RecyclerView.ViewHolder {

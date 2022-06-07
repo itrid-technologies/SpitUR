@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import split.com.app.R;
+import split.com.app.utils.Constants;
 
 public class AdapterAvatars extends RecyclerView.Adapter<AdapterAvatars.AvatarsVH> {
 
@@ -36,7 +37,7 @@ public class AdapterAvatars extends RecyclerView.Adapter<AdapterAvatars.AvatarsV
     @Override
     public void onBindViewHolder(@NonNull AvatarsVH holder, int position) {
         final String currentAvatar = mAvatars.get(position);
-        Glide.with(ctx).load("http://192.168.100.19:4000"+currentAvatar).into(holder.avatar);
+        Glide.with(ctx).load(Constants.IMG_PATH +currentAvatar).into(holder.avatar);
     }
 
     @Override

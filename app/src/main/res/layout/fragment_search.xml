@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.view.search.Search">
+    tools:context=".ui.main.view.search_create.Search">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -54,7 +54,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="Search"
-                android:drawableEnd="@drawable/ic_close"
                 android:gravity="center|start"
                 android:textColor="@color/dark_grey"
                 android:drawableStart="@drawable/search_icon"

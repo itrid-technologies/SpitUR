@@ -23,5 +23,6 @@
     <color name="profile_bg">#262A34</color>
     <color name="terms_bg">#1C2431</color>
     <color name="error">#FFDD2C00</color>
+    <color name="yellow">#FFD300</color>
 
 </resources>
