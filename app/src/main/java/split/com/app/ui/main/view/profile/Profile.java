@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,15 +56,8 @@ public class Profile extends Fragment {
         initClickListeners();
 
 
-//        mViewModel = new AvatarViewModel();
-//        mViewModel.init();
-//        mViewModel.getData().observe(getActivity(), avatarModel -> {
-//            avatarList.addAll(avatarModel.getAvatar());
-//            for (int i=0; i <= avatarList.size()-1; i++){
-//                avatars.add(avatarList.get(i).getUrl());
-//            }
-//            buildAvatarsRV();
-//        });
+        mViewModel = new AvatarViewModel();
+
 
     }
 
@@ -90,11 +84,38 @@ public class Profile extends Fragment {
             Navigation.findNavController(view).navigate(R.id.action_profile2_to_contactUs);
         });
 
+        binding.swap.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_profile2_to_swapCoins);
+        });
+
+        binding.swapIcon.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_profile2_to_swapCoins);
+        });
+
+
         binding.userImage.setOnClickListener(view -> {
             final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
             bottomSheetDialog.setContentView(R.layout.fragment_user_information);
 
+          //  EditText name = item.findViewById(R.id.ed_name);
+
+
+
+//            mViewModel.init();
+//            mViewModel.getData().observe(getViewLifecycleOwner(), avatarModel -> {
+//                avatarList.addAll(avatarModel.getAvatar());
+//                for (int i=0; i <= avatarList.size()-1; i++){
+//                    avatars.add(avatarList.get(i).getUrl());
+//                }
+//                buildAvatarsRV();
+//            });
+
             bottomSheetDialog.show();
+
+//            MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+//            binding.userProfile.edId.setText(pm.getData(Split.getAppContext(),"userId"));
+//            binding.userProfile.edName.setText(pm.getData(Split.getAppContext(),"userName"));
+//            Glide.with(Split.getAppContext()).load(pm.getData(Split.getAppContext(),"userAvatar")).placeholder(R.drawable.user).into(binding.userImage);
         });
     }
 

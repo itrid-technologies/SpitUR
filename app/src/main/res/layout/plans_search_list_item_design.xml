@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rect_back_with_grey_stroke"
+    android:padding="10dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_user"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/user"
+        app:civ_border_color="@color/yellow"
+        app:civ_border_width="2dp"
+        app:civ_circle_background_color="#94F0F0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/iv_user_"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/round_back"
+        android:backgroundTint="@color/yellow"
+        android:text="23"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="10sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@id/iv_user"
+        app:layout_constraintEnd_toEndOf="@id/iv_user" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        style="@style/semiBoldText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:text="Rajesh Kumar"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/iv_user"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_slot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-9dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="4"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/tv_username"
+        app:layout_constraintTop_toBottomOf="@id/tv_username" />
+
+
+    <TextView
+        android:id="@+id/tv_slot_total"
+        style="@style/semiBoldText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:text="/4"
+        android:textColor="@color/dark_grey"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@id/tv_slot"
+        app:layout_constraintTop_toBottomOf="@id/tv_username" />
+
+
+    <TextView
+        android:id="@+id/tv_available"
+        style="@style/normalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text="Slots available"
+        android:textColor="@color/yellow"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_slot_total"
+        app:layout_constraintStart_toEndOf="@id/tv_slot_total" />
+
+    <TextView
+        android:id="@+id/tv_groupid"
+        style="@style/normalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Group Id:"
+        android:textColor="@color/dark_grey"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="@id/iv_user"
+        app:layout_constraintTop_toBottomOf="@id/iv_user" />
+
+    <TextView
+        android:id="@+id/tv_groupid_value"
+        style="@style/normalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="875690"
+        android:textColor="@color/dark_grey"
+        android:textSize="12dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toEndOf="@id/tv_groupid"
+        app:layout_constraintTop_toBottomOf="@id/iv_user" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_username"
+        app:layout_constraintBottom_toBottomOf="@id/tv_available"
+        android:background="@drawable/rect_blue_bg"
+        android:text="143 Coins"
+        android:layout_marginTop="-8dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:padding="8dp"/>
+
+
+
+    <TextView
+        android:id="@+id/tv_plan"
+        style="@style/normalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Netflix Premium"
+        android:textColor="@color/dark_grey"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

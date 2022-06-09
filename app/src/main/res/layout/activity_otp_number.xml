@@ -66,6 +66,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:ccp_showFlag="false"
+                app:ccp_defaultPhoneCode="92"
                 android:layout_marginStart="8dp"
                 app:ccp_textSize="16sp"
                 app:ccpDialog_textColor="@color/white"

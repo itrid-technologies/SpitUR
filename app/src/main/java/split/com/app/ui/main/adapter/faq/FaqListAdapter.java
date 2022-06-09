@@ -75,5 +75,5 @@ public class FaqListAdapter extends RecyclerView.Adapter<FaqListAdapter.FaqVH> {
             view = itemView.findViewById(R.id.closeView);
 
         }
-    }//vh
+    }
 }

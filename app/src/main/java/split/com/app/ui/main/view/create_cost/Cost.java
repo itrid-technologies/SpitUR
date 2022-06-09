@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import split.com.app.R;
 import split.com.app.databinding.FragmentCostBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.utils.MySharedPreferences;
+import split.com.app.utils.Split;
 
 
 public class Cost extends Fragment {
@@ -42,7 +44,15 @@ public class Cost extends Fragment {
         });
 
         binding.btnNext.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
+            String cost = binding.costValue.getText().toString().trim();
+            if (!cost.isEmpty()){
+                MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+                pm.saveData(Split.getAppContext(), "COST", cost);
+                Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
+            }else {
+                binding.errorMessage.setVisibility(View.VISIBLE);
+                binding.errorMessage.setText("Enter cost per member");
+            }
         });
     }
 }

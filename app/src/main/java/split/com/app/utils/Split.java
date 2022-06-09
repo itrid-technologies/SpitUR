@@ -12,6 +12,7 @@ public class Split extends Application {
         return _splitInstance;
     }
 
+
     @Override
     public void onCreate() {
         super.onCreate();

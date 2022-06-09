@@ -116,6 +116,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toStartOf="@id/swap_icon"
                 app:layout_constraintTop_toBottomOf="@id/background_image"
                 android:src="@drawable/pyment"
@@ -140,6 +141,7 @@
                 app:layout_constraintStart_toEndOf="@id/swap_icon"
                 app:layout_constraintTop_toBottomOf="@id/background_image"
                 android:src="@drawable/refund"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
                 android:id="@+id/refund_icon"/>
 
@@ -163,6 +165,8 @@
                 app:layout_constraintEnd_toStartOf="@id/refund_icon"
                 app:layout_constraintTop_toBottomOf="@id/background_image"
                 android:src="@drawable/swap"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="15dp"
                 android:id="@+id/swap_icon"/>
 
@@ -306,8 +310,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="Friends"
                     style="@style/headingText"
-                    android:layout_marginStart="15dp"
                     android:textSize="24sp"
+                    android:layout_marginStart="15dp"
                     android:id="@+id/tv_friends"/>
 
                 <TextView

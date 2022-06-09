@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:background="@drawable/only_stroke"
+    android:padding="2dp"
+    android:id="@+id/plan_stroke"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="1dp"
+        >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:background="#282B3F"
+        >
+
+        <ImageView
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/plan1"
+            android:id="@+id/planbg"
+            android:backgroundTint="@color/orange"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="40dp"
+            android:src="@drawable/plan_icon"
+            app:layout_constraintStart_toStartOf="@id/planbg"
+            app:layout_constraintEnd_toEndOf="@id/planbg"
+            app:layout_constraintTop_toTopOf="@id/planbg"
+            app:layout_constraintBottom_toBottomOf="@id/planbg"
+            android:id="@+id/plan_icon"/>
+
+        <TextView
+            android:id="@+id/planTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Netflix Standard"
+            android:layout_marginEnd="20dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planbg"
+            android:layout_marginTop="6dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1080p"
+            android:layout_marginEnd="8dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planTitle"
+            android:fontFamily="@font/poppin_regular"
+            android:textColor="@color/orange"
+            android:id="@+id/planBody"
+            />
+
+        <Button
+            android:id="@+id/join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_round_bg"
+            android:textColor="@color/white"
+            style="@style/buttonStyle"
+            android:text="Join now"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planBody"
+            android:layout_marginTop="12dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

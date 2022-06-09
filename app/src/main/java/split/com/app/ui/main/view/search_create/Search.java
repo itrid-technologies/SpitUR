@@ -20,15 +20,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import split.com.app.R;
+import split.com.app.data.model.popular_subcategory.DataItem;
 import split.com.app.databinding.FragmentSearchBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.adapter.search.SearchListAdapter;
+import split.com.app.ui.main.viewmodel.search_create_viewmodel.SearchCreateViewModel;
 import split.com.app.utils.Split;
 
 
 public class Search extends Fragment {
 
   FragmentSearchBinding binding;
+    private SearchCreateViewModel mViewModel;
+    private List<DataItem> popularSubCategoryList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,9 +47,32 @@ public class Search extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getList();
+        popularSubCategoryList = new ArrayList<>();
+
+        mViewModel = new SearchCreateViewModel();
+        getPopularSubCategory();
         initClickListeners();
         searchTextWatcher();
+    }
+
+    private void getPopularSubCategory() {
+        mViewModel.init();
+        mViewModel.getPopularCategoryData().observe(getViewLifecycleOwner() , popularSubCategoryModel -> {
+            if (popularSubCategoryModel.isSuccess()){
+                if (popularSubCategoryModel.getData().size() > 0){
+                    popularSubCategoryList.addAll(popularSubCategoryModel.getData());
+                }
+
+                buildCategoryRv();
+            }
+        });
+    }
+
+    private void buildCategoryRv() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
+        binding.searchLis.setLayoutManager(layoutManager);
+        SearchListAdapter adapter = new SearchListAdapter(Split.getAppContext(), popularSubCategoryList);
+        binding.searchLis.setAdapter(adapter);
     }
 
     private void searchTextWatcher() {
@@ -77,20 +104,5 @@ public class Search extends Fragment {
         });
     }
 
-    private void getList() {
-        List<String> names = new ArrayList<>();
 
-        names.add("Netflix Premium");
-        names.add("Shopify Premium");
-
-        List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.player_icon);
-        images.add(R.drawable.song_icon);
-
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
-        binding.searchLis.setLayoutManager(layoutManager);
-        SearchListAdapter adapter = new SearchListAdapter(Split.getAppContext(), images, names);
-        binding.searchLis.setAdapter(adapter);
-    }
 }

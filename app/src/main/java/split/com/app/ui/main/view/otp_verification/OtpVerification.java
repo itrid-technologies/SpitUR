@@ -2,6 +2,7 @@ package split.com.app.ui.main.view.otp_verification;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,7 +23,6 @@ public class OtpVerification extends AppCompatActivity {
     ActivityOtpVerificationBinding binding;
 
     private OtpVerificationViewModel mViewModel;
-    private List<AuthenticationModel> modelList = new ArrayList<>();
 
 
     @Override
@@ -71,12 +71,13 @@ public class OtpVerification extends AppCompatActivity {
 
 
                 } else {
-//                    Toast.makeText(this, "Enter Complete Digits", Toast.LENGTH_SHORT).show();
+                    binding.errorMessage.setText("Enter Complete Digits");
+                    binding.errorMessage.setVisibility(View.VISIBLE);
                 }
 
             } else {
-                // Toast.makeText(this, "Enter OTP", Toast.LENGTH_SHORT).show();
-
+                binding.errorMessage.setText("Enter OTP");
+                binding.errorMessage.setVisibility(View.VISIBLE);
             }
 
         });
@@ -91,14 +92,14 @@ public class OtpVerification extends AppCompatActivity {
         mViewModel.getData().observe(this, authenticationModel -> {
             if (authenticationModel.isSuccess()) {
 
-                if (authenticationModel.getData() != null) {
+                if (authenticationModel.getData().getUser() != null) {
                     MySharedPreferences preferences = new MySharedPreferences(this);
-                    preferences.saveData(this, "userId", authenticationModel.getData().getUserId());
-                    preferences.saveData(this, "userOtp", authenticationModel.getData().getOtpHash());
-                    preferences.saveData(this, "userName", authenticationModel.getData().getName());
-                    preferences.saveData(this, "userAvatar", Constants.IMG_PATH + authenticationModel.getData().getAvatar());
-                    preferences.saveData(this, "userCreatedAt", authenticationModel.getData().getCreatedAt());
-                    preferences.saveData(this, "userAccessToken", authenticationModel.getData().getToken());
+                    preferences.saveData(this, "userId", authenticationModel.getData().getUser().getUserId());
+                    preferences.saveData(this, "userOtp", authenticationModel.getData().getUser().getOtpHash());
+                    preferences.saveData(this, "userName", authenticationModel.getData().getUser().getName());
+                    preferences.saveData(this, "userAvatar", Constants.IMG_PATH + authenticationModel.getData().getUser().getAvatar());
+                    preferences.saveData(this, "userCreatedAt", authenticationModel.getData().getUser().getCreatedAt());
+                    preferences.saveData(this, "userAccessToken", "Bearer " +authenticationModel.getData().getToken());
 
                     ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

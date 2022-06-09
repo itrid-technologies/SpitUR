@@ -11,21 +11,23 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import split.com.app.R;
+import split.com.app.data.model.popular_subcategory.DataItem;
+import split.com.app.utils.Constants;
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.SearchVH> {
 
-    private final List<Integer> Icons;
-    private final List<String> Names;
+    private final List<DataItem> dataItems;
     private final Context context;
 
 
-    public SearchListAdapter(Context context, List<Integer> popIcons, List<String> popNames) {
-        this.context = context;
-        this.Icons = popIcons;
-        this.Names = popNames;
+    public SearchListAdapter(Context appContext, List<DataItem> popularSubCategoryList) {
+        this.context = appContext;
+        this.dataItems = popularSubCategoryList;
     }
 
     @NonNull
@@ -37,15 +39,17 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
 
     @Override
     public void onBindViewHolder(@NonNull SearchListAdapter.SearchVH holder, int position) {
-        final Integer currentIcon = Icons.get(position);
-        final String currentName = Names.get(position);
-        holder.icon.setImageResource(currentIcon);
-        holder.name.setText(currentName);
+        final DataItem current_data = dataItems.get(position);
+        Glide.with(context)
+                .load(Constants.IMG_PATH + current_data.getCategory().getIcon())
+                .placeholder(R.color.blue)
+                .into(holder.icon);
+        holder.name.setText(current_data.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return Names.size();
+        return dataItems.size();
     }
 
 

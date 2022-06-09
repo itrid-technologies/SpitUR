@@ -14,12 +14,15 @@ import android.view.ViewGroup;
 import split.com.app.R;
 import split.com.app.databinding.FragmentVisibilityBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.utils.MySharedPreferences;
+import split.com.app.utils.Split;
 
 
 public class Visibility extends Fragment {
 
 
     FragmentVisibilityBinding binding;
+    int visibility = 1;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -45,6 +48,9 @@ public class Visibility extends Fragment {
         });
 
         binding.privateLayout.setOnClickListener(view -> {
+
+            visibility = 0;
+
             binding.publicLayout.setBackgroundResource(0);
             binding.publicNote.setVisibility(View.GONE);
             binding.publicSelected.setVisibility(View.GONE);
@@ -55,6 +61,9 @@ public class Visibility extends Fragment {
         });
 
         binding.publicLayout.setOnClickListener(view -> {
+
+            visibility = 1;
+
             binding.privateLayout.setBackgroundResource(0);
             binding.privateNote.setVisibility(View.GONE);
             binding.privateSelected.setVisibility(View.GONE);
@@ -65,6 +74,11 @@ public class Visibility extends Fragment {
         });
 
         binding.btnNext.setOnClickListener(view -> {
+
+            MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+            pm.saveData(Split.getAppContext(), "SLOTS", "4");
+            pm.saveData(Split.getAppContext(), "VISIBILITY", String.valueOf(visibility));
+
             Navigation.findNavController(view).navigate(R.id.action_visibility2_to_cost2);
         });
     }

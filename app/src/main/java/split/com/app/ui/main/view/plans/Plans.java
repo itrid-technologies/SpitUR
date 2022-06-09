@@ -1,25 +1,35 @@
 package split.com.app.ui.main.view.plans;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import java.util.ArrayList;
+import java.util.List;
 
 import split.com.app.R;
+import split.com.app.data.model.plans.PlanDataItem;
 import split.com.app.databinding.FragmentPlansBinding;
+import split.com.app.ui.main.adapter.PlanAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.plan_viewmodel.PlansViewModel;
+import split.com.app.utils.MySharedPreferences;
+import split.com.app.utils.Split;
 
 
 public class Plans extends Fragment {
 
 
     FragmentPlansBinding binding;
+    private PlansViewModel mViewModel;
+    private List<PlanDataItem> planModelList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,7 +37,7 @@ public class Plans extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentPlansBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
-
+        binding.toolbar.title.setText("Plans");
         return binding.getRoot();
     }
 
@@ -37,19 +47,47 @@ public class Plans extends Fragment {
 
         initClickListeners();
 
+        mViewModel = new PlansViewModel();
+        mViewModel.init();
+        mViewModel.getPlan().observe(getViewLifecycleOwner(), planModel -> {
+            if (planModel.isSuccess()) {
+                if (planModel.getData().size() > 0) {
+                    planModelList.addAll(planModel.getData());
+                }
+
+                buildsPlansRv();
+            }
+        });
 
 
+    }
+
+    private void buildsPlansRv() {
+        GridLayoutManager glm = new GridLayoutManager(getContext(), 2);
+        binding.PlansList.setLayoutManager(glm);
+        PlanAdapter adapter = new PlanAdapter(Split.getAppContext(), planModelList);
+        binding.PlansList.setAdapter(adapter);
+
+        adapter.setOnPlanSelectListener(position -> {
+            String plan_id = String.valueOf(planModelList.get(position).getId());
+            MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+            pm.saveData(Split.getAppContext(), "PLAN_ID", plan_id);
+            pm.saveData(Split.getAppContext(), "TITLE", planModelList.get(position).getName());
+
+            Navigation.findNavController(requireView()).navigate(R.id.action_plans2_to_visibility2);
+
+        });
 
     }
 
     private void initClickListeners() {
 
-        binding.back.setOnClickListener(view -> {
+        binding.toolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 
-        binding.join.setOnClickListener(view1 -> {
-            Navigation.findNavController(view1).navigate(R.id.action_plans2_to_visibility2);
-        });
+//        binding.join.setOnClickListener(view1 -> {
+//            Navigation.findNavController(view1).navigate(R.id.action_plans2_to_visibility2);
+//        });
     }
 }

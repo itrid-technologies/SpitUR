@@ -64,7 +64,8 @@ public class OtpNumber extends AppCompatActivity {
 
 
             }else{
-                binding.phoneNumber.setError("Enter number");
+                binding.errorMessage.setText("Enter number");
+                binding.errorMessage.setVisibility(View.VISIBLE);
             }
         });
 

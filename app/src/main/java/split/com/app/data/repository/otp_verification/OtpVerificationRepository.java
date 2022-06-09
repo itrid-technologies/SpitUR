@@ -11,7 +11,6 @@ import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
 import split.com.app.data.model.otp_verification.AuthenticationModel;
-import split.com.app.data.model.register.RegisterModel;
 
 public class OtpVerificationRepository {
     private ApiService apiService;

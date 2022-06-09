@@ -4,9 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import split.com.app.data.model.home_categories.CategoriesModel;
-import split.com.app.data.model.otp_verification.AuthenticationModel;
 import split.com.app.data.repository.home.HomeRepository;
-import split.com.app.data.repository.otp_verification.OtpVerificationRepository;
 
 public class HomeViewModel extends ViewModel {
 

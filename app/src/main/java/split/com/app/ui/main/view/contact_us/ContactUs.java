@@ -43,7 +43,7 @@ public class ContactUs extends Fragment {
             Navigation.findNavController(view).navigateUp();
         });
 
-        binding.faqLayout.setOnClickListener(view -> {
+        binding.contactLayout.faqLayout.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_contactUs_to_FAQ);
         });
     }

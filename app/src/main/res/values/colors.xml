@@ -24,5 +24,9 @@
     <color name="terms_bg">#1C2431</color>
     <color name="error">#FFDD2C00</color>
     <color name="yellow">#FFD300</color>
+    <color name="green">#14FF00</color>
+    <color name="dark_orange">#FF3D00</color>
+    <color name="remove_react_bg">#170000</color>
 
+    
 </resources>
