@@ -21,7 +21,7 @@ public class RegisterRepository {
 
     public MutableLiveData<RegisterModel> registerUser(String number, String name, String id, String url) {
         final MutableLiveData<RegisterModel> RegisterModelMutableLiveData = new MutableLiveData<>();
-        apiService = ApiManager.getClientAuthentication().create(ApiService.class);
+        apiService = ApiManager.getRestApiService();
         Call<RegisterModel> call = apiService.register(number,name,url,id);
         call.enqueue(new Callback<RegisterModel>() {
             @Override

@@ -28,7 +28,7 @@ public class CreateGroupRepository {
     public CreateGroupRepository() {
     }
 
-    public MutableLiveData<CreateGroupModel> createGroup(String plan_id,String title, String slot, String cost, String email, String password, String visibility) {
+    public MutableLiveData<CreateGroupModel> createGroup(String plan_id,String title, String slot, String cost, String email, String password, String visibility,String sub_cat_id) {
 
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
@@ -50,6 +50,8 @@ public class CreateGroupRepository {
         parms.put("email",email);
         parms.put("password",password);
         parms.put("visibility",visibility);
+        parms.put("sub_category_id",sub_cat_id);
+
 
         JsonObject object = new JsonObject();
         object.addProperty("plans_id",plan_id);
@@ -60,28 +62,11 @@ public class CreateGroupRepository {
         object.addProperty("password",password);
         object.addProperty("visibility",visibility);
 
-        apiService = ApiManager.getClientAuthentication().create(ApiService.class);
-
-        Call<CreateGroupModel> call1 = apiService.createGroup1("Bearer "+token,requiredForGroup);
-        call1.enqueue(new Callback<CreateGroupModel>() {
-            @Override
-            public void onResponse(@NonNull Call<CreateGroupModel> call, @NonNull Response<CreateGroupModel> response) {
-                if(response.body()!=null)
-                {
-                }
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<CreateGroupModel> call, @NonNull Throwable t) {
-                Log.e("Category Error",t.getMessage());
-            }
-        });
-
+        apiService = ApiManager.getRestApiService();
 
         final MutableLiveData<CreateGroupModel> liveData = new MutableLiveData<>();
        // apiService = ApiManager.getClientAuthentication().create(ApiService.class);
-        Call<CreateGroupModel> call = apiService.createGroup(token,requiredForGroup);
+        Call<CreateGroupModel> call = apiService.createGroup("Bearer "+token,parms);
         call.enqueue(new Callback<CreateGroupModel>() {
             @Override
             public void onResponse(@NonNull Call<CreateGroupModel> call, @NonNull Response<CreateGroupModel> response) {
@@ -89,7 +74,6 @@ public class CreateGroupRepository {
                 {
                     liveData.setValue(response.body());
                 }
-
             }
 
             @Override

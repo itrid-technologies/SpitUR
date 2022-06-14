@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,16 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import split.com.app.R;
-import split.com.app.data.model.home_categories.CategoriesModel;
+import split.com.app.data.model.HomeContentModel;
+import split.com.app.data.model.HomeDataItem;
 import split.com.app.data.model.home_categories.CategoryDataItems;
-import split.com.app.data.model.register.RegisterModel;
-import split.com.app.data.repository.home.HomeRepository;
 import split.com.app.databinding.FragmentHomeBinding;
+import split.com.app.ui.main.adapter.HomeSectionAdapter;
 import split.com.app.ui.main.adapter.category_adapter.CategoryAdapter;
 import split.com.app.ui.main.adapter.popular_adapter.PopularHomeAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.category_viewmodel.CategoryViewModel;
 import split.com.app.ui.main.viewmodel.home_viewmodel.HomeViewModel;
-import split.com.app.ui.main.viewmodel.register_viewmodel.RegisterViewModel;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -35,8 +36,11 @@ public class Home extends Fragment {
 
    FragmentHomeBinding binding;
 
-    private HomeViewModel mViewModel;
-    private List<CategoryDataItems> category_list = new ArrayList<>();
+    private CategoryViewModel mViewModel;
+    private List<HomeDataItem> homeDataItems;
+
+    private HomeViewModel homeViewModel;
+    private List<CategoryDataItems> category_list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,14 +55,36 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mViewModel = new HomeViewModel();
+        category_list = new ArrayList<>();
+        homeDataItems = new ArrayList<>();
+
+        homeViewModel = new HomeViewModel();
+        homeViewModel.init();
+        homeViewModel.getHomeData().observe(getViewLifecycleOwner(),homeContentModel -> {
+            if (homeContentModel.isSuccess()){
+              homeDataItems.addAll(homeContentModel.getData());
+            }
+        });
+
+        mViewModel = new CategoryViewModel();
         getCategories();
 
         setProfileData();
 
 
+        initClickListeners();
         getPopularList();
         getMoviesList();
+    }
+
+    private void initClickListeners() {
+        binding.search.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_home2_to_joinSearch);
+        });
+
+        binding.viewAll.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_home2_to_joinSearch);
+        });
     }
 
     private void getCategories() {
@@ -81,6 +107,10 @@ public class Home extends Fragment {
         CategoryAdapter adapter = new CategoryAdapter(Split.getAppContext(), category_list);
         binding.categoriesLst.setAdapter(adapter);
 
+        adapter.setOnCategorySelectListener(position -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_home2_to_joinSearch);
+        });
+
     }
 
     private void setProfileData() {
@@ -95,22 +125,11 @@ public class Home extends Fragment {
     }
 
     private void getMoviesList() {
-        List<String> names = new ArrayList<>();
 
-        names.add("Amazon Prime");
-        names.add("Shopify Premium");
-        names.add("Nord Vpn Premium");
-
-        List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.player_icon);
-        images.add(R.drawable.song_icon);
-        images.add(R.drawable.drive_icon);
-
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false);
-        binding.moviesList.setLayoutManager(layoutManager);
-        PopularHomeAdapter adapter = new PopularHomeAdapter(Split.getAppContext(), images, names);
-        binding.moviesList.setAdapter(adapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
+        binding.homeSections.setLayoutManager(layoutManager);
+        HomeSectionAdapter adapter = new HomeSectionAdapter(Split.getAppContext(), homeDataItems);
+        binding.homeSections.setAdapter(adapter);
     }
 
 

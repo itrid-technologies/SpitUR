@@ -35,7 +35,7 @@
 
 
         <TextView
-            android:id="@+id/catName"
+            android:id="@+id/tv_join"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
@@ -61,7 +61,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/popular_name"
-            app:layout_constraintBottom_toTopOf="@id/catName"
+            app:layout_constraintBottom_toTopOf="@id/tv_join"
             android:layout_marginTop="10dp"
             />
 

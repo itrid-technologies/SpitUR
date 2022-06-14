@@ -3,31 +3,30 @@ package split.com.app.ui.main.viewmodel.home_viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import split.com.app.data.model.HomeContentModel;
 import split.com.app.data.model.home_categories.CategoriesModel;
-import split.com.app.data.repository.home.HomeRepository;
+import split.com.app.data.repository.categories.CategoryRepository;
+import split.com.app.data.repository.home.HomeContentRepository;
 
 public class HomeViewModel extends ViewModel {
-
-
-    private MutableLiveData<CategoriesModel> category_data;
-    private HomeRepository homeRepository;
+    private MutableLiveData<HomeContentModel> home_data;
+    private HomeContentRepository homeContentRepository;
 
     public HomeViewModel() {
-        homeRepository = new HomeRepository();
+        homeContentRepository = new HomeContentRepository();
     }
 
     public void init() {
-        if (this.category_data != null) {
+        if (this.home_data != null) {
             // ViewModel is created per Fragment so
             // we know the userId won't change
             return;
         }
-        category_data = homeRepository.getCategories();
+        home_data = homeContentRepository.getHomeContent();
     }
 
-    public MutableLiveData<CategoriesModel> getCategoryData() {
-        return this.category_data;
+    public MutableLiveData<HomeContentModel> getHomeData() {
+        return this.home_data;
     }
-
 
 }

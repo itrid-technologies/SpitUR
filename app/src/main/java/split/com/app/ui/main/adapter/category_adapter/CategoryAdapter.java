@@ -16,6 +16,7 @@ import java.util.List;
 
 import split.com.app.R;
 import split.com.app.data.model.home_categories.CategoryDataItems;
+import split.com.app.ui.main.adapter.PlanAdapter;
 import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
 
@@ -23,6 +24,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     private final List<CategoryDataItems> categoryDataItems;
     private final Context context;
+
+    private CategoryAdapter.ItemClickListener mListener;
+
+
+
+    public void setOnCategorySelectListener(CategoryAdapter.ItemClickListener listener) {
+        mListener = listener;
+    }
 
 
     public CategoryAdapter(Context appContext, List<CategoryDataItems> category_list) {
@@ -34,7 +43,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public CategoryAdapter.CategoryVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_category_list_item, parent, false);
-        return new CategoryAdapter.CategoryVH(view);
+        return new CategoryAdapter.CategoryVH(view,mListener);
     }
 
     @Override
@@ -52,15 +61,27 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categoryDataItems.size();
     }
 
+    public interface ItemClickListener{
+        void onCategorySelect(int position);
+    }
+
     public static class CategoryVH extends RecyclerView.ViewHolder {
         public ImageView icon;
         public TextView name;
 
-        public CategoryVH(@NonNull View itemView) {
+        public CategoryVH(@NonNull View itemView, ItemClickListener mListener) {
             super(itemView);
             //find views
             icon = itemView.findViewById(R.id.catImage);
             name = itemView.findViewById(R.id.catName);
+
+            itemView.setOnClickListener(view -> {
+                if (mListener != null) {
+                    if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        mListener.onCategorySelect(getAdapterPosition());
+                    }
+                }
+            });
 
         }
     }//vh

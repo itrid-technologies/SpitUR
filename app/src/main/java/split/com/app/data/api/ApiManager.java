@@ -24,59 +24,87 @@ public class ApiManager {
 
     private static Retrofit retrofit;
 
-    public static Retrofit getRetrofitInstance() {
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(URL_BASE)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+    private static ApiService sRestApi = null;
 
-        }
-        return retrofit;
-    }
-    public static Retrofit getClientAuthentication() {
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-// set your desired log level
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl(URL_BASE);
-        AuthenticationInterceptor interceptor = new AuthenticationInterceptor(
-                Credentials.basic("", ""));
-        if (!httpClient.interceptors().contains(interceptor)) {
-            httpClient.addInterceptor(interceptor);
-            httpClient.addInterceptor(logging);
-            builder.client(httpClient.build());
-            retrofit = builder
-                     .baseUrl(URL_BASE)
-                    .addConverterFactory(ScalarsConverterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
+    //function to get one time service
+    public static ApiService getRestApiService() {
+        if (sRestApi == null) {
+
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+            httpClient.readTimeout(15, TimeUnit.SECONDS);
+            httpClient.connectTimeout(15, TimeUnit.SECONDS);
+            httpClient.addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BODY));
+
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(URL_BASE)
+                    //.baseUrl("https://testserver.glorek.com/api/")
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+//                    .addConverterFactory(NullOrEmptyConverterFactory())
                     .client(httpClient.build())
                     .build();
 
+            sRestApi = retrofit.create(ApiService.class);
         }
+        return sRestApi;
+    }//end get
 
-        return retrofit;
-    }
-
-    public static class AuthenticationInterceptor implements Interceptor {
-
-        private String authToken;
-
-        public AuthenticationInterceptor(String token) {
-            this.authToken = token;
-        }
-
-        @NonNull
-        @Override
-        public okhttp3.Response intercept(Chain chain) throws IOException {
-            Request original = chain.request();
-
-            Request.Builder builder = original.newBuilder()
-                    .header("Authorization", authToken);//Remember header() vs addHeader
-
-            Request request = builder.build();
-            return chain.proceed(request);
-        }
-    }
+//    public static Retrofit getRetrofitInstance() {
+//        if (retrofit == null) {
+//            retrofit = new Retrofit.Builder()
+//                    .baseUrl(URL_BASE)
+//                    .addConverterFactory(GsonConverterFactory.create())
+//                    .build();
+//
+//        }
+//        return retrofit;
+//    }
+//    public static Retrofit getClientAuthentication() {
+//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+//// set your desired log level
+//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+//        Retrofit.Builder builder = new Retrofit.Builder()
+//                .baseUrl(URL_BASE);
+//        AuthenticationInterceptor interceptor = new AuthenticationInterceptor("");
+//        if (!httpClient.interceptors().contains(interceptor)) {
+//            httpClient.addInterceptor(interceptor);
+//            httpClient.addInterceptor(logging);
+//            builder.client(httpClient.build());
+//            retrofit = builder
+//                     .baseUrl(URL_BASE)
+//                    .addConverterFactory(ScalarsConverterFactory.create())
+//                    .addConverterFactory(GsonConverterFactory.create())
+//                    .client(httpClient.build())
+//                    .build();
+//
+//        }
+//
+//        return retrofit;
+//    }
+//
+//    public static class AuthenticationInterceptor implements Interceptor {
+//
+//        private String authToken;
+//
+//        public AuthenticationInterceptor(String token) {
+//            this.authToken = token;
+//        }
+//
+//        @NonNull
+//        @Override
+//        public okhttp3.Response intercept(Chain chain) throws IOException {
+//            Request original = chain.request();
+//
+//            Request.Builder builder = original.newBuilder()
+//                    .header("Authorization", authToken);//Remember header() vs addHeader
+//
+//            Request request = builder.build();
+//            return chain.proceed(request);
+//        }
+//    }
 }

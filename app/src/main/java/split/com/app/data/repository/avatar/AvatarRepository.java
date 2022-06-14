@@ -25,7 +25,7 @@ public class AvatarRepository {
 
         final MutableLiveData<AvatarModel> avatarModelMutableLiveData = new MutableLiveData<>();
 
-        apiService = ApiManager.getClientAuthentication().create(ApiService.class);
+        apiService = ApiManager.getRestApiService();
 
         Call<AvatarModel> call = apiService.getAvatar();
 

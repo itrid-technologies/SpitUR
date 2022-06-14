@@ -22,7 +22,7 @@ public class PhoneNumberRepository {
 
     public MutableLiveData<NumberModel> checkPhoneNumber(String phone_number) {
         final MutableLiveData<NumberModel> RegisterModelMutableLiveData = new MutableLiveData<>();
-        apiService = ApiManager.getClientAuthentication().create(ApiService.class);
+        apiService = ApiManager.getRestApiService();
         Call<NumberModel> call = apiService.checkNumberExistence(phone_number);
         call.enqueue(new Callback<NumberModel>() {
             @Override
@@ -46,7 +46,7 @@ public class PhoneNumberRepository {
 
     public MutableLiveData<BasicModel> sendOtp(String otp) {
         final MutableLiveData<BasicModel> RegisterModelMutableLiveData = new MutableLiveData<>();
-        apiService = ApiManager.getClientAuthentication().create(ApiService.class);
+        apiService = ApiManager.getRestApiService();
         Call<BasicModel> call = apiService.sendOTP(otp);
         call.enqueue(new Callback<BasicModel>() {
             @Override

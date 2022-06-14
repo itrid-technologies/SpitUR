@@ -20,7 +20,7 @@ public class OtpVerificationRepository {
 
     public MutableLiveData<AuthenticationModel> verifyUser(String number, String otp) {
         final MutableLiveData<AuthenticationModel> RegisterModelMutableLiveData = new MutableLiveData<>();
-        apiService = ApiManager.getClientAuthentication().create(ApiService.class);
+        apiService = ApiManager.getRestApiService();
         Call<AuthenticationModel> call = apiService.authenticateUser(number,otp);
         call.enqueue(new Callback<AuthenticationModel>() {
             @Override

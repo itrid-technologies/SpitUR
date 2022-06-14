@@ -56,17 +56,22 @@ public class PhoneCredentials extends Fragment {
             if (!number.isEmpty()) {
 
                 my_number = "+"+code+number;
+                Bundle bundle = new Bundle();
+                bundle.putString("phone_number",my_number);
 
-                mViewModel = new PhoneNumberViewModel(my_number);
-                mViewModel.init();
+                Navigation.findNavController(requireView()).navigate(R.id.action_phoneCredentials_to_otpVerifyFragment,bundle);
 
-                mViewModel.getData().observe(getViewLifecycleOwner(), numberModel -> {
-                    if (numberModel.isStatus()){
-
-                        sentOtp(numberModel.getPhone());
-
-                    }
-                });
+//
+//                mViewModel = new PhoneNumberViewModel(my_number);
+//                mViewModel.init();
+//
+//                mViewModel.getData().observe(getViewLifecycleOwner(), numberModel -> {
+//                    if (numberModel.isStatus()){
+//
+//                        sentOtp(numberModel.getPhone());
+//
+//                    }
+//                });
 
 
             }else{

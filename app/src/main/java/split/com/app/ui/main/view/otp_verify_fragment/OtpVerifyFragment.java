@@ -98,9 +98,10 @@ public class OtpVerifyFragment extends Fragment {
                 String password = pm.getData(Split.getAppContext(),"PASSWORD");
                 String visibility = pm.getData(Split.getAppContext(),"VISIBILITY");
                 String title = pm.getData(Split.getAppContext(),"TITLE");
+                String sub_catId = pm.getData(Split.getAppContext(),"SUB_CATEGORY_ID");
 
 
-                viewModel = new CreateGroupViewModel(planId,title,slots,cost,email,password,visibility);
+                viewModel = new CreateGroupViewModel(planId,title,slots,cost,email,password,visibility,sub_catId);
                 viewModel.init();
                 viewModel.getData().observe(getViewLifecycleOwner(), createGroupModel -> {
                     if (createGroupModel.isSuccess()){

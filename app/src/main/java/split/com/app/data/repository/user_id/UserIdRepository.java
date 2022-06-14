@@ -20,21 +20,19 @@ public class UserIdRepository {
 
     public MutableLiveData<BasicModel> checkUserId(String id) {
         final MutableLiveData<BasicModel> BasicModelMutableLiveData = new MutableLiveData<>();
-        apiService = ApiManager.getClientAuthentication().create(ApiService.class);
+        apiService = ApiManager.getRestApiService();
         Call<BasicModel> call = apiService.checkUserIdExistence(id);
         call.enqueue(new Callback<BasicModel>() {
             @Override
-            public void onResponse(Call<BasicModel> call, Response<BasicModel> response) {
+            public void onResponse(@NonNull Call<BasicModel> call, @NonNull Response<BasicModel> response) {
                 if(response.body()!=null)
                 {
                     BasicModelMutableLiveData.setValue(response.body());
                 }
-
-
             }
 
             @Override
-            public void onFailure(@NonNull Call<BasicModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<BasicModel> call, @NonNull Throwable t) {
                 Log.e("Avatar Error",t.getMessage());
             }
         });

@@ -3,18 +3,22 @@ package split.com.app.data.api;
 import com.google.gson.JsonObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import split.com.app.data.model.HomeContentModel;
 import split.com.app.data.model.create_group.CreateGroupModel;
 import split.com.app.data.model.create_group.DataRequiredForGroup;
+import split.com.app.data.model.group_detail.GroupDetailModel;
 import split.com.app.data.model.home_categories.CategoriesModel;
 import split.com.app.data.model.otp_verification.AuthenticationModel;
 import split.com.app.data.model.plans.PlanModel;
@@ -61,12 +65,15 @@ public interface ApiService {
     @GET("groups/get_plan/{id}")
     Call<PlanModel> getPlans(@Path("id") String id);
 
-   
+
+    @FormUrlEncoded
     @POST("groups/create_group")
     Call<CreateGroupModel> createGroup(@Header("Authorization") String token,
-                                       @Body final DataRequiredForGroup requiredForGroup);
+                                       @FieldMap Map<String, String> options);
 
-    @POST("groups/create_group")
-    Call<CreateGroupModel> createGroup1(@Header("Authorization") String token,
-                                       @Body final DataRequiredForGroup requiredForGroup);
+    @GET("groups/get_home_content")
+    Call<HomeContentModel> getHomeData(@Header("Authorization") String token);
+
+    @GET("groups/group_details_search/ne")
+    Call<GroupDetailModel> getGroupDetails();
 }

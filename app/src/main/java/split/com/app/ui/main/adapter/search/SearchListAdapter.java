@@ -1,6 +1,7 @@
 package split.com.app.ui.main.adapter.search;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +13,19 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.badge.BadgeUtils;
 
 import java.util.List;
 
 import split.com.app.R;
 import split.com.app.data.model.popular_subcategory.DataItem;
 import split.com.app.utils.Constants;
+import split.com.app.utils.MySharedPreferences;
+import split.com.app.utils.Split;
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.SearchVH> {
 
-    private final List<DataItem> dataItems;
+    private static List<DataItem> dataItems;
     private final Context context;
 
 
@@ -65,6 +69,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
             name = itemView.findViewById(R.id.search_name);
 
             itemView.setOnClickListener(view -> {
+                MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+                pm.saveData(Split.getAppContext(), "SUB_CATEGORY_ID", String.valueOf(dataItems.get(getAbsoluteAdapterPosition()).getId()));
                 Navigation.findNavController(view).navigate(R.id.action_search2_to_plans2);
             });
         }

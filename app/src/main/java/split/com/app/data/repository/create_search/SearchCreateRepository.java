@@ -23,7 +23,7 @@ public class SearchCreateRepository {
 
 
         final MutableLiveData<PopularSubCategoryModel> liveData = new MutableLiveData<>();
-        apiService = ApiManager.getClientAuthentication().create(ApiService.class);
+        apiService = ApiManager.getRestApiService();
         Call<PopularSubCategoryModel> call = apiService.getPopularCategories();
         call.enqueue(new Callback<PopularSubCategoryModel>() {
             @Override

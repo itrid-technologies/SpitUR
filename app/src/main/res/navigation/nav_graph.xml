@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_home2_to_search2"
             app:destination="@id/search2"/>
+        <action
+            android:id="@+id/action_home2_to_joinSearch"
+            app:destination="@id/joinSearch" />
+        <action
+            android:id="@+id/action_home2_to_groupDetail"
+            app:destination="@id/groupDetail" />
     </fragment>
     <fragment
         android:id="@+id/search2"
@@ -151,4 +157,23 @@
             android:id="@+id/action_otpVerifyFragment_to_otpSuccess"
             app:destination="@id/otpSuccess" />
     </fragment>
+    <fragment
+        android:id="@+id/joinSearch"
+        android:name="split.com.app.ui.main.view.join_group_search.JoinSearch"
+        android:label="fragment_join_search"
+        tools:layout="@layout/fragment_join_search" />
+    <fragment
+        android:id="@+id/groupDetail"
+        android:name="split.com.app.ui.main.view.group_details.GroupDetail"
+        android:label="fragment_join_group_plans"
+        tools:layout="@layout/fragment_join_group_plans" >
+        <action
+            android:id="@+id/action_groupDetail_to_groupInformation"
+            app:destination="@id/groupInformation" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupInformation"
+        android:name="split.com.app.ui.main.view.group_info.GroupInformation"
+        android:label="fragment_group_information"
+        tools:layout="@layout/fragment_group_information" />
 </navigation>

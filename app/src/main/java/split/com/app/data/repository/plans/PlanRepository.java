@@ -22,7 +22,7 @@ public class PlanRepository {
 
     public MutableLiveData<PlanModel> getPlans(String id) {
         final MutableLiveData<PlanModel> planModelMutableLiveData = new MutableLiveData<>();
-        apiService = ApiManager.getClientAuthentication().create(ApiService.class);
+        apiService = ApiManager.getRestApiService();
         Call<PlanModel> call = apiService.getPlans(id);
         call.enqueue(new Callback<PlanModel>() {
             @Override

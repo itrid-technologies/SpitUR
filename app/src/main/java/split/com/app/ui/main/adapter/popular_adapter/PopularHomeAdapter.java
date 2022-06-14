@@ -50,16 +50,17 @@ public class PopularHomeAdapter extends RecyclerView.Adapter<PopularHomeAdapter.
 
     public static class PopularVH extends RecyclerView.ViewHolder {
         public CircleImageView icon;
-        public TextView name;
+        public TextView name, join;
 
         public PopularVH(@NonNull View itemView) {
             super(itemView);
             //find views
             icon = itemView.findViewById(R.id.popular_icons);
             name = itemView.findViewById(R.id.popular_name);
+            join = itemView.findViewById(R.id.tv_join);
 
-            itemView.setOnClickListener(view -> {
-                Navigation.findNavController(view).navigate(R.id.action_home2_to_search2);
+            join.setOnClickListener(view -> {
+                Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail);
             });
 
         }
