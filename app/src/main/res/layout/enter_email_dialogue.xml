@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/LogoutConfirmation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="30dp"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="340dp"
+            android:padding="12dp"
+            android:background="@drawable/terms_bg"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/tv_EMAIL"
+                style="@style/semiBoldText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter Email ID"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_EMAIL"
+                android:hint="email"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/hint_color"
+                android:fontFamily="@font/poppin_regular"
+                android:textSize="15sp"
+                android:drawablePadding="10dp"
+                android:gravity="start|center"
+                android:background="@drawable/round_back"
+                android:backgroundTint="@color/light_blue"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/ic_userid"
+                android:id="@+id/ed_userEMAIL"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/ed_userEMAIL"
+                app:layout_constraintEnd_toEndOf="@id/ed_userEMAIL"
+                app:layout_constraintTop_toBottomOf="@id/ed_userEMAIL"
+                style="@style/normalText"
+                android:textColor="@color/error"
+                android:padding="3dp"
+                android:visibility="gone"
+                android:id="@+id/d_errorMessage"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/d_errorMessage"
+                android:text="Join"
+                android:layout_marginTop="8dp"
+                style="@style/buttonStyle"
+                android:background="@drawable/button_round_bg"
+                android:paddingStart="40dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textSize="14dp"
+                android:paddingEnd="40dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:id="@+id/d_join"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

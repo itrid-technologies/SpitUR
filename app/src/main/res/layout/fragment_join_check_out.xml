@@ -68,7 +68,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="Group Price"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_total" />
 
@@ -80,7 +80,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="Payment Gateway"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_price" />
 
@@ -92,7 +92,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="Fees"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_gateway" />
 
@@ -104,7 +104,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="143 Coins"
                     android:textColor="@color/yellow"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_price"
                     app:layout_constraintEnd_toStartOf="@id/per_month"
                     app:layout_constraintTop_toTopOf="@id/tv_price" />
@@ -117,7 +117,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="/Month"
                     android:textColor="@color/hint_color"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_price"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -130,7 +130,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="2.86"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_gateway"
                     app:layout_constraintEnd_toStartOf="@id/per_month"
                     app:layout_constraintTop_toTopOf="@id/tv_gateway" />
@@ -143,7 +143,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="/Month"
                     android:textColor="@color/hint_color"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_gateway"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -155,13 +155,115 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="Free"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@id/payment"
                     app:layout_constraintBottom_toBottomOf="@id/tv_fee"
                     app:layout_constraintEnd_toStartOf="@id/per_month"
                     app:layout_constraintTop_toTopOf="@id/tv_fee" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/free"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:id="@+id/view"/>
+
+
+                <TextView
+                    android:id="@+id/tv_promo"
+                    style="@style/normalText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Promocode"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view" />
+
+
+                <com.skydoves.elasticviews.ElasticImageView
+                    android:id="@+id/next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_next"
+                    app:imageView_duration="150"
+                    app:imageView_scale="0.7"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_promo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_promo" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/guarantee_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/only_stroke"
+            android:backgroundTint="@color/blue"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/total_layout">
+
+
+            <TextView
+                android:id="@+id/tv_guarantee"
+                style="@style/semiBoldText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Splitur Guarantee"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_guarantee_msg"
+                style="@style/normalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This is a month payment which can be Canceled anytime from the App."
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_guarantee" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_guarantee_msg"
+                android:background="@drawable/rect_back_with_grey_stroke"
+                android:text="You will recive full refund including the fees if you do not recive the Credentials or your service stops within 28 days from today"
+                style="@style/normalText"
+                android:padding="10dp"
+                android:textSize="11sp"
+                android:layout_marginTop="6dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/btn_join"
+                style="@style/buttonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/button_round_bg"
+                android:paddingStart="60dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="60dp"
+                android:paddingBottom="5dp"
+                android:text="Join For 146 Coins"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

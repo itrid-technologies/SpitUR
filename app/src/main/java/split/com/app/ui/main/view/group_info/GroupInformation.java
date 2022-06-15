@@ -51,6 +51,10 @@ public class GroupInformation extends Fragment {
 
         setPasswordVerificationList();
 
+        binding.joinButton.setOnClickListener(view1 -> {
+            Navigation.findNavController(view1).navigate(R.id.action_groupInformation_to_joinCheckOut);
+        });
+
 
     }
 

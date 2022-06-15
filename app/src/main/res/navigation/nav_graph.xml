@@ -12,13 +12,25 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_home2_to_search2"
-            app:destination="@id/search2"/>
+            app:destination="@id/search2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_home2_to_joinSearch"
-            app:destination="@id/joinSearch" />
+            app:destination="@id/joinSearch"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_home2_to_groupDetail"
-            app:destination="@id/groupDetail" />
+            app:destination="@id/groupDetail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/search2"
@@ -175,5 +187,41 @@
         android:id="@+id/groupInformation"
         android:name="split.com.app.ui.main.view.group_info.GroupInformation"
         android:label="fragment_group_information"
-        tools:layout="@layout/fragment_group_information" />
+        tools:layout="@layout/fragment_group_information" >
+        <action
+            android:id="@+id/action_groupInformation_to_joinCheckOut"
+            app:destination="@id/joinCheckOut" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinCheckOut"
+        android:name="split.com.app.ui.main.view.join_checkout.JoinCheckOut"
+        android:label="fragment_join_check_out"
+        tools:layout="@layout/fragment_join_check_out" >
+        <action
+            android:id="@+id/action_joinCheckOut_to_joinTerms"
+            app:destination="@id/joinTerms" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinTerms"
+        android:name="split.com.app.ui.main.view.join_checkout_terms.JoinTerms"
+        android:label="fragment_join_terms"
+        tools:layout="@layout/fragment_join_terms" >
+        <action
+            android:id="@+id/action_joinTerms_to_joinPayment"
+            app:destination="@id/joinPayment" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinPayment"
+        android:name="split.com.app.ui.main.view.join_buy_coins.JoinPayment"
+        android:label="fragment_join_payment"
+        tools:layout="@layout/fragment_join_payment" >
+        <action
+            android:id="@+id/action_joinPayment_to_joinCheckoutComplete"
+            app:destination="@id/joinCheckoutComplete" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinCheckoutComplete"
+        android:name="split.com.app.ui.main.view.join_checkout_complete.JoinCheckoutComplete"
+        android:label="fragment_join_checkout_complete"
+        tools:layout="@layout/fragment_join_checkout_complete" />
 </navigation>

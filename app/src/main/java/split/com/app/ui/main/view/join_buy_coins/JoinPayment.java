@@ -1,4 +1,4 @@
-package split.com.app.ui.main.view.join_checkout;
+package split.com.app.ui.main.view.join_buy_coins;
 
 import android.os.Bundle;
 
@@ -12,24 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import split.com.app.R;
-import split.com.app.databinding.FragmentJoinCheckOutBinding;
+import split.com.app.databinding.FragmentJoinPaymentBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 
 
-public class JoinCheckOut extends Fragment {
+public class JoinPayment extends Fragment {
 
-   FragmentJoinCheckOutBinding binding;
+    FragmentJoinPaymentBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentJoinCheckOutBinding.inflate(inflater, container, false);
+        binding = FragmentJoinPaymentBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
-
-        binding.toolbar.title.setText("Join");
-        binding.profile.count.setText("143 coins");
-
         return binding.getRoot();
     }
 
@@ -37,14 +33,8 @@ public class JoinCheckOut extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initClickListeners();
-
-
-    }
-
-    private void initClickListeners() {
-        binding.btnJoin.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_joinCheckOut_to_joinTerms);
+        binding.dJoin.setOnClickListener(view1 -> {
+            Navigation.findNavController(view1).navigate(R.id.action_joinPayment_to_joinCheckoutComplete);
         });
     }
 }

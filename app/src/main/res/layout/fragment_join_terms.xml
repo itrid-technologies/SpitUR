@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    tools:context=".ui.main.view.join_checkout_terms.JoinTerms">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/rect_bg"
+        android:layout_marginTop="20dp"
+        android:padding="12dp"
+        android:backgroundTint="@color/profile_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Terms&amp;Conditions"
+            style="@style/semiBoldText"
+            android:id="@+id/tv_terms"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/termPoints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingTop="8dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_terms"
+            android:background="@drawable/terms_bg"
+            >
+
+            <ImageView
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/round_back"
+                android:backgroundTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_point1"
+                android:layout_margin="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/point1"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="I have read and understand and agree to comply with all tems and conditions, Privacy policy and Subscpace Gurantee and Refund Policy"
+                style="@style/normalText"
+                app:layout_constraintStart_toEndOf="@id/point1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/tv_point1"/>
+
+            <ImageView
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/round_back"
+                android:backgroundTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_point2"
+                android:layout_margin="8dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_point1"
+                android:id="@+id/point2"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="I confirm that I understand and comply with the Subscription Platforms sharing terms and conditions"
+                style="@style/normalText"
+                app:layout_constraintStart_toEndOf="@id/point2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_point1"
+                android:id="@+id/tv_point2"/>
+
+
+            <ImageView
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/round_back"
+                android:backgroundTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_point3"
+                android:layout_margin="8dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_point2"
+                android:id="@+id/point3"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="I confirm that I understand and comply with the Subscription Platforms sharing terms and conditions"
+                style="@style/normalText"
+                app:layout_constraintStart_toEndOf="@id/point3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_point2"
+                android:id="@+id/tv_point3"/>
+
+            <ImageView
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/round_back"
+                android:backgroundTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_point4"
+                android:layout_margin="8dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_point3"
+                android:id="@+id/point4"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="I confirm that I understand and comply with the Subscription Platforms sharing terms and conditions"
+                style="@style/normalText"
+                app:layout_constraintStart_toEndOf="@id/point4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_point3"
+                android:id="@+id/tv_point4"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/termPoints"
+            android:text="By clicking on the join button, you agree to the terms and conditions mentioned above"
+            style="@style/normalText"
+            android:layout_marginTop="6dp"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Join"
+        style="@style/buttonStyle"
+        android:background="@drawable/button_round_bg"
+        android:paddingStart="80dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textSize="14dp"
+        android:paddingEnd="80dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:id="@+id/btnJoin"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
