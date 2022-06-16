@@ -12,8 +12,11 @@ public class GroupDetailViewModel extends ViewModel {
 
     private MutableLiveData<GroupDetailModel> detailModelMutableLiveData;
     private GroupDetailRepository groupDetailRepository;
+    String  subCategoryId, query;
 
-    public GroupDetailViewModel() {
+    public GroupDetailViewModel(String id, String data) {
+        this.subCategoryId = id;
+        this.query = data;
         groupDetailRepository = new GroupDetailRepository();
     }
 
@@ -23,11 +26,23 @@ public class GroupDetailViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        detailModelMutableLiveData = groupDetailRepository.getDetails();
+        detailModelMutableLiveData = groupDetailRepository.getDetails(subCategoryId);
+    }
+
+    public void initSearch() {
+        if (this.detailModelMutableLiveData != null) {
+            // ViewModel is created per Fragment so
+            // we know the userId won't change
+            return;
+        }
+        detailModelMutableLiveData = groupDetailRepository.getDetailsBySearch(subCategoryId,query);
     }
 
     public MutableLiveData<GroupDetailModel> getDetailData() {
         return this.detailModelMutableLiveData;
     }
+
+
+
 
 }

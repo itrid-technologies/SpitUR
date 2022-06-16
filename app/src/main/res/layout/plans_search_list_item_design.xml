@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/iv_user_"
+        android:id="@+id/tv_score"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:background="@drawable/round_back"
@@ -37,50 +37,110 @@
         style="@style/semiBoldText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="4dp"
-        android:text="Rajesh Kumar"
+        android:layout_marginStart="5dp"
+        android:text="-"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@id/iv_user"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_slot"
+    <LinearLayout
+        android:id="@+id/memberView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-9dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="4"
-        android:textColor="@color/white"
-        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="@id/tv_username"
-        app:layout_constraintTop_toBottomOf="@id/tv_username" />
+        app:layout_constraintTop_toBottomOf="@id/tv_username"
+        android:background="@drawable/round_back"
+        android:orientation="horizontal"
+        android:backgroundTint="@color/dark_blue"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
+
+        <TextView
+            android:id="@+id/tv_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            style="@style/normalText"
+            android:textSize="10dp"
+            android:background="@drawable/round_back"
+            android:backgroundTint="@color/transparent"
+            android:paddingStart="8dp"
+            android:padding="3dp"
+            android:paddingEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:background="@drawable/round_back"
+            android:backgroundTint="@color/transparent"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            style="@style/normalText"
+            android:textSize="10dp"
+
+            android:padding="3dp"/>
+
+        <TextView
+            android:id="@+id/tv_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            style="@style/normalText"
+            android:background="@drawable/round_back"
+            android:backgroundTint="@color/transparent"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textSize="10dp"
+
+            android:padding="3dp"/>
+
+        <TextView
+            android:id="@+id/tv_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:background="@drawable/round_back"
+            android:backgroundTint="@color/transparent"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            style="@style/normalText"
+            android:textSize="10dp"
+
+            android:padding="3dp"/>
+        <TextView
+            android:id="@+id/tv_five"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            style="@style/normalText"
+            android:textSize="10dp"
+            android:background="@drawable/round_back"
+            android:backgroundTint="@color/transparent"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:gravity="center"
+            android:padding="3dp"/>
+
+        <TextView
+            android:id="@+id/tv_six"
+            android:background="@drawable/round_back"
+            android:backgroundTint="@color/transparent"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6"
+            style="@style/normalText"
+            android:textSize="10dp"
+            android:padding="3dp"/>
 
 
-    <TextView
-        android:id="@+id/tv_slot_total"
-        style="@style/semiBoldText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:text="/4"
-        android:textColor="@color/dark_grey"
-        android:textSize="16dp"
-        app:layout_constraintStart_toEndOf="@id/tv_slot"
-        app:layout_constraintTop_toBottomOf="@id/tv_username" />
+    </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/tv_available"
-        style="@style/normalText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:text="Slots available"
-        android:textColor="@color/yellow"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_slot_total"
-        app:layout_constraintStart_toEndOf="@id/tv_slot_total" />
 
     <TextView
         android:id="@+id/tv_groupid"
@@ -100,7 +160,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="875690"
+        android:text="-"
         android:textColor="@color/dark_grey"
         android:textSize="12dp"
         android:layout_marginStart="4dp"
@@ -112,29 +172,63 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_username"
-        app:layout_constraintBottom_toBottomOf="@id/tv_available"
+        app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/rect_blue_bg"
+        app:layout_constraintBottom_toBottomOf="@id/memberView"
         android:text="143 Coins"
-        android:layout_marginTop="-8dp"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center"
         android:textColor="@color/white"
-        android:padding="8dp"/>
+        android:padding="5dp"/>
 
 
+
+    <ImageView
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:background="@drawable/round_back"
+        android:backgroundTint="@color/green"
+        app:layout_constraintEnd_toStartOf="@id/tv_online"
+        android:layout_marginEnd="3dp"
+        app:layout_constraintTop_toTopOf="@id/tv_online"
+        app:layout_constraintBottom_toBottomOf="@id/tv_online"
+        android:id="@+id/online_icon"/>
 
     <TextView
-        android:id="@+id/tv_plan"
+        android:id="@+id/tv_online"
         style="@style/normalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Netflix Premium"
+        android:text="Online"
         android:textColor="@color/dark_grey"
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@drawable/player_icon"
+        app:layout_constraintEnd_toStartOf="@id/tv_rateOf"
+        android:layout_marginEnd="3dp"
+        app:layout_constraintTop_toTopOf="@id/tv_rateOf"
+        app:layout_constraintBottom_toBottomOf="@id/tv_rateOf"
+        android:id="@+id/icon"/>
+
+    <TextView
+        android:id="@+id/tv_rateOf"
+        style="@style/normalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="rajesh2002"
+        android:textColor="@color/dark_grey"
+        android:textSize="12dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toStartOf="@id/online_icon"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

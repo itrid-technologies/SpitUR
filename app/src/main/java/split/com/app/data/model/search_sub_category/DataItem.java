@@ -1,4 +1,4 @@
-package split.com.app.data.model.popular_subcategory;
+package split.com.app.data.model.search_sub_category;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -10,11 +10,11 @@ public class DataItem{
 	@SerializedName("category_id")
 	private int categoryId;
 
+	@SerializedName("sub_cat_title")
+	private String subCatTitle;
+
 	@SerializedName("id")
 	private int id;
-
-	@SerializedName("sub_cat_title")
-	private String title;
 
 	@SerializedName("category")
 	private Category category;
@@ -30,12 +30,12 @@ public class DataItem{
 		return categoryId;
 	}
 
-	public int getId(){
-		return id;
+	public String getSubCatTitle(){
+		return subCatTitle;
 	}
 
-	public String getTitle(){
-		return title;
+	public int getId(){
+		return id;
 	}
 
 	public Category getCategory(){

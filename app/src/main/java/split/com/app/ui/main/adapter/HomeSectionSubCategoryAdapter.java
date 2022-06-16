@@ -1,7 +1,6 @@
-package split.com.app.ui.main.adapter.popular_adapter;
+package split.com.app.ui.main.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,50 +16,48 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
-import split.com.app.data.model.HomeDataItem;
 import split.com.app.data.model.SubCategoryItem;
 import split.com.app.data.model.popular_subcategory.DataItem;
 import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
 
-public class PopularHomeAdapter extends RecyclerView.Adapter<PopularHomeAdapter.PopularVH> {
+public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSectionSubCategoryAdapter.PopularVH> {
 
-    private static List<DataItem> dataItems;
-    boolean status = false;
+    private static List<SubCategoryItem> homeDataItem;
+    String subCat_icon;
 
     private final Context context;
 
 
-    public PopularHomeAdapter(Split appContext, List<DataItem> popularSubCategoryList) {
+
+    public HomeSectionSubCategoryAdapter(Split appContext, List<SubCategoryItem> subCategory, String icon) {
         this.context = appContext;
-        this.dataItems = popularSubCategoryList;
+        this.homeDataItem = subCategory;
+        this.subCat_icon = icon;
     }
-
-
 
     @NonNull
     @Override
-    public PopularVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HomeSectionSubCategoryAdapter.PopularVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_popular_list_items, parent, false);
-        return new PopularVH(view);
+        return new HomeSectionSubCategoryAdapter.PopularVH(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PopularVH holder, int position) {
+    public void onBindViewHolder(@NonNull HomeSectionSubCategoryAdapter.PopularVH holder, int position) {
 
-
-            final DataItem current_data = dataItems.get(position);
             Glide.with(context)
-                    .load(Constants.IMG_PATH + current_data.getCategory().getIcon())
+                    .load(Constants.IMG_PATH + subCat_icon)
                     .placeholder(R.color.blue)
                     .into(holder.icon);
-            holder.name.setText(current_data.getTitle());
-
+            SubCategoryItem subCategoryItem = homeDataItem.get(position);
+            holder.name.setText(subCategoryItem.getSubCatTitle());
+            
     }
 
     @Override
     public int getItemCount() {
-        return dataItems.size();
+        return homeDataItem.size();
     }
 
     public static class PopularVH extends RecyclerView.ViewHolder {
@@ -75,9 +72,7 @@ public class PopularHomeAdapter extends RecyclerView.Adapter<PopularHomeAdapter.
             join = itemView.findViewById(R.id.tv_join);
 
             join.setOnClickListener(view -> {
-                Bundle bundle = new Bundle();
-                bundle.putString("join_sub_cat_id",String.valueOf(dataItems.get(getAbsoluteAdapterPosition()).getId()));
-                Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail,bundle);
+                Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail);
             });
 
         }

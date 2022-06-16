@@ -14,20 +14,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import split.com.app.R;
+import split.com.app.data.model.group_detail.DataItem;
 import split.com.app.databinding.FragmentGroupInformationBinding;
 import split.com.app.ui.main.adapter.HomeSectionAdapter;
 import split.com.app.ui.main.adapter.VerificationStatusAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.group_viewmodel.GroupDetailViewModel;
+import split.com.app.ui.main.viewmodel.join_group.JoinGroupViewModel;
+import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
 
 
 public class GroupInformation extends Fragment {
 
     FragmentGroupInformationBinding binding;
+    String id;
+    private JoinGroupViewModel viewModel;
+    DataItem dataItem;
+
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -55,6 +67,34 @@ public class GroupInformation extends Fragment {
             Navigation.findNavController(view1).navigate(R.id.action_groupInformation_to_joinCheckOut);
         });
 
+        if (getArguments() != null){
+            String data = getArguments().getString("groupDetail");
+
+            Gson gson = new Gson();
+            dataItem = gson.fromJson(data, DataItem.class);
+
+            setData(dataItem);
+//            viewModel = new JoinGroupViewModel(d);
+//            viewModel.init();
+//            viewModel.getData().observe(getViewLifecycleOwner(), basicModel -> {
+//                if (basicModel.isStatus()){
+//
+//                }
+//            });
+        }
+
+
+    }
+
+    private void setData(DataItem dataItem) {
+        binding.profile.netflix.setText(dataItem.getTitle());
+        Glide.with(requireContext())
+                .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
+                .placeholder(R.color.blue)
+                .into(binding.profile.userImage);
+        binding.profile.userName.setText(dataItem.getUserId());
+        binding.tvScoreValue.setText(String.valueOf(dataItem.getGroupAdmin().getSpliturScore()));
+        
 
     }
 

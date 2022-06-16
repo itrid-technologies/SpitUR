@@ -1,14 +1,9 @@
-package split.com.app.data.repository.group_detail;
+package split.com.app.data.repository.created_and_joined;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
-
-import com.google.gson.JsonObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,31 +14,25 @@ import split.com.app.data.model.group_detail.GroupDetailModel;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
-public class GroupDetailRepository {
+public class CreatedAndJoinedGroupRepository {
     private ApiService apiService;
 
-    public GroupDetailRepository() {
+    public CreatedAndJoinedGroupRepository() {
     }
 
-    public MutableLiveData<GroupDetailModel> getDetails(String id) {
+    public MutableLiveData<GroupDetailModel> getAllCreatedGroups() {
 
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
-        JsonObject object = new JsonObject();
-        object.addProperty("sub_cat_id", id);
-
-        Map<String, String> parms = new HashMap<String, String>();
-        parms.put("sub_cat_id", id);
-
-
         final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GroupDetailModel> call = apiService.getGroupDetails(object);
+        Call<GroupDetailModel> call = apiService.getCreatedGroups(token);
         call.enqueue(new Callback<GroupDetailModel>() {
             @Override
             public void onResponse(@NonNull Call<GroupDetailModel> call, @NonNull Response<GroupDetailModel> response) {
-                if (response.body() != null) {
+                if(response.body()!=null)
+                {
                     liveData.setValue(response.body());
                 }
 
@@ -51,33 +40,26 @@ public class GroupDetailRepository {
 
             @Override
             public void onFailure(@NonNull Call<GroupDetailModel> call, @NonNull Throwable t) {
-                Log.e("Detail Error", t.getMessage());
+                Log.e("Created Groups Error",t.getMessage());
             }
         });
 
         return liveData;
     }
 
-    public MutableLiveData<GroupDetailModel> getDetailsBySearch(String id, String query) {
+    public MutableLiveData<GroupDetailModel> getAllJoinedGroups() {
 
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
-        JsonObject object = new JsonObject();
-        object.addProperty("sub_cat_id", id);
-
-        Map<String, String> parms = new HashMap<String, String>();
-        parms.put("sub_cat_id", id);
-        parms.put("query", query);
-
-
         final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GroupDetailModel> call = apiService.getGroupDetails(object);
+        Call<GroupDetailModel> call = apiService.getJoinedGroups(token);
         call.enqueue(new Callback<GroupDetailModel>() {
             @Override
             public void onResponse(@NonNull Call<GroupDetailModel> call, @NonNull Response<GroupDetailModel> response) {
-                if (response.body() != null) {
+                if(response.body()!=null)
+                {
                     liveData.setValue(response.body());
                 }
 
@@ -85,11 +67,10 @@ public class GroupDetailRepository {
 
             @Override
             public void onFailure(@NonNull Call<GroupDetailModel> call, @NonNull Throwable t) {
-                Log.e("Detail Error", t.getMessage());
+                Log.e("Joined Groups Error",t.getMessage());
             }
         });
 
         return liveData;
     }
-
 }

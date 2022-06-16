@@ -15,6 +15,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 import split.com.app.data.model.HomeContentModel;
 import split.com.app.data.model.create_group.CreateGroupModel;
 import split.com.app.data.model.create_group.DataRequiredForGroup;
@@ -27,6 +28,7 @@ import split.com.app.data.model.register.RegisterModel;
 import split.com.app.data.model.get_avatar.AvatarModel;
 import split.com.app.data.model.phone_number.NumberModel;
 import split.com.app.data.model.basic_model.BasicModel;
+import split.com.app.data.model.search_sub_category.SearchSubCatModel;
 
 public interface ApiService {
 
@@ -74,6 +76,21 @@ public interface ApiService {
     @GET("groups/get_home_content")
     Call<HomeContentModel> getHomeData(@Header("Authorization") String token);
 
-    @GET("groups/group_details_search/ne")
-    Call<GroupDetailModel> getGroupDetails();
+    @POST("groups/group_details_search")
+    Call<GroupDetailModel> getGroupDetails(@Body JsonObject object);
+
+    @FormUrlEncoded
+    @POST("groups/join_group")
+    Call<BasicModel> joinGroup(@Header("Authorization") String token,
+                               @Field("group_id") String id
+                               );
+
+    @GET("groups/get_joined_groups")
+    Call<GroupDetailModel> getJoinedGroups(@Header("Authorization") String token);
+
+    Call<GroupDetailModel> getCreatedGroups(@Header("Authorization") String token);
+
+    @GET("groups/search_sub_categories/{data}")
+    Call<PopularSubCategoryModel> getsubCat(@Header("Authorization") String token,
+                                      @Path("data") String data);
 }

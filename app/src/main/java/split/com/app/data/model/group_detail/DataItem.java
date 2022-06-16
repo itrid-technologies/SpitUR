@@ -16,7 +16,7 @@ public class DataItem{
 	@SerializedName("total_members")
 	private int totalMembers;
 
-	@SerializedName("title")
+	@SerializedName("group_title")
 	private String title;
 
 	@SerializedName("createdAt")

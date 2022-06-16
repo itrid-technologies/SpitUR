@@ -4,10 +4,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import split.com.app.R;
 import split.com.app.data.model.group_detail.DataItem;
 import split.com.app.data.model.group_detail.GroupDetailModel;
 import split.com.app.data.model.home_categories.CategoryDataItems;
@@ -31,6 +35,7 @@ public class GroupDetail extends Fragment {
     FragmentJoinGroupPlansBinding binding;
     private GroupDetailViewModel viewModel;
     private List<DataItem> detailItems;
+    String sub_categoryId;
 
 
 
@@ -49,7 +54,11 @@ public class GroupDetail extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         detailItems = new ArrayList<>();
 
-        viewModel = new GroupDetailViewModel();
+        if (getArguments() != null){
+            sub_categoryId = getArguments().getString("join_sub_cat_id");
+        }
+
+        viewModel = new GroupDetailViewModel(sub_categoryId,"");
         viewModel.init();
         viewModel.getDetailData().observe(getViewLifecycleOwner(),groupDetailModel -> {
             if (groupDetailModel.isSuccess()){
@@ -62,7 +71,48 @@ public class GroupDetail extends Fragment {
         });
 
 
+        searchTextWatcher();
 
+    }
+
+    private void searchTextWatcher() {
+        binding.planSearchField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count > 0) {
+                    binding.planSearchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, ContextCompat.getDrawable(Split.getAppContext(), R.drawable.ic_close), null);
+                } else {
+                    binding.planSearchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, null, null);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable data) {
+
+                getSearchedData(data.toString());
+
+            }
+        });
+    }
+
+    private void getSearchedData(String data) {
+        detailItems = new ArrayList<>();
+        viewModel = new GroupDetailViewModel(sub_categoryId,data);
+        viewModel.initSearch();
+        viewModel.getDetailData().observe(getViewLifecycleOwner(),groupDetailModel -> {
+            if (groupDetailModel.isSuccess()){
+
+                if (groupDetailModel.getData().size() > 0){
+                    detailItems.addAll(groupDetailModel.getData());
+                    buildRec();
+                }
+            }
+        });
     }
 
     private void buildRec() {

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -19,6 +20,8 @@ import java.util.List;
 import split.com.app.R;
 import split.com.app.data.model.HomeDataItem;
 import split.com.app.data.model.plans.PlanDataItem;
+import split.com.app.ui.main.adapter.popular_adapter.PopularHomeAdapter;
+import split.com.app.utils.Split;
 
 public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.ViewHolder> {
 
@@ -42,8 +45,12 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
 
         HomeDataItem dataItem = homeDataItems.get(position);
         holder.title.setText(dataItem.getTitle());
-
-
+        if (dataItem.getSubCategory().size() > 0){
+            LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false);
+            holder.list.setLayoutManager(layoutManager);
+            HomeSectionSubCategoryAdapter adapter = new HomeSectionSubCategoryAdapter(Split.getAppContext(), dataItem.getSubCategory(), dataItem.getIcon());
+            holder.list.setAdapter(adapter);
+        }
 
 
 
