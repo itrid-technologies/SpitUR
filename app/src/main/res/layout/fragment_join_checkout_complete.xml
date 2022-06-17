@@ -10,7 +10,7 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:id="@+id/toolbar"
+        android:id="@+id/jcc_toolbar"
         layout="@layout/toolbar_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -58,27 +58,32 @@
                 android:background="@drawable/rect_bg">
 
                 <EditText
+                    android:id="@+id/group_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:drawableStart="@drawable/ic_user"
                     android:background="@color/transparent"
+                    android:clickable="false"
+                    android:drawableStart="@drawable/ic_user"
                     android:drawablePadding="15dp"
+                    android:focusable="false"
                     android:fontFamily="@font/poppins_medium"
-                    android:textSize="15sp"
-                    android:textColor="@color/white"
                     android:hint="Email"
+                    android:textColor="@color/white"
                     android:textColorHint="@color/hint_color"
-                    android:id="@+id/ed_username"/>
+                    android:textSize="14sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.39"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/ed_username"
-                    app:layout_constraintBottom_toBottomOf="@id/ed_username"
+                    app:layout_constraintTop_toTopOf="@id/group_email"
+                    app:layout_constraintBottom_toBottomOf="@id/group_email"
                     android:src="@drawable/copy_link"
                     android:id="@+id/copy_email"/>
 
@@ -87,7 +92,7 @@
                     android:layout_height="1dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ed_username"
+                    app:layout_constraintTop_toBottomOf="@id/group_email"
                     android:layout_marginTop="10dp"
                     android:background="@color/hint_color"
                     android:alpha="0.35"
@@ -102,21 +107,25 @@
                     app:layout_constraintTop_toBottomOf="@id/view"
                     android:drawableStart="@drawable/ic_password"
                     android:background="@color/transparent"
+                    android:focusable="false"
+                    android:clickable="false"
                     android:layout_marginTop="10dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:drawablePadding="15dp"
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="15sp"
                     android:textColor="@color/white"
                     android:hint="Password"
                     android:textColorHint="@color/hint_color"
-                    android:id="@+id/ed_password"/>
+                    android:id="@+id/group_pass"/>
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/ed_password"
-                    app:layout_constraintBottom_toBottomOf="@id/ed_password"
+                    app:layout_constraintTop_toTopOf="@id/group_pass"
+                    app:layout_constraintBottom_toBottomOf="@id/group_pass"
                     android:src="@drawable/copy_link"
                     android:id="@+id/copy_pass"/>
 
@@ -125,7 +134,7 @@
                     android:layout_height="1dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ed_password"
+                    app:layout_constraintTop_toBottomOf="@id/group_pass"
                     android:layout_marginTop="10dp"
                     android:background="@color/hint_color"
                     android:alpha="0.35"
@@ -144,18 +153,19 @@
                     android:drawablePadding="15dp"
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="15sp"
+                    android:gravity="center|start"
                     android:text="Request Otp"
                     android:textColor="@color/hint_color"
                     android:textColorHint="@color/hint_color"
                     android:id="@+id/tv_request"/>
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv_request"
                     app:layout_constraintBottom_toBottomOf="@id/tv_request"
-                    android:background="@drawable/send_icon"
+                    android:background="@drawable/send_btn"
                     android:id="@+id/send"/>
 
 
@@ -170,7 +180,7 @@
                 app:layout_constraintTop_toBottomOf="@id/credential_layout"
                 style="@style/normalText"
                 android:visibility="gone"
-                android:textColor="@color/error"
+                android:textColor="@color/green"
                 android:padding="3dp"
                 android:id="@+id/errorMessage"/>
 

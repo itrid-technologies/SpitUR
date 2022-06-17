@@ -73,7 +73,7 @@ public class GroupDetailRepository {
 
         final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GroupDetailModel> call = apiService.getGroupDetails(object);
+        Call<GroupDetailModel> call = apiService.getGroupDetailsSearch(object);
         call.enqueue(new Callback<GroupDetailModel>() {
             @Override
             public void onResponse(@NonNull Call<GroupDetailModel> call, @NonNull Response<GroupDetailModel> response) {

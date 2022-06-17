@@ -36,6 +36,7 @@ public class JoinTerms extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentJoinTermsBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
+        binding.jtToolbar.title.setText("Join");
         return binding.getRoot();
     }
 
@@ -47,6 +48,11 @@ public class JoinTerms extends Fragment {
     }
 
     private void initClickListeners() {
+
+        binding.jtToolbar.back.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigateUp();
+        });
+
         binding.btnJoin.setOnClickListener(view -> {
             dialogBuilder = new AlertDialog.Builder(requireContext());
             View layoutView = getLayoutInflater().inflate(R.layout.enter_email_dialogue, null);

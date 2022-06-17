@@ -21,6 +21,7 @@ import split.com.app.data.model.create_group.CreateGroupModel;
 import split.com.app.data.model.create_group.DataRequiredForGroup;
 import split.com.app.data.model.group_detail.GroupDetailModel;
 import split.com.app.data.model.home_categories.CategoriesModel;
+import split.com.app.data.model.join_group.JoinGroupModel;
 import split.com.app.data.model.otp_verification.AuthenticationModel;
 import split.com.app.data.model.plans.PlanModel;
 import split.com.app.data.model.popular_subcategory.PopularSubCategoryModel;
@@ -79,10 +80,13 @@ public interface ApiService {
     @POST("groups/group_details_search")
     Call<GroupDetailModel> getGroupDetails(@Body JsonObject object);
 
+    @POST("groups/group_details_search")
+    Call<GroupDetailModel> getGroupDetailsSearch(@Body JsonObject object);
+
     @FormUrlEncoded
     @POST("groups/join_group")
-    Call<BasicModel> joinGroup(@Header("Authorization") String token,
-                               @Field("group_id") String id
+    Call<JoinGroupModel> joinGroup(@Header("Authorization") String token,
+                                   @Field("group_id") String id
                                );
 
     @GET("groups/get_joined_groups")

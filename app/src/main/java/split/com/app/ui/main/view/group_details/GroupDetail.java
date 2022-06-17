@@ -52,7 +52,6 @@ public class GroupDetail extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        detailItems = new ArrayList<>();
 
         if (getArguments() != null){
             sub_categoryId = getArguments().getString("join_sub_cat_id");
@@ -61,6 +60,8 @@ public class GroupDetail extends Fragment {
         viewModel = new GroupDetailViewModel(sub_categoryId,"");
         viewModel.init();
         viewModel.getDetailData().observe(getViewLifecycleOwner(),groupDetailModel -> {
+            detailItems = new ArrayList<>();
+
             if (groupDetailModel.isSuccess()){
 
                 if (groupDetailModel.getData().size() > 0){
@@ -94,7 +95,9 @@ public class GroupDetail extends Fragment {
             @Override
             public void afterTextChanged(Editable data) {
 
-                getSearchedData(data.toString());
+                if (!data.toString().isEmpty()){
+                    getSearchedData(data.toString());
+                }
 
             }
         });

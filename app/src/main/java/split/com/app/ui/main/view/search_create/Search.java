@@ -38,7 +38,7 @@ public class Search extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(inflater, container, false);
-        Dashboard.hideNav(true);
+        Dashboard.hideNav(false);
         return binding.getRoot();
     }
 
@@ -46,7 +46,7 @@ public class Search extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        popularSubCategoryList = new ArrayList<>();
+//      popularSubCategoryList = new ArrayList<>();
 
         mViewModel = new SearchCreateViewModel(null);
         getPopularSubCategory();

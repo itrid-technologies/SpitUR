@@ -10,7 +10,7 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:id="@+id/toolbar"
+        android:id="@+id/jc_toolbar"
         layout="@layout/toolbar_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/jc_toolbar"
         app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +36,7 @@
 
             <include
 
-                android:id="@+id/profile"
+                android:id="@+id/profile2"
                 layout="@layout/profile_data_in_create" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +48,7 @@
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profile">
+                app:layout_constraintTop_toBottomOf="@id/profile2">
 
                 <TextView
                     android:id="@+id/tv_total"

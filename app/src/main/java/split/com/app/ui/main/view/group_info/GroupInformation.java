@@ -47,8 +47,8 @@ public class GroupInformation extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentGroupInformationBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
-        binding.toolbar.title.setText("Group");
-        binding.profile.count.setText("143 coins");
+        binding.giToolbar.title.setText("Group");
+        binding.profile1.count.setText("143 coins");
 
         return binding.getRoot();
     }
@@ -57,14 +57,19 @@ public class GroupInformation extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.toolbar.back.setOnClickListener(view1 -> {
+        binding.giToolbar.back.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigateUp();
         });
 
         setPasswordVerificationList();
 
         binding.joinButton.setOnClickListener(view1 -> {
-            Navigation.findNavController(view1).navigate(R.id.action_groupInformation_to_joinCheckOut);
+            Bundle bundle = new Bundle();
+            Gson gson = new Gson();
+            String groupData = gson.toJson(dataItem);
+
+            bundle.putString("groupDetail",groupData);
+            Navigation.findNavController(view).navigate(R.id.action_groupInformation_to_joinCheckOut,bundle);
         });
 
         if (getArguments() != null){
@@ -87,15 +92,23 @@ public class GroupInformation extends Fragment {
     }
 
     private void setData(DataItem dataItem) {
-        binding.profile.netflix.setText(dataItem.getTitle());
-        Glide.with(requireContext())
-                .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
-                .placeholder(R.color.blue)
-                .into(binding.profile.userImage);
-        binding.profile.userName.setText(dataItem.getUserId());
-        binding.tvScoreValue.setText(String.valueOf(dataItem.getGroupAdmin().getSpliturScore()));
-        
+        try {
+            binding.profile1.netflix.setText(dataItem.getTitle());
+            Glide.with(requireContext())
+                    .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
+                    .placeholder(R.color.blue)
+                    .into(binding.profile1.userImage);
+            binding.profile1.userName.setText(String.valueOf(dataItem.getUserId()));
+            binding.tvScoreValue.setText(String.valueOf(dataItem.getGroupAdmin().getSpliturScore()));
+            binding.tvLastActive.setText(Constants.getDate(dataItem.getGroupAdmin().getLastActive()));
+            String coin = String.valueOf(dataItem.getCostPerMember());
+            Double coinFloat = Double.parseDouble(coin);
+            String value = String.valueOf(((coinFloat * 30) / 100) + coinFloat);
+            binding.profile1.count.setText(value + " Coins");
+            // binding.tvDaysValue.setText(dataItem.);
+        }catch (NullPointerException e){
 
+        }
     }
 
     private void setPasswordVerificationList() {

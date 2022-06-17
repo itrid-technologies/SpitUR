@@ -11,6 +11,7 @@ import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
 import split.com.app.data.model.basic_model.BasicModel;
+import split.com.app.data.model.join_group.JoinGroupModel;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -20,16 +21,16 @@ public class JoinGroupRepository {
     public JoinGroupRepository() {
     }
 
-    public MutableLiveData<BasicModel> join(String id) {
+    public MutableLiveData<JoinGroupModel> join(String id) {
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
-        final MutableLiveData<BasicModel> BasicModelMutableLiveData = new MutableLiveData<>();
+        final MutableLiveData<JoinGroupModel> BasicModelMutableLiveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<BasicModel> call = apiService.joinGroup("Bearer "+token,id);
-        call.enqueue(new Callback<BasicModel>() {
+        Call<JoinGroupModel> call = apiService.joinGroup("Bearer "+token,id);
+        call.enqueue(new Callback<JoinGroupModel>() {
             @Override
-            public void onResponse(@NonNull Call<BasicModel> call, @NonNull Response<BasicModel> response) {
+            public void onResponse(@NonNull Call<JoinGroupModel> call, @NonNull Response<JoinGroupModel> response) {
                 if(response.body()!=null)
                 {
                     BasicModelMutableLiveData.setValue(response.body());
@@ -37,7 +38,7 @@ public class JoinGroupRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<BasicModel> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<JoinGroupModel> call, @NonNull Throwable t) {
                 Log.e("Avatar Error",t.getMessage());
             }
         });

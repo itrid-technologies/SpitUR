@@ -223,5 +223,19 @@
         android:id="@+id/joinCheckoutComplete"
         android:name="split.com.app.ui.main.view.join_checkout_complete.JoinCheckoutComplete"
         android:label="fragment_join_checkout_complete"
-        tools:layout="@layout/fragment_join_checkout_complete" />
+        tools:layout="@layout/fragment_join_checkout_complete" >
+        <action
+            android:id="@+id/action_joinCheckoutComplete_to_chatroom"
+            app:destination="@id/chatroom" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatroom"
+        android:name="split.com.app.ui.main.view.chat.Chatroom"
+        android:label="fragment_chatroom"
+        tools:layout="@layout/fragment_chatroom" />
+    <fragment
+        android:id="@+id/createdAndJoinedGroups"
+        android:name="split.com.app.ui.main.view.group_created_and_joined.CreatedAndJoinedGroups"
+        android:label="fragment_created_and_joined_groups"
+        tools:layout="@layout/fragment_created_and_joined_groups" />
 </navigation>

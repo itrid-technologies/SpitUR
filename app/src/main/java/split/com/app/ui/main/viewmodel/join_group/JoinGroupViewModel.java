@@ -5,12 +5,13 @@ import androidx.lifecycle.ViewModel;
 
 import split.com.app.data.model.HomeContentModel;
 import split.com.app.data.model.basic_model.BasicModel;
+import split.com.app.data.model.join_group.JoinGroupModel;
 import split.com.app.data.repository.home.HomeContentRepository;
 import split.com.app.data.repository.join_group.JoinGroupRepository;
 
 public class JoinGroupViewModel extends ViewModel {
 
-    private MutableLiveData<BasicModel> data;
+    private MutableLiveData<JoinGroupModel> data;
     private JoinGroupRepository joinGroupRepository;
     String groupId;
 
@@ -28,7 +29,7 @@ public class JoinGroupViewModel extends ViewModel {
         data = joinGroupRepository.join(groupId);
     }
 
-    public MutableLiveData<BasicModel> getData() {
+    public MutableLiveData<JoinGroupModel> getData() {
         return this.data;
     }
 

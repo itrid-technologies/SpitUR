@@ -43,6 +43,9 @@ public class Dashboard extends AppCompatActivity {
                     i.getIcon().setTint(R.color.white);
                     mNavController.navigate(R.id.search2, null);
                     break;
+                case R.id.createdAndJoinedGroups:
+                    mNavController.navigate(R.id.createdAndJoinedGroups, null);
+                    break;
 
                 case R.id.profile2:
                     i.getIcon().setTint(R.color.white);

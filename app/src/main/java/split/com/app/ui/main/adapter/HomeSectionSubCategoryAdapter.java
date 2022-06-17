@@ -1,6 +1,7 @@
 package split.com.app.ui.main.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,9 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
             join = itemView.findViewById(R.id.tv_join);
 
             join.setOnClickListener(view -> {
-                Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail);
+                Bundle bundle = new Bundle();
+                bundle.putString("join_sub_cat_id",String.valueOf(homeDataItem.get(getAbsoluteAdapterPosition()).getId()));
+                Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail,bundle);
             });
 
         }
