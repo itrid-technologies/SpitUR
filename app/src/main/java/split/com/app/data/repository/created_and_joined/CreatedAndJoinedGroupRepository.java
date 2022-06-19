@@ -10,6 +10,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
+import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
 import split.com.app.data.model.group_detail.GroupDetailModel;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
@@ -20,17 +21,17 @@ public class CreatedAndJoinedGroupRepository {
     public CreatedAndJoinedGroupRepository() {
     }
 
-    public MutableLiveData<GroupDetailModel> getAllCreatedGroups() {
+    public MutableLiveData<AllCreatedGroupModel> getAllCreatedGroups() {
 
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
-        final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();
+        final MutableLiveData<AllCreatedGroupModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GroupDetailModel> call = apiService.getCreatedGroups(token);
-        call.enqueue(new Callback<GroupDetailModel>() {
+        Call<AllCreatedGroupModel> call = apiService.getCreatedGroups(token);
+        call.enqueue(new Callback<AllCreatedGroupModel>() {
             @Override
-            public void onResponse(@NonNull Call<GroupDetailModel> call, @NonNull Response<GroupDetailModel> response) {
+            public void onResponse(@NonNull Call<AllCreatedGroupModel> call, @NonNull Response<AllCreatedGroupModel> response) {
                 if(response.body()!=null)
                 {
                     liveData.setValue(response.body());
@@ -39,7 +40,7 @@ public class CreatedAndJoinedGroupRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<GroupDetailModel> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<AllCreatedGroupModel> call, @NonNull Throwable t) {
                 Log.e("Created Groups Error",t.getMessage());
             }
         });

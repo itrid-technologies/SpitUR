@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    tools:context=".ui.main.view.joined_detail.JoinedGroupDetail">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:id="@+id/gi_toolbar"
+        layout="@layout/toolbar_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gi_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:scrollbars="none"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <include
+
+                layout="@layout/profile_data_in_create"
+                android:id="@+id/profile1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/profile1"
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/semiBoldText"
+                android:text="Admin Info"
+                android:layout_marginTop="15dp"
+                android:textSize="20sp"
+                android:id="@+id/tv_admin_info"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/admin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_admin_info"
+                android:padding="16dp"
+                android:backgroundTint="#262A34"
+                android:background="@drawable/rect_bg">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_last_active"
+                    style="@style/semiBoldText"
+                    android:textSize="18sp"
+                    android:text="92"
+                    android:textColor="@color/green"
+                    android:gravity="center"
+                    android:id="@+id/tv_score_value"/>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_score_value"
+                    app:layout_constraintEnd_toStartOf="@id/tv_last_active"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/hint_color"
+                    android:id="@+id/line"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_score_value"
+                    app:layout_constraintTop_toBottomOf="@id/tv_score_value"
+                    app:layout_constraintEnd_toEndOf="@id/tv_score_value"
+                    style="@style/normalText"
+                    android:text="@string/spiltur_score"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/hint_color"
+                    android:gravity="center"
+                    android:id="@+id/tv_score"/>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_last_active"
+                    app:layout_constraintEnd_toStartOf="@id/tv_days_value"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/hint_color"
+                    android:id="@+id/line1"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/tv_score_value"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_days_value"
+                    style="@style/semiBoldText"
+                    android:gravity="center"
+                    android:text="Today"
+                    android:textSize="18sp"
+                    android:textColor="#6094FE"
+                    android:id="@+id/tv_last_active"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_last_active"
+                    app:layout_constraintTop_toBottomOf="@id/tv_last_active"
+                    app:layout_constraintEnd_toEndOf="@id/tv_last_active"
+                    style="@style/normalText"
+                    android:layout_marginTop="5dp"
+                    android:text="Last Active"
+                    android:textColor="@color/hint_color"
+                    android:gravity="center"
+                    android:id="@+id/tv_active"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/tv_last_active"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="center"
+                    style="@style/semiBoldText"
+                    android:text="5 days"
+                    android:textSize="18sp"
+                    android:textColor="@color/orange"
+                    android:id="@+id/tv_days_value"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_days_value"
+                    app:layout_constraintTop_toBottomOf="@id/tv_days_value"
+                    app:layout_constraintEnd_toEndOf="@id/tv_days_value"
+                    style="@style/normalText"
+                    android:text="Days Left"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/hint_color"
+                    android:gravity="center"
+                    android:id="@+id/tv_days"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/admin_layout"
+                android:text="Group Credentials"
+                style="@style/semiBoldText"
+                android:textSize="20sp"
+                android:layout_marginTop="15dp"
+                android:id="@+id/group_credentials"/>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/credential_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/group_credentials"
+                android:padding="20dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/light_blue"
+                android:background="@drawable/rect_bg">
+
+                <EditText
+                    android:id="@+id/group_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:clickable="false"
+                    android:drawableStart="@drawable/ic_user"
+                    android:drawablePadding="15dp"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="Email"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/hint_color"
+                    android:textSize="14sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.39"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/group_email"
+                    app:layout_constraintBottom_toBottomOf="@id/group_email"
+                    android:src="@drawable/copy_link"
+                    android:id="@+id/copy_email"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/group_email"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/hint_color"
+                    android:alpha="0.35"
+                    android:id="@+id/view"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view"
+                    android:drawableStart="@drawable/ic_password"
+                    android:background="@color/transparent"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:layout_marginTop="10dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:drawablePadding="15dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:hint="Password"
+                    android:textColorHint="@color/hint_color"
+                    android:id="@+id/group_pass"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/group_pass"
+                    app:layout_constraintBottom_toBottomOf="@id/group_pass"
+                    android:src="@drawable/copy_link"
+                    android:id="@+id/copy_pass"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
