@@ -11,6 +11,7 @@ import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
+import split.com.app.data.model.all_joined_groups.AllJoinedGroupModel;
 import split.com.app.data.model.group_detail.GroupDetailModel;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
@@ -28,7 +29,7 @@ public class CreatedAndJoinedGroupRepository {
 
         final MutableLiveData<AllCreatedGroupModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<AllCreatedGroupModel> call = apiService.getCreatedGroups(token);
+        Call<AllCreatedGroupModel> call = apiService.getCreatedGroups("Bearer "+token);
         call.enqueue(new Callback<AllCreatedGroupModel>() {
             @Override
             public void onResponse(@NonNull Call<AllCreatedGroupModel> call, @NonNull Response<AllCreatedGroupModel> response) {
@@ -48,17 +49,17 @@ public class CreatedAndJoinedGroupRepository {
         return liveData;
     }
 
-    public MutableLiveData<GroupDetailModel> getAllJoinedGroups() {
+    public MutableLiveData<AllJoinedGroupModel> getAllJoinedGroups() {
 
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
-        final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();
+        final MutableLiveData<AllJoinedGroupModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GroupDetailModel> call = apiService.getJoinedGroups(token);
-        call.enqueue(new Callback<GroupDetailModel>() {
+        Call<AllJoinedGroupModel> call = apiService.getJoinedGroups("Bearer "+token);
+        call.enqueue(new Callback<AllJoinedGroupModel>() {
             @Override
-            public void onResponse(@NonNull Call<GroupDetailModel> call, @NonNull Response<GroupDetailModel> response) {
+            public void onResponse(@NonNull Call<AllJoinedGroupModel> call, @NonNull Response<AllJoinedGroupModel> response) {
                 if(response.body()!=null)
                 {
                     liveData.setValue(response.body());
@@ -67,7 +68,7 @@ public class CreatedAndJoinedGroupRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<GroupDetailModel> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<AllJoinedGroupModel> call, @NonNull Throwable t) {
                 Log.e("Joined Groups Error",t.getMessage());
             }
         });

@@ -8,20 +8,19 @@
     tools:context=".ui.main.view.joined_detail.JoinedGroupDetail">
 
     <include
+        android:id="@+id/jgd_toolbar"
+        layout="@layout/toolbar_layout01"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:id="@+id/gi_toolbar"
-        layout="@layout/toolbar_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gi_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/jgd_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:scrollbars="none"
@@ -35,12 +34,12 @@
             <include
 
                 layout="@layout/profile_data_in_create"
-                android:id="@+id/profile1"/>
+                android:id="@+id/joined_profile"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/profile1"
+                app:layout_constraintTop_toBottomOf="@id/joined_profile"
                 app:layout_constraintStart_toStartOf="parent"
                 style="@style/semiBoldText"
                 android:text="Admin Info"
@@ -159,11 +158,53 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/score_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/admin_layout"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rect_with_yellow_stroke"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/ic_score_icon"
+                    android:padding="10dp"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/score_icon"/>
+
+                <TextView
+                    android:id="@+id/tv_splitur_score"
+                    style="@style/headingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Splitur Score"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toEndOf="@+id/score_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/admin_layout"
+                app:layout_constraintTop_toBottomOf="@id/score_layout"
                 android:text="Group Credentials"
                 style="@style/semiBoldText"
                 android:textSize="20sp"

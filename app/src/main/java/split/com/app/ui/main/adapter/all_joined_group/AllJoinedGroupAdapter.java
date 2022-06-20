@@ -16,19 +16,19 @@ import split.com.app.data.model.all_created_groupx.DataItem;
 
 public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAdapter.GroupVH> {
 
-    private final List<DataItem> dataItems;
+    private final List<split.com.app.data.model.all_joined_groups.DataItem> dataItems;
     private final Context context;
 
     private AllJoinedGroupAdapter.ItemClickListener mListener;
 
 
 
-    public void setOnCategorySelectListener(AllJoinedGroupAdapter.ItemClickListener listener) {
+    public void setOnJoinedClixkListener(AllJoinedGroupAdapter.ItemClickListener listener) {
         mListener = listener;
     }
 
 
-    public AllJoinedGroupAdapter(Context appContext, List<DataItem> list) {
+    public AllJoinedGroupAdapter(Context appContext, List<split.com.app.data.model.all_joined_groups.DataItem> list) {
         this.context = appContext;
         this.dataItems = list;
     }
@@ -36,14 +36,14 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
     @NonNull
     @Override
     public AllJoinedGroupAdapter.GroupVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_created_group_design, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_joined_list_design, parent, false);
         return new AllJoinedGroupAdapter.GroupVH(view,mListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AllJoinedGroupAdapter.GroupVH holder, int position) {
-        DataItem current_item =  dataItems.get(position);
-        holder.name.setText(current_item.getGroupTitle());
+        split.com.app.data.model.all_joined_groups.DataItem current_item =  dataItems.get(position);
+        holder.name.setText(current_item.getGroup().getGroupTitle());
     }
 
     @Override
@@ -57,14 +57,15 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
 
     public static class GroupVH extends RecyclerView.ViewHolder {
         public ImageView icon;
-        public TextView name;
+        public TextView name,open;
 
         public GroupVH(@NonNull View itemView, AllJoinedGroupAdapter.ItemClickListener mListener) {
             super(itemView);
             //find views
-            name = itemView.findViewById(R.id.catName);
+            name = itemView.findViewById(R.id.join_title);
+            open = itemView.findViewById(R.id.open);
 
-            itemView.setOnClickListener(view -> {
+            open.setOnClickListener(view -> {
                 if (mListener != null) {
                     if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                         mListener.onCategorySelect(getAdapterPosition());

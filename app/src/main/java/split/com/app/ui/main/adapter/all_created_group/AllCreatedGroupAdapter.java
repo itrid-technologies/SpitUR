@@ -17,6 +17,7 @@ import split.com.app.R;
 import split.com.app.data.model.all_created_groupx.DataItem;
 import split.com.app.data.model.home_categories.CategoryDataItems;
 import split.com.app.utils.Constants;
+import split.com.app.utils.Split;
 
 public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroupAdapter.GroupVH> {
 
@@ -26,8 +27,7 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
     private AllCreatedGroupAdapter.ItemClickListener mListener;
 
 
-
-    public void setOnCategorySelectListener(AllCreatedGroupAdapter.ItemClickListener listener) {
+    public void setOnCreatedGroupClickListener(AllCreatedGroupAdapter.ItemClickListener listener) {
         mListener = listener;
     }
 
@@ -48,6 +48,7 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
     public void onBindViewHolder(@NonNull AllCreatedGroupAdapter.GroupVH holder, int position) {
         DataItem current_item =  dataItems.get(position);
         holder.name.setText(current_item.getGroupTitle());
+        holder.slots.setText(String.valueOf(current_item.getSlots()));
     }
 
     @Override
@@ -61,12 +62,14 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
 
     public static class GroupVH extends RecyclerView.ViewHolder {
         public ImageView icon;
-        public TextView name;
+        public TextView name,slots;
 
         public GroupVH(@NonNull View itemView, AllCreatedGroupAdapter.ItemClickListener mListener) {
             super(itemView);
             //find views
-            name = itemView.findViewById(R.id.catName);
+            name = itemView.findViewById(R.id.group_title);
+            slots = itemView.findViewById(R.id.space);
+
 
             itemView.setOnClickListener(view -> {
                 if (mListener != null) {

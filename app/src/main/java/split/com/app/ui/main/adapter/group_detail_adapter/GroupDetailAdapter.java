@@ -92,6 +92,11 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
 
         holder.rateOf_id.setText(String.valueOf(dataItem.getUserId()));
 
+        String coin = String.valueOf(dataItem.getCostPerMember());
+        Double coinFloat = Double.parseDouble(coin);
+        String value = String.valueOf(((coinFloat * 30) / 100) + coinFloat);
+        holder.coins.setText(value + " Coins");
+
         holder.itemView.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
             Gson gson = new Gson();
@@ -112,7 +117,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, online_offline, group_id , rateOf_id, one, two , three, four , five , six, score;
+        public TextView title, online_offline, group_id , rateOf_id, one, two , three, four , five , six, score, coins;
         ImageView online_icon , rate_icon;
         CircleImageView user;
 
@@ -135,6 +140,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
             rate_icon = itemView.findViewById(R.id.icon);
             score = itemView.findViewById(R.id.tv_score);
             user = itemView.findViewById(R.id.iv_user);
+            coins = itemView.findViewById(R.id.coins_value);
 
 
 

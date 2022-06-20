@@ -1,10 +1,9 @@
-package split.com.app.data.model.group_detail;
+package split.com.app.data.model.all_joined_groups;
 
-import java.util.Collection;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class GroupDetailModel{
+public class AllJoinedGroupModel{
 
 	@SerializedName("data")
 	private List<DataItem> data;
@@ -15,15 +14,15 @@ public class GroupDetailModel{
 	@SerializedName("message")
 	private String message;
 
-	public List<DataItem> getData() {
+	public List<DataItem> getData(){
 		return data;
 	}
 
-	public boolean isSuccess() {
+	public boolean isSuccess(){
 		return success;
 	}
 
-	public String getMessage() {
+	public String getMessage(){
 		return message;
 	}
 }

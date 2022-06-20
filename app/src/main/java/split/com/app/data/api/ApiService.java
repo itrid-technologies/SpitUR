@@ -18,9 +18,11 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import split.com.app.data.model.HomeContentModel;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
+import split.com.app.data.model.all_joined_groups.AllJoinedGroupModel;
 import split.com.app.data.model.create_group.CreateGroupModel;
 import split.com.app.data.model.create_group.DataRequiredForGroup;
 import split.com.app.data.model.group_detail.GroupDetailModel;
+import split.com.app.data.model.group_member.GroupMemberModel;
 import split.com.app.data.model.home_categories.CategoriesModel;
 import split.com.app.data.model.join_group.JoinGroupModel;
 import split.com.app.data.model.otp_verification.AuthenticationModel;
@@ -91,11 +93,19 @@ public interface ApiService {
                                );
 
     @GET("groups/get_joined_groups")
-    Call<GroupDetailModel> getJoinedGroups(@Header("Authorization") String token);
+    Call<AllJoinedGroupModel> getJoinedGroups(@Header("Authorization") String token);
 
+    @GET("groups/admin_group_list")
     Call<AllCreatedGroupModel> getCreatedGroups(@Header("Authorization") String token);
 
     @GET("groups/search_sub_categories/{data}")
     Call<PopularSubCategoryModel> getsubCat(@Header("Authorization") String token,
                                       @Path("data") String data);
+
+    @GET("groups/get_group_members/{id}")
+    Call<GroupMemberModel> getGroupMembers(@Header("Authorization") String token,
+                                           @Path("id") String id);
+    @GET("groups/delete_group/{id}")
+    Call<BasicModel> deleteGroup(@Header("Authorization") String token,
+                                 @Path("id") String id);
 }

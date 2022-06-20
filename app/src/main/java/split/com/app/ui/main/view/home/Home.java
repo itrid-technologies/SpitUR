@@ -98,7 +98,6 @@ public class Home extends Fragment {
                 if (categoriesModel.getData().size() > 0) {
                     category_list.addAll(categoriesModel.getData());
                 }
-
                 buildCategoryRv();
             }
         });

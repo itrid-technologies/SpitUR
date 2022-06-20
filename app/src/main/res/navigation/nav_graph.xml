@@ -237,5 +237,26 @@
         android:id="@+id/createdAndJoinedGroups"
         android:name="split.com.app.ui.main.view.group_created_and_joined.CreatedAndJoinedGroups"
         android:label="fragment_created_and_joined_groups"
-        tools:layout="@layout/fragment_created_and_joined_groups" />
+        tools:layout="@layout/fragment_created_and_joined_groups" >
+        <action
+            android:id="@+id/action_createdAndJoinedGroups_to_joinedGroupDetail2"
+            app:destination="@id/joinedGroupDetail2" />
+        <action
+            android:id="@+id/action_createdAndJoinedGroups_to_createdGroupDetail"
+            app:destination="@id/createdGroupDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinedGroupDetail2"
+        android:name="split.com.app.ui.main.view.joined_detail.JoinedGroupDetail"
+        android:label="fragment_joined_group_detail"
+        tools:layout="@layout/fragment_joined_group_detail" />
+    <fragment
+        android:id="@+id/createdGroupDetail"
+        android:name="split.com.app.ui.main.view.created_detail.CreatedGroupDetail"
+        android:label="fragment_created_group_detail"
+        tools:layout="@layout/fragment_created_group_detail" >
+        <action
+            android:id="@+id/action_createdGroupDetail_to_chatroom"
+            app:destination="@id/chatroom" />
+    </fragment>
 </navigation>
