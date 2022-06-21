@@ -42,8 +42,10 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
 
     @Override
     public void onBindViewHolder(@NonNull AllJoinedGroupAdapter.GroupVH holder, int position) {
-        split.com.app.data.model.all_joined_groups.DataItem current_item =  dataItems.get(position);
-        holder.name.setText(current_item.getGroup().getGroupTitle());
+        split.com.app.data.model.all_joined_groups.DataItem current_item = dataItems.get(position);
+        if (current_item.getGroup() != null) {
+            holder.name.setText(current_item.getGroup().getGroupTitle());
+        }
     }
 
     @Override

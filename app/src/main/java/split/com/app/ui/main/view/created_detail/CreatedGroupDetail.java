@@ -10,6 +10,8 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -77,7 +80,7 @@ public class CreatedGroupDetail extends Fragment {
         }
 
 
-        membersViewModel = new GroupMembersViewModel(String.valueOf(data.getId()));
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","");
         membersViewModel.init();
         membersViewModel.getPlan().observe(getViewLifecycleOwner(),groupMemberModel -> {
             if (groupMemberModel.isSuccess()){
@@ -89,7 +92,68 @@ public class CreatedGroupDetail extends Fragment {
         });
 
 
+        textWatcher();
 
+    }
+
+    private void textWatcher() {
+        binding.edUsername.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                String updated_value = editable.toString().trim();
+                updateEmailData(updated_value);
+            }
+        });
+
+        binding.edPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                String updated_value = editable.toString().trim();
+                updatePassData(updated_value);
+            }
+        });
+    }
+
+    private void updateEmailData(String updated_value) {
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "",updated_value,"");
+        membersViewModel.initEmailUpdate();
+        membersViewModel.getUpdate_email_data().observe(getViewLifecycleOwner(),basicModel -> {
+            if (basicModel.isStatus()){
+                Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void updatePassData(String updated_value) {
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "","",updated_value);
+        membersViewModel.initPassUpdate();
+        membersViewModel.getUpdate_pass_data().observe(getViewLifecycleOwner(),basicModel -> {
+            if (basicModel.isStatus()){
+                Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void buildMembersList(List<split.com.app.data.model.group_member.DataItem> membersList) {
@@ -105,16 +169,16 @@ public class CreatedGroupDetail extends Fragment {
                 View carDetailView = LayoutInflater.from(requireContext()).inflate(R.layout.delete_layout, null, false);
                 ConstraintLayout deleteLayout = carDetailView.findViewById(R.id.delete_layout);
                 deleteLayout.setOnClickListener(view -> {
-                    bt.cancel();
-                    membersViewModel = new GroupMembersViewModel(String.valueOf(data.getId()));
-                    membersViewModel.initRemoveGroup();
-                    membersViewModel.getRemove_data().observe(getViewLifecycleOwner(),basicModel -> {
+
+                    membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), String.valueOf(membersList.get(position).getUserId()),"","");
+                    membersViewModel.initRemoveMember();
+                    membersViewModel.getMember_remove_data().observe(getViewLifecycleOwner(),basicModel -> {
                         if (basicModel.isStatus()){
                             displayRemovedDialogue();
                         }
                     });
                 });
-                
+
                 bt.setContentView(carDetailView);
                 bt.show();
             });
@@ -129,11 +193,19 @@ public class CreatedGroupDetail extends Fragment {
                 .placeholder(R.drawable.user)
                 .into(binding.detailProfile.userImage);
 
-        binding.detailProfile.userName.setText(data.getGroupAdmin().getName());
+        binding.detailProfile.userName.setText(data.getGroupAdmin().getUserId());
         binding.detailProfile.count.setText((String.valueOf(data.getSlots()))+ " Slots");
 
         binding.edUsername.setText(data.getEmail());
         binding.edPassword.setText(data.getPassword());
+
+        //group_admin
+        Glide.with(Split.getAppContext())
+                .load(Constants.IMG_PATH + data.getGroupAdmin().getAvatar())
+                .placeholder(R.color.blue)
+                .into(binding.memberImage);
+
+        binding.memberName.setText(data.getGroupAdmin().getUserId());
 
         if (data.isVisibility()){
             binding.privateLayout.setBackgroundResource(0);
@@ -178,7 +250,7 @@ public class CreatedGroupDetail extends Fragment {
 
             deleteLayout.setOnClickListener(view -> {
                 bt.cancel();
-                membersViewModel = new GroupMembersViewModel(String.valueOf(data.getId()));
+                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","");
                 membersViewModel.initRemoveGroup();
                 membersViewModel.getRemove_data().observe(getViewLifecycleOwner(),basicModel -> {
                     if (basicModel.isStatus()){

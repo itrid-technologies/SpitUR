@@ -300,7 +300,21 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+            <Button
+                android:id="@+id/btn_group_chat"
+                style="@style/buttonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/button_round_bg"
+                android:paddingStart="80dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="80dp"
+                android:paddingBottom="10dp"
+                android:text="Group Chat"
+                app:layout_constraintTop_toBottomOf="@id/credential_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -72,6 +72,11 @@ public class Profile extends Fragment {
     }
 
     private void initClickListeners() {
+
+        binding.friendsLayout.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_profile2_to_friends);
+        });
+
         binding.refund.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_profile2_to_refund2);
         });

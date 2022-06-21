@@ -1,5 +1,6 @@
 package split.com.app.ui.main.adapter.chat;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,21 +15,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import split.com.app.R;
 import split.com.app.data.model.chat_receiver.ReceiverModel;
 import split.com.app.data.model.chat_sender.SenderModel;
+import split.com.app.data.model.receive_message.MessagesItem;
+import split.com.app.data.model.receive_message.Receiver;
+import split.com.app.data.model.receive_message.Sender;
+import split.com.app.utils.Split;
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private static final int OUTGOING_VIEW_TYPE = 1;
     private static final int INCOMING_VIEW_TYPE = 0;
+    private final List<MessagesItem> mMessageList;
+    private Context context;
 
-    private final ArrayList<Object> mMessageList;
-
-    public ChatAdapter(ArrayList<Object> mMessageList) {
-        this.mMessageList = mMessageList;
+    public ChatAdapter(Split appContext, List<MessagesItem> messagesItems) {
+        this.context = appContext;
+        this.mMessageList = messagesItems;
     }
 
     @NonNull
@@ -49,24 +56,24 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         switch (getItemViewType(position)) {
             case 0:
                 RecieverVH rvh = (RecieverVH) holder;
-                ReceiverModel data = (ReceiverModel) mMessageList.get(position);
-                rvh.message.setText(data.getMessage());
+                Receiver data = (Receiver) mMessageList.get(position).getReceiver();
+                rvh.message.setText(mMessageList.get(position).getBody());
 
-                String rStime;
-                String[] rSentTime = data.getTime().split("T");
-                rStime = rSentTime[1].substring(0, Math.min(rSentTime[1].length(), 5));
-                rvh.time.setText(rStime);
+//                String rStime;
+//                String[] rSentTime = data.getTime().split("T");
+//                rStime = rSentTime[1].substring(0, Math.min(rSentTime[1].length(), 5));
+//                rvh.time.setText(rStime);
 
                 break;
             case 1:
-                SenderVH svh = (SenderVH) holder;
-                SenderModel data2 = (SenderModel) mMessageList.get(position);
-                Log.e("TAG", "onBindViewHolder: " + data2.get_message() );
-                svh.senderMessage.setText(data2.get_message());
-                String sSTime;
-                String[] sSentTime = data2.getTime().split("T");
-                sSTime = sSentTime[1].substring(0, Math.min(sSentTime[1].length(), 5));
-                svh.time.setText(sSTime);
+//                SenderVH svh = (SenderVH) holder;
+//                Sender data2 = (Sender) mMessageList.get(position).getSender();
+//                Log.e("TAG", "onBindViewHolder: " + data2.get_message() );
+//                svh.senderMessage.setText(data2.get_message());
+//                String sSTime;
+//                String[] sSentTime = data2.getTime().split("T");
+//                sSTime = sSentTime[1].substring(0, Math.min(sSentTime[1].length(), 5));
+//                svh.time.setText(sSTime);
 
                 break;
         }

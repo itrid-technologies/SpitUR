@@ -43,6 +43,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detail_profile"
                 android:text="Group Credentials"
+                android:textSize="20sp"
                 style="@style/semiBoldText"
                 android:layout_marginTop="20dp"
                 android:id="@+id/tv_credentials"/>
@@ -118,6 +119,7 @@
                 app:layout_constraintTop_toBottomOf="@id/credential_layout"
                 android:text="Share Group Join Link"
                 style="@style/semiBoldText"
+                android:textSize="20sp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/tv_share_link"/>
 
@@ -279,17 +281,127 @@
                 app:layout_constraintTop_toBottomOf="@id/privateLayout"
                 android:text="Group Members"
                 style="@style/semiBoldText"
+                android:textSize="20sp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/tv_group_members"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/admin_as_member"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_group_members">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_group_members"
+                    >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/profile_bg"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/adminBg"
+                        android:padding="10dp">
+
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/member_image"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/user"
+                            app:civ_border_width="1dp"
+                            android:layout_marginStart="5dp"
+                            app:civ_circle_background_color="#94F0F0"
+                            app:civ_border_color="@color/green"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/member_image"
+                            style="@style/semiBoldText"
+                            android:text="username"
+                            android:textSize="18sp"
+                            android:layout_marginStart="10dp"
+                            android:id="@+id/member_name"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/member_name"
+                            app:layout_constraintStart_toStartOf="@id/member_name"
+                            style="@style/normalText"
+                            android:layout_marginTop="-3dp"
+                            android:text="Coins available on "
+                            android:id="@+id/tv_coin"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/member_name"
+                            app:layout_constraintStart_toEndOf="@id/tv_coin"
+                            style="@style/normalText"
+                            android:layout_marginTop="-3dp"
+                            android:textColor="@color/orange"
+                            android:text=" 1/12/2022"
+                            android:id="@+id/tv_coins_date"/>
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="@id/tv_coin"
+                            app:layout_constraintTop_toBottomOf="@id/tv_coin"
+                            android:background="@drawable/round_back"
+                            android:backgroundTint="@color/blue"
+                            android:text="Chat"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp"
+                            android:layout_marginTop="5dp"
+                            style="@style/buttonStyle"
+                            android:textSize="14sp"
+                            android:id="@+id/chat_button"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <ImageView
+                        android:id="@+id/adminBg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:src="@drawable/ic_tick"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:background="@color/green"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_group_members"
+                app:layout_constraintTop_toBottomOf="@id/admin_as_member"
                 android:id="@+id/group_members_list"
-                android:layout_marginTop="8dp"/>
+                />
 
 
             <Button

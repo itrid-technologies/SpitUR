@@ -99,7 +99,7 @@ public class OtpVerification extends AppCompatActivity {
                     preferences.saveData(this, "userName", authenticationModel.getData().getUser().getName());
                     preferences.saveData(this, "userAvatar", Constants.IMG_PATH + authenticationModel.getData().getUser().getAvatar());
                     preferences.saveData(this, "userCreatedAt", authenticationModel.getData().getUser().getCreatedAt());
-                    preferences.saveData(this, "userAccessToken", "Bearer " +authenticationModel.getData().getToken());
+                    preferences.saveData(this, "userAccessToken", authenticationModel.getData().getToken());
 
                     ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

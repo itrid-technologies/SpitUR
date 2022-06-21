@@ -19,8 +19,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class ApiManager {
-//http://192.168.100.19:4000/
-    public static final String URL_BASE= "http://192.168.100.19:4000";
+//http://192.168.100.19:4000/http://3.6.7.161:4000/
+    public static final String URL_BASE= "http://192.168.100.19:4000/";
 
     private static Retrofit retrofit;
 
@@ -42,9 +42,9 @@ public class ApiManager {
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(URL_BASE)
-                    //.baseUrl("https://testserver.glorek.com/api/")
+//                    .baseUrl("https://testserver.glorek.com/api/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
-//                    .addConverterFactory(NullOrEmptyConverterFactory())
+//                  .addConverterFactory(NullOrEmptyConverterFactory())
                     .client(httpClient.build())
                     .build();
 

@@ -65,6 +65,7 @@
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_credentials.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_enter_upi_id.xml" value="0.22" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_f_a_q.xml" value="0.371875" />
+        <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_friends.xml" value="0.3052586575459598" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_group_information.xml" value="0.25" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_home.xml" value="0.16" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_join_check_out.xml" value="0.22" />
@@ -89,6 +90,7 @@
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_swap_coins.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_user_information.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/fragment_visibility.xml" value="0.371875" />
+        <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/friends_list_design.xml" value="0.3052586575459598" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/group_member_list_design.xml" value="0.3052586575459598" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/group_options_dialogue.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/home_category_list_item.xml" value="0.371875" />
@@ -96,6 +98,7 @@
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/home_section_design.xml" value="0.209375" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/item_user_avatar.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/password_verification_design.xml" value="0.9" />
+        <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/payment_list_item_design.xml" value="0.3052586575459598" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/plans_list_item_design.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/plans_search_list_item_design.xml" value="0.5" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/profile_data_in_create.xml" value="0.25" />

@@ -106,6 +106,9 @@
         <action
             android:id="@+id/action_profile2_to_swapCoins"
             app:destination="@id/swapCoins" />
+        <action
+            android:id="@+id/action_profile2_to_friends"
+            app:destination="@id/friends" />
     </fragment>
     <fragment
         android:id="@+id/refund2"
@@ -259,4 +262,9 @@
             android:id="@+id/action_createdGroupDetail_to_chatroom"
             app:destination="@id/chatroom" />
     </fragment>
+    <fragment
+        android:id="@+id/friends"
+        android:name="split.com.app.ui.main.view.friends.Friends"
+        android:label="fragment_friends"
+        tools:layout="@layout/fragment_friends" />
 </navigation>

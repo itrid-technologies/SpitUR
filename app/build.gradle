@@ -80,10 +80,10 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:4.9.1"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
 
-    //dagger
-    implementation 'com.google.dagger:dagger-android:2.35.1'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.20'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.20'
+//    //dagger
+//    implementation 'com.google.dagger:dagger-android:2.35.1'
+//    annotationProcessor 'com.google.dagger:dagger-android-processor:2.20'
+//    annotationProcessor 'com.google.dagger:dagger-compiler:2.20'
 
 
 

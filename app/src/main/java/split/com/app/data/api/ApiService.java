@@ -2,7 +2,6 @@ package split.com.app.data.api;
 
 import com.google.gson.JsonObject;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -14,25 +13,23 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 import split.com.app.data.model.HomeContentModel;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
 import split.com.app.data.model.all_joined_groups.AllJoinedGroupModel;
+import split.com.app.data.model.basic_model.BasicModel;
 import split.com.app.data.model.create_group.CreateGroupModel;
-import split.com.app.data.model.create_group.DataRequiredForGroup;
+import split.com.app.data.model.get_avatar.AvatarModel;
 import split.com.app.data.model.group_detail.GroupDetailModel;
 import split.com.app.data.model.group_member.GroupMemberModel;
 import split.com.app.data.model.home_categories.CategoriesModel;
 import split.com.app.data.model.join_group.JoinGroupModel;
 import split.com.app.data.model.otp_verification.AuthenticationModel;
+import split.com.app.data.model.phone_number.NumberModel;
 import split.com.app.data.model.plans.PlanModel;
 import split.com.app.data.model.popular_subcategory.PopularSubCategoryModel;
+import split.com.app.data.model.receive_message.GetMessagesModel;
 import split.com.app.data.model.register.RegisterModel;
-import split.com.app.data.model.get_avatar.AvatarModel;
-import split.com.app.data.model.phone_number.NumberModel;
-import split.com.app.data.model.basic_model.BasicModel;
-import split.com.app.data.model.search_sub_category.SearchSubCatModel;
+import split.com.app.data.model.send_message.MessageSendModel;
 
 public interface ApiService {
 
@@ -50,6 +47,7 @@ public interface ApiService {
                                  @Field("name") String name,
                                  @Field("avatar") String avatar,
                                  @Field("userId") String id);
+
     @FormUrlEncoded
     @POST("users/sendOtp")
     Call<BasicModel> sendOTP(@Field("phone") String number);
@@ -58,6 +56,7 @@ public interface ApiService {
     @POST("users/authentication")
     Call<AuthenticationModel> authenticateUser(@Field("phone") String number,
                                                @Field("otp") String otp);
+
     @FormUrlEncoded
     @POST("users/usernameExists")
     Call<BasicModel> checkUserIdExistence(@Field("userId") String id);
@@ -90,7 +89,7 @@ public interface ApiService {
     @POST("groups/join_group")
     Call<JoinGroupModel> joinGroup(@Header("Authorization") String token,
                                    @Field("group_id") String id
-                               );
+    );
 
     @GET("groups/get_joined_groups")
     Call<AllJoinedGroupModel> getJoinedGroups(@Header("Authorization") String token);
@@ -100,12 +99,30 @@ public interface ApiService {
 
     @GET("groups/search_sub_categories/{data}")
     Call<PopularSubCategoryModel> getsubCat(@Header("Authorization") String token,
-                                      @Path("data") String data);
+                                            @Path("data") String data);
 
     @GET("groups/get_group_members/{id}")
     Call<GroupMemberModel> getGroupMembers(@Header("Authorization") String token,
                                            @Path("id") String id);
+
     @GET("groups/delete_group/{id}")
     Call<BasicModel> deleteGroup(@Header("Authorization") String token,
                                  @Path("id") String id);
+
+    @POST("messages/sendMessage")
+    Call<MessageSendModel> sendMessage(@Header("Authorization") String token,
+                                       @Body JsonObject object);
+    @GET("messages/getMessages/{id}")
+    Call<GetMessagesModel> getMessages(@Header("Authorization") String token,
+                                       @Path("id") String id);
+
+
+    @POST("groups/remove_member")
+    Call<BasicModel> removeMember(@Header("Authorization") String token,
+                                  @Body JsonObject object);
+
+    @POST("groups/update_group/{id}")
+    Call<BasicModel> updateGroup(@Header("Authorization") String token,
+                                 @Path("id") String id,
+                                 @Body JsonObject object);
 }

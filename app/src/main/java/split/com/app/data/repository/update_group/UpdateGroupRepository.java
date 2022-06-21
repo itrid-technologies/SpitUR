@@ -1,4 +1,4 @@
-package split.com.app.data.repository.get_member;
+package split.com.app.data.repository.update_group;
 
 import android.util.Log;
 
@@ -13,54 +13,26 @@ import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
 import split.com.app.data.model.basic_model.BasicModel;
-import split.com.app.data.model.group_member.GroupMemberModel;
-import split.com.app.data.model.join_group.JoinGroupModel;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
-public class GroupMembersRepository {
+public class UpdateGroupRepository {
     private ApiService apiService;
 
-    public GroupMembersRepository() {
+    public UpdateGroupRepository() {
     }
 
-    public MutableLiveData<GroupMemberModel> getMembers(String id) {
-        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
-        String token = preferences.getData(Split.getAppContext(), "userAccessToken");
+    public MutableLiveData<BasicModel> updateEmail(String group_id, String email) {
 
-        final MutableLiveData<GroupMemberModel> BasicModelMutableLiveData = new MutableLiveData<>();
-        apiService = ApiManager.getRestApiService();
-        Call<GroupMemberModel> call = apiService.getGroupMembers("Bearer "+token,id);
-        call.enqueue(new Callback<GroupMemberModel>() {
-            @Override
-            public void onResponse(@NonNull Call<GroupMemberModel> call, @NonNull Response<GroupMemberModel> response) {
-                if(response.body()!=null)
-                {
-                    BasicModelMutableLiveData.setValue(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<GroupMemberModel> call, @NonNull Throwable t) {
-                Log.e("Avatar Error",t.getMessage());
-            }
-        });
-
-        return BasicModelMutableLiveData;
-    }
-
-
-    public MutableLiveData<BasicModel> removeGroupMember(String group_id, String user_id) {
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
         JsonObject object = new JsonObject();
-        object.addProperty("group_id", group_id);
-        object.addProperty("user_id", user_id);
+        object.addProperty("email", email);
 
         final MutableLiveData<BasicModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<BasicModel> call = apiService.removeMember("Bearer "+token,object);
+        Call<BasicModel> call = apiService.updateGroup("Bearer "+token , group_id, object);
         call.enqueue(new Callback<BasicModel>() {
             @Override
             public void onResponse(@NonNull Call<BasicModel> call, @NonNull Response<BasicModel> response) {
@@ -79,5 +51,32 @@ public class GroupMembersRepository {
         return liveData;
     }
 
+    public MutableLiveData<BasicModel> updatePass(String group_id, String pass) {
 
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String token = preferences.getData(Split.getAppContext(), "userAccessToken");
+
+        JsonObject object = new JsonObject();
+        object.addProperty("password", pass);
+
+        final MutableLiveData<BasicModel> liveData = new MutableLiveData<>();
+        apiService = ApiManager.getRestApiService();
+        Call<BasicModel> call = apiService.updateGroup("Bearer "+token , group_id, object);
+        call.enqueue(new Callback<BasicModel>() {
+            @Override
+            public void onResponse(@NonNull Call<BasicModel> call, @NonNull Response<BasicModel> response) {
+                if(response.body()!=null)
+                {
+                    liveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<BasicModel> call, @NonNull Throwable t) {
+                Log.e("Avatar Error",t.getMessage());
+            }
+        });
+
+        return liveData;
+    }
 }

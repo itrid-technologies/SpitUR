@@ -17,6 +17,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
+import split.com.app.data.model.group_member.DataItem;
 import split.com.app.utils.Constants;
 
 
@@ -25,6 +26,7 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
     private final List<split.com.app.data.model.group_member.DataItem> list;
     private final Context context;
     private ItemClickListener mListener;
+    String adminId;
 
 
     public void setOnRemoveListener(ItemClickListener listener) {
@@ -32,7 +34,7 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
     }
 
 
-    public GroupMemberAdapter(Context appContext, List<split.com.app.data.model.group_member.DataItem> membersList) {
+    public GroupMemberAdapter(Context appContext, List<DataItem> membersList) {
         this.context = appContext;
         this.list = membersList;
     }
@@ -69,7 +71,7 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public CircleImageView image;
-        public ImageView remove;
+        public ImageView remove, admin;
         public TextView name, date;
         public Button chat;
 
@@ -81,6 +83,7 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
             name = itemView.findViewById(R.id.member_name);
             date = itemView.findViewById(R.id.tv_coins_date);
             chat = itemView.findViewById(R.id.chat_button);
+            admin = itemView.findViewById(R.id.adminBg);
 
 
             remove.setOnClickListener(view -> {

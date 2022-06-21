@@ -44,7 +44,7 @@ public class CreateGroupRepository {
 
         HashMap<String, String> parms = new HashMap<>();
         parms.put("plans_id",plan_id);
-        parms.put("title",title);
+        parms.put("group_title",title);
         parms.put("slots",slot);
         parms.put("cost_per_member",cost);
         parms.put("email",email);
@@ -55,7 +55,7 @@ public class CreateGroupRepository {
 
         JsonObject object = new JsonObject();
         object.addProperty("plans_id",plan_id);
-        object.addProperty("title",title);
+        object.addProperty("group_title",title);
         object.addProperty("slots",slot);
         object.addProperty("cost_per_member",cost);
         object.addProperty("email",email);

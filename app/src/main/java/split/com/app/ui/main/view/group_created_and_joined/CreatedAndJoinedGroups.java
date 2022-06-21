@@ -126,9 +126,9 @@ public class CreatedAndJoinedGroups extends Fragment {
 
         adapter.setOnJoinedClixkListener(position -> {
             Gson gson = new Gson();
-            String createdGroupData = gson.toJson(join_data.get(position));
+            String joinData = gson.toJson(join_data.get(position));
             Bundle bundle = new Bundle();
-            bundle.putString("joinedGroupData",createdGroupData);
+            bundle.putString("joinedGroupData",joinData);
             Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_joinedGroupDetail2,bundle);
         });
     }

@@ -89,7 +89,7 @@ public class OtpVerifyFragment extends Fragment {
 
                 MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
 
-                pm.saveData(Split.getAppContext(), "userAccessToken", "Bearer " +authenticationModel.getData().getToken());
+                pm.saveData(Split.getAppContext(), "userAccessToken", authenticationModel.getData().getToken());
 
                 String planId = pm.getData(Split.getAppContext(),"PLAN_ID");
                 String slots = pm.getData(Split.getAppContext(),"SLOTS");
