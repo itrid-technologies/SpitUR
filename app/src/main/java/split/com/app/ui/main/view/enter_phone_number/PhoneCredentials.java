@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import split.com.app.R;
 import split.com.app.databinding.FragmentPhoneCredentialsBinding;
 import split.com.app.ui.main.view.full_name.Name;
@@ -19,6 +21,7 @@ import split.com.app.ui.main.view.otp_verification.OtpVerification;
 import split.com.app.ui.main.viewmodel.phone_number.PhoneNumberViewModel;
 import split.com.app.utils.ActivityUtil;
 import split.com.app.utils.MySharedPreferences;
+import split.com.app.utils.Split;
 
 
 public class PhoneCredentials extends Fragment {
@@ -43,7 +46,23 @@ public class PhoneCredentials extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initClickListeners();
+        setProfileData();
+
     }
+
+    private void setProfileData() {
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String user_name = preferences.getData(Split.getAppContext(), "userName");
+        String user_ID = preferences.getData(Split.getAppContext(), "userId");
+        String avatar = preferences.getData(Split.getAppContext(), "userAvatar");
+        String slot = preferences.getData(Split.getAppContext(), "SLOTS");
+
+        binding.phoneProfile.netflix.setText(user_name);
+        binding.phoneProfile.userName.setText(user_ID);
+        binding.phoneProfile.count.setText(slot + " Slots");
+        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.drawable.user).into(binding.phoneProfile.userImage);
+    }
+
 
     private void initClickListeners() {
         binding.back.setOnClickListener(view -> {

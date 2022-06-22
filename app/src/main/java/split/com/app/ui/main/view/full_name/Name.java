@@ -38,7 +38,7 @@ public class Name extends AppCompatActivity {
             if (!name.isEmpty()){
 
                 MySharedPreferences sharedPreferences = new MySharedPreferences(this);
-                sharedPreferences.saveData(this,"name",name);
+                sharedPreferences.saveData(this,"userName",name);
 
                 ActivityUtil.gotoPage(Name.this, UserId.class);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

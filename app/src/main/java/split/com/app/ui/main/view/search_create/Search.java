@@ -24,6 +24,7 @@ import split.com.app.databinding.FragmentSearchBinding;
 import split.com.app.ui.main.adapter.search.SearchListAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.viewmodel.search_create_viewmodel.SearchCreateViewModel;
+import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
 
@@ -48,23 +49,24 @@ public class Search extends Fragment {
 
 //      popularSubCategoryList = new ArrayList<>();
 
-        mViewModel = new SearchCreateViewModel(null);
         getPopularSubCategory();
         initClickListeners();
         searchTextWatcher();
     }
 
     private void getPopularSubCategory() {
-        popularSubCategoryList = new ArrayList<>();
 
+        mViewModel = new SearchCreateViewModel(null);
         mViewModel.init();
         mViewModel.getPopularCategoryData().observe(getViewLifecycleOwner(), popularSubCategoryModel -> {
             if (popularSubCategoryModel.isSuccess()) {
                 if (popularSubCategoryModel.getData().size() > 0) {
+                    popularSubCategoryList = new ArrayList<>();
                     popularSubCategoryList.addAll(popularSubCategoryModel.getData());
+                    buildCategoryRv(popularSubCategoryList);
+
                 }
 
-                buildCategoryRv();
             }
         });
     }
@@ -91,8 +93,9 @@ public class Search extends Fragment {
             @Override
             public void afterTextChanged(Editable data) {
 
-                getSearchedData(data.toString());
-
+                if (!data.toString().isEmpty()) {
+                    getSearchedData(data.toString());
+                }
             }
         });
     }
@@ -104,7 +107,7 @@ public class Search extends Fragment {
             if (searchSubCatModel.isSuccess()) {
                 popularSubCategoryList = new ArrayList<>();
                 popularSubCategoryList.addAll(searchSubCatModel.getData());
-                buildCategoryRv();
+                buildCategoryRv1(popularSubCategoryList);
             }
         });
     }
@@ -115,11 +118,37 @@ public class Search extends Fragment {
         });
     }
 
-    private void buildCategoryRv() {
+    private void buildCategoryRv(List<DataItem> popularSubCategoryList) {
+
+        binding.popularList.setVisibility(View.VISIBLE);
+        binding.searchLis.setVisibility(View.GONE);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
+        binding.popularList.setLayoutManager(layoutManager);
+        SearchListAdapter adapter = new SearchListAdapter(Split.getAppContext(), popularSubCategoryList);
+        binding.popularList.setAdapter(adapter);
+    }
+
+    private void buildCategoryRv1(List<DataItem> popularSubCategoryList) {
+
+        binding.popularList.setVisibility(View.GONE);
+        binding.searchLis.setVisibility(View.VISIBLE);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.searchLis.setLayoutManager(layoutManager);
-        SearchListAdapter adapter = new SearchListAdapter(Split.getAppContext(), popularSubCategoryList);
-        binding.searchLis.setAdapter(adapter);
+        SearchListAdapter adapter1 = new SearchListAdapter(Split.getAppContext(), popularSubCategoryList);
+        binding.searchLis.setAdapter(adapter1);
+
+        adapter1.setOnCreateClickListener(position -> {
+//            Bundle bundle = new Bundle();
+//            bundle.putString("SUB_CATEGORY_ID",String.valueOf(popularSubCategoryList.get(position).getId()));
+//
+//            MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+//            pm.saveData(Split.getAppContext(), "SUB_CATEGORY_ID", String.valueOf(popularSubCategoryList.get(position).getId()));
+
+            Navigation.findNavController(requireView()).navigate(R.id.action_search2_to_subscriptionName);
+
+        });
     }
 
 }

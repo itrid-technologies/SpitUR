@@ -66,7 +66,7 @@ public class GroupDetail extends Fragment {
 
                 if (groupDetailModel.getData().size() > 0){
                     detailItems.addAll(groupDetailModel.getData());
-                    buildRec();
+                    buildRec(detailItems);
                 }
             }
         });
@@ -107,21 +107,36 @@ public class GroupDetail extends Fragment {
         detailItems = new ArrayList<>();
         viewModel = new GroupDetailViewModel(sub_categoryId,data);
         viewModel.initSearch();
-        viewModel.getDetailData().observe(getViewLifecycleOwner(),groupDetailModel -> {
+        viewModel.getDetailSearchData().observe(getViewLifecycleOwner(),groupDetailModel -> {
             if (groupDetailModel.isSuccess()){
 
                 if (groupDetailModel.getData().size() > 0){
+                    detailItems = new ArrayList<>();
                     detailItems.addAll(groupDetailModel.getData());
-                    buildRec();
+                    sarchBuildRec(detailItems);
                 }
             }
         });
     }
 
-    private void buildRec() {
+    private void buildRec(List<DataItem> detailItems) {
+        binding.groupsDetailList.setVisibility(View.VISIBLE);
+        binding.searchGroupsDetailList.setVisibility(View.GONE);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.groupsDetailList.setLayoutManager(layoutManager);
         GroupDetailAdapter adapter = new GroupDetailAdapter(Split.getAppContext(), detailItems);
         binding.groupsDetailList.setAdapter(adapter);
+    }
+
+
+    private void sarchBuildRec(List<DataItem> detailItems) {
+        binding.searchGroupsDetailList.setVisibility(View.VISIBLE);
+        binding.groupsDetailList.setVisibility(View.GONE);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
+        binding.searchGroupsDetailList.setLayoutManager(layoutManager);
+        GroupDetailAdapter adapter = new GroupDetailAdapter(Split.getAppContext(), detailItems);
+        binding.searchGroupsDetailList.setAdapter(adapter);
     }
 }

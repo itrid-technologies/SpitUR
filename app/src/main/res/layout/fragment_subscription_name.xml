@@ -99,6 +99,7 @@
                     android:id="@+id/ed_netflix"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/verification_method_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +143,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/verification_text"
                         android:text="Email &amp; Password"
-                        android:background="@drawable/rect_back_with_grey_stroke"
+                        android:background="@drawable/selected_gradient_stroke_radius"
 
                         />
 
@@ -165,6 +166,22 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/verification_method_layout"
+                    android:text="Next"
+                    style="@style/buttonStyle"
+                    android:background="@drawable/button_round_bg"
+                    android:paddingStart="80dp"
+                    android:paddingEnd="80dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:id="@+id/BTN_SUB_NEXT"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

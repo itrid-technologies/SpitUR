@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_search2_to_plans2"
             app:destination="@id/plans2"/>
+        <action
+            android:id="@+id/action_search2_to_subscriptionName"
+            app:destination="@id/subscriptionName" />
     </fragment>
     <fragment
         android:id="@+id/plans2"
@@ -267,4 +270,22 @@
         android:name="split.com.app.ui.main.view.friends.Friends"
         android:label="fragment_friends"
         tools:layout="@layout/fragment_friends" />
+    <fragment
+        android:id="@+id/subscriptionName"
+        android:name="split.com.app.ui.main.view.subscription_name.SubscriptionName"
+        android:label="fragment_subscription_name"
+        tools:layout="@layout/fragment_subscription_name" >
+        <action
+            android:id="@+id/action_subscriptionName_to_slots"
+            app:destination="@id/slots" />
+    </fragment>
+    <fragment
+        android:id="@+id/slots"
+        android:name="split.com.app.ui.main.view.slots.Slots"
+        android:label="fragment_slots"
+        tools:layout="@layout/fragment_slots" >
+        <action
+            android:id="@+id/action_slots_to_visibility2"
+            app:destination="@id/visibility2" />
+    </fragment>
 </navigation>

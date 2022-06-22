@@ -7,8 +7,11 @@ public class Result{
 	@SerializedName("createdAt")
 	private String createdAt;
 
-	@SerializedName("receiver_id")
-	private int receiverId;
+	@SerializedName("sent_by")
+	private int sentBy;
+
+	@SerializedName("group_id")
+	private int groupId;
 
 	@SerializedName("id")
 	private int id;
@@ -26,8 +29,12 @@ public class Result{
 		return createdAt;
 	}
 
-	public int getReceiverId(){
-		return receiverId;
+	public int getSentBy(){
+		return sentBy;
+	}
+
+	public int getGroupId(){
+		return groupId;
 	}
 
 	public int getId(){

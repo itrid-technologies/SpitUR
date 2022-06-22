@@ -62,7 +62,7 @@
                 <include
 
                     layout="@layout/profile_data_in_create"
-                    android:id="@+id/profile"/>
+                    android:id="@+id/visibility_profile"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/publicLayout"
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/profile"
+                    app:layout_constraintTop_toBottomOf="@id/visibility_profile"
                     android:layout_marginTop="30dp"
                     android:padding="20dp"
                     android:background="@drawable/selected_gradient_stroke"

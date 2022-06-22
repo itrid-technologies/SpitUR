@@ -30,9 +30,9 @@ public class TermsAndConditions extends AppCompatActivity {
 
         MySharedPreferences sharedPreferences = new MySharedPreferences(this);
         String number = sharedPreferences.getData(this,"number");
-        String name = sharedPreferences.getData(this,"name");
-        String userid = sharedPreferences.getData(this,"user_id");
-        String avatar = sharedPreferences.getData(this,"avatar");
+        String name = sharedPreferences.getData(this,"userName");
+        String userid = sharedPreferences.getData(this,"userId");
+        String avatar = sharedPreferences.getData(this,"userAvatar");
 
 
 

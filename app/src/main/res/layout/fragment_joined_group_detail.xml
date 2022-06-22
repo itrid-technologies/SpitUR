@@ -226,7 +226,7 @@
 
                 <EditText
                     android:id="@+id/group_email"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
                     android:clickable="false"
@@ -240,7 +240,7 @@
                     android:textSize="14sp"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/copy_email"
                     app:layout_constraintHorizontal_bias="0.39"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

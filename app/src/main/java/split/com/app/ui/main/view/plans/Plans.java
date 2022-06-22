@@ -31,6 +31,8 @@ public class Plans extends Fragment {
     private PlansViewModel mViewModel;
     private List<PlanDataItem> planModelList = new ArrayList<>();
 
+    String sub_cat_id;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,7 +49,11 @@ public class Plans extends Fragment {
 
         initClickListeners();
 
-        mViewModel = new PlansViewModel();
+        if (getArguments() != null){
+            sub_cat_id = getArguments().getString("SUB_CATEGORY_ID");
+        }
+
+        mViewModel = new PlansViewModel(sub_cat_id);
         mViewModel.init();
         mViewModel.getPlan().observe(getViewLifecycleOwner(), planModel -> {
             if (planModel.isSuccess()) {

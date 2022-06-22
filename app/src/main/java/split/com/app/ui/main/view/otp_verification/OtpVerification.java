@@ -94,6 +94,7 @@ public class OtpVerification extends AppCompatActivity {
 
                 if (authenticationModel.getData().getUser() != null) {
                     MySharedPreferences preferences = new MySharedPreferences(this);
+                    preferences.saveData(this, "Id", String.valueOf(authenticationModel.getData().getUser().getId()));
                     preferences.saveData(this, "userId", authenticationModel.getData().getUser().getUserId());
                     preferences.saveData(this, "userOtp", authenticationModel.getData().getUser().getOtpHash());
                     preferences.saveData(this, "userName", authenticationModel.getData().getUser().getName());

@@ -15,7 +15,8 @@ public class PlansViewModel extends ViewModel {
     private MutableLiveData<PlanModel> data;
     private PlanRepository planRepository;
 
-    public PlansViewModel() {
+    public PlansViewModel(String sub_cat_id) {
+        this.id = sub_cat_id;
         planRepository = new PlanRepository();
     }
 
@@ -25,7 +26,7 @@ public class PlansViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        data = planRepository.getPlans("1");
+        data = planRepository.getPlans(id);
     }
 
     public MutableLiveData<PlanModel> getPlan() {

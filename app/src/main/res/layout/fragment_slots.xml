@@ -78,7 +78,7 @@
                     android:layout_marginEnd="30dp"
                     android:id="@+id/sub_detail"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/slotValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,7 +87,10 @@
                     android:background="@drawable/rect_bg"
                     android:backgroundTint="@color/light_blue"
                     app:layout_constraintTop_toBottomOf="@id/sub_detail"
-                    android:text="5"
+                    android:hint="Slots"
+                    style="@style/semiBoldText"
+                    android:textColor="@color/white"
+                    android:gravity="center"
                     android:textSize="16sp"
                     android:fontFamily="@font/poppin_regular"
                     android:paddingTop="14dp"
@@ -96,7 +99,21 @@
                     android:paddingEnd="24dp"
                     android:layout_marginTop="20dp"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/slotValue"
+                    app:layout_constraintEnd_toEndOf="@id/slotValue"
+                    app:layout_constraintTop_toBottomOf="@id/slotValue"
+                    style="@style/normalText"
+                    android:text="Select Slots"
+                    android:visibility="gone"
+                    android:textColor="@color/error"
+                    android:padding="5dp"
+                    android:id="@+id/errorMessage"/>
+
                 <ImageView
+                    android:id="@+id/decrease"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="30dp"
@@ -109,6 +126,7 @@
                     android:padding="12dp"/>
 
                 <ImageView
+                    android:id="@+id/increase"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toEndOf="@id/slotValue"
@@ -126,7 +144,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/send_otp_button"
+                    app:layout_constraintBottom_toTopOf="@id/slot_next_button"
                     android:layout_gravity="bottom"
                     app:keySpecial="*"
                     android:layout_marginBottom="20dp"
@@ -144,12 +162,12 @@
                     style="@style/buttonStyle"
                     android:background="@drawable/button_round_bg"
                     android:paddingStart="80dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:textSize="14dp"
                     android:paddingEnd="80dp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:id="@+id/send_otp_button"/>
+                    android:id="@+id/slot_next_button"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

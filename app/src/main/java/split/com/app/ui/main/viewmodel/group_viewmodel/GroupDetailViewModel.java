@@ -11,6 +11,8 @@ import split.com.app.data.repository.home.HomeContentRepository;
 public class GroupDetailViewModel extends ViewModel {
 
     private MutableLiveData<GroupDetailModel> detailModelMutableLiveData;
+    private MutableLiveData<GroupDetailModel> detailSearchData;
+
     private GroupDetailRepository groupDetailRepository;
     String  subCategoryId, query;
 
@@ -30,16 +32,20 @@ public class GroupDetailViewModel extends ViewModel {
     }
 
     public void initSearch() {
-        if (this.detailModelMutableLiveData != null) {
+        if (this.detailSearchData != null) {
             // ViewModel is created per Fragment so
             // we know the userId won't change
             return;
         }
-        detailModelMutableLiveData = groupDetailRepository.getDetailsBySearch(subCategoryId,query);
+        detailSearchData = groupDetailRepository.getDetailsBySearch(subCategoryId,query);
     }
 
     public MutableLiveData<GroupDetailModel> getDetailData() {
         return this.detailModelMutableLiveData;
+    }
+
+    public MutableLiveData<GroupDetailModel> getDetailSearchData() {
+        return this.detailSearchData;
     }
 
 

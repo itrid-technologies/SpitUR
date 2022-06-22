@@ -11,24 +11,27 @@ import split.com.app.data.repository.update_group.UpdateGroupRepository;
 
 public class GroupMembersViewModel extends ViewModel {
 
-    String group_id, user_id, email, password;
+    String group_id, user_id, email, password, visible;
 
     private MutableLiveData<GroupMemberModel> data;
     private MutableLiveData<BasicModel> remove_data;
     private MutableLiveData<BasicModel> member_remove_data;
     private MutableLiveData<BasicModel> update_email_data;
     private MutableLiveData<BasicModel> update_pass_data;
+    private MutableLiveData<BasicModel> update_visibility;
+
 
     private GroupMembersRepository membersRepository;
     private DeleteGroupRepository deleteGroupRepository;
     private UpdateGroupRepository updateGroupRepository;
 
 
-    public GroupMembersViewModel(String id, String userid, String email, String Pass) {
+    public GroupMembersViewModel(String id, String userid, String email, String Pass, String visibility) {
         this.group_id = id;
         this.user_id = userid;
         this.email = email;
         this.password = Pass;
+        this.visible = visibility;
         membersRepository = new GroupMembersRepository();
         deleteGroupRepository = new DeleteGroupRepository();
         updateGroupRepository = new UpdateGroupRepository();
@@ -75,6 +78,16 @@ public class GroupMembersViewModel extends ViewModel {
         update_pass_data = updateGroupRepository.updatePass(group_id, password);
     }
 
+    public void initUpdateVisibility() {
+        if (this.update_visibility != null) {
+            // ViewModel is created per Fragment so
+            // we know the userId won't change
+            return;
+        }
+        update_visibility = updateGroupRepository.updateVisibility(group_id,visible);
+    }
+
+
 
     public MutableLiveData<GroupMemberModel> getPlan() {
         return this.data;
@@ -93,6 +106,9 @@ public class GroupMembersViewModel extends ViewModel {
     }
     public MutableLiveData<BasicModel> getUpdate_pass_data() {
         return this.update_pass_data;
+    }
+    public MutableLiveData<BasicModel> getUpdate_visibility() {
+        return this.update_visibility;
     }
 
 

@@ -81,7 +81,7 @@
             android:background="@drawable/button_round_bg"
             android:textColor="@color/white"
             style="@style/buttonStyle"
-            android:text="Join now"
+            android:text="Create"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             app:layout_constraintStart_toStartOf="parent"

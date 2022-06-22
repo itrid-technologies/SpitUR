@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import java.util.Locale;
 
 import split.com.app.R;
@@ -40,8 +42,22 @@ public class Credentials extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initClickListeners();
+        setProfileData();
+
     }
 
+    private void setProfileData() {
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String user_name = preferences.getData(Split.getAppContext(), "userName");
+        String user_ID = preferences.getData(Split.getAppContext(), "userId");
+        String avatar = preferences.getData(Split.getAppContext(), "userAvatar");
+        String slot = preferences.getData(Split.getAppContext(), "SLOTS");
+
+        binding.credentialProfile.netflix.setText(user_name);
+        binding.credentialProfile.userName.setText(user_ID);
+        binding.credentialProfile.count.setText(slot + " Slots");
+        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.drawable.user).into(binding.credentialProfile.userImage);
+    }
     private void initClickListeners() {
         binding.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();

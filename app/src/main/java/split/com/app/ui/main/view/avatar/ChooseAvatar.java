@@ -23,6 +23,7 @@ import split.com.app.databinding.ActivityChooseAvatarBinding;
 import split.com.app.ui.main.view.terms_conditions.TermsAndConditions;
 import split.com.app.ui.main.viewmodel.avatar_viewmodel.AvatarViewModel;
 import split.com.app.utils.ActivityUtil;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 
 public class ChooseAvatar extends AppCompatActivity {
@@ -96,7 +97,7 @@ public class ChooseAvatar extends AppCompatActivity {
             final String selectedAvatar = avatars.get(currentIndex);
 
             MySharedPreferences sharedPreferences = new MySharedPreferences(this);
-            sharedPreferences.saveData(this,"avatar",selectedAvatar);
+            sharedPreferences.saveData(this,"userAvatar", Constants.IMG_PATH +selectedAvatar);
 
             ActivityUtil.gotoPage(ChooseAvatar.this, TermsAndConditions.class);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

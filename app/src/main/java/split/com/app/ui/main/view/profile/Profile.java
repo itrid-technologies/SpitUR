@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +29,8 @@ import split.com.app.databinding.FragmentProfileBinding;
 import split.com.app.ui.main.adapter.avatar_adapter.AdapterAvatars;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.viewmodel.avatar_viewmodel.AvatarViewModel;
+import split.com.app.ui.main.viewmodel.profile_viewmodel.ProfileViewModel;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -36,6 +41,9 @@ public class Profile extends Fragment {
     private AvatarViewModel mViewModel;
     private List<AvatarItem> avatarList = new ArrayList<>();
     private final List<String> avatars = new ArrayList<>();
+    private int currentIndex = 0;
+
+    ProfileViewModel viewModel;
 
 
     @Override
@@ -68,7 +76,6 @@ public class Profile extends Fragment {
 
         binding.name.setText(user_name);
         Glide.with(Split.getAppContext()).load(avatar).placeholder(R.drawable.user).into(binding.userImage);
-
     }
 
     private void initClickListeners() {
@@ -99,43 +106,77 @@ public class Profile extends Fragment {
 
 
         binding.userImage.setOnClickListener(view -> {
-            final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
-            bottomSheetDialog.setContentView(R.layout.fragment_user_information);
+            final BottomSheetDialog bt = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
+            View profileView = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_user_information, null, false);
 
-          //  EditText name = item.findViewById(R.id.ed_name);
+            EditText name = profileView.findViewById(R.id.profile_name);
+            EditText userid = profileView.findViewById(R.id.profile_id);
+            RecyclerView avatarRv = profileView.findViewById(R.id.profile_avatars);
+            ImageButton previous = profileView.findViewById(R.id.previous_avatar);
+            ImageButton next = profileView.findViewById(R.id.next_avatar);
+            Button save = profileView.findViewById(R.id.btn_save_profile);
+
+            MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+
+            name.setText(preferences.getData(Split.getAppContext(), "userName"));
+            userid.setText(preferences.getData(Split.getAppContext(), "userId"));
 
 
+            mViewModel.init();
+            mViewModel.getData().observe(getViewLifecycleOwner(), avatarModel -> {
+                avatarList.addAll(avatarModel.getAvatar());
+                for (int i = 0; i <= avatarList.size() - 1; i++) {
+                    avatars.add(avatarList.get(i).getUrl());
+                }
+                avatarRv.setHasFixedSize(true);
+                avatarRv.setHorizontalScrollBarEnabled(false);
+                avatarRv.setLayoutManager(new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false));
+                RecyclerView.OnItemTouchListener disabler = new RecyclerViewDisabler();
+                avatarRv.addOnItemTouchListener(disabler);// scrolling disable
+                avatarRv.setAdapter(new AdapterAvatars(getActivity(), avatars));
+            });
 
-//            mViewModel.init();
-//            mViewModel.getData().observe(getViewLifecycleOwner(), avatarModel -> {
-//                avatarList.addAll(avatarModel.getAvatar());
-//                for (int i=0; i <= avatarList.size()-1; i++){
-//                    avatars.add(avatarList.get(i).getUrl());
-//                }
-//                buildAvatarsRV();
-//            });
+            next.setOnClickListener(view1 -> {
+                if (currentIndex < avatars.size() - 1) {//in range
+                    currentIndex++;
+                    avatarRv.smoothScrollToPosition(currentIndex);
+                }
+            });
+            previous.setOnClickListener(view1 -> {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    avatarRv.smoothScrollToPosition(currentIndex);
+                }
+            });
 
-            bottomSheetDialog.show();
+            save.setOnClickListener(view1 -> {
+                String updated_name = name.getText().toString().trim();
+                String updated_id = userid.getText().toString().trim();
+                final String updatedAvatar = avatars.get(currentIndex);
 
-//            MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
-//            binding.userProfile.edId.setText(pm.getData(Split.getAppContext(),"userId"));
-//            binding.userProfile.edName.setText(pm.getData(Split.getAppContext(),"userName"));
-//            Glide.with(Split.getAppContext()).load(pm.getData(Split.getAppContext(),"userAvatar")).placeholder(R.drawable.user).into(binding.userImage);
+                viewModel = new ProfileViewModel(updated_name, updated_id, updatedAvatar);
+                viewModel.init();
+                viewModel.getUpdate_profile().observe(getViewLifecycleOwner(), userUpdateModel -> {
+                    if (userUpdateModel.isSuccess()) {
+                        if (userUpdateModel.getData() != null){
+                            MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
+                            sharedPreferences.saveData(Split.getAppContext(), "userAvatar",  Constants.IMG_PATH +userUpdateModel.getData().getAvatar());
+                            sharedPreferences.saveData(Split.getAppContext(), "userName", userUpdateModel.getData().getName());
+                            sharedPreferences.saveData(Split.getAppContext(), "userId", userUpdateModel.getData().getUserId());
+
+                            Toast.makeText(Split.getAppContext(), userUpdateModel.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+            });
+
+            bt.setContentView(profileView);
+            bt.show();
         });
     }
 
-    private void buildAvatarsRV() {
-        binding.userProfile.rvAvatars.setHasFixedSize(true);
-        binding.userProfile.rvAvatars.setHorizontalScrollBarEnabled(false);
-        binding.userProfile.rvAvatars.setLayoutManager(
-                new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false)
-        );
 
-        RecyclerView.OnItemTouchListener disabler = new RecyclerViewDisabler();
-        binding.userProfile.rvAvatars.addOnItemTouchListener(disabler);// scrolling disable
-
-        binding.userProfile.rvAvatars.setAdapter(new AdapterAvatars(getActivity(),avatars));
-    }
     public static class RecyclerViewDisabler implements RecyclerView.OnItemTouchListener {
 
         @Override

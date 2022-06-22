@@ -113,7 +113,7 @@ public class JoinedGroupDetail extends Fragment {
 
             deleteLayout.setOnClickListener(view -> {
                 bt.cancel();
-                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","");
+                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","","");
                 membersViewModel.initRemoveGroup();
                 membersViewModel.getRemove_data().observe(getViewLifecycleOwner(),basicModel -> {
                     if (basicModel.isStatus()){
@@ -130,7 +130,7 @@ public class JoinedGroupDetail extends Fragment {
 
         binding.btnGroupChat.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putString("receiver_id", String.valueOf(data.getId()));
+            bundle.putString("groupId", String.valueOf(data.getId()));
             Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_chatroom,bundle);
         });
     }

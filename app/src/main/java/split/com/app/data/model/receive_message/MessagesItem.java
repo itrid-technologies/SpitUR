@@ -7,14 +7,12 @@ public class MessagesItem{
 	@SerializedName("createdAt")
 	private String createdAt;
 
-	@SerializedName("receiver")
-	private Receiver receiver;
 
-	@SerializedName("sender")
-	private Sender sender;
+	@SerializedName("group_id")
+	private int groupId;
 
-	@SerializedName("receiver_id")
-	private int receiverId;
+	@SerializedName("group_sender")
+	private GroupSender groupSender;
 
 	@SerializedName("id")
 	private int id;
@@ -32,16 +30,13 @@ public class MessagesItem{
 		return createdAt;
 	}
 
-	public Receiver getReceiver(){
-		return receiver;
+
+	public int getGroupId(){
+		return groupId;
 	}
 
-	public Sender getSender(){
-		return sender;
-	}
-
-	public int getReceiverId(){
-		return receiverId;
+	public GroupSender getGroupSender(){
+		return groupSender;
 	}
 
 	public int getId(){

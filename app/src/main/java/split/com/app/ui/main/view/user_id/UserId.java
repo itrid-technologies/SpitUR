@@ -47,7 +47,7 @@ public class UserId extends AppCompatActivity {
                 mViewModel.getData().observe(this, basicModel -> {
                     if (!basicModel.isStatus()){
                         MySharedPreferences sharedPreferences = new MySharedPreferences(this);
-                        sharedPreferences.saveData(this,"user_id",userId);
+                        sharedPreferences.saveData(this,"userId",userId);
 
                         ActivityUtil.gotoPage(UserId.this, ChooseAvatar.class);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import split.com.app.R;
 import split.com.app.databinding.FragmentCostBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
@@ -36,6 +38,20 @@ public class Cost extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initClickListeners();
+        setProfileData();
+    }
+
+    private void setProfileData() {
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String user_name = preferences.getData(Split.getAppContext(), "userName");
+        String user_ID = preferences.getData(Split.getAppContext(), "userId");
+        String avatar = preferences.getData(Split.getAppContext(), "userAvatar");
+        String slot = preferences.getData(Split.getAppContext(), "SLOTS");
+
+        binding.costProfile.netflix.setText(user_name);
+        binding.costProfile.userName.setText(user_ID);
+        binding.costProfile.count.setText(slot + " Slots");
+        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.drawable.user).into(binding.costProfile.userImage);
     }
 
     private void initClickListeners() {

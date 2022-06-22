@@ -80,7 +80,7 @@ public class CreatedGroupDetail extends Fragment {
         }
 
 
-        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","");
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","","");
         membersViewModel.init();
         membersViewModel.getPlan().observe(getViewLifecycleOwner(),groupMemberModel -> {
             if (groupMemberModel.isSuccess()){
@@ -134,10 +134,47 @@ public class CreatedGroupDetail extends Fragment {
                 updatePassData(updated_value);
             }
         });
+
+        binding.privateLayout.setOnClickListener(view -> {
+
+            binding.publicLayout.setBackgroundResource(0);
+            binding.publicNote.setVisibility(View.GONE);
+            binding.publicSelected.setVisibility(View.GONE);
+
+            binding.privateLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
+            binding.privateNote.setVisibility(View.VISIBLE);
+            binding.privateSelected.setVisibility(View.VISIBLE);
+
+            updateVisibility("0");
+        });
+
+        binding.publicLayout.setOnClickListener(view -> {
+
+            binding.privateLayout.setBackgroundResource(0);
+            binding.privateNote.setVisibility(View.GONE);
+            binding.privateSelected.setVisibility(View.GONE);
+
+            binding.publicLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
+            binding.publicNote.setVisibility(View.VISIBLE);
+            binding.publicSelected.setVisibility(View.VISIBLE);
+
+            updateVisibility("1");
+
+        });
+    }
+
+    private void updateVisibility(String visibility) {
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "","","",visibility);
+        membersViewModel.initUpdateVisibility();
+        membersViewModel.getUpdate_visibility().observe(getViewLifecycleOwner(),basicModel -> {
+            if (basicModel.isStatus()){
+                Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void updateEmailData(String updated_value) {
-        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "",updated_value,"");
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "",updated_value,"","");
         membersViewModel.initEmailUpdate();
         membersViewModel.getUpdate_email_data().observe(getViewLifecycleOwner(),basicModel -> {
             if (basicModel.isStatus()){
@@ -147,7 +184,7 @@ public class CreatedGroupDetail extends Fragment {
     }
 
     private void updatePassData(String updated_value) {
-        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "","",updated_value);
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "","",updated_value,"");
         membersViewModel.initPassUpdate();
         membersViewModel.getUpdate_pass_data().observe(getViewLifecycleOwner(),basicModel -> {
             if (basicModel.isStatus()){
@@ -170,7 +207,7 @@ public class CreatedGroupDetail extends Fragment {
                 ConstraintLayout deleteLayout = carDetailView.findViewById(R.id.delete_layout);
                 deleteLayout.setOnClickListener(view -> {
 
-                    membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), String.valueOf(membersList.get(position).getUserId()),"","");
+                    membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), String.valueOf(membersList.get(position).getUserId()),"","","");
                     membersViewModel.initRemoveMember();
                     membersViewModel.getMember_remove_data().observe(getViewLifecycleOwner(),basicModel -> {
                         if (basicModel.isStatus()){
@@ -250,7 +287,7 @@ public class CreatedGroupDetail extends Fragment {
 
             deleteLayout.setOnClickListener(view -> {
                 bt.cancel();
-                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","");
+                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","","");
                 membersViewModel.initRemoveGroup();
                 membersViewModel.getRemove_data().observe(getViewLifecycleOwner(),basicModel -> {
                     if (basicModel.isStatus()){
@@ -266,7 +303,9 @@ public class CreatedGroupDetail extends Fragment {
 
 
         binding.btnGroupChat.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_chatroom);
+            Bundle bundle = new Bundle();
+            bundle.putString("groupId", String.valueOf(data.getId()));
+            Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_chatroom,bundle);
         });
     }
 

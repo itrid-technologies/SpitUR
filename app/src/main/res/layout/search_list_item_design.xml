@@ -55,7 +55,7 @@
         android:textAllCaps="false"
         android:background="@drawable/rect_blue_bg"
         android:padding="10dp"
-        android:id="@+id/join"/>
+        android:id="@+id/tv_create"/>
 
 
 

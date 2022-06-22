@@ -11,8 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Locale;
+
+import split.com.app.R;
 import split.com.app.databinding.FragmentSlotsBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.utils.MySharedPreferences;
+import split.com.app.utils.Split;
 
 
 public class Slots extends Fragment {
@@ -20,7 +25,7 @@ public class Slots extends Fragment {
     FragmentSlotsBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentSlotsBinding.inflate(inflater, container, false);
@@ -40,6 +45,47 @@ public class Slots extends Fragment {
     private void initClickListeners() {
         binding.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
+        });
+
+        binding.slotNextButton.setOnClickListener(view -> {
+            String slots = binding.slotValue.getText().toString().trim();
+            if (slots.isEmpty()){
+                binding.errorMessage.setVisibility(View.VISIBLE);
+            }else {
+                MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+                preferences.saveData(Split.getAppContext(),"SLOTS",slots);
+                Navigation.findNavController(view).navigate(R.id.action_slots_to_visibility2);
+            }
+        });
+
+        binding.increase.setOnClickListener(view -> {
+            String slots = binding.slotValue.getText().toString().trim();
+
+            if (slots.isEmpty()){
+                binding.errorMessage.setVisibility(View.VISIBLE);
+            }else {
+                int slot_int = Integer.parseInt(slots);
+                if (slot_int < 6) {
+                    slot_int = slot_int + 1;
+                    String updated_slot = String.valueOf(slot_int);
+                    binding.slotValue.setText(updated_slot);
+                }
+            }
+        });
+
+        binding.decrease.setOnClickListener(view -> {
+            String slots = binding.slotValue.getText().toString().trim();
+
+            if (slots.isEmpty()){
+                binding.errorMessage.setVisibility(View.VISIBLE);
+            }else {
+                int slot_int = Integer.parseInt(slots);
+                if (slot_int > 0) {
+                    slot_int = slot_int - 1;
+                    String updated_slot = String.valueOf(slot_int);
+                    binding.slotValue.setText(updated_slot);
+                }
+            }
         });
     }
 }

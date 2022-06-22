@@ -2,7 +2,7 @@ package split.com.app.data.model.receive_message;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Sender{
+public class GroupSender{
 
 	@SerializedName("name")
 	private String name;

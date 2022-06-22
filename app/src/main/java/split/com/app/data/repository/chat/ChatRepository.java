@@ -12,7 +12,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
-import split.com.app.data.model.basic_model.BasicModel;
 import split.com.app.data.model.receive_message.GetMessagesModel;
 import split.com.app.data.model.send_message.MessageSendModel;
 import split.com.app.utils.MySharedPreferences;
@@ -30,7 +29,7 @@ public class ChatRepository {
 
         JsonObject object = new JsonObject();
         object.addProperty("body", message);
-        object.addProperty("receiver_id",receiver_id);
+        object.addProperty("group_id",receiver_id);
 
         final MutableLiveData<MessageSendModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();

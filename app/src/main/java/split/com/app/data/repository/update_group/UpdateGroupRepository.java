@@ -79,4 +79,32 @@ public class UpdateGroupRepository {
 
         return liveData;
     }
+
+    public MutableLiveData<BasicModel> updateVisibility(String group_id, String visible) {
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String token = preferences.getData(Split.getAppContext(), "userAccessToken");
+
+        JsonObject object = new JsonObject();
+        object.addProperty("visibility", visible);
+
+        final MutableLiveData<BasicModel> liveData = new MutableLiveData<>();
+        apiService = ApiManager.getRestApiService();
+        Call<BasicModel> call = apiService.updateGroup("Bearer "+token , group_id, object);
+        call.enqueue(new Callback<BasicModel>() {
+            @Override
+            public void onResponse(@NonNull Call<BasicModel> call, @NonNull Response<BasicModel> response) {
+                if(response.body()!=null)
+                {
+                    liveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<BasicModel> call, @NonNull Throwable t) {
+                Log.e("Avatar Error",t.getMessage());
+            }
+        });
+
+        return liveData;
+    }
 }

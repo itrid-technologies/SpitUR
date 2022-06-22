@@ -12,6 +12,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import split.com.app.data.model.HomeContentModel;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
@@ -30,6 +31,7 @@ import split.com.app.data.model.popular_subcategory.PopularSubCategoryModel;
 import split.com.app.data.model.receive_message.GetMessagesModel;
 import split.com.app.data.model.register.RegisterModel;
 import split.com.app.data.model.send_message.MessageSendModel;
+import split.com.app.data.model.update_user_profile.UserUpdateModel;
 
 public interface ApiService {
 
@@ -109,10 +111,10 @@ public interface ApiService {
     Call<BasicModel> deleteGroup(@Header("Authorization") String token,
                                  @Path("id") String id);
 
-    @POST("messages/sendMessage")
+    @POST("messages/sendMessageGroupChat")
     Call<MessageSendModel> sendMessage(@Header("Authorization") String token,
                                        @Body JsonObject object);
-    @GET("messages/getMessages/{id}")
+    @GET("messages/getMessagesGroupChat/{id}")
     Call<GetMessagesModel> getMessages(@Header("Authorization") String token,
                                        @Path("id") String id);
 
@@ -125,4 +127,7 @@ public interface ApiService {
     Call<BasicModel> updateGroup(@Header("Authorization") String token,
                                  @Path("id") String id,
                                  @Body JsonObject object);
+    @PUT("users/update")
+    Call<UserUpdateModel> updateProfile(@Header("Authorization") String token,
+                                        @Body JsonObject object);
 }
