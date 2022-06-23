@@ -19,6 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
 import split.com.app.data.model.SubCategoryItem;
 import split.com.app.data.model.popular_subcategory.DataItem;
+import split.com.app.ui.main.adapter.category_adapter.CategoryAdapter;
 import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
 
@@ -29,7 +30,13 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
 
     private final Context context;
 
+    private ItemClickListener mListener;
 
+
+
+    public void setOnSubCategorySelectListener(ItemClickListener listener) {
+        mListener = listener;
+    }
 
     public HomeSectionSubCategoryAdapter(Split appContext, List<SubCategoryItem> subCategory, String icon) {
         this.context = appContext;
@@ -41,7 +48,7 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
     @Override
     public HomeSectionSubCategoryAdapter.PopularVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_popular_list_items, parent, false);
-        return new HomeSectionSubCategoryAdapter.PopularVH(view);
+        return new HomeSectionSubCategoryAdapter.PopularVH(view,mListener);
     }
 
     @Override
@@ -61,11 +68,15 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
         return homeDataItem.size();
     }
 
+    public interface ItemClickListener{
+        void onSubCategorySelect(int position);
+    }
+
     public static class PopularVH extends RecyclerView.ViewHolder {
         public CircleImageView icon;
         public TextView name, join;
 
-        public PopularVH(@NonNull View itemView) {
+        public PopularVH(@NonNull View itemView, ItemClickListener mListener) {
             super(itemView);
             //find views
             icon = itemView.findViewById(R.id.popular_icons);
@@ -73,9 +84,11 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
             join = itemView.findViewById(R.id.tv_join);
 
             join.setOnClickListener(view -> {
-                Bundle bundle = new Bundle();
-                bundle.putString("join_sub_cat_id",String.valueOf(homeDataItem.get(getAbsoluteAdapterPosition()).getId()));
-                Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail,bundle);
+                if (mListener != null) {
+                    if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        mListener.onSubCategorySelect(getAdapterPosition());
+                    }
+                }
             });
 
         }

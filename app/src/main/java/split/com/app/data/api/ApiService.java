@@ -112,9 +112,18 @@ public interface ApiService {
                                  @Path("id") String id);
 
     @POST("messages/sendMessageGroupChat")
-    Call<MessageSendModel> sendMessage(@Header("Authorization") String token,
+    Call<MessageSendModel> sendGroupMessage(@Header("Authorization") String token,
                                        @Body JsonObject object);
     @GET("messages/getMessagesGroupChat/{id}")
+    Call<GetMessagesModel> getGroupMessages(@Header("Authorization") String token,
+                                       @Path("id") String id);
+
+
+
+    @POST("messages/sendMessage")
+    Call<MessageSendModel> sendMessage(@Header("Authorization") String token,
+                                       @Body JsonObject object);
+    @GET("messages/getMessages/{id}")
     Call<GetMessagesModel> getMessages(@Header("Authorization") String token,
                                        @Path("id") String id);
 

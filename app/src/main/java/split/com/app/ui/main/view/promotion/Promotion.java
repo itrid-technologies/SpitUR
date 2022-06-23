@@ -27,7 +27,7 @@ public class Promotion extends Fragment {
         binding = FragmentPromotionBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
 
-        binding.toolbar.title.setText("Promotion");
+        binding.promotionToolbar.title.setText("Promotion");
         return binding.getRoot();
     }
 
@@ -40,7 +40,7 @@ public class Promotion extends Fragment {
 
     private void initClickListeners() {
 
-        binding.toolbar.back.setOnClickListener(view -> {
+        binding.promotionToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
     }

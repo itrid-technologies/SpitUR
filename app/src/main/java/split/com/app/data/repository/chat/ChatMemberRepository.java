@@ -17,10 +17,10 @@ import split.com.app.data.model.send_message.MessageSendModel;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
-public class ChatRepository {
+public class ChatMemberRepository {
     private ApiService apiService;
 
-    public ChatRepository() {
+    public ChatMemberRepository() {
     }
 
     public MutableLiveData<MessageSendModel> send(String message , String receiver_id) {
@@ -29,11 +29,11 @@ public class ChatRepository {
 
         JsonObject object = new JsonObject();
         object.addProperty("body", message);
-        object.addProperty("group_id",receiver_id);
+        object.addProperty("receiver_id",receiver_id);
 
         final MutableLiveData<MessageSendModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<MessageSendModel> call = apiService.sendGroupMessage("Bearer "+token,object);
+        Call<MessageSendModel> call = apiService.sendMessage("Bearer "+token,object);
         call.enqueue(new Callback<MessageSendModel>() {
             @Override
             public void onResponse(@NonNull Call<MessageSendModel> call, @NonNull Response<MessageSendModel> response) {
@@ -58,7 +58,7 @@ public class ChatRepository {
 
         final MutableLiveData<GetMessagesModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GetMessagesModel> call = apiService.getGroupMessages("Bearer "+token,id);
+        Call<GetMessagesModel> call = apiService.getMessages("Bearer "+token,id);
         call.enqueue(new Callback<GetMessagesModel>() {
             @Override
             public void onResponse(@NonNull Call<GetMessagesModel> call, @NonNull Response<GetMessagesModel> response) {

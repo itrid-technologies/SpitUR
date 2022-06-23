@@ -80,7 +80,7 @@ public class UpdateGroupRepository {
         return liveData;
     }
 
-    public MutableLiveData<BasicModel> updateVisibility(String group_id, String visible) {
+    public MutableLiveData<BasicModel> updateVisibility(String group_id, boolean visible) {
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 

@@ -131,7 +131,7 @@ public class Home extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.homeSections.setLayoutManager(layoutManager);
-        HomeSectionAdapter adapter = new HomeSectionAdapter(Split.getAppContext(), homeDataItems);
+        HomeSectionAdapter adapter = new HomeSectionAdapter(Split.getAppContext(), homeDataItems,requireView());
         binding.homeSections.setAdapter(adapter);
     }
 

@@ -69,7 +69,7 @@
                     android:drawableStart="@drawable/ic_user"
                     android:background="@color/transparent"
                     android:drawablePadding="15dp"
-                    android:maxLines="1"
+                    android:maxLines="2"
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="15sp"
@@ -306,72 +306,73 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:background="@color/profile_bg"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:padding="10dp"
                         app:layout_constraintEnd_toStartOf="@id/adminBg"
-                        android:padding="10dp">
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/member_image"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:src="@drawable/user"
-                            app:civ_border_width="1dp"
                             android:layout_marginStart="5dp"
-                            app:civ_circle_background_color="#94F0F0"
+                            android:src="@drawable/user"
                             app:civ_border_color="@color/green"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
+                            app:civ_border_width="1dp"
+                            app:civ_circle_background_color="#94F0F0"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/member_image"
+                            android:id="@+id/member_name"
                             style="@style/semiBoldText"
-                            android:text="username"
-                            android:textSize="18sp"
-                            android:layout_marginStart="10dp"
-                            android:id="@+id/member_name"/>
-
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/member_name"
-                            app:layout_constraintStart_toStartOf="@id/member_name"
+                            android:layout_marginStart="10dp"
+                            android:text="-"
+                            android:textSize="18sp"
+                            app:layout_constraintStart_toEndOf="@id/member_image"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_coin"
                             style="@style/normalText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="-3dp"
                             android:text="Coins available on "
-                            android:id="@+id/tv_coin"/>
+                            app:layout_constraintStart_toStartOf="@id/member_name"
+                            app:layout_constraintTop_toBottomOf="@id/member_name" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/member_name"
-                            app:layout_constraintStart_toEndOf="@id/tv_coin"
+                            android:id="@+id/tv_coins_date"
                             style="@style/normalText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="-3dp"
-                            android:textColor="@color/orange"
                             android:text=" 1/12/2022"
-                            android:id="@+id/tv_coins_date"/>
+                            android:textColor="@color/orange"
+                            app:layout_constraintStart_toEndOf="@id/tv_coin"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/member_name" />
 
                         <Button
+                            android:id="@+id/chat_button"
+                            style="@style/buttonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintStart_toStartOf="@id/tv_coin"
-                            app:layout_constraintTop_toBottomOf="@id/tv_coin"
+                            android:layout_marginTop="5dp"
                             android:background="@drawable/round_back"
                             android:backgroundTint="@color/blue"
-                            android:text="Chat"
                             android:paddingStart="20dp"
                             android:paddingEnd="20dp"
-                            android:layout_marginTop="5dp"
-                            style="@style/buttonStyle"
+                            android:text="Chat"
                             android:textSize="14sp"
-                            android:id="@+id/chat_button"/>
+                            app:layout_constraintStart_toStartOf="@id/tv_coin"
+                            app:layout_constraintTop_toBottomOf="@id/tv_coin" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

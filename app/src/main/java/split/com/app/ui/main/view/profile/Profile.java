@@ -84,6 +84,25 @@ public class Profile extends Fragment {
             Navigation.findNavController(view).navigate(R.id.action_profile2_to_friends);
         });
 
+        binding.transactionLayout.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_profile2_to_transactions);
+
+        });
+
+        binding.payment.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_profile2_to_transactions);
+
+        });
+
+        binding.transactionLayout.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_profile2_to_transactions);
+
+        });
+
+        binding.promotionLayout.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_profile2_to_promotion);
+        });
+
         binding.refund.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_profile2_to_refund2);
         });

@@ -112,6 +112,12 @@
         <action
             android:id="@+id/action_profile2_to_friends"
             app:destination="@id/friends" />
+        <action
+            android:id="@+id/action_profile2_to_promotion"
+            app:destination="@id/promotion" />
+        <action
+            android:id="@+id/action_profile2_to_transactions"
+            app:destination="@id/transactions" />
     </fragment>
     <fragment
         android:id="@+id/refund2"
@@ -288,4 +294,19 @@
             android:id="@+id/action_slots_to_visibility2"
             app:destination="@id/visibility2" />
     </fragment>
+    <fragment
+        android:id="@+id/promotion"
+        android:name="split.com.app.ui.main.view.promotion.Promotion"
+        android:label="fragment_promotion"
+        tools:layout="@layout/fragment_promotion" />
+    <fragment
+        android:id="@+id/transactions"
+        android:name="split.com.app.ui.main.view.transactions.Transactions"
+        android:label="fragment_transactions"
+        tools:layout="@layout/fragment_transactions" >
+        <action
+            android:id="@+id/action_transactions_to_FAQ"
+            app:destination="@id/FAQ" />
+    </fragment>
+
 </navigation>

@@ -1,6 +1,7 @@
 package split.com.app.ui.main.adapter.all_created_group;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,17 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
     public void onBindViewHolder(@NonNull AllCreatedGroupAdapter.GroupVH holder, int position) {
         DataItem current_item =  dataItems.get(position);
         holder.name.setText(current_item.getGroupTitle());
-        holder.slots.setText(String.valueOf(current_item.getSlots()));
+        int space = current_item.getSlots() - current_item.getTotalMembers();
+
+        if (space == 0){
+            holder.slots.setText("Full");
+            holder.slots.setTextColor(Color.parseColor("#0FB900"));
+
+        }else {
+            holder.slots.setText((String.valueOf(space)) + " Slots Free");
+            holder.slots.setTextColor(Color.parseColor("#FFDD72"));
+        }
+
     }
 
     @Override

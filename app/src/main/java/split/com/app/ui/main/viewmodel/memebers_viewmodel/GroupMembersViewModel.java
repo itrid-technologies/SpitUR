@@ -11,7 +11,8 @@ import split.com.app.data.repository.update_group.UpdateGroupRepository;
 
 public class GroupMembersViewModel extends ViewModel {
 
-    String group_id, user_id, email, password, visible;
+    String group_id, user_id, email, password;
+    boolean visible;
 
     private MutableLiveData<GroupMemberModel> data;
     private MutableLiveData<BasicModel> remove_data;
@@ -26,7 +27,7 @@ public class GroupMembersViewModel extends ViewModel {
     private UpdateGroupRepository updateGroupRepository;
 
 
-    public GroupMembersViewModel(String id, String userid, String email, String Pass, String visibility) {
+    public GroupMembersViewModel(String id, String userid, String email, String Pass, boolean visibility) {
         this.group_id = id;
         this.user_id = userid;
         this.email = email;

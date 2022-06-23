@@ -10,7 +10,7 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:id="@+id/toolbar"
+        android:id="@+id/promotion_toolbar"
         layout="@layout/toolbar_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/promotion_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:scrollbars="none"
@@ -33,6 +33,340 @@
             android:layout_height="wrap_content"
             android:padding="20dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/headingText"
+                android:text="Refer a Friend"
+                android:id="@+id/tv_refer"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_refer"
+                android:text="And both can Earn 15% Off on the first Group"
+                style="@style/normalText"
+                android:layout_marginEnd="30dp"
+                android:id="@+id/tv_refer_detail"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/total_earn_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_refer_detail"
+                android:background="@drawable/rect_bg"
+                android:backgroundTint="@color/blue"
+                android:padding="10dp"
+                android:layout_marginTop="10dp">
+
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/earn_icon"
+                    android:src="@drawable/dollar_icon"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/earn_icon"
+                    style="@style/headingText"
+                    android:text="Total Earned"
+                    android:textSize="26dp"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/tv_total"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tv_total"
+                    app:layout_constraintStart_toStartOf="@id/tv_total"
+                    style="@style/normalText"
+                    android:layout_marginTop="-8dp"
+                    android:text="143 Coins"
+                    android:textColor="@color/white"
+                    android:textSize="22dp"
+                    android:id="@+id/tv_total_coins"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/invite_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/total_earn_layout"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/promotion_bg"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@drawable/rect_bg"
+                    android:backgroundTint="@color/blue"
+                    android:paddingTop="8dp"
+                    android:text="1"
+                    android:gravity="center"
+                    style="@style/headingText"
+                    android:textStyle="bold"
+                    android:id="@+id/invite_icon"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/invite_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Invite your friends"
+                    style="@style/headingText"
+                    android:textSize="22sp"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/tv_invite"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_invite"
+                    app:layout_constraintTop_toBottomOf="@id/tv_invite"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="-8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Share Your link with your Friends"
+                    style="@style/normalText"
+                    android:id="@+id/tv_transaction"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/join_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/invite_layout"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/promotion_bg"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@drawable/rect_bg"
+                    android:backgroundTint="@color/blue"
+                    android:paddingTop="8dp"
+                    android:gravity="center"
+                    android:text="2"
+                    style="@style/headingText"
+                    android:textStyle="bold"
+                    android:id="@+id/invite2_icon"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/invite2_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="They Join a group"
+                    style="@style/headingText"
+                    android:textSize="22sp"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/tv_join"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_join"
+                    app:layout_constraintTop_toBottomOf="@id/tv_join"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="-8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="With 15% Off"
+                    style="@style/normalText"
+                    android:id="@+id/tv_off"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/discount_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/join_layout"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/promotion_bg"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@drawable/rect_bg"
+                    android:backgroundTint="@color/blue"
+                    android:paddingTop="8dp"
+                    android:text="3"
+                    android:gravity="center"
+                    style="@style/headingText"
+                    android:textStyle="bold"
+                    android:id="@+id/invite3_icon"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/invite3_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="You also make 15%"
+                    style="@style/headingText"
+                    android:textSize="22sp"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/tv_discount"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_discount"
+                    app:layout_constraintTop_toBottomOf="@id/tv_discount"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="-8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Off your friends Order"
+                    style="@style/normalText"
+                    android:id="@+id/tv_off_value"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/discount_layout"
+                android:textColor="@color/white"
+                android:textColorHint="@color/hint_color"
+                android:fontFamily="@font/poppin_regular"
+                android:textSize="15sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:paddingEnd="46dp"
+                android:layout_marginTop="16dp"
+                android:drawablePadding="10dp"
+                android:gravity="start|center"
+                android:background="@drawable/round_back"
+                android:backgroundTint="@color/light_blue"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/ic_userid"
+                android:id="@+id/profile_link1"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/copy_link"
+                android:id="@+id/copy_link01"
+                android:layout_marginEnd="8dp"
+                android:padding="10dp"
+                app:layout_constraintTop_toTopOf="@id/profile_link1"
+                app:layout_constraintEnd_toEndOf="@id/profile_link1"
+                app:layout_constraintBottom_toBottomOf="@id/profile_link1"
+                />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/share_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="14dp"
+                app:layout_constraintTop_toBottomOf="@id/profile_link1"
+                android:padding="20dp"
+                android:backgroundTint="@color/light_blue"
+                android:background="@drawable/rect_bg">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/copy_link"
+                    android:id="@+id/copy_link"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/message"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintStart_toEndOf="@id/copy_link"
+                    android:src="@drawable/chat"
+                    android:id="@+id/message"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/whatsapp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintStart_toEndOf="@id/message"
+                    android:src="@drawable/whatsapp"
+                    android:id="@+id/whatsapp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/insta"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintStart_toEndOf="@id/whatsapp"
+                    android:src="@drawable/insta"
+                    android:id="@+id/insta"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/twitter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintStart_toEndOf="@id/insta"
+                    android:src="@drawable/twitter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/twitter"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

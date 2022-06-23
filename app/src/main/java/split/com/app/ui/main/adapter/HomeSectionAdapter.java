@@ -3,6 +3,7 @@ package split.com.app.ui.main.adapter;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,10 +29,12 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
 
     private final List<HomeDataItem> homeDataItems;
     private final Context context;
+    View adapter_view;
 
-    public HomeSectionAdapter(Context appContext, List<HomeDataItem> list) {
+    public HomeSectionAdapter(Context appContext, List<HomeDataItem> list, View view) {
         this.context = appContext;
         this.homeDataItems = list;
+        this.adapter_view = view;
     }
 
     @NonNull
@@ -50,9 +54,14 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
             holder.list.setLayoutManager(layoutManager);
             HomeSectionSubCategoryAdapter adapter = new HomeSectionSubCategoryAdapter(Split.getAppContext(), dataItem.getSubCategory(), dataItem.getIcon());
             holder.list.setAdapter(adapter);
+
+            adapter.setOnSubCategorySelectListener(position1 -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("join_sub_cat_id",String.valueOf(dataItem.getSubCategory().get(position1).getId()));
+                    Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail,bundle);
+            });
+
         }
-
-
 
     }
 

@@ -1,5 +1,6 @@
 package split.com.app.ui.main.view.joined_detail;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -83,6 +86,7 @@ public class JoinedGroupDetail extends Fragment {
             binding.joinedProfile.count.setText(value + " Coins");
             binding.tvScoreValue.setText(String.valueOf(data.getGroup().getGroupAdmin().getSpliturScore()));
             binding.tvLastActive.setText(Constants.getDate(data.getGroup().getGroupAdmin().getLastActive()));
+            binding.tvDaysValue.setText(Constants.getDate(data.getGroup().getGroupAdmin().getCreatedAt()));
             binding.groupEmail.setText(data.getGroup().getEmail());
             binding.groupPass.setText(data.getGroup().getPassword());
 
@@ -102,7 +106,9 @@ public class JoinedGroupDetail extends Fragment {
 
             ConstraintLayout chatLayout = carDetailView.findViewById(R.id.options_chat_layout);
             ConstraintLayout deleteLayout = carDetailView.findViewById(R.id.deleteLAYOUT);
+            ImageView confirm = deleteLayout.findViewById(R.id.confirm_remove);
             TextView removeText = deleteLayout.findViewById(R.id.tv_remove);
+
 
             removeText.setText("Leave Group");
 
@@ -111,20 +117,39 @@ public class JoinedGroupDetail extends Fragment {
                 Navigation.findNavController(requireView()).navigate(R.id.chatroom);
             });
 
-            deleteLayout.setOnClickListener(view -> {
+            confirm.setOnClickListener(view -> {
                 bt.cancel();
-                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","","");
-                membersViewModel.initRemoveGroup();
-                membersViewModel.getRemove_data().observe(getViewLifecycleOwner(),basicModel -> {
-                    if (basicModel.isStatus()){
-                        displayRemovedDialogue();
-                    }
-                });
+                displayRemovedDialogue("You left the Group");
+//                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","",false);
+//                membersViewModel.initRemoveGroup();
+//                membersViewModel.getRemove_data().observe(getViewLifecycleOwner(),basicModel -> {
+//                    if (basicModel.isStatus()){
+//                        displayRemovedDialogue();
+//                    }
+//                });
             });
 
 
             bt.setContentView(carDetailView);
             bt.show();
+        });
+
+        binding.copyEmail1.setOnClickListener(view -> {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper",binding.groupEmail.getText().toString());
+            clipboard.setPrimaryClip(clip);
+
+            Toast.makeText(Split.getAppContext(), "Copied", Toast.LENGTH_SHORT).show();
+        });
+
+
+
+        binding.copyPass1.setOnClickListener(view -> {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper",binding.groupPass.getText().toString());
+            clipboard.setPrimaryClip(clip);
+
+            Toast.makeText(Split.getAppContext(), "Copied", Toast.LENGTH_SHORT).show();
         });
 
 
@@ -135,19 +160,24 @@ public class JoinedGroupDetail extends Fragment {
         });
     }
 
-    private void displayRemovedDialogue() {
+    private void displayRemovedDialogue(String data) {
         final BottomSheetDialog bt = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
-        View carDetailView = LayoutInflater.from(requireContext()).inflate(R.layout.removed_dialogue, null, false);
+        View view1 = LayoutInflater.from(requireContext()).inflate(R.layout.removed_dialogue, null, false);
 
-        Button cancel = carDetailView.findViewById(R.id.btn_return_to_group);
+        Button cancel = view1.findViewById(R.id.btn_return_to_group);
+        TextView removeText = view1.findViewById(R.id.tv_removed);
 
+
+        removeText.setText(data);
 
         cancel.setOnClickListener(view -> {
             bt.cancel();
+            getActivity().onBackPressed();
+
         });
 
 
-        bt.setContentView(carDetailView);
+        bt.setContentView(view1);
         bt.show();
     }
 }

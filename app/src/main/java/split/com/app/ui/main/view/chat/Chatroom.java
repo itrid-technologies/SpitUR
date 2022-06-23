@@ -43,7 +43,7 @@ public class Chatroom extends Fragment {
         binding = FragmentChatroomBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
 
-        binding.crToolbar.title.setText("Chat member");
+        binding.crToolbar.title.setText("Chat Group");
 
         return binding.getRoot();
     }
@@ -78,12 +78,10 @@ public class Chatroom extends Fragment {
                                     getMessagesModel.getMessages().get(i).getCreatedAt()
                             ));
                         }
-
                     }
                     buildChatRv(msgs);
                 }
             }
-
         });
     }
 
