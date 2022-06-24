@@ -185,7 +185,11 @@
         android:id="@+id/joinSearch"
         android:name="split.com.app.ui.main.view.join_group_search.JoinSearch"
         android:label="fragment_join_search"
-        tools:layout="@layout/fragment_join_search" />
+        tools:layout="@layout/fragment_join_search" >
+        <action
+            android:id="@+id/action_joinSearch_to_groupDetail"
+            app:destination="@id/groupDetail" />
+    </fragment>
     <fragment
         android:id="@+id/groupDetail"
         android:name="split.com.app.ui.main.view.group_details.GroupDetail"
@@ -236,9 +240,10 @@
         android:name="split.com.app.ui.main.view.join_checkout_complete.JoinCheckoutComplete"
         android:label="fragment_join_checkout_complete"
         tools:layout="@layout/fragment_join_checkout_complete" >
+
         <action
-            android:id="@+id/action_joinCheckoutComplete_to_chatroom"
-            app:destination="@id/chatroom" />
+            android:id="@+id/action_joinCheckoutComplete_to_memberChat"
+            app:destination="@id/memberChat" />
     </fragment>
     <fragment
         android:id="@+id/chatroom"
@@ -261,7 +266,11 @@
         android:id="@+id/joinedGroupDetail2"
         android:name="split.com.app.ui.main.view.joined_detail.JoinedGroupDetail"
         android:label="fragment_joined_group_detail"
-        tools:layout="@layout/fragment_joined_group_detail" />
+        tools:layout="@layout/fragment_joined_group_detail" >
+        <action
+            android:id="@+id/action_joinedGroupDetail2_to_chatroom"
+            app:destination="@id/chatroom" />
+    </fragment>
     <fragment
         android:id="@+id/createdGroupDetail"
         android:name="split.com.app.ui.main.view.created_detail.CreatedGroupDetail"
@@ -270,6 +279,9 @@
         <action
             android:id="@+id/action_createdGroupDetail_to_chatroom"
             app:destination="@id/chatroom" />
+        <action
+            android:id="@+id/action_createdGroupDetail_to_memberChat"
+            app:destination="@id/memberChat" />
     </fragment>
     <fragment
         android:id="@+id/friends"
@@ -308,5 +320,10 @@
             android:id="@+id/action_transactions_to_FAQ"
             app:destination="@id/FAQ" />
     </fragment>
+    <fragment
+        android:id="@+id/memberChat"
+        android:name="split.com.app.ui.main.view.member_chat.MemberChat"
+        android:label="fragment_member_chat"
+        tools:layout="@layout/fragment_member_chat" />
 
 </navigation>

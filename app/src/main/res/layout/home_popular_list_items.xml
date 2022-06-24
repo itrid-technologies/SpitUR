@@ -21,7 +21,7 @@
             android:id="@+id/popular_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Amazon Prime"
+            android:text="-"
             android:padding="8dp"
             android:textSize="16sp"
             android:fontFamily="@font/poppins_semibold"

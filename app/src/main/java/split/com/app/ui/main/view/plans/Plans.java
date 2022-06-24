@@ -39,7 +39,7 @@ public class Plans extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentPlansBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
-        binding.toolbar.title.setText("Plans");
+        binding.plansToolbar.title.setText("Plans");
         return binding.getRoot();
     }
 
@@ -88,7 +88,7 @@ public class Plans extends Fragment {
 
     private void initClickListeners() {
 
-        binding.toolbar.back.setOnClickListener(view -> {
+        binding.plansToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 

@@ -55,7 +55,7 @@ public class CreatedGroupDetail extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentCreatedGroupDetailBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
-        binding.jgdToolbar.title.setText("Group Created");
+        binding.cgdToolbar.title.setText("Group Created");
         return binding.getRoot();
     }
 
@@ -268,11 +268,11 @@ public class CreatedGroupDetail extends Fragment {
     }
 
     private void initClickEvents() {
-        binding.jgdToolbar.back.setOnClickListener(view1 -> {
+        binding.cgdToolbar.back.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigateUp();
         });
 
-        binding.jgdToolbar.info.setOnClickListener(view1 -> {
+        binding.cgdToolbar.info.setOnClickListener(view1 -> {
             final BottomSheetDialog bt = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
             View carDetailView = LayoutInflater.from(requireContext()).inflate(R.layout.group_options_dialogue, null, false);
 
@@ -311,6 +311,12 @@ public class CreatedGroupDetail extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("groupId", String.valueOf(data.getId()));
             Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_chatroom,bundle);
+        });
+
+        binding.checkMesageLayout.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("groupId", String.valueOf(data.getId()));
+            Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_memberChat,bundle);
         });
     }
 

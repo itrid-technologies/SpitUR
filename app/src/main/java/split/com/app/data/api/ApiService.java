@@ -19,7 +19,10 @@ import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
 import split.com.app.data.model.all_joined_groups.AllJoinedGroupModel;
 import split.com.app.data.model.basic_model.BasicModel;
 import split.com.app.data.model.create_group.CreateGroupModel;
+import split.com.app.data.model.faq.FaqListModel;
+import split.com.app.data.model.friend_list.FriendListModel;
 import split.com.app.data.model.get_avatar.AvatarModel;
+import split.com.app.data.model.getch_memeber_messages.GetMemberMessagesModel;
 import split.com.app.data.model.group_detail.GroupDetailModel;
 import split.com.app.data.model.group_member.GroupMemberModel;
 import split.com.app.data.model.home_categories.CategoriesModel;
@@ -103,6 +106,13 @@ public interface ApiService {
     Call<PopularSubCategoryModel> getsubCat(@Header("Authorization") String token,
                                             @Path("data") String data);
 
+    @POST("groups/cat_search/{data}")
+    Call<PopularSubCategoryModel> getSubCatByCatId(@Header("Authorization") String token,
+                                                   @Path("data") String data,
+                                                   @Body JsonObject object);
+
+
+
     @GET("groups/get_group_members/{id}")
     Call<GroupMemberModel> getGroupMembers(@Header("Authorization") String token,
                                            @Path("id") String id);
@@ -124,8 +134,8 @@ public interface ApiService {
     Call<MessageSendModel> sendMessage(@Header("Authorization") String token,
                                        @Body JsonObject object);
     @GET("messages/getMessages/{id}")
-    Call<GetMessagesModel> getMessages(@Header("Authorization") String token,
-                                       @Path("id") String id);
+    Call<GetMemberMessagesModel> getMessages(@Header("Authorization") String token,
+                                             @Path("id") String id);
 
 
     @POST("groups/remove_member")
@@ -139,4 +149,16 @@ public interface ApiService {
     @PUT("users/update")
     Call<UserUpdateModel> updateProfile(@Header("Authorization") String token,
                                         @Body JsonObject object);
+
+    @GET("faqs/getFAQs")
+    Call<FaqListModel> faqList(@Header("Authorization") String token);
+
+    @GET("users/getfriendlist/{data}")
+    Call<FriendListModel> friendList(@Header("Authorization") String token,
+                                     @Path("data") String data);
+
+    @POST("groups/add_split_score")
+    Call<BasicModel> sendScore(@Header("Authorization") String token,
+                               @Body JsonObject object);
+
 }

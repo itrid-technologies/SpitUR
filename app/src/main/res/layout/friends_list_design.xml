@@ -5,6 +5,7 @@
     android:background="@drawable/rect_bg"
     android:backgroundTint="@color/profile_bg"
     android:padding="10dp"
+    android:layout_margin="3dp"
     android:layout_height="wrap_content">
 
 

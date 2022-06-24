@@ -52,7 +52,7 @@
             android:id="@+id/planTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Netflix Standard"
+            android:text="-"
             android:layout_marginEnd="20dp"
             android:textSize="20sp"
             android:fontFamily="@font/poppins_semibold"
@@ -64,7 +64,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1080p"
+            android:text="-"
             android:layout_marginEnd="8dp"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"

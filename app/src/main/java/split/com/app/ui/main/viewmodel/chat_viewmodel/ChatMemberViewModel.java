@@ -3,6 +3,7 @@ package split.com.app.ui.main.viewmodel.chat_viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import split.com.app.data.model.getch_memeber_messages.GetMemberMessagesModel;
 import split.com.app.data.model.receive_message.GetMessagesModel;
 import split.com.app.data.model.send_message.MessageSendModel;
 import split.com.app.data.repository.chat.ChatMemberRepository;
@@ -11,7 +12,7 @@ import split.com.app.data.repository.chat.ChatRepository;
 public class ChatMemberViewModel extends ViewModel {
 
     private MutableLiveData<MessageSendModel> data;
-    private MutableLiveData<GetMessagesModel> messages_data;
+    private MutableLiveData<GetMemberMessagesModel> messages_data;
     String id, msg;
     private ChatMemberRepository chatRepository;
 
@@ -45,7 +46,7 @@ public class ChatMemberViewModel extends ViewModel {
         return this.data;
     }
 
-    public MutableLiveData<GetMessagesModel> getMessages_data() {
+    public MutableLiveData<GetMemberMessagesModel> getMessages_data() {
         return this.messages_data;
     }
 

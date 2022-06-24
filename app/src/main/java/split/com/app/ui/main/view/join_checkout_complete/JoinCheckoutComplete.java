@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 
 import split.com.app.R;
 import split.com.app.data.model.join_group.Data;
+import split.com.app.data.model.join_group.JoinGroupModel;
 import split.com.app.databinding.FragmentJoinCheckoutCompleteBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.utils.Split;
@@ -27,7 +28,7 @@ import split.com.app.utils.Split;
 public class JoinCheckoutComplete extends Fragment {
 
    FragmentJoinCheckoutCompleteBinding binding;
-   Data data;
+   JoinGroupModel joinGroupModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -46,8 +47,8 @@ public class JoinCheckoutComplete extends Fragment {
         if (getArguments() != null){
             String response = getArguments().getString("group_credentials");
             Gson gson = new Gson();
-            data = gson.fromJson(response, Data.class);
-            setData(data);
+            joinGroupModel = gson.fromJson(response, JoinGroupModel.class);
+            setData(joinGroupModel);
         }
 
         initClickListeners();
@@ -81,13 +82,15 @@ public class JoinCheckoutComplete extends Fragment {
         });
 
         binding.tvRequest.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_joinCheckoutComplete_to_chatroom);
+//            Bundle bundle = new Bundle();
+//            bundle.putString("groupId", String.valueOf(joinGroupModel.ge()));
+            Navigation.findNavController(view).navigate(R.id.action_joinCheckoutComplete_to_memberChat);
         });
     }
 
-    private void setData(Data data) {
-        binding.groupEmail.setText(data.getEmail());
-        binding.groupPass.setText(data.getPassword());
+    private void setData(JoinGroupModel data) {
+        binding.groupEmail.setText(data.getData().getEmail());
+        binding.groupPass.setText(data.getData().getPassword());
 
     }
 }

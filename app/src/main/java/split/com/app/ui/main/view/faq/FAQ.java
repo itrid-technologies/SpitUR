@@ -16,11 +16,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import split.com.app.R;
+import split.com.app.data.model.faq.DataItem;
 import split.com.app.databinding.FragmentFAQBinding;
-import split.com.app.ui.main.adapter.category_adapter.CategoryAdapter;
 import split.com.app.ui.main.adapter.faq.FaqListAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.faq_viewmodel.FaqViewModel;
 import split.com.app.utils.Split;
 
 
@@ -28,6 +28,9 @@ public class FAQ extends Fragment {
 
 
     FragmentFAQBinding binding;
+    FaqViewModel viewModel;
+    private List<DataItem> faq_data;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -42,9 +45,26 @@ public class FAQ extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setFaqList();
+        faq_data = new ArrayList<>();
+        viewModel = new FaqViewModel();
+        viewModel.init();
+        viewModel.getData().observe(getViewLifecycleOwner(), faqListModel -> {
+            if (faqListModel.isSuccess()){
+                if (faqListModel.getData().size() > 0){
+                    faq_data.addAll(faqListModel.getData());
+                    buildFaqRv(faq_data);
+                }
+            }
+        });
         initClickListeners();
 
+    }
+
+    private void buildFaqRv(List<DataItem> faq_data) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
+        binding.faqsList.setLayoutManager(layoutManager);
+        FaqListAdapter adapter = new FaqListAdapter(Split.getAppContext(), faq_data);
+        binding.faqsList.setAdapter(adapter);
     }
 
     private void initClickListeners() {
@@ -53,15 +73,5 @@ public class FAQ extends Fragment {
         });
     }
 
-    private void setFaqList() {
-        List<String> queries = new ArrayList<>();
-        queries.add("When can i withdraw the money from the App ?");
-        queries.add("When can i withdraw the money from the App ?");
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
-        binding.faqsList.setLayoutManager(layoutManager);
-        FaqListAdapter adapter = new FaqListAdapter(Split.getAppContext(), queries);
-        binding.faqsList.setAdapter(adapter);
-
-    }
 }

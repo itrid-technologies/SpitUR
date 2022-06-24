@@ -39,7 +39,7 @@ public class OtpVerifyFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentOtpVerifyBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
-        binding.toolbar.title.setText("Verify Phone Number");
+        binding.verifyToolbar.title.setText("Verify Phone Number");
         return binding.getRoot();
     }
 
@@ -56,7 +56,7 @@ public class OtpVerifyFragment extends Fragment {
 
     private void initClickListeners() {
 
-        binding.toolbar.back.setOnClickListener(view -> {
+        binding.verifyToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 

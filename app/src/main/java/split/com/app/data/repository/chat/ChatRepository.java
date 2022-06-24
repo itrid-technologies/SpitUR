@@ -23,13 +23,13 @@ public class ChatRepository {
     public ChatRepository() {
     }
 
-    public MutableLiveData<MessageSendModel> send(String message , String receiver_id) {
+    public MutableLiveData<MessageSendModel> send(String message , String group_id) {
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
         JsonObject object = new JsonObject();
         object.addProperty("body", message);
-        object.addProperty("group_id",receiver_id);
+        object.addProperty("group_id",group_id);
 
         final MutableLiveData<MessageSendModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();

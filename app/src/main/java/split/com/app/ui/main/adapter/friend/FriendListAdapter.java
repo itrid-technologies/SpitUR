@@ -19,17 +19,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
 import split.com.app.data.model.group_member.DataItem;
 import split.com.app.utils.Constants;
+import split.com.app.utils.Split;
 
 public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.ViewHolder> {
 
-    private final List<DataItem> list;
+    private final List<split.com.app.data.model.friend_list.DataItem> list;
     private final Context context;
 
 
 
-    public FriendListAdapter(Context appContext, List<DataItem> membersList) {
+    public FriendListAdapter(Context appContext, List<split.com.app.data.model.friend_list.DataItem> friend_data) {
         this.context = appContext;
-        this.list = membersList;
+        this.list = friend_data;
     }
 
 
@@ -42,14 +43,15 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull FriendListAdapter.ViewHolder holder, int position) {
-//        split.com.app.data.model.group_member.DataItem current_item = list.get(position);
-//
-//        Glide.with(context)
-//                .load(Constants.IMG_PATH + current_item.getUser().getAvatar())
-//                .placeholder(R.color.blue)
-//                .into(holder.image);
-//
-//        holder.name.setText(current_item.getUser().getName());
+        split.com.app.data.model.friend_list.DataItem current_item = list.get(position);
+
+        Glide.with(context)
+                .load(Constants.IMG_PATH + current_item.getAvatar())
+                .placeholder(R.color.blue)
+                .into(holder.image);
+
+        holder.name.setText(current_item.getName());
+        holder.userid.setText(current_item.getUserId());
     }
 
     @Override

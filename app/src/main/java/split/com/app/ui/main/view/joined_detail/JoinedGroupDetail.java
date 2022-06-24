@@ -20,12 +20,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.slider.Slider;
 import com.google.gson.Gson;
 
 import split.com.app.R;
 import split.com.app.data.model.all_joined_groups.DataItem;
 import split.com.app.databinding.FragmentJoinedGroupDetailBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.joined_group_detail.JoinedGroupDetailViewModel;
 import split.com.app.ui.main.viewmodel.memebers_viewmodel.GroupMembersViewModel;
 import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
@@ -36,6 +38,8 @@ public class JoinedGroupDetail extends Fragment {
     FragmentJoinedGroupDetailBinding binding;
     split.com.app.data.model.all_joined_groups.DataItem data;
     GroupMembersViewModel membersViewModel;
+
+    JoinedGroupDetailViewModel viewModel;
 
 
     @Override
@@ -134,6 +138,23 @@ public class JoinedGroupDetail extends Fragment {
             bt.show();
         });
 
+
+        binding.slider.addOnChangeListener(new Slider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+                viewModel = new JoinedGroupDetailViewModel(String.valueOf(data.getGroupId()),
+                        String.valueOf(data.getGroup().getGroupAdmin().getId()),
+                        String.valueOf(value));
+
+                viewModel.init();
+                viewModel.getData().observe(getViewLifecycleOwner(),basicModel -> {
+                    if (basicModel.isStatus()){
+                        Toast.makeText(Split.getAppContext(), "Updated Score "+ String.valueOf(value), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
         binding.copyEmail1.setOnClickListener(view -> {
             android.content.ClipboardManager clipboard = (android.content.ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
             android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper",binding.groupEmail.getText().toString());
@@ -156,7 +177,7 @@ public class JoinedGroupDetail extends Fragment {
         binding.btnGroupChat.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
             bundle.putString("groupId", String.valueOf(data.getId()));
-            Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_chatroom,bundle);
+            Navigation.findNavController(view).navigate(R.id.action_joinedGroupDetail2_to_chatroom,bundle);
         });
     }
 

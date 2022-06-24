@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "535241433709",
+    "project_id": "splitur",
+    "storage_bucket": "splitur.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535241433709:android:a4552b9e471f6dde681564",
+        "android_client_info": {
+          "package_name": "split.com.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535241433709-1ochcif8rouav6gd8dnnq23og30g949j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBjrbPGBhOAE09SURHcnpSiX9dLBSXTg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535241433709-1ochcif8rouav6gd8dnnq23og30g949j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

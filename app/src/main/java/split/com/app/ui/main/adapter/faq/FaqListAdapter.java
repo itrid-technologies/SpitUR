@@ -16,16 +16,17 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import split.com.app.R;
+import split.com.app.data.model.faq.DataItem;
 import split.com.app.data.model.home_categories.CategoryDataItems;
 import split.com.app.utils.Constants;
 
 public class FaqListAdapter extends RecyclerView.Adapter<FaqListAdapter.FaqVH> {
 
-    private final List<String> faqListData;
+    private final List<DataItem> faqListData;
     private final Context context;
 
 
-    public FaqListAdapter(Context appContext, List<String> list) {
+    public FaqListAdapter(Context appContext, List<DataItem> list) {
         this.context = appContext;
         this.faqListData = list;
     }
@@ -40,8 +41,9 @@ public class FaqListAdapter extends RecyclerView.Adapter<FaqListAdapter.FaqVH> {
     @Override
     public void onBindViewHolder(@NonNull FaqListAdapter.FaqVH holder, int position) {
 
-        String faqQuery = faqListData.get(position);
-        holder.query.setText(faqQuery);
+        DataItem faqQuery = faqListData.get(position);
+        holder.query.setText(faqQuery.getQuestion());
+        holder.answer.setText(faqQuery.getAnswer());
 
         holder.view.setOnClickListener(view -> {
             String status = holder.view.getTag().toString().trim();
@@ -64,13 +66,15 @@ public class FaqListAdapter extends RecyclerView.Adapter<FaqListAdapter.FaqVH> {
 
     public static class FaqVH extends RecyclerView.ViewHolder {
         public ConstraintLayout layout;
-        public TextView query;
+        public TextView query, answer;
         public ImageView view;
 
         public FaqVH(@NonNull View itemView) {
             super(itemView);
             //find views
             query = itemView.findViewById(R.id.query);
+            answer = itemView.findViewById(R.id.queryAnswer);
+
             layout = itemView.findViewById(R.id.queryResponse);
             view = itemView.findViewById(R.id.closeView);
 

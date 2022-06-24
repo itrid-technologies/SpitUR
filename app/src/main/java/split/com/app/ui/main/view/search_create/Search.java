@@ -56,7 +56,7 @@ public class Search extends Fragment {
 
     private void getPopularSubCategory() {
 
-        mViewModel = new SearchCreateViewModel(null);
+        mViewModel = new SearchCreateViewModel(null,null);
         mViewModel.init();
         mViewModel.getPopularCategoryData().observe(getViewLifecycleOwner(), popularSubCategoryModel -> {
             if (popularSubCategoryModel.isSuccess()) {
@@ -101,7 +101,7 @@ public class Search extends Fragment {
     }
 
     private void getSearchedData(String data) {
-        mViewModel = new SearchCreateViewModel(data);
+        mViewModel = new SearchCreateViewModel(data,null);
         mViewModel.initSearch();
         mViewModel.getSearchData().observe(getViewLifecycleOwner(), searchSubCatModel -> {
             if (searchSubCatModel.isSuccess()) {

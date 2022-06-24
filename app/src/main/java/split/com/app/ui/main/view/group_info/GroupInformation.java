@@ -98,7 +98,7 @@ public class GroupInformation extends Fragment {
                     .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
                     .placeholder(R.color.blue)
                     .into(binding.profile1.userImage);
-            binding.profile1.userName.setText(String.valueOf(dataItem.getUserId()));
+            binding.profile1.userName.setText(String.valueOf(dataItem.getGroupAdmin().getUserId()));
             binding.tvScoreValue.setText(String.valueOf(dataItem.getGroupAdmin().getSpliturScore()));
             binding.tvLastActive.setText(Constants.getDate(dataItem.getGroupAdmin().getLastActive()));
             String coin = String.valueOf(dataItem.getCostPerMember());

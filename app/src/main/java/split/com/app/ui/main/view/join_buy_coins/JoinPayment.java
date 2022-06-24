@@ -55,7 +55,7 @@ public class JoinPayment extends Fragment {
                     if (joinGroupModel.isSuccess()){
                         Bundle bundle = new Bundle();
                         Gson gson = new Gson();
-                        String groupDATA = gson.toJson(joinGroupModel.getData());
+                        String groupDATA = gson.toJson(joinGroupModel);
                         bundle.putString("group_credentials",groupDATA);
                         Navigation.findNavController(view1).navigate(R.id.action_joinPayment_to_joinCheckoutComplete,bundle);
 

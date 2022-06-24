@@ -45,7 +45,7 @@
                 android:textSize="18sp"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/white"
-                android:id="@+id/search"/>
+                android:id="@+id/title_search"/>
 
             <EditText
                 android:layout_width="match_parent"

@@ -44,7 +44,7 @@
                 android:textSize="18sp"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/white"
-                android:id="@+id/title"/>
+                android:id="@+id/title_refund"/>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout

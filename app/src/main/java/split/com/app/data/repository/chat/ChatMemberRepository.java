@@ -12,6 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
+import split.com.app.data.model.getch_memeber_messages.GetMemberMessagesModel;
 import split.com.app.data.model.receive_message.GetMessagesModel;
 import split.com.app.data.model.send_message.MessageSendModel;
 import split.com.app.utils.MySharedPreferences;
@@ -52,16 +53,16 @@ public class ChatMemberRepository {
         return liveData;
     }
 
-    public MutableLiveData<GetMessagesModel> getMessages(String id) {
+    public MutableLiveData<GetMemberMessagesModel> getMessages(String id) {
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
-        final MutableLiveData<GetMessagesModel> liveData = new MutableLiveData<>();
+        final MutableLiveData<GetMemberMessagesModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GetMessagesModel> call = apiService.getMessages("Bearer "+token,id);
-        call.enqueue(new Callback<GetMessagesModel>() {
+        Call<GetMemberMessagesModel> call = apiService.getMessages("Bearer "+token,id);
+        call.enqueue(new Callback<GetMemberMessagesModel>() {
             @Override
-            public void onResponse(@NonNull Call<GetMessagesModel> call, @NonNull Response<GetMessagesModel> response) {
+            public void onResponse(@NonNull Call<GetMemberMessagesModel> call, @NonNull Response<GetMemberMessagesModel> response) {
                 if(response.body()!=null)
                 {
                     liveData.setValue(response.body());
@@ -69,7 +70,7 @@ public class ChatMemberRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<GetMessagesModel> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<GetMemberMessagesModel> call, @NonNull Throwable t) {
                 Log.e("Avatar Error",t.getMessage());
             }
         });

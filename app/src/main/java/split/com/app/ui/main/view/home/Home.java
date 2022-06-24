@@ -111,7 +111,9 @@ public class Home extends Fragment {
         binding.categoriesLst.setAdapter(adapter);
 
         adapter.setOnCategorySelectListener(position -> {
-            Navigation.findNavController(requireView()).navigate(R.id.action_home2_to_joinSearch);
+            Bundle bundle = new Bundle();
+            bundle.putString("CurrentCatId", String.valueOf(category_list.get(position).getId()));
+            Navigation.findNavController(requireView()).navigate(R.id.action_home2_to_joinSearch,bundle);
         });
 
     }
