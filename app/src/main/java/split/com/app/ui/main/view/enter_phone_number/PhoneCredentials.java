@@ -20,6 +20,7 @@ import split.com.app.ui.main.view.otp_phone_number.OtpNumber;
 import split.com.app.ui.main.view.otp_verification.OtpVerification;
 import split.com.app.ui.main.viewmodel.phone_number.PhoneNumberViewModel;
 import split.com.app.utils.ActivityUtil;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -78,19 +79,19 @@ public class PhoneCredentials extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("phone_number",my_number);
 
-                Navigation.findNavController(requireView()).navigate(R.id.action_phoneCredentials_to_otpVerifyFragment,bundle);
+              //  Navigation.findNavController(requireView()).navigate(R.id.action_phoneCredentials_to_otpVerifyFragment,bundle);
 
-//
-//                mViewModel = new PhoneNumberViewModel(my_number);
-//                mViewModel.init();
-//
-//                mViewModel.getData().observe(getViewLifecycleOwner(), numberModel -> {
-//                    if (numberModel.isStatus()){
-//
-//                        sentOtp(numberModel.getPhone());
-//
-//                    }
-//                });
+
+                mViewModel = new PhoneNumberViewModel(my_number);
+                mViewModel.init();
+
+                mViewModel.getData().observe(getViewLifecycleOwner(), numberModel -> {
+                    if (numberModel.isStatus()){
+
+                        sentOtp(numberModel.getPhone());
+
+                    }
+                });
 
 
             }else{
@@ -107,7 +108,7 @@ public class PhoneCredentials extends Fragment {
 
                 Bundle bundle = new Bundle();
                 bundle.putString("phone_number",phone);
-
+                Constants.NUMBER = phone;
                 Navigation.findNavController(requireView()).navigate(R.id.action_phoneCredentials_to_otpVerifyFragment,bundle);
 
             }else {

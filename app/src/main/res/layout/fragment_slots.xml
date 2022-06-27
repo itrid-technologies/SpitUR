@@ -75,6 +75,7 @@
                     app:layout_constraintTop_toBottomOf="@id/sub_name"
                     android:text="There is a maximum limit of 6 Members per Group"
                     style="@style/normalText"
+                    android:textSize="14sp"
                     android:layout_marginEnd="30dp"
                     android:id="@+id/sub_detail"/>
 
@@ -91,7 +92,7 @@
                     style="@style/semiBoldText"
                     android:textColor="@color/white"
                     android:gravity="center"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:fontFamily="@font/poppin_regular"
                     android:paddingTop="14dp"
                     android:paddingBottom="14dp"
@@ -110,6 +111,7 @@
                     android:visibility="gone"
                     android:textColor="@color/error"
                     android:padding="5dp"
+                    android:textSize="11sp"
                     android:id="@+id/errorMessage"/>
 
                 <ImageView
@@ -147,6 +149,7 @@
                     app:layout_constraintBottom_toTopOf="@id/slot_next_button"
                     android:layout_gravity="bottom"
                     app:keySpecial="*"
+                    app:keyTextSize="28sp"
                     android:layout_marginBottom="20dp"
                     app:field="@+id/slotValue"
                     app:keyTextColor="@color/white" />

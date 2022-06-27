@@ -25,6 +25,7 @@
         app:layout_constraintTop_toBottomOf="@id/get_started_image"
         android:text="@string/share"
         style="@style/headingText"
+        android:textSize="40sp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="-80dp"
         android:id="@+id/share"/>
@@ -36,6 +37,7 @@
         app:layout_constraintTop_toBottomOf="@id/share"
         android:text="@string/subscribe"
         style="@style/headingText"
+        android:textSize="40sp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="-10dp"
         android:id="@+id/subscribe"/>
@@ -48,6 +50,7 @@
         app:layout_constraintTop_toBottomOf="@id/subscribe"
         android:text="@string/earn"
         style="@style/headingText"
+        android:textSize="40sp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="-10dp"
         android:id="@+id/earn"/>

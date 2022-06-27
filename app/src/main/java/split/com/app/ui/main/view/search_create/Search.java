@@ -24,6 +24,7 @@ import split.com.app.databinding.FragmentSearchBinding;
 import split.com.app.ui.main.adapter.search.SearchListAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.viewmodel.search_create_viewmodel.SearchCreateViewModel;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -105,9 +106,21 @@ public class Search extends Fragment {
         mViewModel.initSearch();
         mViewModel.getSearchData().observe(getViewLifecycleOwner(), searchSubCatModel -> {
             if (searchSubCatModel.isSuccess()) {
-                popularSubCategoryList = new ArrayList<>();
-                popularSubCategoryList.addAll(searchSubCatModel.getData());
-                buildCategoryRv1(popularSubCategoryList);
+                if (searchSubCatModel.getData().size() == 0){
+                    binding.customCreateView.customLayout.setVisibility(View.VISIBLE);
+                    binding.popularList.setVisibility(View.GONE);
+                    binding.searchLis.setVisibility(View.GONE);
+
+                }else {
+                    binding.searchLis.setVisibility(View.VISIBLE);
+
+                    binding.customCreateView.customLayout.setVisibility(View.GONE);
+                    binding.popularList.setVisibility(View.GONE);
+                    popularSubCategoryList = new ArrayList<>();
+                    popularSubCategoryList.addAll(searchSubCatModel.getData());
+                    buildCategoryRv1(popularSubCategoryList);
+                }
+
             }
         });
     }
@@ -115,6 +128,11 @@ public class Search extends Fragment {
     private void initClickListeners() {
         binding.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
+        });
+
+        binding.customCreateView.customCreate.setOnClickListener(view -> {
+            Constants.SUB_CAT_TITLE = "Custom Services";
+            Navigation.findNavController(requireView()).navigate(R.id.action_search2_to_subscriptionName);
         });
     }
 
@@ -146,7 +164,7 @@ public class Search extends Fragment {
 //            MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
 //            pm.saveData(Split.getAppContext(), "SUB_CATEGORY_ID", String.valueOf(popularSubCategoryList.get(position).getId()));
 
-            Navigation.findNavController(requireView()).navigate(R.id.action_search2_to_subscriptionName);
+            //Navigation.findNavController(requireView()).navigate(R.id.action_search2_to_subscriptionName);
 
         });
     }

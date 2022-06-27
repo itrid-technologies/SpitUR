@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,6 +75,10 @@ public class GroupDetail extends Fragment {
 
 
         searchTextWatcher();
+
+//        binding.back.setOnClickListener(view1 -> {
+//            Navigation.findNavController(view1).clearBackStack(R.id.groupDetail);
+//        });
 
     }
 

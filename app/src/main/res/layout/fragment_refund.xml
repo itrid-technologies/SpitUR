@@ -89,6 +89,7 @@
                 android:padding="8dp"
                 android:text="Available Balance"
                 style="@style/normalText"
+                android:textSize="15sp"
                 android:textColor="@color/white"
                 android:id="@+id/available_balance"/>
 
@@ -168,6 +169,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/currency"
                     style="@style/normalText"
+                    android:textSize="14sp"
                     android:text="Enter the amount to withdraw"
                     android:gravity="center_horizontal"/>
 
@@ -183,6 +185,7 @@
                 app:layout_constraintBottom_toTopOf="@id/btnNext"
                 android:layout_gravity="bottom"
                 app:keySpecial="*"
+                app:keyTextSize="28sp"
                 android:layout_marginBottom="20dp"
                 app:field="@+id/withdraw_amount"
                 app:keyTextColor="@color/white" />

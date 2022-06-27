@@ -68,7 +68,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="Group Price"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_total" />
 
@@ -80,7 +80,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="Payment Gateway"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_price" />
 
@@ -92,7 +92,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="Fees"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_gateway" />
 
@@ -104,7 +104,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="143 Coins"
                     android:textColor="@color/yellow"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_price"
                     app:layout_constraintEnd_toStartOf="@id/per_month"
                     app:layout_constraintTop_toTopOf="@id/tv_price" />
@@ -130,7 +130,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="2.86"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_gateway"
                     app:layout_constraintEnd_toStartOf="@id/per_month"
                     app:layout_constraintTop_toTopOf="@id/tv_gateway" />
@@ -155,7 +155,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="Free"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/payment"
                     app:layout_constraintBottom_toBottomOf="@id/tv_fee"
                     app:layout_constraintEnd_toStartOf="@id/per_month"
@@ -181,7 +181,7 @@
                     android:text="Promocode"
                     android:layout_marginTop="5dp"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view" />
 
@@ -244,7 +244,7 @@
                 android:text="You will recive full refund including the fees if you do not recive the Credentials or your service stops within 28 days from today"
                 style="@style/normalText"
                 android:padding="10dp"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 android:layout_marginTop="6dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -256,10 +256,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/button_round_bg"
-                android:paddingStart="80dp"
-                android:paddingTop="10dp"
-                android:paddingEnd="80dp"
-                android:paddingBottom="10dp"
+                android:paddingStart="50dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="50dp"
+                android:paddingBottom="5dp"
                 android:text="Join For 146 Coins"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

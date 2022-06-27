@@ -39,7 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 style="@style/semiBoldText"
-                android:textSize="22sp"
+                android:textSize="14sp"
                 android:text="Recent Transactions"
                 android:id="@+id/tv_recent_trens"/>
 

@@ -1,7 +1,5 @@
 package split.com.app.ui.main.view.join_checkout_complete;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -18,7 +16,6 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import split.com.app.R;
-import split.com.app.data.model.join_group.Data;
 import split.com.app.data.model.join_group.JoinGroupModel;
 import split.com.app.databinding.FragmentJoinCheckoutCompleteBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
@@ -82,15 +79,24 @@ public class JoinCheckoutComplete extends Fragment {
         });
 
         binding.tvRequest.setOnClickListener(view -> {
-//            Bundle bundle = new Bundle();
-//            bundle.putString("groupId", String.valueOf(joinGroupModel.ge()));
-            Navigation.findNavController(view).navigate(R.id.action_joinCheckoutComplete_to_memberChat);
+
+            Bundle bundle = new Bundle();
+            bundle.putString("groupId", String.valueOf(joinGroupModel.getData().getGroupId()));
+            Navigation.findNavController(view).navigate(R.id.action_joinCheckoutComplete_to_memberChat,bundle);
         });
     }
 
     private void setData(JoinGroupModel data) {
         binding.groupEmail.setText(data.getData().getEmail());
         binding.groupPass.setText(data.getData().getPassword());
+        if (data.getData().getSubCategory().getValidationType() != null){
+            String otpAuth = data.getData().getSubCategory().getValidationType();
+            if (otpAuth.equalsIgnoreCase("otp")){
+                binding.tvRequest.setVisibility(View.VISIBLE);
+                binding.send.setVisibility(View.VISIBLE);
+                binding.view1.setVisibility(View.VISIBLE);
+            }
+        }
 
     }
 }

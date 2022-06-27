@@ -1,6 +1,8 @@
 package split.com.app.utils;
 
+import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,12 +11,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -36,6 +45,8 @@ public final class NotificationsUtils {
 
     private final Context mContext;
     private final NotificationManagerCompat mManagerCompat;
+    AlertDialog.Builder dialogBuilder;
+//    AlertDialog alertDialog;
 
     public NotificationsUtils(Context context) {
         this.mContext = context;
@@ -82,6 +93,8 @@ public final class NotificationsUtils {
     public void showNotificationMessage(String title, String message, String timeStamp, Intent intent) {
         showNotificationMessage(title, message, timeStamp, intent, null);
     }
+
+
 
     public void showNotificationMessage(final String title, final String message, final String timeStamp, Intent intent, String imageUrl) {
         // Check for empty push message
@@ -198,5 +211,28 @@ public final class NotificationsUtils {
             e.printStackTrace();
         }
     }
+
+
+    public void showOtpRequestDialog(Context context) {
+        dialogBuilder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        View layoutView = inflater.inflate( R.layout.otp_request_dialogue, null );
+
+        ImageView close = (ImageView) layoutView.findViewById(R.id.close_dialogue);
+        ImageView send = (ImageView) layoutView.findViewById(R.id.send_otp);
+
+        dialogBuilder.setView(layoutView);
+        dialogBuilder.show();
+        AlertDialog alertDialog;
+        alertDialog = dialogBuilder.create();
+    //    alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
+     //   alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+        close.setOnClickListener(view1 -> {
+                alertDialog.dismiss();
+        });
+
+    }
+
 
 }//end class

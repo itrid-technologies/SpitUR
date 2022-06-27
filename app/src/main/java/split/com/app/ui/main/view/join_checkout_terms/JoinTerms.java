@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.skydoves.elasticviews.ElasticButton;
 import split.com.app.R;
 import split.com.app.databinding.FragmentJoinTermsBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.utils.Constants;
 
 
 public class JoinTerms extends Fragment {
@@ -68,11 +70,16 @@ public class JoinTerms extends Fragment {
             alertDialog.show();
             join.setOnClickListener(view1 -> {
                 String emailId = email.getText().toString().trim();
-                if (emailId.isEmpty()) {
+
+                if (emailId.isEmpty()){
                     error.setText("Enter email id");
+                    error.setVisibility(View.VISIBLE);
+                }else if (!Patterns.EMAIL_ADDRESS.matcher(emailId).matches()){
+                    error.setText("Enter valid email id");
                     error.setVisibility(View.VISIBLE);
                 }else {
                     error.setVisibility(View.GONE);
+                    Constants.JoinEmail = emailId;
                     nAV();
                     alertDialog.dismiss();
                 }

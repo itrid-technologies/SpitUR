@@ -1,6 +1,7 @@
 package split.com.app.service;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -20,6 +21,7 @@ import org.json.JSONObject;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.utils.Configration;
 import split.com.app.utils.NotificationsUtils;
+import split.com.app.utils.Split;
 
 public class FirebaseCloudMessagingService extends FirebaseMessagingService {
 
@@ -100,20 +102,11 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
 //            Log.e(TAG, "timestamp: " + timestamp);
 //            Log.e(TAG, "type: " + type);
 
+            if (json.get("type").toString().equals("otp_request")) {
+              notificationUtils = new NotificationsUtils(getApplicationContext());
+              notificationUtils.showOtpRequestDialog(getApplicationContext());
+            }
 
-            if (!NotificationsUtils.isAppIsInBackground(getApplicationContext())) {
-                // app is in foreground, broadcast the push message
-                Intent pushNotification = new Intent(Configration.PUSH_NOTIFICATION);
-                pushNotification.putExtra("message", "message");
-                pushNotification.putExtra("type", json.get("type").toString());
-                LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
-
-                //TODO: handle 
-
-
-                NotificationsUtils NotificationsUtils = new NotificationsUtils(getApplicationContext());
-                NotificationsUtils.playNotificationSound();
-            } else {
                 // app is in background, show the notification in notification tray
                 Intent resultIntent = new Intent(getApplicationContext(), Dashboard.class);
                 resultIntent.putExtra("message", json.get("message").toString());
@@ -127,7 +120,7 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
                     // image is present, show notification with image
                     //showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
                 }
-            }
+
         } catch (JSONException e) {
             Log.e(TAG, "Json Exception: " + e.getMessage());
         } catch (Exception e) {

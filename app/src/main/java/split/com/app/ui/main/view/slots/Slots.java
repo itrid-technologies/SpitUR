@@ -16,6 +16,7 @@ import java.util.Locale;
 import split.com.app.R;
 import split.com.app.databinding.FragmentSlotsBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -54,6 +55,7 @@ public class Slots extends Fragment {
             }else {
                 MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
                 preferences.saveData(Split.getAppContext(),"SLOTS",slots);
+                Constants.SLOTS = slots;
                 Navigation.findNavController(view).navigate(R.id.action_slots_to_visibility2);
             }
         });

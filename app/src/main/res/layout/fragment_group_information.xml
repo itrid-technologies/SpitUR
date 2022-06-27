@@ -100,7 +100,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_last_active"
                     style="@style/semiBoldText"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:text="92"
                     android:textColor="@color/green"
                     android:gravity="center"
@@ -123,6 +123,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_score_value"
                     app:layout_constraintEnd_toEndOf="@id/tv_score_value"
                     style="@style/normalText"
+                    android:textSize="10sp"
                     android:text="@string/spiltur_score"
                     android:layout_marginTop="5dp"
                     android:textColor="@color/hint_color"
@@ -148,7 +149,7 @@
                     style="@style/semiBoldText"
                     android:gravity="center"
                     android:text="Today"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textColor="#6094FE"
                     android:id="@+id/tv_last_active"/>
 
@@ -161,6 +162,7 @@
                     style="@style/normalText"
                     android:layout_marginTop="5dp"
                     android:text="Last Active"
+                    android:textSize="10sp"
                     android:textColor="@color/hint_color"
                     android:gravity="center"
                     android:id="@+id/tv_active"/>
@@ -174,7 +176,7 @@
                     android:gravity="center"
                     style="@style/semiBoldText"
                     android:text="5 days"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textColor="@color/orange"
                     android:id="@+id/tv_days_value"/>
 
@@ -186,6 +188,7 @@
                     app:layout_constraintEnd_toEndOf="@id/tv_days_value"
                     style="@style/normalText"
                     android:text="Days Left"
+                    android:textSize="10sp"
                     android:layout_marginTop="5dp"
                     android:textColor="@color/hint_color"
                     android:gravity="center"
@@ -243,6 +246,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/pass_manager_icon"
                 style="@style/normalText"
+                android:textStyle="bold"
+                android:textSize="10sp"
                 android:textColor="@color/hint_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_manager"

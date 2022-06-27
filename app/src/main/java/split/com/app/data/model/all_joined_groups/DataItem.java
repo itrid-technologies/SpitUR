@@ -20,7 +20,7 @@ public class DataItem{
 	private int id;
 
 	@SerializedName("otp_requsted")
-	private Object otpRequsted;
+	private boolean otpRequsted;
 
 	@SerializedName("updatedAt")
 	private String updatedAt;
@@ -48,7 +48,7 @@ public class DataItem{
 		return id;
 	}
 
-	public Object getOtpRequsted(){
+	public boolean getOtpRequsted(){
 		return otpRequsted;
 	}
 

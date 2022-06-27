@@ -17,6 +17,7 @@ import split.com.app.R;
 import split.com.app.databinding.FragmentJoinPaymentBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.viewmodel.join_group.JoinGroupViewModel;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -45,25 +46,32 @@ public class JoinPayment extends Fragment {
         });
 
         binding.dJoin.setOnClickListener(view1 -> {
-            MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
 
-            String group_id  = mySharedPreferences.getData(Split.getAppContext(),"GroupID");
-            if (!group_id.isEmpty()) {
-                viewModel = new JoinGroupViewModel(group_id);
-                viewModel.init();
-                viewModel.getData().observe(getViewLifecycleOwner(), joinGroupModel -> {
-                    if (joinGroupModel.isSuccess()){
-                        Bundle bundle = new Bundle();
-                        Gson gson = new Gson();
-                        String groupDATA = gson.toJson(joinGroupModel);
-                        bundle.putString("group_credentials",groupDATA);
-                        Navigation.findNavController(view1).navigate(R.id.action_joinPayment_to_joinCheckoutComplete,bundle);
+            String upi_id = binding.edUpi.getText().toString().trim();
+            if (upi_id.isEmpty()){
+                binding.dErrorMessage.setText("Enter Upi id");
+                binding.dErrorMessage.setVisibility(View.VISIBLE);
+            }else {
 
-                    }
-                });
+
+                MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
+
+                String group_id = mySharedPreferences.getData(Split.getAppContext(), "GroupID");
+                if (!group_id.isEmpty()) {
+                    viewModel = new JoinGroupViewModel(group_id, Constants.JoinEmail, upi_id);
+                    viewModel.init();
+                    viewModel.getData().observe(getViewLifecycleOwner(), joinGroupModel -> {
+                        if (joinGroupModel.isSuccess()) {
+                            Bundle bundle = new Bundle();
+                            Gson gson = new Gson();
+                            String groupDATA = gson.toJson(joinGroupModel);
+                            bundle.putString("group_credentials", groupDATA);
+                            Navigation.findNavController(view1).navigate(R.id.action_joinPayment_to_joinCheckoutComplete, bundle);
+
+                        }
+                    });
+                }
             }
-        });
-
-
+    });
     }
 }

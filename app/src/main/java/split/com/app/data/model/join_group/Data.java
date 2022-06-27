@@ -13,6 +13,9 @@ public class Data{
 	@SerializedName("user_id")
 	private int userId;
 
+	@SerializedName("sub_category")
+	private SubCategory subCategory;
+
 	@SerializedName("email")
 	private String email;
 
@@ -26,6 +29,10 @@ public class Data{
 
 	public int getUserId(){
 		return userId;
+	}
+
+	public SubCategory getSubCategory(){
+		return subCategory;
 	}
 
 	public String getEmail(){

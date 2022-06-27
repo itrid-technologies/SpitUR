@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/customLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/normalText"
+        android:padding="20dp"
+        android:text="The services you are trying to find is not yet added, But you can create your own."
+        android:gravity="center"
+        android:id="@+id/tv_custom"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:padding="15dp"
+        android:background="@drawable/rect_back_with_grey_stroke"
+        app:layout_constraintTop_toBottomOf="@id/tv_custom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/search_icons"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:src="@drawable/player_icon"
+            app:civ_border_width="2dp"
+            android:layout_marginStart="10dp"
+            app:civ_circle_background_color="@color/icons_bg"
+            app:civ_border_color="@color/icons_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/search_icons"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Custom Services"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/poppins_medium"
+            android:id="@+id/custom_name"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            app:layout_constraintStart_toStartOf="@id/custom_name"
+            app:layout_constraintTop_toBottomOf="@id/custom_name"
+            android:src="@drawable/search_cat"
+            android:layout_marginTop="-5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Create"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_medium"
+            android:textAllCaps="false"
+            android:background="@drawable/rect_blue_bg"
+            android:padding="10dp"
+            android:id="@+id/custom_create"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

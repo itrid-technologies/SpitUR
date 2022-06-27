@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Enter Email ID"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +39,7 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/hint_color"
                 android:fontFamily="@font/poppin_regular"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:drawablePadding="10dp"
                 android:gravity="start|center"
                 android:background="@drawable/round_back"
@@ -56,6 +57,7 @@
                 style="@style/normalText"
                 android:textColor="@color/error"
                 android:padding="3dp"
+                android:textSize="11sp"
                 android:visibility="gone"
                 android:id="@+id/d_errorMessage"/>
 

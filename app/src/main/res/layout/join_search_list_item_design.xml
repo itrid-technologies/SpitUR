@@ -50,7 +50,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="Join"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:fontFamily="@font/poppins_medium"
         android:textAllCaps="false"
         android:background="@drawable/rect_blue_bg"

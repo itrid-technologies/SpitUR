@@ -26,7 +26,7 @@
     <style name="normalText">
         <item name="fontFamily">@font/poppin_regular</item>
         <item name="android:textColor">@color/hint_color</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="semiBoldText">
@@ -58,7 +58,7 @@
     <style name="buttonStyle">
         <item name="fontFamily">@font/poppins_semibold</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:gravity">center</item>
         <item name="button_duration">100</item>
         <item name="button_scale">0.94</item>

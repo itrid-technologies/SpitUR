@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +25,7 @@ import split.com.app.ui.main.adapter.chat.ChatAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.viewmodel.chat_viewmodel.ChatMemberViewModel;
 import split.com.app.ui.main.viewmodel.chat_viewmodel.ChatViewModel;
+import split.com.app.ui.main.viewmodel.otp_request_viewmodel.OtpRequestViewModel;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -36,7 +38,7 @@ public class MemberChat extends Fragment {
     ChatMemberViewModel viewModel;
     private ArrayList<Object> msgs;
     ChatAdapter adapter;
-
+    OtpRequestViewModel otpRequestViewModel;
 
 
     @Override
@@ -63,7 +65,7 @@ public class MemberChat extends Fragment {
         }
 
         MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
-        id = pm.getData(Split.getAppContext(), "ID");
+        id = pm.getData(Split.getAppContext(), "Id");
 
         viewModel = new ChatMemberViewModel(group_id, "");
         viewModel.initGetAllMessage();
@@ -113,6 +115,16 @@ public class MemberChat extends Fragment {
                     }
                 });
             }
+        });
+
+        binding.askOtp.setOnClickListener(view -> {
+            otpRequestViewModel = new OtpRequestViewModel(group_id);
+            otpRequestViewModel.init();
+            otpRequestViewModel.getData().observe(getViewLifecycleOwner(),basicModel -> {
+                if (basicModel.isStatus()){
+                    Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 

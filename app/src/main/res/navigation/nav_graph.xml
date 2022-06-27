@@ -9,7 +9,7 @@
         android:id="@+id/home2"
         android:name="split.com.app.ui.main.view.home.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_home2_to_search2"
             app:destination="@id/search2"
@@ -30,7 +30,8 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right"
+           />
     </fragment>
     <fragment
         android:id="@+id/search2"
@@ -70,6 +71,9 @@
         <action
             android:id="@+id/action_cost2_to_credentials2"
             app:destination="@id/credentials2" />
+        <action
+            android:id="@+id/action_cost2_to_phoneCredentials"
+            app:destination="@id/phoneCredentials" />
     </fragment>
     <fragment
         android:id="@+id/credentials2"
@@ -79,6 +83,9 @@
         <action
             android:id="@+id/action_credentials2_to_phoneCredentials"
             app:destination="@id/phoneCredentials" />
+        <action
+            android:id="@+id/action_credentials2_to_otpSuccess"
+            app:destination="@id/otpSuccess" />
     </fragment>
     <fragment
         android:id="@+id/phoneCredentials"

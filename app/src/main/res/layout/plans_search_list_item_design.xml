@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="-"
-        android:textSize="18sp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@id/iv_user"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:text="1"
             style="@style/normalText"
-            android:textSize="10dp"
+            android:textSize="9sp"
             android:background="@drawable/round_back"
             android:backgroundTint="@color/transparent"
             android:paddingStart="8dp"
@@ -80,7 +80,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             style="@style/normalText"
-            android:textSize="10dp"
+            android:textSize="9sp"
 
             android:padding="3dp"/>
 
@@ -94,7 +94,7 @@
             android:backgroundTint="@color/transparent"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:textSize="10dp"
+            android:textSize="9sp"
 
             android:padding="3dp"/>
 
@@ -108,7 +108,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             style="@style/normalText"
-            android:textSize="10dp"
+            android:textSize="9sp"
 
             android:padding="3dp"/>
         <TextView
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:text="5"
             style="@style/normalText"
-            android:textSize="10dp"
+            android:textSize="9sp"
             android:background="@drawable/round_back"
             android:backgroundTint="@color/transparent"
             android:paddingStart="8dp"
@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:text="6"
             style="@style/normalText"
-            android:textSize="10dp"
+            android:textSize="9sp"
             android:padding="3dp"/>
 
 
@@ -150,7 +150,7 @@
         android:layout_marginTop="15dp"
         android:text="Group Id:"
         android:textColor="@color/dark_grey"
-        android:textSize="12dp"
+        android:textSize="11sp"
         app:layout_constraintStart_toStartOf="@id/iv_user"
         app:layout_constraintTop_toBottomOf="@id/iv_user" />
 
@@ -162,7 +162,7 @@
         android:layout_marginTop="15dp"
         android:text="-"
         android:textColor="@color/dark_grey"
-        android:textSize="12dp"
+        android:textSize="11sp"
         android:layout_marginStart="4dp"
         app:layout_constraintStart_toEndOf="@id/tv_groupid"
         app:layout_constraintTop_toBottomOf="@id/iv_user" />
@@ -177,7 +177,7 @@
         android:background="@drawable/rect_blue_bg"
         app:layout_constraintBottom_toBottomOf="@id/memberView"
         android:text="143 Coins"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center"
         android:textColor="@color/white"
@@ -204,7 +204,7 @@
         android:layout_marginTop="15dp"
         android:text="Online"
         android:textColor="@color/dark_grey"
-        android:textSize="12dp"
+        android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -227,7 +227,7 @@
         android:layout_marginTop="15dp"
         android:text="rajesh2002"
         android:textColor="@color/dark_grey"
-        android:textSize="12dp"
+        android:textSize="10sp"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toStartOf="@id/online_icon"
         app:layout_constraintBottom_toBottomOf="parent" />

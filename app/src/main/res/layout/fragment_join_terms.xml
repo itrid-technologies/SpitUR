@@ -52,6 +52,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:text="Terms&amp;Conditions"
             style="@style/semiBoldText"
+            android:textSize="20sp"
             android:id="@+id/tv_terms"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout

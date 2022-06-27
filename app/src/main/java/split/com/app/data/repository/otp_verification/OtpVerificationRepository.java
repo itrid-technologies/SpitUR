@@ -11,6 +11,7 @@ import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
 import split.com.app.data.model.otp_verification.AuthenticationModel;
+import split.com.app.utils.Constants;
 
 public class OtpVerificationRepository {
     private ApiService apiService;
@@ -21,7 +22,7 @@ public class OtpVerificationRepository {
     public MutableLiveData<AuthenticationModel> verifyUser(String number, String otp) {
         final MutableLiveData<AuthenticationModel> RegisterModelMutableLiveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<AuthenticationModel> call = apiService.authenticateUser(number,otp);
+        Call<AuthenticationModel> call = apiService.authenticateUser(Constants.DEVICE_TOKEN,number,otp);
         call.enqueue(new Callback<AuthenticationModel>() {
             @Override
             public void onResponse(Call<AuthenticationModel> call, Response<AuthenticationModel> response) {

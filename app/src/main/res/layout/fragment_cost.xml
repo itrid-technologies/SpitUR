@@ -129,6 +129,7 @@
                     android:visibility="gone"
                     android:textColor="@color/error"
                     android:padding="3dp"
+                    android:textSize="11sp"
                     android:id="@+id/errorMessage"/>
 
 

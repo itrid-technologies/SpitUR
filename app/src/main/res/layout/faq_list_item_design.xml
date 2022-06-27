@@ -15,7 +15,6 @@
         android:background="@drawable/rect_bg"
         android:padding="10dp"
         android:layout_marginStart="30dp"
-        android:visibility="gone"
         android:layout_marginEnd="30dp"
         app:layout_constraintTop_toBottomOf="@id/queryView"
         app:layout_constraintStart_toStartOf="@id/queryView"
@@ -31,10 +30,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="30dp"
             android:text="The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: “Client”, “You” and “Your” refers to you, the person log on"
             style="@style/normalText"
-            android:textSize="12dp"/>
+            android:textSize="9sp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -59,7 +58,7 @@
             app:layout_constraintEnd_toStartOf="@id/closeView"
             style="@style/normalText"
             android:layout_margin="8dp"
-            android:textSize="12dp"
+            android:textSize="11sp"
             android:textColor="@color/yellow"
             android:text="When can i withdraw the money from the App ?"
             />

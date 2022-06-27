@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/user_image"
             android:text="-"
+            android:textSize="20sp"
             android:layout_marginStart="40dp"
             style="@style/semiBoldText"
             app:layout_constraintTop_toTopOf="parent"
@@ -60,12 +61,13 @@
             android:background="@drawable/rect_blue_bg"
             android:backgroundTint="@color/blue"
             android:text="- Slots"
+            android:textSize="12sp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textColor="@color/white"
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
-            android:padding="6dp"/>
+            android:padding="8dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

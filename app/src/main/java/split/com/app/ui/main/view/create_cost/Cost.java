@@ -12,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 
 import split.com.app.R;
 import split.com.app.databinding.FragmentCostBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -62,9 +64,18 @@ public class Cost extends Fragment {
         binding.btnNext.setOnClickListener(view -> {
             String cost = binding.costValue.getText().toString().trim();
             if (!cost.isEmpty()){
-                MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
-                pm.saveData(Split.getAppContext(), "COST", cost);
-                Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
+                Constants.COST = cost;
+                String validation_type = Constants.VALIDATION_TYPE;
+                if (validation_type.isEmpty()){
+                    Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
+                }else {
+                    if (validation_type.equalsIgnoreCase("otp")){
+
+                        Navigation.findNavController(view).navigate(R.id.action_cost2_to_phoneCredentials);
+                    }else {
+                        Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
+                    }
+                }
             }else {
                 binding.errorMessage.setVisibility(View.VISIBLE);
                 binding.errorMessage.setText("Enter cost per member");

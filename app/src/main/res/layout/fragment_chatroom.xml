@@ -68,6 +68,7 @@
                     app:layout_constraintEnd_toStartOf="@id/send_message"
                     app:layout_constraintBottom_toBottomOf="parent"
                     style="@style/normalText"
+                    android:textSize="13sp"
                     android:textColor="@color/white"
                     android:background="@color/transparent"
                     android:hint="Write a message"

@@ -14,11 +14,16 @@ import android.view.ViewGroup;
 import split.com.app.R;
 import split.com.app.databinding.FragmentSubscriptionNameBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.utils.Constants;
+import split.com.app.utils.MySharedPreferences;
+import split.com.app.utils.Split;
 
 
 public class SubscriptionName extends Fragment {
 
     FragmentSubscriptionNameBinding binding;
+    String verification_type = "auth";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,12 +49,28 @@ public class SubscriptionName extends Fragment {
         });
 
         binding.otp.setOnClickListener(view -> {
+            verification_type = "otp";
             binding.otp.setBackgroundResource(R.drawable.selected_gradient_stroke);
             binding.emailAndPass.setBackgroundResource(R.drawable.rect_back_with_grey_stroke);
         });
 
+        binding.emailAndPass.setOnClickListener(view -> {
+            verification_type = "auth";
+            binding.otp.setBackgroundResource(R.drawable.rect_back_with_grey_stroke);
+            binding.emailAndPass.setBackgroundResource(R.drawable.selected_gradient_stroke);
+        });
+
         binding.BTNSUBNEXT.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_subscriptionName_to_slots);
+            String title = binding.edGroupTitle.getText().toString().trim();
+            if (!title.isEmpty()){
+                Constants.GROUP_TITLE = title;
+                Constants.VALIDATION_TYPE = verification_type;
+
+//                MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+//                preferences.saveData(Split.getAppContext(),"GROUP_TITLE",title);
+//                preferences.saveData(Split.getAppContext(),"VALIDATION_TYPE",verification_type);
+                Navigation.findNavController(view).navigate(R.id.action_subscriptionName_to_slots);
+            }
         });
 
     }

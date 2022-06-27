@@ -3,6 +3,8 @@ package split.com.app.utils;
 import android.app.Application;
 import android.util.Log;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 public class Split extends Application {
 
 
@@ -26,5 +28,20 @@ public class Split extends Application {
             Log.e("Access Token", token);
         }
 
+        getDeviceToken();
+
+    }
+
+    private void getDeviceToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.e("FCM TOKEN", "onComplete: Fetching FCM registration token failed", task.getException());
+                        return;
+                    }
+                    // Get new FCM registration token
+                    Constants.DEVICE_TOKEN = task.getResult();
+                    Log.e("FCM TOKEN", Constants.DEVICE_TOKEN);
+                });
     }
 }

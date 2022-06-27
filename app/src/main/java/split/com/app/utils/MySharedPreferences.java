@@ -20,10 +20,26 @@ public class MySharedPreferences {
 
     }
 
+    public void saveBooleanData(Context context, String key, boolean value) {
+
+        SharedPreferences sharedPref = (SharedPreferences) context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(key, value);
+        editor.apply();
+
+    }
+
     public String getData(Context context, String key) {
 
         SharedPreferences sharedPref = (SharedPreferences) context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         return sharedPref.getString(key,"");
+
+    }
+
+    public boolean getBooleanData(Context context, String key) {
+
+        SharedPreferences sharedPref = (SharedPreferences) context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        return sharedPref.getBoolean(key,false);
 
     }
 

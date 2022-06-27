@@ -20,6 +20,7 @@ import split.com.app.databinding.FragmentPlansBinding;
 import split.com.app.ui.main.adapter.PlanAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.viewmodel.plan_viewmodel.PlansViewModel;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -76,9 +77,11 @@ public class Plans extends Fragment {
 
         adapter.setOnPlanSelectListener(position -> {
             String plan_id = String.valueOf(planModelList.get(position).getId());
-            MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
-            pm.saveData(Split.getAppContext(), "PLAN_ID", plan_id);
-            pm.saveData(Split.getAppContext(), "TITLE", planModelList.get(position).getName());
+          //  MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+          //  pm.saveData(Split.getAppContext(), "PLAN_ID", plan_id);
+            Constants.PLAN_ID = plan_id;
+            Constants.SUB_CAT_TITLE = planModelList.get(position).getName();
+           // pm.saveData(Split.getAppContext(), "TITLE", planModelList.get(position).getName());
 
             Navigation.findNavController(requireView()).navigate(R.id.action_plans2_to_visibility2);
 

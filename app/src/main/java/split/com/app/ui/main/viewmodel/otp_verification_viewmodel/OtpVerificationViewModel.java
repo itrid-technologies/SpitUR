@@ -34,6 +34,4 @@ public class OtpVerificationViewModel extends ViewModel {
         return this.data;
     }
 
-
-
 }

@@ -81,7 +81,7 @@
                 android:layout_marginEnd="70dp"
                 style="@style/headingText"
                 android:layout_marginStart="6dp"
-                android:textSize="30sp"
+                android:textSize="32sp"
                 android:gravity="start"
                 android:id="@+id/tv_upi_id"/>
 
@@ -89,7 +89,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/tv_upi_id"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:gravity="start"
                 android:textColor="@color/hint_color"
                 android:fontFamily="@font/poppin_regular"
@@ -118,6 +118,20 @@
                 android:id="@+id/ed_upi_id"/>
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/ed_upi_id"
+                app:layout_constraintEnd_toEndOf="@id/ed_upi_id"
+                app:layout_constraintTop_toBottomOf="@id/ed_upi_id"
+                android:text="VPA Entered is Invalid"
+                style="@style/normalText"
+                android:textColor="@color/error"
+                android:textSize="11sp"
+                android:padding="3dp"
+                android:id="@+id/errorMessage"/>
+
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -126,7 +140,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ed_upi_id"
                 android:background="@drawable/rect_bg"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:padding="12dp"
                 android:backgroundTint="@color/light_blue">
 
@@ -137,6 +151,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="Terms&amp;Conditions"
                     style="@style/semiBoldText"
+                    android:textSize="20sp"
                     android:id="@+id/tv_terms"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout

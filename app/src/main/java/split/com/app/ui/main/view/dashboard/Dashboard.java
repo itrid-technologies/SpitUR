@@ -1,9 +1,13 @@
 package split.com.app.ui.main.view.dashboard;
 
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -17,6 +21,7 @@ public class Dashboard extends AppCompatActivity {
     NavController mNavController;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,23 +37,28 @@ public class Dashboard extends AppCompatActivity {
             mNavController = navHostFragment.getNavController();
         }
 
+        binding.bottomNavigation.setItemIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
+
+
         binding.bottomNavigation.setOnItemSelectedListener(i -> {
             switch (i.getItemId()) {
                 case R.id.home2:
-                    i.getIcon().setTint(R.color.white);
+                   // i.getIcon().setTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
                     mNavController.navigate(R.id.home2, null);
                     break;
 
                 case R.id.search2:
-                    i.getIcon().setTint(R.color.white);
+                   // i.getIcon().setTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
                     mNavController.navigate(R.id.search2, null);
                     break;
                 case R.id.createdAndJoinedGroups:
+                  //  i.setIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
+
                     mNavController.navigate(R.id.createdAndJoinedGroups, null);
                     break;
 
                 case R.id.profile2:
-                    i.getIcon().setTint(R.color.white);
+                  //  i.setIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
                     mNavController.navigate(R.id.profile2, null);
                     break;
                 default:

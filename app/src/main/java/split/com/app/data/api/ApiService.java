@@ -59,7 +59,8 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("users/authentication")
-    Call<AuthenticationModel> authenticateUser(@Field("phone") String number,
+    Call<AuthenticationModel> authenticateUser(@Field("fcm_token") String token,
+                                               @Field("phone") String number,
                                                @Field("otp") String otp);
 
     @FormUrlEncoded
@@ -81,6 +82,11 @@ public interface ApiService {
     Call<CreateGroupModel> createGroup(@Header("Authorization") String token,
                                        @FieldMap Map<String, String> options);
 
+    @FormUrlEncoded
+    @POST("groups/create_custom_group")
+    Call<BasicModel> createCustomGroup(@Header("Authorization") String token,
+                                             @FieldMap Map<String, String> options);
+
     @GET("groups/get_home_content")
     Call<HomeContentModel> getHomeData(@Header("Authorization") String token);
 
@@ -90,11 +96,9 @@ public interface ApiService {
     @POST("groups/group_details_search")
     Call<GroupDetailModel> getGroupDetailsSearch(@Body JsonObject object);
 
-    @FormUrlEncoded
     @POST("groups/join_group")
     Call<JoinGroupModel> joinGroup(@Header("Authorization") String token,
-                                   @Field("group_id") String id
-    );
+                                   @Body JsonObject object);
 
     @GET("groups/get_joined_groups")
     Call<AllJoinedGroupModel> getJoinedGroups(@Header("Authorization") String token);
@@ -112,7 +116,6 @@ public interface ApiService {
                                                    @Body JsonObject object);
 
 
-
     @GET("groups/get_group_members/{id}")
     Call<GroupMemberModel> getGroupMembers(@Header("Authorization") String token,
                                            @Path("id") String id);
@@ -123,16 +126,17 @@ public interface ApiService {
 
     @POST("messages/sendMessageGroupChat")
     Call<MessageSendModel> sendGroupMessage(@Header("Authorization") String token,
-                                       @Body JsonObject object);
+                                            @Body JsonObject object);
+
     @GET("messages/getMessagesGroupChat/{id}")
     Call<GetMessagesModel> getGroupMessages(@Header("Authorization") String token,
-                                       @Path("id") String id);
-
+                                            @Path("id") String id);
 
 
     @POST("messages/sendMessage")
     Call<MessageSendModel> sendMessage(@Header("Authorization") String token,
                                        @Body JsonObject object);
+
     @GET("messages/getMessages/{id}")
     Call<GetMemberMessagesModel> getMessages(@Header("Authorization") String token,
                                              @Path("id") String id);
@@ -146,6 +150,7 @@ public interface ApiService {
     Call<BasicModel> updateGroup(@Header("Authorization") String token,
                                  @Path("id") String id,
                                  @Body JsonObject object);
+
     @PUT("users/update")
     Call<UserUpdateModel> updateProfile(@Header("Authorization") String token,
                                         @Body JsonObject object);
@@ -161,4 +166,8 @@ public interface ApiService {
     Call<BasicModel> sendScore(@Header("Authorization") String token,
                                @Body JsonObject object);
 
+
+    @GET("groups/otp_request/{id}")
+    Call<BasicModel> request_otp(@Header("Authorization") String token,
+                                 @Path("id") String id);
 }

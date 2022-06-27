@@ -79,8 +79,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
             create = itemView.findViewById(R.id.tv_create);
 
             itemView.setOnClickListener(view -> {
-                MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
-                pm.saveData(Split.getAppContext(), "SUB_CATEGORY_ID", String.valueOf(dataItems.get(getAbsoluteAdapterPosition()).getId()));
+                Constants.SUB_CATEGORY_ID = String.valueOf(dataItems.get(getAbsoluteAdapterPosition()).getId());
                 Bundle bundle = new Bundle();
                 bundle.putString("SUB_CATEGORY_ID",String.valueOf(dataItems.get(getAbsoluteAdapterPosition()).getId()));
                 Navigation.findNavController(view).navigate(R.id.action_search2_to_plans2,bundle);

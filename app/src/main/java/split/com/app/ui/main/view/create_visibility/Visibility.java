@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import split.com.app.R;
 import split.com.app.databinding.FragmentVisibilityBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -24,7 +25,8 @@ public class Visibility extends Fragment {
 
 
     FragmentVisibilityBinding binding;
-    int visibility = 1;
+    boolean visibility = true;
+    int visible = 1;
     String slot;
 
     @Override
@@ -68,40 +70,41 @@ public class Visibility extends Fragment {
 
         binding.privateLayout.setOnClickListener(view -> {
 
-            visibility = 0;
+            visibility = false;
+            visible = 0;
 
-            binding.publicLayout.setBackgroundResource(0);
-            binding.publicNote.setVisibility(View.GONE);
+            binding.publicLayout.setBackgroundResource(R.drawable.only_grey_stroke);
             binding.publicSelected.setVisibility(View.GONE);
 
             binding.privateLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
-            binding.privateNote.setVisibility(View.VISIBLE);
             binding.privateSelected.setVisibility(View.VISIBLE);
         });
 
         binding.publicLayout.setOnClickListener(view -> {
 
-            visibility = 1;
+            visibility = true;
+            visible = 1;
 
-            binding.privateLayout.setBackgroundResource(0);
-            binding.privateNote.setVisibility(View.GONE);
+
+            binding.privateLayout.setBackgroundResource(R.drawable.only_grey_stroke);
             binding.privateSelected.setVisibility(View.GONE);
 
             binding.publicLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
-            binding.publicNote.setVisibility(View.VISIBLE);
             binding.publicSelected.setVisibility(View.VISIBLE);
         });
 
         binding.btnNext.setOnClickListener(view -> {
 
-            MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+           // MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
             if (!slot.isEmpty()){
-                pm.saveData(Split.getAppContext(), "SLOTS", slot);
+                Constants.SLOTS = slot;
 
             }else {
-                pm.saveData(Split.getAppContext(), "SLOTS", "4");
+                Constants.SLOTS = "4";
             }
-            pm.saveData(Split.getAppContext(), "VISIBILITY", String.valueOf(visibility));
+//            pm.saveBooleanData(Split.getAppContext(), "VISIBILITY", visibility);
+            Constants.VISIBILITY_string = String.valueOf(visible);
+            Constants.VISIBILITY = visibility;
 
             Navigation.findNavController(view).navigate(R.id.action_visibility2_to_cost2);
         });

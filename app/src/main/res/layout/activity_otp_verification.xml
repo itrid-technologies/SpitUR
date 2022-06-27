@@ -40,7 +40,6 @@
             android:layout_marginTop="10dp"
             style="@style/headingText"
             android:layout_marginStart="6dp"
-            android:textSize="30sp"
             android:gravity="start"
             android:id="@+id/tv_enter_code"/>
 
@@ -50,6 +49,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_enter_code"
             android:text="00:00"
+            android:textSize="14sp"
             android:textColor="@color/hint_color"
             android:paddingEnd="10dp"
             android:id="@+id/remaining_time"/>
@@ -65,7 +65,7 @@
             android:inputType="number"
             android:padding="20dp"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:cursorWidth="0dp"
             app:hideLineWhenFilled="true"
@@ -96,6 +96,8 @@
             style="@style/normalText"
             android:textColor="@color/error"
             android:padding="3dp"
+            android:textSize="11sp"
+
             android:visibility="gone"
             android:id="@+id/errorMessage"/>
 
@@ -112,6 +114,7 @@
             app:layout_constraintBottom_toTopOf="@id/verify_button"
             android:layout_gravity="bottom"
             app:keySpecial="*"
+            app:keyTextSize="28sp"
             android:layout_marginBottom="20dp"
             app:field="@+id/otp"
             app:keyTextColor="@color/white" />

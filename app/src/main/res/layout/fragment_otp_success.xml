@@ -41,7 +41,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="Phone OTP"
+                android:text="Group Created"
                 android:textSize="18sp"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/white"
@@ -68,7 +68,7 @@
                     android:gravity="center"
                     android:layout_marginBottom="10dp"
                     android:text="You are All Set"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     app:layout_constraintBottom_toTopOf="@+id/share"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -91,6 +91,7 @@
                     android:gravity="center"
                     android:layout_marginBottom="20dp"
                     android:text="@string/share_with_the_world"
+                    android:textSize="20sp"
                     app:layout_constraintBottom_toTopOf="@+id/userEmail"
                     app:layout_constraintStart_toStartOf="@+id/userEmail" />
 

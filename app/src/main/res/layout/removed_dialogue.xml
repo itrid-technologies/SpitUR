@@ -59,6 +59,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/avatar_bg_frame"
                 android:text="-"
+                android:textSize="24sp"
                 style="@style/semiBoldText"
                 android:id="@+id/tv_removed"/>
 

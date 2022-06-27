@@ -33,14 +33,14 @@ public class CreateGroupRepository {
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
-        DataRequiredForGroup requiredForGroup = new DataRequiredForGroup();
-        requiredForGroup.setPlansId(Integer.parseInt(plan_id));
-        requiredForGroup.setEmail(email);
-        requiredForGroup.setPassword(password);
-        requiredForGroup.setSlots(Integer.parseInt(slot));
-        requiredForGroup.setTitle(title);
-        requiredForGroup.setCostPerMember(Integer.parseInt(cost));
-        requiredForGroup.setVisibility(Integer.parseInt(visibility));
+//        DataRequiredForGroup requiredForGroup = new DataRequiredForGroup();
+//        requiredForGroup.setPlansId(Integer.parseInt(plan_id));
+//        requiredForGroup.setEmail(email);
+//        requiredForGroup.setPassword(password);
+//        requiredForGroup.setSlots(Integer.parseInt(slot));
+//        requiredForGroup.setTitle(title);
+//        requiredForGroup.setCostPerMember(Integer.parseInt(cost));
+//        requiredForGroup.setVisibility(Integer.parseInt(visibility));
 
         HashMap<String, String> parms = new HashMap<>();
         parms.put("plans_id",plan_id);
@@ -53,14 +53,14 @@ public class CreateGroupRepository {
         parms.put("sub_category_id",sub_cat_id);
 
 
-        JsonObject object = new JsonObject();
-        object.addProperty("plans_id",plan_id);
-        object.addProperty("group_title",title);
-        object.addProperty("slots",slot);
-        object.addProperty("cost_per_member",cost);
-        object.addProperty("email",email);
-        object.addProperty("password",password);
-        object.addProperty("visibility",visibility);
+//        JsonObject object = new JsonObject();
+//        object.addProperty("plans_id",plan_id);
+//        object.addProperty("group_title",title);
+//        object.addProperty("slots",slot);
+//        object.addProperty("cost_per_member",cost);
+//        object.addProperty("email",email);
+//        object.addProperty("password",password);
+//        object.addProperty("visibility",visibility);
 
         apiService = ApiManager.getRestApiService();
 

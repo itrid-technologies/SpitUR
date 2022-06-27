@@ -30,7 +30,7 @@ public class ChatMemberRepository {
 
         JsonObject object = new JsonObject();
         object.addProperty("body", message);
-        object.addProperty("receiver_id",receiver_id);
+        object.addProperty("group_id",receiver_id);
 
         final MutableLiveData<MessageSendModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();

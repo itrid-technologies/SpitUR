@@ -1,25 +1,20 @@
 package split.com.app.ui.main.view.otp_verify_fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import split.com.app.R;
-import split.com.app.data.repository.create_group.CreateGroupRepository;
 import split.com.app.databinding.FragmentOtpVerifyBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
-import split.com.app.ui.main.view.otp_verification.OtpVerification;
 import split.com.app.ui.main.viewmodel.craete_group_viewModel.CreateGroupViewModel;
 import split.com.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel;
-import split.com.app.ui.main.viewmodel.search_create_viewmodel.SearchCreateViewModel;
-import split.com.app.utils.ActivityUtil;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
@@ -31,6 +26,7 @@ public class OtpVerifyFragment extends Fragment {
     String number;
     private OtpVerificationViewModel mViewModel;
     private CreateGroupViewModel viewModel;
+    MySharedPreferences pm;
 
 
     @Override
@@ -47,9 +43,11 @@ public class OtpVerifyFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (getArguments() != null){
+        if (getArguments() != null) {
             number = getArguments().getString("phone_number");
         }
+        pm = new MySharedPreferences(Split.getAppContext());
+
 
         initClickListeners();
     }
@@ -66,7 +64,12 @@ public class OtpVerifyFragment extends Fragment {
             if (!otp.isEmpty()) {
                 if (otp.length() == 4) {
 
-                    authenticateUser(number, otp);
+                    String validation_type = Constants.VALIDATION_TYPE;
+                    if (!validation_type.isEmpty()) {
+                        Navigation.findNavController(requireView()).navigate(R.id.action_otpVerifyFragment_to_otpSuccess);
+                    } else {
+                        authenticateUser(number, otp);
+                    }
 
 
                 } else {
@@ -87,32 +90,30 @@ public class OtpVerifyFragment extends Fragment {
         mViewModel.getData().observe(getViewLifecycleOwner(), authenticationModel -> {
             if (authenticationModel.isSuccess()) {
 
-                MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
 
                 pm.saveData(Split.getAppContext(), "userAccessToken", authenticationModel.getData().getToken());
 
-                String planId = pm.getData(Split.getAppContext(),"PLAN_ID");
-                String slots = pm.getData(Split.getAppContext(),"SLOTS");
-                String cost = pm.getData(Split.getAppContext(),"COST");
-                String email = pm.getData(Split.getAppContext(),"EMAIL");
-                String password = pm.getData(Split.getAppContext(),"PASSWORD");
-                String visibility = pm.getData(Split.getAppContext(),"VISIBILITY");
-                String title = pm.getData(Split.getAppContext(),"TITLE");
-                String sub_catId = pm.getData(Split.getAppContext(),"SUB_CATEGORY_ID");
+                String planId = Constants.PLAN_ID;
+                String slots = Constants.SLOTS;
+                String cost = Constants.COST;
+                String email = Constants.EMAIL;
+                String password = Constants.PASSWORD;
+                String visibility = Constants.VISIBILITY_string;
+                String title = Constants.SUB_CAT_TITLE;
+                String sub_catId = Constants.SUB_CATEGORY_ID;
 
 
-                viewModel = new CreateGroupViewModel(planId,title,slots,cost,email,password,visibility,sub_catId);
+                viewModel = new CreateGroupViewModel(planId, title, slots, cost, email, password, visibility, sub_catId);
                 viewModel.init();
                 viewModel.getData().observe(getViewLifecycleOwner(), createGroupModel -> {
-                    if (createGroupModel.isSuccess()){
-                        if(createGroupModel.getData() != null) {
-                          //  MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
-                            pm.saveData(Split.getAppContext(), "PLAN_ID", String.valueOf(createGroupModel.getData().getPlansId()));
-                            pm.saveData(Split.getAppContext(), "SLOTS", String.valueOf(createGroupModel.getData().getSlots()));
-                            pm.saveData(Split.getAppContext(), "COST", String.valueOf(createGroupModel.getData().getCostPerMember()));
-                            pm.saveData(Split.getAppContext(), "EMAIL", String.valueOf(createGroupModel.getData().getEmail()));
-                            pm.saveData(Split.getAppContext(), "PASSWORD", String.valueOf(createGroupModel.getData().getPassword()));
-                            pm.saveData(Split.getAppContext(), "VISIBILITY", String.valueOf(createGroupModel.getData().isVisibility()));
+                    if (createGroupModel.isSuccess()) {
+                        if (createGroupModel.getData() != null) {
+                            Constants.PLAN_ID = String.valueOf(createGroupModel.getData().getPlansId());
+                            Constants.SLOTS = String.valueOf(createGroupModel.getData().getSlots());
+                            Constants.COST = String.valueOf(createGroupModel.getData().getCostPerMember());
+                            Constants.EMAIL = String.valueOf(createGroupModel.getData().getEmail());
+                            Constants.PASSWORD = String.valueOf(createGroupModel.getData().getPassword());
+                            Constants.VISIBILITY = createGroupModel.getData().isVisibility();
                             pm.saveData(Split.getAppContext(), "TITLE", String.valueOf(createGroupModel.getData().getTitle()));
                             pm.saveData(Split.getAppContext(), "ID", String.valueOf(createGroupModel.getData().getId()));
                             pm.saveData(Split.getAppContext(), "GROUP_ID", String.valueOf(createGroupModel.getData().getGroupId()));

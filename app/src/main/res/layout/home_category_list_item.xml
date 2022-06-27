@@ -7,8 +7,8 @@
     >
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:src="@drawable/song_icon"
         android:padding="10dp"
         android:background="@drawable/rect_back_with_grey_stroke"
@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="@id/catImage"
         app:layout_constraintTop_toBottomOf="@id/catImage"
         android:text="Movies"
-        android:textSize="12dp"
+        android:textSize="10sp"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="@id/catImage"
         android:textColor="@color/white"

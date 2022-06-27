@@ -60,6 +60,8 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
             holder.slots.setTextColor(Color.parseColor("#FFDD72"));
         }
 
+  
+
     }
 
     @Override

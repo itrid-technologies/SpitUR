@@ -19,6 +19,8 @@ import java.util.Locale;
 import split.com.app.R;
 import split.com.app.databinding.FragmentCredentialsBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.custom_create_viewmodel.CustomCreateViewModel;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -27,6 +29,8 @@ public class Credentials extends Fragment {
 
 
     FragmentCredentialsBinding binding;
+    private CustomCreateViewModel viewModel;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -78,12 +82,38 @@ public class Credentials extends Fragment {
                 binding.errorMessage.setVisibility(View.VISIBLE);
             }else {
                 binding.errorMessage.setVisibility(View.GONE);
-                MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
-                pm.saveData(Split.getAppContext(), "EMAIL", email);
-                pm.saveData(Split.getAppContext(), "PASSWORD", password);
-                Navigation.findNavController(view).navigate(R.id.action_credentials2_to_phoneCredentials);
+
+                Constants.EMAIL = email;
+                Constants.PASSWORD = password;
+                String validation_type = Constants.VALIDATION_TYPE;
+                if (!validation_type.isEmpty()) {
+                    hitCustomCreateApi();
+                } else {
+                    Navigation.findNavController(view).navigate(R.id.action_credentials2_to_phoneCredentials);
+                }
             }
 
+        });
+    }
+
+    private void hitCustomCreateApi() {
+
+        String title = Constants.GROUP_TITLE;
+        String slots = Constants.SLOTS;
+        String cost = Constants.COST;
+        String email = Constants.EMAIL;
+        String password = Constants.PASSWORD;
+        String visibility = Constants.VISIBILITY_string;
+        String sub_cat_title = Constants.SUB_CAT_TITLE;
+        String type = Constants.VALIDATION_TYPE;
+        String number = Constants.NUMBER;
+
+        viewModel = new CustomCreateViewModel(title,slots,cost,email,password,visibility,sub_cat_title,type,number);
+        viewModel.init();
+        viewModel.getData().observe(getViewLifecycleOwner(), createGroupModel -> {
+            if (createGroupModel.getMessage().equalsIgnoreCase("Custom Group created successfully")){
+                    Navigation.findNavController(requireView()).navigate(R.id.action_credentials2_to_otpSuccess);
+            }
         });
     }
 }

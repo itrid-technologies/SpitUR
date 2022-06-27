@@ -69,7 +69,7 @@
                 android:textColor="@color/dark_grey"
                 android:drawableStart="@drawable/search_icon"
                 android:drawablePadding="8dp"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:fontFamily="@font/poppin_regular"
                 android:background="@drawable/rect_bg"
                 android:padding="12dp"
@@ -82,7 +82,7 @@
                 app:layout_constraintTop_toBottomOf="@id/search"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="Popular"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textColor="@color/white"
                 android:fontFamily="@font/poppins_medium"
                 android:background="@drawable/round_back"
@@ -104,7 +104,7 @@
                 android:text="View All"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/light_grey"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 />
 
             <androidx.recyclerview.widget.RecyclerView

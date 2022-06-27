@@ -83,6 +83,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         android:text="Public"
+                        android:textSize="16sp"
                         android:fontFamily="@font/poppins_medium"
                         android:textColor="@color/orange"
                         style="@style/semiBoldText"/>
@@ -94,6 +95,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_public"
                         android:text="Visibility"
+                        android:textSize="16sp"
                         android:fontFamily="@font/poppins_medium"
                         android:layout_marginStart="6dp"
                         style="@style/semiBoldText"/>
@@ -130,6 +132,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/publicLayout"
                     android:layout_marginTop="8dp"
+                    android:background="@drawable/only_grey_stroke"
                     android:padding="20dp"
                     >
 
@@ -140,6 +143,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         android:text="Private"
+                        android:textSize="16sp"
                         android:fontFamily="@font/poppins_medium"
                         style="@style/semiBoldText"/>
 
@@ -150,6 +154,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_private"
                         android:text="Visibility"
+                        android:textSize="16sp"
                         android:fontFamily="@font/poppins_medium"
                         android:layout_marginStart="6dp"
                         style="@style/semiBoldText"/>
@@ -161,7 +166,6 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_private"
                         app:layout_constraintStart_toStartOf="@id/tv_private"
                         android:text="It will not visible on search"
-                        android:visibility="gone"
                         android:fontFamily="@font/poppins_medium"
                         android:layout_marginTop="-4dp"
                         style="@style/normalText"/>

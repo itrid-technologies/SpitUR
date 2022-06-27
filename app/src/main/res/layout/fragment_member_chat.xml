@@ -68,6 +68,7 @@
                 app:layout_constraintEnd_toStartOf="@id/send_member_message"
                 app:layout_constraintBottom_toBottomOf="parent"
                 style="@style/normalText"
+                android:textSize="13sp"
                 android:textColor="@color/white"
                 android:background="@color/transparent"
                 android:hint="Write a message"
@@ -86,13 +87,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ask_otp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintStart_toEndOf="@id/type_member_message"
             app:layout_constraintEnd_toEndOf="parent"
             android:backgroundTint="@color/blue"
             android:layout_marginStart="5dp"
             android:background="@drawable/round_back"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/type_member_message"
+            app:layout_constraintTop_toTopOf="@id/type_member_message"
             android:padding="5dp"
             >
 
@@ -102,14 +104,15 @@
                 android:layout_height="wrap_content"
                 style="@style/semiBoldText"
                 android:text="Ask OTP"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:paddingStart="10dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingStart="12dp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:paddingEnd="10dp"/>
+                android:paddingEnd="12dp"/>
 
 
 

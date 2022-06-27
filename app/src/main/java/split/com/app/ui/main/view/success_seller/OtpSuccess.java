@@ -15,7 +15,11 @@ import android.view.ViewGroup;
 import split.com.app.R;
 import split.com.app.databinding.FragmentOtpSuccessBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.craete_group_viewModel.CreateGroupViewModel;
+import split.com.app.ui.main.viewmodel.custom_create_viewmodel.CustomCreateViewModel;
 import split.com.app.utils.ActivityUtil;
+import split.com.app.utils.Constants;
+import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
 
@@ -23,6 +27,7 @@ public class OtpSuccess extends Fragment {
 
 
     FragmentOtpSuccessBinding binding;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -40,6 +45,10 @@ public class OtpSuccess extends Fragment {
         binding.btnHome.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigate(R.id.home2);
         });
+
+
+
+
 
     }
 }

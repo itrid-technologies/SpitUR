@@ -6,7 +6,24 @@ import java.util.Date;
 
 public class Constants {
 
-    public static final String IMG_PATH = "http://192.168.100.19:4000";
+    public static final String IMG_PATH = "http://192.168.100.24:4000";
+    public static String DEVICE_TOKEN = "";
+
+    public static String GROUP_TITLE = "";
+    public static String COST = "";
+    public static Boolean VISIBILITY = false;
+    public static String SLOTS = "";
+    public static String OTP = "";
+    public static String NUMBER = "";
+    public static String EMAIL = "";
+    public static String PASSWORD = "";
+    public static String VALIDATION_TYPE = "";
+    public static String PLAN_ID = "";
+    public static String SUB_CAT_TITLE = "";
+    public static  String SUB_CATEGORY_ID = "";
+    public static String VISIBILITY_string = "";
+    public static String JoinEmail = "";
+
 
     public static String getDate(String data){
         String date;

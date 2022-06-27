@@ -52,6 +52,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_enter_code"
                 android:text="00:00"
+                android:textSize="14sp"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/hint_color"
                 android:paddingEnd="10dp"
@@ -68,7 +69,7 @@
                 android:inputType="number"
                 android:padding="20dp"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:cursorWidth="0dp"
                 app:hideLineWhenFilled="true"
@@ -98,6 +99,7 @@
                 style="@style/normalText"
                 android:textColor="@color/error"
                 android:padding="3dp"
+                android:textSize="11sp"
                 android:visibility="gone"
                 android:id="@+id/errorMessage"/>
 

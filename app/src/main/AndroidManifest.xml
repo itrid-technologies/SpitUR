@@ -8,11 +8,21 @@
     <application
         android:name=".utils.Split"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/aplit_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/aplit_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Split">
+
+
+        <service
+            android:name=".service.FirebaseCloudMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service> <!-- Foreground services in Q+ require type. -->
+
         <activity
             android:name=".ui.main.view.dashboard.Dashboard"
             android:exported="false"

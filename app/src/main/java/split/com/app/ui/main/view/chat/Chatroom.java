@@ -60,7 +60,7 @@ public class Chatroom extends Fragment {
         }
 
         MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
-        id = pm.getData(Split.getAppContext(), "ID");
+        id = pm.getData(Split.getAppContext(), "Id");
 
         chatViewModel = new ChatViewModel(group_id, "");
         chatViewModel.initGetAllMessage();
@@ -105,7 +105,9 @@ public class Chatroom extends Fragment {
                 chatViewModel.getData().observe(getViewLifecycleOwner(), messageSendModel -> {
                     if (messageSendModel.isStatus()) {
                         msgs.add(new SenderModel(message, Calendar.getInstance().getTime().toString()));
-                        adapter.notifyDataSetChanged();
+                        if (adapter != null) {
+                            adapter.notifyDataSetChanged();
+                        }
                         binding.messgae.setText("");
                     }
                 });

@@ -67,7 +67,7 @@ public class JoinCheckOut extends Fragment {
                     .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
                     .placeholder(R.color.blue)
                     .into(binding.profile2.userImage);
-            binding.profile2.userName.setText(String.valueOf(dataItem.getUserId()));
+            binding.profile2.userName.setText(String.valueOf(dataItem.getGroupAdmin().getUserId()));
             String coin = String.valueOf(dataItem.getCostPerMember());
             Double coinFloat = Double.parseDouble(coin);
             String value = String.valueOf(((coinFloat * 30) / 100) + coinFloat);
@@ -77,7 +77,7 @@ public class JoinCheckOut extends Fragment {
             binding.btnJoin.setText("Join for "+value + " Coins");
 
             MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
-            mySharedPreferences.saveData(Split.getAppContext(),"GroupID", String.valueOf(dataItem.getGroupId()));
+            mySharedPreferences.saveData(Split.getAppContext(),"GroupID", String.valueOf(dataItem.getGroupAdmin().getId()));
 
         }catch (NullPointerException e){
 

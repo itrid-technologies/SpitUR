@@ -29,7 +29,6 @@
         android:layout_marginTop="10dp"
         style="@style/headingText"
         android:layout_marginStart="6dp"
-        android:textSize="30sp"
         android:gravity="start"
         android:id="@+id/tv_enter_userid"/>
 
@@ -38,7 +37,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/tv_enter_userid"
         app:layout_constraintEnd_toEndOf="@id/tv_enter_userid"
-        android:textSize="13sp"
+        android:textSize="14sp"
         android:textColor="@color/hint_color"
         android:fontFamily="@font/poppin_regular"
         android:text="This is your id which you will use to  communicate with others"
@@ -75,6 +74,7 @@
         app:layout_constraintTop_toBottomOf="@id/ed_userId"
         style="@style/normalText"
         android:textColor="@color/error"
+        android:textSize="11sp"
         android:padding="3dp"
         android:visibility="gone"
         android:id="@+id/errorMessage"/>

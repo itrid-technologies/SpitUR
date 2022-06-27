@@ -137,12 +137,10 @@ public class CreatedGroupDetail extends Fragment {
 
         binding.privateLayout.setOnClickListener(view -> {
 
-            binding.publicLayout.setBackgroundResource(0);
-            binding.publicNote.setVisibility(View.GONE);
+            binding.publicLayout.setBackgroundResource(R.drawable.only_grey_stroke);
             binding.publicSelected.setVisibility(View.GONE);
 
             binding.privateLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
-            binding.privateNote.setVisibility(View.VISIBLE);
             binding.privateSelected.setVisibility(View.VISIBLE);
 
             updateVisibility(false);
@@ -150,12 +148,10 @@ public class CreatedGroupDetail extends Fragment {
 
         binding.publicLayout.setOnClickListener(view -> {
 
-            binding.privateLayout.setBackgroundResource(0);
-            binding.privateNote.setVisibility(View.GONE);
+            binding.privateLayout.setBackgroundResource(R.drawable.only_grey_stroke);
             binding.privateSelected.setVisibility(View.GONE);
 
             binding.publicLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
-            binding.publicNote.setVisibility(View.VISIBLE);
             binding.publicSelected.setVisibility(View.VISIBLE);
 
             updateVisibility(true);
@@ -207,15 +203,14 @@ public class CreatedGroupDetail extends Fragment {
                 ConstraintLayout deleteLayout = carDetailView.findViewById(R.id.delete_layout);
                 deleteLayout.setOnClickListener(view -> {
 
-                    displayRemovedDialogue("Group member Removed");
 
-//                    membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), String.valueOf(membersList.get(position).getUserId()),"","",false);
-//                    membersViewModel.initRemoveMember();
-//                    membersViewModel.getMember_remove_data().observe(getViewLifecycleOwner(),basicModel -> {
-//                        if (basicModel.isStatus()){
-//                            displayRemovedDialogue();
-//                        }
-//                    });
+                    membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), String.valueOf(membersList.get(position).getUserId()),"","",false);
+                    membersViewModel.initRemoveMember();
+                    membersViewModel.getMember_remove_data().observe(getViewLifecycleOwner(),basicModel -> {
+                        if (basicModel.isStatus()){
+                            displayRemovedDialogue("Group member Removed");
+                        }
+                    });
                 });
 
                 bt.setContentView(carDetailView);

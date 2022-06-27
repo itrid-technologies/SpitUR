@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@id/group_title"
         android:text="-"
         android:textColor="@color/green"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:fontFamily="@font/poppins_medium"
         android:id="@+id/space"
         />
@@ -64,7 +64,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="Open"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:fontFamily="@font/poppins_medium"
         android:textAllCaps="false"
         android:background="@drawable/rect_blue_bg"
