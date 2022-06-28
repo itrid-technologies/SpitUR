@@ -101,7 +101,7 @@
                     app:layout_constraintEnd_toStartOf="@id/tv_last_active"
                     style="@style/semiBoldText"
                     android:textSize="20sp"
-                    android:text="92"
+                    android:text="-"
                     android:textColor="@color/green"
                     android:gravity="center"
                     android:id="@+id/tv_score_value"/>
@@ -148,7 +148,7 @@
                     app:layout_constraintEnd_toStartOf="@id/tv_days_value"
                     style="@style/semiBoldText"
                     android:gravity="center"
-                    android:text="Today"
+                    android:text="-"
                     android:textSize="20sp"
                     android:textColor="#6094FE"
                     android:id="@+id/tv_last_active"/>
@@ -175,7 +175,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:gravity="center"
                     style="@style/semiBoldText"
-                    android:text="5 days"
+                    android:text="-"
                     android:textSize="20sp"
                     android:textColor="@color/orange"
                     android:id="@+id/tv_days_value"/>
@@ -187,7 +187,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_days_value"
                     app:layout_constraintEnd_toEndOf="@id/tv_days_value"
                     style="@style/normalText"
-                    android:text="Days Left"
+                    android:text="Creation Date"
                     android:textSize="10sp"
                     android:layout_marginTop="5dp"
                     android:textColor="@color/hint_color"

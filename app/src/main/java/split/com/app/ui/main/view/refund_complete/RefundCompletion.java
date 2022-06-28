@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import split.com.app.R;
 import split.com.app.databinding.FragmentRefundCompletionBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
@@ -23,7 +25,7 @@ public class RefundCompletion extends Fragment {
   FragmentRefundCompletionBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentRefundCompletionBinding.inflate(inflater, container, false);
@@ -39,6 +41,7 @@ public class RefundCompletion extends Fragment {
     }
 
     private void initClickListeners() {
+
         binding.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
@@ -46,5 +49,8 @@ public class RefundCompletion extends Fragment {
         binding.btnHome.setOnClickListener(view -> {
             ActivityUtil.gotoHome(Split.getAppContext());
         });
+
+       // Glide.with(Split.getAppContext()).load(R.drawable.success_gif).into(binding.refundSuccessGif);
+
     }
 }

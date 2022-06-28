@@ -14,12 +14,15 @@ import android.view.ViewGroup;
 import split.com.app.R;
 import split.com.app.databinding.FragmentSwapCoinsBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.swap_viewmodel.SwapViewModel;
 
 
 public class SwapCoins extends Fragment {
 
 
     FragmentSwapCoinsBinding binding;
+    String coins;
+    SwapViewModel viewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,7 +30,7 @@ public class SwapCoins extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentSwapCoinsBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
-        binding.toolbar.title.setText("Swap");
+        binding.swapToolbar.title.setText("Swap");
 
         return binding.getRoot();
     }
@@ -37,17 +40,32 @@ public class SwapCoins extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if (getArguments() != null){
+            coins = getArguments().getString("Coins");
+            binding.urCoinsValue.setText(coins);
+        }
+
+
         initClickListeners();
     }
 
     private void initClickListeners() {
 
-        binding.toolbar.back.setOnClickListener(view -> {
+        binding.swapToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 
         binding.swapButton.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_swapCoins_to_successfullySwapped);
+            String swapValue = binding.inrCoinsValue.getText().toString();
+            if (!swapValue.isEmpty() && swapValue.equalsIgnoreCase(coins)){
+              viewModel = new SwapViewModel(swapValue);
+              viewModel.init();
+              viewModel.getCoins_data().observe(getViewLifecycleOwner(), basicModel -> {
+                  if (basicModel.isStatus()){
+                      Navigation.findNavController(view).navigate(R.id.action_swapCoins_to_successfullySwapped);
+                  }
+              });
+            }
         });
     }
 }

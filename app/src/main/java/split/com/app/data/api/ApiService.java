@@ -18,6 +18,7 @@ import split.com.app.data.model.HomeContentModel;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
 import split.com.app.data.model.all_joined_groups.AllJoinedGroupModel;
 import split.com.app.data.model.basic_model.BasicModel;
+import split.com.app.data.model.basic_model.BasicModel1;
 import split.com.app.data.model.create_group.CreateGroupModel;
 import split.com.app.data.model.faq.FaqListModel;
 import split.com.app.data.model.friend_list.FriendListModel;
@@ -34,7 +35,9 @@ import split.com.app.data.model.popular_subcategory.PopularSubCategoryModel;
 import split.com.app.data.model.receive_message.GetMessagesModel;
 import split.com.app.data.model.register.RegisterModel;
 import split.com.app.data.model.send_message.MessageSendModel;
+import split.com.app.data.model.total_coins.TotalCoinsModel;
 import split.com.app.data.model.update_user_profile.UserUpdateModel;
+import split.com.app.data.model.wallet_balance.WalletBalanceModel;
 
 public interface ApiService {
 
@@ -121,7 +124,7 @@ public interface ApiService {
                                            @Path("id") String id);
 
     @GET("groups/delete_group/{id}")
-    Call<BasicModel> deleteGroup(@Header("Authorization") String token,
+    Call<BasicModel1> deleteGroup(@Header("Authorization") String token,
                                  @Path("id") String id);
 
     @POST("messages/sendMessageGroupChat")
@@ -143,8 +146,8 @@ public interface ApiService {
 
 
     @POST("groups/remove_member")
-    Call<BasicModel> removeMember(@Header("Authorization") String token,
-                                  @Body JsonObject object);
+    Call<BasicModel1> removeMember(@Header("Authorization") String token,
+                                   @Body JsonObject object);
 
     @POST("groups/update_group/{id}")
     Call<BasicModel> updateGroup(@Header("Authorization") String token,
@@ -170,4 +173,26 @@ public interface ApiService {
     @GET("groups/otp_request/{id}")
     Call<BasicModel> request_otp(@Header("Authorization") String token,
                                  @Path("id") String id);
+
+
+    @GET("groups/left_group/{id}")
+    Call<BasicModel1> leftGroup(@Header("Authorization") String token,
+                                 @Path("id") String id);
+
+    @POST("users/swap_coins")
+    Call<BasicModel> swapCoins(@Header("Authorization") String token,
+                               @Body JsonObject object);
+
+
+    @GET("users/wallet_balance/{id}")
+    Call<WalletBalanceModel> getWalletBalance(@Header("Authorization") String token,
+                                              @Path("id") String id);
+
+    @GET("users/total_coins/{id}")
+    Call<TotalCoinsModel> getTotalCoins(@Header("Authorization") String token,
+                                        @Path("id") String id);
+
+    @POST("users/refund")
+    Call<BasicModel1> refundAmount(@Header("Authorization") String token,
+                                  @Body JsonObject object);
 }

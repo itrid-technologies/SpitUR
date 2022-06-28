@@ -109,7 +109,7 @@ public class Credentials extends Fragment {
         String number = Constants.NUMBER;
 
         viewModel = new CustomCreateViewModel(title,slots,cost,email,password,visibility,sub_cat_title,type,number);
-        viewModel.init();
+        viewModel.initAuth();
         viewModel.getData().observe(getViewLifecycleOwner(), createGroupModel -> {
             if (createGroupModel.getMessage().equalsIgnoreCase("Custom Group created successfully")){
                     Navigation.findNavController(requireView()).navigate(R.id.action_credentials2_to_otpSuccess);

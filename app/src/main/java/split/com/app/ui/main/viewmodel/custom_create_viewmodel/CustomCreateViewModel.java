@@ -13,6 +13,8 @@ public class CustomCreateViewModel extends ViewModel {
     String title,type, slot , cost , email , password, visibility , subCatTtile , phone;
 
     private MutableLiveData<BasicModel> data;
+    private MutableLiveData<BasicModel> otp_data;
+
     private CustomCreateRepository customCreateRepository;
 
     public CustomCreateViewModel(String title, String slots, String cost, String email, String pass, String visible, String sub_catTitle, String type, String number) {
@@ -28,7 +30,7 @@ public class CustomCreateViewModel extends ViewModel {
         customCreateRepository = new CustomCreateRepository();
     }
 
-    public void init() {
+    public void initAuth() {
         if (this.data != null) {
             // ViewModel is created per Fragment so
             // we know the userId won't change
@@ -37,7 +39,21 @@ public class CustomCreateViewModel extends ViewModel {
         data = customCreateRepository.create(title,slot,cost,email,password,visibility,subCatTtile,type);
     }
 
+    public void initOtp() {
+        if (this.otp_data != null) {
+            // ViewModel is created per Fragment so
+            // we know the userId won't change
+            return;
+        }
+        otp_data = customCreateRepository.createByOtp(title,slot,cost,email,password,visibility,subCatTtile,type,phone);
+    }
+
     public MutableLiveData<BasicModel> getData() {
         return this.data;
     }
+
+    public MutableLiveData<BasicModel> getOtp_data() {
+        return this.otp_data;
+    }
+
 }

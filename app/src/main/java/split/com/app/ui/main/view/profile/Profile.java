@@ -42,8 +42,10 @@ public class Profile extends Fragment {
     private List<AvatarItem> avatarList = new ArrayList<>();
     private final List<String> avatars = new ArrayList<>();
     private int currentIndex = 0;
+    String id;
 
     ProfileViewModel viewModel;
+    String userCoins;
 
 
     @Override
@@ -67,6 +69,16 @@ public class Profile extends Fragment {
         mViewModel = new AvatarViewModel();
 
 
+        MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+        id = pm.getData(Split.getAppContext(), "Id");
+        viewModel = new ProfileViewModel(id,"", "", "");
+        viewModel.initCoins();
+        viewModel.getCoins_data().observe(getViewLifecycleOwner(),totalCoinsModel -> {
+            if (totalCoinsModel.isStatus()){
+                userCoins = String.valueOf(totalCoinsModel.getCoins());
+                binding.coinValue.setText(String.valueOf(totalCoinsModel.getCoins()));
+            }
+        });
     }
 
     private void setProfileData() {
@@ -116,11 +128,15 @@ public class Profile extends Fragment {
         });
 
         binding.swap.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_profile2_to_swapCoins);
+            Bundle bundle = new Bundle();
+            bundle.putString("Coins", userCoins);
+            Navigation.findNavController(view).navigate(R.id.action_profile2_to_swapCoins,bundle);
         });
 
         binding.swapIcon.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_profile2_to_swapCoins);
+            Bundle bundle = new Bundle();
+            bundle.putString("Coins", userCoins);
+            Navigation.findNavController(view).navigate(R.id.action_profile2_to_swapCoins,bundle);
         });
 
 
@@ -173,7 +189,7 @@ public class Profile extends Fragment {
                 String updated_id = userid.getText().toString().trim();
                 final String updatedAvatar = avatars.get(currentIndex);
 
-                viewModel = new ProfileViewModel(updated_name, updated_id, updatedAvatar);
+                viewModel = new ProfileViewModel("",updated_name, updated_id, updatedAvatar);
                 viewModel.init();
                 viewModel.getUpdate_profile().observe(getViewLifecycleOwner(), userUpdateModel -> {
                     if (userUpdateModel.isSuccess()) {

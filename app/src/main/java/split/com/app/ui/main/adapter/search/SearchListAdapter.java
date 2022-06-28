@@ -82,6 +82,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
                 Constants.SUB_CATEGORY_ID = String.valueOf(dataItems.get(getAbsoluteAdapterPosition()).getId());
                 Bundle bundle = new Bundle();
                 bundle.putString("SUB_CATEGORY_ID",String.valueOf(dataItems.get(getAbsoluteAdapterPosition()).getId()));
+                Constants.SUB_CAT_TITLE = String.valueOf(dataItems.get(getAbsoluteAdapterPosition()).getTitle());
                 Navigation.findNavController(view).navigate(R.id.action_search2_to_plans2,bundle);
             });
 

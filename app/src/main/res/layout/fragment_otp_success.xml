@@ -51,13 +51,24 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="?attr/actionBarSize"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:padding="20dp"
-                >
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+
+                <ImageView
+                    android:id="@+id/success_gif"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/set"
@@ -65,22 +76,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="-40dp"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
-                    android:layout_marginBottom="10dp"
                     android:text="You are All Set"
                     android:textSize="24sp"
-                    app:layout_constraintBottom_toTopOf="@+id/share"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/success_gif" />
 
                 <ImageView
                     android:id="@+id/flower_img"
                     android:layout_width="38dp"
                     android:layout_height="38dp"
                     android:layout_marginStart="5dp"
+                    android:src="@drawable/success"
                     app:layout_constraintStart_toEndOf="@id/set"
-                    app:layout_constraintTop_toTopOf="@id/set"
-                    android:src="@drawable/success"/>
+                    app:layout_constraintTop_toTopOf="@id/set" />
 
 
                 <TextView
@@ -88,18 +99,18 @@
                     style="@style/semiBoldText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
-                    android:layout_marginBottom="20dp"
                     android:text="@string/share_with_the_world"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/userEmail"
-                    app:layout_constraintStart_toStartOf="@+id/userEmail" />
+                    app:layout_constraintStart_toStartOf="@+id/userEmail"
+                    app:layout_constraintTop_toBottomOf="@+id/set" />
 
                 <EditText
                     android:id="@+id/userEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/round_back"
                     android:backgroundTint="@color/light_blue"
                     android:drawableLeft="@drawable/ic_user"
@@ -112,97 +123,92 @@
                     android:textColor="@color/white"
                     android:textColorHint="@color/hint_color"
                     android:textSize="15sp"
-                    app:layout_constraintBottom_toTopOf="@+id/share_layout"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/share_layout" />
+                    app:layout_constraintStart_toStartOf="@+id/share_layout"
+                    app:layout_constraintTop_toBottomOf="@+id/share" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/share_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginBottom="14dp"
-                    app:layout_constraintBottom_toTopOf="@id/btnHome"
-                    android:padding="20dp"
+                    android:background="@drawable/rect_bg"
                     android:backgroundTint="@color/light_blue"
-                    android:background="@drawable/rect_bg">
+                    android:padding="20dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/userEmail">
 
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:src="@drawable/copy_link"
                         android:id="@+id/copy_link"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/copy_link"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/message"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        app:layout_constraintStart_toEndOf="@id/copy_link"
-                        android:src="@drawable/chat"
                         android:id="@+id/message"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/chat"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/whatsapp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintStart_toEndOf="@id/copy_link"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        app:layout_constraintStart_toEndOf="@id/message"
-                        android:src="@drawable/whatsapp"
                         android:id="@+id/whatsapp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/whatsapp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/insta"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintStart_toEndOf="@id/message"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        app:layout_constraintStart_toEndOf="@id/whatsapp"
-                        android:src="@drawable/insta"
                         android:id="@+id/insta"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/twitter"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
-
-                    <ImageView
                         android:layout_width="0dp"
                         android:layout_height="50dp"
-                        app:layout_constraintStart_toEndOf="@id/insta"
-                        android:src="@drawable/twitter"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:id="@+id/twitter"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/insta"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintEnd_toStartOf="@id/twitter"
+                        app:layout_constraintStart_toEndOf="@id/whatsapp"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/twitter"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/twitter"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/insta"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 <Button
+                    android:id="@+id/btnHome"
+                    style="@style/buttonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="Home"
-                    android:layout_marginTop="30dp"
-                    style="@style/buttonStyle"
                     android:background="@drawable/button_round_bg"
+                    android:fontFamily="@font/poppins_semibold"
                     android:paddingStart="80dp"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:textSize="14dp"
                     android:paddingEnd="80dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:id="@+id/btnHome"/>
+                    android:paddingBottom="5dp"
+                    android:text="Home"
+                    android:textSize="14dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/share_layout" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,7 @@ import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
 import split.com.app.data.model.basic_model.BasicModel;
+import split.com.app.data.model.basic_model.BasicModel1;
 import split.com.app.data.model.group_member.GroupMemberModel;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
@@ -49,7 +50,7 @@ public class GroupMembersRepository {
     }
 
 
-    public MutableLiveData<BasicModel> removeGroupMember(String group_id, String user_id) {
+    public MutableLiveData<BasicModel1> removeGroupMember(String group_id, String user_id) {
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
@@ -57,12 +58,12 @@ public class GroupMembersRepository {
         object.addProperty("group_id", group_id);
         object.addProperty("user_id", user_id);
 
-        final MutableLiveData<BasicModel> liveData = new MutableLiveData<>();
+        final MutableLiveData<BasicModel1> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<BasicModel> call = apiService.removeMember("Bearer "+token,object);
-        call.enqueue(new Callback<BasicModel>() {
+        Call<BasicModel1> call = apiService.removeMember("Bearer "+token,object);
+        call.enqueue(new Callback<BasicModel1>() {
             @Override
-            public void onResponse(@NonNull Call<BasicModel> call, @NonNull Response<BasicModel> response) {
+            public void onResponse(@NonNull Call<BasicModel1> call, @NonNull Response<BasicModel1> response) {
                 if(response.body()!=null)
                 {
                     liveData.setValue(response.body());
@@ -70,7 +71,7 @@ public class GroupMembersRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<BasicModel> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<BasicModel1> call, @NonNull Throwable t) {
                 Log.e("Avatar Error",t.getMessage());
             }
         });

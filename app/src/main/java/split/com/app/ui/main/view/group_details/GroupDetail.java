@@ -37,17 +37,16 @@ public class GroupDetail extends Fragment {
     FragmentJoinGroupPlansBinding binding;
     private GroupDetailViewModel viewModel;
     private List<DataItem> detailItems;
-    String sub_categoryId;
+    String sub_categoryId , title;
 
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentJoinGroupPlansBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
-        binding.title.setText("Netflix Premium");
         return binding.getRoot();
     }
 
@@ -57,6 +56,9 @@ public class GroupDetail extends Fragment {
 
         if (getArguments() != null){
             sub_categoryId = getArguments().getString("join_sub_cat_id");
+            title = getArguments().getString("join_sub_cat_title");
+            binding.title.setText(title);
+
         }
 
         viewModel = new GroupDetailViewModel(sub_categoryId,"");

@@ -103,23 +103,24 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
 //            Log.e(TAG, "type: " + type);
 
             if (json.get("type").toString().equals("otp_request")) {
-              notificationUtils = new NotificationsUtils(getApplicationContext());
-              notificationUtils.showOtpRequestDialog(getApplicationContext());
+                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                intent.putExtra("value1", json.get("type").toString());
+                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
             }
 
                 // app is in background, show the notification in notification tray
-                Intent resultIntent = new Intent(getApplicationContext(), Dashboard.class);
-                resultIntent.putExtra("message", json.get("message").toString());
-                resultIntent.putExtra("type", json.get("type").toString());
-
-                // check for image attachment
-                if (TextUtils.isEmpty("imageUrl")) {
-                    showNotificationMessage(getApplicationContext(), json.get("title").toString(), json.get("message").toString(), json.get("timestamp").toString(), resultIntent);
-                    // handle
-                } else {
-                    // image is present, show notification with image
-                    //showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
-                }
+//                Intent resultIntent = new Intent(getApplicationContext(), Dashboard.class);
+//                resultIntent.putExtra("message", json.get("message").toString());
+//                resultIntent.putExtra("type", json.get("type").toString());
+//
+//                // check for image attachment
+//                if (TextUtils.isEmpty("imageUrl")) {
+//                    showNotificationMessage(getApplicationContext(), json.get("title").toString(), json.get("message").toString(), json.get("timestamp").toString(), resultIntent);
+//                    // handle
+//                } else {
+//                    // image is present, show notification with image
+//                    //showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
+//                }
 
         } catch (JSONException e) {
             Log.e(TAG, "Json Exception: " + e.getMessage());

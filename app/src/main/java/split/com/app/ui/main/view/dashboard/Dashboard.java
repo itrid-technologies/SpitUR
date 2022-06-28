@@ -1,26 +1,42 @@
 package split.com.app.ui.main.view.dashboard;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import split.com.app.R;
 import split.com.app.databinding.ActivityDashboardBinding;
+import split.com.app.utils.ActivityUtil;
+import split.com.app.utils.Split;
 
 public class Dashboard extends AppCompatActivity {
 
     public static ActivityDashboardBinding binding;
     NavController mNavController;
 
+    AlertDialog.Builder dialogBuilder;
+    AlertDialog alertDialog;
 
+    private BroadcastReceiver mMessageReceiver;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("ResourceAsColor")
     @Override
@@ -66,6 +82,35 @@ public class Dashboard extends AppCompatActivity {
 
             return false;
         });
+
+
+        mMessageReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                // Extract data included in the Intent
+                String type = intent.getStringExtra("type");
+                if (type.equalsIgnoreCase("otp_request")){
+                    showDialogue();
+                }
+            }
+        };
+    }
+
+    private void showDialogue() {
+        dialogBuilder = new AlertDialog.Builder(Dashboard.this);
+        dialogBuilder.setCancelable(false);
+        View layoutView = getLayoutInflater().inflate(R.layout.otp_request_dialogue, null);
+        ImageView close = (ImageView) layoutView.findViewById(R.id.close_dialogue);
+
+
+        dialogBuilder.setView(layoutView);
+        alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+        close.setOnClickListener(view1 -> {
+            alertDialog.dismiss();
+        });
     }
 
     public static void hideNav(boolean hideStatus) {
@@ -77,4 +122,9 @@ public class Dashboard extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(Dashboard.this);
+    }
 }

@@ -59,7 +59,6 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
     }
 
     public static class GroupVH extends RecyclerView.ViewHolder {
-        public ImageView icon;
         public TextView name,open;
 
         public GroupVH(@NonNull View itemView, AllJoinedGroupAdapter.ItemClickListener mListener) {
@@ -67,7 +66,6 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
             //find views
             name = itemView.findViewById(R.id.join_title);
             open = itemView.findViewById(R.id.open);
-            icon = itemView.findViewById(R.id.open);
 
 
             open.setOnClickListener(view -> {

@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class JoinGroupModel{
 
+	@SerializedName("subscriptions")
+	private Subscriptions subscriptions;
+
 	@SerializedName("data")
 	private Data data;
 
@@ -12,6 +15,10 @@ public class JoinGroupModel{
 
 	@SerializedName("message")
 	private String message;
+
+	public Subscriptions getSubscriptions(){
+		return subscriptions;
+	}
 
 	public Data getData(){
 		return data;

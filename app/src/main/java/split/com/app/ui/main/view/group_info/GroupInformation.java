@@ -101,6 +101,8 @@ public class GroupInformation extends Fragment {
             binding.profile1.userName.setText(String.valueOf(dataItem.getGroupAdmin().getUserId()));
             binding.tvScoreValue.setText(String.valueOf(dataItem.getGroupAdmin().getSpliturScore()));
             binding.tvLastActive.setText(Constants.getDate(dataItem.getGroupAdmin().getLastActive()));
+            binding.tvDaysValue.setText(Constants.getDate(dataItem.getGroupAdmin().getCreatedAt()));
+
             String coin = String.valueOf(dataItem.getCostPerMember());
             Double coinFloat = Double.parseDouble(coin);
             String value = String.valueOf(((coinFloat * 30) / 100) + coinFloat);

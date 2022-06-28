@@ -13,6 +13,7 @@ import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
 import split.com.app.data.model.basic_model.BasicModel;
+import split.com.app.data.model.total_coins.TotalCoinsModel;
 import split.com.app.data.model.update_user_profile.UserUpdateModel;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
@@ -55,5 +56,34 @@ public class ProfileRepository {
 
         return liveData;
     }
+
+    public MutableLiveData<TotalCoinsModel> getTotalCoins(String id) {
+
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String token = preferences.getData(Split.getAppContext(), "userAccessToken");
+
+
+
+        final MutableLiveData<TotalCoinsModel> liveData = new MutableLiveData<>();
+        apiService = ApiManager.getRestApiService();
+        Call<TotalCoinsModel> call = apiService.getTotalCoins("Bearer " +token, id);
+        call.enqueue(new Callback<TotalCoinsModel>() {
+            @Override
+            public void onResponse(@NonNull Call<TotalCoinsModel> call, @NonNull Response<TotalCoinsModel> response) {
+                if(response.body()!=null)
+                {
+                    liveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<TotalCoinsModel> call, @NonNull Throwable t) {
+                Log.e("Update Error",t.getMessage());
+            }
+        });
+
+        return liveData;
+    }
+
 
 }

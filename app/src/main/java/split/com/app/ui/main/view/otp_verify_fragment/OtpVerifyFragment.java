@@ -14,6 +14,7 @@ import split.com.app.R;
 import split.com.app.databinding.FragmentOtpVerifyBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.viewmodel.craete_group_viewModel.CreateGroupViewModel;
+import split.com.app.ui.main.viewmodel.custom_create_viewmodel.CustomCreateViewModel;
 import split.com.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
@@ -26,6 +27,7 @@ public class OtpVerifyFragment extends Fragment {
     String number;
     private OtpVerificationViewModel mViewModel;
     private CreateGroupViewModel viewModel;
+    CustomCreateViewModel customCreateViewModel;
     MySharedPreferences pm;
 
 
@@ -66,7 +68,7 @@ public class OtpVerifyFragment extends Fragment {
 
                     String validation_type = Constants.VALIDATION_TYPE;
                     if (!validation_type.isEmpty()) {
-                        Navigation.findNavController(requireView()).navigate(R.id.action_otpVerifyFragment_to_otpSuccess);
+                        createCustomGroupByOtp();
                     } else {
                         authenticateUser(number, otp);
                     }
@@ -80,6 +82,26 @@ public class OtpVerifyFragment extends Fragment {
             } else {
                 binding.errorMessage.setText("Enter OTP");
                 binding.errorMessage.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void createCustomGroupByOtp() {
+        String title = Constants.GROUP_TITLE;
+        String slots = Constants.SLOTS;
+        String cost = Constants.COST;
+        String email = Constants.EMAIL;
+        String password = Constants.PASSWORD;
+        String visibility = Constants.VISIBILITY_string;
+        String sub_cat_title = Constants.SUB_CAT_TITLE;
+        String type = Constants.VALIDATION_TYPE;
+        String number = Constants.NUMBER;
+
+        customCreateViewModel = new CustomCreateViewModel(title, slots, cost, email, password, visibility, sub_cat_title, type, number);
+        customCreateViewModel.initOtp();
+        customCreateViewModel.getOtp_data().observe(getViewLifecycleOwner(), createGroupModel -> {
+            if (createGroupModel.getMessage().equalsIgnoreCase("Custom Group created successfully")) {
+                Navigation.findNavController(requireView()).navigate(R.id.action_otpVerifyFragment_to_otpSuccess);
             }
         });
     }

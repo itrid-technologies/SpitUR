@@ -23,7 +23,7 @@ import split.com.app.utils.Constants;
 
 public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.ViewHolder> {
 
-    private final List<split.com.app.data.model.group_member.DataItem> list;
+    private List<split.com.app.data.model.group_member.DataItem> list;
     private final Context context;
     private ItemClickListener mListener;
     String adminId;
@@ -93,6 +93,16 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
                     }
                 }
             });
+
+
         }
+
+
+    }
+
+    public void removeAt(int position){
+            list.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, list.size());
     }
 }

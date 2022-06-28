@@ -201,13 +201,20 @@ public class CreatedGroupDetail extends Fragment {
                 final BottomSheetDialog bt = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
                 View carDetailView = LayoutInflater.from(requireContext()).inflate(R.layout.delete_layout, null, false);
                 ConstraintLayout deleteLayout = carDetailView.findViewById(R.id.delete_layout);
+                TextView remove = carDetailView.findViewById(R.id.tv_remove);
+
+                remove.setText("Remove Member");
+
                 deleteLayout.setOnClickListener(view -> {
+
 
 
                     membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), String.valueOf(membersList.get(position).getUserId()),"","",false);
                     membersViewModel.initRemoveMember();
                     membersViewModel.getMember_remove_data().observe(getViewLifecycleOwner(),basicModel -> {
-                        if (basicModel.isStatus()){
+                        if (basicModel.isStatus().equalsIgnoreCase("true")){
+                            adapter.removeAt(position);
+                            bt.cancel();
                             displayRemovedDialogue("Group member Removed");
                         }
                     });
@@ -242,20 +249,16 @@ public class CreatedGroupDetail extends Fragment {
         binding.memberName.setText(data.getGroupAdmin().getUserId());
 
         if (data.isVisibility()){
-            binding.privateLayout.setBackgroundResource(0);
-            binding.privateNote.setVisibility(View.GONE);
+            binding.privateLayout.setBackgroundResource(R.drawable.only_grey_stroke);
             binding.privateSelected.setVisibility(View.GONE);
 
             binding.publicLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
-            binding.publicNote.setVisibility(View.VISIBLE);
             binding.publicSelected.setVisibility(View.VISIBLE);
         }else {
-            binding.publicLayout.setBackgroundResource(0);
-            binding.publicNote.setVisibility(View.GONE);
+            binding.publicLayout.setBackgroundResource(R.drawable.only_grey_stroke);
             binding.publicSelected.setVisibility(View.GONE);
 
             binding.privateLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
-            binding.privateNote.setVisibility(View.VISIBLE);
             binding.privateSelected.setVisibility(View.VISIBLE);
         }
 
@@ -263,6 +266,7 @@ public class CreatedGroupDetail extends Fragment {
     }
 
     private void initClickEvents() {
+
         binding.cgdToolbar.back.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigateUp();
         });
@@ -286,14 +290,13 @@ public class CreatedGroupDetail extends Fragment {
 
             confirm.setOnClickListener(view -> {
                 bt.cancel();
-                displayRemovedDialogue("Group Removed");
-//                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","",false);
-//                membersViewModel.initRemoveGroup();
-//                membersViewModel.getRemove_data().observe(getViewLifecycleOwner(),basicModel -> {
-//                    if (basicModel.isStatus()){
-//                         displayRemovedDialogue();
-//                    }
-//                });
+                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","",false);
+                membersViewModel.initRemoveGroup();
+                membersViewModel.getRemove_data().observe(getViewLifecycleOwner(),basicModel -> {
+                    if (basicModel.isStatus().equalsIgnoreCase("true")){
+                         displayRemovedDialogue("Group Deleted");
+                    }
+                });
             });
 
 

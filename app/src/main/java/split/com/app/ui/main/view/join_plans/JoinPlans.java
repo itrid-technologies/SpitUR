@@ -1,4 +1,4 @@
-package split.com.app.ui.main.view.success_seller;
+package split.com.app.ui.main.view.join_plans;
 
 import android.os.Bundle;
 
@@ -10,27 +10,27 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.bumptech.glide.Glide;
+import android.webkit.WebSettings;
 
 import split.com.app.R;
-import split.com.app.databinding.FragmentOtpSuccessBinding;
+import split.com.app.databinding.FragmentJoinPlansBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
-import split.com.app.utils.Split;
 
 
-public class OtpSuccess extends Fragment {
+public class JoinPlans extends Fragment {
 
 
-    FragmentOtpSuccessBinding binding;
-
+    String url;
+    FragmentJoinPlansBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentOtpSuccessBinding.inflate(inflater, container, false);
+        binding = FragmentJoinPlansBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
+
+        binding.joinPlansToolbar.title.setText("Plans");
         return binding.getRoot();
     }
 
@@ -38,14 +38,16 @@ public class OtpSuccess extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.btnHome.setOnClickListener(view1 -> {
-            Navigation.findNavController(view1).navigate(R.id.home2);
+        binding.joinPlansToolbar.back.setOnClickListener(view1 -> {
+            Navigation.findNavController(view1).navigateUp();
         });
 
+        if (getArguments() != null){
+            url = getArguments().getString("plan_url");
+        }
 
-        Glide.with(Split.getAppContext()).load(R.drawable.success_gif).into(binding.successGif);
-
-
-
+        WebSettings webSettings = binding.plansWebview.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        binding.plansWebview.loadUrl(url);
     }
 }

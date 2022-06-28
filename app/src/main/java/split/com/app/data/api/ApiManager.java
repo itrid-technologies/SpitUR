@@ -16,6 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+import split.com.app.utils.Constants;
 
 
 public class ApiManager {
@@ -41,7 +42,7 @@ public class ApiManager {
                     .create();
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(URL_BASE)
+                    .baseUrl(Constants.URL_BASE)
 //                    .baseUrl("https://testserver.glorek.com/api/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
 //                  .addConverterFactory(NullOrEmptyConverterFactory())

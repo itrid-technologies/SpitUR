@@ -45,8 +45,7 @@ public final class NotificationsUtils {
 
     private final Context mContext;
     private final NotificationManagerCompat mManagerCompat;
-    AlertDialog.Builder dialogBuilder;
-//    AlertDialog alertDialog;
+
 
     public NotificationsUtils(Context context) {
         this.mContext = context;
@@ -213,26 +212,6 @@ public final class NotificationsUtils {
     }
 
 
-    public void showOtpRequestDialog(Context context) {
-        dialogBuilder = new AlertDialog.Builder(context);
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-        View layoutView = inflater.inflate( R.layout.otp_request_dialogue, null );
-
-        ImageView close = (ImageView) layoutView.findViewById(R.id.close_dialogue);
-        ImageView send = (ImageView) layoutView.findViewById(R.id.send_otp);
-
-        dialogBuilder.setView(layoutView);
-        dialogBuilder.show();
-        AlertDialog alertDialog;
-        alertDialog = dialogBuilder.create();
-    //    alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
-     //   alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        alertDialog.show();
-        close.setOnClickListener(view1 -> {
-                alertDialog.dismiss();
-        });
-
-    }
 
 
 }//end class

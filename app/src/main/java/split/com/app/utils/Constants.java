@@ -6,8 +6,12 @@ import java.util.Date;
 
 public class Constants {
 
-    public static final String IMG_PATH = "http://192.168.100.24:4000";
+
+    public static String URL_BASE = "http://3.6.7.161:4000/";
+
+    public static String IMG_PATH = "http://3.6.7.161:4000";
     public static String DEVICE_TOKEN = "";
+
 
     public static String GROUP_TITLE = "";
     public static String COST = "";

@@ -77,7 +77,7 @@ public class JoinCheckOut extends Fragment {
             binding.btnJoin.setText("Join for "+value + " Coins");
 
             MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
-            mySharedPreferences.saveData(Split.getAppContext(),"GroupID", String.valueOf(dataItem.getGroupAdmin().getId()));
+            mySharedPreferences.saveData(Split.getAppContext(),"GroupID", String.valueOf(dataItem.getId()));
 
         }catch (NullPointerException e){
 

@@ -77,6 +77,8 @@ public class PopularHomeAdapter extends RecyclerView.Adapter<PopularHomeAdapter.
             join.setOnClickListener(view -> {
                 Bundle bundle = new Bundle();
                 bundle.putString("join_sub_cat_id",String.valueOf(dataItems.get(getAdapterPosition()).getId()));//absolute adopter position
+                bundle.putString("join_sub_cat_title",String.valueOf(dataItems.get(getAdapterPosition()).getTitle()));
+
                 Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail,bundle);
             });
 

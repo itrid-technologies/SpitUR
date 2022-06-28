@@ -241,6 +241,9 @@
         <action
             android:id="@+id/action_joinPayment_to_joinCheckoutComplete"
             app:destination="@id/joinCheckoutComplete" />
+        <action
+            android:id="@+id/action_joinPayment_to_joinPlans"
+            app:destination="@id/joinPlans" />
     </fragment>
     <fragment
         android:id="@+id/joinCheckoutComplete"
@@ -332,5 +335,10 @@
         android:name="split.com.app.ui.main.view.member_chat.MemberChat"
         android:label="fragment_member_chat"
         tools:layout="@layout/fragment_member_chat" />
+    <fragment
+        android:id="@+id/joinPlans"
+        android:name="split.com.app.ui.main.view.join_plans.JoinPlans"
+        android:label="fragment_join_plans"
+        tools:layout="@layout/fragment_join_plans" />
 
 </navigation>

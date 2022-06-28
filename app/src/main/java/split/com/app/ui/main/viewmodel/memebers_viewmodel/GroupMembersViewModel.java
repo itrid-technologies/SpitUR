@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import split.com.app.data.model.basic_model.BasicModel;
+import split.com.app.data.model.basic_model.BasicModel1;
 import split.com.app.data.model.group_member.GroupMemberModel;
 import split.com.app.data.repository.delete_group.DeleteGroupRepository;
 import split.com.app.data.repository.get_member.GroupMembersRepository;
@@ -15,11 +16,12 @@ public class GroupMembersViewModel extends ViewModel {
     boolean visible;
 
     private MutableLiveData<GroupMemberModel> data;
-    private MutableLiveData<BasicModel> remove_data;
-    private MutableLiveData<BasicModel> member_remove_data;
+    private MutableLiveData<BasicModel1> remove_data;
+    private MutableLiveData<BasicModel1> member_remove_data;
     private MutableLiveData<BasicModel> update_email_data;
     private MutableLiveData<BasicModel> update_pass_data;
     private MutableLiveData<BasicModel> update_visibility;
+    private MutableLiveData<BasicModel1> left_data;
 
 
     private GroupMembersRepository membersRepository;
@@ -51,6 +53,13 @@ public class GroupMembersViewModel extends ViewModel {
             return;
         }
         remove_data = deleteGroupRepository.delete(group_id);
+    }
+
+    public void initLeftGroup() {
+        if (this.left_data != null) {
+            return;
+        }
+        left_data = deleteGroupRepository.left(group_id);
     }
 
     public void initRemoveMember() {
@@ -94,11 +103,11 @@ public class GroupMembersViewModel extends ViewModel {
         return this.data;
     }
 
-    public MutableLiveData<BasicModel> getRemove_data() {
+    public MutableLiveData<BasicModel1> getRemove_data() {
         return this.remove_data;
     }
 
-    public MutableLiveData<BasicModel> getMember_remove_data() {
+    public MutableLiveData<BasicModel1> getMember_remove_data() {
         return this.member_remove_data;
     }
 
@@ -112,5 +121,7 @@ public class GroupMembersViewModel extends ViewModel {
         return this.update_visibility;
     }
 
-
+    public MutableLiveData<BasicModel1> getLeft_data() {
+        return left_data;
+    }
 }

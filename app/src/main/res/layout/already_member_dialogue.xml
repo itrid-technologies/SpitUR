@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/LogoutConfirmation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="30dp"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="340dp"
+        android:padding="12dp"
+        android:background="@drawable/terms_bg"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/tv_fail"
+            style="@style/semiBoldText"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Joined Failed!"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_reason"
+            style="@style/normalText"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:text="You are already member of this group"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_fail" />
+
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_reason"
+            android:text="Home"
+            android:layout_marginTop="10dp"
+            style="@style/buttonStyle"
+            android:background="@drawable/button_round_bg"
+            android:paddingStart="40dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="14dp"
+            android:paddingEnd="40dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:id="@+id/back_home"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

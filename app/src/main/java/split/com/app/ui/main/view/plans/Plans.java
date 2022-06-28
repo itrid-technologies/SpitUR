@@ -60,9 +60,13 @@ public class Plans extends Fragment {
             if (planModel.isSuccess()) {
                 if (planModel.getData().size() > 0) {
                     planModelList.addAll(planModel.getData());
+                    buildsPlansRv();
+                }else {
+                    Constants.PLAN_ID = "";
+                    Navigation.findNavController(requireView()).navigate(R.id.action_plans2_to_visibility2);
+
                 }
 
-                buildsPlansRv();
             }
         });
 

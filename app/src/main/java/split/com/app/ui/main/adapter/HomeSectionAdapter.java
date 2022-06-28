@@ -58,7 +58,9 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
             adapter.setOnSubCategorySelectListener(position1 -> {
                     Bundle bundle = new Bundle();
                     bundle.putString("join_sub_cat_id",String.valueOf(dataItem.getSubCategory().get(position1).getId()));
-                    Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail,bundle);
+                bundle.putString("join_sub_cat_title",String.valueOf(dataItem.getSubCategory().get(position1).getSubCatTitle()));
+
+                Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail,bundle);
             });
 
         }

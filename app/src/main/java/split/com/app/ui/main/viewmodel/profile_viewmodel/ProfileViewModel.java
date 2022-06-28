@@ -4,19 +4,23 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import split.com.app.data.model.register.RegisterModel;
+import split.com.app.data.model.total_coins.TotalCoinsModel;
 import split.com.app.data.model.update_user_profile.UserUpdateModel;
 import split.com.app.data.repository.profile.ProfileRepository;
 import split.com.app.data.repository.register.RegisterRepository;
 
 public class ProfileViewModel extends ViewModel {
-    String name , id, url;
+    String name , userid, url,id;
 
     private MutableLiveData<UserUpdateModel> update_profile;
+    private MutableLiveData<TotalCoinsModel> coins_data;
+
     private ProfileRepository profileRepository;
 
-    public ProfileViewModel(String name, String userid, String avatar) {
+    public ProfileViewModel(String ID, String name, String userid, String avatar) {
+        this.id = ID;
         this.name = name;
-        this.id = userid;
+        this.userid = userid;
         this.url = avatar;
         profileRepository = new ProfileRepository();
     }
@@ -27,9 +31,22 @@ public class ProfileViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        update_profile = profileRepository.upDateProfile(name,id,url);
+        update_profile = profileRepository.upDateProfile(name,userid,url);
     }
 
+    public void initCoins() {
+        if (this.coins_data != null) {
+            // ViewModel is created per Fragment so
+            // we know the userId won't change
+            return;
+        }
+        coins_data = profileRepository.getTotalCoins(id);
+    }
+
+
+    public MutableLiveData<TotalCoinsModel> getCoins_data() {
+        return coins_data;
+    }
 
     public MutableLiveData<UserUpdateModel> getUpdate_profile() {
         return update_profile;

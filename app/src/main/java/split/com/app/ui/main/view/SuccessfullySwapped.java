@@ -27,7 +27,7 @@ public class SuccessfullySwapped extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentSucessfullySwapedBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
-        binding.toolbar.title.setText("Swap");
+        binding.swapSuccessToolbar.title.setText("Swap");
 
         return binding.getRoot();
     }
@@ -37,7 +37,7 @@ public class SuccessfullySwapped extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        binding.toolbar.back.setOnClickListener(view1 -> {
+        binding.swapSuccessToolbar.back.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigateUp();
         });
 

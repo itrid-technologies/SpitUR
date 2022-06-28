@@ -101,7 +101,7 @@
                 android:textSize="26sp"
                 android:paddingStart="10dp"
                 android:layout_marginTop="-10dp"
-                android:text="$ 455.65"
+                android:text="$ 0"
                 style="@style/headingText"
                 android:textColor="@color/white"
                 android:id="@+id/available_balance_value"/>
