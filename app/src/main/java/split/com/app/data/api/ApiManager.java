@@ -21,7 +21,7 @@ import split.com.app.utils.Constants;
 
 public class ApiManager {
     //http://192.168.100.19:4000/http://3.6.7.161:4000/
-    public static final String URL_BASE= "http://192.168.100.5:4000/";
+    public static final String URL_BASE= "http://3.6.7.161:4000/";
 
     private static Retrofit retrofit;
 
