@@ -2,6 +2,7 @@ package split.com.app.ui.main.view.refund_complete;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -47,10 +48,17 @@ public class RefundCompletion extends Fragment {
         });
 
         binding.btnHome.setOnClickListener(view -> {
-            ActivityUtil.gotoHome(Split.getAppContext());
+            Navigation.findNavController(view).navigate(R.id.home2);
         });
 
-       // Glide.with(Split.getAppContext()).load(R.drawable.success_gif).into(binding.refundSuccessGif);
+        Glide.with(Split.getAppContext()).load(R.drawable.success_gif).into(binding.refundSuccessGif);
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(requireActivity(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(requireView()).navigate(R.id.home2);
+            }
+        });
 
     }
 }

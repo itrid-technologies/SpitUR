@@ -231,7 +231,7 @@ public class CreatedGroupDetail extends Fragment {
         binding.detailProfile.netflix.setText(data.getGroupTitle());
         Glide.with(Split.getAppContext())
                 .load(Constants.IMG_PATH + data.getGroupAdmin().getAvatar())
-                .placeholder(R.drawable.user)
+                .placeholder(R.color.blue)
                 .into(binding.detailProfile.userImage);
 
         binding.detailProfile.userName.setText(data.getGroupAdmin().getUserId());

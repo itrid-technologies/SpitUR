@@ -1,5 +1,8 @@
 package split.com.app.ui.main.view.swap;
 
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,9 +10,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import split.com.app.R;
 import split.com.app.databinding.FragmentSwapCoinsBinding;
@@ -40,6 +45,8 @@ public class SwapCoins extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        applyGradient();
+
         if (getArguments() != null){
             coins = getArguments().getString("Coins");
             binding.urCoinsValue.setText(coins);
@@ -48,6 +55,32 @@ public class SwapCoins extends Fragment {
 
         initClickListeners();
     }
+
+    private void applyGradient() {
+        TextPaint paint = binding.inrCoinsValue.getPaint();
+        float width = paint.measureText("Tianjin, China");
+
+        Shader textShader = new LinearGradient(0, 0, width, binding.inrCoinsValue.getTextSize(),
+                new int[]{
+                        Color.parseColor("#0027FE"),
+                        Color.parseColor("#D703FF")
+                }, null, Shader.TileMode.CLAMP);
+        binding.inrCoinsValue.getPaint().setShader(textShader);
+
+//        TextPaint paint1 = binding.urCoinsValue.getPaint();
+//        float width1 = paint1.measureText("Tianjin, China");
+//
+//        Shader textShader1 = new LinearGradient(0, 0, width1, binding.urCoinsValue.getTextSize(),
+//                new int[]{
+//                        Color.parseColor("#F97C3C"),
+//                        Color.parseColor("#FDB54E"),
+//                        Color.parseColor("#64B678"),
+//                        Color.parseColor("#478AEA"),
+//                        Color.parseColor("#8446CC"),
+//                }, null, Shader.TileMode.CLAMP);
+//        binding.urCoinsValue.getPaint().setShader(textShader1);
+    }
+
 
     private void initClickListeners() {
 
@@ -66,6 +99,11 @@ public class SwapCoins extends Fragment {
                   }
               });
             }
+        });
+
+        binding.tvMax.setOnClickListener(view -> {
+            String availableCoin = binding.urCoinsValue.getText().toString().trim();
+            binding.inrCoinsValue.setText(availableCoin);
         });
     }
 }

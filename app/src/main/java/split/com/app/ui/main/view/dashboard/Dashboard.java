@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,6 +27,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import split.com.app.R;
 import split.com.app.databinding.ActivityDashboardBinding;
 import split.com.app.utils.ActivityUtil;
+import split.com.app.utils.Configration;
+import split.com.app.utils.MyReceiver;
 import split.com.app.utils.Split;
 
 public class Dashboard extends AppCompatActivity {
@@ -36,6 +39,9 @@ public class Dashboard extends AppCompatActivity {
     AlertDialog.Builder dialogBuilder;
     AlertDialog alertDialog;
 
+    private BroadcastReceiver receiver = null;
+
+
     private BroadcastReceiver mMessageReceiver;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("ResourceAsColor")
@@ -45,6 +51,8 @@ public class Dashboard extends AppCompatActivity {
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        receiver = new MyReceiver();
+        broadcastIntent();
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
@@ -84,16 +92,22 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
-        mMessageReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                // Extract data included in the Intent
-                String type = intent.getStringExtra("type");
-                if (type.equalsIgnoreCase("otp_request")){
-                    showDialogue();
-                }
-            }
-        };
+
+//        mMessageReceiver = new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                // Extract data included in the Intent
+//                String type = intent.getStringExtra("type");
+//                if (type.equalsIgnoreCase("otp_request")){
+//                    showDialogue();
+//                }
+//            }
+//        };
+    }
+
+
+    public void broadcastIntent() {
+        registerReceiver(receiver ,new IntentFilter(Configration.PUSH_NOTIFICATION));
     }
 
     private void showDialogue() {
@@ -127,4 +141,10 @@ public class Dashboard extends AppCompatActivity {
         super.onResume();
         LocalBroadcastManager.getInstance(Dashboard.this);
     }
+
+//    @Override
+//    protected void onPause() {
+//        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+//        super.onPause();
+//    }//onPause
 }

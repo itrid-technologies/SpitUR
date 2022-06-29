@@ -105,7 +105,8 @@ public class JoinPayment extends Fragment {
         alertDialog.show();
         home.setOnClickListener(view1 -> {
             alertDialog.dismiss();
-            ActivityUtil.gotoHome(Split.getAppContext());
+            Navigation.findNavController(view1).navigate(R.id.home2);
+            //ActivityUtil.gotoHome(Split.getAppContext());
         });
     }
 }

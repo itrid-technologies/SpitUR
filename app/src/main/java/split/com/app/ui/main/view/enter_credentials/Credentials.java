@@ -60,7 +60,7 @@ public class Credentials extends Fragment {
         binding.credentialProfile.netflix.setText(user_name);
         binding.credentialProfile.userName.setText(user_ID);
         binding.credentialProfile.count.setText(slot + " Slots");
-        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.drawable.user).into(binding.credentialProfile.userImage);
+        Glide.with(Split.getAppContext()).load(avatar).into(binding.credentialProfile.userImage);
     }
     private void initClickListeners() {
         binding.back.setOnClickListener(view -> {

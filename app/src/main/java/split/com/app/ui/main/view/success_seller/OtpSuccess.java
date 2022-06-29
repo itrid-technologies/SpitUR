@@ -2,6 +2,7 @@ package split.com.app.ui.main.view.success_seller;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import split.com.app.R;
 import split.com.app.databinding.FragmentOtpSuccessBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.utils.ActivityUtil;
 import split.com.app.utils.Split;
 
 
@@ -45,7 +47,12 @@ public class OtpSuccess extends Fragment {
 
         Glide.with(Split.getAppContext()).load(R.drawable.success_gif).into(binding.successGif);
 
-
+//        requireActivity().getOnBackPressedDispatcher().addCallback(requireActivity(), new OnBackPressedCallback(true) {
+//            @Override
+//            public void handleOnBackPressed() {
+//                ActivityUtil.gotoHome(Split.getAppContext());
+//            }
+//        });
 
     }
 }

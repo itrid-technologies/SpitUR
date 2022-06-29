@@ -23,6 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
 import split.com.app.data.model.HomeDataItem;
 import split.com.app.data.model.group_detail.DataItem;
+import split.com.app.ui.main.adapter.HomeSectionSubCategoryAdapter;
 import split.com.app.utils.Constants;
 
 public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.ViewHolder> {
@@ -30,6 +31,15 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
     private final List<DataItem> data;
     private final Context context;
     DataItem dataItem;
+
+    private ItemClickListener mListener;
+
+
+
+    public void setOnGroupSelectListener(ItemClickListener listener) {
+        mListener = listener;
+    }
+
 
     public GroupDetailAdapter(Context appContext, List<DataItem> list) {
         this.context = appContext;
@@ -40,7 +50,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
     @Override
     public GroupDetailAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.plans_search_list_item_design, parent, false);
-        return new GroupDetailAdapter.ViewHolder(view);
+        return new GroupDetailAdapter.ViewHolder(view,mListener);
     }
 
     @Override
@@ -97,14 +107,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
         String value = String.valueOf(((coinFloat * 30) / 100) + coinFloat);
         holder.coins.setText(value + " Coins");
 
-        holder.itemView.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            Gson gson = new Gson();
-            String groupData = gson.toJson(dataItem);
 
-            bundle.putString("groupDetail",groupData);
-            Navigation.findNavController(view).navigate(R.id.action_groupDetail_to_groupInformation,bundle);
-        });
     }
 
 
@@ -114,7 +117,9 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
         return data.size();
     }
 
-
+    public interface ItemClickListener{
+        void onGroupSelect(int position);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title, online_offline, group_id , rateOf_id, one, two , three, four , five , six, score, coins;
@@ -123,7 +128,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
 
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, ItemClickListener mListener) {
             super(itemView);
             //find views
             title = itemView.findViewById(R.id.tv_username);
@@ -142,7 +147,13 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
             user = itemView.findViewById(R.id.iv_user);
             coins = itemView.findViewById(R.id.coins_value);
 
-
+            itemView.setOnClickListener(view -> {
+                if (mListener != null) {
+                    if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        mListener.onGroupSelect(getAdapterPosition());
+                    }
+                }
+            });
 
 
 

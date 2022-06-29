@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,9 +80,9 @@ public class GroupDetail extends Fragment {
 
         searchTextWatcher();
 
-//        binding.back.setOnClickListener(view1 -> {
-//            Navigation.findNavController(view1).clearBackStack(R.id.groupDetail);
-//        });
+        binding.back.setOnClickListener(view1 -> {
+            Navigation.findNavController(view1).navigateUp();
+        });
 
     }
 
@@ -135,6 +137,15 @@ public class GroupDetail extends Fragment {
         binding.groupsDetailList.setLayoutManager(layoutManager);
         GroupDetailAdapter adapter = new GroupDetailAdapter(Split.getAppContext(), detailItems);
         binding.groupsDetailList.setAdapter(adapter);
+
+        adapter.setOnGroupSelectListener(position -> {
+            Bundle bundle = new Bundle();
+            Gson gson = new Gson();
+            String groupData = gson.toJson(detailItems.get(position));
+
+            bundle.putString("groupDetail",groupData);
+            Navigation.findNavController(requireView()).navigate(R.id.action_groupDetail_to_groupInformation,bundle);
+        });
     }
 
 
@@ -146,5 +157,13 @@ public class GroupDetail extends Fragment {
         binding.searchGroupsDetailList.setLayoutManager(layoutManager);
         GroupDetailAdapter adapter = new GroupDetailAdapter(Split.getAppContext(), detailItems);
         binding.searchGroupsDetailList.setAdapter(adapter);
+        adapter.setOnGroupSelectListener(position -> {
+            Bundle bundle = new Bundle();
+            Gson gson = new Gson();
+            String groupData = gson.toJson(detailItems.get(position));
+
+            bundle.putString("groupDetail",groupData);
+            Navigation.findNavController(requireView()).navigate(R.id.action_groupDetail_to_groupInformation,bundle);
+        });
     }
 }

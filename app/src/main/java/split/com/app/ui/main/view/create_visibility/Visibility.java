@@ -59,7 +59,7 @@ public class Visibility extends Fragment {
         binding.visibilityProfile.netflix.setText(user_name);
         binding.visibilityProfile.userName.setText(user_ID);
         binding.visibilityProfile.count.setText(slot + " Slots");
-        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.drawable.user).into(binding.visibilityProfile.userImage);
+        Glide.with(Split.getAppContext()).load(avatar).into(binding.visibilityProfile.userImage);
     }
 
     private void clickListeners() {

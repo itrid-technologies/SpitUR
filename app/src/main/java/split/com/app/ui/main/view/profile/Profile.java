@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -87,7 +88,7 @@ public class Profile extends Fragment {
         String avatar = preferences.getData(Split.getAppContext(), "userAvatar");
 
         binding.name.setText(user_name);
-        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.drawable.user).into(binding.userImage);
+        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.color.blue).into(binding.userImage);
     }
 
     private void initClickListeners() {
@@ -102,6 +103,11 @@ public class Profile extends Fragment {
         });
 
         binding.payment.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_profile2_to_transactions);
+
+        });
+
+        binding.paymentIcon.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_profile2_to_transactions);
 
         });
@@ -141,73 +147,107 @@ public class Profile extends Fragment {
 
 
         binding.userImage.setOnClickListener(view -> {
-            final BottomSheetDialog bt = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
-            View profileView = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_user_information, null, false);
+            //fetch user data
+            viewModel = new ProfileViewModel("","","","");
+            viewModel.initUser();
+            viewModel.getUser_data().observe(getViewLifecycleOwner() , activeUserModel -> {
+                if (activeUserModel.isStatus()) {
 
-            EditText name = profileView.findViewById(R.id.profile_name);
-            EditText userid = profileView.findViewById(R.id.profile_id);
-            RecyclerView avatarRv = profileView.findViewById(R.id.profile_avatars);
-            ImageButton previous = profileView.findViewById(R.id.previous_avatar);
-            ImageButton next = profileView.findViewById(R.id.next_avatar);
-            Button save = profileView.findViewById(R.id.btn_save_profile);
+                    if (activeUserModel.getData() != null) {
+                        final BottomSheetDialog bt = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
+                        View profileView = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_user_information, null, false);
 
-            MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+                        EditText name = profileView.findViewById(R.id.profile_name);
+                        EditText userid = profileView.findViewById(R.id.profile_id);
+                        EditText email = profileView.findViewById(R.id.profile_email);
+                        ImageView image = profileView.findViewById(R.id.profile_image);
 
-            name.setText(preferences.getData(Split.getAppContext(), "userName"));
-            userid.setText(preferences.getData(Split.getAppContext(), "userId"));
+                        RecyclerView avatarRv = profileView.findViewById(R.id.profile_avatars);
+                        ImageButton previous = profileView.findViewById(R.id.previous_avatar);
+                        ImageButton next = profileView.findViewById(R.id.next_avatar);
+                        Button save = profileView.findViewById(R.id.btn_save_profile);
+
+//            MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+//
+//            name.setText(preferences.getData(Split.getAppContext(), "userName"));
+//            userid.setText(preferences.getData(Split.getAppContext(), "userId"));
+
+                        name.setText(activeUserModel.getData().getName());
+                        userid.setText(activeUserModel.getData().getUserId());
+                        email.setText(activeUserModel.getData().getEmail());
+                        avatarRv.setVisibility(View.GONE);
+                        image.setVisibility(View.VISIBLE);
+                        Glide.with(Split.getAppContext()).load(Constants.IMG_PATH + activeUserModel.getData().getAvatar()).into(image);
 
 
-            mViewModel.init();
-            mViewModel.getData().observe(getViewLifecycleOwner(), avatarModel -> {
-                avatarList.addAll(avatarModel.getAvatar());
-                for (int i = 0; i <= avatarList.size() - 1; i++) {
-                    avatars.add(avatarList.get(i).getUrl());
-                }
-                avatarRv.setHasFixedSize(true);
-                avatarRv.setHorizontalScrollBarEnabled(false);
-                avatarRv.setLayoutManager(new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false));
-                RecyclerView.OnItemTouchListener disabler = new RecyclerViewDisabler();
-                avatarRv.addOnItemTouchListener(disabler);// scrolling disable
-                avatarRv.setAdapter(new AdapterAvatars(getActivity(), avatars));
-            });
+                        MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
+                        sharedPreferences.saveData(Split.getAppContext(), "userAvatar", Constants.IMG_PATH + activeUserModel.getData().getAvatar());
+                        sharedPreferences.saveData(Split.getAppContext(), "userName", activeUserModel.getData().getName());
+                        sharedPreferences.saveData(Split.getAppContext(), "userId", activeUserModel.getData().getUserId());
 
-            next.setOnClickListener(view1 -> {
-                if (currentIndex < avatars.size() - 1) {//in range
-                    currentIndex++;
-                    avatarRv.smoothScrollToPosition(currentIndex);
-                }
-            });
-            previous.setOnClickListener(view1 -> {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    avatarRv.smoothScrollToPosition(currentIndex);
-                }
-            });
+                        mViewModel.init();
+                        mViewModel.getData().observe(getViewLifecycleOwner(), avatarModel -> {
+                            avatarList.addAll(avatarModel.getAvatar());
+                            for (int i = 0; i <= avatarList.size() - 1; i++) {
+                                avatars.add(avatarList.get(i).getUrl());
+                            }
+                            avatarRv.setHasFixedSize(true);
+                            avatarRv.setHorizontalScrollBarEnabled(false);
+                            avatarRv.setLayoutManager(new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false));
+                            RecyclerView.OnItemTouchListener disabler = new RecyclerViewDisabler();
+                            avatarRv.addOnItemTouchListener(disabler);// scrolling disable
+                            avatarRv.setAdapter(new AdapterAvatars(getActivity(), avatars));
+                        });
 
-            save.setOnClickListener(view1 -> {
-                String updated_name = name.getText().toString().trim();
-                String updated_id = userid.getText().toString().trim();
-                final String updatedAvatar = avatars.get(currentIndex);
+                        next.setOnClickListener(view1 -> {
+                            if (currentIndex < avatars.size() - 1) {//in range
 
-                viewModel = new ProfileViewModel("",updated_name, updated_id, updatedAvatar);
-                viewModel.init();
-                viewModel.getUpdate_profile().observe(getViewLifecycleOwner(), userUpdateModel -> {
-                    if (userUpdateModel.isSuccess()) {
-                        if (userUpdateModel.getData() != null){
-                            MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
-                            sharedPreferences.saveData(Split.getAppContext(), "userAvatar",  Constants.IMG_PATH +userUpdateModel.getData().getAvatar());
-                            sharedPreferences.saveData(Split.getAppContext(), "userName", userUpdateModel.getData().getName());
-                            sharedPreferences.saveData(Split.getAppContext(), "userId", userUpdateModel.getData().getUserId());
+                                avatarRv.setVisibility(View.VISIBLE);
+                                image.setVisibility(View.GONE);
 
-                            Toast.makeText(Split.getAppContext(), userUpdateModel.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                                currentIndex++;
+                                avatarRv.smoothScrollToPosition(currentIndex);
+                            }
+                        });
+                        previous.setOnClickListener(view1 -> {
+                            if (currentIndex > 0) {
 
+                                avatarRv.setVisibility(View.VISIBLE);
+                                image.setVisibility(View.GONE);
+
+                                currentIndex--;
+                                avatarRv.smoothScrollToPosition(currentIndex);
+                            }
+                        });
+
+                        save.setOnClickListener(view1 -> {
+                            String updated_name = name.getText().toString().trim();
+                            String updated_id = userid.getText().toString().trim();
+                            final String updatedAvatar = avatars.get(currentIndex);
+
+                            viewModel = new ProfileViewModel("", updated_name, updated_id, updatedAvatar);
+                            viewModel.init();
+                            viewModel.getUpdate_profile().observe(getViewLifecycleOwner(), userUpdateModel -> {
+                                if (userUpdateModel.isSuccess()) {
+                                    if (userUpdateModel.getData() != null) {
+                                        MySharedPreferences sharedPreferences1 = new MySharedPreferences(Split.getAppContext());
+                                        sharedPreferences1.saveData(Split.getAppContext(), "userAvatar", Constants.IMG_PATH + userUpdateModel.getData().getAvatar());
+                                        sharedPreferences1.saveData(Split.getAppContext(), "userName", userUpdateModel.getData().getName());
+                                        sharedPreferences1.saveData(Split.getAppContext(), "userId", userUpdateModel.getData().getUserId());
+
+                                        Toast.makeText(Split.getAppContext(), userUpdateModel.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        });
+
+                        bt.setContentView(profileView);
+                        bt.show();
                     }
-                });
+                }
             });
 
-            bt.setContentView(profileView);
-            bt.show();
+
         });
     }
 

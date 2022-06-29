@@ -80,7 +80,7 @@ public class JoinedGroupDetail extends Fragment {
             binding.joinedProfile.netflix.setText(data.getGroup().getGroupTitle());
             Glide.with(Split.getAppContext())
                     .load(Constants.IMG_PATH + data.getGroup().getGroupAdmin().getAvatar())
-                    .placeholder(R.drawable.user)
+                    .placeholder(R.color.blue)
                     .into(binding.joinedProfile.userImage);
 
             binding.joinedProfile.userName.setText(data.getGroup().getGroupAdmin().getUserId());

@@ -53,7 +53,7 @@ public class Cost extends Fragment {
         binding.costProfile.netflix.setText(user_name);
         binding.costProfile.userName.setText(user_ID);
         binding.costProfile.count.setText(slot + " Slots");
-        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.drawable.user).into(binding.costProfile.userImage);
+        Glide.with(Split.getAppContext()).load(avatar).into(binding.costProfile.userImage);
     }
 
     private void initClickListeners() {

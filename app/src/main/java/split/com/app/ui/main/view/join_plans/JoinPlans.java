@@ -1,5 +1,6 @@
 package split.com.app.ui.main.view.join_plans;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
+import android.webkit.WebViewClient;
 
 import split.com.app.R;
 import split.com.app.databinding.FragmentJoinPlansBinding;
@@ -34,6 +36,7 @@ public class JoinPlans extends Fragment {
         return binding.getRoot();
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -48,6 +51,7 @@ public class JoinPlans extends Fragment {
 
         WebSettings webSettings = binding.plansWebview.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        binding.plansWebview.setWebViewClient(new WebViewClient());
         binding.plansWebview.loadUrl(url);
     }
 }

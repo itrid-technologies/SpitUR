@@ -15,6 +15,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import split.com.app.data.model.HomeContentModel;
+import split.com.app.data.model.active_user.ActiveUserModel;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
 import split.com.app.data.model.all_joined_groups.AllJoinedGroupModel;
 import split.com.app.data.model.basic_model.BasicModel;
@@ -26,6 +27,7 @@ import split.com.app.data.model.get_avatar.AvatarModel;
 import split.com.app.data.model.getch_memeber_messages.GetMemberMessagesModel;
 import split.com.app.data.model.group_detail.GroupDetailModel;
 import split.com.app.data.model.group_member.GroupMemberModel;
+import split.com.app.data.model.group_score.GroupScoreModel;
 import split.com.app.data.model.home_categories.CategoriesModel;
 import split.com.app.data.model.join_group.JoinGroupModel;
 import split.com.app.data.model.otp_verification.AuthenticationModel;
@@ -188,6 +190,10 @@ public interface ApiService {
     Call<WalletBalanceModel> getWalletBalance(@Header("Authorization") String token,
                                               @Path("id") String id);
 
+    @GET("groups/get_group_score/{id}")
+    Call<GroupScoreModel> getGroupScore(@Header("Authorization") String token,
+                                        @Path("id") String id);
+
     @GET("users/total_coins/{id}")
     Call<TotalCoinsModel> getTotalCoins(@Header("Authorization") String token,
                                         @Path("id") String id);
@@ -195,4 +201,7 @@ public interface ApiService {
     @POST("users/refund")
     Call<BasicModel1> refundAmount(@Header("Authorization") String token,
                                   @Body JsonObject object);
+
+    @GET("users/current")
+    Call<ActiveUserModel> getUserData(@Header("Authorization") String token);
 }

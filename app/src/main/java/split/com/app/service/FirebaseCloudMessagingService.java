@@ -103,7 +103,7 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
 //            Log.e(TAG, "type: " + type);
 
             if (json.get("type").toString().equals("otp_request")) {
-                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                Intent intent=new Intent(Configration.PUSH_NOTIFICATION);
                 intent.putExtra("value1", json.get("type").toString());
                 LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
             }

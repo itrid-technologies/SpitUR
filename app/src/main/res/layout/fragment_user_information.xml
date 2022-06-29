@@ -28,7 +28,7 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:paddingTop="5dp"
-            android:paddingBottom="40dp"
+            android:paddingBottom="10dp"
             >
 
 
@@ -74,6 +74,19 @@
                 app:layout_constraintTop_toTopOf="@id/avatar_bg_frame" />
 
 
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:background="@android:color/transparent"
+                android:layout_marginBottom="40dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/avatar_bg_frame"
+                app:layout_constraintEnd_toEndOf="@id/avatar_bg_frame"
+                app:layout_constraintStart_toStartOf="@id/avatar_bg_frame"
+                app:layout_constraintTop_toTopOf="@id/avatar_bg_frame" />
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/profile_avatars"
                 android:layout_width="130dp"
@@ -103,6 +116,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_fullname"
                 android:textColor="@color/white"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColorHint="@color/hint_color"
                 android:fontFamily="@font/poppin_regular"
                 android:textSize="15sp"
@@ -136,6 +151,8 @@
                 android:fontFamily="@font/poppin_regular"
                 android:textSize="15sp"
                 android:drawablePadding="10dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:gravity="start|center"
                 android:background="@drawable/round_back"
                 android:backgroundTint="@color/light_blue"
@@ -143,34 +160,35 @@
                 android:drawableLeft="@drawable/ic_user"
                 android:id="@+id/profile_id"/>
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/profile_id"-->
-<!--                android:text="Email Id"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                style="@style/semiBoldText"-->
-<!--                android:id="@+id/tv_email"/>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_id"
+                android:text="Email Id"
+                android:layout_marginTop="10dp"
+                style="@style/semiBoldText"
+                android:id="@+id/tv_email"/>
 
-<!--            <EditText-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/tv_email"-->
-<!--                android:hint="rajest@gmail.com"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textColorHint="@color/hint_color"-->
-<!--                android:fontFamily="@font/poppin_regular"-->
-<!--                android:textSize="15sp"-->
-<!--                android:drawablePadding="10dp"-->
-<!--                android:gravity="start|center"-->
-<!--                android:background="@drawable/round_back"-->
-<!--                android:backgroundTint="@color/light_blue"-->
-<!--                android:padding="10dp"-->
-<!--                android:drawableLeft="@drawable/ic_user"-->
-<!--                android:id="@+id/profile_email"/>-->
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_email"
+                android:textColor="@color/white"
+                android:textColorHint="@color/hint_color"
+                android:fontFamily="@font/poppin_regular"
+                android:textSize="15sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:drawablePadding="10dp"
+                android:gravity="start|center"
+                android:background="@drawable/round_back"
+                android:backgroundTint="@color/light_blue"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/ic_user"
+                android:id="@+id/profile_email"/>
 
 
 
@@ -179,7 +197,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profile_id"
+                app:layout_constraintTop_toBottomOf="@id/profile_email"
                 android:text="Save"
                 style="@style/buttonStyle"
                 android:background="@drawable/button_round_bg"

@@ -3,6 +3,7 @@ package split.com.app.ui.main.viewmodel.profile_viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import split.com.app.data.model.active_user.ActiveUserModel;
 import split.com.app.data.model.register.RegisterModel;
 import split.com.app.data.model.total_coins.TotalCoinsModel;
 import split.com.app.data.model.update_user_profile.UserUpdateModel;
@@ -16,6 +17,7 @@ public class ProfileViewModel extends ViewModel {
     private MutableLiveData<TotalCoinsModel> coins_data;
 
     private ProfileRepository profileRepository;
+    private MutableLiveData<ActiveUserModel> user_data;
 
     public ProfileViewModel(String ID, String name, String userid, String avatar) {
         this.id = ID;
@@ -43,6 +45,15 @@ public class ProfileViewModel extends ViewModel {
         coins_data = profileRepository.getTotalCoins(id);
     }
 
+    public void initUser() {
+        if (this.user_data != null) {
+            // ViewModel is created per Fragment so
+            // we know the userId won't change
+            return;
+        }
+        user_data = profileRepository.getUser();
+    }
+
 
     public MutableLiveData<TotalCoinsModel> getCoins_data() {
         return coins_data;
@@ -50,5 +61,9 @@ public class ProfileViewModel extends ViewModel {
 
     public MutableLiveData<UserUpdateModel> getUpdate_profile() {
         return update_profile;
+    }
+
+    public MutableLiveData<ActiveUserModel> getUser_data() {
+        return user_data;
     }
 }

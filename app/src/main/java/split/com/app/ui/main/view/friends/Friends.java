@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,6 +58,12 @@ public class Friends extends Fragment {
     }
 
     private void initClickListeners() {
+
+        binding.friendToolbar.back.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigateUp();
+        });
+
+
         binding.searchFriends.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {

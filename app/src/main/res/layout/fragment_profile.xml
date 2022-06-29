@@ -383,9 +383,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <include
-        android:id="@+id/user_profile"
-        layout="@layout/fragment_user_information"
-        />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

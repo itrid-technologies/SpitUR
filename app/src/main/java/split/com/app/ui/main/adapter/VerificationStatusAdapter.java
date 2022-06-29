@@ -12,27 +12,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
 import split.com.app.data.model.HomeDataItem;
+import split.com.app.data.model.group_score.GroupSplitScoreItem;
+import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
 
 public class VerificationStatusAdapter extends RecyclerView.Adapter<VerificationStatusAdapter.ViewHolder> {
 
-    private final List<String> statusList;
-    private final List<Integer> iconList;
-    private final List<String> colorsList;
+    private final List<GroupSplitScoreItem> list;
     private final Context context;
 
 
-    public VerificationStatusAdapter(Split appContext, List<String> status, List<Integer> icons, List<String> colors) {
+    public VerificationStatusAdapter(Split appContext, List<GroupSplitScoreItem> scoreItems) {
          this.context = appContext;
-         this.statusList = status;
-         this.iconList = icons;
-         this.colorsList = colors;
+         this.list = scoreItems;
     }
+
 
     @NonNull
     @Override
@@ -44,14 +45,57 @@ public class VerificationStatusAdapter extends RecyclerView.Adapter<Verification
     @Override
     public void onBindViewHolder(@NonNull VerificationStatusAdapter.ViewHolder holder, int position) {
 
-        String status = statusList.get(position);
-        String color = colorsList.get(position);
-        Integer icon = iconList.get(position);
+        GroupSplitScoreItem splitScoreItem = list.get(position);
+        int score = splitScoreItem.getSplitScore();
+        if (splitScoreItem.getSplitGroupUserId() != null ){
+            if (score <= 100 && score >= 80 ){
+                Glide.with(context)
+                        .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
+                        .placeholder(R.color.blue)
+                        .into(holder.user);
 
-        holder.status.setText(status);
-        holder.user.setBorderColor(Color.parseColor(color));
-        holder.imageView.setImageResource(icon);
-        holder.imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor((color))));
+                holder.status.setText("Verified");
+                holder.user.setBorderColor(Color.parseColor("#0FB900"));
+                holder.imageView.setImageResource(R.drawable.ic_verify);
+                holder.imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(("#0FB900"))));
+            }else if (score < 80 && score >= 50){
+                Glide.with(context)
+                        .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
+                        .placeholder(R.color.blue)
+                        .into(holder.user);
+
+                holder.status.setText("Pending");
+                holder.user.setBorderColor(Color.parseColor("#F7931A"));
+                holder.imageView.setImageResource(R.drawable.ic_attach);
+                holder.imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(("#F7931A"))));
+            }else if (score < 50 && score >= 0 ){
+                Glide.with(context)
+                        .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
+                        .placeholder(R.color.blue)
+                        .into(holder.user);
+
+                holder.status.setText("Invalid");
+                holder.user.setBorderColor(Color.parseColor("#FF0000"));
+                holder.imageView.setImageResource(R.drawable.ic_close);
+                holder.imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(("#FF0000"))));
+            }else {
+
+            }
+        }else {
+//            Glide.with(context)
+//                    .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
+//                    .placeholder(R.color.blue)
+//                    .into(holder.user);
+//
+//            holder.status.setText("No User");
+//            holder.user.setBorderColor(Color.parseColor("#FF0000"));
+//            holder.imageView.setImageResource(R.drawable.ic_close);
+//            holder.imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(("FF0000"))));
+        }
+
+
+
+
 
 
 
@@ -60,7 +104,7 @@ public class VerificationStatusAdapter extends RecyclerView.Adapter<Verification
 
     @Override
     public int getItemCount() {
-        return statusList.size();
+        return list.size();
     }
 
 
