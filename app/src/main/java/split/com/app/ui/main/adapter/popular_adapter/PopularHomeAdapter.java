@@ -50,10 +50,12 @@ public class PopularHomeAdapter extends RecyclerView.Adapter<PopularHomeAdapter.
 
 
             final DataItem current_data = dataItems.get(position);
-            Glide.with(context)
-                    .load(Constants.IMG_PATH + current_data.getCategory().getIcon())
-                    .placeholder(R.color.blue)
-                    .into(holder.icon);
+            if (current_data.getCategory() != null){
+                Glide.with(context)
+                        .load(Constants.IMG_PATH + current_data.getCategory().getIcon())
+                        .placeholder(R.color.blue)
+                        .into(holder.icon);
+            }
             holder.name.setText(current_data.getTitle());
 
     }

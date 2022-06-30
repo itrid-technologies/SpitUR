@@ -64,12 +64,16 @@ public class Search extends Fragment {
         mViewModel.getPopularCategoryData().observe(getViewLifecycleOwner(), popularSubCategoryModel -> {
             if (popularSubCategoryModel.isSuccess()) {
                 if (popularSubCategoryModel.getData().size() > 0) {
+                    binding.popular.setVisibility(View.VISIBLE);
                     popularSubCategoryList = new ArrayList<>();
                     popularSubCategoryList.addAll(popularSubCategoryModel.getData());
                     buildCategoryRv(popularSubCategoryList);
 
+                }else {
+                    binding.popular.setVisibility(View.GONE);
                 }
-
+            }else {
+                binding.popular.setVisibility(View.GONE);
             }
         });
     }

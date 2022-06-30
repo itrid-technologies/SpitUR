@@ -66,6 +66,19 @@
         <item name="android:textAllCaps">false</item>
 
     </style>
+
+    <style name="buttonStyle01">
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="button_duration">100</item>
+        <item name="button_scale">0.94</item>
+        <item name="backgroundTint">@color/dark_grey</item>
+        <item name="android:textAllCaps">false</item>
+
+    </style>
+
     <style name="buttonStyleOrange">
         <item name="fontFamily">@font/poppins_semibold</item>
         <item name="android:textColor">@color/white</item>

@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,6 +88,10 @@ public class CreatedGroupDetail extends Fragment {
                 if (groupMemberModel.getData().size() > 0){
                     membersList.addAll(groupMemberModel.getData());
                     buildMembersList(membersList);
+                }else {
+                    binding.noMemberLayout.setVisibility(View.VISIBLE);
+                    binding.adminAsMember.setVisibility(View.GONE);
+                    binding.groupMembersList.setVisibility(View.GONE);
                 }
             }
         });
@@ -191,6 +196,11 @@ public class CreatedGroupDetail extends Fragment {
 
     private void buildMembersList(List<split.com.app.data.model.group_member.DataItem> membersList) {
         if (membersList.size() > 0){
+
+            binding.noMemberLayout.setVisibility(View.GONE);
+            binding.adminAsMember.setVisibility(View.VISIBLE);
+            binding.groupMembersList.setVisibility(View.GONE);
+
             LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
             binding.groupMembersList.setLayoutManager(layoutManager);
             GroupMemberAdapter adapter = new GroupMemberAdapter(Split.getAppContext(), membersList);

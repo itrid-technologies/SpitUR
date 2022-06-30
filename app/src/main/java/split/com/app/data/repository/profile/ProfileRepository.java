@@ -13,7 +13,7 @@ import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
 import split.com.app.data.model.active_user.ActiveUserModel;
-import split.com.app.data.model.basic_model.BasicModel;
+import split.com.app.data.model.basic_model.BasicModel1;
 import split.com.app.data.model.total_coins.TotalCoinsModel;
 import split.com.app.data.model.update_user_profile.UserUpdateModel;
 import split.com.app.utils.MySharedPreferences;
@@ -107,6 +107,34 @@ public class ProfileRepository {
 
             @Override
             public void onFailure(@NonNull Call<ActiveUserModel> call, @NonNull Throwable t) {
+                Log.e("Update Error",t.getMessage());
+            }
+        });
+
+        return liveData;
+    }
+
+
+    public MutableLiveData<BasicModel1> logout(String id) {
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String token = preferences.getData(Split.getAppContext(), "userAccessToken");
+
+
+
+        final MutableLiveData<BasicModel1> liveData = new MutableLiveData<>();
+        apiService = ApiManager.getRestApiService();
+        Call<BasicModel1> call = apiService.logoutUser("Bearer " +token,id);
+        call.enqueue(new Callback<BasicModel1>() {
+            @Override
+            public void onResponse(@NonNull Call<BasicModel1> call, @NonNull Response<BasicModel1> response) {
+                if(response.body()!=null)
+                {
+                    liveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<BasicModel1> call, @NonNull Throwable t) {
                 Log.e("Update Error",t.getMessage());
             }
         });

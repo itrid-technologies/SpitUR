@@ -235,8 +235,17 @@ public class Profile extends Fragment {
 
 
                                 confirm_logout.setOnClickListener(view2 -> {
-                                    Intent intent = new Intent(requireContext(), Splash.class);
-                                    startActivity(intent);
+
+                                    viewModel = new ProfileViewModel(String.valueOf(activeUserModel.getData().getId()),"","","");
+                                    viewModel.initLogout();
+                                    viewModel.getLogout().observe(getViewLifecycleOwner(), basicModel -> {
+                                        if (basicModel.isStatus().equalsIgnoreCase("true")){
+                                            Intent intent = new Intent(requireContext(), Splash.class);
+                                            startActivity(intent);
+
+                                        }
+                                    });
+
 
                                 });
 

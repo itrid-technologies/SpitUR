@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import split.com.app.data.model.active_user.ActiveUserModel;
+import split.com.app.data.model.basic_model.BasicModel;
+import split.com.app.data.model.basic_model.BasicModel1;
 import split.com.app.data.model.register.RegisterModel;
 import split.com.app.data.model.total_coins.TotalCoinsModel;
 import split.com.app.data.model.update_user_profile.UserUpdateModel;
@@ -15,6 +17,9 @@ public class ProfileViewModel extends ViewModel {
 
     private MutableLiveData<UserUpdateModel> update_profile;
     private MutableLiveData<TotalCoinsModel> coins_data;
+
+    private MutableLiveData<BasicModel1> logout;
+
 
     private ProfileRepository profileRepository;
     private MutableLiveData<ActiveUserModel> user_data;
@@ -54,6 +59,19 @@ public class ProfileViewModel extends ViewModel {
         user_data = profileRepository.getUser();
     }
 
+    public void initLogout() {
+        if (this.logout != null) {
+            // ViewModel is created per Fragment so
+            // we know the userId won't change
+            return;
+        }
+        logout = profileRepository.logout(id);
+    }
+
+
+    public MutableLiveData<BasicModel1> getLogout() {
+        return logout;
+    }
 
     public MutableLiveData<TotalCoinsModel> getCoins_data() {
         return coins_data;

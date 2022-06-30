@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.exifinterface.media.ExifInterface;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +37,7 @@ public class JoinSearch extends Fragment {
     private SearchCreateViewModel mViewModel;
     private List<DataItem> list;
     String catID = null;
+    private List<DataItem> popularSubCategoryList;
 
 
 
@@ -57,10 +59,34 @@ public class JoinSearch extends Fragment {
             catID = getArguments().getString("CurrentCatId");
         }
 
+        getPopularSubCategory();
+
         initClickListeners();
         searchTextWatcher();
     }
 
+    private void getPopularSubCategory() {
+
+        mViewModel = new SearchCreateViewModel(null,null);
+        mViewModel.init();
+        mViewModel.getPopularCategoryData().observe(getViewLifecycleOwner(), popularSubCategoryModel -> {
+            if (popularSubCategoryModel.isSuccess()) {
+                if (popularSubCategoryModel.getData().size() > 0) {
+                    binding.joinPopular.setVisibility(View.VISIBLE);
+                    popularSubCategoryList = new ArrayList<>();
+                    popularSubCategoryList.addAll(popularSubCategoryModel.getData());
+                    buildCategoryRv(popularSubCategoryList);
+
+                }else {
+                    binding.joinPopular.setVisibility(View.GONE);
+                }
+            }else {
+                binding.joinPopular.setVisibility(View.GONE);
+            }
+
+
+        });
+    }
 
     private void searchTextWatcher() {
         binding.joinSearchField.addTextChangedListener(new TextWatcher() {
@@ -101,6 +127,7 @@ public class JoinSearch extends Fragment {
                     list.addAll(searchSubCatModel.getData());
                     buildCategoryRv(list);
                 }
+
             });
 
         }else {

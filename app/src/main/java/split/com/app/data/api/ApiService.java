@@ -90,7 +90,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("groups/create_custom_group")
     Call<BasicModel> createCustomGroup(@Header("Authorization") String token,
-                                             @FieldMap Map<String, String> options);
+                                       @FieldMap Map<String, String> options);
 
     @GET("groups/get_home_content")
     Call<HomeContentModel> getHomeData(@Header("Authorization") String token);
@@ -127,7 +127,7 @@ public interface ApiService {
 
     @GET("groups/delete_group/{id}")
     Call<BasicModel1> deleteGroup(@Header("Authorization") String token,
-                                 @Path("id") String id);
+                                  @Path("id") String id);
 
     @POST("messages/sendMessageGroupChat")
     Call<MessageSendModel> sendGroupMessage(@Header("Authorization") String token,
@@ -179,7 +179,7 @@ public interface ApiService {
 
     @GET("groups/left_group/{id}")
     Call<BasicModel1> leftGroup(@Header("Authorization") String token,
-                                 @Path("id") String id);
+                                @Path("id") String id);
 
     @POST("users/swap_coins")
     Call<BasicModel> swapCoins(@Header("Authorization") String token,
@@ -200,8 +200,13 @@ public interface ApiService {
 
     @POST("users/refund")
     Call<BasicModel1> refundAmount(@Header("Authorization") String token,
-                                  @Body JsonObject object);
+                                   @Body JsonObject object);
 
     @GET("users/current")
     Call<ActiveUserModel> getUserData(@Header("Authorization") String token);
+
+    @GET("users/logout/{id}")
+    Call<BasicModel1> logoutUser(@Header("Authorization") String token,
+                                @Path("id") String id);
+
 }

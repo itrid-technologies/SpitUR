@@ -73,6 +73,8 @@ public class Home extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         Dashboard.hideNav(false);
+
+        Glide.with(requireContext()).load(R.drawable.splitur_loading).into(binding.homeLoading);
         return binding.getRoot();
     }
 
@@ -82,6 +84,10 @@ public class Home extends Fragment {
 
         category_list = new ArrayList<>();
         homeDataItems = new ArrayList<>();
+
+        binding.categoriesLst.setVisibility(View.GONE);
+        binding.popularLst.setVisibility(View.GONE);
+        binding.homeSections.setVisibility(View.GONE);
 
         homeViewModel = new HomeViewModel();
         homeViewModel.init();
@@ -328,6 +334,11 @@ public class Home extends Fragment {
         binding.popularLst.setLayoutManager(layoutManager);
         PopularHomeAdapter adapter = new PopularHomeAdapter(Split.getAppContext(), popularSubCategoryList);
         binding.popularLst.setAdapter(adapter);
+
+        binding.categoriesLst.setVisibility(View.VISIBLE);
+        binding.popularLst.setVisibility(View.VISIBLE);
+        binding.homeSections.setVisibility(View.VISIBLE);
+        binding.homeLoading.setVisibility(View.GONE);
 
     }
 }

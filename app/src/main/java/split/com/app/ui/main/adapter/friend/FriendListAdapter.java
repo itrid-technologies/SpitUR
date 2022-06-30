@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,18 +15,17 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
-import split.com.app.data.model.group_member.DataItem;
+import split.com.app.data.model.contact.ContactModel;
 import split.com.app.utils.Constants;
-import split.com.app.utils.Split;
 
 public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.ViewHolder> {
 
-    private final List<split.com.app.data.model.friend_list.DataItem> list;
+    private final List<ContactModel> list;
     private final Context context;
 
 
 
-    public FriendListAdapter(Context appContext, List<split.com.app.data.model.friend_list.DataItem> friend_data) {
+    public FriendListAdapter(Context appContext, List<ContactModel> friend_data) {
         this.context = appContext;
         this.list = friend_data;
     }
@@ -43,15 +40,17 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull FriendListAdapter.ViewHolder holder, int position) {
-        split.com.app.data.model.friend_list.DataItem current_item = list.get(position);
+        ContactModel current_item = list.get(position);
 
-        Glide.with(context)
-                .load(Constants.IMG_PATH + current_item.getAvatar())
-                .placeholder(R.color.blue)
-                .into(holder.image);
+        if (current_item.photoURI != null) {
+            Glide.with(context)
+                    .load(current_item.photoURI)
+                    .placeholder(R.color.blue)
+                    .into(holder.image);
+        }
 
-        holder.name.setText(current_item.getName());
-        holder.userid.setText(current_item.getUserId());
+        holder.name.setText(current_item.name);
+        holder.userid.setText(current_item.mobileNumber);
     }
 
     @Override
