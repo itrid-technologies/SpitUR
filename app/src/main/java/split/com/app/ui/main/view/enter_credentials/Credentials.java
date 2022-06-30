@@ -38,6 +38,8 @@ public class Credentials extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentCredentialsBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
+        binding.credentialsToolbar.title.setText("Credentials");
+
         return binding.getRoot();
     }
 
@@ -63,7 +65,7 @@ public class Credentials extends Fragment {
         Glide.with(Split.getAppContext()).load(avatar).into(binding.credentialProfile.userImage);
     }
     private void initClickListeners() {
-        binding.back.setOnClickListener(view -> {
+        binding.credentialsToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 

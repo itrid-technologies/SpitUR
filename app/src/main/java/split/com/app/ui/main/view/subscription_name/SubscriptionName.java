@@ -32,6 +32,8 @@ public class SubscriptionName extends Fragment {
         binding = FragmentSubscriptionNameBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
 
+        binding.subNameToolbar.title.setText("Name");
+
         return binding.getRoot();
     }
 
@@ -71,6 +73,10 @@ public class SubscriptionName extends Fragment {
 //                preferences.saveData(Split.getAppContext(),"VALIDATION_TYPE",verification_type);
                 Navigation.findNavController(view).navigate(R.id.action_subscriptionName_to_slots);
             }
+        });
+
+        binding.subNameToolbar.back.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigateUp();
         });
 
     }

@@ -95,13 +95,22 @@ public class Friends extends Fragment {
         viewModel.getData().observe(getViewLifecycleOwner(), friendListModel -> {
             if (friendListModel.isStatus()) {
                 friend_data = new ArrayList<>();
-                friend_data.addAll(friendListModel.getData());
-                buildFriendRv(friend_data);
+                if (friendListModel.getData().size() > 0) {
+                    friend_data.addAll(friendListModel.getData());
+                    buildFriendRv(friend_data);
+                }else {
+                    binding.noFriendLayout.setVisibility(View.VISIBLE);
+                    binding.friendsList.setVisibility(View.GONE);
+                }
             }
         });
     }
 
     private void buildFriendRv(List<DataItem> friend_data) {
+
+        binding.noFriendLayout.setVisibility(View.GONE);
+        binding.friendsList.setVisibility(View.VISIBLE);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.friendsList.setLayoutManager(layoutManager);
         FriendListAdapter adapter = new FriendListAdapter(Split.getAppContext(), friend_data);

@@ -31,6 +31,9 @@ public class Refund extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentRefundBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
+
+        binding.refundAmountToolbar.title.setText("Refund");
+
         return binding.getRoot();
     }
 
@@ -53,7 +56,7 @@ public class Refund extends Fragment {
     }
 
     private void initClickListeners() {
-        binding.back.setOnClickListener(view -> {
+        binding.refundAmountToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 

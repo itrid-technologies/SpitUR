@@ -41,6 +41,8 @@ public class Search extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         Dashboard.hideNav(false);
+
+        binding.cSearchToolbar.title.setText("Search");
         return binding.getRoot();
     }
 
@@ -126,7 +128,7 @@ public class Search extends Fragment {
     }
 
     private void initClickListeners() {
-        binding.back.setOnClickListener(view -> {
+        binding.cSearchToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 

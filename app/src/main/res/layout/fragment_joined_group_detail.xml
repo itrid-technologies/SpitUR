@@ -29,7 +29,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp">
+            android:padding="20dp">
 
             <include
 
@@ -181,7 +181,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:src="@drawable/ic_score_icon"
                     android:padding="10dp"
-                    android:layout_marginStart="10dp"
                     android:id="@+id/score_icon"/>
 
                 <TextView
@@ -189,11 +188,30 @@
                     style="@style/headingText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="10dp"
                     android:text="Splitur Score"
                     android:textSize="20sp"
                     app:layout_constraintStart_toEndOf="@+id/score_icon"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/tv_splitur_score"
+                    app:layout_constraintTop_toTopOf="@id/tv_splitur_score"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_splitur_score"
+                    android:layout_marginStart="10dp"
+                    android:text="0"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="2dp"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    style="@style/semiBoldText"
+                    android:background="@drawable/rect_blue_bg"
+                    android:backgroundTint="@color/yellow"
+                    android:textColor="@color/white"
+                    android:id="@+id/scoreValue"/>
 
 <!--                <com.daimajia.numberprogressbar.NumberProgressBar-->
 <!--                    android:id="@+id/number_progress_bar"-->

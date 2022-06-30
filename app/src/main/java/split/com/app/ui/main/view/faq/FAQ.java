@@ -38,6 +38,9 @@ public class FAQ extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentFAQBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
+
+        binding.fToolbar.title.setText("FAQ");
+
         return binding.getRoot();
     }
 
@@ -68,7 +71,7 @@ public class FAQ extends Fragment {
     }
 
     private void initClickListeners() {
-        binding.back.setOnClickListener(view -> {
+        binding.fToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
     }

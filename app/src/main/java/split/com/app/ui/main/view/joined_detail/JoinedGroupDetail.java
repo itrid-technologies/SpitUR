@@ -35,7 +35,7 @@ import split.com.app.utils.Split;
 
 public class JoinedGroupDetail extends Fragment {
 
-    FragmentJoinedGroupDetailBinding binding;
+    split.com.app.databinding.FragmentJoinedGroupDetailBinding binding;
     split.com.app.data.model.all_joined_groups.DataItem data;
     GroupMembersViewModel membersViewModel;
 
@@ -141,6 +141,7 @@ public class JoinedGroupDetail extends Fragment {
         binding.slider.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+                binding.scoreValue.setText(String.valueOf(Math.round(value)));
                 viewModel = new JoinedGroupDetailViewModel(String.valueOf(data.getGroupId()),
                         String.valueOf(data.getGroup().getGroupAdmin().getId()),
                         String.valueOf(value));

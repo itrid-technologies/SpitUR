@@ -31,6 +31,9 @@ public class RefundCompletion extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentRefundCompletionBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
+
+        binding.completeRefundToolbar.title.setText("Refund Completed");
+
         return binding.getRoot();
     }
 
@@ -43,7 +46,7 @@ public class RefundCompletion extends Fragment {
 
     private void initClickListeners() {
 
-        binding.back.setOnClickListener(view -> {
+        binding.completeRefundToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 

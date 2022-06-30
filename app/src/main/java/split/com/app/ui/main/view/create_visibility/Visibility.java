@@ -36,6 +36,8 @@ public class Visibility extends Fragment {
         binding = FragmentVisibilityBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
 
+        binding.visibilityToolbar.title.setText("Visibility");
+
         return binding.getRoot();
     }
 
@@ -64,7 +66,7 @@ public class Visibility extends Fragment {
 
     private void clickListeners() {
 
-        binding.back.setOnClickListener(view -> {
+        binding.visibilityToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 

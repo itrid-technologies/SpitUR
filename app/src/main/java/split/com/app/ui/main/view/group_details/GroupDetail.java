@@ -59,7 +59,7 @@ public class GroupDetail extends Fragment {
         if (getArguments() != null){
             sub_categoryId = getArguments().getString("join_sub_cat_id");
             title = getArguments().getString("join_sub_cat_title");
-            binding.title.setText(title);
+            binding.groupDetailToolbar.title.setText(title);
 
         }
 
@@ -80,7 +80,7 @@ public class GroupDetail extends Fragment {
 
         searchTextWatcher();
 
-        binding.back.setOnClickListener(view1 -> {
+        binding.groupDetailToolbar.back.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigateUp();
         });
 

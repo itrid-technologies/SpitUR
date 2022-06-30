@@ -30,6 +30,9 @@ public class EnterUpiId extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentEnterUpiIdBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
+
+        binding.refundUpiToolbar.title.setText("Refund");
+
         return binding.getRoot();
     }
 
@@ -61,7 +64,7 @@ public class EnterUpiId extends Fragment {
 
         });
 
-        binding.back.setOnClickListener(view -> {
+        binding.refundUpiToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
     }

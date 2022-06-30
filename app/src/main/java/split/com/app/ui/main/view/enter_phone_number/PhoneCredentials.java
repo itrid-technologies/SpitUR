@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 
 import split.com.app.R;
 import split.com.app.databinding.FragmentPhoneCredentialsBinding;
+import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.view.full_name.Name;
 import split.com.app.ui.main.view.otp_phone_number.OtpNumber;
 import split.com.app.ui.main.view.otp_verification.OtpVerification;
@@ -38,6 +39,10 @@ public class PhoneCredentials extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentPhoneCredentialsBinding.inflate(inflater, container, false);
+        Dashboard.hideNav(true);
+
+        binding.phoneCredentialsToolbar.title.setText("Phone Credentials");
+
 
         return binding.getRoot();
     }
@@ -66,7 +71,7 @@ public class PhoneCredentials extends Fragment {
 
 
     private void initClickListeners() {
-        binding.back.setOnClickListener(view -> {
+        binding.phoneCredentialsToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 

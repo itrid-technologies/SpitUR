@@ -199,13 +199,14 @@ public class CreatedGroupDetail extends Fragment {
             adapter.setOnRemoveListener(position -> {
 
                 final BottomSheetDialog bt = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
-                View carDetailView = LayoutInflater.from(requireContext()).inflate(R.layout.delete_layout, null, false);
-                ConstraintLayout deleteLayout = carDetailView.findViewById(R.id.delete_layout);
+                View carDetailView = LayoutInflater.from(requireContext()).inflate(R.layout.ask_to_remove_dialogue, null, false);
+                ConstraintLayout deleteLayout = carDetailView.findViewById(R.id.deleteLAYOUT);
                 TextView remove = carDetailView.findViewById(R.id.tv_remove);
+                ImageView delete = carDetailView.findViewById(R.id.confirm_remove);
 
                 remove.setText("Remove Member");
 
-                deleteLayout.setOnClickListener(view -> {
+                delete.setOnClickListener(view -> {
 
 
 

@@ -70,6 +70,9 @@ public class CreatedAndJoinedGroups extends Fragment {
                 if (allCreatedGroupModel.getData().size() > 0){
                   data.addAll(allCreatedGroupModel.getData());
                   buildRv();
+                }else {
+                  binding.noGroupLayout.setVisibility(View.VISIBLE);
+                  binding.createdGroupslist.setVisibility(View.GONE);
                 }
             }
         });
@@ -82,6 +85,8 @@ public class CreatedAndJoinedGroups extends Fragment {
         binding.joinedButton.setOnClickListener(view -> {
             binding.createdGroupslist.setVisibility(View.GONE);
             binding.joinedGroupslist.setVisibility(View.VISIBLE);
+            binding.noGroupLayout.setVisibility(View.GONE);
+
 
             binding.gToolbar.title.setText("Group Joined");
 
@@ -100,6 +105,9 @@ public class CreatedAndJoinedGroups extends Fragment {
                     if (groupDetailModel.getData().size() > 0){
                         join_data.addAll(groupDetailModel.getData());
                         buildJoinRv();
+                    }else {
+                        binding.noGroupLayout.setVisibility(View.VISIBLE);
+                        binding.joinedGroupslist.setVisibility(View.GONE);
                     }
                 }
             });
@@ -119,6 +127,8 @@ public class CreatedAndJoinedGroups extends Fragment {
         });    }
 
     private void buildJoinRv() {
+        binding.noGroupLayout.setVisibility(View.GONE);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.joinedGroupslist.setLayoutManager(layoutManager);
         AllJoinedGroupAdapter adapter = new AllJoinedGroupAdapter(Split.getAppContext(), join_data);

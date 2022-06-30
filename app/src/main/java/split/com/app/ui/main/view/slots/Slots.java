@@ -32,6 +32,8 @@ public class Slots extends Fragment {
         binding = FragmentSlotsBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
 
+        binding.slottoolbar.title.setText("Slots");
+
         return binding.getRoot();
     }
 
@@ -44,7 +46,7 @@ public class Slots extends Fragment {
     }
 
     private void initClickListeners() {
-        binding.back.setOnClickListener(view -> {
+        binding.slottoolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 

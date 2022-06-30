@@ -27,6 +27,8 @@ public class ContactUs extends Fragment {
 
         binding = FragmentContactUsBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
+        binding.contactToolbar.title.setText("Contact Us");
+
         return binding.getRoot();
     }
 
@@ -39,7 +41,7 @@ public class ContactUs extends Fragment {
 
     private void initClickListeners() {
 
-        binding.back.setOnClickListener(view -> {
+        binding.contactToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 

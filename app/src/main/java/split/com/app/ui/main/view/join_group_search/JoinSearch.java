@@ -45,7 +45,7 @@ public class JoinSearch extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentJoinSearchBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
-        binding.title.setText("Search");
+        binding.jsToolbar.title.setText("Search");
         return binding.getRoot();
     }
 
@@ -119,7 +119,7 @@ public class JoinSearch extends Fragment {
     }
 
     private void initClickListeners() {
-        binding.back.setOnClickListener(view -> {
+        binding.jsToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
     }

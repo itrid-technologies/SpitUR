@@ -45,12 +45,68 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_recent_trens"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="8dp"
                 android:id="@+id/transactions_list"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="80dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_recent_trens"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/noTransactionLayout">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_no_transaction"
+                    android:id="@+id/empty_list_icon"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This Place feels empty but You can fill it by joing a group here"
+                    style="@style/normalText"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/empty_list_icon"
+                    android:gravity="center"
+                    android:id="@+id/tv_trans"/>
+
+                <Button
+                    android:id="@+id/shareButton"
+                    style="@style/buttonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_round_bg"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:paddingStart="60dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="60dp"
+                    android:paddingBottom="5dp"
+                    android:text="Join Now"
+                    android:textSize="14dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_trans"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

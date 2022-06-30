@@ -32,6 +32,8 @@ public class Cost extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentCostBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
+
+        binding.costToolbar.title.setText("Cost");
         return binding.getRoot();
     }
 
@@ -57,7 +59,7 @@ public class Cost extends Fragment {
     }
 
     private void initClickListeners() {
-        binding.back.setOnClickListener(view -> {
+        binding.costToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
 
