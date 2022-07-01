@@ -38,7 +38,7 @@ public class UserId extends AppCompatActivity {
             overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         });
 
-        binding.btnContinue.setOnClickListener(view -> {
+        binding.btnFinalStep.setOnClickListener(view -> {
             String userId = binding.edUserId.getText().toString().trim();
             if (!userId.isEmpty()){
 

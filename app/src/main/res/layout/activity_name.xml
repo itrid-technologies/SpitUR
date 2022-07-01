@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="16dp"
+    android:padding="30dp"
     tools:context=".ui.main.view.full_name.Name">
 
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_back"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toBottomOf="@id/back"
         android:text="Enter Your full name"
         android:layout_marginEnd="70dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         style="@style/headingText"
         android:layout_marginStart="6dp"
         android:gravity="start"
@@ -37,15 +37,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_enter_name"
-        android:layout_margin="20dp"
         android:hint="Full Name"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingEnd="20dp"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textColor="@color/white"
         android:textColorHint="@color/hint_color"
         android:fontFamily="@font/poppin_regular"
         android:textSize="15sp"
-        android:drawablePadding="10dp"
+        android:layout_marginTop="30dp"
+        android:drawablePadding="20dp"
         android:gravity="start|center"
-        android:background="@drawable/round_back"
+        android:background="@drawable/otp_number_bg"
         android:backgroundTint="@color/light_blue"
         android:padding="10dp"
         android:drawableLeft="@drawable/ic_user"
@@ -65,7 +70,7 @@
         android:id="@+id/errorMessage"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="248dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,12 +78,9 @@
         android:text="Continue"
         style="@style/buttonStyle"
         android:background="@drawable/button_round_bg"
-        android:paddingStart="60dp"
-        android:paddingEnd="60dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/poppins_semibold"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/btn_continue"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,32 +3,46 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="4dp"
+    android:layout_marginEnd="8dp"
     >
 
-    <ImageView
-        android:layout_width="46dp"
-        android:layout_height="46dp"
-        android:src="@drawable/song_icon"
-        android:padding="10dp"
-        android:background="@drawable/rect_back_with_grey_stroke"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/imageLayout"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/catImage"/>
+        android:padding="5dp"
+        android:background="@drawable/sub_cat_bg"
+>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/song_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/catImage"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <TextView
         android:id="@+id/catName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/catImage"
-        app:layout_constraintTop_toBottomOf="@id/catImage"
+        app:layout_constraintStart_toStartOf="@id/imageLayout"
+        app:layout_constraintTop_toBottomOf="@id/imageLayout"
         android:text="Movies"
         android:textSize="10sp"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="@id/catImage"
+        android:layout_marginTop="3dp"
+        app:layout_constraintEnd_toEndOf="@id/imageLayout"
         android:textColor="@color/white"
-        android:fontFamily="@font/poppin_regular"/>
+        android:fontFamily="@font/inter_medium"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

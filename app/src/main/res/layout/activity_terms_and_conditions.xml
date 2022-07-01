@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="25dp"
+    android:padding="30dp"
     tools:context=".ui.main.view.terms_conditions.TermsAndConditions">
 
     <ImageView
         android:id="@+id/back"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:importantForAccessibility="no"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,6 +56,7 @@
             android:fontFamily="@font/poppins_semibold"
             android:paddingStart="12dp"
             android:paddingEnd="0dp"
+            android:button="@drawable/checkbox"
             android:text="I agree with Terms and Conditions"
             android:textColor="@color/hint_color" />
 
@@ -65,7 +66,8 @@
             android:fontFamily="@font/poppins_semibold"
             android:paddingStart="12dp"
             android:paddingEnd="0dp"
-            android:text="I agree with Privacy Policy"
+            android:button="@drawable/checkbox"
+            android:text="I agree with Splitur Privacy Policy"
             android:textColor="@color/hint_color" />
 
     </LinearLayout>
@@ -75,10 +77,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:fontFamily="@font/poppin_regular"
+        android:fontFamily="@font/inter_medium"
         android:text="@string/label_agree"
         android:textAlignment="center"
-        android:textColor="@color/hint_color"
+        android:textColor="#5E6272"
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/ll_terms" />
 
@@ -86,14 +88,12 @@
     <Button
         android:id="@+id/btn_continue"
         style="@style/buttonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="248dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/button_round_bg"
-        android:paddingStart="60dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="60dp"
-        android:paddingBottom="5dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="15dp"
         android:text="Continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

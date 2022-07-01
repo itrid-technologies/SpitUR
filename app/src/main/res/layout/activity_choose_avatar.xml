@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="16dp"
+    android:padding="30dp"
     tools:context=".ui.main.view.avatar.ChooseAvatar">
 
 
@@ -13,7 +13,7 @@
         android:importantForAccessibility="no"
         android:id="@+id/back"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,8 +23,7 @@
         style="@style/headingText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="70dp"
         android:gravity="start"
         android:text="Choose your avatar"
@@ -36,7 +35,7 @@
         android:id="@+id/avatar_bg_frame"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/avatar_background"
         android:importantForAccessibility="no"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +49,8 @@
         android:background="@drawable/ripple_bg_round_dark"
         android:importantForAccessibility="no"
         android:rotation="180"
-        android:src="@drawable/next"
+        android:src="@drawable/ic_chevron"
+        app:layout_constraintEnd_toStartOf="@id/avatar_bg_frame"
         app:layout_constraintBottom_toBottomOf="@id/avatar_bg_frame"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/avatar_bg_frame" />
@@ -61,9 +61,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/ripple_bg_round_dark"
         android:importantForAccessibility="no"
-        android:src="@drawable/next"
+        android:src="@drawable/ic_chevron"
         app:layout_constraintBottom_toBottomOf="@id/avatar_bg_frame"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/avatar_bg_frame"
         app:layout_constraintTop_toTopOf="@id/avatar_bg_frame" />
 
 
@@ -83,15 +84,13 @@
     <Button
         android:id="@+id/btn_set"
         style="@style/buttonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="248dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:background="@drawable/button_round_bg"
-        android:paddingStart="60dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="60dp"
-        android:paddingBottom="5dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="16dp"
         android:text="All Set"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

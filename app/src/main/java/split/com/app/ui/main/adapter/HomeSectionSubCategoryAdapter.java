@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -73,7 +75,7 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
     }
 
     public static class PopularVH extends RecyclerView.ViewHolder {
-        public CircleImageView icon;
+        public ImageView icon;
         public TextView name, join;
 
         public PopularVH(@NonNull View itemView, ItemClickListener mListener) {

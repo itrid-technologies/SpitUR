@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -62,11 +63,14 @@ public class PopularHomeAdapter extends RecyclerView.Adapter<PopularHomeAdapter.
 
     @Override
     public int getItemCount() {
-        return dataItems.size();
+        //return dataItems.size();
+        int size = dataItems.size();
+        // Return at most 5 items from the ArrayList
+        return (Math.min(size, 3));
     }
 
     public static class PopularVH extends RecyclerView.ViewHolder {
-        public CircleImageView icon;
+        public ImageView icon;
         public TextView name, join;
 
         public PopularVH(@NonNull View itemView) {
