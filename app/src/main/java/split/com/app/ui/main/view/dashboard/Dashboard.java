@@ -3,20 +3,15 @@ package split.com.app.ui.main.view.dashboard;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,10 +21,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import split.com.app.R;
 import split.com.app.databinding.ActivityDashboardBinding;
-import split.com.app.utils.ActivityUtil;
 import split.com.app.utils.Configration;
 import split.com.app.utils.MyReceiver;
-import split.com.app.utils.Split;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -43,6 +36,7 @@ public class Dashboard extends AppCompatActivity {
 
 
     private BroadcastReceiver mMessageReceiver;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("ResourceAsColor")
     @Override
@@ -67,22 +61,22 @@ public class Dashboard extends AppCompatActivity {
         binding.bottomNavigation.setOnItemSelectedListener(i -> {
             switch (i.getItemId()) {
                 case R.id.home2:
-                   // i.getIcon().setTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
+                    // i.getIcon().setTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
                     mNavController.navigate(R.id.home2, null);
                     break;
 
                 case R.id.search2:
-                   // i.getIcon().setTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
+                    // i.getIcon().setTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
                     mNavController.navigate(R.id.search2, null);
                     break;
                 case R.id.createdAndJoinedGroups:
-                  //  i.setIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
+                    //  i.setIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
 
                     mNavController.navigate(R.id.createdAndJoinedGroups, null);
                     break;
 
                 case R.id.profile2:
-                  //  i.setIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
+                    //  i.setIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
                     mNavController.navigate(R.id.profile2, null);
                     break;
                 default:
@@ -90,7 +84,6 @@ public class Dashboard extends AppCompatActivity {
 
             return false;
         });
-
 
 
 //        mMessageReceiver = new BroadcastReceiver() {
@@ -103,11 +96,20 @@ public class Dashboard extends AppCompatActivity {
 //                }
 //            }
 //        };
+
+        Intent data = getIntent();
+        if (data.hasExtra("checkout_complete")) {
+            //group data
+            Bundle bundle = new Bundle();
+            bundle.putString("group_credentials", data.getStringExtra("group_credentials"));
+            mNavController.navigate(R.id.joinCheckoutComplete, bundle);
+        }
+
     }
 
 
     public void broadcastIntent() {
-        registerReceiver(receiver ,new IntentFilter(Configration.PUSH_NOTIFICATION));
+        registerReceiver(receiver, new IntentFilter(Configration.PUSH_NOTIFICATION));
     }
 
     private void showDialogue() {

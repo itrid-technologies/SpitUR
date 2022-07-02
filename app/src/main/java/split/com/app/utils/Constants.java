@@ -7,9 +7,11 @@ import java.util.Date;
 public class Constants {
 
 
-    public static String URL_BASE = "http://3.6.7.161:4000/";
+//    public static String URL_BASE = "http://3.6.7.161:4000/";
+    public static String URL_BASE = "http://192.168.100.5:4000/";
 
-    public static String IMG_PATH = "http://3.6.7.161:4000";
+//    public static String IMG_PATH = "http://3.6.7.161:4000";
+    public static String IMG_PATH = "http://192.168.100.5:4000";
     public static String DEVICE_TOKEN = "";
 
 

@@ -83,8 +83,6 @@ public class JoinCheckOut extends Fragment {
 
         }
 
-
-
     }
 
     private void initClickListeners() {

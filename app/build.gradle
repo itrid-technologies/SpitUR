@@ -83,6 +83,9 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:4.9.1"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
 
+    //new size unit - sdp (scalable dp). This size unit scales with the screen size
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+
 //    //dagger
 //    implementation 'com.google.dagger:dagger-android:2.35.1'
 //    annotationProcessor 'com.google.dagger:dagger-android-processor:2.20'
@@ -94,6 +97,7 @@ dependencies {
 
 
     implementation 'com.razorpay:checkout:1.6.19'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

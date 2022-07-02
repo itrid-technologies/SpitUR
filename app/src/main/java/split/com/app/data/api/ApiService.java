@@ -105,6 +105,9 @@ public interface ApiService {
     Call<JoinGroupModel> joinGroup(@Header("Authorization") String token,
                                    @Body JsonObject object);
 
+    @POST("groups/group_payment")
+    Call<JsonObject> sendPaymentSuccess(@Body JsonObject object);
+
     @GET("groups/get_joined_groups")
     Call<AllJoinedGroupModel> getJoinedGroups(@Header("Authorization") String token);
 
@@ -207,6 +210,7 @@ public interface ApiService {
 
     @GET("users/logout/{id}")
     Call<BasicModel1> logoutUser(@Header("Authorization") String token,
-                                @Path("id") String id);
+                                 @Path("id") String id);
+
 
 }

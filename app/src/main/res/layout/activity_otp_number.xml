@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
-        android:padding="30dp"
+        android:padding="@dimen/_25sdp"
         tools:context=".ui.main.view.otp_phone_number.OtpNumber">
 
 
@@ -33,10 +33,10 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="@dimen/_5sdp"
             app:layout_constraintTop_toBottomOf="@id/back"
             android:text="@string/enter_your_phone_number"
-            android:layout_marginTop="27dp"
+            android:layout_marginTop="@dimen/_25sdp"
             style="@style/headingText"
             android:gravity="start"
             android:id="@+id/tv_enter_number"/>
@@ -52,9 +52,7 @@
             android:background="@drawable/round_back"
             android:backgroundTint="@color/dark_blue"
             android:padding="4dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="@dimen/_20sdp"
             >
 
             <com.hbb20.CountryCodePicker
@@ -65,7 +63,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:ccp_showFlag="false"
-                app:ccp_defaultPhoneCode="92"
+                app:ccp_defaultPhoneCode="91"
                 android:layout_marginStart="8dp"
                 app:ccp_textSize="18sp"
                 app:ccpDialog_textColor="@color/white"
@@ -84,8 +82,9 @@
                 android:backgroundTint="@color/light_blue"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:gravity="center_vertical"
                 android:paddingStart="20dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:hint="1234567"
@@ -96,12 +95,9 @@
                 android:inputType="number"
                 android:textSize="18sp"
                 android:textColor="@color/white">
-
                 <requestFocus/>
 
             </EditText>
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -116,42 +112,36 @@
             android:textColor="@color/error"
             android:padding="3dp"
             android:textSize="11sp"
-
             android:visibility="gone"
             android:id="@+id/errorMessage"/>
 
 
         <com.konaire.numerickeyboard.NumericKeyboard
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/send_otp_button"
+            android:layout_height="0dp"
             android:layout_gravity="bottom"
-            app:keySpecial="*"
-            app:flow_verticalGap="50dp"
-            app:flow_horizontalGap="15dp"
-            android:textSize="28sp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:textSize="@dimen/_25sdp"
             app:field="@+id/phone_number"
-            app:keyTextColor="@color/white" />
+            app:keySpecial="*"
+            app:keyTextColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/send_otp_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/number_layout" />
 
 
         <Button
-            android:layout_width="248dp"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_45sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/send_otp"
             style="@style/buttonStyle"
-            android:background="@drawable/button_round_bg"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+            android:background="@drawable/bg_curved_blue_btn"
             android:id="@+id/send_otp_button"/>
 
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

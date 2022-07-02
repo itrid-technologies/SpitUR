@@ -1,5 +1,6 @@
 package split.com.app.ui.main.viewmodel.join_group;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -10,7 +11,7 @@ public class JoinGroupViewModel extends ViewModel {
 
     private MutableLiveData<JoinGroupModel> data;
     private JoinGroupRepository joinGroupRepository;
-    String groupId , upiId, email;
+    String groupId, upiId, email, paymentId;
 
     public JoinGroupViewModel(String id, String email, String upi_id) {
         this.groupId = id;
@@ -25,7 +26,7 @@ public class JoinGroupViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        data = joinGroupRepository.join(groupId,email,upiId);
+        data = joinGroupRepository.join(groupId, email, upiId);
     }
 
     public MutableLiveData<JoinGroupModel> getData() {

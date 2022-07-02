@@ -3,6 +3,7 @@ package split.com.app.data.repository.join_group;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
@@ -34,22 +35,22 @@ public class JoinGroupRepository {
 
         final MutableLiveData<JoinGroupModel> BasicModelMutableLiveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<JoinGroupModel> call = apiService.joinGroup("Bearer "+token,object);
+        Call<JoinGroupModel> call = apiService.joinGroup("Bearer " + token, object);
         call.enqueue(new Callback<JoinGroupModel>() {
             @Override
             public void onResponse(@NonNull Call<JoinGroupModel> call, @NonNull Response<JoinGroupModel> response) {
-                if(response.body()!=null)
-                {
+                if (response.body() != null) {
                     BasicModelMutableLiveData.setValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<JoinGroupModel> call, @NonNull Throwable t) {
-                Log.e("Avatar Error",t.getMessage());
+                Log.e("Avatar Error", t.getMessage());
             }
         });
 
         return BasicModelMutableLiveData;
     }
+
 }
