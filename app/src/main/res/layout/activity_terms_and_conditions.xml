@@ -90,13 +90,13 @@
         style="@style/buttonStyle"
         android:layout_width="248dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/button_round_bg"
         android:paddingTop="16dp"
+        android:layout_marginTop="30dp"
         android:paddingBottom="15dp"
         android:text="Continue"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_confirm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

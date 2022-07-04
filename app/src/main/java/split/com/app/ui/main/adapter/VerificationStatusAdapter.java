@@ -51,7 +51,7 @@ public class VerificationStatusAdapter extends RecyclerView.Adapter<Verification
             if (score <= 100 && score >= 80 ){
                 Glide.with(context)
                         .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
-                        .placeholder(R.color.blue)
+                        .placeholder(R.color.images_placeholder)
                         .into(holder.user);
 
                 holder.status.setText("Verified");
@@ -61,7 +61,7 @@ public class VerificationStatusAdapter extends RecyclerView.Adapter<Verification
             }else if (score < 80 && score >= 50){
                 Glide.with(context)
                         .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
-                        .placeholder(R.color.blue)
+                        .placeholder(R.color.images_placeholder)
                         .into(holder.user);
 
                 holder.status.setText("Pending");
@@ -71,7 +71,7 @@ public class VerificationStatusAdapter extends RecyclerView.Adapter<Verification
             }else if (score < 50 && score >= 0 ){
                 Glide.with(context)
                         .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
-                        .placeholder(R.color.blue)
+                        .placeholder(R.color.images_placeholder)
                         .into(holder.user);
 
                 holder.status.setText("Invalid");
@@ -119,7 +119,7 @@ public class VerificationStatusAdapter extends RecyclerView.Adapter<Verification
             super(itemView);
             //find views
             status = itemView.findViewById(R.id.status);
-            imageView = (itemView).findViewById(R.id.iv_user_);
+            imageView = (itemView).findViewById(R.id.iv_user_status);
             user = (itemView).findViewById(R.id.iv_user);
 
 

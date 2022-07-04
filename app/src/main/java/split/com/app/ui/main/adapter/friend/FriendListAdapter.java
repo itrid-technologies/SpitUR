@@ -45,7 +45,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
         if (current_item.photoURI != null) {
             Glide.with(context)
                     .load(current_item.photoURI)
-                    .placeholder(R.color.blue)
+                    .placeholder(R.color.images_placeholder)
                     .into(holder.image);
         }
 

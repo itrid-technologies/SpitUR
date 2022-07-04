@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#141629"
     tools:context=".ui.main.view.join_buy_coins.JoinPayment">
 
     <include
         android:id="@+id/jp_toolbar"
         layout="@layout/toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +31,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:padding="30dp">
 
             <TextView
                 android:id="@+id/tv_upi"
@@ -67,6 +67,7 @@
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="70dp"
+                android:visibility="gone"
                 android:gravity="start"
                 android:text="Select your UPI App"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +81,7 @@
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="70dp"
+                android:visibility="gone"
                 android:gravity="start"
                 android:text="OR"
                 android:textSize="18sp"
@@ -93,12 +95,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Enter UPI Id"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_or" />
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintStart_toStartOf="@id/tv_id_info"
+                app:layout_constraintTop_toBottomOf="@id/tv_id_info" />
 
             <EditText
                 android:id="@+id/ed_upi"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/round_back"
@@ -113,7 +116,7 @@
                 android:textColorHint="@color/hint_color"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_EMAIL"
                 app:layout_constraintTop_toBottomOf="@id/tv_EMAIL" />
 
             <TextView
@@ -136,13 +139,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/button_round_bg"
-                android:fontFamily="@font/poppins_semibold"
                 android:paddingStart="80dp"
-                android:paddingTop="5dp"
+                android:paddingTop="15dp"
                 android:paddingEnd="80dp"
-                android:paddingBottom="5dp"
+                android:paddingBottom="15dp"
                 android:text="Join"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

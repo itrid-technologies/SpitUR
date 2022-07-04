@@ -51,7 +51,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         CategoryDataItems current_item =  categoryDataItems.get(position);
         Glide.with(context)
                 .load(Constants.IMG_PATH + current_item.getIcon())
-                .placeholder(R.color.blue)
+                .placeholder(R.color.images_placeholder)
                 .into(holder.icon);
         holder.name.setText(current_item.getTitle());
     }

@@ -1,5 +1,6 @@
 package split.com.app.ui.main.view.group_created_and_joined;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,12 +26,14 @@ import com.google.gson.Gson;
 import split.com.app.R;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
 import split.com.app.data.model.all_created_groupx.DataItem;
+import split.com.app.data.model.all_joined_groups.AllJoinedGroupModel;
 import split.com.app.data.repository.created_and_joined.CreatedAndJoinedGroupRepository;
 import split.com.app.databinding.FragmentCreatedAndJoinedGroupsBinding;
 import split.com.app.ui.main.adapter.all_created_group.AllCreatedGroupAdapter;
 import split.com.app.ui.main.adapter.all_joined_group.AllJoinedGroupAdapter;
 import split.com.app.ui.main.adapter.group_detail_adapter.GroupDetailAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.view.join_plans.CheckoutActivity;
 import split.com.app.ui.main.viewmodel.created_and_joined.CreatedAndJoinedViewModel;
 import split.com.app.ui.main.viewmodel.group_viewmodel.GroupDetailViewModel;
 import split.com.app.utils.Split;
@@ -104,7 +107,7 @@ public class CreatedAndJoinedGroups extends Fragment {
 
                     if (groupDetailModel.getData().size() > 0){
                         join_data.addAll(groupDetailModel.getData());
-                        buildJoinRv();
+                        buildJoinRv(groupDetailModel);
                     }else {
                         binding.noGroupLayout.setVisibility(View.VISIBLE);
                         binding.joinedGroupslist.setVisibility(View.GONE);
@@ -126,7 +129,7 @@ public class CreatedAndJoinedGroups extends Fragment {
             binding.joinedButton.setTextColor(Color.parseColor("#9395A4"));
         });    }
 
-    private void buildJoinRv() {
+    private void buildJoinRv(AllJoinedGroupModel groupDetailModel) {
         binding.noGroupLayout.setVisibility(View.GONE);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
@@ -137,9 +140,25 @@ public class CreatedAndJoinedGroups extends Fragment {
         adapter.setOnJoinedClixkListener(position -> {
             Gson gson = new Gson();
             String joinData = gson.toJson(join_data.get(position));
-            Bundle bundle = new Bundle();
-            bundle.putString("joinedGroupData",joinData);
-            Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_joinedGroupDetail2,bundle);
+
+            Gson gson1 = new Gson();
+            String groupDATA = gson1.toJson(groupDetailModel);
+
+            if (join_data.get(position).getPayment_status().equalsIgnoreCase("pending")){
+                Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
+                checkoutIntent.putExtra("group_id", String.valueOf(join_data.get(position).getGroupId()));
+                checkoutIntent.putExtra("upi_id",  join_data.get(position).getUpi_id());
+                checkoutIntent.putExtra("subscription_id", join_data.get(position).getSubscription_id());
+                checkoutIntent.putExtra("group_credentials", groupDATA);
+                startActivity(checkoutIntent);
+                requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+            else {
+                Bundle bundle = new Bundle();
+                bundle.putString("joinedGroupData",joinData);
+                Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_joinedGroupDetail2,bundle);
+            }
+
         });
     }
 

@@ -1,36 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="170dp"
-    android:layout_height="wrap_content"
+    android:layout_width="149dp"
+    android:layout_height="200dp"
     android:layout_margin="3dp"
+    android:layout_marginEnd="5dp"
     android:background="@drawable/only_stroke"
-    android:padding="2dp"
+    android:padding="1dp"
     android:id="@+id/plan_stroke"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:cardCornerRadius="8dp"
-        android:layout_margin="1dp"
-        >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
-        android:background="#282B3F"
+        android:paddingTop="20dp"
+        android:paddingStart="16dp"
+        android:paddingBottom="12dp"
+        android:paddingEnd="16dp"
+        android:backgroundTint="#262A34"
+        android:background="@drawable/verification_bg"
         >
 
         <ImageView
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/plan1"
             android:id="@+id/planbg"
             android:backgroundTint="@color/orange"
@@ -39,9 +33,10 @@
             />
 
         <ImageView
-            android:layout_width="44dp"
-            android:layout_height="40dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:src="@drawable/plan_icon"
+            android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="@id/planbg"
             app:layout_constraintEnd_toEndOf="@id/planbg"
             app:layout_constraintTop_toTopOf="@id/planbg"
@@ -52,44 +47,47 @@
             android:id="@+id/planTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="-"
+            android:text="Netflix Premium"
             android:layout_marginEnd="20dp"
             android:textSize="16sp"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/inter_semibold"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/planbg"
-            android:layout_marginTop="6dp"/>
+            android:layout_marginTop="12dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-"
-            android:layout_marginEnd="8dp"
+            android:text="1090"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/planTitle"
-            android:fontFamily="@font/poppin_regular"
+            android:fontFamily="@font/inter_medium"
             android:textColor="@color/orange"
             android:id="@+id/planBody"
             />
 
-        <Button
+        <TextView
             android:id="@+id/join"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_round_bg"
             android:textColor="@color/white"
-            style="@style/buttonStyle"
             android:text="Create"
+            android:fontFamily="@font/inter_semibold"
+            android:textSize="15sp"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp"
+            android:backgroundTint="@color/orange"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/planBody"
             android:layout_marginTop="12dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

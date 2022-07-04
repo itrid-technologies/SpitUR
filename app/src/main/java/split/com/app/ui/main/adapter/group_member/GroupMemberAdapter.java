@@ -53,7 +53,7 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
 
         Glide.with(context)
                 .load(Constants.IMG_PATH + current_item.getUser().getAvatar())
-                .placeholder(R.color.blue)
+                .placeholder(R.color.images_placeholder)
                 .into(holder.image);
 
         holder.name.setText(current_item.getUser().getUserId());

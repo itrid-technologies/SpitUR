@@ -9,7 +9,7 @@
 
     <include
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
         android:id="@+id/swap_success_toolbar"
         layout="@layout/toolbar_layout"
         app:layout_constraintStart_toStartOf="parent"

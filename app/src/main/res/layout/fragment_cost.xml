@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background"
+    android:background="#181A20"
     tools:context=".ui.main.view.create_cost.Cost">
 
     <include
         android:id="@+id/cost_toolbar"
         layout="@layout/toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +34,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:padding="20dp"
+                android:padding="30dp"
                 >
 
                 <include
@@ -52,8 +52,8 @@
                     app:layout_constraintTop_toBottomOf="@id/cost_profile"
                     android:layout_marginTop="20dp"
                     android:padding="10dp"
-                    android:backgroundTint="@color/dark_blue"
-                    android:background="@drawable/rect_bg">
+                    android:backgroundTint="#1C203A"
+                    android:background="@drawable/otp_number_bg">
 
 
                     <TextView
@@ -64,6 +64,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         android:text="$"
                         android:gravity="end"
+                        android:textSize="32sp"
                         style="@style/headingText"
                         android:id="@+id/currency"/>
 
@@ -78,6 +79,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         style="@style/headingText"
                         android:maxLines="1"
+                        android:textSize="32sp"
                         android:cursorVisible="false"
                         android:background="@color/transparent"
                         android:ellipsize="end">
@@ -90,7 +92,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/currency"
-                        style="@style/normalText"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textSize="14sp"
+                        android:textColor="#9395A4"
                         android:text="Cost Per Group Members"
                         android:gravity="center_horizontal"/>
 
@@ -113,10 +117,11 @@
 
                 <com.konaire.numerickeyboard.NumericKeyboard
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/btnNext"
+                    app:layout_constraintTop_toBottomOf="@id/errorMessage"
                     android:layout_gravity="bottom"
                     app:keySpecial="*"
                     android:layout_marginBottom="20dp"
@@ -125,7 +130,7 @@
 
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="248dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -133,12 +138,9 @@
                     android:text="Next"
                     style="@style/buttonStyle"
                     android:background="@drawable/button_round_bg"
-                    android:paddingStart="80dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
                     android:textSize="14dp"
-                    android:paddingEnd="80dp"
-                    android:fontFamily="@font/poppins_semibold"
                     android:id="@+id/btnNext"/>
 
 

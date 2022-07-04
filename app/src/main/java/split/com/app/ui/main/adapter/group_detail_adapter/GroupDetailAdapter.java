@@ -92,19 +92,19 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
 
         Glide.with(context)
                 .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
-                .placeholder(R.color.blue)
+                .placeholder(R.color.images_placeholder)
                 .into(holder.user);
 
         Glide.with(context)
                 .load(Constants.IMG_PATH + dataItem.getSubCategory().getCategory().getIcon())
-                .placeholder(R.color.blue)
+                .placeholder(R.color.images_placeholder)
                 .into(holder.rate_icon);
 
         holder.rateOf_id.setText(String.valueOf(dataItem.getGroupAdmin().getUserId()));
 
         String coin = String.valueOf(dataItem.getCostPerMember());
         Double coinFloat = Double.parseDouble(coin);
-        String value = String.valueOf(((coinFloat * 30) / 100) + coinFloat);
+        String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
         holder.coins.setText(value + " Coins");
 
 

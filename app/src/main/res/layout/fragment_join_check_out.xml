@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background"
+    android:background="#141629"
     tools:context=".ui.main.view.join_checkout.JoinCheckOut">
 
     <include
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
         android:id="@+id/jc_toolbar"
         layout="@layout/toolbar_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,15 +23,19 @@
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/jc_toolbar"
-        app:layout_constraintVertical_bias="1.0">
+       >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:padding="30dp">
 
             <include
 
@@ -45,27 +48,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/rect_with_yellow_stroke"
-                android:padding="12dp"
+                android:paddingStart="20dp"
+                android:paddingTop="25dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile2">
 
                 <TextView
                     android:id="@+id/tv_total"
-                    style="@style/semiBoldText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_semibold"
                     android:text="Total"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_price"
-                    style="@style/normalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Group Price"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -74,10 +80,9 @@
 
                 <TextView
                     android:id="@+id/tv_gateway"
-                    style="@style/normalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Payment Gateway"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -86,10 +91,9 @@
 
                 <TextView
                     android:id="@+id/tv_fee"
-                    style="@style/normalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Fees"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -98,12 +102,11 @@
 
                 <TextView
                     android:id="@+id/price_value"
-                    style="@style/normalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/inter_semibold"
                     android:text="143 Coins"
-                    android:textColor="@color/yellow"
+                    android:textColor="#FFE600"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_price"
                     app:layout_constraintEnd_toStartOf="@id/per_month"
@@ -111,23 +114,21 @@
 
                 <TextView
                     android:id="@+id/per_month"
-                    style="@style/normalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/inter_semibold"
                     android:text="/Month"
                     android:textColor="@color/hint_color"
-                    android:textSize="14sp"
+                    android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_price"
                     app:layout_constraintEnd_toEndOf="parent" />
 
 
                 <TextView
                     android:id="@+id/payment"
-                    style="@style/normalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/inter_medium"
                     android:text="2.86"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -137,49 +138,46 @@
 
                 <TextView
                     android:id="@+id/payment_per_month"
-                    style="@style/normalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/inter_semibold"
                     android:text="/Month"
                     android:textColor="@color/hint_color"
-                    android:textSize="14sp"
+                    android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_gateway"
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
                     android:id="@+id/free"
-                    style="@style/normalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Free"
                     android:textColor="@color/white"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/payment"
                     app:layout_constraintBottom_toBottomOf="@id/tv_fee"
                     app:layout_constraintEnd_toStartOf="@id/per_month"
+                    app:layout_constraintStart_toStartOf="@id/payment"
                     app:layout_constraintTop_toTopOf="@id/tv_fee" />
 
                 <View
+                    android:id="@+id/view"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/free"
                     android:layout_marginTop="8dp"
                     android:background="@color/white"
-                    android:id="@+id/view"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/free" />
 
 
                 <TextView
                     android:id="@+id/tv_promo"
-                    style="@style/normalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:fontFamily="@font/inter_semibold"
                     android:text="Promocode"
-                    android:layout_marginTop="5dp"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -188,9 +186,9 @@
 
                 <com.skydoves.elasticviews.ElasticImageView
                     android:id="@+id/next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="6dp"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:padding="7dp"
                     android:src="@drawable/ic_next"
                     app:imageView_duration="150"
                     app:imageView_scale="0.7"
@@ -200,73 +198,238 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/guarantee_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/only_stroke"
-            android:backgroundTint="@color/blue"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/total_layout">
-
-
-            <TextView
-                android:id="@+id/tv_guarantee"
-                style="@style/semiBoldText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Splitur Guarantee"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_guarantee_msg"
-                style="@style/normalText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is a month payment which can be Canceled anytime from the App."
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_guarantee" />
-
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/guarantee_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/only_stroke"
+                android:backgroundTint="@color/blue"
+                android:paddingStart="20dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_guarantee_msg"
-                android:background="@drawable/rect_back_with_grey_stroke"
-                android:text="You will recive full refund including the fees if you do not recive the Credentials or your service stops within 28 days from today"
-                style="@style/normalText"
-                android:padding="10dp"
-                android:textSize="12sp"
-                android:layout_marginTop="6dp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/total_layout">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tv_guarantee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="Splitur Guarantee"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_guarantee_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:alpha="0.8"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="This is a month payment which can be Canceled anytime from the App."
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_guarantee" />
+
+                <TextView
+                    style="@style/normalText"
+                    android:layout_width="309dp"
+                    android:layout_height="73dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/guarantee_term_bg"
+                    android:paddingStart="11dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="9dp"
+                    android:text="You will recive full refund including the fees if you do not recive the Credentials or your service stops within 28 days from today"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_guarantee_msg" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/joinTermsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/nav_bg"
+                android:backgroundTint="@color/profile_bg"
+                android:paddingTop="13dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="15dp"
+                android:layout_marginTop="@dimen/_13sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guarantee_layout">
+
+                <TextView
+                    android:id="@+id/tv_terms"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Terms&amp;Conditions"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/termPoints"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/terms_bg"
+                    android:paddingStart="12dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="20dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_terms">
+
+                    <ImageView
+                        android:id="@+id/point1"
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/round_back"
+                        android:backgroundTint="@color/hint_color"
+                        app:layout_constraintEnd_toStartOf="@id/tv_point1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/tv_point1"
+                        android:fontFamily="@font/inter_medium"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/hint_color"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="I have read and understand and agree to comply with all tems and conditions, Privacy policy and Subscpace Gurantee and Refund Policy"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/point1"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/point2"
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/round_back"
+                        android:backgroundTint="@color/hint_color"
+                        app:layout_constraintEnd_toStartOf="@id/tv_point2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_point1" />
+
+
+                    <TextView
+                        android:id="@+id/tv_point2"
+                        android:fontFamily="@font/inter_medium"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/hint_color"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="I confirm that I understand and comply with the Subscription Platforms sharing terms and conditions"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/point2"
+                        app:layout_constraintTop_toBottomOf="@id/tv_point1" />
+
+
+                    <ImageView
+                        android:id="@+id/point3"
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/round_back"
+                        android:backgroundTint="@color/hint_color"
+                        app:layout_constraintEnd_toStartOf="@id/tv_point3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_point2" />
+
+
+                    <TextView
+                        android:id="@+id/tv_point3"
+                        android:fontFamily="@font/inter_medium"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/hint_color"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="I confirm that I understand and comply with the Subscription Platforms sharing terms and conditions"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/point3"
+                        app:layout_constraintTop_toBottomOf="@id/tv_point2" />
+
+                    <ImageView
+                        android:id="@+id/point4"
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/round_back"
+                        android:backgroundTint="@color/hint_color"
+                        app:layout_constraintEnd_toStartOf="@id/tv_point4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_point3" />
+
+
+                    <TextView
+                        android:id="@+id/tv_point4"
+                        android:fontFamily="@font/inter_medium"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/hint_color"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="I confirm that I understand and comply with the Subscription Platforms sharing terms and conditions"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/point4"
+                        app:layout_constraintTop_toBottomOf="@id/tv_point3" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="@dimen/_10sdp"
+                    android:padding="@dimen/_4sdp"
+                    android:textColor="@color/hint_color"
+                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="By clicking on the join button, you agree to the terms and conditions mentioned above"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/termPoints" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <Button
                 android:id="@+id/btn_join"
                 style="@style/buttonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_213sdp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:background="@drawable/button_round_bg"
-                android:paddingStart="50dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="50dp"
-                android:paddingBottom="5dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:text="Join For 146 Coins"
+                app:layout_constraintTop_toBottomOf="@id/joinTermsLayout"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_40sdp"
                 app:layout_constraintStart_toStartOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

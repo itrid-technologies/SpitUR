@@ -29,6 +29,7 @@ import split.com.app.ui.main.viewmodel.group_info.GroupInfoViewModel;
 import split.com.app.ui.main.viewmodel.join_group.JoinGroupViewModel;
 import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
+import split.com.app.utils.TimeAgo;
 
 
 public class GroupInformation extends Fragment {
@@ -102,16 +103,20 @@ public class GroupInformation extends Fragment {
             binding.profile1.netflix.setText(dataItem.getTitle());
             Glide.with(requireContext())
                     .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
-                    .placeholder(R.color.blue)
+                    .placeholder(R.color.images_placeholder)
                     .into(binding.profile1.userImage);
             binding.profile1.userName.setText(String.valueOf(dataItem.getGroupAdmin().getUserId()));
             binding.tvScoreValue.setText(String.valueOf(dataItem.getGroupAdmin().getSpliturScore()));
-            binding.tvLastActive.setText(Constants.getDate(dataItem.getGroupAdmin().getLastActive()));
+
+            TimeAgo timeAgo = new TimeAgo();
+            String last_seen = timeAgo.covertTimeToText(dataItem.getGroupAdmin().getLastActive());
+
+            binding.tvLastActive.setText(last_seen);
             binding.tvDaysValue.setText(Constants.getDate(dataItem.getGroupAdmin().getCreatedAt()));
 
             String coin = String.valueOf(dataItem.getCostPerMember());
             Double coinFloat = Double.parseDouble(coin);
-            String value = String.valueOf(((coinFloat * 30) / 100) + coinFloat);
+            String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
             binding.profile1.count.setText(value + " Coins");
             // binding.tvDaysValue.setText(dataItem.);
         } catch (NullPointerException e) {

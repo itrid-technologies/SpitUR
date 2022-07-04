@@ -73,12 +73,14 @@ public class Credentials extends Fragment {
             String email = binding.edUsername.getText().toString().trim();
             String password = binding.edPassword.getText().toString().trim();
 
+
+
             if (email.isEmpty()){
                 binding.errorMessage.setText("Enter email");
                 binding.errorMessage.setVisibility(View.VISIBLE);
-            }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                binding.errorMessage.setText("Enter valid email");
-                binding.errorMessage.setVisibility(View.VISIBLE);
+//            }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+//                binding.errorMessage.setText("Enter valid email");
+//                binding.errorMessage.setVisibility(View.VISIBLE);
             } else if (password.isEmpty()) {
                 binding.errorMessage.setText("Enter password");
                 binding.errorMessage.setVisibility(View.VISIBLE);

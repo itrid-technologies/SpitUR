@@ -75,7 +75,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlansVH> {
     public static class PlansVH extends RecyclerView.ViewHolder {
         public ConstraintLayout layout;
         public TextView title, body ;
-        Button join;
+        TextView join;
         ImageView icon_bg;
         ImageView icon;
 

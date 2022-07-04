@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#181A20"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.view.create_visibility.Visibility">
 
@@ -11,7 +11,7 @@
         android:id="@+id/visibility_toolbar"
         layout="@layout/toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:padding="30dp">
 
                 <include
 
@@ -44,8 +44,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/visibility_profile"
-                    android:layout_marginTop="30dp"
-                    android:padding="20dp"
+                    android:layout_marginTop="34dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
                     android:background="@drawable/selected_gradient_stroke"
                     >
 
@@ -57,7 +60,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         android:text="Public"
                         android:textSize="16sp"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/inter_semibold"
                         android:textColor="@color/orange"
                         style="@style/semiBoldText"/>
 
@@ -69,7 +72,8 @@
                         app:layout_constraintStart_toEndOf="@id/tv_public"
                         android:text="Visibility"
                         android:textSize="16sp"
-                        android:fontFamily="@font/poppins_medium"
+                        android:alpha="0.8"
+                        android:fontFamily="@font/inter_semibold"
                         android:layout_marginStart="6dp"
                         style="@style/semiBoldText"/>
 
@@ -80,9 +84,11 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_public"
                         app:layout_constraintStart_toStartOf="@id/tv_public"
                         android:text="It will be visible on search"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/inter_medium"
                         android:layout_marginTop="-4dp"
-                        style="@style/normalText"/>
+                        android:textSize="12sp"
+                        android:textColor="#5E6272"
+                        />
 
 
                     <ImageView
@@ -104,9 +110,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/publicLayout"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:background="@drawable/only_grey_stroke"
-                    android:padding="20dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
                     >
 
                     <TextView
@@ -117,8 +126,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         android:text="Private"
                         android:textSize="16sp"
-                        android:fontFamily="@font/poppins_medium"
-                        style="@style/semiBoldText"/>
+                        android:fontFamily="@font/inter_semibold"
+                        android:textColor="@color/white"
+                        android:alpha="0.8"/>
 
                     <TextView
                         android:id="@+id/visibility01"
@@ -128,9 +138,10 @@
                         app:layout_constraintStart_toEndOf="@id/tv_private"
                         android:text="Visibility"
                         android:textSize="16sp"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/inter_semibold"
                         android:layout_marginStart="6dp"
-                        style="@style/semiBoldText"/>
+                        android:textColor="@color/white"
+                        android:alpha="0.6"/>
 
                     <TextView
                         android:id="@+id/private_note"
@@ -138,10 +149,11 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/tv_private"
                         app:layout_constraintStart_toStartOf="@id/tv_private"
-                        android:text="It will not visible on search"
-                        android:fontFamily="@font/poppins_medium"
+                        android:text="It will be visible on search"
+                        android:fontFamily="@font/inter_medium"
                         android:layout_marginTop="-4dp"
-                        style="@style/normalText"/>
+                        android:textSize="12sp"
+                        android:textColor="#5E6272"/>
 
 
                     <ImageView
@@ -162,14 +174,12 @@
                 <Button
                     android:id="@+id/btn_next"
                     style="@style/buttonStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="248dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/button_round_bg"
-                    android:paddingStart="60dp"
-                    android:paddingTop="5dp"
-                    android:paddingEnd="60dp"
-                    android:paddingBottom="5dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
                     android:text="@string/next"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/privateLayout"

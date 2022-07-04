@@ -1,5 +1,8 @@
 package split.com.app.ui.main.view.join_checkout;
 
+import android.app.AlertDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,9 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -27,6 +33,9 @@ public class JoinCheckOut extends Fragment {
 
    FragmentJoinCheckOutBinding binding;
     DataItem dataItem;
+    AlertDialog.Builder dialogBuilder;
+    AlertDialog alertDialog;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,7 +74,7 @@ public class JoinCheckOut extends Fragment {
             binding.profile2.netflix.setText(dataItem.getTitle());
             Glide.with(requireContext())
                     .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
-                    .placeholder(R.color.blue)
+                    .placeholder(R.color.images_placeholder)
                     .into(binding.profile2.userImage);
             binding.profile2.userName.setText(String.valueOf(dataItem.getGroupAdmin().getUserId()));
             String coin = String.valueOf(dataItem.getCostPerMember());
@@ -86,12 +95,47 @@ public class JoinCheckOut extends Fragment {
     }
 
     private void initClickListeners() {
-        binding.btnJoin.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_joinCheckOut_to_joinTerms);
-        });
 
         binding.jcToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
+
+
+        binding.btnJoin.setOnClickListener(view -> {
+            dialogBuilder = new AlertDialog.Builder(requireContext());
+            View layoutView = getLayoutInflater().inflate(R.layout.enter_email_dialogue, null);
+            TextView join = (TextView) layoutView.findViewById(R.id.d_join);
+            TextView error = (TextView) layoutView.findViewById(R.id.d_errorMessage);
+
+            EditText email = (EditText) layoutView.findViewById(R.id.ed_userEMAIL);
+
+            dialogBuilder.setView(layoutView);
+            alertDialog = dialogBuilder.create();
+            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            alertDialog.show();
+            join.setOnClickListener(view1 -> {
+                String emailId = email.getText().toString().trim();
+
+                if (emailId.isEmpty()){
+                    error.setText("Enter email id");
+                    error.setVisibility(View.VISIBLE);
+                }else if (!Patterns.EMAIL_ADDRESS.matcher(emailId).matches()){
+                    error.setText("Enter valid email id");
+                    error.setVisibility(View.VISIBLE);
+                }else {
+                    error.setVisibility(View.GONE);
+                    Constants.JoinEmail = emailId;
+                    nAV();
+                    alertDialog.dismiss();
+                }
+            });
+
+        });
     }
+
+    private void nAV() {
+        Navigation.findNavController(requireView()).navigate(R.id.action_joinCheckOut_to_joinPayment);
+    }
+
 }

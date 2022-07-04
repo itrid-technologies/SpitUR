@@ -223,6 +223,9 @@
         <action
             android:id="@+id/action_joinCheckOut_to_joinTerms"
             app:destination="@id/joinTerms" />
+        <action
+            android:id="@+id/action_joinCheckOut_to_joinPayment"
+            app:destination="@id/joinPayment" />
     </fragment>
     <fragment
         android:id="@+id/joinTerms"

@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background"
+    android:background="#181A20"
     tools:context=".ui.main.view.group_info.GroupInformation">
 
     <include
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
         android:id="@+id/gi_toolbar"
         layout="@layout/toolbar_layout"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:padding="22dp">
 
             <include
 
@@ -43,9 +43,10 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/profile1"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/semiBoldText"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
                 android:text="Password Verification"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:textSize="20sp"
                 android:id="@+id/tv_pass_verification"/>
 
@@ -56,9 +57,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_pass_verification"
-                android:padding="20dp"
+                android:padding="@dimen/_15sdp"
                 android:backgroundTint="#262A34"
-                android:background="@drawable/rect_bg">
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="@drawable/verification_bg">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/no_user_layout"
@@ -70,10 +72,10 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/iv_user"
-                        android:layout_width="74dp"
-                        android:layout_height="74dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/user"
-                        app:civ_border_color="@color/error"
+                        app:civ_border_color="#ADADAD"
                         app:civ_border_width="2dp"
                         app:civ_circle_background_color="#94F0F0"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -88,6 +90,7 @@
                         android:backgroundTint="@color/error"
                         android:src="@drawable/cross"
                         android:gravity="center"
+                        android:visibility="gone"
                         android:padding="3dp"
                         app:layout_constraintBottom_toBottomOf="@id/iv_user"
                         app:layout_constraintEnd_toEndOf="@id/iv_user" />
@@ -99,7 +102,9 @@
                         app:layout_constraintEnd_toEndOf="@id/iv_user"
                         app:layout_constraintTop_toBottomOf="@id/iv_user_"
                         android:text="No User"
-                        style="@style/semiBoldText"
+                        android:textSize="14dp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_bold"
                         android:layout_marginTop="6dp"
                         android:id="@+id/status"/>
 
@@ -123,9 +128,10 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/verification_layout"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/semiBoldText"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
                 android:text="Admin Info"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:textSize="20sp"
                 android:id="@+id/tv_admin_info"/>
 
@@ -138,6 +144,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_admin_info"
                 android:padding="16dp"
                 android:backgroundTint="#262A34"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:background="@drawable/rect_bg">
 
                 <TextView
@@ -146,9 +153,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_last_active"
-                    style="@style/semiBoldText"
                     android:textSize="20sp"
                     android:text="-"
+                    android:fontFamily="@font/inter_bold"
                     android:textColor="@color/green"
                     android:gravity="center"
                     android:id="@+id/tv_score_value"/>
@@ -160,7 +167,8 @@
                     app:layout_constraintEnd_toStartOf="@id/tv_last_active"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:background="@color/hint_color"
+                    android:background="@color/white"
+                    android:alpha="0.2"
                     android:id="@+id/line"/>
 
                 <TextView
@@ -169,7 +177,7 @@
                     app:layout_constraintStart_toStartOf="@id/tv_score_value"
                     app:layout_constraintTop_toBottomOf="@id/tv_score_value"
                     app:layout_constraintEnd_toEndOf="@id/tv_score_value"
-                    style="@style/normalText"
+                    android:fontFamily="@font/inter_regular"
                     android:textSize="10sp"
                     android:text="@string/spiltur_score"
                     android:layout_marginTop="5dp"
@@ -184,7 +192,8 @@
                     app:layout_constraintEnd_toStartOf="@id/tv_days_value"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:background="@color/hint_color"
+                    android:background="@color/white"
+                    android:alpha="0.2"
                     android:id="@+id/line1"/>
 
                 <TextView
@@ -193,7 +202,7 @@
                     app:layout_constraintStart_toEndOf="@id/tv_score_value"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_days_value"
-                    style="@style/semiBoldText"
+                    android:fontFamily="@font/inter_bold"
                     android:gravity="center"
                     android:text="-"
                     android:textSize="20sp"
@@ -206,7 +215,7 @@
                     app:layout_constraintStart_toStartOf="@id/tv_last_active"
                     app:layout_constraintTop_toBottomOf="@id/tv_last_active"
                     app:layout_constraintEnd_toEndOf="@id/tv_last_active"
-                    style="@style/normalText"
+                    android:fontFamily="@font/inter_regular"
                     android:layout_marginTop="5dp"
                     android:text="Last Active"
                     android:textSize="10sp"
@@ -221,7 +230,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:gravity="center"
-                    style="@style/semiBoldText"
+                    android:fontFamily="@font/inter_bold"
                     android:text="-"
                     android:textSize="20sp"
                     android:textColor="@color/orange"
@@ -233,7 +242,7 @@
                     app:layout_constraintStart_toStartOf="@id/tv_days_value"
                     app:layout_constraintTop_toBottomOf="@id/tv_days_value"
                     app:layout_constraintEnd_toEndOf="@id/tv_days_value"
-                    style="@style/normalText"
+                    android:fontFamily="@font/inter_regular"
                     android:text="Creation Date"
                     android:textSize="10sp"
                     android:layout_marginTop="5dp"
@@ -248,9 +257,10 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/admin_layout"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/semiBoldText"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
                 android:text="Group Credential"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:textSize="20sp"
                 android:id="@+id/tv_credential"/>
 
@@ -261,9 +271,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_credential"
-            android:padding="20dp"
+            android:paddingTop="@dimen/_12sdp"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             android:backgroundTint="#262A34"
-            android:background="@drawable/rect_bg">
+            android:background="@drawable/nav_bg">
 
             <ImageView
                 android:layout_width="60dp"
@@ -279,7 +293,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/pass_manager_icon"
-                style="@style/semiBoldText"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/white"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="Splitur Password Manager"
@@ -292,9 +307,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/pass_manager_icon"
-                style="@style/normalText"
-                android:textStyle="bold"
+                android:fontFamily="@font/inter_semibold"
                 android:textSize="10sp"
+                android:layout_marginTop="-6dp"
                 android:textColor="@color/hint_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_manager"
@@ -306,21 +321,18 @@
 
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/group_layout"
                 android:text="Join Now"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 style="@style/buttonStyle"
                 android:background="@drawable/button_round_bg"
-                android:paddingStart="80dp"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
                 android:textSize="14dp"
-                android:paddingEnd="80dp"
-                android:fontFamily="@font/poppins_semibold"
                 android:id="@+id/join_button"/>
 
 

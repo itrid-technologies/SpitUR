@@ -19,6 +19,15 @@ public class DataItem{
 	@SerializedName("id")
 	private int id;
 
+	@SerializedName("upi_id")
+	private String upi_id;
+
+	@SerializedName("subscription_id")
+	private String subscription_id;
+
+	@SerializedName("payment_status")
+	private String payment_status;
+
 	@SerializedName("otp_requsted")
 	private boolean otpRequsted;
 
@@ -58,5 +67,21 @@ public class DataItem{
 
 	public Group getGroup(){
 		return group;
+	}
+
+	public String getPayment_status() {
+		return payment_status;
+	}
+
+	public boolean isOtpRequsted() {
+		return otpRequsted;
+	}
+
+	public String getSubscription_id() {
+		return subscription_id;
+	}
+
+	public String getUpi_id() {
+		return upi_id;
 	}
 }

@@ -1,6 +1,8 @@
 package split.com.app.ui.main.adapter.all_joined_group;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +46,19 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
     public void onBindViewHolder(@NonNull AllJoinedGroupAdapter.GroupVH holder, int position) {
         split.com.app.data.model.all_joined_groups.DataItem current_item = dataItems.get(position);
         if (current_item.getGroup() != null) {
+            if (!current_item.getPayment_status().isEmpty()){
+                if (current_item.getPayment_status().equalsIgnoreCase("paid")){
+                    holder.open.setText("Open");
+                }else if (current_item.getPayment_status().equalsIgnoreCase("pending")){
+                    holder.open.setText("Pending");
+                    holder.open.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFD300")));
+                }else {
+
+                }
+            }
+
             holder.name.setText(current_item.getGroup().getGroupTitle());
+
         }
 
     }

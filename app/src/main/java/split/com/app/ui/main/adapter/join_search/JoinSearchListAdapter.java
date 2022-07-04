@@ -51,7 +51,7 @@ public class JoinSearchListAdapter extends RecyclerView.Adapter<JoinSearchListAd
         if (current_data.getCategory() != null) {
             Glide.with(context)
                     .load(Constants.IMG_PATH + current_data.getCategory().getIcon())
-                    .placeholder(R.color.blue)
+                    .placeholder(R.color.images_placeholder)
                     .into(holder.icon);
         }
         holder.name.setText(current_data.getTitle());

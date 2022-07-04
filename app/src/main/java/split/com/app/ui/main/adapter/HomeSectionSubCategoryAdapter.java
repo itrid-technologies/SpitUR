@@ -58,7 +58,7 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
 
             Glide.with(context)
                     .load(Constants.IMG_PATH + subCat_icon)
-                    .placeholder(R.color.blue)
+                    .placeholder(R.color.images_placeholder)
                     .into(holder.icon);
             SubCategoryItem subCategoryItem = homeDataItem.get(position);
             holder.name.setText(subCategoryItem.getSubCatTitle());

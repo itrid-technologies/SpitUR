@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background"
+    android:background="#181A20"
     tools:context=".ui.main.view.group_details.GroupDetail">
 
     <include
         android:id="@+id/group_detail_toolbar"
         layout="@layout/toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,10 +43,15 @@
                 android:textColor="@color/white"
                 android:drawableStart="@drawable/search_icon"
                 android:drawablePadding="8dp"
-                android:textSize="16sp"
-                android:fontFamily="@font/poppin_regular"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_semibold"
                 android:background="@drawable/rect_bg"
-                android:padding="12dp"
+                android:paddingTop="12dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:paddingBottom="12dp"
+                android:paddingStart="16sp"
+                android:paddingEnd="16sp"
                 android:id="@+id/planSearchField"/>
 
             <androidx.recyclerview.widget.RecyclerView

@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
+    android:layout_marginTop="12dp"
     android:background="@drawable/rect_back_with_grey_stroke"
-    android:padding="8dp">
+    android:padding="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_user"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:src="@drawable/user"
         app:civ_border_color="@color/yellow"
         app:civ_border_width="2dp"
@@ -34,110 +34,119 @@
 
     <TextView
         android:id="@+id/tv_username"
-        style="@style/semiBoldText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="-"
+        android:text="Netflix"
+        android:textColor="@color/white"
+        android:fontFamily="@font/inter_semibold"
         android:textSize="17sp"
+        app:layout_constraintEnd_toStartOf="@+id/coins_value"
         app:layout_constraintStart_toEndOf="@id/iv_user"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/memberView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/tv_username"
         app:layout_constraintTop_toBottomOf="@id/tv_username"
-        android:background="@drawable/round_back"
-        android:orientation="horizontal"
-        android:backgroundTint="@color/dark_blue"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp">
+        android:gravity="start"
+        app:layout_constraintEnd_toStartOf="@+id/coins_value"
+   >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_back"
+            android:backgroundTint="@color/dark_blue"
+            android:orientation="horizontal"
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp">
+
 
         <TextView
             android:id="@+id/tv_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
-            style="@style/normalText"
-            android:textSize="9sp"
-            android:background="@drawable/round_back"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:alpha="0.4"
+            android:textSize="@dimen/_9sdp"
+            android:background="@drawable/ic_score_bg"
             android:backgroundTint="@color/transparent"
-            android:paddingStart="8dp"
-            android:padding="3dp"
-            android:paddingEnd="8dp"/>
+   />
 
         <TextView
             android:id="@+id/tv_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2"
-            android:background="@drawable/round_back"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:alpha="0.4"
+            android:textSize="@dimen/_9sdp"
+            android:background="@drawable/ic_score_bg"
             android:backgroundTint="@color/transparent"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            style="@style/normalText"
-            android:textSize="9sp"
-
-            android:padding="3dp"/>
+           />
 
         <TextView
             android:id="@+id/tv_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3"
-            style="@style/normalText"
-            android:background="@drawable/round_back"
-            android:backgroundTint="@color/transparent"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textSize="9sp"
-
-            android:padding="3dp"/>
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:alpha="0.4"
+            android:textSize="@dimen/_9sdp"
+            android:background="@drawable/ic_score_bg"
+            android:backgroundTint="@color/transparent"/>
 
         <TextView
             android:id="@+id/tv_four"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="4"
-            android:background="@drawable/round_back"
-            android:backgroundTint="@color/transparent"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            style="@style/normalText"
-            android:textSize="9sp"
-
-            android:padding="3dp"/>
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:alpha="0.4"
+            android:textSize="@dimen/_9sdp"
+            android:background="@drawable/ic_score_bg"
+            android:backgroundTint="@color/transparent"/>
         <TextView
             android:id="@+id/tv_five"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5"
-            style="@style/normalText"
-            android:textSize="9sp"
-            android:background="@drawable/round_back"
-            android:backgroundTint="@color/transparent"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
-            android:padding="3dp"/>
+            android:textColor="#FFFFFF"
+            android:alpha="0.4"
+            android:textSize="@dimen/_9sdp"
+            android:background="@drawable/ic_score_bg"
+            android:backgroundTint="@color/transparent"/>
 
         <TextView
             android:id="@+id/tv_six"
-            android:background="@drawable/round_back"
-            android:backgroundTint="@color/transparent"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="6"
-            style="@style/normalText"
-            android:textSize="9sp"
-            android:padding="3dp"/>
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:alpha="0.4"
+            android:textSize="@dimen/_9sdp"
+            android:background="@drawable/ic_score_bg"
+            android:backgroundTint="@color/transparent"/>
 
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -149,8 +158,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="Group Id:"
-        android:textColor="@color/dark_grey"
+        android:textColor="#FFFFFF"
+        android:alpha="0.6"
         android:textSize="11sp"
+        android:fontFamily="@font/inter_regular"
         app:layout_constraintStart_toStartOf="@id/iv_user"
         app:layout_constraintTop_toBottomOf="@id/iv_user" />
 
@@ -161,8 +172,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="-"
-        android:textColor="@color/dark_grey"
+        android:textColor="#FFFFFF"
+        android:alpha="0.6"
         android:textSize="11sp"
+        android:fontFamily="@font/inter_regular"
         android:layout_marginStart="4dp"
         app:layout_constraintStart_toEndOf="@id/tv_groupid"
         app:layout_constraintTop_toBottomOf="@id/iv_user" />
@@ -172,16 +185,15 @@
         android:id="@+id/coins_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/rect_blue_bg"
-        app:layout_constraintBottom_toBottomOf="@id/memberView"
-        android:text="143 Coins"
-        android:textSize="12sp"
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="8dp"
+        android:text="143 Coins"
         android:textColor="@color/white"
-        android:padding="5dp"/>
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 
@@ -203,18 +215,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="Online"
-        android:textColor="@color/dark_grey"
+        android:textColor="#FFFFFF"
+        android:alpha="0.6"
         android:textSize="11sp"
+        android:fontFamily="@font/inter_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 
     <ImageView
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
         android:background="@drawable/player_icon"
         app:layout_constraintEnd_toStartOf="@id/tv_rateOf"
         android:layout_marginEnd="3dp"
+        android:scaleType="fitXY"
         app:layout_constraintTop_toTopOf="@id/tv_rateOf"
         app:layout_constraintBottom_toBottomOf="@id/tv_rateOf"
         android:id="@+id/icon"/>
@@ -226,8 +241,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="rajesh2002"
-        android:textColor="@color/dark_grey"
-        android:textSize="10sp"
+        android:textColor="#FFFFFF"
+        android:alpha="0.6"
+        android:textSize="11sp"
+        android:fontFamily="@font/inter_regular"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toStartOf="@id/online_icon"
         app:layout_constraintBottom_toBottomOf="parent" />

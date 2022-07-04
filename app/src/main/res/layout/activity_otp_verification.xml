@@ -36,8 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/back"
             android:text="@string/enter_verification_code"
-            android:layout_marginEnd="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             style="@style/headingText"
             android:gravity="start"
             android:id="@+id/tv_enter_code"/>
@@ -95,7 +94,6 @@
             android:textColor="@color/error"
             android:padding="3dp"
             android:textSize="11sp"
-
             android:visibility="gone"
             android:id="@+id/errorMessage"/>
 
@@ -106,14 +104,15 @@
 
         <com.konaire.numerickeyboard.NumericKeyboard
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/verify_button"
+            app:layout_constraintTop_toBottomOf="@id/otp"
             android:layout_gravity="bottom"
             app:keySpecial="*"
             app:keyTextSize="28sp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="30dp"
             app:field="@+id/otp"
             app:keyTextColor="@color/white" />
 
