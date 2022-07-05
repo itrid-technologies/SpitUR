@@ -20,7 +20,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:paddingTop="20dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,10 +59,12 @@
                 app:layout_constraintTop_toTopOf="parent"
                 />
 
+
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="190dp"
+                android:layout_height="195dp"
                 android:scaleType="fitXY"
+                android:layout_marginTop="30dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/name"
@@ -70,11 +74,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/background_image"
                 app:layout_constraintTop_toTopOf="@id/background_image"
                 android:text="splitur"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="36dp"
                 style="@style/semiBoldText"/>
 
             <ImageView
@@ -95,9 +99,9 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/background_image"
-                android:text="436"
+                android:text="-"
                 android:textSize="26sp"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="36dp"
                 style="@style/semiBoldText"/>
 
             <TextView
@@ -115,7 +119,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toStartOf="@id/swap_icon"
                 app:layout_constraintTop_toBottomOf="@id/background_image"
@@ -128,9 +132,10 @@
                 app:layout_constraintStart_toStartOf="@id/payment_icon"
                 app:layout_constraintTop_toBottomOf="@id/payment_icon"
                 android:text="Payments"
-                style="@style/normalText"
                 app:layout_constraintEnd_toEndOf="@id/payment_icon"
-                android:padding="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#9CA3AF"
+                android:layout_marginTop="9dp"
                 android:textSize="13sp"
                 android:id="@+id/payment"/>
 
@@ -142,7 +147,7 @@
                 app:layout_constraintTop_toBottomOf="@id/background_image"
                 android:src="@drawable/refund"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:id="@+id/refund_icon"/>
 
             <TextView
@@ -151,9 +156,10 @@
                 app:layout_constraintStart_toStartOf="@id/swap_icon"
                 app:layout_constraintTop_toBottomOf="@id/swap_icon"
                 android:text="Swap Coins"
-                style="@style/normalText"
                 app:layout_constraintEnd_toEndOf="@id/swap_icon"
-                android:padding="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#9CA3AF"
+                android:layout_marginTop="9dp"
                 android:textSize="13sp"
                 android:id="@+id/swap"/>
 
@@ -167,7 +173,7 @@
                 android:src="@drawable/swap"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:id="@+id/swap_icon"/>
 
             <TextView
@@ -176,9 +182,10 @@
                 app:layout_constraintStart_toStartOf="@id/refund_icon"
                 app:layout_constraintTop_toBottomOf="@id/refund_icon"
                 android:text="Refund"
-                style="@style/normalText"
                 app:layout_constraintEnd_toEndOf="@id/refund_icon"
-                android:padding="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#9CA3AF"
+                android:layout_marginTop="9dp"
                 android:textSize="13sp"
                 android:id="@+id/refund"/>
 
@@ -189,9 +196,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/payment"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/plan_bg_blue_stroke"
-                android:padding="10dp">
+                android:layout_marginTop="20dp"
+                android:background="@drawable/profile_items_bg"
+                android:paddingTop="16dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -209,7 +219,8 @@
                     app:layout_constraintStart_toEndOf="@id/transaction_icon"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="Payments"
-                    style="@style/headingText"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_semibold"
                     android:textSize="20sp"
                     android:layout_marginStart="29dp"
                     android:id="@+id/tv_payment"/>
@@ -219,12 +230,12 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="@id/tv_payment"
                     app:layout_constraintTop_toBottomOf="@id/tv_payment"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="-8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:text="Transactions and UPI Payment Methods"
-                    style="@style/normalText"
+                    android:fontFamily="@font/poppins_medium"
                     android:textSize="13sp"
+                    android:textColor="@color/hint_color"
+                    android:layout_marginEnd="30dp"
                     android:id="@+id/tv_transaction"/>
 
 
@@ -238,9 +249,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/transaction_layout"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/plan_bg_blue_stroke"
-                android:padding="10dp">
+                android:layout_marginTop="10dp"
+                android:background="@drawable/profile_items_bg"
+                android:paddingTop="16dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -258,7 +272,8 @@
                     app:layout_constraintStart_toEndOf="@id/promotion_icon"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="Promotion"
-                    style="@style/headingText"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_semibold"
                     android:textSize="20sp"
                     android:layout_marginStart="29dp"
                     android:id="@+id/tv_promotion"/>
@@ -268,9 +283,10 @@
                     style="@style/normalText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-8dp"
-                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/poppins_medium"
                     android:textSize="13sp"
+                    android:textColor="@color/hint_color"
+                    android:layout_marginEnd="30dp"
                     android:text="Earn Credits when you Invite Friends"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.333"
@@ -287,10 +303,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/promotion_layout"
-
-                android:layout_marginTop="15dp"
-                android:background="@drawable/plan_bg_blue_stroke"
-                android:padding="10dp">
+                android:layout_marginTop="10dp"
+                android:background="@drawable/profile_items_bg"
+                android:paddingTop="16dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -308,7 +326,8 @@
                     app:layout_constraintStart_toEndOf="@id/friends_icon"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="Friends"
-                    style="@style/headingText"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_semibold"
                     android:textSize="20sp"
                     android:layout_marginStart="29dp"
                     android:id="@+id/tv_friends"/>
@@ -318,12 +337,12 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="@id/tv_friends"
                     app:layout_constraintTop_toBottomOf="@id/tv_friends"
-                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/poppins_medium"
                     android:textSize="13sp"
-                    android:layout_marginTop="-8dp"
+                    android:textColor="@color/hint_color"
+                    android:layout_marginEnd="30dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:text="People who you know from your contacts"
-                    style="@style/normalText"
                     android:id="@+id/tv_friends_detail"/>
 
 
@@ -337,9 +356,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/friends_layout"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/plan_bg_blue_stroke"
-                android:padding="10dp">
+                android:layout_marginTop="10dp"
+                android:background="@drawable/profile_items_bg"
+                android:paddingTop="16dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -357,9 +379,10 @@
                     app:layout_constraintStart_toEndOf="@id/contact_icon"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="Contact Us"
-                    android:layout_marginStart="29dp"
-                    style="@style/headingText"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_semibold"
                     android:textSize="20sp"
+                    android:layout_marginStart="29dp"
                     android:id="@+id/tv_contact"/>
 
                 <TextView
@@ -367,9 +390,10 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="@id/tv_contact"
                     app:layout_constraintTop_toBottomOf="@id/tv_contact"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="-8dp"
+                    android:fontFamily="@font/poppins_medium"
                     android:textSize="13sp"
+                    android:textColor="@color/hint_color"
+                    android:layout_marginEnd="30dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:text="Open a Support Ticket regarding a group"
                     style="@style/normalText"
