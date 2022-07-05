@@ -274,6 +274,9 @@
         <action
             android:id="@+id/action_createdAndJoinedGroups_to_createdGroupDetail"
             app:destination="@id/createdGroupDetail" />
+        <action
+            android:id="@+id/action_createdAndJoinedGroups_to_joinSearch"
+            app:destination="@id/joinSearch" />
     </fragment>
     <fragment
         android:id="@+id/joinedGroupDetail2"

@@ -127,7 +127,15 @@ public class CreatedAndJoinedGroups extends Fragment {
 
             binding.joinedButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00000000")));
             binding.joinedButton.setTextColor(Color.parseColor("#9395A4"));
-        });    }
+        });
+
+
+        binding.joinedButton.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_createdAndJoinedGroups_to_joinSearch);
+        });
+
+
+    }
 
     private void buildJoinRv(AllJoinedGroupModel groupDetailModel) {
         binding.noGroupLayout.setVisibility(View.GONE);

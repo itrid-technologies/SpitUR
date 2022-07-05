@@ -1,5 +1,6 @@
 package split.com.app.ui.main.view.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.skydoves.elasticviews.ElasticImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,7 @@ import split.com.app.ui.main.adapter.category_adapter.CategoryAdapter;
 import split.com.app.ui.main.adapter.popular_adapter.PopularHomeAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.view.profile.Profile;
+import split.com.app.ui.main.view.splash.Splash;
 import split.com.app.ui.main.viewmodel.avatar_viewmodel.AvatarViewModel;
 import split.com.app.ui.main.viewmodel.category_viewmodel.CategoryViewModel;
 import split.com.app.ui.main.viewmodel.home_viewmodel.HomeViewModel;
@@ -74,7 +78,7 @@ public class Home extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         Dashboard.hideNav(false);
 
-        Glide.with(requireContext()).load(R.drawable.splitur_loading).into(binding.homeLoading);
+       // Glide.with(requireContext()).load(R.drawable.splitur_loading).into(binding.homeLoading);
         return binding.getRoot();
     }
 
@@ -140,6 +144,7 @@ public class Home extends Fragment {
                             EditText userid = profileView.findViewById(R.id.profile_id);
                             EditText email = profileView.findViewById(R.id.profile_email);
                             ImageView image = profileView.findViewById(R.id.profile_image);
+                            ElasticImageView logout = profileView.findViewById(R.id.logout_icon);
 
                             RecyclerView avatarRv = profileView.findViewById(R.id.profile_avatars);
                             ImageButton previous = profileView.findViewById(R.id.previous_avatar);
@@ -223,6 +228,38 @@ public class Home extends Fragment {
                                 });
                             });
 
+
+                            logout.setOnClickListener(view1 -> {
+
+                                final BottomSheetDialog dialog = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
+                                View layout = LayoutInflater.from(requireContext()).inflate(R.layout.ask_to_remove_dialogue, null, false);
+                                ConstraintLayout deleteLayout = layout.findViewById(R.id.delete_layout);
+                                TextView remove = layout.findViewById(R.id.tv_remove);
+                                TextView tagline = layout.findViewById(R.id.delete_detail);
+                                TextView confirm = layout.findViewById(R.id.confirm_tagline);
+                                ImageView confirm_logout = layout.findViewById(R.id.confirm_remove);
+
+                                remove.setText("Log Out");
+                                tagline.setText("You can login back again using your Phone number and OTP");
+                                confirm.setText("You want to logout");
+
+
+                                confirm_logout.setOnClickListener(view2 -> {
+
+                                    profileViewModel = new ProfileViewModel(String.valueOf(activeUserModel.getData().getId()), "", "", "");
+                                    profileViewModel.initLogout();
+                                    profileViewModel.getLogout().observe(getViewLifecycleOwner(), basicModel -> {
+                                        if (basicModel.isStatus().equalsIgnoreCase("true")) {
+                                            Intent intent = new Intent(requireContext(), Splash.class);
+                                            startActivity(intent);
+
+                                        }
+                                    });
+                                });
+
+                            });
+
+
                             bt.setContentView(profileView);
                             bt.show();
 
@@ -249,7 +286,7 @@ public class Home extends Fragment {
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
             if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                 count = 0;
-            }else {
+            } else {
                 count = 1;
             }
 
@@ -338,7 +375,7 @@ public class Home extends Fragment {
         binding.categoriesLst.setVisibility(View.VISIBLE);
         binding.popularLst.setVisibility(View.VISIBLE);
         binding.homeSections.setVisibility(View.VISIBLE);
-        binding.homeLoading.setVisibility(View.GONE);
+        binding.loadingView.setVisibility(View.GONE);
 
     }
 }

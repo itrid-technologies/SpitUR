@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.view.home.Home">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:fillViewport="true"
         android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:fillViewport="true">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,157 +24,156 @@
             android:padding="20dp">
 
 
-
             <TextView
+                android:id="@+id/hello"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="Hello,"
                 android:fontFamily="@font/poppin_regular"
+                android:text="Hello,"
                 android:textColor="@color/hint_color"
                 android:textSize="20sp"
-                android:id="@+id/hello"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/hello"
-                android:text="User Name"
-                android:fontFamily="@font/poppins_bold"
-                android:textColor="@color/white"
                 android:layout_marginTop="-10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="User Name"
+                android:textColor="@color/white"
                 android:textSize="30sp"
-                android:id="@+id/name"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hello" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/user"
+                app:civ_border_color="#94F0F0"
                 app:civ_border_width="5dp"
                 app:civ_circle_background_color="#94F0F0"
-                app:civ_border_color="#94F0F0"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/name"
-                android:text="Search"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rect_bg"
+                android:drawableStart="@drawable/search_icon"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/inter_semibold"
+                android:gravity="center|start"
                 android:paddingStart="16dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:gravity="center|start"
+                android:text="Search"
                 android:textColor="@color/dark_grey"
-                android:drawableStart="@drawable/search_icon"
-                android:drawablePadding="8dp"
                 android:textSize="14sp"
-                android:fontFamily="@font/inter_semibold"
-                android:background="@drawable/rect_bg"
-                android:layout_marginTop="20dp"
-                android:id="@+id/search"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name" />
 
             <TextView
+                android:id="@+id/popular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/search"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="Popular"
-                android:textSize="14sp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/inter_semibold"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/round_back"
                 android:backgroundTint="@color/blue"
-                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_semibold"
+                android:gravity="center"
                 android:paddingStart="16dp"
                 android:paddingTop="4dp"
-                android:paddingBottom="4dp"
                 android:paddingEnd="16dp"
-                android:gravity="center"
-                android:id="@+id/popular"/>
+                android:paddingBottom="4dp"
+                android:text="Popular"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search" />
 
             <TextView
                 android:id="@+id/viewAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/popular"
-                app:layout_constraintBottom_toBottomOf="@id/popular"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="View All"
                 android:fontFamily="@font/inter_semibold"
+                android:text="View All"
                 android:textColor="@color/light_grey"
                 android:textSize="12sp"
-                />
+                app:layout_constraintBottom_toBottomOf="@id/popular"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/popular" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/popularLst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/popular"
                 android:layout_marginTop="10dp"
-                android:id="@+id/popularLst"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/popular" />
 
             <TextView
+                android:id="@+id/categories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/popularLst"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="Categories"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:textSize="18sp"
+                android:text="Categories"
                 android:textColor="@color/white"
-                android:layout_marginTop="10dp"
-                android:id="@+id/categories"/>
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/popularLst" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoriesLst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/categories"
                 android:layout_marginTop="10dp"
-                android:id="@+id/categoriesLst"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/categories" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/categoriesLst"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                android:text="Movies / Tv Shows"-->
-<!--                android:fontFamily="@font/poppins_semibold"-->
-<!--                android:textSize="18sp"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:id="@+id/movies"/>-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layout_constraintTop_toTopOf="@id/movies"-->
-<!--                app:layout_constraintBottom_toBottomOf="@id/movies"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                android:text="View All"-->
-<!--                android:fontFamily="@font/poppins_medium"-->
-<!--                android:textColor="@color/light_grey"-->
-<!--                android:textSize="14sp"-->
-<!--                />-->
+            <!--            <TextView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/categoriesLst"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                android:text="Movies / Tv Shows"-->
+            <!--                android:fontFamily="@font/poppins_semibold"-->
+            <!--                android:textSize="18sp"-->
+            <!--                android:textColor="@color/white"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:id="@+id/movies"/>-->
+            <!--            <TextView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/movies"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/movies"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                android:text="View All"-->
+            <!--                android:fontFamily="@font/poppins_medium"-->
+            <!--                android:textColor="@color/light_grey"-->
+            <!--                android:textSize="14sp"-->
+            <!--                />-->
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/homeSections"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/categoriesLst"
                 android:layout_marginTop="10dp"
-                android:id="@+id/homeSections"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/categoriesLst" />
 
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loadingView"
+                android:layout_marginTop="@dimen/_70sdp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:scaleType="center"
@@ -183,7 +182,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:id="@+id/home_loading"/>
+                app:lottie_autoPlay="false"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loading_animation" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
