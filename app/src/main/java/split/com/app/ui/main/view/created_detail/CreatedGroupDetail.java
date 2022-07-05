@@ -199,7 +199,7 @@ public class CreatedGroupDetail extends Fragment {
 
             binding.noMemberLayout.setVisibility(View.GONE);
             binding.adminAsMember.setVisibility(View.VISIBLE);
-            binding.groupMembersList.setVisibility(View.GONE);
+            binding.groupMembersList.setVisibility(View.VISIBLE);
 
             LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
             binding.groupMembersList.setLayoutManager(layoutManager);

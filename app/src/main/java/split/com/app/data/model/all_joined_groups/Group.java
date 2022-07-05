@@ -17,7 +17,7 @@ public class Group{
 	private GroupAdmin groupAdmin;
 
 	@SerializedName("total_members")
-	private Object totalMembers;
+	private String totalMembers;
 
 	@SerializedName("createdAt")
 	private String createdAt;
@@ -46,8 +46,14 @@ public class Group{
 	@SerializedName("email")
 	private String email;
 
+	@SerializedName("plan_id")
+	private String planId;
+
 	@SerializedName("plans_id")
 	private Object plansId;
+
+	@SerializedName("status")
+	private boolean status;
 
 	@SerializedName("updatedAt")
 	private String updatedAt;
@@ -108,8 +114,16 @@ public class Group{
 		return email;
 	}
 
+	public String getPlanId(){
+		return planId;
+	}
+
 	public Object getPlansId(){
 		return plansId;
+	}
+
+	public boolean isStatus(){
+		return status;
 	}
 
 	public String getUpdatedAt(){

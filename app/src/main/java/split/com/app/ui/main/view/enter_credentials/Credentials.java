@@ -80,10 +80,10 @@ public class Credentials extends Fragment {
                 binding.errorMessage.setVisibility(View.VISIBLE);
 //            }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
 //                binding.errorMessage.setText("Enter valid email");
+////                binding.errorMessage.setVisibility(View.VISIBLE);
+//            } else if (password.isEmpty()) {
+//                binding.errorMessage.setText("Enter password");
 //                binding.errorMessage.setVisibility(View.VISIBLE);
-            } else if (password.isEmpty()) {
-                binding.errorMessage.setText("Enter password");
-                binding.errorMessage.setVisibility(View.VISIBLE);
             }else {
                 binding.errorMessage.setVisibility(View.GONE);
 

@@ -127,6 +127,9 @@
                     android:layout_gravity="bottom"
                     app:keySpecial="*"
                     android:layout_marginBottom="30dp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
                     app:field="@+id/costValue"
                     app:keyTextColor="@color/white" />
 

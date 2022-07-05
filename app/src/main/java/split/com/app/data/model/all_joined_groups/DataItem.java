@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class DataItem{
 
+	@SerializedName("subscription_id")
+	private String subscriptionId;
+
 	@SerializedName("createdAt")
 	private String createdAt;
 
@@ -16,17 +19,14 @@ public class DataItem{
 	@SerializedName("group_id")
 	private int groupId;
 
+	@SerializedName("payment_status")
+	private String paymentStatus;
+
 	@SerializedName("id")
 	private int id;
 
 	@SerializedName("upi_id")
-	private String upi_id;
-
-	@SerializedName("subscription_id")
-	private String subscription_id;
-
-	@SerializedName("payment_status")
-	private String payment_status;
+	private String upiId;
 
 	@SerializedName("otp_requsted")
 	private boolean otpRequsted;
@@ -36,6 +36,10 @@ public class DataItem{
 
 	@SerializedName("group")
 	private Group group;
+
+	public String getSubscriptionId(){
+		return subscriptionId;
+	}
 
 	public String getCreatedAt(){
 		return createdAt;
@@ -53,11 +57,19 @@ public class DataItem{
 		return groupId;
 	}
 
+	public String getPaymentStatus(){
+		return paymentStatus;
+	}
+
 	public int getId(){
 		return id;
 	}
 
-	public boolean getOtpRequsted(){
+	public String getUpiId(){
+		return upiId;
+	}
+
+	public boolean isOtpRequsted(){
 		return otpRequsted;
 	}
 
@@ -67,21 +79,5 @@ public class DataItem{
 
 	public Group getGroup(){
 		return group;
-	}
-
-	public String getPayment_status() {
-		return payment_status;
-	}
-
-	public boolean isOtpRequsted() {
-		return otpRequsted;
-	}
-
-	public String getSubscription_id() {
-		return subscription_id;
-	}
-
-	public String getUpi_id() {
-		return upi_id;
 	}
 }

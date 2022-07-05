@@ -30,6 +30,7 @@ import java.util.List;
 
 import split.com.app.R;
 import split.com.app.data.model.HomeDataItem;
+import split.com.app.data.model.active_user.ActiveUserModel;
 import split.com.app.data.model.get_avatar.AvatarItem;
 import split.com.app.data.model.home_categories.CategoryDataItems;
 import split.com.app.data.model.popular_subcategory.DataItem;
@@ -78,7 +79,7 @@ public class Home extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         Dashboard.hideNav(false);
 
-       // Glide.with(requireContext()).load(R.drawable.splitur_loading).into(binding.homeLoading);
+        // Glide.with(requireContext()).load(R.drawable.splitur_loading).into(binding.homeLoading);
         return binding.getRoot();
     }
 
@@ -107,10 +108,26 @@ public class Home extends Fragment {
 
         setProfileData();
 
+        getUserDetails();
+
 
         initClickListeners();
         getPopularList();
     }
+
+    private void getUserDetails() {
+        profileViewModel = new ProfileViewModel("", "", "", "");
+        profileViewModel.initUser();
+        profileViewModel.getUser_data().observe(getViewLifecycleOwner(), activeUserModel -> {
+            if (activeUserModel.isStatus()) {
+                if (activeUserModel.getData() != null) {
+                    saveUserData(activeUserModel);
+                }
+            }
+        });
+    }
+
+
 
     private void initClickListeners() {
         binding.search.setOnClickListener(view -> {
@@ -164,6 +181,7 @@ public class Home extends Fragment {
                             Glide.with(Split.getAppContext()).load(Constants.IMG_PATH + activeUserModel.getData().getAvatar()).into(image);
 
 
+                            saveUserData(activeUserModel);
                             MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
                             sharedPreferences.saveData(Split.getAppContext(), "userAvatar", Constants.IMG_PATH + activeUserModel.getData().getAvatar());
                             sharedPreferences.saveData(Split.getAppContext(), "userName", activeUserModel.getData().getName());
@@ -377,5 +395,14 @@ public class Home extends Fragment {
         binding.homeSections.setVisibility(View.VISIBLE);
         binding.loadingView.setVisibility(View.GONE);
 
+    }
+
+    private void saveUserData(ActiveUserModel activeUserModel) {
+        Constants.ID = String.valueOf(activeUserModel.getData().getId());
+        Constants.USER_ID = activeUserModel.getData().getUserId();
+        Constants.USER_NAME = activeUserModel.getData().getName();
+        Constants.USER_EMAIL = activeUserModel.getData().getEmail();
+        Constants.USER_AVATAR = Constants.IMG_PATH + activeUserModel.getData().getAvatar();
+        Constants.NUMBER = activeUserModel.getData().getPhone();
     }
 }

@@ -2,17 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/rect_bg"
-    android:backgroundTint="@color/profile_bg"
-    android:padding="10dp"
+    android:background="@drawable/verification_bg"
+    android:backgroundTint="#262A34"
+    android:padding="13dp"
     android:layout_marginTop="4dp"
     android:layout_height="wrap_content">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/friend_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:src="@drawable/user"
         app:civ_border_width="2dp"
         android:layout_marginStart="10dp"
@@ -29,8 +29,8 @@
         app:layout_constraintStart_toEndOf="@id/friend_image"
         app:layout_constraintTop_toTopOf="@id/friend_image"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        style="@style/semiBoldText"
+        android:textColor="@color/white"
+        android:fontFamily="@font/inter_semibold"
         android:text="Rajesh kumar"
         android:textSize="16sp"
         android:id="@+id/friend_name"/>
@@ -40,7 +40,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/friend_name"
         app:layout_constraintTop_toBottomOf="@id/friend_name"
-        style="@style/normalText"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="12sp"
+        android:textColor="#5E6272"
         android:text="kumar2022"
         android:id="@+id/friend_id"/>
 

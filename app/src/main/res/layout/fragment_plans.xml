@@ -31,8 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:paddingTop="20dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:paddingBottom="20dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -17,13 +17,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="18dp">
+        app:cardCornerRadius="24dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/profile_bg"
+            android:background="#262A34"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:paddingTop="5dp"
@@ -35,7 +35,7 @@
                 android:id="@+id/SlideUp"
                 android:layout_width="70dp"
                 android:layout_height="3dp"
-                android:background="@color/dark_grey"
+                android:background="#5E6272"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +48,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/SlideUp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="25dp"
                 android:background="@drawable/plan_bg_blue_stroke"
                 android:padding="10dp">
 
@@ -68,9 +68,10 @@
                     app:layout_constraintStart_toEndOf="@id/chat_icon"
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="Chat"
-                    style="@style/headingText"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="@dimen/_14sdp"
                     android:id="@+id/tv_chat"/>
 
                 <TextView
@@ -78,12 +79,12 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="@id/tv_chat"
                     app:layout_constraintTop_toBottomOf="@id/tv_chat"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="50dp"
                     android:layout_marginTop="-5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:textColor="@color/blue"
                     android:text="Get Issues resolved directly by our Crew"
-                    style="@style/normalText"
+                    android:fontFamily="@font/poppins_medium"
                     android:textSize="11sp"
                     android:id="@+id/tv_chat_detail"/>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#181A20"
     tools:context=".ui.main.view.refund_complete.RefundCompletion">
 
     <include
@@ -38,9 +38,8 @@
             <ImageView
                 android:id="@+id/refund_success_gif"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="284dp"
                 android:background="@color/transparent"
-                android:src="@drawable/success_gif"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,41 +51,41 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:text="Transaction Complete"
-                android:textSize="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_transaction_complete"
+                android:textSize="24sp"
+                android:layout_marginTop="45dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/refund_success_gif" />
 
 
             <TextView
                 android:id="@+id/tv_transaction_complete"
-                style="@style/normalText"
+                android:fontFamily="@font/poppins_medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="80dp"
                 android:gravity="start"
+                android:textSize="12sp"
+                android:textColor="#9395A4"
+                android:layout_marginTop="@dimen/_4sdp"
                 android:text="Your Requested will be Processed within 24 to 48 hrs. And your withdrwal amount will be sent to the back account connected to you UPI Id"
-                app:layout_constraintBottom_toTopOf="@+id/btnHome"
-                app:layout_constraintStart_toStartOf="@id/tv_complete" />
+                app:layout_constraintStart_toStartOf="@id/tv_complete"
+                app:layout_constraintTop_toBottomOf="@+id/tv_complete" />
 
 
             <Button
                 android:id="@+id/btnHome"
                 style="@style/buttonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="248dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:background="@drawable/button_round_bg"
-                android:fontFamily="@font/poppins_semibold"
-                android:paddingStart="80dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="80dp"
-                android:paddingBottom="5dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:text="Home"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_transaction_complete" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

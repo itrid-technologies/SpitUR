@@ -89,7 +89,7 @@ public class JoinedGroupDetail extends Fragment {
             String value = String.valueOf(((coinFloat * 30) / 100) + coinFloat);
             binding.joinedProfile.count.setText(value + " Coins");
             binding.tvScoreValue.setText(String.valueOf(data.getGroup().getGroupAdmin().getSpliturScore()));
-            binding.tvLastActive.setText(Constants.getDate(data.getGroup().getGroupAdmin().getLastActive()));
+         // binding.tvLastActive.setText(Constants.getDate(data.getGroup().getGroupAdmin().getLastActive()));
             binding.tvDaysValue.setText(Constants.getDate(data.getGroup().getGroupAdmin().getCreatedAt()));
             binding.groupEmail.setText(data.getGroup().getEmail());
             binding.groupPass.setText(data.getGroup().getPassword());

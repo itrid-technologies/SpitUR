@@ -151,7 +151,17 @@ public class Search extends Fragment {
         binding.popularList.setLayoutManager(layoutManager);
         SearchListAdapter adapter = new SearchListAdapter(Split.getAppContext(), popularSubCategoryList);
         binding.popularList.setAdapter(adapter);
-    }
+
+        adapter.setOnCreateClickListener(position -> {
+
+
+            Constants.SUB_CATEGORY_ID = String.valueOf(popularSubCategoryList.get(position).getId());
+            Bundle bundle = new Bundle();
+            bundle.putString("SUB_CATEGORY_ID", String.valueOf(popularSubCategoryList.get(position).getId()));
+            Constants.SUB_CAT_TITLE = String.valueOf(popularSubCategoryList.get(position).getTitle());
+            Navigation.findNavController(requireView()).navigate(R.id.action_search2_to_plans2, bundle);
+        });
+        }
 
     private void buildCategoryRv1(List<DataItem> popularSubCategoryList) {
 
@@ -164,13 +174,21 @@ public class Search extends Fragment {
         binding.searchLis.setAdapter(adapter1);
 
         adapter1.setOnCreateClickListener(position -> {
+
+
+            Constants.SUB_CATEGORY_ID = String.valueOf(popularSubCategoryList.get(position).getId());
+            Bundle bundle = new Bundle();
+            bundle.putString("SUB_CATEGORY_ID",String.valueOf(popularSubCategoryList.get(position).getId()));
+            Constants.SUB_CAT_TITLE = String.valueOf(popularSubCategoryList.get(position).getTitle());
+            Navigation.findNavController(requireView()).navigate(R.id.action_search2_to_plans2,bundle);
+
 //            Bundle bundle = new Bundle();
 //            bundle.putString("SUB_CATEGORY_ID",String.valueOf(popularSubCategoryList.get(position).getId()));
 //
 //            MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
 //            pm.saveData(Split.getAppContext(), "SUB_CATEGORY_ID", String.valueOf(popularSubCategoryList.get(position).getId()));
-
-            //Navigation.findNavController(requireView()).navigate(R.id.action_search2_to_subscriptionName);
+//
+//            Navigation.findNavController(requireView()).navigate(R.id.action_search2_to_subscriptionName);
 
         });
     }

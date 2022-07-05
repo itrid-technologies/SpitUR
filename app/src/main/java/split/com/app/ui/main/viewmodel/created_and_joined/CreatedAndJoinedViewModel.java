@@ -4,11 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
 import split.com.app.data.model.all_joined_groups.AllJoinedGroupModel;
-import split.com.app.data.model.create_group.CreateGroupModel;
-import split.com.app.data.model.group_detail.GroupDetailModel;
-import split.com.app.data.repository.create_group.CreateGroupRepository;
 import split.com.app.data.repository.created_and_joined.CreatedAndJoinedGroupRepository;
-import split.com.app.ui.main.adapter.all_joined_group.AllJoinedGroupAdapter;
 
 public class CreatedAndJoinedViewModel extends ViewModel {
 

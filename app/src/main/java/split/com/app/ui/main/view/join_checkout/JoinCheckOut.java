@@ -24,6 +24,7 @@ import split.com.app.R;
 import split.com.app.data.model.group_detail.DataItem;
 import split.com.app.databinding.FragmentJoinCheckOutBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.join_checkout_viewmodel.JoinCheckoutViewModel;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
@@ -36,9 +37,11 @@ public class JoinCheckOut extends Fragment {
     AlertDialog.Builder dialogBuilder;
     AlertDialog alertDialog;
 
+    JoinCheckoutViewModel viewModel;
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentJoinCheckOutBinding.inflate(inflater, container, false);
@@ -102,34 +105,45 @@ public class JoinCheckOut extends Fragment {
 
 
         binding.btnJoin.setOnClickListener(view -> {
-            dialogBuilder = new AlertDialog.Builder(requireContext());
-            View layoutView = getLayoutInflater().inflate(R.layout.enter_email_dialogue, null);
-            TextView join = (TextView) layoutView.findViewById(R.id.d_join);
-            TextView error = (TextView) layoutView.findViewById(R.id.d_errorMessage);
 
-            EditText email = (EditText) layoutView.findViewById(R.id.ed_userEMAIL);
-
-            dialogBuilder.setView(layoutView);
-            alertDialog = dialogBuilder.create();
-            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            alertDialog.show();
-            join.setOnClickListener(view1 -> {
-                String emailId = email.getText().toString().trim();
-
-                if (emailId.isEmpty()){
-                    error.setText("Enter email id");
-                    error.setVisibility(View.VISIBLE);
-                }else if (!Patterns.EMAIL_ADDRESS.matcher(emailId).matches()){
-                    error.setText("Enter valid email id");
-                    error.setVisibility(View.VISIBLE);
+            viewModel = new JoinCheckoutViewModel(Constants.ID);
+            viewModel.init();
+            viewModel.getData().observe(getViewLifecycleOwner(),basicModel -> {
+                if (basicModel.isStatus()){
+                    Navigation.findNavController(requireView()).navigate(R.id.action_joinCheckOut_to_joinPayment);
                 }else {
-                    error.setVisibility(View.GONE);
-                    Constants.JoinEmail = emailId;
-                    nAV();
-                    alertDialog.dismiss();
+                    dialogBuilder = new AlertDialog.Builder(requireContext());
+                    View layoutView = getLayoutInflater().inflate(R.layout.enter_email_dialogue, null);
+                    TextView join = (TextView) layoutView.findViewById(R.id.d_join);
+                    TextView error = (TextView) layoutView.findViewById(R.id.d_errorMessage);
+
+                    EditText email = (EditText) layoutView.findViewById(R.id.ed_userEMAIL);
+
+                    dialogBuilder.setView(layoutView);
+                    alertDialog = dialogBuilder.create();
+                    alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    alertDialog.show();
+                    join.setOnClickListener(view1 -> {
+                        String emailId = email.getText().toString().trim();
+
+                        if (emailId.isEmpty()){
+                            error.setText("Enter email id");
+                            error.setVisibility(View.VISIBLE);
+                        }else if (!Patterns.EMAIL_ADDRESS.matcher(emailId).matches()){
+                            error.setText("Enter valid email id");
+                            error.setVisibility(View.VISIBLE);
+                        }else {
+                            error.setVisibility(View.GONE);
+                            Constants.JoinEmail = emailId;
+                            nAV();
+                            alertDialog.dismiss();
+                        }
+                    });
+
                 }
             });
+
 
         });
     }

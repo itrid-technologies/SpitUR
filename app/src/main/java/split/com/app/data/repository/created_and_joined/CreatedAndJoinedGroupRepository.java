@@ -12,7 +12,6 @@ import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
 import split.com.app.data.model.all_joined_groups.AllJoinedGroupModel;
-import split.com.app.data.model.group_detail.GroupDetailModel;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 

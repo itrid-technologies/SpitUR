@@ -160,7 +160,7 @@ public class Friends extends Fragment {
             Runnable r = new Runnable() {
                 @Override
                 public void run() {
-//                    getContacts();
+                    getContacts(Split.getAppContext());
                 }
             };
             Thread thread = new Thread(r);

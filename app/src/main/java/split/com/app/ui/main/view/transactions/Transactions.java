@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +18,25 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import split.com.app.R;
+import split.com.app.data.model.DataItem;
 import split.com.app.databinding.FragmentTransactionsBinding;
+import split.com.app.ui.main.adapter.chat.ChatAdapter;
+import split.com.app.ui.main.adapter.transactions.TransactionAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.transactions_viewmodel.TransactionsViewModel;
+import split.com.app.utils.Split;
 
 
 public class Transactions extends Fragment {
 
     FragmentTransactionsBinding binding;
+    TransactionsViewModel viewModel;
+
+    List<DataItem> transactions;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -42,11 +55,40 @@ public class Transactions extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initClickListeners();
+
+        viewModel = new TransactionsViewModel();
+        viewModel.init();
+        viewModel.getTransaction_data().observe(getViewLifecycleOwner(),transactionsModel -> {
+            if (transactionsModel.isStatus()){
+                if (transactionsModel.getData().size() > 0){
+                    binding.noTransactionLayout.setVisibility(View.GONE);
+                    transactions = new ArrayList<>();
+                    transactions.addAll(transactionsModel.getData());
+                    buildRv(transactions);
+
+                }else {
+                    binding.noTransactionLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
+    }
+
+    private void buildRv(List<DataItem> transactions) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
+        binding.transactionsList.setLayoutManager(layoutManager);
+        TransactionAdapter adapter = new TransactionAdapter(Split.getAppContext(), transactions);
+        binding.transactionsList.setAdapter(adapter);
     }
 
     private void initClickListeners() {
         binding.transactionToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
+        });
+
+        binding.joinButtonGlobal.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.joinSearch);
         });
 
         binding.transactionToolbar.info.setOnClickListener(view -> {

@@ -335,6 +335,9 @@
         <action
             android:id="@+id/action_transactions_to_FAQ"
             app:destination="@id/FAQ" />
+        <action
+            android:id="@+id/action_transactions_self"
+            app:destination="@id/transactions" />
     </fragment>
     <fragment
         android:id="@+id/memberChat"

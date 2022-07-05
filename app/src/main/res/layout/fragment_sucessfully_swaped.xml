@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background"
+    android:background="#181A20"
     tools:context=".ui.main.view.SuccessfullySwapped">
 
     <include
@@ -25,21 +25,23 @@
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/swap_success_toolbar"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:paddingTop="20dp">
 
             <ImageView
                 android:id="@+id/swap_success_gif"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:src="@drawable/success_gif"
+                android:layout_height="284dp"
                 android:background="@color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,43 +49,44 @@
 
             <TextView
                 android:id="@+id/tv_complete"
-                style="@style/semiBoldText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:fontFamily="@font/poppins_semibold"
                 android:gravity="start"
                 android:text="Swap Complete"
-                android:textSize="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_transaction_complete"
+                android:textColor="@color/white"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/swap_success_gif" />
 
 
             <TextView
                 android:id="@+id/tv_transaction_complete"
-                style="@style/normalText"
+                android:textColor="#9395A4"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="12sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="80dp"
                 android:gravity="start"
-                android:text="You can now request Withdrawals requests equivalent to the Swap amount from the app"
-                app:layout_constraintBottom_toTopOf="@+id/btnprofile"
-                app:layout_constraintStart_toStartOf="@id/tv_complete" />
+                android:layout_marginTop="@dimen/_3sdp"
+                android:text="You can now make Withdrawals requests from the INR available in your account. Minimum withdrwal limit of 100 INR"
+                app:layout_constraintStart_toStartOf="@id/tv_complete"
+                app:layout_constraintTop_toBottomOf="@+id/tv_complete" />
 
 
             <Button
                 android:id="@+id/btnprofile"
                 style="@style/buttonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="248dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/button_round_bg"
-                android:fontFamily="@font/poppins_semibold"
-                android:paddingStart="80dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="80dp"
-                android:paddingBottom="5dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:text="Profile"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

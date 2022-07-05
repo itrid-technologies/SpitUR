@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,18 +23,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 
 import split.com.app.R;
-import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
 import split.com.app.data.model.all_created_groupx.DataItem;
 import split.com.app.data.model.all_joined_groups.AllJoinedGroupModel;
-import split.com.app.data.repository.created_and_joined.CreatedAndJoinedGroupRepository;
 import split.com.app.databinding.FragmentCreatedAndJoinedGroupsBinding;
 import split.com.app.ui.main.adapter.all_created_group.AllCreatedGroupAdapter;
 import split.com.app.ui.main.adapter.all_joined_group.AllJoinedGroupAdapter;
-import split.com.app.ui.main.adapter.group_detail_adapter.GroupDetailAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.view.join_plans.CheckoutActivity;
 import split.com.app.ui.main.viewmodel.created_and_joined.CreatedAndJoinedViewModel;
-import split.com.app.ui.main.viewmodel.group_viewmodel.GroupDetailViewModel;
 import split.com.app.utils.Split;
 
 
@@ -130,7 +125,7 @@ public class CreatedAndJoinedGroups extends Fragment {
         });
 
 
-        binding.joinedButton.setOnClickListener(view -> {
+        binding.joinButtonSearch.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_createdAndJoinedGroups_to_joinSearch);
         });
 
@@ -152,11 +147,11 @@ public class CreatedAndJoinedGroups extends Fragment {
             Gson gson1 = new Gson();
             String groupDATA = gson1.toJson(groupDetailModel);
 
-            if (join_data.get(position).getPayment_status().equalsIgnoreCase("pending")){
+            if (join_data.get(position).getPaymentStatus().equalsIgnoreCase("pending")){
                 Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
                 checkoutIntent.putExtra("group_id", String.valueOf(join_data.get(position).getGroupId()));
-                checkoutIntent.putExtra("upi_id",  join_data.get(position).getUpi_id());
-                checkoutIntent.putExtra("subscription_id", join_data.get(position).getSubscription_id());
+                checkoutIntent.putExtra("upi_id",  join_data.get(position).getUpiId());
+                checkoutIntent.putExtra("subscription_id", join_data.get(position).getSubscriptionId());
                 checkoutIntent.putExtra("group_credentials", groupDATA);
                 startActivity(checkoutIntent);
                 requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

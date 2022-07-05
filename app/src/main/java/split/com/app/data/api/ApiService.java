@@ -15,6 +15,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import split.com.app.data.model.HomeContentModel;
+import split.com.app.data.model.TransactionsModel;
 import split.com.app.data.model.active_user.ActiveUserModel;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
 import split.com.app.data.model.all_joined_groups.AllJoinedGroupModel;
@@ -71,6 +72,9 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("users/usernameExists")
     Call<BasicModel> checkUserIdExistence(@Field("userId") String id);
+
+    @GET("users/is_email_exist/{Id}")
+    Call<BasicModel> checkUserEmailExistence(@Path("Id") String Id);
 
     @GET("groups/get_categories")
     Call<CategoriesModel> getAllCategories(@Header("Authorization") String token);
@@ -212,5 +216,6 @@ public interface ApiService {
     Call<BasicModel1> logoutUser(@Header("Authorization") String token,
                                  @Path("id") String id);
 
-
+    @GET("groups/get_payment_transaction")
+    Call<TransactionsModel> getAllTransactions(@Header("Authorization") String token);
 }

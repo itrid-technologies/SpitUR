@@ -18,17 +18,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="18dp">
+        app:cardCornerRadius="24dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/profile_bg"
+            android:background="#2C2D2F"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:paddingTop="5dp"
-            android:paddingBottom="10dp"
+            android:paddingBottom="17dp"
             >
 
 
@@ -36,7 +36,7 @@
                 android:id="@+id/SlideUp"
                 android:layout_width="70dp"
                 android:layout_height="3dp"
-                android:background="@color/dark_grey"
+                android:background="#5E6272"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -63,25 +63,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/SlideUp" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/previous_avatar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
+                android:importantForAccessibility="no"
                 android:rotation="180"
-                android:src="@drawable/next"
+                android:src="@drawable/ic_chevron"
+                app:layout_constraintEnd_toStartOf="@id/avatar_bg_frame"
                 app:layout_constraintBottom_toBottomOf="@id/avatar_bg_frame"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/avatar_bg_frame" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/next_avatar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
-                android:src="@drawable/next"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_chevron"
                 app:layout_constraintBottom_toBottomOf="@id/avatar_bg_frame"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/avatar_bg_frame"
                 app:layout_constraintTop_toTopOf="@id/avatar_bg_frame" />
 
 
@@ -129,6 +131,7 @@
                 android:textColor="@color/white"
                 android:maxLines="1"
                 android:ellipsize="end"
+                android:layout_marginTop="8dp"
                 android:textColorHint="@color/hint_color"
                 android:fontFamily="@font/poppin_regular"
                 android:textSize="15sp"
@@ -136,7 +139,7 @@
                 android:gravity="start|center"
                 android:background="@drawable/round_back"
                 android:backgroundTint="@color/light_blue"
-                android:padding="10dp"
+                android:padding="11dp"
                 android:drawableLeft="@drawable/ic_user"
                 android:id="@+id/profile_name"/>
 
@@ -161,13 +164,14 @@
                 android:textColorHint="@color/hint_color"
                 android:fontFamily="@font/poppin_regular"
                 android:textSize="15sp"
+                android:layout_marginTop="8dp"
                 android:drawablePadding="10dp"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:gravity="start|center"
                 android:background="@drawable/round_back"
                 android:backgroundTint="@color/light_blue"
-                android:padding="10dp"
+                android:padding="11dp"
                 android:drawableLeft="@drawable/ic_user"
                 android:id="@+id/profile_id"/>
 
@@ -191,20 +195,21 @@
                 android:textColorHint="@color/hint_color"
                 android:fontFamily="@font/poppin_regular"
                 android:textSize="15sp"
+                android:layout_marginTop="8dp"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:drawablePadding="10dp"
                 android:gravity="start|center"
                 android:background="@drawable/round_back"
                 android:backgroundTint="@color/light_blue"
-                android:padding="10dp"
+                android:padding="11dp"
                 android:drawableLeft="@drawable/ic_user"
                 android:id="@+id/profile_email"/>
 
 
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="213dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -212,12 +217,9 @@
                 android:text="Save"
                 style="@style/buttonStyle"
                 android:background="@drawable/button_round_bg"
-                android:paddingStart="80dp"
-                android:paddingEnd="80dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins_semibold"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:layout_marginTop="17dp"
                 android:id="@+id/btn_save_profile"/>
 
 

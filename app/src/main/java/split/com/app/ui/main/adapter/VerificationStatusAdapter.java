@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -48,6 +49,8 @@ public class VerificationStatusAdapter extends RecyclerView.Adapter<Verification
         GroupSplitScoreItem splitScoreItem = list.get(position);
         int score = splitScoreItem.getSplitScore();
         if (splitScoreItem.getSplitGroupUserId() != null ){
+            holder.constraintLayout.setVisibility(View.VISIBLE);
+
             if (score <= 100 && score >= 80 ){
                 Glide.with(context)
                         .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
@@ -82,6 +85,8 @@ public class VerificationStatusAdapter extends RecyclerView.Adapter<Verification
 
             }
         }else {
+            holder.constraintLayout.setVisibility(View.GONE);
+
 //            Glide.with(context)
 //                    .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
 //                    .placeholder(R.color.blue)
@@ -113,6 +118,7 @@ public class VerificationStatusAdapter extends RecyclerView.Adapter<Verification
         public TextView status;
         CircleImageView user;
         ImageView imageView;
+        ConstraintLayout constraintLayout;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -121,6 +127,7 @@ public class VerificationStatusAdapter extends RecyclerView.Adapter<Verification
             status = itemView.findViewById(R.id.status);
             imageView = (itemView).findViewById(R.id.iv_user_status);
             user = (itemView).findViewById(R.id.iv_user);
+            constraintLayout = (itemView).findViewById(R.id.layout);
 
 
         }

@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-\
+
 import split.com.app.R;
 import split.com.app.databinding.FragmentCostBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;

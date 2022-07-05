@@ -5,11 +5,17 @@ import com.google.gson.annotations.SerializedName;
 
 public class SubCategory{
 
+	@SerializedName("validation_type")
+	private String validationType;
+
 	@SerializedName("createdAt")
 	private String createdAt;
 
 	@SerializedName("category_id")
 	private int categoryId;
+
+	@SerializedName("is_popular")
+	private boolean isPopular;
 
 	@SerializedName("sub_cat_title")
 	private String subCatTitle;
@@ -21,10 +27,14 @@ public class SubCategory{
 	private Category category;
 
 	@SerializedName("plan")
-	private List<Object> plan;
+	private List<PlanItem> plan;
 
 	@SerializedName("updatedAt")
 	private String updatedAt;
+
+	public String getValidationType(){
+		return validationType;
+	}
 
 	public String getCreatedAt(){
 		return createdAt;
@@ -32,6 +42,10 @@ public class SubCategory{
 
 	public int getCategoryId(){
 		return categoryId;
+	}
+
+	public boolean isIsPopular(){
+		return isPopular;
 	}
 
 	public String getSubCatTitle(){
@@ -46,7 +60,7 @@ public class SubCategory{
 		return category;
 	}
 
-	public List<Object> getPlan(){
+	public List<PlanItem> getPlan(){
 		return plan;
 	}
 

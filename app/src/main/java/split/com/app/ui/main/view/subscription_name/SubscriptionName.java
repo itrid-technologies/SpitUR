@@ -45,21 +45,21 @@ public class SubscriptionName extends Fragment {
     }
 
     private void initClickListeners() {
-        binding.emailAndPass.setOnClickListener(view -> {
-            binding.emailAndPass.setBackgroundResource(R.drawable.selected_gradient_stroke);
-            binding.otp.setBackgroundResource(R.drawable.rect_back_with_grey_stroke);
-        });
+//        binding.authLayout.setOnClickListener(view -> {
+//            binding.authLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
+//            binding.otpLayout.setBackgroundResource(R.drawable.unselected_bg);
+//        });
 
-        binding.otp.setOnClickListener(view -> {
+        binding.otpLayout.setOnClickListener(view -> {
             verification_type = "otp";
-            binding.otp.setBackgroundResource(R.drawable.selected_gradient_stroke);
-            binding.emailAndPass.setBackgroundResource(R.drawable.rect_back_with_grey_stroke);
+            binding.otpLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
+            binding.authLayout.setBackgroundResource(R.drawable.unselected_bg);
         });
 
-        binding.emailAndPass.setOnClickListener(view -> {
+        binding.authLayout.setOnClickListener(view -> {
             verification_type = "auth";
-            binding.otp.setBackgroundResource(R.drawable.rect_back_with_grey_stroke);
-            binding.emailAndPass.setBackgroundResource(R.drawable.selected_gradient_stroke);
+            binding.otpLayout.setBackgroundResource(R.drawable.unselected_bg);
+            binding.authLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
         });
 
         binding.BTNSUBNEXT.setOnClickListener(view -> {

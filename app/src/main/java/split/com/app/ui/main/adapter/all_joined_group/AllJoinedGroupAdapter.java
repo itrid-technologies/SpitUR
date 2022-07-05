@@ -46,15 +46,20 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
     public void onBindViewHolder(@NonNull AllJoinedGroupAdapter.GroupVH holder, int position) {
         split.com.app.data.model.all_joined_groups.DataItem current_item = dataItems.get(position);
         if (current_item.getGroup() != null) {
-            if (!current_item.getPayment_status().isEmpty()){
-                if (current_item.getPayment_status().equalsIgnoreCase("paid")){
+            if (!current_item.getPaymentStatus().isEmpty()){
+                if (current_item.getPaymentStatus().equalsIgnoreCase("paid")){
                     holder.open.setText("Open");
-                }else if (current_item.getPayment_status().equalsIgnoreCase("pending")){
+                }else if (current_item.getPaymentStatus().equalsIgnoreCase("pending")){
                     holder.open.setText("Pending");
                     holder.open.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFD300")));
                 }else {
 
                 }
+            }
+
+            if (!current_item.getGroup().isStatus()){
+                holder.open.setText("Closed");
+                holder.open.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E50000")));
             }
 
             holder.name.setText(current_item.getGroup().getGroupTitle());
@@ -83,9 +88,14 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
 
 
             open.setOnClickListener(view -> {
-                if (mListener != null) {
-                    if (getAdapterPosition() != RecyclerView.NO_POSITION) {
-                        mListener.onCategorySelect(getAdapterPosition());
+                String isOpen = open.getText().toString().trim();
+                if (isOpen.equalsIgnoreCase("Closed")) {
+
+                } else{
+                    if (mListener != null) {
+                        if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                            mListener.onCategorySelect(getAdapterPosition());
+                        }
                     }
                 }
             });

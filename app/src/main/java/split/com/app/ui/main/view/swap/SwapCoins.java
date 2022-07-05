@@ -62,8 +62,8 @@ public class SwapCoins extends Fragment {
 
         Shader textShader = new LinearGradient(0, 0, width, binding.inrCoinsValue.getTextSize(),
                 new int[]{
-                        Color.parseColor("#0027FE"),
-                        Color.parseColor("#D703FF")
+                        Color.parseColor("#D703FF"),
+                        Color.parseColor("#0027FE")
                 }, null, Shader.TileMode.CLAMP);
         binding.inrCoinsValue.getPaint().setShader(textShader);
 

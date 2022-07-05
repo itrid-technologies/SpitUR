@@ -72,8 +72,7 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public CircleImageView image;
         public ImageView remove, admin;
-        public TextView name, date;
-        public Button chat;
+        public TextView name, date , chat;
 
         public ViewHolder(@NonNull View itemView, ItemClickListener mListener) {
             super(itemView);
