@@ -2,18 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
-    android:padding="15dp"
+    android:paddingTop="15dp"
+    android:paddingStart="20dp"
+    android:paddingBottom="15dp"
+    android:paddingEnd="20dp"
+    android:layout_marginTop="@dimen/_8sdp"
+    android:id="@+id/JoinedItemLayout"
     android:background="@drawable/rect_back_with_grey_stroke"
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/search_icons"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/player_icon"
         app:civ_border_width="2dp"
-        android:layout_marginStart="10dp"
         app:civ_circle_background_color="@color/icons_bg"
         app:civ_border_color="@color/icons_bg"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,13 +32,13 @@
         android:text="-"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="18dp"
         android:fontFamily="@font/poppins_medium"
         android:id="@+id/join_title"/>
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_width="80dp"
+        android:layout_height="28dp"
         app:layout_constraintStart_toStartOf="@id/join_title"
         app:layout_constraintTop_toBottomOf="@id/join_title"
         android:src="@drawable/search_cat"
@@ -50,12 +53,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="Open"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:fontFamily="@font/poppins_medium"
         android:textAllCaps="false"
         android:background="@drawable/rect_blue_bg"
-        android:padding="10dp"
+        android:paddingStart="10dp"
+        android:paddingBottom="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="15dp"
         android:id="@+id/open"/>
+
+
 
 
 

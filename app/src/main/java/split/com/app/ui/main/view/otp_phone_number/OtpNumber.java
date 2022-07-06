@@ -75,8 +75,6 @@ public class OtpNumber extends AppCompatActivity {
         });
 
 
-
-
     }
 
     private void sentOtp() {

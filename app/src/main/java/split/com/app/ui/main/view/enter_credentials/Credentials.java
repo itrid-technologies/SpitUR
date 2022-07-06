@@ -19,17 +19,20 @@ import java.util.Locale;
 import split.com.app.R;
 import split.com.app.databinding.FragmentCredentialsBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.craete_group_viewModel.CreateGroupViewModel;
 import split.com.app.ui.main.viewmodel.custom_create_viewmodel.CustomCreateViewModel;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
 
-public class Credentials extends Fragment {
+public class  Credentials extends Fragment {
 
 
     FragmentCredentialsBinding binding;
     private CustomCreateViewModel viewModel;
+    private CreateGroupViewModel createGroupViewModel;
+
 
 
     @Override
@@ -57,7 +60,7 @@ public class Credentials extends Fragment {
         String user_name = preferences.getData(Split.getAppContext(), "userName");
         String user_ID = preferences.getData(Split.getAppContext(), "userId");
         String avatar = preferences.getData(Split.getAppContext(), "userAvatar");
-        String slot = preferences.getData(Split.getAppContext(), "SLOTS");
+        String slot = Constants.SLOTS;
 
         binding.credentialProfile.netflix.setText(user_name);
         binding.credentialProfile.userName.setText(user_ID);
@@ -93,7 +96,43 @@ public class Credentials extends Fragment {
                 if (!validation_type.isEmpty()) {
                     hitCustomCreateApi();
                 } else {
-                    Navigation.findNavController(view).navigate(R.id.action_credentials2_to_phoneCredentials);
+
+                    String planId = Constants.PLAN_ID;
+                    String slots = Constants.SLOTS;
+                    String cost = Constants.COST;
+                    String email1 = Constants.EMAIL;
+                    String password1 = Constants.PASSWORD;
+                    String visibility = Constants.VISIBILITY_string;
+                    String title = Constants.SUB_CAT_TITLE;
+                    String sub_catId = Constants.SUB_CATEGORY_ID;
+
+
+                    createGroupViewModel = new CreateGroupViewModel(planId, title, slots, cost, email1, password1, visibility, sub_catId);
+                    createGroupViewModel.init();
+                    createGroupViewModel.getData().observe(getViewLifecycleOwner(), createGroupModel -> {
+                        if (createGroupModel.isSuccess()) {
+                            if (createGroupModel.getData() != null) {
+
+                                MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+
+
+                                Constants.PLAN_ID = String.valueOf(createGroupModel.getData().getPlansId());
+                                Constants.SLOTS = String.valueOf(createGroupModel.getData().getSlots());
+                                Constants.COST = String.valueOf(createGroupModel.getData().getCostPerMember());
+                                Constants.EMAIL = String.valueOf(createGroupModel.getData().getEmail());
+                                Constants.PASSWORD = String.valueOf(createGroupModel.getData().getPassword());
+                                Constants.VISIBILITY = createGroupModel.getData().isVisibility();
+                                pm.saveData(Split.getAppContext(), "TITLE", String.valueOf(createGroupModel.getData().getTitle()));
+                                pm.saveData(Split.getAppContext(), "ID", String.valueOf(createGroupModel.getData().getId()));
+                                pm.saveData(Split.getAppContext(), "GROUP_ID", String.valueOf(createGroupModel.getData().getGroupId()));
+                                pm.saveData(Split.getAppContext(), "CREATED_AT", String.valueOf(createGroupModel.getData().getCreatedAt()));
+
+                                Navigation.findNavController(requireView()).navigate(R.id.action_otpVerifyFragment_to_otpSuccess);
+                            }
+                        }
+                    });
+//                    Navigation.findNavController(view).navigate(R.id.action_credentials2_to_phoneCredentials);
+                    Navigation.findNavController(requireView()).navigate(R.id.action_credentials2_to_otpSuccess);
                 }
             }
 

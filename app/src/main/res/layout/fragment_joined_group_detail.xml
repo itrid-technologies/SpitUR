@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background"
+    android:background="#181A20"
     tools:context=".ui.main.view.joined_detail.JoinedGroupDetail">
 
     <include
@@ -41,9 +41,10 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/joined_profile"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/semiBoldText"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
                 android:text="Admin Info"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="16dp"
                 android:textSize="20sp"
                 android:id="@+id/tv_admin_info"/>
 
@@ -56,6 +57,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_admin_info"
                 android:padding="16dp"
                 android:backgroundTint="#262A34"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:background="@drawable/rect_bg">
 
                 <TextView
@@ -64,9 +66,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_last_active"
-                    style="@style/semiBoldText"
                     android:textSize="20sp"
                     android:text="-"
+                    android:fontFamily="@font/inter_bold"
                     android:textColor="@color/green"
                     android:gravity="center"
                     android:id="@+id/tv_score_value"/>
@@ -78,7 +80,8 @@
                     app:layout_constraintEnd_toStartOf="@id/tv_last_active"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:background="@color/hint_color"
+                    android:background="@color/white"
+                    android:alpha="0.2"
                     android:id="@+id/line"/>
 
                 <TextView
@@ -87,7 +90,7 @@
                     app:layout_constraintStart_toStartOf="@id/tv_score_value"
                     app:layout_constraintTop_toBottomOf="@id/tv_score_value"
                     app:layout_constraintEnd_toEndOf="@id/tv_score_value"
-                    style="@style/normalText"
+                    android:fontFamily="@font/inter_regular"
                     android:textSize="10sp"
                     android:text="@string/spiltur_score"
                     android:layout_marginTop="5dp"
@@ -102,7 +105,8 @@
                     app:layout_constraintEnd_toStartOf="@id/tv_days_value"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:background="@color/hint_color"
+                    android:background="@color/white"
+                    android:alpha="0.2"
                     android:id="@+id/line1"/>
 
                 <TextView
@@ -111,7 +115,7 @@
                     app:layout_constraintStart_toEndOf="@id/tv_score_value"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_days_value"
-                    style="@style/semiBoldText"
+                    android:fontFamily="@font/inter_bold"
                     android:gravity="center"
                     android:text="-"
                     android:textSize="20sp"
@@ -124,11 +128,10 @@
                     app:layout_constraintStart_toStartOf="@id/tv_last_active"
                     app:layout_constraintTop_toBottomOf="@id/tv_last_active"
                     app:layout_constraintEnd_toEndOf="@id/tv_last_active"
-                    style="@style/normalText"
+                    android:fontFamily="@font/inter_regular"
                     android:layout_marginTop="5dp"
-                    android:textSize="10sp"
-
                     android:text="Last Active"
+                    android:textSize="10sp"
                     android:textColor="@color/hint_color"
                     android:gravity="center"
                     android:id="@+id/tv_active"/>
@@ -140,7 +143,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:gravity="center"
-                    style="@style/semiBoldText"
+                    android:fontFamily="@font/inter_bold"
                     android:text="-"
                     android:textSize="20sp"
                     android:textColor="@color/orange"
@@ -152,9 +155,9 @@
                     app:layout_constraintStart_toStartOf="@id/tv_days_value"
                     app:layout_constraintTop_toBottomOf="@id/tv_days_value"
                     app:layout_constraintEnd_toEndOf="@id/tv_days_value"
-                    style="@style/normalText"
-                    android:textSize="10sp"
+                    android:fontFamily="@font/inter_regular"
                     android:text="Creation Date"
+                    android:textSize="10sp"
                     android:layout_marginTop="5dp"
                     android:textColor="@color/hint_color"
                     android:gravity="center"
@@ -169,9 +172,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/admin_layout"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="27dp"
                 android:background="@drawable/rect_with_yellow_stroke"
-                android:padding="10dp">
+                android:padding="17dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -213,23 +216,23 @@
                     android:textColor="@color/white"
                     android:id="@+id/scoreValue"/>
 
-<!--                <com.daimajia.numberprogressbar.NumberProgressBar-->
-<!--                    android:id="@+id/number_progress_bar"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:layout_constraintStart_toStartOf="@id/tv_splitur_score"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tv_splitur_score"-->
-<!--                    app:progress_text_size="16sp"-->
-<!--                    app:progress_unreached_bar_height="6dp"-->
-<!--                    app:progress_unreached_color="#8C8C8C"-->
-<!--                    app:progress_reached_bar_height="6dp"-->
-<!--                    app:progress_reached_color="@color/yellow"-->
-<!--                    android:layout_marginEnd="8dp"-->
-<!--                    app:progress_text_color="@color/white"-->
-<!--                    app:progress_current="0"-->
-<!--                    app:progress_max="100"-->
-<!--                    android:focusable="true"-->
+                <!--                <com.daimajia.numberprogressbar.NumberProgressBar-->
+                <!--                    android:id="@+id/number_progress_bar"-->
+                <!--                    android:layout_width="0dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    app:layout_constraintStart_toStartOf="@id/tv_splitur_score"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/tv_splitur_score"-->
+                <!--                    app:progress_text_size="16sp"-->
+                <!--                    app:progress_unreached_bar_height="6dp"-->
+                <!--                    app:progress_unreached_color="#8C8C8C"-->
+                <!--                    app:progress_reached_bar_height="6dp"-->
+                <!--                    app:progress_reached_color="@color/yellow"-->
+                <!--                    android:layout_marginEnd="8dp"-->
+                <!--                    app:progress_text_color="@color/white"-->
+                <!--                    app:progress_current="0"-->
+                <!--                    app:progress_max="100"-->
+                <!--                    android:focusable="true"-->
 
 
 
@@ -264,7 +267,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/score_layout"
                 android:text="Group Credentials"
-                style="@style/semiBoldText"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:layout_marginTop="15dp"
                 android:id="@+id/group_credentials"/>
@@ -277,10 +281,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/group_credentials"
-                android:padding="20dp"
+                android:paddingTop="18dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="18dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/light_blue"
-                android:background="@drawable/rect_bg">
+                android:background="@drawable/otp_number_bg">
 
                 <EditText
                     android:id="@+id/group_email"
@@ -289,7 +297,7 @@
                     android:background="@color/transparent"
                     android:clickable="false"
                     android:drawableStart="@drawable/ic_user"
-                    android:drawablePadding="15dp"
+                    android:drawablePadding="20dp"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_medium"
                     android:hint="Email"
@@ -337,7 +345,7 @@
                     android:layout_marginTop="10dp"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    android:drawablePadding="15dp"
+                    android:drawablePadding="20dp"
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="15sp"
                     android:textColor="@color/white"
@@ -361,14 +369,12 @@
             <Button
                 android:id="@+id/btn_group_chat"
                 style="@style/buttonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="213dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/button_round_bg"
-                android:paddingStart="80dp"
-                android:paddingTop="10dp"
-                android:paddingEnd="80dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:text="Group Chat"
                 app:layout_constraintTop_toBottomOf="@id/credential_layout"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background"
+    android:background="#181A20"
     tools:context=".ui.main.view.success_seller.OtpSuccess">
 
     <ScrollView
@@ -63,8 +63,8 @@
 
                 <ImageView
                     android:id="@+id/success_gif"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
                     android:background="@color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +99,7 @@
                     style="@style/semiBoldText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="16dp"
                     android:gravity="center"
                     android:text="@string/share_with_the_world"
                     android:textSize="20sp"
@@ -110,7 +110,7 @@
                     android:id="@+id/userEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="14dp"
                     android:background="@drawable/round_back"
                     android:backgroundTint="@color/light_blue"
                     android:drawableLeft="@drawable/ic_user"
@@ -134,7 +134,7 @@
                     android:background="@drawable/rect_bg"
                     android:backgroundTint="@color/light_blue"
                     android:padding="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="14dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/userEmail">
@@ -195,16 +195,14 @@
                 <Button
                     android:id="@+id/btnHome"
                     style="@style/buttonStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="213dp"
                     android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:background="@drawable/button_round_bg"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:paddingStart="80dp"
-                    android:paddingTop="5dp"
-                    android:paddingEnd="80dp"
-                    android:paddingBottom="5dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
                     android:text="Home"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

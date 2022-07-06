@@ -48,6 +48,7 @@ import split.com.app.ui.main.viewmodel.home_viewmodel.HomeViewModel;
 import split.com.app.ui.main.viewmodel.profile_viewmodel.ProfileViewModel;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
+import split.com.app.utils.SpanningLinearLayoutManager;
 import split.com.app.utils.Split;
 
 
@@ -61,6 +62,7 @@ public class Home extends Fragment {
     private HomeViewModel homeViewModel;
     private List<CategoryDataItems> category_list;
 
+    //    private List<DataItem> popularSubCategoryList;
     private List<DataItem> popularSubCategoryList;
 
     ProfileViewModel profileViewModel;
@@ -91,7 +93,7 @@ public class Home extends Fragment {
         homeDataItems = new ArrayList<>();
 
         binding.categoriesLst.setVisibility(View.GONE);
-        binding.popularLst.setVisibility(View.GONE);
+       // binding.popularLst.setVisibility(View.GONE);
         binding.homeSections.setVisibility(View.GONE);
 
         homeViewModel = new HomeViewModel();
@@ -126,7 +128,6 @@ public class Home extends Fragment {
             }
         });
     }
-
 
 
     private void initClickListeners() {
@@ -329,8 +330,12 @@ public class Home extends Fragment {
     }
 
     private void buildCategoryRv() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false);
+        SpanningLinearLayoutManager layoutManager = new SpanningLinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false);
+        binding.categoriesLst.suppressLayout(true);
+        layoutManager.canScrollHorizontally();
+        layoutManager.setSmoothScrollbarEnabled(false);
         binding.categoriesLst.setLayoutManager(layoutManager);
+
         CategoryAdapter adapter = new CategoryAdapter(Split.getAppContext(), category_list);
         binding.categoriesLst.setAdapter(adapter);
 
@@ -371,10 +376,13 @@ public class Home extends Fragment {
         homeViewModel.getPopularCategoryData().observe(getViewLifecycleOwner(), popularSubCategoryModel -> {
             if (popularSubCategoryModel.isSuccess()) {
                 if (popularSubCategoryModel.getData().size() > 0) {
-                    popularSubCategoryList.addAll(popularSubCategoryModel.getData());
+                    for (int i = 0; i<= 2 ; i++){
+                        popularSubCategoryList.add(popularSubCategoryModel.getData().get(i));
+                    }
+                    setDaATA(popularSubCategoryList);
                 }
 
-                buildPopularCatRv();
+               // buildPopularCatRv();
             }
         });
 
@@ -384,18 +392,73 @@ public class Home extends Fragment {
 //        binding.popularLst.setAdapter(adapter);
     }
 
-    private void buildPopularCatRv() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false);
-        binding.popularLst.setLayoutManager(layoutManager);
-        PopularHomeAdapter adapter = new PopularHomeAdapter(Split.getAppContext(), popularSubCategoryList);
-        binding.popularLst.setAdapter(adapter);
+    private void setDaATA(List<DataItem> popularSubCategoryList) {
+        if (popularSubCategoryList.get(0).getCategory() != null){
+            Glide.with(Split.getAppContext())
+                    .load(Constants.IMG_PATH + popularSubCategoryList.get(0).getCategory().getIcon())
+                    .placeholder(R.color.images_placeholder)
+                    .into(binding.popularIcons);
+        }
+        binding.popularName.setText(popularSubCategoryList.get(0).getTitle());
+
+        if (popularSubCategoryList.get(1).getCategory() != null){
+            Glide.with(Split.getAppContext())
+                    .load(Constants.IMG_PATH + popularSubCategoryList.get(1).getCategory().getIcon())
+                    .placeholder(R.color.images_placeholder)
+                    .into(binding.popularIcons1);
+        }
+        binding.popularName1.setText(popularSubCategoryList.get(1).getTitle());
+
+        if (popularSubCategoryList.get(2).getCategory() != null){
+            Glide.with(Split.getAppContext())
+                    .load(Constants.IMG_PATH + popularSubCategoryList.get(2).getCategory().getIcon())
+                    .placeholder(R.color.images_placeholder)
+                    .into(binding.popularIcons2);
+        }
+        binding.popularName2.setText(popularSubCategoryList.get(2).getTitle());
+
+        binding.tvJoin.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("join_sub_cat_id",String.valueOf(popularSubCategoryList.get(0).getId()));//absolute adopter position
+            bundle.putString("join_sub_cat_title",String.valueOf(popularSubCategoryList.get(0).getTitle()));
+
+            Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail,bundle);
+        });
+
+        binding.tvJoin1.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("join_sub_cat_id",String.valueOf(popularSubCategoryList.get(1).getId()));//absolute adopter position
+            bundle.putString("join_sub_cat_title",String.valueOf(popularSubCategoryList.get(1).getTitle()));
+
+            Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail,bundle);
+        });
+
+        binding.tvJoin2.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("join_sub_cat_id",String.valueOf(popularSubCategoryList.get(2).getId()));//absolute adopter position
+            bundle.putString("join_sub_cat_title",String.valueOf(popularSubCategoryList.get(2).getTitle()));
+
+            Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail,bundle);
+        });
+
 
         binding.categoriesLst.setVisibility(View.VISIBLE);
-        binding.popularLst.setVisibility(View.VISIBLE);
         binding.homeSections.setVisibility(View.VISIBLE);
         binding.loadingView.setVisibility(View.GONE);
-
     }
+
+//    private void buildPopularCatRv() {
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false);
+//        binding.popularLst.setLayoutManager(layoutManager);
+//        PopularHomeAdapter adapter = new PopularHomeAdapter(Split.getAppContext(), popularSubCategoryList);
+//        binding.popularLst.setAdapter(adapter);
+//
+//        binding.categoriesLst.setVisibility(View.VISIBLE);
+//        binding.popularLst.setVisibility(View.VISIBLE);
+//        binding.homeSections.setVisibility(View.VISIBLE);
+//        binding.loadingView.setVisibility(View.GONE);
+//
+//    }
 
     private void saveUserData(ActiveUserModel activeUserModel) {
         Constants.ID = String.valueOf(activeUserModel.getData().getId());

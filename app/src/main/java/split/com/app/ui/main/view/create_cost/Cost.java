@@ -46,10 +46,10 @@ public class Cost extends Fragment {
 
     private void setProfileData() {
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
-        String user_name = preferences.getData(Split.getAppContext(), "userName");
-        String user_ID = preferences.getData(Split.getAppContext(), "userId");
-        String avatar = preferences.getData(Split.getAppContext(), "userAvatar");
-        String slot = preferences.getData(Split.getAppContext(), "SLOTS");
+        String user_name = Constants.USER_NAME;
+        String user_ID = Constants.USER_ID;
+        String avatar = Constants.USER_AVATAR;
+        String slot = Constants.SLOTS;
 
         binding.costProfile.netflix.setText(user_name);
         binding.costProfile.userName.setText(user_ID);

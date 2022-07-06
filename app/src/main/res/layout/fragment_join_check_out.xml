@@ -243,8 +243,8 @@
 
                 <TextView
                     style="@style/normalText"
-                    android:layout_width="309dp"
-                    android:layout_height="73dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
                     android:background="@drawable/guarantee_term_bg"
                     android:paddingStart="11dp"

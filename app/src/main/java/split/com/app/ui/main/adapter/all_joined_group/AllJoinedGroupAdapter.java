@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import split.com.app.R;
 import split.com.app.data.model.all_created_groupx.DataItem;
@@ -46,12 +47,15 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
     public void onBindViewHolder(@NonNull AllJoinedGroupAdapter.GroupVH holder, int position) {
         split.com.app.data.model.all_joined_groups.DataItem current_item = dataItems.get(position);
         if (current_item.getGroup() != null) {
+            holder.layout.setVisibility(View.VISIBLE);
+
+
             if (!current_item.getPaymentStatus().isEmpty()){
                 if (current_item.getPaymentStatus().equalsIgnoreCase("paid")){
                     holder.open.setText("Open");
                 }else if (current_item.getPaymentStatus().equalsIgnoreCase("pending")){
                     holder.open.setText("Pending");
-                    holder.open.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFD300")));
+                    holder.open.setBackgroundResource(R.drawable.pending_bg);
                 }else {
 
                 }
@@ -59,11 +63,13 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
 
             if (!current_item.getGroup().isStatus()){
                 holder.open.setText("Closed");
-                holder.open.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E50000")));
+                holder.open.setBackgroundResource(R.drawable.closed_bg);
             }
 
             holder.name.setText(current_item.getGroup().getGroupTitle());
 
+        }else {
+            holder.layout.setVisibility(View.GONE);
         }
 
     }
@@ -79,13 +85,14 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
 
     public static class GroupVH extends RecyclerView.ViewHolder {
         public TextView name,open;
+        ConstraintLayout layout;
 
         public GroupVH(@NonNull View itemView, AllJoinedGroupAdapter.ItemClickListener mListener) {
             super(itemView);
             //find views
             name = itemView.findViewById(R.id.join_title);
             open = itemView.findViewById(R.id.open);
-
+            layout = itemView.findViewById(R.id.JoinedItemLayout);
 
             open.setOnClickListener(view -> {
                 String isOpen = open.getText().toString().trim();

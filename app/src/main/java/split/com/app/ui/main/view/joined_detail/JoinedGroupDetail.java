@@ -71,6 +71,18 @@ public class JoinedGroupDetail extends Fragment {
         }
 
         initClickListeners();
+        getScore();
+    }
+
+    private void getScore() {
+        viewModel = new JoinedGroupDetailViewModel(String.valueOf(data.getGroupId()),"","");
+        viewModel.initScore();
+        viewModel.getScoreData().observe(getViewLifecycleOwner(),getScoreModel -> {
+            if (getScoreModel.isSuccess()){
+                binding.scoreValue.setText(String.valueOf(getScoreModel.getSplitScore()));
+                binding.slider.setValue(Float.valueOf(getScoreModel.getSplitScore()));
+            }
+        });
     }
 
     private void setProfileData(DataItem data) {
@@ -86,7 +98,7 @@ public class JoinedGroupDetail extends Fragment {
             binding.joinedProfile.userName.setText(data.getGroup().getGroupAdmin().getUserId());
             String coin = String.valueOf(data.getGroup().getCostPerMember());
             Double coinFloat = Double.parseDouble(coin);
-            String value = String.valueOf(((coinFloat * 30) / 100) + coinFloat);
+            String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
             binding.joinedProfile.count.setText(value + " Coins");
             binding.tvScoreValue.setText(String.valueOf(data.getGroup().getGroupAdmin().getSpliturScore()));
          // binding.tvLastActive.setText(Constants.getDate(data.getGroup().getGroupAdmin().getLastActive()));

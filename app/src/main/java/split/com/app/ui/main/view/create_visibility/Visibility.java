@@ -53,10 +53,16 @@ public class Visibility extends Fragment {
 
     private void setProfileData() {
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
-        String user_name = preferences.getData(Split.getAppContext(), "userName");
-        String user_ID = preferences.getData(Split.getAppContext(), "userId");
-        String avatar = preferences.getData(Split.getAppContext(), "userAvatar");
-        slot = preferences.getData(Split.getAppContext(), "SLOTS");
+        String user_name = Constants.USER_NAME;
+        String user_ID = Constants.USER_ID;
+        String avatar = Constants.USER_AVATAR;
+        slot = Constants.SLOTS;
+        if (!slot.isEmpty()){
+            Constants.SLOTS = slot;
+
+        }else {
+            Constants.SLOTS = "4";
+        }
 
         binding.visibilityProfile.netflix.setText(user_name);
         binding.visibilityProfile.userName.setText(user_ID);

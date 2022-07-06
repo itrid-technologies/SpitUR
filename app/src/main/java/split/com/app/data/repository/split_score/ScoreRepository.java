@@ -12,6 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
+import split.com.app.data.model.GetScoreModel;
 import split.com.app.data.model.basic_model.BasicModel;
 import split.com.app.data.model.faq.FaqListModel;
 import split.com.app.utils.MySharedPreferences;
@@ -51,6 +52,32 @@ public class ScoreRepository {
         });
 
         return BasicModelMutableLiveData;
+    }
+
+    public MutableLiveData<GetScoreModel> getScore(String groupId) {
+
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String token = preferences.getData(Split.getAppContext(), "userAccessToken");
+
+
+        final MutableLiveData<GetScoreModel> liveData = new MutableLiveData<>();
+        apiService = ApiManager.getRestApiService();
+        Call<GetScoreModel> call = apiService.getScore("Bearer "+token,groupId);
+        call.enqueue(new Callback<GetScoreModel>() {
+            @Override
+            public void onResponse(@NonNull Call<GetScoreModel> call, @NonNull Response<GetScoreModel> response) {
+                if(response.body()!=null)
+                {
+                    liveData.setValue(response.body());
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<GetScoreModel> call, @NonNull Throwable t) {
+                Log.e("Avatar Error",t.getMessage());
+            }
+        });
+
+        return liveData;
     }
 
 }

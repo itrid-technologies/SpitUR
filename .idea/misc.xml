@@ -3,6 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/drawable/closed_bg.xml" value="0.206" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/drawable/custom_borders.xml" value="0.1905" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/drawable/pending_bg.xml" value="0.206" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/drawable/rect_back_with_grey_stroke.xml" value="0.206" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/drawable/rect_blue_bg.xml" value="0.206" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/drawable/sub_cat_bg.xml" value="0.1905" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/activity_otp_number.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/activity_otp_verification.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/all_created_group_design.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/all_joined_list_design.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/fragment_cost.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/fragment_created_and_joined_groups.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/fragment_created_group_detail.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/fragment_credentials.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/fragment_join_check_out.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/fragment_joined_group_detail.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/fragment_otp_success.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/home_category_list_item.xml" value="0.25" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/home_popular_list_items.xml" value="0.536" />
+        <entry key="..\:/Users/HP/Desktop/SpitUR/app/src/main/res/layout/receicer_layout.xml" value="0.25" />
         <entry key="..\:/Users/Itrid Technologies/.gradle/caches/transforms-3/3aa728ce1590e5950a0fa150851093ed/transformed/pinview-1.4.4/res/drawable/pv_invisible_image.xml" value="0.263" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/drawable/back_arrow.xml" value="0.263" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/drawable/back_button_bg.xml" value="0.263" />

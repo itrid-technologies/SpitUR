@@ -82,11 +82,11 @@ public class JoinCheckOut extends Fragment {
             binding.profile2.userName.setText(String.valueOf(dataItem.getGroupAdmin().getUserId()));
             String coin = String.valueOf(dataItem.getCostPerMember());
             Double coinFloat = Double.parseDouble(coin);
-            String value = String.valueOf(((coinFloat * 30) / 100) + coinFloat);
+            String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
             binding.profile2.count.setText(value + " Coins");
             binding.priceValue.setText(value + " Coins");
             binding.payment.setText(String.valueOf(dataItem.getCostPerMember()));
-            binding.btnJoin.setText("Join for "+value + " Coins");
+            binding.btnJoin.setText("Join for " + value + " Coins");
 
             MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
             mySharedPreferences.saveData(Split.getAppContext(),"GroupID", String.valueOf(dataItem.getId()));

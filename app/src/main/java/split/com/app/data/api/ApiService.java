@@ -14,6 +14,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import split.com.app.data.model.GetScoreModel;
 import split.com.app.data.model.HomeContentModel;
 import split.com.app.data.model.TransactionsModel;
 import split.com.app.data.model.active_user.ActiveUserModel;
@@ -174,9 +175,14 @@ public interface ApiService {
     Call<FriendListModel> friendList(@Header("Authorization") String token,
                                      @Path("data") String data);
 
+
     @POST("groups/add_split_score")
     Call<BasicModel> sendScore(@Header("Authorization") String token,
                                @Body JsonObject object);
+
+    @GET("groups/get_posted_score/{id}")
+    Call<GetScoreModel> getScore(@Header("Authorization") String token,
+                                 @Path("id") String id);
 
 
     @GET("groups/otp_request/{id}")

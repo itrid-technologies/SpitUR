@@ -73,7 +73,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:drawableStart="@drawable/ic_user"
                     android:background="@color/transparent"
-                    android:drawablePadding="15dp"
+                    android:drawablePadding="20dp"
                     android:maxLines="2"
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins_medium"
@@ -104,7 +104,7 @@
                     android:drawableStart="@drawable/ic_password"
                     android:background="@color/transparent"
                     android:layout_marginTop="10dp"
-                    android:drawablePadding="15dp"
+                    android:drawablePadding="20dp"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins_medium"
@@ -124,34 +124,40 @@
                 app:layout_constraintTop_toBottomOf="@id/credential_layout"
                 app:layout_constraintEnd_toEndOf="@id/credential_layout"
                 android:background="@drawable/terms_bg"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
+                android:paddingTop="12dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="12dp"
+                android:layout_marginTop="19dp"
                 android:id="@+id/check_mesage_layout">
 
 
-
                 <TextView
+                    android:id="@+id/otp_request_mesage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="Regularly Check the App for OTP requests. You may loose Members If you do not respond and your Score may also take a Hit. Be Online Until All slots are Full"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/message_icon"
-                    android:textColor="@color/yellow"
-                    android:fontFamily="@font/inter_medium"
-                    android:textSize="10sp"
-                    android:layout_marginEnd="-15dp"
                     android:drawablePadding="10dp"
+                    android:fontFamily="@font/inter_medium"
                     android:gravity="start|center"
-                    android:id="@+id/otp_request_mesage"/>
+                    android:text="Regularly Check the App for OTP requests. You may loose Members If you do not respond and your Score may also take a Hit. Be Online Until All slots are Full"
+                    android:textColor="@color/yellow"
+                    android:textSize="10sp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/message_icon"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.41" />
 
                 <ImageView
                     android:layout_width="57dp"
                     android:layout_height="52dp"
+                    android:scaleType="fitXY"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/message_check"
+                    android:src="@drawable/message_iconn"
                     android:id="@+id/message_icon"/>
 
 
@@ -164,9 +170,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/check_mesage_layout"
                 android:text="Share Group Join Link"
-                style="@style/semiBoldText"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
                 android:textSize="20sp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:id="@+id/tv_share_link"/>
 
             <EditText
@@ -183,7 +190,7 @@
                 android:ellipsize="end"
                 android:paddingEnd="46dp"
                 android:layout_marginTop="10dp"
-                android:drawablePadding="10dp"
+                android:drawablePadding="20dp"
                 android:gravity="start|center"
                 android:background="@drawable/round_back"
                 android:backgroundTint="@color/light_blue"
@@ -203,6 +210,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/profile_link"
                 />
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/publicLayout"
                 android:layout_width="match_parent"
@@ -210,8 +218,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_link"
-                android:layout_marginTop="20dp"
-                android:padding="20dp"
+                android:layout_marginTop="34dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
                 android:background="@drawable/selected_gradient_stroke"
                 >
 
@@ -222,7 +233,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:text="Public"
-                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/inter_semibold"
                     android:textColor="@color/orange"
                     style="@style/semiBoldText"/>
 
@@ -233,7 +245,9 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_public"
                     android:text="Visibility"
-                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="16sp"
+                    android:alpha="0.8"
+                    android:fontFamily="@font/inter_semibold"
                     android:layout_marginStart="6dp"
                     style="@style/semiBoldText"/>
 
@@ -244,9 +258,11 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_public"
                     app:layout_constraintStart_toStartOf="@id/tv_public"
                     android:text="It will be visible on search"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/inter_medium"
                     android:layout_marginTop="-4dp"
-                    style="@style/normalText"/>
+                    android:textSize="12sp"
+                    android:textColor="#5E6272"
+                    />
 
 
                 <ImageView
@@ -268,9 +284,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/publicLayout"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="6dp"
                 android:background="@drawable/only_grey_stroke"
-                android:padding="20dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
                 >
 
                 <TextView
@@ -280,8 +299,10 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:text="Private"
-                    android:fontFamily="@font/poppins_medium"
-                    style="@style/semiBoldText"/>
+                    android:textSize="16sp"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/white"
+                    android:alpha="0.8"/>
 
                 <TextView
                     android:id="@+id/visibility01"
@@ -290,9 +311,11 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_private"
                     android:text="Visibility"
-                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/inter_semibold"
                     android:layout_marginStart="6dp"
-                    style="@style/semiBoldText"/>
+                    android:textColor="@color/white"
+                    android:alpha="0.6"/>
 
                 <TextView
                     android:id="@+id/private_note"
@@ -300,10 +323,11 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/tv_private"
                     app:layout_constraintStart_toStartOf="@id/tv_private"
-                    android:text="It will not visible on search"
-                    android:fontFamily="@font/poppins_medium"
+                    android:text="It will be visible on search"
+                    android:fontFamily="@font/inter_medium"
                     android:layout_marginTop="-4dp"
-                    style="@style/normalText"/>
+                    android:textSize="12sp"
+                    android:textColor="#5E6272"/>
 
 
                 <ImageView
@@ -318,6 +342,7 @@
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
             <TextView
@@ -461,7 +486,7 @@
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_group_members">
+                    app:layout_constraintTop_toTopOf="parent">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -477,13 +502,13 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/dummy_profile"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_marginStart="5dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:src="@drawable/user"
-                            app:civ_border_color="@color/green"
                             app:civ_border_width="1dp"
+                            android:layout_marginStart="5dp"
                             app:civ_circle_background_color="#94F0F0"
+                            app:civ_border_color="@color/green"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />

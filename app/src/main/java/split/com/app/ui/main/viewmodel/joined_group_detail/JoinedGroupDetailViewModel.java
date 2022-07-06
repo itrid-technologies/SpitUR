@@ -3,12 +3,15 @@ package split.com.app.ui.main.viewmodel.joined_group_detail;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import split.com.app.data.model.GetScoreModel;
 import split.com.app.data.model.basic_model.BasicModel;
 import split.com.app.data.repository.split_score.ScoreRepository;
 
 public class JoinedGroupDetailViewModel extends ViewModel {
 
     private MutableLiveData<BasicModel> data;
+    private MutableLiveData<GetScoreModel> scoreData;
+
     private ScoreRepository scoreRepository;
     String group_id , admin_id, score;
 
@@ -28,7 +31,21 @@ public class JoinedGroupDetailViewModel extends ViewModel {
         data = scoreRepository.uploadScore(group_id,admin_id,score);
     }
 
+    public void initScore() {
+        if (this.scoreData != null) {
+            // ViewModel is created per Fragment so
+            // we know the userId won't change
+            return;
+        }
+        scoreData = scoreRepository.getScore(group_id);
+    }
+
     public MutableLiveData<BasicModel> getData() {
         return this.data;
     }
+
+    public MutableLiveData<GetScoreModel> getScoreData() {
+        return this.scoreData;
+    }
+
 }
