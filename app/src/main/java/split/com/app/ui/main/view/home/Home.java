@@ -108,7 +108,6 @@ public class Home extends Fragment {
         mViewModel = new CategoryViewModel();
         getCategories();
 
-        setProfileData();
 
         getUserDetails();
 
@@ -464,5 +463,8 @@ public class Home extends Fragment {
         Constants.USER_EMAIL = activeUserModel.getData().getEmail();
         Constants.USER_AVATAR = Constants.IMG_PATH + activeUserModel.getData().getAvatar();
         Constants.NUMBER = activeUserModel.getData().getPhone();
+
+        setProfileData();
+
     }
 }

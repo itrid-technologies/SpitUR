@@ -63,21 +63,32 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
         if (member.equalsIgnoreCase("1")){
             holder.one.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
             holder.one.setTextColor(Color.WHITE);
+            holder.one.setAlpha(1);
         }else if (member.equalsIgnoreCase("2")){
             holder.two.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
             holder.two.setTextColor(Color.WHITE);
+            holder.two.setAlpha(1);
+
         }else if (member.equalsIgnoreCase("3")){
             holder.three.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
             holder.three.setTextColor(Color.WHITE);
+            holder.three.setAlpha(1);
+
         }else if (member.equalsIgnoreCase("4")){
             holder.four.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
             holder.four.setTextColor(Color.WHITE);
+            holder.four.setAlpha(1);
+
         }else if (member.equalsIgnoreCase("5")){
             holder.five.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
             holder.five.setTextColor(Color.WHITE);
+            holder.five.setAlpha(1);
+
         }else if (member.equalsIgnoreCase("6")) {
             holder.six.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
             holder.six.setTextColor(Color.WHITE);
+            holder.six.setAlpha(1);
+
         }
 
         if (dataItem.getGroupAdmin().isOnlineOflineStatus()){

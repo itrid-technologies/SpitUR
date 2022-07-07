@@ -13,10 +13,9 @@ public class JoinGroupViewModel extends ViewModel {
     private JoinGroupRepository joinGroupRepository;
     String groupId, upiId, email, paymentId;
 
-    public JoinGroupViewModel(String id, String email, String upi_id) {
+    public JoinGroupViewModel(String id, String email) {
         this.groupId = id;
         this.email = email;
-        this.upiId = upi_id;
         joinGroupRepository = new JoinGroupRepository();
     }
 
@@ -26,7 +25,7 @@ public class JoinGroupViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        data = joinGroupRepository.join(groupId, email, upiId);
+        data = joinGroupRepository.join(groupId, email);
     }
 
     public MutableLiveData<JoinGroupModel> getData() {

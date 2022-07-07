@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class GroupAdmin{
 
 	@SerializedName("coins")
-	private int coins;
+	private double coins;
 
 	@SerializedName("wallet_balance")
 	private Double walletBalance;
@@ -49,7 +49,7 @@ public class GroupAdmin{
 	@SerializedName("updatedAt")
 	private String updatedAt;
 
-	public int getCoins(){
+	public double getCoins(){
 		return coins;
 	}
 

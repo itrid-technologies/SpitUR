@@ -20,11 +20,11 @@
         android:background="@drawable/round_back"
         android:backgroundTint="@color/icons_bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/search_icons">
+        android:id="@+id/icons">
 
 
         <ImageView
-            android:id="@+id/icon"
+            android:id="@+id/search_icons"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/player_icon"
@@ -41,7 +41,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/search_icons"
+        app:layout_constraintStart_toEndOf="@id/icons"
         app:layout_constraintTop_toTopOf="parent"
         android:text="-"
         android:textColor="@color/white"

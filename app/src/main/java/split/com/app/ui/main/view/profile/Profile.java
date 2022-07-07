@@ -86,7 +86,7 @@ public class Profile extends Fragment {
         viewModel.getCoins_data().observe(getViewLifecycleOwner(),totalCoinsModel -> {
             if (totalCoinsModel.isStatus()){
                 userCoins = String.valueOf(totalCoinsModel.getCoins());
-                binding.coinValue.setText(String.valueOf(totalCoinsModel.getCoins()));
+                binding.coinValue.setText(String.valueOf(Math.round(totalCoinsModel.getCoins())));
             }
         });
     }

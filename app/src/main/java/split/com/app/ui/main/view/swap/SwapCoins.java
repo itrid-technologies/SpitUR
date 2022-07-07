@@ -90,7 +90,7 @@ public class SwapCoins extends Fragment {
 
         binding.swapButton.setOnClickListener(view -> {
             String swapValue = binding.inrCoinsValue.getText().toString();
-            if (!swapValue.isEmpty() && swapValue.equalsIgnoreCase(coins)){
+            if (!swapValue.isEmpty() && swapValue.equalsIgnoreCase("0.0")){
               viewModel = new SwapViewModel(swapValue);
               viewModel.init();
               viewModel.getCoins_data().observe(getViewLifecycleOwner(), basicModel -> {

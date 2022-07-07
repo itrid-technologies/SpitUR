@@ -1,6 +1,7 @@
 package split.com.app.ui.main.view.join_checkout;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,7 +26,9 @@ import split.com.app.R;
 import split.com.app.data.model.group_detail.DataItem;
 import split.com.app.databinding.FragmentJoinCheckOutBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.view.join_plans.CheckoutActivity;
 import split.com.app.ui.main.viewmodel.join_checkout_viewmodel.JoinCheckoutViewModel;
+import split.com.app.ui.main.viewmodel.join_group.JoinGroupViewModel;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
@@ -42,6 +46,9 @@ public class JoinCheckOut extends Fragment {
 
     boolean isPromoValid = false;
     String discount_amount , code;
+
+    JoinGroupViewModel joinGroupViewModel;
+
 
 
     @Override
@@ -73,6 +80,7 @@ public class JoinCheckOut extends Fragment {
 
         initClickListeners();
 
+        
 
     }
 
@@ -179,7 +187,8 @@ public class JoinCheckOut extends Fragment {
             viewModel.init();
             viewModel.getData().observe(getViewLifecycleOwner(), basicModel -> {
                 if (basicModel.isStatus()) {
-                    Navigation.findNavController(requireView()).navigate(R.id.action_joinCheckOut_to_joinPayment);
+                    nAV();
+                    //Navigation.findNavController(requireView()).navigate(R.id.action_joinCheckOut_to_joinPayment);
                 } else {
                     dialogBuilder = new AlertDialog.Builder(requireContext());
                     View layoutView = getLayoutInflater().inflate(R.layout.enter_email_dialogue, null);
@@ -229,7 +238,57 @@ public class JoinCheckOut extends Fragment {
     }
 
     private void nAV() {
-        Navigation.findNavController(requireView()).navigate(R.id.action_joinCheckOut_to_joinPayment);
+//        Navigation.findNavController(requireView()).navigate(R.id.action_joinCheckOut_to_joinPayment);
+
+        MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
+        String group_id = mySharedPreferences.getData(Split.getAppContext(), "GroupID");
+
+        if (!group_id.isEmpty()) {
+            joinGroupViewModel = new JoinGroupViewModel(group_id, Constants.USER_EMAIL);
+            joinGroupViewModel.init();
+            joinGroupViewModel.getData().observe(getViewLifecycleOwner(), joinGroupModel -> {
+                if (joinGroupModel.isSuccess()) {
+                    Bundle bundle = new Bundle();
+                    Gson gson = new Gson();
+                    String groupDATA = gson.toJson(joinGroupModel);
+                    bundle.putString("group_credentials", groupDATA);
+                    bundle.putString("plan_url", joinGroupModel.getSubscriptions().getShortUrl());
+
+//                          Navigation.findNavController(view1).navigate(R.id.action_joinPayment_to_joinPlans,bundle);
+
+                    Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
+                    checkoutIntent.putExtra("group_id", group_id);
+                    checkoutIntent.putExtra("subscription_id", joinGroupModel.getSubscriptions().getId());
+                    checkoutIntent.putExtra("group_credentials", groupDATA);
+                    startActivity(checkoutIntent);
+                    requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                } else {
+                    failureDialogue(joinGroupModel.getMessage());
+                }
+            });
+        }
+    }
+
+    private void failureDialogue(String message) {
+        dialogBuilder = new AlertDialog.Builder(requireContext());
+        dialogBuilder.setCancelable(false);
+        View layoutView = getLayoutInflater().inflate(R.layout.already_member_dialogue, null);
+        Button home = (Button) layoutView.findViewById(R.id.back_home);
+        TextView reason = (TextView) layoutView.findViewById(R.id.tv_reason);
+        reason.setText(message);
+
+
+        dialogBuilder.setView(layoutView);
+        alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+        home.setOnClickListener(view1 -> {
+            alertDialog.dismiss();
+            Navigation.findNavController(requireView()).navigate(R.id.home2);
+            //ActivityUtil.gotoHome(Split.getAppContext());
+        });
     }
 
 }

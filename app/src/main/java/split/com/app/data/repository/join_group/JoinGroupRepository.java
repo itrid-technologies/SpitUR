@@ -23,7 +23,7 @@ public class JoinGroupRepository {
     public JoinGroupRepository() {
     }
 
-    public MutableLiveData<JoinGroupModel> join(String groupId, String email, String upiId) {
+    public MutableLiveData<JoinGroupModel> join(String groupId, String email) {
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
@@ -31,7 +31,6 @@ public class JoinGroupRepository {
         JsonObject object = new JsonObject();
         object.addProperty("group_id", groupId);
         object.addProperty("email", email);
-        object.addProperty("upi_id", upiId);
 
         final MutableLiveData<JoinGroupModel> BasicModelMutableLiveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();

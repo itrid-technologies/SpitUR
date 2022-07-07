@@ -71,8 +71,8 @@
                 android:fontFamily="@font/inter_semibold"
                 android:gravity="center|start"
                 android:paddingStart="16dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
                 android:text="Search"
                 android:textColor="@color/dark_grey"
                 android:textSize="14sp"
@@ -127,7 +127,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    app:layout_constraintEnd_toStartOf="@id/part2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:id="@+id/part1"
                     >
@@ -205,6 +204,7 @@
                     app:layout_constraintEnd_toStartOf="@id/part3"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:id="@+id/part2"
+                    android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     >
 
@@ -278,7 +278,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/guarantee_term_bg"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/part2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:id="@+id/part3"
                     >
@@ -375,6 +374,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginStart="-8dp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

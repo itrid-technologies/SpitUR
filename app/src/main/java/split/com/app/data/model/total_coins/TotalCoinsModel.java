@@ -5,12 +5,12 @@ import com.google.gson.annotations.SerializedName;
 public class TotalCoinsModel{
 
 	@SerializedName("coins")
-	private int coins;
+	private double coins;
 
 	@SerializedName("status")
 	private boolean status;
 
-	public int getCoins(){
+	public double getCoins(){
 		return coins;
 	}
 

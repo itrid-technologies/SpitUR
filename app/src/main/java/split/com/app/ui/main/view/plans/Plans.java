@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
@@ -82,7 +83,7 @@ public class Plans extends Fragment {
     }
 
     private void buildsPlansRv() {
-        GridAutofitLayoutManager glm = new GridAutofitLayoutManager(Split.getAppContext(), 2, LinearLayoutManager.HORIZONTAL,false);
+        GridLayoutManager glm = new GridLayoutManager(Split.getAppContext(), 2);
         binding.PlansList.setLayoutManager(glm);
         PlanAdapter adapter = new PlanAdapter(Split.getAppContext(), planModelList);
         binding.PlansList.setAdapter(adapter);
