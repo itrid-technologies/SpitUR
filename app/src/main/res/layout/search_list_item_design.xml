@@ -10,19 +10,33 @@
     android:background="@drawable/grey_troke_16_"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/search_icons"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/player_icon"
-        app:civ_border_width="2dp"
-        android:layout_marginStart="10dp"
-        app:civ_circle_background_color="@color/icons_bg"
-        app:civ_border_color="@color/icons_bg"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/round_back"
+        android:backgroundTint="@color/icons_bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        android:id="@+id/search_icons">
+
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/player_icon"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
