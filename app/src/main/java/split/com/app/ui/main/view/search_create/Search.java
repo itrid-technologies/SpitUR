@@ -15,14 +15,18 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import split.com.app.R;
+import split.com.app.data.model.plans.PlanDataItem;
 import split.com.app.data.model.popular_subcategory.DataItem;
 import split.com.app.databinding.FragmentSearchBinding;
 import split.com.app.ui.main.adapter.search.SearchListAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.plan_viewmodel.PlansViewModel;
 import split.com.app.ui.main.viewmodel.search_create_viewmodel.SearchCreateViewModel;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
@@ -34,6 +38,8 @@ public class Search extends Fragment {
     FragmentSearchBinding binding;
     private SearchCreateViewModel mViewModel;
     private List<DataItem> popularSubCategoryList;
+
+    private PlansViewModel plansViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -156,10 +162,32 @@ public class Search extends Fragment {
 
 
             Constants.SUB_CATEGORY_ID = String.valueOf(popularSubCategoryList.get(position).getId());
-            Bundle bundle = new Bundle();
-            bundle.putString("SUB_CATEGORY_ID", String.valueOf(popularSubCategoryList.get(position).getId()));
+//            Bundle bundle = new Bundle();
+//            bundle.putString("SUB_CATEGORY_ID", String.valueOf(popularSubCategoryList.get(position).getId()));
             Constants.SUB_CAT_TITLE = String.valueOf(popularSubCategoryList.get(position).getTitle());
-            Navigation.findNavController(requireView()).navigate(R.id.action_search2_to_plans2, bundle);
+
+//sub cat id
+            plansViewModel = new PlansViewModel(String.valueOf(popularSubCategoryList.get(position).getId()));
+            plansViewModel.init();
+            plansViewModel.getPlan().observe(getViewLifecycleOwner(), planModel -> {
+                if (planModel.isSuccess()) {
+                    if (planModel.getData().size() > 0) {
+
+                        Gson gson = new Gson();
+                        String plansModelData = gson.toJson(planModel);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("plansDATA", plansModelData);
+                        Navigation.findNavController(requireView()).navigate(R.id.action_search2_to_plans2, bundle);
+
+                    }else {
+                        Constants.PLAN_ID = "";
+                        Navigation.findNavController(requireView()).navigate(R.id.action_search2_to_visibility2);
+
+                    }
+
+                }
+            });
+
         });
         }
 

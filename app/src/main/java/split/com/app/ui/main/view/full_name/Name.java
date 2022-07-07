@@ -15,6 +15,7 @@ import split.com.app.ui.main.view.otp_phone_number.OtpNumber;
 import split.com.app.ui.main.view.otp_verification.OtpVerification;
 import split.com.app.ui.main.view.user_id.UserId;
 import split.com.app.utils.ActivityUtil;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 
 public class Name extends AppCompatActivity {
@@ -37,8 +38,8 @@ public class Name extends AppCompatActivity {
             String name = binding.edName.getText().toString().trim();
             if (!name.isEmpty()){
 
-                MySharedPreferences sharedPreferences = new MySharedPreferences(this);
-                sharedPreferences.saveData(this,"userName",name);
+                Constants.USER_NAME = name;
+
 
                 ActivityUtil.gotoPage(Name.this, UserId.class);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

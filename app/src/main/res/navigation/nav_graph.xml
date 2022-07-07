@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_search2_to_subscriptionName"
             app:destination="@id/subscriptionName" />
+        <action
+            android:id="@+id/action_search2_to_visibility2"
+            app:destination="@id/visibility2" />
     </fragment>
     <fragment
         android:id="@+id/plans2"

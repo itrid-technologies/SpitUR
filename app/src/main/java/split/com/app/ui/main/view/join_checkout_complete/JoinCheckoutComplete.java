@@ -95,6 +95,10 @@ public class JoinCheckoutComplete extends Fragment {
                 binding.tvRequest.setVisibility(View.VISIBLE);
                 binding.send.setVisibility(View.VISIBLE);
                 binding.view1.setVisibility(View.VISIBLE);
+            }else {
+                binding.tvRequest.setVisibility(View.GONE);
+                binding.send.setVisibility(View.GONE);
+                binding.view1.setVisibility(View.GONE);
             }
         }
 

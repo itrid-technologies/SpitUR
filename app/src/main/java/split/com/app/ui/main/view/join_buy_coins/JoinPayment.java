@@ -66,7 +66,7 @@ public class JoinPayment extends Fragment {
                 String group_id = mySharedPreferences.getData(Split.getAppContext(), "GroupID");
 
                 if (!group_id.isEmpty()) {
-                    viewModel = new JoinGroupViewModel(group_id, Constants.JoinEmail, upi_id);
+                    viewModel = new JoinGroupViewModel(group_id, Constants.USER_EMAIL, upi_id);
                     viewModel.init();
                     viewModel.getData().observe(getViewLifecycleOwner(), joinGroupModel -> {
                         if (joinGroupModel.isSuccess()) {
@@ -76,7 +76,7 @@ public class JoinPayment extends Fragment {
                             bundle.putString("group_credentials", groupDATA);
                             bundle.putString("plan_url", joinGroupModel.getSubscriptions().getShortUrl());
 
-//                            Navigation.findNavController(view1).navigate(R.id.action_joinPayment_to_joinPlans,bundle);
+//                          Navigation.findNavController(view1).navigate(R.id.action_joinPayment_to_joinPlans,bundle);
 
                             Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
                             checkoutIntent.putExtra("group_id", group_id);

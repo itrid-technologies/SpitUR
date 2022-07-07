@@ -15,6 +15,7 @@ import split.com.app.ui.main.view.full_name.Name;
 import split.com.app.ui.main.view.otp_verification.OtpVerification;
 import split.com.app.ui.main.viewmodel.phone_number.PhoneNumberViewModel;
 import split.com.app.utils.ActivityUtil;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 
 public class OtpNumber extends AppCompatActivity {
@@ -54,8 +55,7 @@ public class OtpNumber extends AppCompatActivity {
 
                     }else {
 
-                        MySharedPreferences preferences = new MySharedPreferences(this);
-                        preferences.saveData(this,"number",my_number);
+                        Constants.USER_NUMBER = my_number;
 
                         ActivityUtil.gotoPage(OtpNumber.this,Name.class);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -82,8 +82,8 @@ public class OtpNumber extends AppCompatActivity {
         mViewModel.getOtp_data().observe(this, otpModel -> {
             if (otpModel.isStatus()){
 
-                MySharedPreferences preferences = new MySharedPreferences(this);
-                preferences.saveData(this,"number",my_number);
+                Constants.USER_NUMBER = my_number;
+
 
                 ActivityUtil.gotoPage(OtpNumber.this,OtpVerification.class);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

@@ -10,6 +10,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import split.com.app.data.api.ApiManager;
 import split.com.app.data.api.ApiService;
+import split.com.app.data.model.PromoModel;
 import split.com.app.data.model.basic_model.BasicModel;
 
 public class JoinCheckoutRepository {
@@ -39,4 +40,27 @@ public class JoinCheckoutRepository {
 
         return BasicModelMutableLiveData;
     }
+
+    public MutableLiveData<PromoModel> apply(String code) {
+        final MutableLiveData<PromoModel> mutableLiveData = new MutableLiveData<>();
+        apiService = ApiManager.getRestApiService();
+        Call<PromoModel> call = apiService.applyPromoCode(code);
+        call.enqueue(new Callback<PromoModel>() {
+            @Override
+            public void onResponse(@NonNull Call<PromoModel> call, @NonNull Response<PromoModel> response) {
+                if(response.body()!=null)
+                {
+                    mutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<PromoModel> call, @NonNull Throwable t) {
+                Log.e("Avatar Error",t.getMessage());
+            }
+        });
+
+        return mutableLiveData;
+    }
+
 }

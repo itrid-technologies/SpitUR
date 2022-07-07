@@ -159,6 +159,16 @@
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/layout/toolbar_layout01.xml" value="0.3052586575459598" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/AndroidStudioProjects/Split/app/src/main/res/xml/network_security_config.xml" value="0.3052586575459598" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SpitUR/app/src/main/res/drawable/dialogue_bg.xml" value="0.2725" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SpitUR/app/src/main/res/drawable/guarantee_term_bg.xml" value="0.2725" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SpitUR/app/src/main/res/drawable/terms_bg.xml" value="0.2725" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SpitUR/app/src/main/res/layout/enter_email_dialogue.xml" value="0.371875" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SpitUR/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SpitUR/app/src/main/res/layout/fragment_join_check_out.xml" value="0.371875" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SpitUR/app/src/main/res/layout/fragment_user_information.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SpitUR/app/src/main/res/layout/fragment_visibility.xml" value="0.371875" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SpitUR/app/src/main/res/layout/promocode_dialogue.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SpitUR/app/src/main/res/layout/receicer_layout.xml" value="0.371875" />
       </map>
     </option>
   </component>

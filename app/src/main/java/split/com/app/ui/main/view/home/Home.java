@@ -165,8 +165,8 @@ public class Home extends Fragment {
                             ElasticImageView logout = profileView.findViewById(R.id.logout_icon);
 
                             RecyclerView avatarRv = profileView.findViewById(R.id.profile_avatars);
-                            ImageButton previous = profileView.findViewById(R.id.previous_avatar);
-                            ImageButton next = profileView.findViewById(R.id.next_avatar);
+                            ImageView previous = profileView.findViewById(R.id.previous_avatar);
+                            ImageView next = profileView.findViewById(R.id.next_avatar);
                             Button save = profileView.findViewById(R.id.btn_save_profile);
 
 //            MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
@@ -348,12 +348,9 @@ public class Home extends Fragment {
     }
 
     private void setProfileData() {
-        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
-        String user_name = preferences.getData(Split.getAppContext(), "userName");
-        String avatar = preferences.getData(Split.getAppContext(), "userAvatar");
 
-        binding.name.setText(user_name);
-        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.color.blue).into(binding.userImage);
+        binding.name.setText(Constants.USER_NAME );
+        Glide.with(Split.getAppContext()).load(Constants.USER_AVATAR).placeholder(R.color.blue).into(binding.userImage);
 
 
     }

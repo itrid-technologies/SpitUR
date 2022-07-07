@@ -7,7 +7,7 @@ public class Data{
 	@SerializedName("password")
 	private String password;
 
-	@SerializedName("group_id")
+	@SerializedName("id")
 	private int groupId;
 
 	@SerializedName("user_id")

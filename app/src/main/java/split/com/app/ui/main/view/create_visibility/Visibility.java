@@ -59,9 +59,11 @@ public class Visibility extends Fragment {
         slot = Constants.SLOTS;
         if (!slot.isEmpty()){
             Constants.SLOTS = slot;
+            slot = Constants.SLOTS;
 
         }else {
             Constants.SLOTS = "4";
+            slot = Constants.SLOTS;
         }
 
         binding.visibilityProfile.netflix.setText(user_name);

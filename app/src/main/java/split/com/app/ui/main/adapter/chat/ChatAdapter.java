@@ -11,15 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
 import split.com.app.data.model.chat_receiver.ReceiverModel;
 import split.com.app.data.model.chat_sender.SenderModel;
+import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -62,6 +65,13 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 rStime = rSentTime[1].substring(0, Math.min(rSentTime[1].length(), 5));
                 rvh.time.setText(rStime);
 
+                if (data.getReceiver() != null){
+                    Glide.with(context).load(Constants.IMG_PATH + data.getReceiver().getAvatar()).placeholder(R.color.images_placeholder).into(((RecieverVH) holder).imageView);
+                    ((RecieverVH) holder).name.setText(data.getReceiver().getName());
+                    ((RecieverVH) holder).name.setVisibility(View.VISIBLE);
+                    ((RecieverVH) holder).imageView.setVisibility(View.VISIBLE);
+                }
+
                 break;
             case 1:
                 SenderVH svh = (SenderVH) holder;
@@ -95,12 +105,16 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public static class RecieverVH extends RecyclerView.ViewHolder {
         private final TextView message;
-        private final TextView time;
+        private final TextView time, name;
+        CircleImageView imageView;
 
         public RecieverVH(@NonNull View itemView) {
             super(itemView);
             message = itemView.findViewById(R.id.tv_receiver_message);
             time = itemView.findViewById(R.id.tv_date);
+            name = itemView.findViewById(R.id.chat_userName);
+            imageView = itemView.findViewById(R.id.user_icons);
+
         }
     }
 

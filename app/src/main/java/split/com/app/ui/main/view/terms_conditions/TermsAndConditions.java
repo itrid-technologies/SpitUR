@@ -13,6 +13,7 @@ import split.com.app.databinding.ActivityTermsAndConditionsBinding;
 import split.com.app.ui.main.view.otp_verification.OtpVerification;
 import split.com.app.ui.main.viewmodel.register_viewmodel.RegisterViewModel;
 import split.com.app.utils.ActivityUtil;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 
 public class TermsAndConditions extends AppCompatActivity {
@@ -28,11 +29,10 @@ public class TermsAndConditions extends AppCompatActivity {
         mBinding = ActivityTermsAndConditionsBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
 
-        MySharedPreferences sharedPreferences = new MySharedPreferences(this);
-        String number = sharedPreferences.getData(this,"number");
-        String name = sharedPreferences.getData(this,"userName");
-        String userid = sharedPreferences.getData(this,"userId");
-        String avatar = sharedPreferences.getData(this,"userAvatar");
+            String number = Constants.USER_NUMBER;
+        String name = Constants.USER_NAME;
+        String userid = Constants.USER_ID;
+        String avatar = Constants.USER_AVATAR;
 
 
 

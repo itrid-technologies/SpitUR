@@ -93,14 +93,11 @@ public class OtpVerification extends AppCompatActivity {
             if (authenticationModel.isSuccess()) {
 
                 if (authenticationModel.getData().getUser() != null) {
-                    MySharedPreferences preferences = new MySharedPreferences(this);
-                    preferences.saveData(this, "Id", String.valueOf(authenticationModel.getData().getUser().getId()));
-                    preferences.saveData(this, "userId", authenticationModel.getData().getUser().getUserId());
-                    preferences.saveData(this, "userOtp", authenticationModel.getData().getUser().getOtpHash());
-                    preferences.saveData(this, "userName", authenticationModel.getData().getUser().getName());
-                    preferences.saveData(this, "userAvatar", Constants.IMG_PATH + authenticationModel.getData().getUser().getAvatar());
-                    preferences.saveData(this, "userCreatedAt", authenticationModel.getData().getUser().getCreatedAt());
-                    preferences.saveData(this, "userAccessToken", authenticationModel.getData().getToken());
+                    Constants.ID = String.valueOf(authenticationModel.getData().getUser().getId());
+                    Constants.USER_ID = authenticationModel.getData().getUser().getUserId();
+                    Constants.USER_NAME =  authenticationModel.getData().getUser().getName();
+                    Constants.USER_AVATAR =  Constants.IMG_PATH + authenticationModel.getData().getUser().getAvatar();
+                    Constants.DEVICE_TOKEN =  authenticationModel.getData().getToken();
 
                     ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

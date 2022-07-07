@@ -19,6 +19,7 @@ import split.com.app.ui.main.view.full_name.Name;
 import split.com.app.ui.main.viewmodel.register_viewmodel.RegisterViewModel;
 import split.com.app.ui.main.viewmodel.user_id.UserIdViewModel;
 import split.com.app.utils.ActivityUtil;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 
 public class UserId extends AppCompatActivity {
@@ -46,8 +47,8 @@ public class UserId extends AppCompatActivity {
                 mViewModel.init();
                 mViewModel.getData().observe(this, basicModel -> {
                     if (!basicModel.isStatus()){
-                        MySharedPreferences sharedPreferences = new MySharedPreferences(this);
-                        sharedPreferences.saveData(this,"userId",userId);
+
+                        Constants.USER_ID = userId;
 
                         ActivityUtil.gotoPage(UserId.this, ChooseAvatar.class);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

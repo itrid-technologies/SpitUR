@@ -16,6 +16,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import split.com.app.data.model.GetScoreModel;
 import split.com.app.data.model.HomeContentModel;
+import split.com.app.data.model.PromoModel;
 import split.com.app.data.model.TransactionsModel;
 import split.com.app.data.model.active_user.ActiveUserModel;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
@@ -224,4 +225,7 @@ public interface ApiService {
 
     @GET("groups/get_payment_transaction")
     Call<TransactionsModel> getAllTransactions(@Header("Authorization") String token);
+
+    @GET("promotions/get_promo_code_details/{code}")
+    Call<PromoModel> applyPromoCode(@Path("code") String code);
 }

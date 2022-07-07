@@ -96,8 +96,7 @@ public class ChooseAvatar extends AppCompatActivity {
             //TODO: here is your selected avatar
             final String selectedAvatar = avatars.get(currentIndex);
 
-            MySharedPreferences sharedPreferences = new MySharedPreferences(this);
-            sharedPreferences.saveData(this,"userAvatar", Constants.IMG_PATH +selectedAvatar);
+           Constants.USER_AVATAR = Constants.IMG_PATH + selectedAvatar;
 
             ActivityUtil.gotoPage(ChooseAvatar.this, TermsAndConditions.class);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

@@ -80,8 +80,7 @@ public class MemberChat extends Fragment {
                             ));
                         } else {
                             msgs.add(new ReceiverModel(getMemberMessagesModel.getMessages().get(i).getBody(),
-                                    getMemberMessagesModel.getMessages().get(i).getCreatedAt()
-                            ));
+                                    getMemberMessagesModel.getMessages().get(i).getCreatedAt(), null));
                         }
                     }
                     buildChatRv(msgs);

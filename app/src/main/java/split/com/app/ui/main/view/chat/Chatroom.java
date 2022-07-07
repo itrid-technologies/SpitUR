@@ -75,7 +75,8 @@ public class Chatroom extends Fragment {
                             ));
                         } else {
                             msgs.add(new ReceiverModel(getMessagesModel.getMessages().get(i).getBody(),
-                                    getMessagesModel.getMessages().get(i).getCreatedAt()
+                                    getMessagesModel.getMessages().get(i).getCreatedAt(),
+                                    getMessagesModel.getMessages().get(i).getGroupSender()
                             ));
                         }
                     }

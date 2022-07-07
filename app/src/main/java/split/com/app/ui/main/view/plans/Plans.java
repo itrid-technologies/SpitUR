@@ -9,19 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import split.com.app.R;
 import split.com.app.data.model.plans.PlanDataItem;
+import split.com.app.data.model.plans.PlanModel;
 import split.com.app.databinding.FragmentPlansBinding;
 import split.com.app.ui.main.adapter.PlanAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
-import split.com.app.ui.main.viewmodel.plan_viewmodel.PlansViewModel;
 import split.com.app.utils.Constants;
-import split.com.app.utils.MySharedPreferences;
+import split.com.app.utils.GridAutofitLayoutManager;
 import split.com.app.utils.Split;
 
 
@@ -29,10 +31,11 @@ public class Plans extends Fragment {
 
 
     FragmentPlansBinding binding;
-    private PlansViewModel mViewModel;
+//    private PlansViewModel mViewModel;
     private List<PlanDataItem> planModelList = new ArrayList<>();
 
     String sub_cat_id;
+    private PlanModel planModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,30 +54,35 @@ public class Plans extends Fragment {
         initClickListeners();
 
         if (getArguments() != null){
-            sub_cat_id = getArguments().getString("SUB_CATEGORY_ID");
+          //  sub_cat_id = getArguments().getString("SUB_CATEGORY_ID");
+            String data  = getArguments().getString("plansDATA");
+            Gson gson = new Gson();
+            planModel = gson.fromJson(data,PlanModel.class);
+            planModelList.addAll(planModel.getData());
+            buildsPlansRv();
         }
 
-        mViewModel = new PlansViewModel(sub_cat_id);
-        mViewModel.init();
-        mViewModel.getPlan().observe(getViewLifecycleOwner(), planModel -> {
-            if (planModel.isSuccess()) {
-                if (planModel.getData().size() > 0) {
-                    planModelList.addAll(planModel.getData());
-                    buildsPlansRv();
-                }else {
-                    Constants.PLAN_ID = "";
-                    Navigation.findNavController(requireView()).navigate(R.id.action_plans2_to_visibility2);
-
-                }
-
-            }
-        });
+//        mViewModel = new PlansViewModel(sub_cat_id);
+//        mViewModel.init();
+//        mViewModel.getPlan().observe(getViewLifecycleOwner(), planModel -> {
+//            if (planModel.isSuccess()) {
+//                if (planModel.getData().size() > 0) {
+//                    planModelList.addAll(planModel.getData());
+//                    buildsPlansRv();
+//                }else {
+//                    Constants.PLAN_ID = "";
+//                    Navigation.findNavController(requireView()).navigate(R.id.action_plans2_to_visibility2);
+//
+//                }
+//
+//            }
+//        });
 
 
     }
 
     private void buildsPlansRv() {
-        GridLayoutManager glm = new GridLayoutManager(getContext(), 2);
+        GridAutofitLayoutManager glm = new GridAutofitLayoutManager(Split.getAppContext(), 2, LinearLayoutManager.HORIZONTAL,false);
         binding.PlansList.setLayoutManager(glm);
         PlanAdapter adapter = new PlanAdapter(Split.getAppContext(), planModelList);
         binding.PlansList.setAdapter(adapter);

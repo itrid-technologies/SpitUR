@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/PromoDialogue"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="30dp"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="340dp"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="15dp"
+        android:background="@drawable/dialogue_bg"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/tv_promo"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Promo Code"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_promo"
+            android:hint="Enter Promocode"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_color"
+            android:fontFamily="@font/poppin_regular"
+            android:textSize="13sp"
+            android:drawablePadding="12dp"
+            android:gravity="start|center"
+            android:background="@drawable/round_back"
+            android:backgroundTint="@color/light_blue"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_promo_icon"
+            android:id="@+id/ed_promocode"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/ed_promocode"
+            app:layout_constraintTop_toBottomOf="@id/ed_promocode"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/error"
+            android:paddingTop="3dp"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:text="-"
+            android:textSize="10sp"
+            android:id="@+id/promo_status"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/promo_status"
+            app:layout_constraintTop_toBottomOf="@id/promo_status"
+            app:layout_constraintEnd_toEndOf="@id/ed_promocode"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/white"
+            android:layout_marginEnd="10sp"
+            android:alpha="0.6"
+            android:visibility="gone"
+            android:text="You will receive 43 Coins in your account after you join the group."
+            android:textSize="10sp"
+            android:id="@+id/codeView"/>
+
+        <Button
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/codeView"
+            android:text="Apply"
+            android:layout_marginTop="14dp"
+            style="@style/buttonStyle"
+            android:background="@drawable/button_round_bg"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:textSize="14sp"
+            android:id="@+id/apply_code"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

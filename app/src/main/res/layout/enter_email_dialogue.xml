@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/LogoutConfirmation"
+    android:id="@+id/EmailDialogue"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="30dp"
@@ -12,16 +12,19 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="340dp"
-            android:padding="12dp"
-            android:backgroundTint="#262A34"
-            android:background="@drawable/terms_bg"
+            android:paddingTop="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="15dp"
+            android:background="@drawable/dialogue_bg"
             android:layout_gravity="center_horizontal"
             android:layout_height="match_parent">
 
 
             <TextView
                 android:id="@+id/tv_EMAIL"
-                style="@style/semiBoldText"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Enter Email ID"
@@ -36,7 +39,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_EMAIL"
                 android:hint="email"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/hint_color"
                 android:fontFamily="@font/poppin_regular"

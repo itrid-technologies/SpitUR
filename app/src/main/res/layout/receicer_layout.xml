@@ -41,7 +41,7 @@
             android:textColor="@color/white"
             android:visibility="gone"
             android:textSize="13sp"
-            android:id="@+id/userName"/>
+            android:id="@+id/chat_userName"/>
 
         <TextView
             android:id="@+id/tv_receiver_message"
