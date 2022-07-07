@@ -66,7 +66,7 @@ public class JoinPayment extends Fragment {
                 String group_id = mySharedPreferences.getData(Split.getAppContext(), "GroupID");
 
                 if (!group_id.isEmpty()) {
-                    viewModel = new JoinGroupViewModel(group_id, Constants.USER_EMAIL, upi_id);
+                    viewModel = new JoinGroupViewModel(group_id, "Constants.USER_EMAIL", upi_id);
                     viewModel.init();
                     viewModel.getData().observe(getViewLifecycleOwner(), joinGroupModel -> {
                         if (joinGroupModel.isSuccess()) {
