@@ -12,17 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
-import split.com.app.data.model.HomeDataItem;
-import split.com.app.data.model.SubCategoryItem;
 import split.com.app.data.model.popular_subcategory.DataItem;
 import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
+import split.com.app.utils.Svg;
 
 public class PopularHomeAdapter extends RecyclerView.Adapter<PopularHomeAdapter.PopularVH> {
 
@@ -52,10 +48,7 @@ public class PopularHomeAdapter extends RecyclerView.Adapter<PopularHomeAdapter.
 
             final DataItem current_data = dataItems.get(position);
             if (current_data.getCategory() != null){
-                Glide.with(context)
-                        .load(Constants.IMG_PATH + current_data.getCategory().getIcon())
-                        .placeholder(R.color.images_placeholder)
-                        .into(holder.icon);
+                Svg.INSTANCE.loadUrl(Constants.IMG_PATH+current_data.getCategory().getIcon() , holder.icon);
             }
             holder.name.setText(current_data.getTitle());
 

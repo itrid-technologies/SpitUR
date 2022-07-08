@@ -131,4 +131,9 @@
     </style>
 
 
+    <style name="BottomNavigationTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/hint_color</item>
+    </style>
+
 </resources>

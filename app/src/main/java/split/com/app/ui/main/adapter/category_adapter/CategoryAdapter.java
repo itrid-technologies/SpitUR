@@ -19,6 +19,7 @@ import split.com.app.data.model.home_categories.CategoryDataItems;
 import split.com.app.ui.main.adapter.PlanAdapter;
 import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
+import split.com.app.utils.Svg;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryVH> {
 
@@ -49,10 +50,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.CategoryVH holder, int position) {
         CategoryDataItems current_item =  categoryDataItems.get(position);
-        Glide.with(context)
-                .load(Constants.IMG_PATH + current_item.getIcon())
-                .placeholder(R.color.images_placeholder)
-                .into(holder.icon);
+        Svg.INSTANCE.loadUrl(
+                Constants.IMG_PATH + current_item.getIcon(),
+                holder.icon
+        );
         holder.name.setText(current_item.getTitle());
     }
 

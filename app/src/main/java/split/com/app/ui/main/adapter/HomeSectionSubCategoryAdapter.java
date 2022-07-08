@@ -1,39 +1,31 @@
 package split.com.app.ui.main.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
 import split.com.app.data.model.SubCategoryItem;
-import split.com.app.data.model.popular_subcategory.DataItem;
-import split.com.app.ui.main.adapter.category_adapter.CategoryAdapter;
 import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
+import split.com.app.utils.Svg;
 
 public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSectionSubCategoryAdapter.PopularVH> {
 
-    private static List<SubCategoryItem> homeDataItem;
+    private final List<SubCategoryItem> homeDataItem;
     String subCat_icon;
 
     private final Context context;
 
     private ItemClickListener mListener;
-
 
 
     public void setOnSubCategorySelectListener(ItemClickListener listener) {
@@ -50,19 +42,16 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
     @Override
     public HomeSectionSubCategoryAdapter.PopularVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_popular_list_items, parent, false);
-        return new HomeSectionSubCategoryAdapter.PopularVH(view,mListener);
+        return new HomeSectionSubCategoryAdapter.PopularVH(view, mListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HomeSectionSubCategoryAdapter.PopularVH holder, int position) {
 
-            Glide.with(context)
-                    .load(Constants.IMG_PATH + subCat_icon)
-                    .placeholder(R.color.images_placeholder)
-                    .into(holder.icon);
-            SubCategoryItem subCategoryItem = homeDataItem.get(position);
-            holder.name.setText(subCategoryItem.getSubCatTitle());
-            
+        Svg.INSTANCE.loadUrl(Constants.IMG_PATH + subCat_icon, holder.icon);
+        SubCategoryItem subCategoryItem = homeDataItem.get(position);
+        holder.name.setText(subCategoryItem.getSubCatTitle());
+
     }
 
     @Override
@@ -70,7 +59,7 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
         return homeDataItem.size();
     }
 
-    public interface ItemClickListener{
+    public interface ItemClickListener {
         void onSubCategorySelect(int position);
     }
 

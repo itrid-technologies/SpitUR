@@ -32,14 +32,11 @@ public class OtpNumber extends AppCompatActivity {
         binding = ActivityOtpNumberBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-
         binding.sendOtpButton.setOnClickListener(view -> {
 
 
-
             String number = binding.phoneNumber.getText().toString().trim();
-            String code = binding.countryCodePicker.getSelectedCountryCode().toString().trim();
+            String code = binding.countryCodePicker.getSelectedCountryCode().trim();
             if (!number.isEmpty()) {
 
                 my_number = "+"+code+number;
@@ -83,7 +80,6 @@ public class OtpNumber extends AppCompatActivity {
             if (otpModel.isStatus()){
 
                 Constants.USER_NUMBER = my_number;
-
 
                 ActivityUtil.gotoPage(OtpNumber.this,OtpVerification.class);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

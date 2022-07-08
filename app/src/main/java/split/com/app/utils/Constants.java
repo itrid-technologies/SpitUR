@@ -1,17 +1,21 @@
 package split.com.app.utils;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.util.TypedValue;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Constants {
+public final class Constants {
 
 
     public static String URL_BASE = "http://3.6.7.161:4000/";
-    // public static String URL_BASE = "http://192.168.100.5:4000/";
+//     public static String URL_BASE = "http://192.168.100.5:4000/";
 
     public static String IMG_PATH = "http://3.6.7.161:4000";
- //   public static String IMG_PATH = "http://192.168.100.5:4000";
+//    public static String IMG_PATH = "http://192.168.100.5:4000";
     public static String DEVICE_TOKEN = "";
 
 

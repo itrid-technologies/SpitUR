@@ -21,6 +21,7 @@ import split.com.app.R;
 import split.com.app.data.model.DataItem;
 import split.com.app.data.model.plans.PlanDataItem;
 import split.com.app.utils.Constants;
+import split.com.app.utils.Svg;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
 
@@ -56,7 +57,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         String url = Constants.IMG_PATH + dataItem.getGroupsPaymentTransactions().getSubCategory().getCategory().getIcon();
 
-        Glide.with(context).load(url).into(holder.icon);
+
+        Svg.INSTANCE.loadUrl(url , holder.icon);
 
     }
 

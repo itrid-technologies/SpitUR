@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import split.com.app.R;
 import split.com.app.data.model.all_created_groupx.DataItem;
+import split.com.app.utils.Svg;
 
 public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAdapter.GroupVH> {
 

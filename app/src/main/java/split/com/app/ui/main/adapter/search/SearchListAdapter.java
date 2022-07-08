@@ -23,6 +23,7 @@ import split.com.app.ui.main.adapter.group_member.GroupMemberAdapter;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
+import split.com.app.utils.Svg;
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.SearchVH> {
 
@@ -51,10 +52,9 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
     public void onBindViewHolder(@NonNull SearchListAdapter.SearchVH holder, int position) {
         final DataItem current_data = dataItems.get(position);
         if (current_data.getCategory() != null) {
-            Glide.with(context)
-                    .load(Constants.IMG_PATH + current_data.getCategory().getIcon())
-                    .placeholder(R.color.images_placeholder)
-                    .into(holder.icon);
+            Svg.INSTANCE.loadUrl(
+                    Constants.IMG_PATH + current_data.getCategory().getIcon(),
+                    holder.icon);
         }
         holder.name.setText(current_data.getTitle());
     }

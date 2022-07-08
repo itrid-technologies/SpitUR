@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +37,6 @@ import split.com.app.databinding.FragmentHomeBinding;
 import split.com.app.ui.main.adapter.HomeSectionAdapter;
 import split.com.app.ui.main.adapter.avatar_adapter.AdapterAvatars;
 import split.com.app.ui.main.adapter.category_adapter.CategoryAdapter;
-import split.com.app.ui.main.adapter.popular_adapter.PopularHomeAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.view.profile.Profile;
 import split.com.app.ui.main.view.splash.Splash;
@@ -50,6 +48,7 @@ import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.SpanningLinearLayoutManager;
 import split.com.app.utils.Split;
+import split.com.app.utils.Svg;
 
 
 public class Home extends Fragment {
@@ -93,7 +92,7 @@ public class Home extends Fragment {
         homeDataItems = new ArrayList<>();
 
         binding.categoriesLst.setVisibility(View.GONE);
-       // binding.popularLst.setVisibility(View.GONE);
+        // binding.popularLst.setVisibility(View.GONE);
         binding.homeSections.setVisibility(View.GONE);
 
         homeViewModel = new HomeViewModel();
@@ -348,7 +347,7 @@ public class Home extends Fragment {
 
     private void setProfileData() {
 
-        binding.name.setText(Constants.USER_NAME );
+        binding.name.setText(Constants.USER_NAME);
         Glide.with(Split.getAppContext()).load(Constants.USER_AVATAR).placeholder(R.color.blue).into(binding.userImage);
 
 
@@ -372,13 +371,13 @@ public class Home extends Fragment {
         homeViewModel.getPopularCategoryData().observe(getViewLifecycleOwner(), popularSubCategoryModel -> {
             if (popularSubCategoryModel.isSuccess()) {
                 if (popularSubCategoryModel.getData().size() > 0) {
-                    for (int i = 0; i<= 2 ; i++){
+                    for (int i = 0; i <= 2; i++) {
                         popularSubCategoryList.add(popularSubCategoryModel.getData().get(i));
                     }
                     setDaATA(popularSubCategoryList);
                 }
 
-               // buildPopularCatRv();
+                // buildPopularCatRv();
             }
         });
 
@@ -389,52 +388,68 @@ public class Home extends Fragment {
     }
 
     private void setDaATA(List<DataItem> popularSubCategoryList) {
-        if (popularSubCategoryList.get(0).getCategory() != null){
-            Glide.with(Split.getAppContext())
-                    .load(Constants.IMG_PATH + popularSubCategoryList.get(0).getCategory().getIcon())
-                    .placeholder(R.color.images_placeholder)
-                    .into(binding.popularIcons);
+        if (popularSubCategoryList.get(0).getCategory() != null) {
+
+
+            Svg.INSTANCE.loadUrl(
+                    Constants.IMG_PATH + popularSubCategoryList.get(0).getCategory().getIcon(),
+                    binding.popularIcons
+            );
+
+//            Glide.with(Split.getAppContext())
+//                    .load(Constants.IMG_PATH + popularSubCategoryList.get(0).getCategory().getIcon())
+//                    .placeholder(R.color.images_placeholder)
+//                    .into(binding.popularIcons);
         }
         binding.popularName.setText(popularSubCategoryList.get(0).getTitle());
 
-        if (popularSubCategoryList.get(1).getCategory() != null){
-            Glide.with(Split.getAppContext())
-                    .load(Constants.IMG_PATH + popularSubCategoryList.get(1).getCategory().getIcon())
-                    .placeholder(R.color.images_placeholder)
-                    .into(binding.popularIcons1);
+        if (popularSubCategoryList.get(1).getCategory() != null) {
+            Svg.INSTANCE.loadUrl(
+                    Constants.IMG_PATH + popularSubCategoryList.get(1).getCategory().getIcon(),
+                    binding.popularIcons
+            );
+//            Glide.with(Split.getAppContext())
+//                    .load(Constants.IMG_PATH + popularSubCategoryList.get(1).getCategory().getIcon())
+//                    .placeholder(R.color.images_placeholder)
+//                    .into(binding.popularIcons1);
         }
         binding.popularName1.setText(popularSubCategoryList.get(1).getTitle());
 
-        if (popularSubCategoryList.get(2).getCategory() != null){
-            Glide.with(Split.getAppContext())
-                    .load(Constants.IMG_PATH + popularSubCategoryList.get(2).getCategory().getIcon())
-                    .placeholder(R.color.images_placeholder)
-                    .into(binding.popularIcons2);
+        if (popularSubCategoryList.get(2).getCategory() != null) {
+
+            Svg.INSTANCE.loadUrl(
+                    Constants.IMG_PATH + popularSubCategoryList.get(2).getCategory().getIcon(),
+                    binding.popularIcons
+            );
+//            Glide.with(Split.getAppContext())
+//                    .load(Constants.IMG_PATH + popularSubCategoryList.get(2).getCategory().getIcon())
+//                    .placeholder(R.color.images_placeholder)
+//                    .into(binding.popularIcons2);
         }
         binding.popularName2.setText(popularSubCategoryList.get(2).getTitle());
 
         binding.tvJoin.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putString("join_sub_cat_id",String.valueOf(popularSubCategoryList.get(0).getId()));//absolute adopter position
-            bundle.putString("join_sub_cat_title",String.valueOf(popularSubCategoryList.get(0).getTitle()));
+            bundle.putString("join_sub_cat_id", String.valueOf(popularSubCategoryList.get(0).getId()));//absolute adopter position
+            bundle.putString("join_sub_cat_title", String.valueOf(popularSubCategoryList.get(0).getTitle()));
 
-            Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail,bundle);
+            Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail, bundle);
         });
 
         binding.tvJoin1.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putString("join_sub_cat_id",String.valueOf(popularSubCategoryList.get(1).getId()));//absolute adopter position
-            bundle.putString("join_sub_cat_title",String.valueOf(popularSubCategoryList.get(1).getTitle()));
+            bundle.putString("join_sub_cat_id", String.valueOf(popularSubCategoryList.get(1).getId()));//absolute adopter position
+            bundle.putString("join_sub_cat_title", String.valueOf(popularSubCategoryList.get(1).getTitle()));
 
-            Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail,bundle);
+            Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail, bundle);
         });
 
         binding.tvJoin2.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putString("join_sub_cat_id",String.valueOf(popularSubCategoryList.get(2).getId()));//absolute adopter position
-            bundle.putString("join_sub_cat_title",String.valueOf(popularSubCategoryList.get(2).getTitle()));
+            bundle.putString("join_sub_cat_id", String.valueOf(popularSubCategoryList.get(2).getId()));//absolute adopter position
+            bundle.putString("join_sub_cat_title", String.valueOf(popularSubCategoryList.get(2).getTitle()));
 
-            Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail,bundle);
+            Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail, bundle);
         });
 
 

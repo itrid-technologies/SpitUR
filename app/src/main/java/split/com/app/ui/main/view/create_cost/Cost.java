@@ -1,15 +1,16 @@
 package split.com.app.ui.main.view.create_cost;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 
@@ -64,20 +65,21 @@ public class Cost extends Fragment {
 
         binding.btnNext.setOnClickListener(view -> {
             String cost = binding.costValue.getText().toString().trim();
-            if (!cost.isEmpty()){
+
+            if (!cost.isEmpty()) {
                 Constants.COST = cost;
                 String validation_type = Constants.VALIDATION_TYPE;
-                if (validation_type.isEmpty()){
+                if (validation_type.isEmpty()) {
                     Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
-                }else {
-                    if (validation_type.equalsIgnoreCase("otp")){
+                } else {
+                    if (validation_type.equalsIgnoreCase("otp")) {
 
                         Navigation.findNavController(view).navigate(R.id.action_cost2_to_phoneCredentials);
-                    }else {
+                    } else {
                         Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
                     }
                 }
-            }else {
+            } else {
                 binding.errorMessage.setVisibility(View.VISIBLE);
                 binding.errorMessage.setText("Enter cost per member");
             }

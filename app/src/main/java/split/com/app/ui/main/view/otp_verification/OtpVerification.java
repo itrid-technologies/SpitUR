@@ -6,17 +6,14 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import split.com.app.R;
-import split.com.app.data.model.otp_verification.AuthenticationModel;
 import split.com.app.databinding.ActivityOtpVerificationBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel;
 import split.com.app.utils.ActivityUtil;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
+import split.com.app.utils.Split;
 
 public class OtpVerification extends AppCompatActivity {
 
@@ -49,7 +46,8 @@ public class OtpVerification extends AppCompatActivity {
         });
 
         MySharedPreferences sharedPreferences = new MySharedPreferences(this);
-        String number = sharedPreferences.getData(this, "number");
+//        String number = sharedPreferences.getData(this, "number");
+        String number = Constants.USER_NUMBER;
 
 
         binding.remainingTime.setOnClickListener(view -> {
@@ -95,9 +93,16 @@ public class OtpVerification extends AppCompatActivity {
                 if (authenticationModel.getData().getUser() != null) {
                     Constants.ID = String.valueOf(authenticationModel.getData().getUser().getId());
                     Constants.USER_ID = authenticationModel.getData().getUser().getUserId();
-                    Constants.USER_NAME =  authenticationModel.getData().getUser().getName();
-                    Constants.USER_AVATAR =  Constants.IMG_PATH + authenticationModel.getData().getUser().getAvatar();
-                    Constants.DEVICE_TOKEN =  authenticationModel.getData().getToken();
+                    Constants.USER_NAME = authenticationModel.getData().getUser().getName();
+                    Constants.USER_AVATAR = Constants.IMG_PATH + authenticationModel.getData().getUser().getAvatar();
+                    Constants.DEVICE_TOKEN = authenticationModel.getData().getToken();
+
+                    MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+                    pm.saveData(Split.getAppContext(), "Id", String.valueOf(authenticationModel.getData().getUser().getId()));
+                    pm.saveData(Split.getAppContext(), "userAccessToken", authenticationModel.getData().getToken());
+                    pm.saveData(Split.getAppContext(), "userName", String.valueOf(authenticationModel.getData().getUser().getName()));
+                    pm.saveData(Split.getAppContext(), "userAvatar", authenticationModel.getData().getUser().getAvatar());
+
 
                     ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

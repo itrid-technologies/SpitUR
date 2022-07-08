@@ -129,7 +129,9 @@ public class ProfileRepository {
             public void onResponse(@NonNull Call<BasicModel1> call, @NonNull Response<BasicModel1> response) {
                 if(response.body()!=null)
                 {
+                    preferences.clearData();
                     liveData.setValue(response.body());
+
                 }
             }
 

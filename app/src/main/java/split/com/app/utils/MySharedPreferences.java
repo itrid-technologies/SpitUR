@@ -43,5 +43,10 @@ public class MySharedPreferences {
 
     }
 
+    public void  clearData(){
+        SharedPreferences sharedPref = (SharedPreferences) context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        sharedPref.edit().clear().apply();
+    }
+
 }
 

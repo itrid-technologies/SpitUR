@@ -42,6 +42,7 @@ import split.com.app.ui.main.viewmodel.profile_viewmodel.ProfileViewModel;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
+import split.com.app.utils.Svg;
 
 
 public class Profile extends Fragment {
@@ -182,8 +183,8 @@ public class Profile extends Fragment {
                             ImageView image = profileView.findViewById(R.id.profile_image);
                             ElasticImageView logout = profileView.findViewById(R.id.logout_icon);
                             RecyclerView avatarRv = profileView.findViewById(R.id.profile_avatars);
-                            ImageButton previous = profileView.findViewById(R.id.previous_avatar);
-                            ImageButton next = profileView.findViewById(R.id.next_avatar);
+                            ImageView previous = profileView.findViewById(R.id.previous_avatar);
+                            ImageView next = profileView.findViewById(R.id.next_avatar);
                             Button save = profileView.findViewById(R.id.btn_save_profile);
 
 //            MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
@@ -196,7 +197,8 @@ public class Profile extends Fragment {
                             email.setText(activeUserModel.getData().getEmail());
                             avatarRv.setVisibility(View.GONE);
                             image.setVisibility(View.VISIBLE);
-                            Glide.with(Split.getAppContext()).load(Constants.IMG_PATH + activeUserModel.getData().getAvatar()).into(image);
+
+                            Svg.INSTANCE.loadUrl(Constants.IMG_PATH + activeUserModel.getData().getAvatar() , image);
 
 
                             MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());

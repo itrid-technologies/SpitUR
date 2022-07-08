@@ -54,8 +54,8 @@ public class Dashboard extends AppCompatActivity {
         if (navHostFragment != null) {
             mNavController = navHostFragment.getNavController();
         }
-
-        binding.bottomNavigation.setItemIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
+//
+//        binding.bottomNavigation.setItemIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
 
 
         binding.bottomNavigation.setOnItemSelectedListener(i -> {

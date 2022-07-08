@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#181A20"
     tools:context=".ui.main.view.create_cost.Cost">
 
@@ -19,138 +19,144 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cost_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fillViewport="true"
         android:scrollbars="none"
-        android:fillViewport="true">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cost_toolbar">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingStart="30dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+
+                android:id="@+id/cost_profile"
+                layout="@layout/profile_data_in_create" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cLayout"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/otp_number_bg"
+                android:backgroundTint="#1C203A"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:paddingTop="20dp"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp"
-                >
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cost_profile">
 
-                <include
-
-                    layout="@layout/profile_data_in_create"
-                    android:id="@+id/cost_profile"/>
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cLayout"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/ll"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cost_profile"
-                    android:layout_marginTop="20dp"
-                    android:padding="10dp"
-                    android:backgroundTint="#1C203A"
-                    android:background="@drawable/otp_number_bg">
-
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/costValue"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:text="$"
-                        android:gravity="end"
-                        android:textSize="32sp"
+                        android:id="@+id/currency"
                         style="@style/headingText"
-                        android:id="@+id/currency"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="$"
+                        android:textSize="32sp" />
 
                     <EditText
                         android:id="@+id/costValue"
-                        android:layout_width="0dp"
+                        style="@style/headingText"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/currency"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@color/transparent"
+                        android:cursorVisible="false"
+                        android:ellipsize="end"
                         android:gravity="start"
                         android:maxLength="5"
-                        app:layout_constraintTop_toTopOf="parent"
-                        style="@style/headingText"
                         android:maxLines="1"
-                        android:textSize="32sp"
-                        android:cursorVisible="false"
-                        android:background="@color/transparent"
-                        android:ellipsize="end">
-                        <requestFocus/>
+                        android:textSize="32sp">
+
+                        <requestFocus />
                     </EditText>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/currency"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textSize="14sp"
-                        android:textColor="#9395A4"
-                        android:text="Cost Per Group Members"
-                        android:gravity="center_horizontal"/>
+                </LinearLayout>
 
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/cLayout"
-                    app:layout_constraintEnd_toEndOf="@id/cLayout"
-                    app:layout_constraintTop_toBottomOf="@id/cLayout"
-                    style="@style/normalText"
-                    android:visibility="gone"
-                    android:textColor="@color/error"
-                    android:padding="3dp"
-                    android:textSize="11sp"
-                    android:id="@+id/errorMessage"/>
-
-
-                <com.konaire.numerickeyboard.NumericKeyboard
-                    android:id="@+id/keyPad"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/errorMessage"
-                    android:layout_gravity="bottom"
-                    app:keySpecial="*"
-                    android:layout_marginBottom="30dp"
-                    android:paddingTop="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_10sdp"
-                    android:layout_marginTop="30dp"
-                    app:field="@+id/costValue"
-                    app:keyTextColor="@color/white" />
-
-
-                <Button
-                    android:layout_width="248dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center_horizontal"
+                    android:text="Cost Per Group Members"
+                    android:textColor="#9395A4"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:text="Next"
-                    app:layout_constraintTop_toBottomOf="@id/keyPad"
-                    style="@style/buttonStyle"
-                    android:background="@drawable/button_round_bg"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="10dp"
-                    android:layout_marginTop="20dp"
-                    android:textSize="14dp"
-                    android:id="@+id/btnNext"/>
+                    app:layout_constraintTop_toBottomOf="@id/ll" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/errorMessage"
+                style="@style/normalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:textColor="@color/error"
+                android:textSize="11sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/cLayout"
+                app:layout_constraintStart_toStartOf="@id/cLayout"
+                app:layout_constraintTop_toBottomOf="@id/cLayout" />
+
+
+            <com.konaire.numerickeyboard.NumericKeyboard
+                android:id="@+id/keyPad"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                app:field="@+id/costValue"
+                app:keySpecial="*"
+                app:keyTextColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/errorMessage" />
+
+
+            <Button
+                android:id="@+id/btnNext"
+                style="@style/buttonStyle"
+                android:layout_width="248dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_round_bg"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp"
+                android:text="Next"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/keyPad" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>

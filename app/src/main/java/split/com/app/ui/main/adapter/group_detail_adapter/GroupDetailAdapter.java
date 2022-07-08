@@ -3,7 +3,6 @@ package split.com.app.ui.main.adapter.group_detail_adapter;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +10,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
-import split.com.app.data.model.HomeDataItem;
 import split.com.app.data.model.group_detail.DataItem;
-import split.com.app.ui.main.adapter.HomeSectionSubCategoryAdapter;
 import split.com.app.utils.Constants;
+import split.com.app.utils.Svg;
 
 public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.ViewHolder> {
 
@@ -33,7 +29,6 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
     DataItem dataItem;
 
     private ItemClickListener mListener;
-
 
 
     public void setOnGroupSelectListener(ItemClickListener listener) {
@@ -50,7 +45,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
     @Override
     public GroupDetailAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.plans_search_list_item_design, parent, false);
-        return new GroupDetailAdapter.ViewHolder(view,mListener);
+        return new GroupDetailAdapter.ViewHolder(view, mListener);
     }
 
     @Override
@@ -60,41 +55,41 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
         holder.title.setText(dataItem.getTitle());
         holder.score.setText(String.valueOf(dataItem.getGroupAdmin().getSpliturScore()));
         String member = String.valueOf(dataItem.getTotalMembers());
-        if (member.equalsIgnoreCase("1")){
+        if (member.equalsIgnoreCase("1")) {
             holder.one.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
             holder.one.setTextColor(Color.WHITE);
             holder.one.setAlpha(1);
-        }else if (member.equalsIgnoreCase("2")){
+        } else if (member.equalsIgnoreCase("2")) {
             holder.two.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
             holder.two.setTextColor(Color.WHITE);
             holder.two.setAlpha(1);
 
-        }else if (member.equalsIgnoreCase("3")){
+        } else if (member.equalsIgnoreCase("3")) {
             holder.three.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
             holder.three.setTextColor(Color.WHITE);
             holder.three.setAlpha(1);
 
-        }else if (member.equalsIgnoreCase("4")){
+        } else if (member.equalsIgnoreCase("4")) {
             holder.four.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
             holder.four.setTextColor(Color.WHITE);
             holder.four.setAlpha(1);
 
-        }else if (member.equalsIgnoreCase("5")){
+        } else if (member.equalsIgnoreCase("5")) {
             holder.five.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
             holder.five.setTextColor(Color.WHITE);
             holder.five.setAlpha(1);
 
-        }else if (member.equalsIgnoreCase("6")) {
+        } else if (member.equalsIgnoreCase("6")) {
             holder.six.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
             holder.six.setTextColor(Color.WHITE);
             holder.six.setAlpha(1);
 
         }
 
-        if (dataItem.getGroupAdmin().isOnlineOflineStatus()){
+        if (dataItem.getGroupAdmin().isOnlineOflineStatus()) {
             holder.online_offline.setText("Online");
             holder.online_icon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#14FF00")));
-        }else {
+        } else {
             holder.online_offline.setText("Offline");
             holder.online_icon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
         }
@@ -106,12 +101,9 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
                 .placeholder(R.color.images_placeholder)
                 .into(holder.user);
 
-        Glide.with(context)
-                .load(Constants.IMG_PATH + dataItem.getSubCategory().getCategory().getIcon())
-                .placeholder(R.color.images_placeholder)
-                .into(holder.rate_icon);
+        Svg.INSTANCE.loadUrl(Constants.IMG_PATH + dataItem.getSubCategory().getCategory().getIcon(), holder.rate_icon);
 
-        holder.rateOf_id.setText(String.valueOf(dataItem.getGroupAdmin().getUserId()));
+        holder.rateOf_id.setText(String.format("@%s", dataItem.getGroupAdmin().getUserId()));
 
         String coin = String.valueOf(dataItem.getCostPerMember());
         Double coinFloat = Double.parseDouble(coin);
@@ -122,21 +114,19 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
     }
 
 
-
     @Override
     public int getItemCount() {
         return data.size();
     }
 
-    public interface ItemClickListener{
+    public interface ItemClickListener {
         void onGroupSelect(int position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, online_offline, group_id , rateOf_id, one, two , three, four , five , six, score, coins;
-        ImageView online_icon , rate_icon;
+        public TextView title, online_offline, group_id, rateOf_id, one, two, three, four, five, six, score, coins;
+        ImageView online_icon, rate_icon;
         CircleImageView user;
-
 
 
         public ViewHolder(@NonNull View itemView, ItemClickListener mListener) {
@@ -165,7 +155,6 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
                     }
                 }
             });
-
 
 
         }
