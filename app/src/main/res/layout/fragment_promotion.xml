@@ -61,7 +61,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_refer_detail"
-                android:background="@drawable/rect_bg"
+                android:background="@drawable/nav_bg"
                 android:backgroundTint="@color/blue"
                 android:padding="10dp"
                 android:layout_marginTop="10dp">
@@ -120,13 +120,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:background="@drawable/rect_bg"
                     android:backgroundTint="@color/blue"
                     android:paddingTop="5dp"
                     android:text="1"
                     android:textSize="36sp"
                     android:gravity="center"
-                    style="@style/headingText"
+                    android:background="@drawable/nav_bg"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:id="@+id/invite_icon"/>
 
@@ -176,14 +177,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:background="@drawable/rect_bg"
                     android:backgroundTint="@color/blue"
                     android:paddingTop="5dp"
                     android:textSize="36sp"
                     android:gravity="center"
                     android:text="2"
-                    style="@style/headingText"
-                    android:textStyle="bold"
+                    android:background="@drawable/nav_bg"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/white"                    android:textStyle="bold"
                     android:id="@+id/invite2_icon"/>
 
                 <TextView
@@ -221,7 +222,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/join_layout"
+                 app:layout_constraintTop_toBottomOf="@id/join_layout"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/promotion_bg"
                 android:padding="16dp">
@@ -232,14 +233,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:background="@drawable/rect_bg"
                     android:backgroundTint="@color/blue"
                     android:paddingTop="5dp"
                     android:text="3"
                     android:textSize="36sp"
                     android:gravity="center"
-                    style="@style/headingText"
-                    android:textStyle="bold"
+                    android:background="@drawable/nav_bg"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/white"                    android:textStyle="bold"
                     android:id="@+id/invite3_icon"/>
 
                 <TextView
@@ -316,13 +317,13 @@
                 app:layout_constraintTop_toBottomOf="@id/profile_link1"
                 android:padding="20dp"
                 android:backgroundTint="@color/light_blue"
-                android:background="@drawable/rect_bg">
+                android:background="@drawable/otp_number_bg">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:src="@drawable/copy_link"
+                    android:src="@drawable/facebook"
                     android:id="@+id/copy_link"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/message"
@@ -333,7 +334,7 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     app:layout_constraintStart_toEndOf="@id/copy_link"
-                    android:src="@drawable/chat"
+                    android:src="@drawable/discord"
                     android:id="@+id/message"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/whatsapp"
@@ -355,7 +356,7 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     app:layout_constraintStart_toEndOf="@id/whatsapp"
-                    android:src="@drawable/insta"
+                    android:src="@drawable/instagram"
                     android:id="@+id/insta"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/twitter"

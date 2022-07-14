@@ -3,6 +3,8 @@ package split.com.app.utils;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class Split extends Application {
@@ -19,6 +21,10 @@ public class Split extends Application {
     public void onCreate() {
         super.onCreate();
         _splitInstance = this;
+
+        //disable dark mode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");

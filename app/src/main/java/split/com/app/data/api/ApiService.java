@@ -17,6 +17,7 @@ import retrofit2.http.Path;
 import split.com.app.data.model.GetScoreModel;
 import split.com.app.data.model.HomeContentModel;
 import split.com.app.data.model.PromoModel;
+import split.com.app.data.model.SecretKeyModel;
 import split.com.app.data.model.TransactionsModel;
 import split.com.app.data.model.active_user.ActiveUserModel;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
@@ -228,4 +229,7 @@ public interface ApiService {
 
     @GET("promotions/get_promo_code_details/{code}")
     Call<PromoModel> applyPromoCode(@Path("code") String code);
+
+    @GET("groups/get_razor_pay_secret")
+    Call<SecretKeyModel> getRozarSecretKey();
 }

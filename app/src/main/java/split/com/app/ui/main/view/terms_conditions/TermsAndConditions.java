@@ -1,6 +1,7 @@
 package split.com.app.ui.main.view.terms_conditions;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.os.Bundle;
 
@@ -29,14 +30,16 @@ public class TermsAndConditions extends AppCompatActivity {
         mBinding = ActivityTermsAndConditionsBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
 
-            String number = Constants.USER_NUMBER;
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+
+        String number = Constants.USER_NUMBER;
         String name = Constants.USER_NAME;
         String userid = Constants.USER_ID;
         String avatar = Constants.USER_AVATAR;
 
 
-
-        mViewModel = new RegisterViewModel(name,number,userid,avatar);
+        mViewModel = new RegisterViewModel(name, number, userid, avatar);
         mViewModel.init();
 
         initClickListeners();
@@ -51,7 +54,7 @@ public class TermsAndConditions extends AppCompatActivity {
         mBinding.btnContinue.setOnClickListener(view -> {
 
             mViewModel.getData().observe(this, registerModel -> {
-                if (registerModel.isSuccess()){
+                if (registerModel.isSuccess()) {
                     ActivityUtil.gotoPage(TermsAndConditions.this, OtpVerification.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }

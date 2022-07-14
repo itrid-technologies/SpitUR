@@ -72,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="$"
+                        android:text="Rs"
                         android:textSize="32sp" />
 
                     <EditText

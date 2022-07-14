@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.gson.JsonObject;
 import com.razorpay.Checkout;
@@ -21,6 +22,7 @@ import retrofit2.Response;
 import split.com.app.R;
 import split.com.app.data.api.ApiManager;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.CheckOutViewModel;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -28,20 +30,35 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
 
     private String group_id;
     private String groupData;
+    CheckOutViewModel viewModel;
+    String secret_key = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+
         final Intent data = getIntent();
         String subID;
+
+        viewModel = new CheckOutViewModel();
+        viewModel.init();
+        viewModel.getData().observe(this ,secretKeyModel -> {
+            if (secretKeyModel.isStatus()){
+                secret_key = secretKeyModel.getKey();
+            }
+        });
 
         if (data.hasExtra("subscription_id")) {
             subID = data.getStringExtra("subscription_id");
             group_id = data.getStringExtra("group_id");
             groupData = data.getStringExtra("group_credentials");
-            checkout(subID);
+            if (!secret_key.isEmpty()) {
+                checkout(subID);
+            }
         }
 
     }
@@ -51,7 +68,10 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
         Checkout checkout = new Checkout();
 
         // set your id as below
-        checkout.setKeyID("rzp_test_Z5X8uEVBddGyA5");
+//        checkout.setKeyID("rzp_test_Z5X8uEVBddGyA5");
+        checkout.setKeyID(secret_key);
+
+
 
         // initialize json object
         JSONObject object = new JSONObject();

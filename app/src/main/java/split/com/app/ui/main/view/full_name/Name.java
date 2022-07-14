@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import split.com.app.R;
 import split.com.app.databinding.ActivityNameBinding;
@@ -27,6 +28,9 @@ public class Name extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityNameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         binding.back.setOnClickListener(view -> {
             onBackPressed();

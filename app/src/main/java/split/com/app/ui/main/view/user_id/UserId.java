@@ -1,6 +1,7 @@
 package split.com.app.ui.main.view.user_id;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +34,9 @@ public class UserId extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityUserIdBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         binding.back.setOnClickListener(view -> {
             onBackPressed();

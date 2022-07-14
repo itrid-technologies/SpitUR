@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,9 @@ public class OtpNumber extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityOtpNumberBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         binding.sendOtpButton.setOnClickListener(view -> {
 

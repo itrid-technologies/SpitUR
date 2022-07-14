@@ -239,6 +239,7 @@ public class JoinCheckOut extends Fragment {
 
     private void nAV() {
 //        Navigation.findNavController(requireView()).navigate(R.id.action_joinCheckOut_to_joinPayment);
+        binding.loadingView.setVisibility(View.VISIBLE);
 
         MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
         String group_id = mySharedPreferences.getData(Split.getAppContext(), "GroupID");
@@ -261,10 +262,13 @@ public class JoinCheckOut extends Fragment {
                     checkoutIntent.putExtra("subscription_id", joinGroupModel.getSubscriptions().getId());
                     checkoutIntent.putExtra("group_credentials", groupDATA);
                     startActivity(checkoutIntent);
+                    binding.loadingView.setVisibility(View.GONE);
                     requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                 } else {
                     failureDialogue(joinGroupModel.getMessage());
+                    binding.loadingView.setVisibility(View.GONE);
+
                 }
             });
         }

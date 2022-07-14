@@ -101,11 +101,17 @@ public class CreatedAndJoinedGroups extends Fragment {
                     join_data = new ArrayList<>();
 
                     if (groupDetailModel.getData().size() > 0){
+
+                        binding.noGroupLayout.setVisibility(View.GONE);
+                        binding.joinedGroupslist.setVisibility(View.VISIBLE);
+                        binding.createdGroupslist.setVisibility(View.GONE);
+
                         join_data.addAll(groupDetailModel.getData());
                         buildJoinRv(groupDetailModel);
                     }else {
                         binding.noGroupLayout.setVisibility(View.VISIBLE);
                         binding.joinedGroupslist.setVisibility(View.GONE);
+                        binding.createdGroupslist.setVisibility(View.GONE);
                     }
                 }
             });
@@ -115,6 +121,7 @@ public class CreatedAndJoinedGroups extends Fragment {
         binding.createdButton.setOnClickListener(view -> {
             binding.createdGroupslist.setVisibility(View.VISIBLE);
             binding.joinedGroupslist.setVisibility(View.GONE);
+            binding.noGroupLayout.setVisibility(View.GONE);
 
             binding.gToolbar.title.setText("Group Created");
             binding.createdButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#246BFD")));
@@ -133,7 +140,6 @@ public class CreatedAndJoinedGroups extends Fragment {
     }
 
     private void buildJoinRv(AllJoinedGroupModel groupDetailModel) {
-        binding.noGroupLayout.setVisibility(View.GONE);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.joinedGroupslist.setLayoutManager(layoutManager);
