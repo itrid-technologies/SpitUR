@@ -220,8 +220,21 @@ public class CreatedGroupDetail extends Fragment {
                 ConstraintLayout deleteLayout = carDetailView.findViewById(R.id.deleteLAYOUT);
                 TextView remove = carDetailView.findViewById(R.id.tv_remove);
                 ImageView delete = carDetailView.findViewById(R.id.confirm_remove);
+                ConstraintLayout confirm_layout = carDetailView.findViewById(R.id.delete_layout);
+
+                deleteLayout.setOnClickListener(view -> {
+                    if (confirm_layout.getTag().equals("hidden")){
+                        confirm_layout.setVisibility(View.VISIBLE);
+                        confirm_layout.setTag("visible");
+                    }else {
+                        confirm_layout.setVisibility(View.GONE);
+                        confirm_layout.setTag("hidden");
+                    }
+
+                });
 
                 remove.setText("Remove Member");
+
 
                 delete.setOnClickListener(view -> {
 
@@ -295,6 +308,19 @@ public class CreatedGroupDetail extends Fragment {
 
             ConstraintLayout chatLayout = carDetailView.findViewById(R.id.options_chat_layout);
             ConstraintLayout deleteLayout = carDetailView.findViewById(R.id.deleteLAYOUT);
+            ConstraintLayout confirm_layout = carDetailView.findViewById(R.id.delete_layout);
+
+            deleteLayout.setOnClickListener(view -> {
+                if (confirm_layout.getTag().equals("hidden")){
+                    confirm_layout.setVisibility(View.VISIBLE);
+                    confirm_layout.setTag("visible");
+                }else {
+                    confirm_layout.setVisibility(View.GONE);
+                    confirm_layout.setTag("hidden");
+                }
+
+            });
+
             ImageView confirm = deleteLayout.findViewById(R.id.confirm_remove);
             TextView removeText = deleteLayout.findViewById(R.id.tv_remove);
 

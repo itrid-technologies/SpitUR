@@ -255,6 +255,19 @@ public class Home extends Fragment {
                                 TextView tagline = layout.findViewById(R.id.delete_detail);
                                 TextView confirm = layout.findViewById(R.id.confirm_tagline);
                                 ImageView confirm_logout = layout.findViewById(R.id.confirm_remove);
+                                ConstraintLayout confirm_layout = layout.findViewById(R.id.delete_layout);
+
+                                deleteLayout.setOnClickListener(view2 -> {
+                                    if (confirm_layout.getTag().equals("hidden")){
+                                        confirm_layout.setVisibility(View.VISIBLE);
+                                        confirm_layout.setTag("visible");
+                                    }else {
+                                        confirm_layout.setVisibility(View.GONE);
+                                        confirm_layout.setTag("hidden");
+                                    }
+
+                                });
+
 
                                 remove.setText("Log Out");
                                 tagline.setText("You can login back again using your Phone number and OTP");

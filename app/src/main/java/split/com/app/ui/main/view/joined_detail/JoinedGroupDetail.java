@@ -116,6 +116,7 @@ public class JoinedGroupDetail extends Fragment {
         binding.jgdToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });
+
         binding.jgdToolbar.info.setOnClickListener(view1 -> {
             final BottomSheetDialog bt = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
             View carDetailView = LayoutInflater.from(requireContext()).inflate(R.layout.group_options_dialogue, null, false);
@@ -124,9 +125,21 @@ public class JoinedGroupDetail extends Fragment {
             ConstraintLayout deleteLayout = carDetailView.findViewById(R.id.deleteLAYOUT);
             ImageView confirm = deleteLayout.findViewById(R.id.confirm_remove);
             TextView removeText = deleteLayout.findViewById(R.id.tv_remove);
+            ConstraintLayout confirm_layout = carDetailView.findViewById(R.id.delete_layout);
 
+            deleteLayout.setOnClickListener(view -> {
+                if (confirm_layout.getTag().equals("hidden")){
+                    confirm_layout.setVisibility(View.VISIBLE);
+                    confirm_layout.setTag("visible");
+                }else {
+                    confirm_layout.setVisibility(View.GONE);
+                    confirm_layout.setTag("hidden");
+                }
+
+            });
 
             removeText.setText("Leave Group");
+
 
             chatLayout.setOnClickListener(view -> {
                 bt.cancel();

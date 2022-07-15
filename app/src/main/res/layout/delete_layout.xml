@@ -11,6 +11,7 @@
         android:background="@drawable/verification_bg"
         android:backgroundTint="@color/remove_react_bg"
         android:padding="10dp"
+        android:tag="hidden"
         android:visibility="gone"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
