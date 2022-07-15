@@ -27,6 +27,7 @@ import split.com.app.data.model.group_detail.DataItem;
 import split.com.app.databinding.FragmentJoinCheckOutBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.view.join_plans.CheckoutActivity;
+import split.com.app.ui.main.viewmodel.CheckOutViewModel;
 import split.com.app.ui.main.viewmodel.join_checkout_viewmodel.JoinCheckoutViewModel;
 import split.com.app.ui.main.viewmodel.join_group.JoinGroupViewModel;
 import split.com.app.utils.Constants;
@@ -42,6 +43,8 @@ public class JoinCheckOut extends Fragment {
     AlertDialog alertDialog;
 
     JoinCheckoutViewModel viewModel;
+    CheckOutViewModel checkOutViewModel;
+
     String value;
 
     boolean isPromoValid = false;
@@ -255,15 +258,28 @@ public class JoinCheckOut extends Fragment {
                     bundle.putString("group_credentials", groupDATA);
                     bundle.putString("plan_url", joinGroupModel.getSubscriptions().getShortUrl());
 
+
+                    checkOutViewModel = new CheckOutViewModel();
+                    checkOutViewModel.init();
+                    checkOutViewModel.getData().observe(getViewLifecycleOwner() ,secretKeyModel -> {
+                        if (secretKeyModel.isStatus()){
+                           String secret_key = secretKeyModel.getKey();
+
+                            Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
+                            checkoutIntent.putExtra("group_id", group_id);
+                            checkoutIntent.putExtra("subscription_id", joinGroupModel.getSubscriptions().getId());
+                            checkoutIntent.putExtra("group_credentials", groupDATA);
+                            checkoutIntent.putExtra("secret_key", secret_key);
+
+                            startActivity(checkoutIntent);
+                            binding.loadingView.setVisibility(View.GONE);
+                            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        }
+                    });
+
 //                          Navigation.findNavController(view1).navigate(R.id.action_joinPayment_to_joinPlans,bundle);
 
-                    Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
-                    checkoutIntent.putExtra("group_id", group_id);
-                    checkoutIntent.putExtra("subscription_id", joinGroupModel.getSubscriptions().getId());
-                    checkoutIntent.putExtra("group_credentials", groupDATA);
-                    startActivity(checkoutIntent);
-                    binding.loadingView.setVisibility(View.GONE);
-                    requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
 
                 } else {
                     failureDialogue(joinGroupModel.getMessage());

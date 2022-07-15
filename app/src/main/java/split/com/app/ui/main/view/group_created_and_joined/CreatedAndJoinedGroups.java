@@ -30,6 +30,7 @@ import split.com.app.ui.main.adapter.all_created_group.AllCreatedGroupAdapter;
 import split.com.app.ui.main.adapter.all_joined_group.AllJoinedGroupAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.view.join_plans.CheckoutActivity;
+import split.com.app.ui.main.viewmodel.CheckOutViewModel;
 import split.com.app.ui.main.viewmodel.created_and_joined.CreatedAndJoinedViewModel;
 import split.com.app.utils.Split;
 
@@ -154,13 +155,27 @@ public class CreatedAndJoinedGroups extends Fragment {
             String groupDATA = gson1.toJson(groupDetailModel);
 
             if (join_data.get(position).getPaymentStatus().equalsIgnoreCase("pending")){
-                Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
-                checkoutIntent.putExtra("group_id", String.valueOf(join_data.get(position).getGroupId()));
-                checkoutIntent.putExtra("upi_id",  join_data.get(position).getUpiId());
-                checkoutIntent.putExtra("subscription_id", join_data.get(position).getSubscriptionId());
-                checkoutIntent.putExtra("group_credentials", groupDATA);
-                startActivity(checkoutIntent);
-                requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+
+                CheckOutViewModel checkOutViewModel = new CheckOutViewModel();
+                checkOutViewModel.init();
+                checkOutViewModel.getData().observe(getViewLifecycleOwner() ,secretKeyModel -> {
+                    if (secretKeyModel.isStatus()) {
+                        String secret_key = secretKeyModel.getKey();
+
+                        Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
+                        checkoutIntent.putExtra("group_id", String.valueOf(join_data.get(position).getGroupId()));
+                        checkoutIntent.putExtra("upi_id", join_data.get(position).getUpiId());
+                        checkoutIntent.putExtra("subscription_id", join_data.get(position).getSubscriptionId());
+                        checkoutIntent.putExtra("group_credentials", groupDATA);
+                        checkoutIntent.putExtra("secret_key", secret_key);
+                        startActivity(checkoutIntent);
+                        requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                    }
+                });
+
+
             }
             else {
                 Bundle bundle = new Bundle();

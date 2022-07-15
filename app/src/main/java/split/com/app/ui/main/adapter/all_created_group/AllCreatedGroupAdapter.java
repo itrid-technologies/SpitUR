@@ -14,6 +14,8 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
 import split.com.app.data.model.all_created_groupx.DataItem;
 import split.com.app.data.model.home_categories.CategoryDataItems;
@@ -60,6 +62,8 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
             holder.slots.setTextColor(Color.parseColor("#FFDD72"));
         }
 
+        holder.icon.setImageResource(
+                Constants.getCategoryIcon(context,current_item.getSubCategory().getCategory().getId()));
   
 
     }
@@ -82,6 +86,7 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
             //find views
             name = itemView.findViewById(R.id.group_title);
             slots = itemView.findViewById(R.id.space);
+            icon = itemView.findViewById(R.id.search_icons);
 
 
             itemView.setOnClickListener(view -> {

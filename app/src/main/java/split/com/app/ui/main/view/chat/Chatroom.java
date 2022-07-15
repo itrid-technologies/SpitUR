@@ -91,6 +91,8 @@ public class Chatroom extends Fragment {
         binding.chatRv.setLayoutManager(layoutManager);
         adapter = new ChatAdapter(Split.getAppContext(), msgs);
         binding.chatRv.setAdapter(adapter);
+        binding.chatRv.scrollToPosition(msgs.size() - 1);
+
     }
 
     private void cliclKisteners() {
@@ -106,9 +108,9 @@ public class Chatroom extends Fragment {
                 chatViewModel.getData().observe(getViewLifecycleOwner(), messageSendModel -> {
                     if (messageSendModel.isStatus()) {
                         msgs.add(new SenderModel(message, Calendar.getInstance().getTime().toString()));
-                        if (adapter != null) {
-                            adapter.notifyDataSetChanged();
-                        }
+                        binding.chatRv.scrollToPosition(msgs.size() - 1);
+                        adapter.notifyItemInserted(msgs.size() - 1);
+                        adapter.notifyDataSetChanged();
                         binding.messgae.setText("");
                     }
                 });

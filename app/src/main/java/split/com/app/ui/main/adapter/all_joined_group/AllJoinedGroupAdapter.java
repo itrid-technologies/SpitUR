@@ -14,8 +14,11 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
 import split.com.app.data.model.all_created_groupx.DataItem;
+import split.com.app.utils.Constants;
 import split.com.app.utils.Svg;
 
 public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAdapter.GroupVH> {
@@ -62,6 +65,9 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
                 }
             }
 
+            holder.icon.setImageResource(
+                    Constants.getCategoryIcon(context,current_item.getGroup().getSubCategory().getCategory().getId()));
+
             if (!current_item.getGroup().isStatus()){
                 holder.open.setText("Closed");
                 holder.open.setBackgroundResource(R.drawable.closed_bg);
@@ -87,6 +93,7 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
     public static class GroupVH extends RecyclerView.ViewHolder {
         public TextView name,open;
         ConstraintLayout layout;
+        ImageView icon;
 
         public GroupVH(@NonNull View itemView, AllJoinedGroupAdapter.ItemClickListener mListener) {
             super(itemView);
@@ -94,6 +101,7 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
             name = itemView.findViewById(R.id.join_title);
             open = itemView.findViewById(R.id.open);
             layout = itemView.findViewById(R.id.JoinedItemLayout);
+            icon = itemView.findViewById(R.id.join_icons);
 
             open.setOnClickListener(view -> {
                 String isOpen = open.getText().toString().trim();

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import split.com.app.R;
+import split.com.app.data.model.HomeDataItem;
 import split.com.app.data.model.SubCategoryItem;
 import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
@@ -21,18 +23,19 @@ import split.com.app.utils.Svg;
 public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSectionSubCategoryAdapter.PopularVH> {
 
     private final List<SubCategoryItem> homeDataItem;
-    String subCat_icon;
-
+    int subCat_icon;
+    private int width;
     private final Context context;
 
     private ItemClickListener mListener;
+
 
 
     public void setOnSubCategorySelectListener(ItemClickListener listener) {
         mListener = listener;
     }
 
-    public HomeSectionSubCategoryAdapter(Split appContext, List<SubCategoryItem> subCategory, String icon) {
+    public HomeSectionSubCategoryAdapter(Split appContext, List<SubCategoryItem> subCategory, int icon) {
         this.context = appContext;
         this.homeDataItem = subCategory;
         this.subCat_icon = icon;
@@ -41,14 +44,22 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
     @NonNull
     @Override
     public HomeSectionSubCategoryAdapter.PopularVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_popular_list_items, parent, false);
+
+//        height = parent.getMeasuredHeight() / 4;
+//        width = parent.getMeasuredWidth() / 3;
+//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        view.setLayoutParams(params);
         return new HomeSectionSubCategoryAdapter.PopularVH(view, mListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HomeSectionSubCategoryAdapter.PopularVH holder, int position) {
 
-        Svg.INSTANCE.loadUrl(Constants.IMG_PATH + subCat_icon, holder.icon);
+//        Svg.INSTANCE.loadUrl(Constants.IMG_PATH + subCat_icon, holder.icon);
+        holder.icon.setImageResource(
+                Constants.getCategoryIcon(context,subCat_icon));
         SubCategoryItem subCategoryItem = homeDataItem.get(position);
         holder.name.setText(subCategoryItem.getSubCatTitle());
 

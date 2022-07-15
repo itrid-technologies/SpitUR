@@ -148,7 +148,7 @@ public class OtpVerification extends AppCompatActivity implements OTPListener {
                     Constants.USER_ID = authenticationModel.getData().getUser().getUserId();
                     Constants.USER_NAME = authenticationModel.getData().getUser().getName();
                     Constants.USER_AVATAR = Constants.IMG_PATH + authenticationModel.getData().getUser().getAvatar();
-                    Constants.DEVICE_TOKEN = authenticationModel.getData().getToken();
+                   // Constants.DEVICE_TOKEN = authenticationModel.getData().getToken();
 
                     MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
                     pm.saveData(Split.getAppContext(), "Id", String.valueOf(authenticationModel.getData().getUser().getId()));

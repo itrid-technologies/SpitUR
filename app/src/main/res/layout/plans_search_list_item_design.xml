@@ -11,7 +11,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_user"
         android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:src="@drawable/user"
         app:civ_border_color="@color/yellow"
         app:civ_border_width="2dp"
@@ -21,15 +21,16 @@
 
     <TextView
         android:id="@+id/tv_score"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:background="@drawable/round_back"
         android:backgroundTint="@color/yellow"
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center"
         android:text="23"
+        android:paddingTop="@dimen/_2sdp"
         android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_user"
         app:layout_constraintEnd_toEndOf="@id/iv_user" />
 
@@ -50,7 +51,7 @@
         android:id="@+id/memberView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginTop="@dimen/_2sdp"
         android:gravity="start"
         app:layout_constraintEnd_toStartOf="@+id/coins_value"
         app:layout_constraintStart_toStartOf="@id/tv_username"
@@ -63,9 +64,9 @@
             android:backgroundTint="@color/dark_blue"
             android:orientation="horizontal"
             android:paddingStart="3dp"
-            android:paddingTop="3dp"
+            android:paddingTop="4dp"
             android:paddingEnd="3dp"
-            android:paddingBottom="3dp">
+            android:paddingBottom="4dp">
 
 
             <TextView
@@ -73,78 +74,84 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.4"
+                android:paddingTop="@dimen/_1sdp"
                 android:background="@drawable/ic_score_bg"
                 android:backgroundTint="@color/transparent"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
                 android:text="1"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/_9sdp" />
+                android:textSize="@dimen/_7sdp" />
 
             <TextView
                 android:id="@+id/tv_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.4"
+                android:paddingTop="@dimen/_1sdp"
                 android:background="@drawable/ic_score_bg"
                 android:backgroundTint="@color/transparent"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
                 android:text="2"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/_9sdp" />
+                android:textSize="@dimen/_7sdp" />
 
             <TextView
                 android:id="@+id/tv_three"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.4"
+                android:paddingTop="@dimen/_1sdp"
                 android:background="@drawable/ic_score_bg"
                 android:backgroundTint="@color/transparent"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
                 android:text="3"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/_9sdp" />
+                android:textSize="@dimen/_7sdp" />
 
             <TextView
                 android:id="@+id/tv_four"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.4"
+                android:paddingTop="@dimen/_1sdp"
                 android:background="@drawable/ic_score_bg"
                 android:backgroundTint="@color/transparent"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
                 android:text="4"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/_9sdp" />
+                android:textSize="@dimen/_7sdp" />
 
             <TextView
                 android:id="@+id/tv_five"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.4"
+                android:paddingTop="@dimen/_1sdp"
                 android:background="@drawable/ic_score_bg"
                 android:backgroundTint="@color/transparent"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
                 android:text="5"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/_9sdp" />
+                android:textSize="@dimen/_7sdp" />
 
             <TextView
                 android:id="@+id/tv_six"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.4"
+                android:paddingTop="@dimen/_1sdp"
                 android:background="@drawable/ic_score_bg"
                 android:backgroundTint="@color/transparent"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
                 android:text="6"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/_9sdp" />
+                android:textSize="@dimen/_7sdp" />
 
         </LinearLayout>
 
@@ -189,7 +196,10 @@
         android:background="@drawable/rect_blue_bg"
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center"
-        android:padding="8dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:text="143 Coins"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"

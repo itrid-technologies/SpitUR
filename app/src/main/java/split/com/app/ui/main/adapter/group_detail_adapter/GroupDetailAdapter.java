@@ -53,7 +53,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
 
         dataItem = data.get(position);
         holder.title.setText(dataItem.getTitle());
-        holder.score.setText(String.valueOf(dataItem.getGroupAdmin().getSpliturScore()));
+        holder.score.setText(String.valueOf(Math.round(dataItem.getGroupAdmin().getSpliturScore())));
         String member = String.valueOf(dataItem.getTotalMembers());
         if (member.equalsIgnoreCase("1")) {
             holder.one.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
@@ -101,7 +101,10 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
                 .placeholder(R.color.images_placeholder)
                 .into(holder.user);
 
-        Svg.INSTANCE.loadUrl(Constants.IMG_PATH + dataItem.getSubCategory().getCategory().getIcon(), holder.rate_icon);
+//        Svg.INSTANCE.loadUrl(Constants.IMG_PATH + dataItem.getSubCategory().getCategory().getIcon(), holder.rate_icon);
+
+        holder.rate_icon.setImageResource(
+                Constants.getCategoryIcon(context,dataItem.getSubCategory().getCategory().getId()));
 
         holder.rateOf_id.setText(String.format("@%s", dataItem.getGroupAdmin().getUserId()));
 

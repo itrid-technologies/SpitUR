@@ -18,7 +18,7 @@ object Svg {
 
         val request = ImageRequest.Builder(imgView.context)
             .placeholder(R.color.images_placeholder)
-            .size(30, 30)
+            .size(90, 90)
             .data(url)
             .target(imgView)
             .build()

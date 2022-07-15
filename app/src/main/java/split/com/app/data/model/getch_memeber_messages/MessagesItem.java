@@ -2,13 +2,15 @@ package split.com.app.data.model.getch_memeber_messages;
 
 import com.google.gson.annotations.SerializedName;
 
+import split.com.app.data.model.receive_message.GroupSender;
+
 public class MessagesItem{
 
 	@SerializedName("createdAt")
 	private String createdAt;
 
-	@SerializedName("receiver")
-	private Receiver receiver;
+	@SerializedName("group_sender")
+	private GroupSender receiver;
 
 	@SerializedName("sender")
 	private Sender sender;
@@ -32,7 +34,7 @@ public class MessagesItem{
 		return createdAt;
 	}
 
-	public Receiver getReceiver(){
+	public GroupSender getReceiver(){
 		return receiver;
 	}
 

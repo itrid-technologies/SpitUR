@@ -1,5 +1,6 @@
 package split.com.app.ui.main.view.created_detail;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -112,10 +113,8 @@ public class CreatedGroupDetail extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
-
                 String updated_value = editable.toString().trim();
                 updateEmailData(updated_value);
             }
@@ -161,6 +160,14 @@ public class CreatedGroupDetail extends Fragment {
 
             updateVisibility(true);
 
+        });
+
+        binding.copyLink.setOnClickListener(view -> {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper",binding.profileLink.getText().toString());
+            clipboard.setPrimaryClip(clip);
+
+            Toast.makeText(Split.getAppContext(), "Copied", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -324,7 +331,9 @@ public class CreatedGroupDetail extends Fragment {
 
         binding.checkMesageLayout.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
+            bundle.putString("receiverId", String.valueOf(data.getUserId()));
             bundle.putString("groupId", String.valueOf(data.getId()));
+
             Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_memberChat,bundle);
         });
     }

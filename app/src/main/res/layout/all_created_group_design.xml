@@ -10,23 +10,36 @@
     android:background="@drawable/rect_back_with_grey_stroke"
     android:layout_height="wrap_content">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/search_icons"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/player_icon"
-        app:civ_border_width="2dp"
-        app:civ_circle_background_color="@color/icons_bg"
-        app:civ_border_color="@color/icons_bg"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/round_back"
+        android:backgroundTint="@color/icons_bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        android:id="@+id/icons">
 
+
+        <ImageView
+            android:id="@+id/search_icons"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/player_icon"
+            android:scaleType="fitXY"
+            android:padding="3dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/search_icons"
+        app:layout_constraintStart_toEndOf="@id/icons"
         app:layout_constraintTop_toTopOf="parent"
         android:text="-"
         android:textColor="@color/white"

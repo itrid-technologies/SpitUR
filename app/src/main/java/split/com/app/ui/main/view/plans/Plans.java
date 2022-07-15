@@ -33,13 +33,13 @@ public class Plans extends Fragment {
 
     FragmentPlansBinding binding;
 //    private PlansViewModel mViewModel;
-    private List<PlanDataItem> planModelList = new ArrayList<>();
+    private List<PlanDataItem> planModelList;
 
     String sub_cat_id;
     private PlanModel planModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentPlansBinding.inflate(inflater, container, false);
@@ -53,6 +53,7 @@ public class Plans extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initClickListeners();
+        planModelList = new ArrayList<>();
 
         if (getArguments() != null){
           //  sub_cat_id = getArguments().getString("SUB_CATEGORY_ID");

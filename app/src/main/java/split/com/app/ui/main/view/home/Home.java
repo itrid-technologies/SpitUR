@@ -390,43 +390,26 @@ public class Home extends Fragment {
     private void setDaATA(List<DataItem> popularSubCategoryList) {
         if (popularSubCategoryList.get(0).getCategory() != null) {
 
+            binding.popularName.setText(popularSubCategoryList.get(0).getTitle());
+            binding.popularIcons.setImageResource(
+                    Constants.getCategoryIcon(requireContext(),popularSubCategoryList.get(0).getCategory().getId()));
 
-            Svg.INSTANCE.loadUrl(
-                    Constants.IMG_PATH + popularSubCategoryList.get(0).getCategory().getIcon(),
-                    binding.popularIcons
-            );
-
-//            Glide.with(Split.getAppContext())
-//                    .load(Constants.IMG_PATH + popularSubCategoryList.get(0).getCategory().getIcon())
-//                    .placeholder(R.color.images_placeholder)
-//                    .into(binding.popularIcons);
         }
-        binding.popularName.setText(popularSubCategoryList.get(0).getTitle());
 
         if (popularSubCategoryList.get(1).getCategory() != null) {
-            Svg.INSTANCE.loadUrl(
-                    Constants.IMG_PATH + popularSubCategoryList.get(1).getCategory().getIcon(),
-                    binding.popularIcons
-            );
-//            Glide.with(Split.getAppContext())
-//                    .load(Constants.IMG_PATH + popularSubCategoryList.get(1).getCategory().getIcon())
-//                    .placeholder(R.color.images_placeholder)
-//                    .into(binding.popularIcons1);
+            binding.popularIcons1.setImageResource(
+                    Constants.getCategoryIcon(requireContext(),popularSubCategoryList.get(1).getCategory().getId()));
+            binding.popularName1.setText(popularSubCategoryList.get(1).getTitle());
+
         }
-        binding.popularName1.setText(popularSubCategoryList.get(1).getTitle());
 
         if (popularSubCategoryList.get(2).getCategory() != null) {
 
-            Svg.INSTANCE.loadUrl(
-                    Constants.IMG_PATH + popularSubCategoryList.get(2).getCategory().getIcon(),
-                    binding.popularIcons
-            );
-//            Glide.with(Split.getAppContext())
-//                    .load(Constants.IMG_PATH + popularSubCategoryList.get(2).getCategory().getIcon())
-//                    .placeholder(R.color.images_placeholder)
-//                    .into(binding.popularIcons2);
+            binding.popularIcons2.setImageResource(
+                    Constants.getCategoryIcon(requireContext(),popularSubCategoryList.get(2).getCategory().getId()));
+            binding.popularName2.setText(popularSubCategoryList.get(2).getTitle());
+
         }
-        binding.popularName2.setText(popularSubCategoryList.get(2).getTitle());
 
         binding.tvJoin.setOnClickListener(view -> {
             Bundle bundle = new Bundle();

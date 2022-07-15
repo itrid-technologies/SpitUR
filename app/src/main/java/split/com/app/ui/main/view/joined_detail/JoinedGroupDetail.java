@@ -188,7 +188,7 @@ public class JoinedGroupDetail extends Fragment {
 
         binding.btnGroupChat.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putString("groupId", String.valueOf(data.getId()));
+            bundle.putString("groupId", String.valueOf(data.getGroup().getId()));
             Navigation.findNavController(view).navigate(R.id.action_joinedGroupDetail2_to_chatroom,bundle);
         });
     }

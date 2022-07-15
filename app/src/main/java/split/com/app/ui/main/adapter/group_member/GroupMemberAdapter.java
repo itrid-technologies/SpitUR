@@ -1,6 +1,7 @@
 package split.com.app.ui.main.adapter.group_member;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -57,6 +59,14 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
                 .into(holder.image);
 
         holder.name.setText(current_item.getUser().getUserId());
+
+        holder.chat.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("receiverId",String.valueOf(current_item.getUser().getId()));
+            bundle.putString("groupId",String.valueOf(current_item.getGroupId()));
+
+            Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_memberChat,bundle);
+        });
     }
 
     @Override

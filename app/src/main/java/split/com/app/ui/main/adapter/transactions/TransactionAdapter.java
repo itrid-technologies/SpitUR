@@ -58,7 +58,9 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         String url = Constants.IMG_PATH + dataItem.getGroupsPaymentTransactions().getSubCategory().getCategory().getIcon();
 
 
-        Svg.INSTANCE.loadUrl(url , holder.icon);
+       // Svg.INSTANCE.loadUrl(url , holder.icon);
+        holder.icon.setImageResource(
+                Constants.getCategoryIcon(context,dataItem.getGroupsPaymentTransactions().getSubCategory().getCategory().getId()));
 
     }
 

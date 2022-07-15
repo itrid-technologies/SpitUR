@@ -50,10 +50,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.CategoryVH holder, int position) {
         CategoryDataItems current_item =  categoryDataItems.get(position);
-        Svg.INSTANCE.loadUrl(
-                Constants.IMG_PATH + current_item.getIcon(),
-                holder.icon
-        );
+//        Svg.INSTANCE.loadUrl(
+//                Constants.IMG_PATH + current_item.getIcon(),
+//                holder.icon
+//        );
+        holder.icon.setImageResource(
+                Constants.getCategoryIcon(context,current_item.getId()));
         holder.name.setText(current_item.getTitle());
     }
 

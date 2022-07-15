@@ -8,6 +8,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import split.com.app.R;
+
 public final class Constants {
 
 
@@ -44,6 +46,13 @@ public final class Constants {
     public static String USER_NUMBER = "";
 
 
+    public static final String FACEBOOK_PACKAGE_NAME = "com.facebook.katana";
+    public static final String TWITTER_PACKAGE_NAME = "com.twitter.android";
+    public static final String INSTAGRAM_PACKAGE_NAME = "com.instagram.android";
+    public static final String PINTEREST_PACKAGE_NAME = "com.pinterest";
+    public static final String WHATS_PACKAGE_NAME =  "com.whatsapp";
+    public static final String DISCORD_PACKAGE_NAME =  "https://discord.gg";
+
     public static String getDate(String data) {
         String date;
         String[] date_value = data.split("T");
@@ -76,5 +85,32 @@ public final class Constants {
         String[] time_value = data.split("T");
         time = time_value[1].substring(0, Math.min(time_value[1].length(), 5));
         return time;
+    }
+
+    public static int getCategoryIcon(Context requireContext, int id) {
+        int icon;
+        switch (id){
+            case 1:
+                icon = R.drawable.movies;
+                break;
+            case 2:
+                icon = R.drawable.cloud;
+                break;
+            case 3:
+                icon = R.drawable.games;
+                break;
+            case 4:
+                icon = R.drawable.music;
+                break;
+            case 5:
+                icon = R.drawable.others;
+                break;
+            case 6:
+                icon = R.drawable.vpn;
+                break;
+            default:
+                icon = R.color.images_placeholder;
+        }
+        return icon;
     }
 }

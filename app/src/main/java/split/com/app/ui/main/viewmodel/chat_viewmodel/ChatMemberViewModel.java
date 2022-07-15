@@ -13,13 +13,14 @@ public class ChatMemberViewModel extends ViewModel {
 
     private MutableLiveData<MessageSendModel> data;
     private MutableLiveData<GetMemberMessagesModel> messages_data;
-    String id, msg;
+    String receiver , group, msg;
     private ChatMemberRepository chatRepository;
 
 
 
-    public ChatMemberViewModel(String receiver_id, String message) {
-        this.id = receiver_id;
+    public ChatMemberViewModel(String group_id,String receiver_id, String message) {
+        this.group = group_id;
+        this.receiver = receiver_id;
         this.msg = message;
         chatRepository = new ChatMemberRepository();
     }
@@ -30,7 +31,7 @@ public class ChatMemberViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        data = chatRepository.send(msg,id);
+        data = chatRepository.send(msg,group,receiver);
     }
 
     public void initGetAllMessage() {
@@ -39,7 +40,7 @@ public class ChatMemberViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        messages_data = chatRepository.getMessages(id);
+        messages_data = chatRepository.getMessages(receiver);
     }
 
     public MutableLiveData<MessageSendModel> getData() {

@@ -34,7 +34,7 @@ public class MemberChat extends Fragment {
 
 
     FragmentMemberChatBinding binding;
-    String group_id , id;
+    String group_id ,receiver_id, id;
     ChatMemberViewModel viewModel;
     private ArrayList<Object> msgs;
     ChatAdapter adapter;
@@ -62,12 +62,14 @@ public class MemberChat extends Fragment {
 
         if (getArguments() != null) {
             group_id = getArguments().getString("groupId");
+            receiver_id = getArguments().getString("receiverId");
+
         }
 
         MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
         id = pm.getData(Split.getAppContext(), "Id");
 
-        viewModel = new ChatMemberViewModel(group_id, "");
+        viewModel = new ChatMemberViewModel(group_id,receiver_id ,"");
         viewModel.initGetAllMessage();
         viewModel.getMessages_data().observe(getViewLifecycleOwner() , getMemberMessagesModel -> {
             if (getMemberMessagesModel.isStatus()) {
@@ -80,7 +82,8 @@ public class MemberChat extends Fragment {
                             ));
                         } else {
                             msgs.add(new ReceiverModel(getMemberMessagesModel.getMessages().get(i).getBody(),
-                                    getMemberMessagesModel.getMessages().get(i).getCreatedAt(), null));
+                                    getMemberMessagesModel.getMessages().get(i).getCreatedAt(),
+                                    getMemberMessagesModel.getMessages().get(i).getReceiver()));
                         }
                     }
                     buildChatRv(msgs);
@@ -94,6 +97,8 @@ public class MemberChat extends Fragment {
         binding.memberChatRv.setLayoutManager(layoutManager);
         adapter = new ChatAdapter(Split.getAppContext(), msgs);
         binding.memberChatRv.setAdapter(adapter);
+        binding.memberChatRv.scrollToPosition(msgs.size() - 1);
+
     }
 
     private void cliclKisteners() {
@@ -104,11 +109,14 @@ public class MemberChat extends Fragment {
         binding.sendMemberMessage.setOnClickListener(view -> {
             String message = binding.messgae.getText().toString().trim();
             if (!message.isEmpty()) {
-                viewModel = new ChatMemberViewModel(group_id, message);
+                viewModel = new ChatMemberViewModel(group_id,receiver_id, message);
                 viewModel.initSendMessage();
                 viewModel.getData().observe(getViewLifecycleOwner(), messageSendModel -> {
                     if (messageSendModel.isStatus()) {
+
                         msgs.add(new SenderModel(message, Calendar.getInstance().getTime().toString()));
+                        binding.memberChatRv.scrollToPosition(msgs.size() - 1);
+                        adapter.notifyItemInserted(msgs.size() - 1);
                         adapter.notifyDataSetChanged();
                         binding.messgae.setText("");
                     }

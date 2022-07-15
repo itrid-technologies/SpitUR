@@ -48,7 +48,7 @@ public class Refund extends Fragment {
         viewModel.init();
         viewModel.getBalance().observe(getViewLifecycleOwner(),walletBalanceModel -> {
             if (walletBalanceModel.isStatus()){
-                binding.availableBalanceValue.setText("Rs " + walletBalanceModel.getWalletBalance());
+                binding.availableBalanceValue.setText("₹ " + walletBalanceModel.getWalletBalance());
             }
         });
 

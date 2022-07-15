@@ -185,8 +185,9 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/hint_color"
                 android:fontFamily="@font/poppin_regular"
-                android:textSize="15sp"
-                android:maxLines="1"
+                android:textSize="13sp"
+                android:text="@string/app_link"
+                android:padding="10dp"
                 android:ellipsize="end"
                 android:paddingEnd="46dp"
                 android:layout_marginTop="10dp"
@@ -194,7 +195,6 @@
                 android:gravity="start|center"
                 android:background="@drawable/round_back"
                 android:backgroundTint="@color/light_blue"
-                android:padding="10dp"
                 android:drawableLeft="@drawable/ic_userid"
                 android:id="@+id/profile_link"/>
 
@@ -365,27 +365,19 @@
                 android:id="@+id/membarPart">
 
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/admin_as_member"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/admin_as_member"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/nav_bg"
+                        android:backgroundTint="#262A34"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_group_members"
-                        >
+                        app:layout_constraintStart_toEndOf="parent">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:background="@color/profile_bg"
                             android:padding="10dp"
                             app:layout_constraintEnd_toStartOf="@id/adminBg"
                             app:layout_constraintHorizontal_bias="1.0"
@@ -472,30 +464,21 @@
                             android:src="@drawable/ic_tick"
                             android:paddingStart="15dp"
                             android:paddingEnd="15dp"
-                            android:background="@color/green"/>
+                            android:background="@drawable/half_round"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/no_member_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="10dp"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/no_member_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/profile_bg"
+                        android:background="@drawable/nav_bg"
+                        android:backgroundTint="#262A34"
                         android:padding="10dp"
-                        app:layout_constraintEnd_toStartOf="@id/adminBg"
-                        app:layout_constraintHorizontal_bias="1.0"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
@@ -509,20 +492,20 @@
                             android:layout_marginStart="5dp"
                             app:civ_circle_background_color="#94F0F0"
                             app:civ_border_color="@color/green"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
                         <TextView
                             android:id="@+id/no_user"
-                            style="@style/semiBoldText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:text="No Joined Members"
-                            android:textSize="18sp"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toEndOf="@id/dummy_profile"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            style="@style/semiBoldText"
+                            android:text="-"
+                            android:textSize="14sp"
+                            android:layout_marginStart="21dp" />
 
                         <TextView
                             android:id="@+id/tv_access"
@@ -536,26 +519,28 @@
                             app:layout_constraintTop_toBottomOf="@id/no_user" />
 
 
-                        <Button
-                            android:id="@+id/disable_chat"
-                            style="@style/buttonStyle01"
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            app:layout_constraintStart_toStartOf="@id/tv_access"
+                            app:layout_constraintTop_toBottomOf="@id/tv_access"
                             android:background="@drawable/round_back"
                             android:backgroundTint="@color/dark_grey"
-                            android:paddingStart="20dp"
-                            android:paddingEnd="20dp"
                             android:text="Chat"
-                            android:textSize="14sp"
-                            app:layout_constraintStart_toStartOf="@id/tv_access"
-                            app:layout_constraintTop_toBottomOf="@id/tv_access" />
+                            android:textColor="@color/white"
+                            android:paddingTop="@dimen/_4sdp"
+                            android:paddingBottom="@dimen/_4sdp"
+                            android:paddingStart="@dimen/_12sdp"
+                            android:paddingEnd="@dimen/_12sdp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="12sp"
+                            android:id="@+id/disable_chat"/>
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                </androidx.cardview.widget.CardView>
 
 
                 <androidx.recyclerview.widget.RecyclerView

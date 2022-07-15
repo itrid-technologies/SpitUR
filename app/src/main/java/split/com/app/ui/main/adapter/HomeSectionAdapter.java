@@ -45,13 +45,15 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
         holder.title.setText(dataItem.getTitle());
         if (dataItem.getSubCategory().size() > 0) {
 
+
+
             LinearLayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
             holder.list.setLayoutManager(layoutManager);
-            HomeSectionSubCategoryAdapter adapter = new HomeSectionSubCategoryAdapter(Split.getAppContext(), dataItem.getSubCategory(), dataItem.getIcon());
+            HomeSectionSubCategoryAdapter adapter = new HomeSectionSubCategoryAdapter(Split.getAppContext(), dataItem.getSubCategory(),dataItem.getId());
             holder.list.setAdapter(adapter);
 
             int spacingInPixels = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._11sdp);
-            holder.list.addItemDecoration(new SpacingItemDecorator(10));
+           // holder.list.addItemDecoration(new SpacingItemDecorator(11));
 
             adapter.setOnSubCategorySelectListener(position1 -> {
                 Bundle bundle = new Bundle();

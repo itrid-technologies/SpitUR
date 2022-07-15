@@ -30,7 +30,6 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
 
     private String group_id;
     private String groupData;
-    CheckOutViewModel viewModel;
     String secret_key = "";
 
     @Override
@@ -44,18 +43,12 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
         final Intent data = getIntent();
         String subID;
 
-        viewModel = new CheckOutViewModel();
-        viewModel.init();
-        viewModel.getData().observe(this ,secretKeyModel -> {
-            if (secretKeyModel.isStatus()){
-                secret_key = secretKeyModel.getKey();
-            }
-        });
 
         if (data.hasExtra("subscription_id")) {
             subID = data.getStringExtra("subscription_id");
             group_id = data.getStringExtra("group_id");
             groupData = data.getStringExtra("group_credentials");
+            secret_key = data.getStringExtra("secret_key");
             if (!secret_key.isEmpty()) {
                 checkout(subID);
             }

@@ -14,7 +14,7 @@ public class GroupAdmin{
 	private String name;
 
 	@SerializedName("splitur_score")
-	private Object spliturScore;
+	private double spliturScore;
 
 	@SerializedName("id")
 	private int id;
@@ -49,7 +49,7 @@ public class GroupAdmin{
 		return name;
 	}
 
-	public Object getSpliturScore(){
+	public double getSpliturScore(){
 		return spliturScore;
 	}
 
