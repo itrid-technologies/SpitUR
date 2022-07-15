@@ -22,7 +22,7 @@ public class OtpVerificationRepository {
     public MutableLiveData<AuthenticationModel> verifyUser(String number, String otp) {
         final MutableLiveData<AuthenticationModel> RegisterModelMutableLiveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<AuthenticationModel> call = apiService.authenticateUser(Constants.DEVICE_TOKEN,number,otp);
+        Call<AuthenticationModel> call = apiService.authenticateUser("Constants.DEVICE_TOKEN",number,otp);
         call.enqueue(new Callback<AuthenticationModel>() {
             @Override
             public void onResponse(Call<AuthenticationModel> call, Response<AuthenticationModel> response) {

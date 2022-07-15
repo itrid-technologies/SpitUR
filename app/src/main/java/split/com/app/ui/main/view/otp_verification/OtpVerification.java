@@ -112,29 +112,7 @@ public class OtpVerification extends AppCompatActivity implements OTPListener {
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 11: {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted, yay! do the
-                    // calendar task you need to do.
-
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-
-            // other 'switch' lines to check for other
-            // permissions this app might request
-        }
-    }
 
     private void authenticateUser(String number, String otp) {
 
@@ -165,6 +143,30 @@ public class OtpVerification extends AppCompatActivity implements OTPListener {
             }
         });
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 11: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! do the
+                    // calendar task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'switch' lines to check for other
+            // permissions this app might request
+        }
     }
 
     @Override
