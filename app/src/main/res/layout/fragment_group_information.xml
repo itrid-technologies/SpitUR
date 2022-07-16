@@ -1,74 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#181A20"
     tools:context=".ui.main.view.group_info.GroupInformation">
 
     <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/gi_toolbar"
         layout="@layout/toolbar_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gi_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fillViewport="true"
         android:scrollbars="none"
-        android:fillViewport="true">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gi_toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="22dp">
 
-            <include
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/userLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/profile_bg"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                layout="@layout/profile_data_in_create"
-                android:id="@+id/profile1"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/user"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="2dp"
+                    app:civ_circle_background_color="@color/images_placeholder"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/netflix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_26sdp"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="-"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_18sdp"
+                    app:layout_constraintStart_toEndOf="@id/user_image"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="-"
+                    android:textColor="#707481"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintStart_toStartOf="@id/netflix"
+                    app:layout_constraintTop_toBottomOf="@id/netflix" />
+
+                <TextView
+                    android:id="@+id/count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/rect_blue_bg"
+                    android:backgroundTint="@color/blue"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:padding="@dimen/_8sdp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="- Slots"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@id/userName"
+                    app:layout_constraintTop_toBottomOf="@id/userName" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/tv_pass_verification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/profile1"
-                app:layout_constraintStart_toStartOf="parent"
-                android:fontFamily="@font/poppins_bold"
-                android:textColor="@color/white"
-                android:text="Password Verification"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Password Verification"
+                android:textColor="@color/white"
                 android:textSize="20sp"
-                android:id="@+id/tv_pass_verification"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userLayout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/verification_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_pass_verification"
-                android:padding="@dimen/_15sdp"
-                android:backgroundTint="#262A34"
                 android:layout_marginTop="@dimen/_6sdp"
-                android:background="@drawable/verification_bg">
+                android:background="@drawable/verification_bg"
+                android:backgroundTint="#262A34"
+                android:padding="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_pass_verification">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/no_user_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    >
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/iv_user"
@@ -88,252 +146,250 @@
                         android:layout_height="24dp"
                         android:background="@drawable/round_back"
                         android:backgroundTint="@color/error"
-                        android:src="@drawable/cross"
                         android:gravity="center"
-                        android:visibility="gone"
                         android:padding="3dp"
+                        android:src="@drawable/cross"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@id/iv_user"
                         app:layout_constraintEnd_toEndOf="@id/iv_user" />
 
                     <TextView
+                        android:id="@+id/status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/iv_user"
-                        app:layout_constraintEnd_toEndOf="@id/iv_user"
-                        app:layout_constraintTop_toBottomOf="@id/iv_user_"
-                        android:text="No User"
-                        android:textSize="14dp"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/poppins_bold"
                         android:layout_marginTop="6dp"
-                        android:id="@+id/status"/>
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="No User"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="@id/iv_user"
+                        app:layout_constraintStart_toStartOf="@id/iv_user"
+                        app:layout_constraintTop_toBottomOf="@id/iv_user_" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/verification_status_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:id="@+id/verification_status_list"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/tv_admin_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/verification_layout"
-                app:layout_constraintStart_toStartOf="parent"
-                android:fontFamily="@font/poppins_bold"
-                android:textColor="@color/white"
-                android:text="Admin Info"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Admin Info"
+                android:textColor="@color/white"
                 android:textSize="20sp"
-                android:id="@+id/tv_admin_info"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/verification_layout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/admin_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_admin_info"
-                android:padding="16dp"
-                android:backgroundTint="#262A34"
                 android:layout_marginTop="@dimen/_6sdp"
-                android:background="@drawable/rect_bg">
+                android:background="@drawable/rect_bg"
+                android:backgroundTint="#262A34"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_admin_info">
 
                 <TextView
+                    android:id="@+id/tv_score_value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tv_last_active"
-                    android:textSize="20sp"
-                    android:text="-"
                     android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="-"
                     android:textColor="@color/green"
-                    android:gravity="center"
-                    android:id="@+id/tv_score_value"/>
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintStart_toEndOf="@id/tv_score_value"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toStartOf="@id/tv_last_active"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:background="@color/white"
-                    android:alpha="0.2"
-                    android:id="@+id/line"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/tv_score_value"
-                    app:layout_constraintTop_toBottomOf="@id/tv_score_value"
-                    app:layout_constraintEnd_toEndOf="@id/tv_score_value"
-                    android:fontFamily="@font/inter_regular"
-                    android:textSize="10sp"
-                    android:text="@string/spiltur_score"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/hint_color"
-                    android:gravity="center"
-                    android:id="@+id/tv_score"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <View
+                    android:id="@+id/line"
                     android:layout_width="2dp"
                     android:layout_height="0dp"
-                    app:layout_constraintStart_toEndOf="@id/tv_last_active"
-                    app:layout_constraintEnd_toStartOf="@id/tv_days_value"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:background="@color/white"
                     android:alpha="0.2"
-                    android:id="@+id/line1"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_last_active"
                     app:layout_constraintStart_toEndOf="@id/tv_score_value"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tv_days_value"
-                    android:fontFamily="@font/inter_bold"
-                    android:gravity="center"
-                    android:text="-"
-                    android:textSize="20sp"
-                    android:textColor="#6094FE"
-                    android:id="@+id/tv_last_active"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/tv_last_active"
-                    app:layout_constraintTop_toBottomOf="@id/tv_last_active"
-                    app:layout_constraintEnd_toEndOf="@id/tv_last_active"
-                    android:fontFamily="@font/inter_regular"
                     android:layout_marginTop="5dp"
-                    android:text="Last Active"
-                    android:textSize="10sp"
-                    android:textColor="@color/hint_color"
+                    android:fontFamily="@font/inter_regular"
                     android:gravity="center"
-                    android:id="@+id/tv_active"/>
+                    android:text="@string/spiltur_score"
+                    android:textColor="@color/hint_color"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/tv_score_value"
+                    app:layout_constraintStart_toStartOf="@id/tv_score_value"
+                    app:layout_constraintTop_toBottomOf="@id/tv_score_value" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="2dp"
+                    android:layout_height="0dp"
+                    android:alpha="0.2"
+                    android:background="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_days_value"
+                    app:layout_constraintStart_toEndOf="@id/tv_last_active"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_last_active"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/tv_last_active"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:gravity="center"
                     android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
                     android:text="-"
-                    android:textSize="20sp"
-                    android:textColor="@color/orange"
-                    android:id="@+id/tv_days_value"/>
+                    android:textColor="#6094FE"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_days_value"
+                    app:layout_constraintStart_toEndOf="@id/tv_score_value"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_active"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/tv_days_value"
-                    app:layout_constraintTop_toBottomOf="@id/tv_days_value"
-                    app:layout_constraintEnd_toEndOf="@id/tv_days_value"
-                    android:fontFamily="@font/inter_regular"
-                    android:text="Creation Date"
-                    android:textSize="10sp"
                     android:layout_marginTop="5dp"
-                    android:textColor="@color/hint_color"
+                    android:fontFamily="@font/inter_regular"
                     android:gravity="center"
-                    android:id="@+id/tv_days"/>
+                    android:text="Last Active"
+                    android:textColor="@color/hint_color"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/tv_last_active"
+                    app:layout_constraintStart_toStartOf="@id/tv_last_active"
+                    app:layout_constraintTop_toBottomOf="@id/tv_last_active" />
+
+                <TextView
+                    android:id="@+id/tv_days_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="-"
+                    android:textColor="@color/orange"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_last_active"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="Creation Date"
+                    android:textColor="@color/hint_color"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/tv_days_value"
+                    app:layout_constraintStart_toStartOf="@id/tv_days_value"
+                    app:layout_constraintTop_toBottomOf="@id/tv_days_value" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/tv_credential"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/admin_layout"
-                app:layout_constraintStart_toStartOf="parent"
-                android:fontFamily="@font/poppins_bold"
-                android:textColor="@color/white"
-                android:text="Group Credential"
                 android:layout_marginTop="16dp"
-                android:textSize="20sp"
-                android:id="@+id/tv_credential"/>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/group_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_credential"
-            android:paddingTop="@dimen/_12sdp"
-            android:paddingStart="@dimen/_12sdp"
-            android:paddingEnd="@dimen/_12sdp"
-            android:paddingBottom="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:backgroundTint="#262A34"
-            android:background="@drawable/nav_bg">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:background="@drawable/pass_manager"
-                android:id="@+id/pass_manager_icon"
-                />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/pass_manager_icon"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Group Credential"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="Splitur Password Manager"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="8dp"
                 android:textSize="20sp"
-                android:id="@+id/tv_manager"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/admin_layout" />
 
-            <TextView
-                android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/group_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/pass_manager_icon"
-                android:fontFamily="@font/inter_semibold"
-                android:textSize="10sp"
-                android:layout_marginTop="-6dp"
-                android:textColor="@color/hint_color"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="@drawable/nav_bg"
+                android:backgroundTint="#262A34"
+                android:paddingStart="@dimen/_12sdp"
+                android:paddingTop="@dimen/_12sdp"
+                android:paddingEnd="@dimen/_12sdp"
+                android:paddingBottom="@dimen/_8sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_manager"
-                android:text="Credentials Visible for Members only"
-                android:layout_marginStart="8dp"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_credential">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/pass_manager_icon"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/pass_manager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_manager"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Splitur Password Manager"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/pass_manager_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="-6dp"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="Credentials Visible for Members only"
+                    android:textColor="@color/hint_color"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/pass_manager_icon"
+                    app:layout_constraintTop_toBottomOf="@id/tv_manager" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <Button
+                android:id="@+id/join_button"
+                style="@style/buttonStyle"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/group_layout"
-                android:text="Join Now"
                 android:layout_marginTop="30dp"
-                style="@style/buttonStyle"
                 android:background="@drawable/button_round_bg"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
+                android:text="Join Now"
                 android:textSize="14dp"
-                android:id="@+id/join_button"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/group_layout" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

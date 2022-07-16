@@ -72,7 +72,9 @@ public class Friends extends Fragment {
         initClickListeners();
         contactList.addAll(getContacts(requireContext()));
         if (contactList.size() > 0){
-            buildFriendRv1(contactList);
+//            buildFriendRv1(contactList);
+            binding.noFriendLayout.setVisibility(View.VISIBLE);
+            binding.friendsList.setVisibility(View.GONE);
         }else {
             binding.noFriendLayout.setVisibility(View.VISIBLE);
             binding.friendsList.setVisibility(View.GONE);

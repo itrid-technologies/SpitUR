@@ -1,7 +1,5 @@
 package split.com.app.ui.main.view.otp_verification;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,11 +11,14 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import java.util.Locale;
+
 import split.com.app.R;
 import split.com.app.databinding.ActivityOtpVerificationBinding;
 import split.com.app.service.OTPListener;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel;
+import split.com.app.ui.main.viewmodel.phone_number.PhoneNumberViewModel;
 import split.com.app.utils.ActivityUtil;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
@@ -38,36 +39,11 @@ public class OtpVerification extends AppCompatActivity implements OTPListener {
         binding = ActivityOtpVerificationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        if (checkSelfPermission(Manifest.permission.READ_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.READ_SMS},
-                    11);
-
-            // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-            // app-defined int constant
-
-            return;
-        }
-
-        OtpReader.bind(this,"SOLV");
-
-
+        OtpReader.bind(this, "SOLV");
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-
-
-        new CountDownTimer(30000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-                binding.remainingTime.setText(String.valueOf((int) (millisUntilFinished / 1000) + " sec"));
-            }
-
-            public void onFinish() {
-                binding.remainingTime.setText("Resend");
-            }
-
-        }.start();
+        startOtpCountDown();
 
         binding.back.setOnClickListener(view -> {
             onBackPressed();
@@ -80,11 +56,10 @@ public class OtpVerification extends AppCompatActivity implements OTPListener {
 
 
         binding.remainingTime.setOnClickListener(view -> {
-            String resend = binding.remainingTime.getText().toString().toString();
+            String resend = binding.remainingTime.getText().toString();
             if (resend.equalsIgnoreCase("Resend")) {
-                String otp = binding.otp.getText().toString();
 
-                authenticateUser(number, otp);
+                resendOtp(number);
             }
         });
 
@@ -112,6 +87,32 @@ public class OtpVerification extends AppCompatActivity implements OTPListener {
 
     }
 
+    private void startOtpCountDown() {
+        new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                binding.remainingTime.setText(String.format(Locale.ENGLISH, "%d sec", (int) (millisUntilFinished / 1000)));
+            }
+
+            public void onFinish() {
+                binding.remainingTime.setText("Resend");
+            }
+
+        }.start();
+    }
+
+    private void resendOtp(String number) {
+        PhoneNumberViewModel phoneNumberViewModel = new PhoneNumberViewModel(number);
+        phoneNumberViewModel.initOtp();
+        phoneNumberViewModel.getOtp_data().observe(this, otpModel -> {
+            if (otpModel.isStatus()) {
+                startOtpCountDown();
+            } else {
+                binding.errorMessage.setVisibility(View.VISIBLE);
+                binding.errorMessage.setText(otpModel.getMessage());
+            }
+        });
+    }
 
 
     private void authenticateUser(String number, String otp) {
@@ -126,7 +127,7 @@ public class OtpVerification extends AppCompatActivity implements OTPListener {
                     Constants.USER_ID = authenticationModel.getData().getUser().getUserId();
                     Constants.USER_NAME = authenticationModel.getData().getUser().getName();
                     Constants.USER_AVATAR = Constants.IMG_PATH + authenticationModel.getData().getUser().getAvatar();
-                   // Constants.DEVICE_TOKEN = authenticationModel.getData().getToken();
+                    // Constants.DEVICE_TOKEN = authenticationModel.getData().getToken();
 
                     MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
                     pm.saveData(Split.getAppContext(), "Id", String.valueOf(authenticationModel.getData().getUser().getId()));
@@ -146,32 +147,9 @@ public class OtpVerification extends AppCompatActivity implements OTPListener {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 11: {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! do the
-                    // calendar task you need to do.
-
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-
-            // other 'switch' lines to check for other
-            // permissions this app might request
-        }
-    }
-
-    @Override
     public void otpReceived(String messageText) {
-        Toast.makeText(this,"Got "+messageText,Toast.LENGTH_LONG).show();
-        Log.d("Otp",messageText);;
+        Toast.makeText(this, "Got " + messageText, Toast.LENGTH_LONG).show();
+        Log.d("Otp", messageText);
+        ;
     }
 }

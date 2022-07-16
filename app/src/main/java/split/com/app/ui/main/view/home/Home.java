@@ -48,7 +48,6 @@ import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.SpanningLinearLayoutManager;
 import split.com.app.utils.Split;
-import split.com.app.utils.Svg;
 
 
 public class Home extends Fragment {
@@ -258,10 +257,10 @@ public class Home extends Fragment {
                                 ConstraintLayout confirm_layout = layout.findViewById(R.id.delete_layout);
 
                                 deleteLayout.setOnClickListener(view2 -> {
-                                    if (confirm_layout.getTag().equals("hidden")){
+                                    if (confirm_layout.getTag().equals("hidden")) {
                                         confirm_layout.setVisibility(View.VISIBLE);
                                         confirm_layout.setTag("visible");
-                                    }else {
+                                    } else {
                                         confirm_layout.setVisibility(View.GONE);
                                         confirm_layout.setTag("hidden");
                                     }
@@ -405,13 +404,13 @@ public class Home extends Fragment {
 
             binding.popularName.setText(popularSubCategoryList.get(0).getTitle());
             binding.popularIcons.setImageResource(
-                    Constants.getCategoryIcon(requireContext(),popularSubCategoryList.get(0).getCategory().getId()));
+                    Constants.getCategoryIcon(requireContext(), popularSubCategoryList.get(0).getCategory().getId()));
 
         }
 
         if (popularSubCategoryList.get(1).getCategory() != null) {
             binding.popularIcons1.setImageResource(
-                    Constants.getCategoryIcon(requireContext(),popularSubCategoryList.get(1).getCategory().getId()));
+                    Constants.getCategoryIcon(requireContext(), popularSubCategoryList.get(1).getCategory().getId()));
             binding.popularName1.setText(popularSubCategoryList.get(1).getTitle());
 
         }
@@ -419,7 +418,7 @@ public class Home extends Fragment {
         if (popularSubCategoryList.get(2).getCategory() != null) {
 
             binding.popularIcons2.setImageResource(
-                    Constants.getCategoryIcon(requireContext(),popularSubCategoryList.get(2).getCategory().getId()));
+                    Constants.getCategoryIcon(requireContext(), popularSubCategoryList.get(2).getCategory().getId()));
             binding.popularName2.setText(popularSubCategoryList.get(2).getTitle());
 
         }

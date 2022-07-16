@@ -1,12 +1,12 @@
 package split.com.app.utils;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.util.TypedValue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import split.com.app.R;
 
@@ -17,7 +17,7 @@ public final class Constants {
 //     public static String URL_BASE = "http://192.168.100.5:4000/";
 
     public static String IMG_PATH = "http://3.6.7.161:4000";
-//    public static String IMG_PATH = "http://192.168.100.5:4000";
+    //    public static String IMG_PATH = "http://192.168.100.5:4000";
     public static String DEVICE_TOKEN = "";
 
 
@@ -50,8 +50,8 @@ public final class Constants {
     public static final String TWITTER_PACKAGE_NAME = "com.twitter.android";
     public static final String INSTAGRAM_PACKAGE_NAME = "com.instagram.android";
     public static final String PINTEREST_PACKAGE_NAME = "com.pinterest";
-    public static final String WHATS_PACKAGE_NAME =  "com.whatsapp";
-    public static final String DISCORD_PACKAGE_NAME =  "https://discord.gg";
+    public static final String WHATS_PACKAGE_NAME = "com.whatsapp";
+    public static final String DISCORD_PACKAGE_NAME = "https://discord.gg";
 
     public static String getDate(String data) {
         String date;
@@ -80,6 +80,11 @@ public final class Constants {
         return str;
     }
 
+    public static String getFormattedDateTimeNow() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
+        return sdf.format(Calendar.getInstance().getTime());
+    }
+
     public static String getTime(String data) {
         String time;
         String[] time_value = data.split("T");
@@ -89,7 +94,7 @@ public final class Constants {
 
     public static int getCategoryIcon(Context requireContext, int id) {
         int icon;
-        switch (id){
+        switch (id) {
             case 1:
                 icon = R.drawable.movies;
                 break;
@@ -106,6 +111,42 @@ public final class Constants {
                 icon = R.drawable.others;
                 break;
             case 6:
+                icon = R.drawable.vpn;
+                break;
+            default:
+                icon = R.color.images_placeholder;
+        }
+        return icon;
+    }
+
+    public static int getAvatarIcon(Context requireContext, int id) {
+        int icon;
+        switch (id) {
+            case 1:
+                icon = R.drawable.movies;
+                break;
+            case 2:
+                icon = R.drawable.cloud;
+                break;
+            case 3:
+                icon = R.drawable.games;
+                break;
+            case 4:
+                icon = R.drawable.music;
+                break;
+            case 5:
+                icon = R.drawable.others;
+                break;
+            case 6:
+                icon = R.drawable.vpn;
+                break;
+            case 7:
+                icon = R.drawable.vpn;
+                break;
+            case 8:
+                icon = R.drawable.vpn;
+                break;
+            case 9:
                 icon = R.drawable.vpn;
                 break;
             default:

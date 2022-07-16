@@ -48,10 +48,10 @@ public class JoinCheckOut extends Fragment {
     String value;
 
     boolean isPromoValid = false;
-    String discount_amount , code;
+    String discount_amount;
+    String code = "";
 
     JoinGroupViewModel joinGroupViewModel;
-
 
 
     @Override
@@ -83,7 +83,6 @@ public class JoinCheckOut extends Fragment {
 
         initClickListeners();
 
-        
 
     }
 
@@ -96,12 +95,16 @@ public class JoinCheckOut extends Fragment {
                     .into(binding.profile2.userImage);
             binding.profile2.userName.setText(String.valueOf(dataItem.getGroupAdmin().getUserId()));
             String coin = String.valueOf(dataItem.getCostPerMember());
-            Double coinFloat = Double.parseDouble(coin);
+            double coinFloat = Double.parseDouble(coin);
             value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
-            binding.profile2.count.setText(value + " Coins");
-            binding.priceValue.setText(value + " Coins");
-            binding.payment.setText(String.valueOf(dataItem.getCostPerMember()));
-            binding.btnJoin.setText("Join for " + value + " Coins");
+            binding.profile2.count.setText(String.format("%s Coins", value));
+            binding.priceValue.setText(String.format("%s Coins", value));
+
+            final double fee = (Double.parseDouble(value) / 100) * 2.5;
+            final String roundedFee = String.format("%.2f", fee);
+
+            binding.payment.setText(roundedFee);
+            binding.btnJoin.setText(String.format("Join for %s Coins", (Double.parseDouble(value) + Double.parseDouble(roundedFee))));
 
             MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
             mySharedPreferences.saveData(Split.getAppContext(), "GroupID", String.valueOf(dataItem.getId()));
@@ -138,15 +141,15 @@ public class JoinCheckOut extends Fragment {
 
                 if (code.isEmpty()) {
 
-                    status.setText("Enter Promocode");
+                    status.setText("Enter Promo code");
                     status.setVisibility(View.VISIBLE);
 
                 } else {
-                    viewModel = new JoinCheckoutViewModel(Constants.ID,code);
+                    viewModel = new JoinCheckoutViewModel(Constants.ID, code);
                     viewModel.initPromo();
-                    viewModel.getPromoData().observe(getViewLifecycleOwner(),promoModel -> {
-                        if (promoModel.isSuccess()){
-                            if (promoModel.getData() != null){
+                    viewModel.getPromoData().observe(getViewLifecycleOwner(), promoModel -> {
+                        if (promoModel.isSuccess()) {
+                            if (promoModel.getData() != null) {
 
                                 isPromoValid = true;
 
@@ -167,7 +170,7 @@ public class JoinCheckOut extends Fragment {
                                 }, 3000); //Timer is in ms here.
 
                             }
-                        }else {
+                        } else {
 
                             isPromoValid = false;
 
@@ -186,7 +189,7 @@ public class JoinCheckOut extends Fragment {
 
         binding.btnJoin.setOnClickListener(view -> {
 
-            viewModel = new JoinCheckoutViewModel(Constants.ID,"");
+            viewModel = new JoinCheckoutViewModel(Constants.ID, "");
             viewModel.init();
             viewModel.getData().observe(getViewLifecycleOwner(), basicModel -> {
                 if (basicModel.isStatus()) {
@@ -230,7 +233,7 @@ public class JoinCheckOut extends Fragment {
     }
 
     private void applyPromo() {
-        if (isPromoValid){
+        if (isPromoValid) {
             binding.tvDiscount.setText("Discount by using " + code);
             binding.discountAmount.setText("- " + discount_amount);
             binding.tvCredit.setVisibility(View.VISIBLE);
@@ -248,7 +251,7 @@ public class JoinCheckOut extends Fragment {
         String group_id = mySharedPreferences.getData(Split.getAppContext(), "GroupID");
 
         if (!group_id.isEmpty()) {
-            joinGroupViewModel = new JoinGroupViewModel(group_id, Constants.USER_EMAIL);
+            joinGroupViewModel = new JoinGroupViewModel(group_id, Constants.USER_EMAIL, code);
             joinGroupViewModel.init();
             joinGroupViewModel.getData().observe(getViewLifecycleOwner(), joinGroupModel -> {
                 if (joinGroupModel.isSuccess()) {
@@ -261,9 +264,9 @@ public class JoinCheckOut extends Fragment {
 
                     checkOutViewModel = new CheckOutViewModel();
                     checkOutViewModel.init();
-                    checkOutViewModel.getData().observe(getViewLifecycleOwner() ,secretKeyModel -> {
-                        if (secretKeyModel.isStatus()){
-                           String secret_key = secretKeyModel.getKey();
+                    checkOutViewModel.getData().observe(getViewLifecycleOwner(), secretKeyModel -> {
+                        if (secretKeyModel.isStatus()) {
+                            String secret_key = secretKeyModel.getKey();
 
                             Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
                             checkoutIntent.putExtra("group_id", group_id);
@@ -278,7 +281,6 @@ public class JoinCheckOut extends Fragment {
                     });
 
 //                          Navigation.findNavController(view1).navigate(R.id.action_joinPayment_to_joinPlans,bundle);
-
 
 
                 } else {

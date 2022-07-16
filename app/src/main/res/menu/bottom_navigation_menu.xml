@@ -7,7 +7,7 @@
        />
     <item
         android:id="@+id/search2"
-        android:icon="@drawable/ic_create"
+        android:icon="@drawable/ic_add_circle"
         android:title="" />
     <item
         android:id="@+id/createdAndJoinedGroups"

@@ -16,8 +16,9 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import split.com.app.data.model.GetScoreModel;
 import split.com.app.data.model.HomeContentModel;
-import split.com.app.data.model.PromoModel;
 import split.com.app.data.model.SecretKeyModel;
+import split.com.app.data.model.promo.PromoResponse;
+import split.com.app.data.model.settings.SettingsResponse;
 import split.com.app.data.model.TransactionsModel;
 import split.com.app.data.model.active_user.ActiveUserModel;
 import split.com.app.data.model.all_created_groupx.AllCreatedGroupModel;
@@ -49,6 +50,9 @@ public interface ApiService {
 
     @GET("users/getAvatar")
     Call<AvatarModel> getAvatar();
+
+    @GET("groups/get_urls")
+    Call<SettingsResponse> getSettings();
 
     @FormUrlEncoded
     @POST("users/phoneAlreadyExist")
@@ -200,6 +204,8 @@ public interface ApiService {
     Call<BasicModel> swapCoins(@Header("Authorization") String token,
                                @Body JsonObject object);
 
+    @GET("users/lastActive/{id}")
+    Call<JsonObject> updateLastActive(@Path("id") int userId);
 
     @GET("users/wallet_balance/{id}")
     Call<WalletBalanceModel> getWalletBalance(@Header("Authorization") String token,
@@ -228,7 +234,7 @@ public interface ApiService {
     Call<TransactionsModel> getAllTransactions(@Header("Authorization") String token);
 
     @GET("promotions/get_promo_code_details/{code}")
-    Call<PromoModel> applyPromoCode(@Path("code") String code);
+    Call<PromoResponse> applyPromoCode(@Path("code") String code);
 
     @GET("groups/get_razor_pay_secret")
     Call<SecretKeyModel> getRozarSecretKey();

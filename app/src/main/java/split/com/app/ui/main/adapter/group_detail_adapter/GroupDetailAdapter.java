@@ -109,10 +109,9 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
         holder.rateOf_id.setText(String.format("@%s", dataItem.getGroupAdmin().getUserId()));
 
         String coin = String.valueOf(dataItem.getCostPerMember());
-        Double coinFloat = Double.parseDouble(coin);
+        double coinFloat = Double.parseDouble(coin);
         String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
         holder.coins.setText(value + " Coins");
-
 
     }
 

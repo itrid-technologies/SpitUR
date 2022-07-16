@@ -1,19 +1,23 @@
 package split.com.app.ui.main.view.dashboard;
 
+import static split.com.app.utils.Configration.OTP_NOTIFICATION;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -22,14 +26,22 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.JsonObject;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import split.com.app.R;
+import split.com.app.data.api.ApiManager;
 import split.com.app.databinding.ActivityDashboardBinding;
 import split.com.app.utils.Configration;
 import split.com.app.utils.MyReceiver;
+import split.com.app.utils.MySharedPreferences;
+import split.com.app.utils.Split;
 
 public class Dashboard extends AppCompatActivity {
 
+    private static final String TAG = "Dashboard";
     public static ActivityDashboardBinding binding;
     NavController mNavController;
 
@@ -37,7 +49,6 @@ public class Dashboard extends AppCompatActivity {
     AlertDialog alertDialog;
 
     private BroadcastReceiver receiver = null;
-
 
     private BroadcastReceiver mMessageReceiver;
 
@@ -51,14 +62,17 @@ public class Dashboard extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-
         binding.bottomNavigation.addTab(binding.bottomNavigation.newTab().setText("").setIcon(R.drawable.ic_home).setId(0));
-        binding.bottomNavigation.addTab(binding.bottomNavigation.newTab().setText("").setIcon(R.drawable.search_icon).setId(1));
+        binding.bottomNavigation.addTab(binding.bottomNavigation.newTab().setText("").setIcon(R.drawable.ic_add_circle).setId(1));
         binding.bottomNavigation.addTab(binding.bottomNavigation.newTab().setText("").setIcon(R.drawable.ic_group).setId(2));
         binding.bottomNavigation.addTab(binding.bottomNavigation.newTab().setText("").setIcon(R.drawable.ic_profile).setId(3));
         binding.bottomNavigation.setTabGravity(TabLayout.GRAVITY_FILL);
 
         binding.bottomNavigation.getTabAt(0).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+
+
+        //update user last active status
+        updateLastActiveStatus();
 
         receiver = new MyReceiver();
         broadcastIntent();
@@ -113,17 +127,17 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
+        mMessageReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
 
-//        mMessageReceiver = new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//                // Extract data included in the Intent
-//                String type = intent.getStringExtra("type");
-//                if (type.equalsIgnoreCase("otp_request")){
-//                    showDialogue();
-//                }
-//            }
-//        };
+                // checking for type intent filter
+                if (intent.getAction().equals(OTP_NOTIFICATION)) {
+                    // gcm successfully registered
+                    showDialogue();
+                }
+            }
+        };
 
         Intent data = getIntent();
         if (data.hasExtra("checkout_complete")) {
@@ -170,11 +184,40 @@ public class Dashboard extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         LocalBroadcastManager.getInstance(Dashboard.this);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter(OTP_NOTIFICATION));
     }
 
-//    @Override
-//    protected void onPause() {
-//        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
-//        super.onPause();
-//    }//onPause
+    private void updateLastActiveStatus() {
+        MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+        final int userId = Integer.parseInt(pm.getData(Split.getAppContext(), "Id"));
+        Call<JsonObject> call = ApiManager.getRestApiService().updateLastActive(userId);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    try {
+                        final boolean status = response.body().get("status").getAsBoolean();
+                        if (status) {
+                            Log.e(TAG, "onResponse: Last Active Updated");
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+        super.onPause();
+    }//onPause
 }

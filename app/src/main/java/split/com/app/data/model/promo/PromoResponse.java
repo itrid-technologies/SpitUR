@@ -1,8 +1,8 @@
-package split.com.app.data.model;
+package split.com.app.data.model.promo;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PromoModel{
+public class PromoResponse{
 
 	@SerializedName("data")
 	private Data data;

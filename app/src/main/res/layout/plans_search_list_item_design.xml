@@ -237,8 +237,8 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="19dp"
-        android:layout_height="19dp"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
         android:scaleType="fitXY"
         android:layout_marginEnd="@dimen/_5sdp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -464,6 +464,7 @@
                             android:src="@drawable/ic_tick"
                             android:paddingStart="15dp"
                             android:paddingEnd="15dp"
+                            android:visibility="gone"
                             android:background="@drawable/half_round"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,17 +3,15 @@ package split.com.app.ui.main.viewmodel.join_checkout_viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import split.com.app.data.model.PromoModel;
 import split.com.app.data.model.basic_model.BasicModel;
-import split.com.app.data.model.join_group.JoinGroupModel;
+import split.com.app.data.model.promo.PromoResponse;
 import split.com.app.data.repository.JoinCheckoutRepository;
-import split.com.app.data.repository.join_group.JoinGroupRepository;
 
 public class JoinCheckoutViewModel extends ViewModel {
 
 
     private MutableLiveData<BasicModel> data;
-    private MutableLiveData<PromoModel> promoData;
+    private MutableLiveData<PromoResponse> promoData;
 
     private JoinCheckoutRepository joinCheckoutRepository;
     String user_id,code;
@@ -46,7 +44,7 @@ public class JoinCheckoutViewModel extends ViewModel {
         return this.data;
     }
 
-    public MutableLiveData<PromoModel> getPromoData() {
+    public MutableLiveData<PromoResponse> getPromoData() {
         return promoData;
     }
 }

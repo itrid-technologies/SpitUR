@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -10,7 +9,7 @@
             name="viewmodel"
             type="OtpVerificationViewModel" />
 
-        <import type="split.com.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel"/>
+        <import type="split.com.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,113 +21,108 @@
 
 
         <ImageView
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/ic_back"
-            android:id="@+id/back"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_enter_code"
+            style="@style/headingText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/back"
-            android:text="@string/enter_verification_code"
             android:layout_marginTop="20dp"
-            style="@style/headingText"
             android:gravity="start"
-            android:id="@+id/tv_enter_code"/>
+            android:text="@string/enter_verification_code"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/back" />
 
         <TextView
+            android:id="@+id/remaining_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/tv_enter_code"
-            android:text="00:00"
-            android:textSize="14sp"
-            android:textColor="@color/hint_color"
             android:paddingEnd="10dp"
-            android:id="@+id/remaining_time"/>
-
+            android:text="00:00"
+            android:textColor="@color/hint_color"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_enter_code"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
         <com.chaos.view.PinView
             android:id="@+id/otp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
             android:cursorVisible="true"
             android:inputType="number"
+            android:itemBackground="@drawable/otp_bg"
             android:padding="20dp"
+            android:text="@={viewmodel.otp}"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
             app:cursorWidth="0dp"
             app:hideLineWhenFilled="true"
-            android:text="@={viewmodel.otp}"
-            android:itemBackground="@drawable/otp_bg"
             app:itemCount="4"
             app:itemHeight="72dp"
             app:itemRadius="4dp"
             app:itemSpacing="20dp"
             app:itemWidth="52dp"
-            app:lineColor="@color/background"
-            app:lineWidth="0dp"
-            android:layout_marginTop="21dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_enter_code">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_enter_code"
+            app:lineColor="@color/background"
+            app:lineWidth="0dp">
 
-            <requestFocus/>
+            <requestFocus />
 
         </com.chaos.view.PinView>
 
         <TextView
+            android:id="@+id/errorMessage"
+            style="@style/normalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/otp"
-            app:layout_constraintEnd_toEndOf="@id/otp"
-            app:layout_constraintTop_toBottomOf="@id/otp"
-            style="@style/normalText"
-            android:textColor="@color/error"
             android:padding="3dp"
+            android:textColor="@color/error"
             android:textSize="11sp"
             android:visibility="gone"
-            android:id="@+id/errorMessage"/>
-
-
-
-
+            app:layout_constraintEnd_toEndOf="@id/otp"
+            app:layout_constraintStart_toStartOf="@id/otp"
+            app:layout_constraintTop_toBottomOf="@id/otp" />
 
 
         <com.konaire.numerickeyboard.NumericKeyboard
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/verify_button"
             android:layout_gravity="bottom"
-            app:keySpecial="*"
-            app:keyTextSize="28sp"
             android:layout_marginBottom="30dp"
             app:field="@+id/otp"
-            app:keyTextColor="@color/white" />
+            app:keySpecial="*"
+            app:keyTextColor="@color/white"
+            app:keyTextSize="28sp"
+            app:layout_constraintBottom_toTopOf="@id/verify_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <Button
+            android:id="@+id/verify_button"
+            style="@style/buttonStyle"
             android:layout_width="248dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@string/verify"
-            style="@style/buttonStyle"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button_round_bg"
             android:paddingTop="16dp"
-            android:layout_marginBottom="10dp"
             android:paddingBottom="15dp"
-            android:id="@+id/verify_button"/>
+            android:text="@string/verify"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

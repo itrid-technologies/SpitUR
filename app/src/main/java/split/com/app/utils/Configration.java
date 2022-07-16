@@ -7,6 +7,9 @@ public class Configration {
 
         // broadcast receiver intent filters
         public static final String PUSH_NOTIFICATION = "pushNotification";
+        public static final String CHAT_MSG_NOTIFICATION = "chatMessageNotification";
+        public static final String GROUP_CHAT_MSG_NOTIFICATION = "groupChatMessageNotification";
+        public static final String OTP_NOTIFICATION = "otpNotification";
 
         public static final String CHANNEL_1_ID = "CHANNEL_1_ID";
 

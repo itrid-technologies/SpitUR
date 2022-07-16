@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.window.SplashScreen;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,7 +35,6 @@ import split.com.app.ui.main.adapter.avatar_adapter.AdapterAvatars;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.view.splash.Splash;
 import split.com.app.ui.main.viewmodel.avatar_viewmodel.AvatarViewModel;
-import split.com.app.ui.main.viewmodel.memebers_viewmodel.GroupMembersViewModel;
 import split.com.app.ui.main.viewmodel.profile_viewmodel.ProfileViewModel;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
@@ -82,10 +79,10 @@ public class Profile extends Fragment {
 
         MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
         id = pm.getData(Split.getAppContext(), "Id");
-        viewModel = new ProfileViewModel(id,"", "", "");
+        viewModel = new ProfileViewModel(id, "", "", "");
         viewModel.initCoins();
-        viewModel.getCoins_data().observe(getViewLifecycleOwner(),totalCoinsModel -> {
-            if (totalCoinsModel.isStatus()){
+        viewModel.getCoins_data().observe(getViewLifecycleOwner(), totalCoinsModel -> {
+            if (totalCoinsModel.isStatus()) {
                 userCoins = String.valueOf(totalCoinsModel.getCoins());
                 binding.coinValue.setText(String.valueOf(Math.round(totalCoinsModel.getCoins())));
             }
@@ -146,17 +143,17 @@ public class Profile extends Fragment {
         binding.swap.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
             bundle.putString("Coins", userCoins);
-            Navigation.findNavController(view).navigate(R.id.action_profile2_to_swapCoins,bundle);
+            Navigation.findNavController(view).navigate(R.id.action_profile2_to_swapCoins, bundle);
         });
 
         binding.swapIcon.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
             bundle.putString("Coins", userCoins);
-            Navigation.findNavController(view).navigate(R.id.action_profile2_to_swapCoins,bundle);
+            Navigation.findNavController(view).navigate(R.id.action_profile2_to_swapCoins, bundle);
+
         });
 
-
-
+        binding.legalLayout.setOnClickListener(v -> Navigation.findNavController(requireView()).navigate(R.id.action_profile2_to_legalContactFragment));
 
         binding.userImage.setOnClickListener(view -> {
 
@@ -198,7 +195,7 @@ public class Profile extends Fragment {
                             avatarRv.setVisibility(View.GONE);
                             image.setVisibility(View.VISIBLE);
 
-                            Svg.INSTANCE.loadUrl(Constants.IMG_PATH + activeUserModel.getData().getAvatar() , image);
+                            Svg.INSTANCE.loadUrl(Constants.IMG_PATH + activeUserModel.getData().getAvatar(), image);
 
 
                             MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
@@ -225,7 +222,7 @@ public class Profile extends Fragment {
 
                                 final BottomSheetDialog dialog = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
                                 View layout = LayoutInflater.from(requireContext()).inflate(R.layout.ask_to_remove_dialogue, null, false);
-                                ConstraintLayout deleteLayout = layout.findViewById(R.id.delete_layout);
+                                ConstraintLayout deleteLayout = layout.findViewById(R.id.deleteLAYOUT);
                                 TextView remove = layout.findViewById(R.id.tv_remove);
                                 TextView tagline = layout.findViewById(R.id.delete_detail);
                                 TextView confirm = layout.findViewById(R.id.confirm_tagline);
@@ -233,10 +230,10 @@ public class Profile extends Fragment {
                                 ConstraintLayout confirm_layout = layout.findViewById(R.id.delete_layout);
 
                                 deleteLayout.setOnClickListener(view2 -> {
-                                    if (confirm_layout.getTag().equals("hidden")){
+                                    if (confirm_layout.getTag().equals("hidden")) {
                                         confirm_layout.setVisibility(View.VISIBLE);
                                         confirm_layout.setTag("visible");
-                                    }else {
+                                    } else {
                                         confirm_layout.setVisibility(View.GONE);
                                         confirm_layout.setTag("hidden");
                                     }
@@ -248,13 +245,12 @@ public class Profile extends Fragment {
                                 confirm.setText("You want to logout");
 
 
-
                                 confirm_logout.setOnClickListener(view2 -> {
 
-                                    viewModel = new ProfileViewModel(String.valueOf(activeUserModel.getData().getId()),"","","");
+                                    viewModel = new ProfileViewModel(String.valueOf(activeUserModel.getData().getId()), "", "", "");
                                     viewModel.initLogout();
                                     viewModel.getLogout().observe(getViewLifecycleOwner(), basicModel -> {
-                                        if (basicModel.isStatus().equalsIgnoreCase("true")){
+                                        if (basicModel.isStatus().equalsIgnoreCase("true")) {
                                             Intent intent = new Intent(requireContext(), Splash.class);
                                             startActivity(intent);
 
@@ -267,7 +263,6 @@ public class Profile extends Fragment {
                                 dialog.setContentView(layout);
                                 dialog.show();
                             });
-
 
 
                             next.setOnClickListener(view1 -> {
@@ -328,7 +323,7 @@ public class Profile extends Fragment {
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
             if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                 count = 0;
-            }else {
+            } else {
                 count = 1;
             }
 
@@ -338,7 +333,6 @@ public class Profile extends Fragment {
         public void onSlide(@NonNull View bottomSheet, float slideOffset) {
         }
     };
-
 
 
     public static class RecyclerViewDisabler implements RecyclerView.OnItemTouchListener {

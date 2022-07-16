@@ -68,7 +68,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/name"
-                android:src="@drawable/ic_card"
+                android:src="@drawable/ic_profile_card"
                 android:id="@+id/background_image"/>
 
             <TextView
@@ -237,7 +237,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="13sp"
                     android:textColor="@color/hint_color"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="10dp"
                     android:id="@+id/tv_transaction"/>
 
 
@@ -288,7 +288,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="13sp"
                     android:textColor="@color/hint_color"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="20dp"
                     android:text="Earn Credits when you Invite Friends"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.333"
@@ -342,7 +342,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="13sp"
                     android:textColor="@color/hint_color"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:text="People who you know from your contacts"
                     android:id="@+id/tv_friends_detail"/>
@@ -395,11 +395,65 @@
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="13sp"
                     android:textColor="@color/hint_color"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:text="Open a Support Ticket regarding a group"
                     style="@style/normalText"
                     android:id="@+id/tv_contact_detail"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/legal_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contact_layout"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/profile_items_bg"
+                android:paddingTop="16dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/ic_legal_icon"
+                    android:padding="5dp"
+                    android:id="@+id/legal_icon"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/legal_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Legal"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="20sp"
+                    android:layout_marginStart="29dp"
+                    android:id="@+id/tv_legal"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_legal"
+                    app:layout_constraintTop_toBottomOf="@id/tv_legal"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="13sp"
+                    android:textColor="@color/hint_color"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Terms Of Use and Privacy Policy"
+                    style="@style/normalText"
+                    android:id="@+id/tv_legal_detail"/>
 
 
 

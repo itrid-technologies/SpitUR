@@ -46,7 +46,6 @@ public class JoinSearchListAdapter extends RecyclerView.Adapter<JoinSearchListAd
         if (current_data.getCategory() != null) {
             holder.icon.setImageResource(
                     Constants.getCategoryIcon(context,current_data.getCategory().getId()));
-          //  Svg.INSTANCE.loadUrl(Constants.IMG_PATH + current_data.getCategory().getIcon() , holder.icon);
         }
         holder.name.setText(current_data.getTitle());
     }

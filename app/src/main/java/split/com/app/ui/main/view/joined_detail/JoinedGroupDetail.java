@@ -2,13 +2,6 @@ package split.com.app.ui.main.view.joined_detail;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +10,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -31,6 +30,7 @@ import split.com.app.ui.main.viewmodel.joined_group_detail.JoinedGroupDetailView
 import split.com.app.ui.main.viewmodel.memebers_viewmodel.GroupMembersViewModel;
 import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
+import split.com.app.utils.TimeAgo;
 
 
 public class JoinedGroupDetail extends Fragment {
@@ -57,17 +57,16 @@ public class JoinedGroupDetail extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         try {
-            if (getArguments() != null){
+            if (getArguments() != null) {
                 Gson gson = new Gson();
                 String groupData = getArguments().getString("joinedGroupData");
                 data = gson.fromJson(groupData, split.com.app.data.model.all_joined_groups.DataItem.class);
 
                 setProfileData(data);
             }
-        }catch (IllegalStateException e){
-            Log.e("join_group_detail",e.getMessage());
+        } catch (IllegalStateException e) {
+            Log.e("join_group_detail", e.getMessage());
         }
 
         initClickListeners();
@@ -75,10 +74,10 @@ public class JoinedGroupDetail extends Fragment {
     }
 
     private void getScore() {
-        viewModel = new JoinedGroupDetailViewModel(String.valueOf(data.getGroupId()),"","");
+        viewModel = new JoinedGroupDetailViewModel(String.valueOf(data.getGroupId()), "", "");
         viewModel.initScore();
-        viewModel.getScoreData().observe(getViewLifecycleOwner(),getScoreModel -> {
-            if (getScoreModel.isSuccess()){
+        viewModel.getScoreData().observe(getViewLifecycleOwner(), getScoreModel -> {
+            if (getScoreModel.isSuccess()) {
                 binding.scoreValue.setText(String.valueOf(getScoreModel.getSplitScore()));
                 binding.slider.setValue(Float.valueOf(getScoreModel.getSplitScore()));
             }
@@ -95,19 +94,31 @@ public class JoinedGroupDetail extends Fragment {
                     .placeholder(R.color.images_placeholder)
                     .into(binding.joinedProfile.userImage);
 
-            binding.joinedProfile.userName.setText(data.getGroup().getGroupAdmin().getUserId());
+            binding.joinedProfile.userName.setText("@" + data.getGroup().getGroupAdmin().getUserId());
             String coin = String.valueOf(data.getGroup().getCostPerMember());
-            Double coinFloat = Double.parseDouble(coin);
+            double coinFloat = Double.parseDouble(coin);
             String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
             binding.joinedProfile.count.setText(value + " Coins");
             binding.tvScoreValue.setText(String.valueOf(data.getGroup().getGroupAdmin().getSpliturScore()));
-         // binding.tvLastActive.setText(Constants.getDate(data.getGroup().getGroupAdmin().getLastActive()));
-            binding.tvDaysValue.setText(Constants.getDate(data.getGroup().getGroupAdmin().getCreatedAt()));
+
+            if (data.getGroup().getGroupAdmin().getLastActive() != null) {
+                TimeAgo timeAgo = new TimeAgo();
+                String last_seen = timeAgo.covertTimeToText(data.getGroup().getGroupAdmin().getLastActive());
+                binding.tvLastActive.setText(last_seen);
+            }
+//          binding.tvLastActive.setText(Constants.getDate(data.getGroup().getGroupAdmin().getLastActive()));
+//          binding.tvDaysValue.setText(Constants.getDate(data.getGroup().getGroupAdmin().getCreatedAt()));
+
+            if (data.getGroup().getGroupAdmin().getCreatedAt() != null) {
+                TimeAgo timeAgo = new TimeAgo();
+                String last_seen = timeAgo.covertTimeToText(data.getGroup().getGroupAdmin().getCreatedAt());
+                binding.tvDaysValue.setText(last_seen);
+            }
             binding.groupEmail.setText(data.getGroup().getEmail());
             binding.groupPass.setText(data.getGroup().getPassword());
 
-        }catch (NullPointerException e){
-            Log.e("null",e.getMessage());
+        } catch (NullPointerException e) {
+            Log.e("null", e.getMessage());
         }
     }
 
@@ -128,10 +139,10 @@ public class JoinedGroupDetail extends Fragment {
             ConstraintLayout confirm_layout = carDetailView.findViewById(R.id.delete_layout);
 
             deleteLayout.setOnClickListener(view -> {
-                if (confirm_layout.getTag().equals("hidden")){
+                if (confirm_layout.getTag().equals("hidden")) {
                     confirm_layout.setVisibility(View.VISIBLE);
                     confirm_layout.setTag("visible");
-                }else {
+                } else {
                     confirm_layout.setVisibility(View.GONE);
                     confirm_layout.setTag("hidden");
                 }
@@ -148,10 +159,10 @@ public class JoinedGroupDetail extends Fragment {
 
             confirm.setOnClickListener(view -> {
                 bt.cancel();
-                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","",false);
+                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", "", "", false);
                 membersViewModel.initLeftGroup();
-                membersViewModel.getLeft_data().observe(getViewLifecycleOwner(),basicModel -> {
-                    if (basicModel.isStatus().equalsIgnoreCase("true")){
+                membersViewModel.getLeft_data().observe(getViewLifecycleOwner(), basicModel -> {
+                    if (basicModel.isStatus().equalsIgnoreCase("true")) {
                         displayRemovedDialogue("You left the Group");
                     }
                 });
@@ -172,9 +183,9 @@ public class JoinedGroupDetail extends Fragment {
                         String.valueOf(value));
 
                 viewModel.init();
-                viewModel.getData().observe(getViewLifecycleOwner(),basicModel -> {
-                    if (basicModel.isStatus()){
-                        Toast.makeText(Split.getAppContext(), "Updated Score "+ String.valueOf(value), Toast.LENGTH_SHORT).show();
+                viewModel.getData().observe(getViewLifecycleOwner(), basicModel -> {
+                    if (basicModel.isStatus()) {
+                        Toast.makeText(Split.getAppContext(), "Updated Score " + String.valueOf(value), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -182,17 +193,16 @@ public class JoinedGroupDetail extends Fragment {
 
         binding.copyEmail1.setOnClickListener(view -> {
             android.content.ClipboardManager clipboard = (android.content.ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper",binding.groupEmail.getText().toString());
+            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper", binding.groupEmail.getText().toString());
             clipboard.setPrimaryClip(clip);
 
             Toast.makeText(Split.getAppContext(), "Copied", Toast.LENGTH_SHORT).show();
         });
 
 
-
         binding.copyPass1.setOnClickListener(view -> {
             android.content.ClipboardManager clipboard = (android.content.ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper",binding.groupPass.getText().toString());
+            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper", binding.groupPass.getText().toString());
             clipboard.setPrimaryClip(clip);
 
             Toast.makeText(Split.getAppContext(), "Copied", Toast.LENGTH_SHORT).show();
@@ -202,7 +212,15 @@ public class JoinedGroupDetail extends Fragment {
         binding.btnGroupChat.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
             bundle.putString("groupId", String.valueOf(data.getGroup().getId()));
-            Navigation.findNavController(view).navigate(R.id.action_joinedGroupDetail2_to_chatroom,bundle);
+            Navigation.findNavController(view).navigate(R.id.action_joinedGroupDetail2_to_chatroom, bundle);
+        });
+
+        binding.send.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("receiverId", String.valueOf(data.getGroup().getUserId()));
+            bundle.putString("groupId", String.valueOf(data.getGroup().getId()));
+
+            Navigation.findNavController(requireView()).navigate(R.id.action_joinedGroupDetail2_to_memberChat, bundle);
         });
     }
 

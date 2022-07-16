@@ -3,7 +3,6 @@ package split.com.app.data.repository.join_group;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
@@ -23,7 +22,7 @@ public class JoinGroupRepository {
     public JoinGroupRepository() {
     }
 
-    public MutableLiveData<JoinGroupModel> join(String groupId, String email) {
+    public MutableLiveData<JoinGroupModel> join(String groupId, String email, String promoCode) {
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
@@ -31,6 +30,7 @@ public class JoinGroupRepository {
         JsonObject object = new JsonObject();
         object.addProperty("group_id", groupId);
         object.addProperty("email", email);
+        object.addProperty("promoCode", promoCode);
 
         final MutableLiveData<JoinGroupModel> BasicModelMutableLiveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();

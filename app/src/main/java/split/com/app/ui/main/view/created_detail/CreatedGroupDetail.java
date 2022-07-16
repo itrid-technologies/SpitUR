@@ -2,15 +2,6 @@ package split.com.app.ui.main.view.created_detail;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,11 +13,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,13 +40,13 @@ import split.com.app.utils.Split;
 
 public class CreatedGroupDetail extends Fragment {
 
-  FragmentCreatedGroupDetailBinding binding;
-  DataItem data;
+    FragmentCreatedGroupDetailBinding binding;
+    DataItem data;
 
-  View fragmentViewBack;
+    View fragmentViewBack;
 
-  GroupMembersViewModel membersViewModel;
-  private List<split.com.app.data.model.group_member.DataItem> membersList;
+    GroupMembersViewModel membersViewModel;
+    private List<split.com.app.data.model.group_member.DataItem> membersList;
 
 
     @Override
@@ -70,26 +68,26 @@ public class CreatedGroupDetail extends Fragment {
         initClickEvents();
 
         try {
-            if (getArguments() != null){
+            if (getArguments() != null) {
                 Gson gson = new Gson();
                 String groupData = getArguments().getString("createdGroupData");
-                data = gson.fromJson(groupData,DataItem.class);
+                data = gson.fromJson(groupData, DataItem.class);
 
                 setProfileData(data);
             }
-        }catch (IllegalStateException e){
-            Log.e("group_detail",e.getMessage());
+        } catch (IllegalStateException e) {
+            Log.e("group_detail", e.getMessage());
         }
 
 
-        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","",false);
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", "", "", false);
         membersViewModel.init();
-        membersViewModel.getPlan().observe(getViewLifecycleOwner(),groupMemberModel -> {
-            if (groupMemberModel.isSuccess()){
-                if (groupMemberModel.getData().size() > 0){
+        membersViewModel.getPlan().observe(getViewLifecycleOwner(), groupMemberModel -> {
+            if (groupMemberModel.isSuccess()) {
+                if (groupMemberModel.getData().size() > 0) {
                     membersList.addAll(groupMemberModel.getData());
                     buildMembersList(membersList);
-                }else {
+                } else {
                     binding.noMemberLayout.setVisibility(View.VISIBLE);
                     binding.adminAsMember.setVisibility(View.GONE);
                     binding.groupMembersList.setVisibility(View.GONE);
@@ -113,6 +111,7 @@ public class CreatedGroupDetail extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
                 String updated_value = editable.toString().trim();
@@ -164,7 +163,7 @@ public class CreatedGroupDetail extends Fragment {
 
         binding.copyLink.setOnClickListener(view -> {
             android.content.ClipboardManager clipboard = (android.content.ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper",binding.profileLink.getText().toString());
+            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper", binding.profileLink.getText().toString());
             clipboard.setPrimaryClip(clip);
 
             Toast.makeText(Split.getAppContext(), "Copied", Toast.LENGTH_SHORT).show();
@@ -172,37 +171,37 @@ public class CreatedGroupDetail extends Fragment {
     }
 
     private void updateVisibility(boolean visibility) {
-        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "","","",visibility);
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", "", "", visibility);
         membersViewModel.initUpdateVisibility();
-        membersViewModel.getUpdate_visibility().observe(getViewLifecycleOwner(),basicModel -> {
-            if (basicModel.isStatus()){
+        membersViewModel.getUpdate_visibility().observe(getViewLifecycleOwner(), basicModel -> {
+            if (basicModel.isStatus()) {
                 Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void updateEmailData(String updated_value) {
-        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "",updated_value,"",false);
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", updated_value, "", false);
         membersViewModel.initEmailUpdate();
-        membersViewModel.getUpdate_email_data().observe(getViewLifecycleOwner(),basicModel -> {
-            if (basicModel.isStatus()){
+        membersViewModel.getUpdate_email_data().observe(getViewLifecycleOwner(), basicModel -> {
+            if (basicModel.isStatus()) {
                 Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void updatePassData(String updated_value) {
-        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "","",updated_value,false);
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", "", updated_value, false);
         membersViewModel.initPassUpdate();
-        membersViewModel.getUpdate_pass_data().observe(getViewLifecycleOwner(),basicModel -> {
-            if (basicModel.isStatus()){
+        membersViewModel.getUpdate_pass_data().observe(getViewLifecycleOwner(), basicModel -> {
+            if (basicModel.isStatus()) {
                 Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void buildMembersList(List<split.com.app.data.model.group_member.DataItem> membersList) {
-        if (membersList.size() > 0){
+        if (membersList.size() > 0) {
 
             binding.noMemberLayout.setVisibility(View.GONE);
             binding.adminAsMember.setVisibility(View.VISIBLE);
@@ -223,10 +222,10 @@ public class CreatedGroupDetail extends Fragment {
                 ConstraintLayout confirm_layout = carDetailView.findViewById(R.id.delete_layout);
 
                 deleteLayout.setOnClickListener(view -> {
-                    if (confirm_layout.getTag().equals("hidden")){
+                    if (confirm_layout.getTag().equals("hidden")) {
                         confirm_layout.setVisibility(View.VISIBLE);
                         confirm_layout.setTag("visible");
-                    }else {
+                    } else {
                         confirm_layout.setVisibility(View.GONE);
                         confirm_layout.setTag("hidden");
                     }
@@ -239,11 +238,10 @@ public class CreatedGroupDetail extends Fragment {
                 delete.setOnClickListener(view -> {
 
 
-
-                    membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), String.valueOf(membersList.get(position).getUserId()),"","",false);
+                    membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), String.valueOf(membersList.get(position).getUserId()), "", "", false);
                     membersViewModel.initRemoveMember();
-                    membersViewModel.getMember_remove_data().observe(getViewLifecycleOwner(),basicModel -> {
-                        if (basicModel.isStatus().equalsIgnoreCase("true")){
+                    membersViewModel.getMember_remove_data().observe(getViewLifecycleOwner(), basicModel -> {
+                        if (basicModel.isStatus().equalsIgnoreCase("true")) {
                             adapter.removeAt(position);
                             bt.cancel();
                             displayRemovedDialogue("Group member Removed");
@@ -265,8 +263,8 @@ public class CreatedGroupDetail extends Fragment {
                 .placeholder(R.color.images_placeholder)
                 .into(binding.detailProfile.userImage);
 
-        binding.detailProfile.userName.setText(data.getGroupAdmin().getUserId());
-        binding.detailProfile.count.setText((String.valueOf(data.getSlots()))+ " Slots");
+        binding.detailProfile.userName.setText("@" + data.getGroupAdmin().getUserId());
+        binding.detailProfile.count.setText((String.valueOf(data.getSlots())) + " Slots");
 
         binding.edUsername.setText(data.getEmail());
         binding.edPassword.setText(data.getPassword());
@@ -279,13 +277,13 @@ public class CreatedGroupDetail extends Fragment {
 
         binding.memberName.setText(data.getGroupAdmin().getUserId());
 
-        if (data.isVisibility()){
+        if (data.isVisibility()) {
             binding.privateLayout.setBackgroundResource(R.drawable.only_grey_stroke);
             binding.privateSelected.setVisibility(View.GONE);
 
             binding.publicLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
             binding.publicSelected.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             binding.publicLayout.setBackgroundResource(R.drawable.only_grey_stroke);
             binding.publicSelected.setVisibility(View.GONE);
 
@@ -311,10 +309,10 @@ public class CreatedGroupDetail extends Fragment {
             ConstraintLayout confirm_layout = carDetailView.findViewById(R.id.delete_layout);
 
             deleteLayout.setOnClickListener(view -> {
-                if (confirm_layout.getTag().equals("hidden")){
+                if (confirm_layout.getTag().equals("hidden")) {
                     confirm_layout.setVisibility(View.VISIBLE);
                     confirm_layout.setTag("visible");
-                }else {
+                } else {
                     confirm_layout.setVisibility(View.GONE);
                     confirm_layout.setTag("hidden");
                 }
@@ -334,11 +332,11 @@ public class CreatedGroupDetail extends Fragment {
 
             confirm.setOnClickListener(view -> {
                 bt.cancel();
-                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())),"","","",false);
+                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", "", "", false);
                 membersViewModel.initRemoveGroup();
-                membersViewModel.getRemove_data().observe(getViewLifecycleOwner(),basicModel -> {
-                    if (basicModel.isStatus().equalsIgnoreCase("true")){
-                         displayRemovedDialogue("Group Deleted");
+                membersViewModel.getRemove_data().observe(getViewLifecycleOwner(), basicModel -> {
+                    if (basicModel.isStatus().equalsIgnoreCase("true")) {
+                        displayRemovedDialogue("Group Deleted");
                     }
                 });
             });
@@ -352,7 +350,7 @@ public class CreatedGroupDetail extends Fragment {
         binding.btnGroupChat.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
             bundle.putString("groupId", String.valueOf(data.getId()));
-            Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_chatroom,bundle);
+            Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_chatroom, bundle);
         });
 
         binding.checkMesageLayout.setOnClickListener(view -> {
@@ -360,7 +358,7 @@ public class CreatedGroupDetail extends Fragment {
             bundle.putString("receiverId", String.valueOf(data.getUserId()));
             bundle.putString("groupId", String.valueOf(data.getId()));
 
-            Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_memberChat,bundle);
+            Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_memberChat, bundle);
         });
     }
 

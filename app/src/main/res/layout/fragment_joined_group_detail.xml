@@ -66,7 +66,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_last_active"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:text="-"
                     android:fontFamily="@font/inter_bold"
                     android:textColor="@color/green"
@@ -118,7 +118,7 @@
                     android:fontFamily="@font/inter_bold"
                     android:gravity="center"
                     android:text="-"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#6094FE"
                     android:id="@+id/tv_last_active"/>
 
@@ -145,7 +145,7 @@
                     android:gravity="center"
                     android:fontFamily="@font/inter_bold"
                     android:text="-"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="@color/orange"
                     android:id="@+id/tv_days_value"/>
 
@@ -362,7 +362,47 @@
                     android:src="@drawable/copy_link"
                     android:id="@+id/copy_pass1"/>
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/group_pass"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/hint_color"
+                    android:alpha="0.35"
+                    android:visibility="visible"
+                    android:id="@+id/view1"
+                    />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view1"
+                    android:drawableStart="@drawable/ic_password"
+                    android:background="@color/transparent"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="15dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="15sp"
+                    android:visibility="visible"
+                    android:gravity="center|start"
+                    android:text="Request Otp"
+                    android:textColor="@color/hint_color"
+                    android:textColorHint="@color/hint_color"
+                    android:id="@+id/tv_request"/>
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_request"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_request"
+                    android:background="@drawable/send_btn"
+                    android:id="@+id/send"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

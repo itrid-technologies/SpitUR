@@ -1,6 +1,13 @@
 package split.com.app.ui.main.view.chat;
 
+import static split.com.app.utils.Configration.GROUP_CHAT_MSG_NOTIFICATION;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +15,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +43,7 @@ public class Chatroom extends Fragment {
     ChatAdapter adapter;
     String id;
 
+    private BroadcastReceiver mGroupChatReceiver;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -55,6 +64,8 @@ public class Chatroom extends Fragment {
         cliclKisteners();
         msgs = new ArrayList<>();
 
+        registerGroupChatReceiver();
+
         if (getArguments() != null) {
             group_id = getArguments().getString("groupId");
         }
@@ -62,6 +73,11 @@ public class Chatroom extends Fragment {
         MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
         id = pm.getData(Split.getAppContext(), "Id");
 
+        initChatList();
+
+    }
+
+    private void initChatList() {
         chatViewModel = new ChatViewModel(group_id, "");
         chatViewModel.initGetAllMessage();
         chatViewModel.getMessages_data().observe(getViewLifecycleOwner(), getMessagesModel -> {
@@ -84,6 +100,21 @@ public class Chatroom extends Fragment {
                 }
             }
         });
+    }
+
+    private void registerGroupChatReceiver() {
+        mGroupChatReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                // checking for type intent filter
+                if (intent.getAction().equals(GROUP_CHAT_MSG_NOTIFICATION)) {
+                    // group chat event occurred
+                    Log.e("Group Chat", "onReceive: reloaded");
+                    initChatList();
+                }
+            }
+        };
     }
 
     private void buildChatRv(ArrayList<Object> msgs) {
@@ -116,5 +147,18 @@ public class Chatroom extends Fragment {
                 });
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(mGroupChatReceiver,
+                new IntentFilter(GROUP_CHAT_MSG_NOTIFICATION));
+    }
+
+    @Override
+    public void onPause() {
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(mGroupChatReceiver);
+        super.onPause();
     }
 }

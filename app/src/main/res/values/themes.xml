@@ -17,6 +17,8 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <color name="light_blue">#282C4A</color>
+
     <style name="headingTextSplash">
         <item name="fontFamily">@font/poppins_semibold</item>
         <item name="android:textColor">@color/white</item>
@@ -51,7 +53,7 @@
         <item name="backgroundTint">@color/yellow</item>
     </style>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
 
 
     <style name="ThemeOverlay.Slider" parent="">

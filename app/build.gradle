@@ -5,6 +5,7 @@ plugins {
 
 android {
     compileSdk 32
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "split.com.app"
@@ -46,7 +47,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.6.10"
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment:2.4.2'

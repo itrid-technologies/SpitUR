@@ -21,7 +21,6 @@ import java.util.List;
 import split.com.app.R;
 import split.com.app.data.model.group_detail.DataItem;
 import split.com.app.data.model.group_score.GroupSplitScoreItem;
-import split.com.app.data.model.group_score.SplitGroupUserId;
 import split.com.app.databinding.FragmentGroupInformationBinding;
 import split.com.app.ui.main.adapter.VerificationStatusAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
@@ -51,7 +50,7 @@ public class GroupInformation extends Fragment {
         binding = FragmentGroupInformationBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
         binding.giToolbar.title.setText("Group");
-        binding.profile1.count.setText("143 coins");
+//        binding.profile1.count.setText("143 coins");
 
         return binding.getRoot();
     }
@@ -95,50 +94,51 @@ public class GroupInformation extends Fragment {
 
         setPasswordVerificationList();
 
-
     }
 
     private void setData(DataItem dataItem) {
         try {
-            binding.profile1.netflix.setText(dataItem.getTitle());
+            binding.netflix.setText(dataItem.getTitle());
             Glide.with(requireContext())
                     .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
                     .placeholder(R.color.images_placeholder)
-                    .into(binding.profile1.userImage);
-            binding.profile1.userName.setText(String.valueOf(dataItem.getGroupAdmin().getUserId()));
+                    .into(binding.userImage);
+            binding.userName.setText(String.format("@%s", dataItem.getGroupAdmin().getUserId()));
             binding.tvScoreValue.setText(String.valueOf(dataItem.getGroupAdmin().getSpliturScore()));
+            if (dataItem.getGroupAdmin().getLastActive() != null) {
+                TimeAgo timeAgo = new TimeAgo();
+                String last_seen = timeAgo.covertTimeToText(dataItem.getGroupAdmin().getLastActive());
+                binding.tvLastActive.setText(last_seen);
+            }
 
-            TimeAgo timeAgo = new TimeAgo();
-            String last_seen = timeAgo.covertTimeToText(dataItem.getGroupAdmin().getLastActive());
 
-            binding.tvLastActive.setText(last_seen);
             binding.tvDaysValue.setText(Constants.getDate(dataItem.getGroupAdmin().getCreatedAt()));
 
             String coin = String.valueOf(dataItem.getCostPerMember());
-            Double coinFloat = Double.parseDouble(coin);
+            double coinFloat = Double.parseDouble(coin);
             String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
-            binding.profile1.count.setText(value + " Coins");
+            binding.count.setText(value + " Coins");
             // binding.tvDaysValue.setText(dataItem.);
         } catch (NullPointerException e) {
-
+            e.printStackTrace();
         }
     }
 
     private void setPasswordVerificationList() {
         groupInfoViewModel = new GroupInfoViewModel(String.valueOf(dataItem.getId()));
         groupInfoViewModel.init();
-        groupInfoViewModel.getData().observe(getViewLifecycleOwner() , groupScoreModel -> {
-            if (groupScoreModel.isSuccess()){
-                if (groupScoreModel.getData().getGroupTitle().equalsIgnoreCase(dataItem.getTitle())){
-                    if (groupScoreModel.getData().getGroupSplitScore().size() > 0){
+        groupInfoViewModel.getData().observe(getViewLifecycleOwner(), groupScoreModel -> {
+            if (groupScoreModel.isSuccess()) {
+                if (groupScoreModel.getData().getGroupTitle().equalsIgnoreCase(dataItem.getTitle())) {
+                    if (groupScoreModel.getData().getGroupSplitScore().size() > 0) {
                         binding.noUserLayout.setVisibility(View.GONE);
                         binding.verificationStatusList.setVisibility(View.VISIBLE);
 
                         scoreItems.addAll(groupScoreModel.getData().getGroupSplitScore());
                         buildScoreList(scoreItems);
-                    }else {
-                      binding.noUserLayout.setVisibility(View.VISIBLE);
-                      binding.verificationStatusList.setVisibility(View.GONE);
+                    } else {
+                        binding.noUserLayout.setVisibility(View.VISIBLE);
+                        binding.verificationStatusList.setVisibility(View.GONE);
                     }
                 }
             }

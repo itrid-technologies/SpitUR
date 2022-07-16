@@ -1,10 +1,8 @@
 package split.com.app.service;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -14,14 +12,11 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.utils.Configration;
 import split.com.app.utils.NotificationsUtils;
-import split.com.app.utils.Split;
 
 public class FirebaseCloudMessagingService extends FirebaseMessagingService {
 
@@ -54,7 +49,25 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.e(TAG, "Data Payload: " + remoteMessage.getData().get("type"));
+            final String notiType = remoteMessage.getData().get("type");
+            Log.e(TAG, "Data Payload: " + notiType);
+
+            if (notiType != null) {
+                if (notiType.equals("new_message")) {
+                    //broadcast new msg value to chat screen 1-1
+                    Intent intent = new Intent(Configration.CHAT_MSG_NOTIFICATION);
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                } else if (notiType.equals("new_group_message")) {
+                    //broadcast new msg value to group chat
+                    Intent intent = new Intent(Configration.GROUP_CHAT_MSG_NOTIFICATION);
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                }
+                else if (notiType.equals("otp_request")) {
+                    //broadcast new msg value to group chat
+                    Intent intent = new Intent(Configration.OTP_NOTIFICATION);
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                }
+            }
 
             try {
                 JSONObject json = new JSONObject(remoteMessage.getData().toString());
@@ -86,7 +99,7 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
         Log.e(TAG, "push json: " + json);
 
         try {
-           // JSONObject data = json.getJSONObject("json");
+            // JSONObject data = json.getJSONObject("json");
 //            String title = data.getString("title");
 //            String message = data.getString("message");
 //            String type = data.getString("type");
@@ -103,12 +116,12 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
 //            Log.e(TAG, "type: " + type);
 
             if (json.get("type").toString().equals("otp_request")) {
-                Intent intent=new Intent(Configration.PUSH_NOTIFICATION);
+                Intent intent = new Intent(Configration.PUSH_NOTIFICATION);
                 intent.putExtra("value1", json.get("type").toString());
                 LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
             }
 
-                // app is in background, show the notification in notification tray
+            // app is in background, show the notification in notification tray
 //                Intent resultIntent = new Intent(getApplicationContext(), Dashboard.class);
 //                resultIntent.putExtra("message", json.get("message").toString());
 //                resultIntent.putExtra("type", json.get("type").toString());
