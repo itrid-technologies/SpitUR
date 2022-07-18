@@ -1,6 +1,7 @@
 package split.com.app.ui.main.view.created_detail;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -101,42 +102,33 @@ public class CreatedGroupDetail extends Fragment {
     }
 
     private void textWatcher() {
-        binding.edUsername.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        binding.editUsername.setOnClickListener(view -> {
 
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String updated_value = editable.toString().trim();
+            if (binding.editUsername.getText().toString().equalsIgnoreCase("Edit")) {
+                binding.edUsername.setFocusable(true);
+                binding.edUsername.setClickable(true);
+                binding.editUsername.setText("Save");
+                binding.editUsername.setTextColor(Color.parseColor("#9F9DF3"));
+            }else if (binding.editUsername.getText().toString().equalsIgnoreCase("Save")){
+                String updated_value = binding.editUsername.getText().toString().trim();
                 updateEmailData(updated_value);
+            }else {
+
             }
         });
 
-        binding.edPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-                String updated_value = editable.toString().trim();
-                updatePassData(updated_value);
-            }
-        });
+        if (binding.editPass.getText().toString().equalsIgnoreCase("Edit")) {
+            binding.edPassword.setFocusable(true);
+            binding.edPassword.setClickable(true);
+            binding.editPass.setText("Save");
+            binding.editPass.setTextColor(Color.parseColor("#9F9DF3"));
+        }else if (binding.editPass.getText().toString().equalsIgnoreCase("Save")){
+            String updated_value = binding.editPass.getText().toString().trim();
+            updatePassData(updated_value);
+        }
 
         binding.privateLayout.setOnClickListener(view -> {
 
@@ -186,6 +178,10 @@ public class CreatedGroupDetail extends Fragment {
         membersViewModel.getUpdate_email_data().observe(getViewLifecycleOwner(), basicModel -> {
             if (basicModel.isStatus()) {
                 Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
+                binding.edUsername.setFocusable(false);
+                binding.edUsername.setClickable(false);
+                binding.editUsername.setText("Edit");
+                binding.editUsername.setTextColor(Color.parseColor("#F7931A"));
             }
         });
     }
@@ -196,6 +192,10 @@ public class CreatedGroupDetail extends Fragment {
         membersViewModel.getUpdate_pass_data().observe(getViewLifecycleOwner(), basicModel -> {
             if (basicModel.isStatus()) {
                 Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
+                binding.edPassword.setFocusable(false);
+                binding.edPassword.setClickable(false);
+                binding.editPass.setText("Edit");
+                binding.editPass .setTextColor(Color.parseColor("#F7931A"));
             }
         });
     }

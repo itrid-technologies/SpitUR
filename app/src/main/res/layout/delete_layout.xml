@@ -11,6 +11,7 @@
         android:background="@drawable/verification_bg"
         android:backgroundTint="@color/remove_react_bg"
         android:paddingStart="26dp"
+        android:visibility="gone"
         android:paddingEnd="26dp"
         android:paddingBottom="20dp"
         android:paddingTop="@dimen/_10sdp"

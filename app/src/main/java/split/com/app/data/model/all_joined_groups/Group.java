@@ -74,7 +74,7 @@ public class Group{
 		return groupAdmin;
 	}
 
-	public Object getTotalMembers(){
+	public String getTotalMembers(){
 		return totalMembers;
 	}
 

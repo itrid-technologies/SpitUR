@@ -69,12 +69,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/editUsername"
                     app:layout_constraintTop_toTopOf="parent"
                     android:drawableStart="@drawable/ic_user"
                     android:background="@color/transparent"
                     android:drawablePadding="20dp"
                     android:maxLines="2"
+                    android:focusable="false"
+                    android:clickable="false"
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="15sp"
@@ -82,6 +84,20 @@
                     android:hint="Email"
                     android:textColorHint="@color/hint_color"
                     android:id="@+id/ed_username"/>
+
+                <TextView
+                    android:id="@+id/editUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/ed_username"
+                    app:layout_constraintTop_toTopOf="@id/ed_username"
+                    app:layout_constraintBottom_toBottomOf="@id/ed_username"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="12sp"
+                    android:text="Edit"
+                    android:alpha="0.6"
+                    android:textColor="#F7931A"/>
 
                 <View
                     android:layout_width="0dp"
@@ -96,16 +112,18 @@
                     />
 
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/editPass"
                     app:layout_constraintTop_toBottomOf="@id/view"
                     android:drawableStart="@drawable/ic_password"
                     android:background="@color/transparent"
                     android:layout_marginTop="10dp"
                     android:drawablePadding="20dp"
                     android:maxLines="1"
+                    android:focusable="false"
+                    android:clickable="false"
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="15sp"
@@ -114,6 +132,19 @@
                     android:textColorHint="@color/hint_color"
                     android:id="@+id/ed_password"/>
 
+                <TextView
+                    android:id="@+id/editPass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/ed_password"
+                    app:layout_constraintTop_toTopOf="@id/ed_password"
+                    app:layout_constraintBottom_toBottomOf="@id/ed_password"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="12sp"
+                    android:text="Edit"
+                    android:alpha="0.6"
+                    android:textColor="#F7931A"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
