@@ -90,12 +90,10 @@ public class Profile extends Fragment {
     }
 
     private void setProfileData() {
-        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
-        String user_name = preferences.getData(Split.getAppContext(), "userName");
-        String avatar = preferences.getData(Split.getAppContext(), "userAvatar");
-
+        String user_name = Constants.USER_NAME;
+        String avatar = Constants.USER_AVATAR;
         binding.name.setText(user_name);
-        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.color.blue).into(binding.userImage);
+        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.color.images_placeholder).into(binding.userImage);
     }
 
     private void initClickListeners() {
@@ -195,13 +193,20 @@ public class Profile extends Fragment {
                             avatarRv.setVisibility(View.GONE);
                             image.setVisibility(View.VISIBLE);
 
-                            Svg.INSTANCE.loadUrl(Constants.IMG_PATH + activeUserModel.getData().getAvatar(), image);
+                            //Svg.INSTANCE.loadUrl(Constants.IMG_PATH + activeUserModel.getData().getAvatar(), image);
+                            Glide.with(requireContext()).load(Constants.IMG_PATH + activeUserModel.getData().getAvatar()).into(image);
 
+                            Constants.ID = String.valueOf(activeUserModel.getData().getId());
+                            Constants.USER_ID = activeUserModel.getData().getUserId();
+                            Constants.USER_NAME = activeUserModel.getData().getName();
+                            Constants.USER_EMAIL = activeUserModel.getData().getEmail();
+                            Constants.USER_AVATAR = Constants.IMG_PATH + activeUserModel.getData().getAvatar();
+                            Constants.NUMBER = activeUserModel.getData().getPhone();
 
-                            MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
-                            sharedPreferences.saveData(Split.getAppContext(), "userAvatar", Constants.IMG_PATH + activeUserModel.getData().getAvatar());
-                            sharedPreferences.saveData(Split.getAppContext(), "userName", activeUserModel.getData().getName());
-                            sharedPreferences.saveData(Split.getAppContext(), "userId", activeUserModel.getData().getUserId());
+//                            MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
+//                            sharedPreferences.saveData(Split.getAppContext(), "userAvatar", Constants.IMG_PATH + activeUserModel.getData().getAvatar());
+//                            sharedPreferences.saveData(Split.getAppContext(), "userName", activeUserModel.getData().getName());
+//                            sharedPreferences.saveData(Split.getAppContext(), "userId", activeUserModel.getData().getUserId());
 
                             mViewModel.init();
                             mViewModel.getData().observe(getViewLifecycleOwner(), avatarModel -> {

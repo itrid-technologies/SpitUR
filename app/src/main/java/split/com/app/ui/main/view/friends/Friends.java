@@ -59,7 +59,6 @@ public class Friends extends Fragment {
         binding = FragmentFriendsBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
         binding.friendToolbar.title.setText("Friends");
-        check();
 
         return binding.getRoot();
     }
@@ -70,7 +69,7 @@ public class Friends extends Fragment {
 
         contactList = new ArrayList<>();
         initClickListeners();
-        contactList.addAll(getContacts(requireContext()));
+      //  contactList.addAll(getContacts(requireContext()));
         if (contactList.size() > 0){
 //            buildFriendRv1(contactList);
             binding.noFriendLayout.setVisibility(View.VISIBLE);
@@ -154,34 +153,7 @@ public class Friends extends Fragment {
 //    }
 
 
-    private void check() {
 
-
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CONTACTS)
-                == PackageManager.PERMISSION_GRANTED) {
-            Runnable r = new Runnable() {
-                @Override
-                public void run() {
-                    getContacts(Split.getAppContext());
-                }
-            };
-            Thread thread = new Thread(r);
-            thread.start();
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
-                    Toast.makeText(getActivity(), "Read contacts permission is required to function app correctly", Toast.LENGTH_LONG).show();
-                } else {
-                    ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{Manifest.permission.READ_CONTACTS},
-                            1);
-                }
-
-            }
-        }
-
-
-    }
 
     @SuppressLint("Range")
     public List<ContactModel> getContacts(Context ctx) {

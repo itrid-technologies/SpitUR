@@ -371,7 +371,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@color/hint_color"
                     android:alpha="0.35"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:id="@+id/view1"
                     />
 
@@ -387,7 +387,7 @@
                     android:drawablePadding="15dp"
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="15sp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:gravity="center|start"
                     android:text="Request Otp"
                     android:textColor="@color/hint_color"
@@ -397,7 +397,7 @@
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv_request"
                     app:layout_constraintBottom_toBottomOf="@id/tv_request"

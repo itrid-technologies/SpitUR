@@ -67,6 +67,9 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
 
             Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_memberChat,bundle);
         });
+
+        String coins_added = Constants.coinsDate(current_item.getUser().getCreatedAt());
+        holder.date.setText(coins_added);
     }
 
     @Override

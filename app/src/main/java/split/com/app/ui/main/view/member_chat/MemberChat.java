@@ -44,6 +44,7 @@ public class MemberChat extends Fragment {
     private ArrayList<Object> msgs;
     ChatAdapter adapter;
     OtpRequestViewModel otpRequestViewModel;
+    boolean otp_status;
 
     private BroadcastReceiver mChatMsgReceiver;
 
@@ -72,6 +73,13 @@ public class MemberChat extends Fragment {
             group_id = getArguments().getString("groupId");
             receiver_id = getArguments().getString("receiverId");
 
+            otp_status = getArguments().getBoolean("ask_otp");
+        }
+
+        if (otp_status){
+            binding.askOtp.setVisibility(View.VISIBLE);
+        }else {
+            binding.askOtp.setVisibility(View.GONE);
         }
 
         MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());

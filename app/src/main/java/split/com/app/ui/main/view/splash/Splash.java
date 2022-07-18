@@ -12,11 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import split.com.app.R;
 import split.com.app.databinding.ActivitySplashBinding;
 import split.com.app.ui.main.view.otp_phone_number.OtpNumber;
 import split.com.app.utils.ActivityUtil;
+import split.com.app.utils.Split;
 
 public class Splash extends AppCompatActivity {
 
@@ -40,9 +43,31 @@ public class Splash extends AppCompatActivity {
 
         binding.getStartedBtn.setOnClickListener(view -> {
 
-            requestSmsPermission();
+            requestContactPermission();
 
         });
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void requestContactPermission() {
+        if (ContextCompat.checkSelfPermission(Splash.this, Manifest.permission.READ_CONTACTS)
+                == PackageManager.PERMISSION_GRANTED) {
+            requestSmsPermission();
+
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
+                    Toast.makeText(Splash.this, "Read contacts permission is required to function app correctly", Toast.LENGTH_LONG).show();
+                } else {
+                    ActivityCompat.requestPermissions(Splash.this,
+                            new String[]{Manifest.permission.READ_CONTACTS},
+                            1);
+                }
+
+            }
+        }
+
 
     }
 

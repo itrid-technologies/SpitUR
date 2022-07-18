@@ -13,10 +13,10 @@ import split.com.app.R;
 public final class Constants {
 
 
-    public static String URL_BASE = "http://3.6.7.161:4000/";
+    public static String URL_BASE = "http://3.109.223.84:4000/";
 //     public static String URL_BASE = "http://192.168.100.5:4000/";
 
-    public static String IMG_PATH = "http://3.6.7.161:4000";
+    public static String IMG_PATH = "http://3.109.223.84:4000";
     //    public static String IMG_PATH = "http://192.168.100.5:4000";
     public static String DEVICE_TOKEN = "";
 
@@ -78,6 +78,23 @@ public final class Constants {
             e.printStackTrace();
         }
         return str;
+    }
+
+    public static String coinsDate(String dateAdded) {
+        String date;
+        String[] date_value = dateAdded.split("T");
+        date = date_value[0];
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        try{
+            cal.setTime(sdf.parse(date));
+            sdf.format(cal.getTime());
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
+        cal.add(1,1);
+        String dateAfter = sdf.format(cal.getTime());
+        return dateAfter;
     }
 
     public static String getFormattedDateTimeNow() {

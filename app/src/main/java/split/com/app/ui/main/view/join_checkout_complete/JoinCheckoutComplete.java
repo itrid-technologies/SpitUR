@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import split.com.app.R;
@@ -40,6 +41,9 @@ public class JoinCheckoutComplete extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Glide.with(Split.getAppContext()).load(R.drawable.success_gif).into(binding.successGif);
+
 
         if (getArguments() != null){
             String response = getArguments().getString("group_credentials");
@@ -82,6 +86,7 @@ public class JoinCheckoutComplete extends Fragment {
 
             Bundle bundle = new Bundle();
             bundle.putString("groupId", String.valueOf(joinGroupModel.getData().getGroupId()));
+            bundle.putBoolean("ask_otp", true);
             Navigation.findNavController(view).navigate(R.id.action_joinCheckoutComplete_to_memberChat,bundle);
         });
     }

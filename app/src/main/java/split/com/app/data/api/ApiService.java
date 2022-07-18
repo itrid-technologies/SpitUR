@@ -238,4 +238,8 @@ public interface ApiService {
 
     @GET("groups/get_razor_pay_secret")
     Call<SecretKeyModel> getRozarSecretKey();
+
+    @GET("users/user_active_status/{status}")
+    Call<BasicModel1> setUserOnlineStatus(@Header("Authorization") String token,
+                                         @Path("status") int status);
 }

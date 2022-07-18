@@ -79,7 +79,7 @@ public class VerificationStatusAdapter extends RecyclerView.Adapter<Verification
 
                 holder.status.setText("Invalid");
                 holder.user.setBorderColor(Color.parseColor("#FF0000"));
-                holder.imageView.setImageResource(R.drawable.ic_close);
+                holder.imageView.setImageResource(R.drawable.cross);
                 holder.imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(("#FF0000"))));
             }else {
 

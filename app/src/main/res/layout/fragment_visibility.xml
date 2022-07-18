@@ -152,7 +152,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/tv_private"
                         app:layout_constraintStart_toStartOf="@id/tv_private"
-                        android:text="It will be visible on search"
+                        android:text="It will not be visible on search"
                         android:fontFamily="@font/inter_medium"
                         android:layout_marginTop="-4dp"
                         android:textSize="12sp"

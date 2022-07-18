@@ -104,7 +104,7 @@ public class GroupInformation extends Fragment {
                     .placeholder(R.color.images_placeholder)
                     .into(binding.userImage);
             binding.userName.setText(String.format("@%s", dataItem.getGroupAdmin().getUserId()));
-            binding.tvScoreValue.setText(String.valueOf(dataItem.getGroupAdmin().getSpliturScore()));
+            binding.tvScoreValue.setText(String.valueOf(Math.round(dataItem.getGroupAdmin().getSpliturScore())));
             if (dataItem.getGroupAdmin().getLastActive() != null) {
                 TimeAgo timeAgo = new TimeAgo();
                 String last_seen = timeAgo.covertTimeToText(dataItem.getGroupAdmin().getLastActive());

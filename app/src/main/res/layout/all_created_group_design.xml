@@ -24,8 +24,8 @@
 
         <ImageView
             android:id="@+id/search_icons"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
             android:src="@drawable/player_icon"
             android:scaleType="fitXY"
             android:padding="3dp"

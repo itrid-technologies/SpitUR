@@ -323,7 +323,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/tv_private"
                     app:layout_constraintStart_toStartOf="@id/tv_private"
-                    android:text="It will be visible on search"
+                    android:text="It will not be visible on search"
                     android:fontFamily="@font/inter_medium"
                     android:layout_marginTop="-4dp"
                     android:textSize="12sp"
@@ -365,111 +365,6 @@
                 android:id="@+id/membarPart">
 
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/admin_as_member"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/nav_bg"
-                        android:backgroundTint="#262A34"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintStart_toEndOf="parent">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            app:layout_constraintEnd_toStartOf="@id/adminBg"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/member_image"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:src="@drawable/user"
-                                app:civ_border_width="1dp"
-                                android:layout_marginStart="5dp"
-                                app:civ_circle_background_color="#94F0F0"
-                                app:civ_border_color="@color/green"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toEndOf="@id/member_image"
-                                style="@style/semiBoldText"
-                                android:text="-"
-                                android:textSize="14sp"
-                                android:layout_marginStart="21dp"
-                                android:id="@+id/member_name"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintTop_toBottomOf="@id/member_name"
-                                app:layout_constraintStart_toStartOf="@id/member_name"
-                                android:fontFamily="@font/inter_medium"
-                                android:textColor="#707481"
-                                android:layout_marginTop="-3dp"
-                                android:textSize="11sp"
-                                android:text="Coins available on "
-                                android:id="@+id/tv_coin"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintTop_toBottomOf="@id/member_name"
-                                app:layout_constraintStart_toEndOf="@id/tv_coin"
-                                android:fontFamily="@font/inter_medium"
-                                android:layout_marginTop="-3dp"
-                                android:textColor="@color/orange"
-                                android:text=" 1/12/2022"
-                                android:textSize="11sp"
-                                android:id="@+id/tv_coins_date"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintStart_toStartOf="@id/tv_coin"
-                                app:layout_constraintTop_toBottomOf="@id/tv_coin"
-                                android:background="@drawable/round_back"
-                                android:backgroundTint="@color/blue"
-                                android:text="Chat"
-                                android:textColor="@color/white"
-                                android:paddingTop="@dimen/_4sdp"
-                                android:paddingBottom="@dimen/_4sdp"
-                                android:paddingStart="@dimen/_12sdp"
-                                android:paddingEnd="@dimen/_12sdp"
-                                android:layout_marginTop="5dp"
-                                android:fontFamily="@font/inter_bold"
-                                android:textSize="12sp"
-                                android:id="@+id/chat_button"/>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <ImageView
-                            android:id="@+id/adminBg"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:src="@drawable/ic_tick"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:visibility="gone"
-                            android:background="@drawable/half_round"/>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/no_member_layout"
@@ -478,7 +373,6 @@
                         android:background="@drawable/nav_bg"
                         android:backgroundTint="#262A34"
                         android:padding="10dp"
-                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
@@ -492,7 +386,7 @@
                             app:civ_border_width="1dp"
                             android:layout_marginStart="5dp"
                             app:civ_circle_background_color="#94F0F0"
-                            app:civ_border_color="@color/green"
+                            app:civ_border_color="#707481"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent" />
@@ -504,7 +398,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toEndOf="@id/dummy_profile"
                             style="@style/semiBoldText"
-                            android:text="-"
+                            android:text="No Joined Members"
                             android:textSize="14sp"
                             android:layout_marginStart="21dp" />
 
@@ -550,7 +444,7 @@
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/admin_as_member"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:id="@+id/group_members_list"
                     />
 

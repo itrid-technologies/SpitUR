@@ -103,8 +103,9 @@ public class JoinCheckOut extends Fragment {
             final double fee = (Double.parseDouble(value) / 100) * 2.5;
             final String roundedFee = String.format("%.2f", fee);
 
-            binding.payment.setText(roundedFee);
-            binding.btnJoin.setText(String.format("Join for %s Coins", (Double.parseDouble(value) + Double.parseDouble(roundedFee))));
+            binding.payment.setText(String.valueOf(Math.round(fee)));
+            String totalCoins = String.valueOf(Math.round(Double.parseDouble(value) + Double.parseDouble(roundedFee)));
+            binding.btnJoin.setText(String.format("Join for %s Coins", totalCoins));
 
             MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
             mySharedPreferences.saveData(Split.getAppContext(), "GroupID", String.valueOf(dataItem.getId()));

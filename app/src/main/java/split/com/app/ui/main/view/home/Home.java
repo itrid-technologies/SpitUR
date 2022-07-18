@@ -2,6 +2,7 @@ package split.com.app.ui.main.view.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ import split.com.app.ui.main.adapter.category_adapter.CategoryAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.view.profile.Profile;
 import split.com.app.ui.main.view.splash.Splash;
+import split.com.app.ui.main.viewmodel.UserOnlineStatusViewModel;
 import split.com.app.ui.main.viewmodel.avatar_viewmodel.AvatarViewModel;
 import split.com.app.ui.main.viewmodel.category_viewmodel.CategoryViewModel;
 import split.com.app.ui.main.viewmodel.home_viewmodel.HomeViewModel;
@@ -113,6 +115,21 @@ public class Home extends Fragment {
         initClickListeners();
         getPopularList();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        UserOnlineStatusViewModel userOnlineStatusViewModel = new UserOnlineStatusViewModel(1);
+        userOnlineStatusViewModel.init();
+        userOnlineStatusViewModel.getData().observe(getViewLifecycleOwner(), basicModel -> {
+            if (basicModel.isStatus().equals("true")){
+                Log.e("user online/offline " , basicModel.getMessage());
+            }
+        });
+    }
+
+
 
     private void getUserDetails() {
         profileViewModel = new ProfileViewModel("", "", "", "");
@@ -285,12 +302,12 @@ public class Home extends Fragment {
                                         }
                                     });
                                 });
-
+                                dialog.setContentView(profileView);
+                                dialog.show();
                             });
 
 
-                            bt.setContentView(profileView);
-                            bt.show();
+
 
 //                            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) profileView.getParent()).getLayoutParams();
 //                            CoordinatorLayout.Behavior behavior = params.getBehavior();
@@ -360,8 +377,7 @@ public class Home extends Fragment {
     private void setProfileData() {
 
         binding.name.setText(Constants.USER_NAME);
-        Glide.with(Split.getAppContext()).load(Constants.USER_AVATAR).placeholder(R.color.blue).into(binding.userImage);
-
+        Glide.with(Split.getAppContext()).load(Constants.USER_AVATAR).placeholder(R.color.images_placeholder).into(binding.userImage);
 
     }
 

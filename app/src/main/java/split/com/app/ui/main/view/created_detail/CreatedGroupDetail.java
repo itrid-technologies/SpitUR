@@ -89,7 +89,7 @@ public class CreatedGroupDetail extends Fragment {
                     buildMembersList(membersList);
                 } else {
                     binding.noMemberLayout.setVisibility(View.VISIBLE);
-                    binding.adminAsMember.setVisibility(View.GONE);
+//                    binding.adminAsMember.setVisibility(View.GONE);
                     binding.groupMembersList.setVisibility(View.GONE);
                 }
             }
@@ -204,7 +204,7 @@ public class CreatedGroupDetail extends Fragment {
         if (membersList.size() > 0) {
 
             binding.noMemberLayout.setVisibility(View.GONE);
-            binding.adminAsMember.setVisibility(View.VISIBLE);
+//            binding.adminAsMember.setVisibility(View.VISIBLE);
             binding.groupMembersList.setVisibility(View.VISIBLE);
 
             LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
@@ -269,13 +269,13 @@ public class CreatedGroupDetail extends Fragment {
         binding.edUsername.setText(data.getEmail());
         binding.edPassword.setText(data.getPassword());
 
-        //group_admin
-        Glide.with(Split.getAppContext())
-                .load(Constants.IMG_PATH + data.getGroupAdmin().getAvatar())
-                .placeholder(R.color.images_placeholder)
-                .into(binding.memberImage);
-
-        binding.memberName.setText(data.getGroupAdmin().getUserId());
+//        //group_admin
+//        Glide.with(Split.getAppContext())
+//                .load(Constants.IMG_PATH + data.getGroupAdmin().getAvatar())
+//                .placeholder(R.color.images_placeholder)
+//                .into(binding.memberImage);
+//
+//        binding.memberName.setText(data.getGroupAdmin().getUserId());
 
         if (data.isVisibility()) {
             binding.privateLayout.setBackgroundResource(R.drawable.only_grey_stroke);
@@ -357,6 +357,7 @@ public class CreatedGroupDetail extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("receiverId", String.valueOf(data.getUserId()));
             bundle.putString("groupId", String.valueOf(data.getId()));
+            bundle.putBoolean("ask_otp", false);
 
             Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_memberChat, bundle);
         });

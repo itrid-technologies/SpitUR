@@ -34,6 +34,7 @@ import retrofit2.Response;
 import split.com.app.R;
 import split.com.app.data.api.ApiManager;
 import split.com.app.databinding.ActivityDashboardBinding;
+import split.com.app.ui.main.viewmodel.UserOnlineStatusViewModel;
 import split.com.app.utils.Configration;
 import split.com.app.utils.MyReceiver;
 import split.com.app.utils.MySharedPreferences;
@@ -220,4 +221,17 @@ public class Dashboard extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
         super.onPause();
     }//onPause
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        UserOnlineStatusViewModel userOnlineStatusViewModel = new UserOnlineStatusViewModel(0);
+        userOnlineStatusViewModel.init();
+        userOnlineStatusViewModel.getData().observe(this, basicModel -> {
+            if (basicModel.isStatus().equals("true")){
+                Log.e("user online/offline " , basicModel.getMessage());
+            }
+        });
+    }
 }
