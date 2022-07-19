@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import split.com.app.data.model.OTpModel;
 import split.com.app.data.model.chat_receiver.ReceiverModel;
 import split.com.app.data.model.chat_sender.SenderModel;
 import split.com.app.databinding.FragmentMemberChatBinding;
@@ -101,7 +102,11 @@ public class MemberChat extends Fragment {
                             msgs.add(new SenderModel(getMemberMessagesModel.getMessages().get(i).getBody(),
                                     getMemberMessagesModel.getMessages().get(i).getCreatedAt()
                             ));
-                        } else {
+                        } else if(getMemberMessagesModel.getMessages().get(i).getSenderId() == getMemberMessagesModel.getMessages().get(i).getReceiverId()) {
+                            msgs.add(new OTpModel(getMemberMessagesModel.getMessages().get(i).getBody(),
+                                    getMemberMessagesModel.getMessages().get(i).getCreatedAt()
+                            ));
+                        }else {
                             msgs.add(new ReceiverModel(getMemberMessagesModel.getMessages().get(i).getBody(),
                                     getMemberMessagesModel.getMessages().get(i).getCreatedAt(),
                                     getMemberMessagesModel.getMessages().get(i).getReceiver()));

@@ -18,6 +18,7 @@ public class MessagesItem{
 	@SerializedName("receiver_id")
 	private int receiverId;
 
+
 	@SerializedName("id")
 	private int id;
 
@@ -57,6 +58,7 @@ public class MessagesItem{
 	public int getSenderId(){
 		return senderId;
 	}
+
 
 	public String getUpdatedAt(){
 		return updatedAt;

@@ -20,6 +20,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import split.com.app.R;
+import split.com.app.data.model.OTpModel;
 import split.com.app.data.model.chat_receiver.ReceiverModel;
 import split.com.app.data.model.chat_sender.SenderModel;
 import split.com.app.utils.Constants;
@@ -30,7 +31,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int OUTGOING_VIEW_TYPE = 1;
     private static final int INCOMING_VIEW_TYPE = 0;
-    private static final int OTP_RESPONSE_VIEW_TYPE = 0;
+    private static final int OTP_RESPONSE_VIEW_TYPE = 2;
 
     private Context context;
     private final ArrayList<Object> mMessageList;
@@ -49,9 +50,13 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (viewType == 0) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.receicer_layout, parent, false);
             return new RecieverVH(view);
+        } else if (viewType == 2) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.otp_request_message_layout, parent, false);
+            return new OTPVH(view);
+        } else {
+            View viewSender = LayoutInflater.from(parent.getContext()).inflate(R.layout.sender_layout, parent, false);
+            return new SenderVH(viewSender);
         }
-        View viewSender = LayoutInflater.from(parent.getContext()).inflate(R.layout.sender_layout, parent, false);
-        return new SenderVH(viewSender);
     }
 
     @Override
@@ -86,6 +91,15 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                // svh.time.setText(sSTime);
 
                 break;
+
+            case 2:
+                OTPVH otpvh = (OTPVH) holder;
+                OTpModel tpModel = (OTpModel) mMessageList.get(position);
+                Log.e("TAG", "onBindViewHolder: " + tpModel.get_message() );
+                otpvh.senderMessage.setText(tpModel.get_message());
+
+
+                break;
         }
     }
 
@@ -100,7 +114,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         if (obj instanceof ReceiverModel) {
             return INCOMING_VIEW_TYPE;
-        } else {
+        } else if (obj instanceof OTpModel) {
+            return OTP_RESPONSE_VIEW_TYPE;
+        }else {
             return OUTGOING_VIEW_TYPE;
         }
     }
@@ -120,6 +136,8 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+
+
     public static class SenderVH extends RecyclerView.ViewHolder {
         private final TextView senderMessage;
       //  private final TextView time;
@@ -128,6 +146,17 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
             senderMessage = itemView.findViewById(R.id.tv_sender_message);
           //  time = itemView.findViewById(R.id.tv_date);
+        }
+    }
+
+    public static class OTPVH extends RecyclerView.ViewHolder {
+        private final TextView senderMessage;
+        //  private final TextView time;
+
+        public OTPVH(@NonNull View itemView) {
+            super(itemView);
+            senderMessage = itemView.findViewById(R.id.otp_message);
+            //  time = itemView.findViewById(R.id.tv_date);
         }
     }
 
