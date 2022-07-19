@@ -1,9 +1,16 @@
 package split.com.app.utils;
 
 import android.content.Context;
+import android.os.Build;
+import android.text.format.DateUtils;
+
+import androidx.annotation.RequiresApi;
+
+import com.google.type.DateTime;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -80,19 +87,42 @@ public final class Constants {
         return str;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static String coinsDate(String dateAdded) {
-        String date;
-        String[] date_value = dateAdded.split("T");
-        date = date_value[0];
+
+//        String date;
+//        String[] date_value = dateAdded.split("T");
+//        date = date_value[0];
+//        String inputPattern = "yyyy-mm-dd";
+//        String outputPattern = "dd/mm/yyyy";
+//        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+//        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+//        Date date1 = null;
+//        String str = null;
+//
+//
+//        try{
+//            date1 = inputFormat.parse(date);
+//            str = outputFormat.format(date1);
+//        }catch(ParseException e){
+//            e.printStackTrace();
+//        }
+//
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(date1);
+//        c.add(Calendar.DATE, 1);
+//        date1 = c.getTime();
+//        str = outputFormat.format(date1);
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar cal = Calendar.getInstance();
         try{
-            cal.setTime(sdf.parse(date));
+            cal.setTime(sdf.parse(dateAdded));
             sdf.format(cal.getTime());
         }catch(ParseException e){
             e.printStackTrace();
         }
-        cal.add(1,1);
+        cal.add(Calendar.DATE, 1);
         String dateAfter = sdf.format(cal.getTime());
         return dateAfter;
     }
