@@ -130,6 +130,24 @@ public class CreatedAndJoinedGroups extends Fragment {
 
             binding.joinedButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00000000")));
             binding.joinedButton.setTextColor(Color.parseColor("#9395A4"));
+
+
+            viewModel = new CreatedAndJoinedViewModel();
+            viewModel.init();
+            viewModel.getData().observe(getViewLifecycleOwner(),allCreatedGroupModel -> {
+                if (allCreatedGroupModel.isSuccess()){
+                    data = new ArrayList<>();
+
+                    if (allCreatedGroupModel.getData().size() > 0){
+                        data.addAll(allCreatedGroupModel.getData());
+                        buildRv();
+                    }else {
+                        binding.noGroupLayout.setVisibility(View.VISIBLE);
+                        binding.createdGroupslist.setVisibility(View.GONE);
+                    }
+                }
+            });
+
         });
 
 

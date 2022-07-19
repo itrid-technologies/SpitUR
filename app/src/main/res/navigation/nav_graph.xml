@@ -163,6 +163,9 @@
         <action
             android:id="@+id/action_contactUs_to_FAQ"
             app:destination="@id/FAQ" />
+        <action
+            android:id="@+id/action_contactUs_to_supportChat"
+            app:destination="@id/supportChat" />
     </fragment>
     <fragment
         android:id="@+id/FAQ"
@@ -372,5 +375,10 @@
         android:name="split.com.app.ui.main.view.WebViewFragment"
         android:label="fragment_web_view"
         tools:layout="@layout/fragment_web_view" />
+    <fragment
+        android:id="@+id/supportChat"
+        android:name="split.com.app.ui.main.view.SupportChat"
+        android:label="fragment_support_chat"
+        tools:layout="@layout/fragment_support_chat" />
 
 </navigation>

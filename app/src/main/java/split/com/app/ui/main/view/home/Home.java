@@ -217,6 +217,53 @@ public class Home extends Fragment {
                                 avatarRv.setAdapter(new AdapterAvatars(getActivity(), avatars));
                             });
 
+
+                            logout.setOnClickListener(view1 -> {
+
+                                final BottomSheetDialog dialog = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
+                                View layout = LayoutInflater.from(requireContext()).inflate(R.layout.ask_to_remove_dialogue, null, false);
+                                ConstraintLayout deleteLayout = layout.findViewById(R.id.deleteLAYOUT);
+                                TextView remove = layout.findViewById(R.id.tv_remove);
+                                TextView tagline = layout.findViewById(R.id.delete_detail);
+                                TextView confirm = layout.findViewById(R.id.confirm_tagline);
+                                ImageView confirm_logout = layout.findViewById(R.id.confirm_remove);
+                                ConstraintLayout confirm_layout = layout.findViewById(R.id.delete_layout);
+
+                                deleteLayout.setOnClickListener(view2 -> {
+                                    if (confirm_layout.getTag().equals("hidden")) {
+                                        confirm_layout.setVisibility(View.VISIBLE);
+                                        confirm_layout.setTag("visible");
+                                    } else {
+                                        confirm_layout.setVisibility(View.GONE);
+                                        confirm_layout.setTag("hidden");
+                                    }
+
+                                });
+
+                                remove.setText("Log Out");
+                                tagline.setText("You can login back again using your Phone number and OTP");
+                                confirm.setText("You want to logout");
+
+
+                                confirm_logout.setOnClickListener(view2 -> {
+
+                                    profileViewModel = new ProfileViewModel(String.valueOf(activeUserModel.getData().getId()), "", "", "");
+                                    profileViewModel.initLogout();
+                                    profileViewModel.getLogout().observe(getViewLifecycleOwner(), basicModel -> {
+                                        if (basicModel.isStatus().equalsIgnoreCase("true")) {
+                                            Intent intent = new Intent(requireContext(), Splash.class);
+                                            startActivity(intent);
+
+                                        }
+                                    });
+
+
+                                });
+
+                                dialog.setContentView(layout);
+                                dialog.show();
+                            });
+
                             next.setOnClickListener(view1 -> {
                                 if (currentIndex < avatars.size() - 1) {//in range
 
@@ -262,59 +309,10 @@ public class Home extends Fragment {
                             });
 
 
-                            logout.setOnClickListener(view1 -> {
 
-                                final BottomSheetDialog dialog = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
-                                View layout = LayoutInflater.from(requireContext()).inflate(R.layout.ask_to_remove_dialogue, null, false);
-                                ConstraintLayout deleteLayout = layout.findViewById(R.id.delete_layout);
-                                TextView remove = layout.findViewById(R.id.tv_remove);
-                                TextView tagline = layout.findViewById(R.id.delete_detail);
-                                TextView confirm = layout.findViewById(R.id.confirm_tagline);
-                                ImageView confirm_logout = layout.findViewById(R.id.confirm_remove);
-                                ConstraintLayout confirm_layout = layout.findViewById(R.id.delete_layout);
+                            bt.setContentView(profileView);
+                            bt.show();
 
-                                deleteLayout.setOnClickListener(view2 -> {
-                                    if (confirm_layout.getTag().equals("hidden")) {
-                                        confirm_layout.setVisibility(View.VISIBLE);
-                                        confirm_layout.setTag("visible");
-                                    } else {
-                                        confirm_layout.setVisibility(View.GONE);
-                                        confirm_layout.setTag("hidden");
-                                    }
-
-                                });
-
-
-                                remove.setText("Log Out");
-                                tagline.setText("You can login back again using your Phone number and OTP");
-                                confirm.setText("You want to logout");
-
-
-                                confirm_logout.setOnClickListener(view2 -> {
-
-                                    profileViewModel = new ProfileViewModel(String.valueOf(activeUserModel.getData().getId()), "", "", "");
-                                    profileViewModel.initLogout();
-                                    profileViewModel.getLogout().observe(getViewLifecycleOwner(), basicModel -> {
-                                        if (basicModel.isStatus().equalsIgnoreCase("true")) {
-                                            Intent intent = new Intent(requireContext(), Splash.class);
-                                            startActivity(intent);
-
-                                        }
-                                    });
-                                });
-                                dialog.setContentView(profileView);
-                                dialog.show();
-                            });
-
-
-
-
-//                            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) profileView.getParent()).getLayoutParams();
-//                            CoordinatorLayout.Behavior behavior = params.getBehavior();
-//
-//                            if(behavior instanceof BottomSheetBehavior) {
-//                                ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
-//                            }
                         }
                     }
 

@@ -103,32 +103,36 @@ public class CreatedGroupDetail extends Fragment {
 
     private void textWatcher() {
 
+        binding.edPassword.setEnabled(false);
+        binding.edUsername.setEnabled(false);
 
         binding.editUsername.setOnClickListener(view -> {
 
             if (binding.editUsername.getText().toString().equalsIgnoreCase("Edit")) {
-                binding.edUsername.setFocusable(true);
-                binding.edUsername.setClickable(true);
+                binding.edUsername.setEnabled(true);
                 binding.editUsername.setText("Save");
                 binding.editUsername.setTextColor(Color.parseColor("#9F9DF3"));
             }else if (binding.editUsername.getText().toString().equalsIgnoreCase("Save")){
-                String updated_value = binding.editUsername.getText().toString().trim();
+                String updated_value = binding.edUsername.getText().toString().trim();
                 updateEmailData(updated_value);
             }else {
 
             }
         });
 
+        binding.editPass.setOnClickListener(view -> {
+            if (binding.editPass.getText().toString().equalsIgnoreCase("Edit")) {
+                binding.edPassword.setEnabled(true);
+                binding.editPass.setText("Save");
+                binding.editPass.setTextColor(Color.parseColor("#9F9DF3"));
+            }else if (binding.editPass.getText().toString().equalsIgnoreCase("Save")){
+                //String updated_value = binding.editPass.getText().toString().trim();
+                String updated_value = binding.edPassword.getText().toString().trim();
+                updatePassData(updated_value);
+            }
+        });
 
-        if (binding.editPass.getText().toString().equalsIgnoreCase("Edit")) {
-            binding.edPassword.setFocusable(true);
-            binding.edPassword.setClickable(true);
-            binding.editPass.setText("Save");
-            binding.editPass.setTextColor(Color.parseColor("#9F9DF3"));
-        }else if (binding.editPass.getText().toString().equalsIgnoreCase("Save")){
-            String updated_value = binding.editPass.getText().toString().trim();
-            updatePassData(updated_value);
-        }
+
 
         binding.privateLayout.setOnClickListener(view -> {
 
@@ -176,13 +180,12 @@ public class CreatedGroupDetail extends Fragment {
         membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", updated_value, "", false);
         membersViewModel.initEmailUpdate();
         membersViewModel.getUpdate_email_data().observe(getViewLifecycleOwner(), basicModel -> {
-            if (basicModel.isStatus()) {
+            //if (basicModel.isStatus().equalsIgnoreCase("true")) {
                 Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
-                binding.edUsername.setFocusable(false);
-                binding.edUsername.setClickable(false);
+                binding.edUsername.setEnabled(false);
                 binding.editUsername.setText("Edit");
                 binding.editUsername.setTextColor(Color.parseColor("#F7931A"));
-            }
+           // }
         });
     }
 
@@ -190,13 +193,12 @@ public class CreatedGroupDetail extends Fragment {
         membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", "", updated_value, false);
         membersViewModel.initPassUpdate();
         membersViewModel.getUpdate_pass_data().observe(getViewLifecycleOwner(), basicModel -> {
-            if (basicModel.isStatus()) {
+           // if (basicModel.isStatus().equalsIgnoreCase("true")) {
                 Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
-                binding.edPassword.setFocusable(false);
-                binding.edPassword.setClickable(false);
+                binding.edPassword.setEnabled(false);
                 binding.editPass.setText("Edit");
                 binding.editPass .setTextColor(Color.parseColor("#F7931A"));
-            }
+          //  }
         });
     }
 

@@ -56,10 +56,9 @@ public class  Credentials extends Fragment {
     }
 
     private void setProfileData() {
-        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
-        String user_name = preferences.getData(Split.getAppContext(), "userName");
-        String user_ID = preferences.getData(Split.getAppContext(), "userId");
-        String avatar = preferences.getData(Split.getAppContext(), "userAvatar");
+        String user_name = Constants.USER_NAME;
+        String user_ID = Constants.USER_ID;
+        String avatar = Constants.USER_AVATAR;
         String slot = Constants.SLOTS;
 
         binding.credentialProfile.netflix.setText(user_name);
@@ -132,7 +131,7 @@ public class  Credentials extends Fragment {
                         }
                     });
 //                    Navigation.findNavController(view).navigate(R.id.action_credentials2_to_phoneCredentials);
-                    Navigation.findNavController(requireView()).navigate(R.id.action_credentials2_to_otpSuccess);
+                   // Navigation.findNavController(requireView()).navigate(R.id.action_credentials2_to_otpSuccess);
                 }
             }
 

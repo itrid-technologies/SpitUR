@@ -166,9 +166,14 @@ public interface ApiService {
                                    @Body JsonObject object);
 
     @POST("groups/update_group/{id}")
-    Call<BasicModel> updateGroup(@Header("Authorization") String token,
+    Call<BasicModel1> updateGroup(@Header("Authorization") String token,
                                  @Path("id") String id,
                                  @Body JsonObject object);
+
+    @POST("groups/update_group/{id}")
+    Call<BasicModel> updateGroupVisibility(@Header("Authorization") String token,
+                                  @Path("id") String id,
+                                  @Body JsonObject object);
 
     @PUT("users/update")
     Call<UserUpdateModel> updateProfile(@Header("Authorization") String token,

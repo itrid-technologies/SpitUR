@@ -90,17 +90,17 @@ public final class Constants {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static String coinsDate(String dateAdded) {
 
-//        String date;
-//        String[] date_value = dateAdded.split("T");
-//        date = date_value[0];
+        String date;
+        String[] date_value = dateAdded.split("T");
+        date = date_value[0];
 //        String inputPattern = "yyyy-mm-dd";
 //        String outputPattern = "dd/mm/yyyy";
 //        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
 //        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 //        Date date1 = null;
 //        String str = null;
-//
-//
+//        String str1 = null;
+////
 //        try{
 //            date1 = inputFormat.parse(date);
 //            str = outputFormat.format(date1);
@@ -110,20 +110,31 @@ public final class Constants {
 //
 //        Calendar c = Calendar.getInstance();
 //        c.setTime(date1);
-//        c.add(Calendar.DATE, 1);
+//        c.add(Calendar.DATE, 30);
 //        date1 = c.getTime();
 //        str = outputFormat.format(date1);
+//
+////        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+////        Calendar cal = Calendar.getInstance();
+////        try{
+////            cal.setTime(sdf.parse(dateAdded));
+////            sdf.format(cal.getTime());
+////        }catch(ParseException e){
+////            e.printStackTrace();
+////        }
+////        cal.add(Calendar.DATE, 1);
+////        String dateAfter = sdf.format(cal.getTime());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar cal = Calendar.getInstance();
-        try{
-            cal.setTime(sdf.parse(dateAdded));
-            sdf.format(cal.getTime());
-        }catch(ParseException e){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(sdf.parse(date));
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-        cal.add(Calendar.DATE, 1);
-        String dateAfter = sdf.format(cal.getTime());
+        c.add(Calendar.DATE, 30);
+        String dateAfter = sdf.format(c.getTime());
+
         return dateAfter;
     }
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_margin="6dp"
+        android:gravity="left"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/vertical_guideline_25"
+        app:layout_constraintStart_toStartOf="@id/vertical_guideline_251"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+        <TextView
+            android:id="@+id/otp_message"
+            android:fontFamily="@font/inter_bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/otp_number_bg"
+            android:backgroundTint="#262A34"
+            android:gravity="start"
+            android:paddingLeft="30dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:paddingTop="10dp"
+            android:textSize="10sp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:textAlignment="textStart"
+            android:textColor="#5E6272"
+            app:layout_constraintTop_toBottomOf="@id/tv_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Receiver here... " />
+
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/normalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="21:24"
+            android:textColor="@color/hint_color"
+            app:layout_constraintEnd_toEndOf="@id/otp_message"
+            app:layout_constraintStart_toStartOf="@id/otp_message"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical_guideline_25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical_guideline_251"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

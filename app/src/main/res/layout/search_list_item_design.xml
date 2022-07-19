@@ -51,14 +51,94 @@
         android:fontFamily="@font/inter_semibold"
         android:id="@+id/search_name"/>
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/search_name"
         app:layout_constraintTop_toBottomOf="@id/search_name"
         android:src="@drawable/search_cat"
-        android:layout_marginTop="-5dp"
-        />
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:civ_circle_background_color="#404251"
+            android:src="@drawable/member1"
+            android:id="@+id/member1"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/member2"
+            app:layout_constraintStart_toEndOf="@id/member1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="-12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:civ_circle_background_color="#404251"
+            app:civ_border_color="#2B2D3E"
+            app:civ_border_width="@dimen/_1sdp"
+            android:src="@drawable/member2"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/member3"
+            app:layout_constraintStart_toEndOf="@id/member2"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="-12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:civ_circle_background_color="#404251"
+            app:civ_border_color="#2B2D3E"
+            app:civ_border_width="@dimen/_1sdp"
+            android:src="@drawable/member3"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/member4"
+            app:layout_constraintStart_toEndOf="@id/member3"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="-12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:civ_circle_background_color="#404251"
+            app:civ_border_color="#2B2D3E"
+            app:civ_border_width="@dimen/_1sdp"
+            android:src="@drawable/member4"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/member5"
+            app:layout_constraintStart_toEndOf="@id/member4"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="-12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:civ_circle_background_color="#404251"
+            app:civ_border_color="#2B2D3E"
+            app:civ_border_width="@dimen/_1sdp"
+            android:src="#404251"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/member5"
+            app:layout_constraintEnd_toEndOf="@id/member5"
+            app:layout_constraintTop_toTopOf="@id/member5"
+            app:layout_constraintBottom_toBottomOf="@id/member5"
+            android:textColor="@color/white"
+            android:text="+6"
+            android:layout_marginEnd="@dimen/_1sdp"
+            android:fontFamily="@font/inter_regular"
+            android:textSize="8sp"
+            android:gravity="center"
+            android:id="@+id/count"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <TextView
         android:layout_width="wrap_content"

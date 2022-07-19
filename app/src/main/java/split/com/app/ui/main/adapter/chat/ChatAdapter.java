@@ -30,6 +30,8 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int OUTGOING_VIEW_TYPE = 1;
     private static final int INCOMING_VIEW_TYPE = 0;
+    private static final int OTP_RESPONSE_VIEW_TYPE = 0;
+
     private Context context;
     private final ArrayList<Object> mMessageList;
 

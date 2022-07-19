@@ -18,8 +18,8 @@ public class GroupMembersViewModel extends ViewModel {
     private MutableLiveData<GroupMemberModel> data;
     private MutableLiveData<BasicModel1> remove_data;
     private MutableLiveData<BasicModel1> member_remove_data;
-    private MutableLiveData<BasicModel> update_email_data;
-    private MutableLiveData<BasicModel> update_pass_data;
+    private MutableLiveData<BasicModel1> update_email_data;
+    private MutableLiveData<BasicModel1> update_pass_data;
     private MutableLiveData<BasicModel> update_visibility;
     private MutableLiveData<BasicModel1> left_data;
 
@@ -111,10 +111,10 @@ public class GroupMembersViewModel extends ViewModel {
         return this.member_remove_data;
     }
 
-    public MutableLiveData<BasicModel> getUpdate_email_data() {
+    public MutableLiveData<BasicModel1> getUpdate_email_data() {
         return this.update_email_data;
     }
-    public MutableLiveData<BasicModel> getUpdate_pass_data() {
+    public MutableLiveData<BasicModel1> getUpdate_pass_data() {
         return this.update_pass_data;
     }
     public MutableLiveData<BasicModel> getUpdate_visibility() {
