@@ -25,7 +25,7 @@ public class RegisterRepository {
         Call<RegisterModel> call = apiService.register(number,name,url,id);
         call.enqueue(new Callback<RegisterModel>() {
             @Override
-            public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
+            public void onResponse(@NonNull Call<RegisterModel> call, @NonNull Response<RegisterModel> response) {
                 if(response.body()!=null)
                 {
                     RegisterModelMutableLiveData.setValue(response.body());
@@ -35,7 +35,7 @@ public class RegisterRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<RegisterModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<RegisterModel> call, @NonNull Throwable t) {
                 Log.e("Avatar Error",t.getMessage());
             }
         });

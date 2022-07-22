@@ -53,15 +53,18 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         holder.date.setText(Constants.getDate(dataItem.getCreatedAt()));
 
-        holder.name.setText(dataItem.getGroupsPaymentTransactions().getSubCategory().getSubCatTitle());
+        if (dataItem.getGroupsPaymentTransactions().getSubCategory() != null) {
 
-        String url = Constants.IMG_PATH + dataItem.getGroupsPaymentTransactions().getSubCategory().getCategory().getIcon();
+            holder.name.setText(dataItem.getGroupsPaymentTransactions().getSubCategory().getSubCatTitle());
+
+            String url = Constants.IMG_PATH + dataItem.getGroupsPaymentTransactions().getSubCategory().getCategory().getIcon();
 
 
-       // Svg.INSTANCE.loadUrl(url , holder.icon);
-        holder.icon.setImageResource(
-                Constants.getCategoryIcon(context,dataItem.getGroupsPaymentTransactions().getSubCategory().getCategory().getId()));
+            // Svg.INSTANCE.loadUrl(url , holder.icon);
+            holder.icon.setImageResource(
+                    Constants.getCategoryIcon(context, dataItem.getGroupsPaymentTransactions().getSubCategory().getCategory().getId()));
 
+        }
     }
 
     @Override

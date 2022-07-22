@@ -11,6 +11,7 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -110,6 +111,8 @@ public class  Credentials extends Fragment {
                     createGroupViewModel.init();
                     createGroupViewModel.getData().observe(getViewLifecycleOwner(), createGroupModel -> {
                         if (createGroupModel.isSuccess()) {
+                            Toast.makeText(requireContext(), createGroupModel.getMessage(), Toast.LENGTH_SHORT).show();
+
                             if (createGroupModel.getData() != null) {
 
                                 MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
@@ -126,8 +129,10 @@ public class  Credentials extends Fragment {
                                 pm.saveData(Split.getAppContext(), "GROUP_ID", String.valueOf(createGroupModel.getData().getGroupId()));
                                 pm.saveData(Split.getAppContext(), "CREATED_AT", String.valueOf(createGroupModel.getData().getCreatedAt()));
 
-                                Navigation.findNavController(requireView()).navigate(R.id.action_otpVerifyFragment_to_otpSuccess);
+                                Navigation.findNavController(requireView()).navigate(R.id.action_credentials2_to_otpSuccess);
                             }
+                        }else {
+                            Toast.makeText(requireContext(), createGroupModel.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 //                    Navigation.findNavController(view).navigate(R.id.action_credentials2_to_phoneCredentials);

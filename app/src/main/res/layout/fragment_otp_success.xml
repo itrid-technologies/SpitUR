@@ -122,7 +122,6 @@
                     android:textSize="13sp"
                     android:paddingEnd="50dp"
                     android:padding="10dp"
-                    android:text="@string/app_link"
                     android:textColor="@color/white"
                     android:textColorHint="@color/hint_color"
                     app:layout_constraintEnd_toEndOf="parent"

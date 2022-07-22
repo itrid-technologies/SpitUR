@@ -247,4 +247,8 @@ public interface ApiService {
     @GET("users/user_active_status/{status}")
     Call<BasicModel1> setUserOnlineStatus(@Header("Authorization") String token,
                                          @Path("status") int status);
+
+    @POST("refer/referal")
+    Call<BasicModel1> sendReferral(@Header("Authorization") String token,
+                                  @Body JsonObject object);
 }

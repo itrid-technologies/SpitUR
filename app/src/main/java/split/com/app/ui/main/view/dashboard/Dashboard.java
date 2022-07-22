@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.tabs.TabLayout;
@@ -134,8 +135,11 @@ public class Dashboard extends AppCompatActivity {
 
                 // checking for type intent filter
                 if (intent.getAction().equals(OTP_NOTIFICATION)) {
+                    String sender_id = intent.getStringExtra("sender_id");
+                    String group_id = intent.getStringExtra("group_id");
+
                     // gcm successfully registered
-                    showDialogue();
+                    showDialogue(sender_id,group_id);
                 }
             }
         };
@@ -155,11 +159,12 @@ public class Dashboard extends AppCompatActivity {
         registerReceiver(receiver, new IntentFilter(Configration.PUSH_NOTIFICATION));
     }
 
-    private void showDialogue() {
+    private void showDialogue(String sender_id, String group_id) {
         dialogBuilder = new AlertDialog.Builder(Dashboard.this);
         dialogBuilder.setCancelable(false);
         View layoutView = getLayoutInflater().inflate(R.layout.otp_request_dialogue, null);
         ImageView close = (ImageView) layoutView.findViewById(R.id.close_dialogue);
+        ImageView send = (ImageView) layoutView.findViewById(R.id.send_otp);
 
 
         dialogBuilder.setView(layoutView);
@@ -169,6 +174,15 @@ public class Dashboard extends AppCompatActivity {
         alertDialog.show();
         close.setOnClickListener(view1 -> {
             alertDialog.dismiss();
+        });
+
+        send.setOnClickListener(view1 -> {
+            alertDialog.dismiss();
+            Bundle bundle = new Bundle();
+            bundle.putString("receiverId",sender_id);
+            bundle.putString("groupId",group_id);
+            bundle.putBoolean("ask_otp", false);
+            mNavController.navigate(R.id.memberChat,bundle);
         });
     }
 

@@ -33,9 +33,12 @@ import split.com.app.data.model.get_avatar.AvatarItem;
 import split.com.app.databinding.FragmentProfileBinding;
 import split.com.app.ui.main.adapter.avatar_adapter.AdapterAvatars;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.view.otp_verification.OtpVerification;
 import split.com.app.ui.main.view.splash.Splash;
+import split.com.app.ui.main.viewmodel.ReferralViewModel;
 import split.com.app.ui.main.viewmodel.avatar_viewmodel.AvatarViewModel;
 import split.com.app.ui.main.viewmodel.profile_viewmodel.ProfileViewModel;
+import split.com.app.utils.ActivityUtil;
 import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
@@ -94,6 +97,14 @@ public class Profile extends Fragment {
         String avatar = Constants.USER_AVATAR;
         binding.name.setText(user_name);
         Glide.with(Split.getAppContext()).load(avatar).placeholder(R.color.images_placeholder).into(binding.userImage);
+
+//        ReferralViewModel referralViewModel = new ReferralViewModel(Constants.ID,"2");
+//        referralViewModel.init();
+//        referralViewModel.getData().observe(getViewLifecycleOwner(),basicModel -> {
+//            if (basicModel.isStatus().equalsIgnoreCase("true")){
+//                Toast.makeText(requireContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     private void initClickListeners() {

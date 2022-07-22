@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,8 +24,13 @@ import androidx.navigation.Navigation;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import split.com.app.R;
+import split.com.app.data.api.ApiManager;
 import split.com.app.data.model.group_detail.DataItem;
+import split.com.app.data.model.settings.SettingsResponse;
 import split.com.app.databinding.FragmentJoinCheckOutBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.view.join_plans.CheckoutActivity;
@@ -52,6 +59,7 @@ public class JoinCheckOut extends Fragment {
     String code = "";
 
     JoinGroupViewModel joinGroupViewModel;
+    String commission;
 
 
     @Override
@@ -60,6 +68,7 @@ public class JoinCheckOut extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentJoinCheckOutBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
+        getCommissionValue();
 
         binding.jcToolbar.title.setText("Join");
         binding.profile2.count.setText("143 coins");
@@ -86,6 +95,32 @@ public class JoinCheckOut extends Fragment {
 
     }
 
+    private void getCommissionValue() {
+        Call<SettingsResponse> call = ApiManager.getRestApiService().getSettings();
+        call.enqueue(new Callback<SettingsResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<SettingsResponse> call, @NonNull Response<SettingsResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().isSuccess()) {
+                        commission = response.body().getData().getCommissionPercentage();
+                        binding.payment.setText(commission);
+                        String totalCoins = String.valueOf(Double.parseDouble(value) + Double.parseDouble(commission));
+                        binding.btnJoin.setText(String.format("Join for %s Coins", totalCoins));
+
+                    } else {
+                        Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SettingsResponse> call, @NonNull Throwable t) {
+                Log.e("Commission Error", "onFailure: ", t);
+            }
+        });
+    }
+
+
     private void setData(DataItem dataItem) {
         try {
             binding.profile2.netflix.setText(dataItem.getTitle());
@@ -100,15 +135,15 @@ public class JoinCheckOut extends Fragment {
             binding.profile2.count.setText(String.format("%s Coins", value));
             binding.priceValue.setText(String.format("%s Coins", value));
 
-            final double fee = (Double.parseDouble(value) / 100) * 2.5;
-            final String roundedFee = String.format("%.2f", fee);
+//            final double fee = (Double.parseDouble(value) / 100) * 2.5;
+//            final String roundedFee = String.format("%.2f", fee);
 
-            binding.payment.setText(String.valueOf(Math.round(fee)));
-            String totalCoins = String.valueOf(Math.round(Double.parseDouble(value) + Double.parseDouble(roundedFee)));
+            binding.payment.setText(commission);
+            String totalCoins = String.valueOf(Math.round(Double.parseDouble(value) + Double.parseDouble(commission)));
             binding.btnJoin.setText(String.format("Join for %s Coins", totalCoins));
 
-            MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
-            mySharedPreferences.saveData(Split.getAppContext(), "GroupID", String.valueOf(dataItem.getId()));
+//            MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
+//            mySharedPreferences.saveData(Split.getAppContext(), "GroupID", String.valueOf(dataItem.getId()));
 
         } catch (NullPointerException e) {
 
@@ -248,9 +283,9 @@ public class JoinCheckOut extends Fragment {
 //        Navigation.findNavController(requireView()).navigate(R.id.action_joinCheckOut_to_joinPayment);
         binding.loadingView.setVisibility(View.VISIBLE);
 
-        MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
-        String group_id = mySharedPreferences.getData(Split.getAppContext(), "GroupID");
-
+//        MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
+//        String group_id = mySharedPreferences.getData(Split.getAppContext(), "GroupID");
+        String group_id = String.valueOf(dataItem.getId());
         if (!group_id.isEmpty()) {
             joinGroupViewModel = new JoinGroupViewModel(group_id, Constants.USER_EMAIL, code);
             joinGroupViewModel.init();
@@ -290,6 +325,8 @@ public class JoinCheckOut extends Fragment {
 
                 }
             });
+        }else {
+
         }
     }
 

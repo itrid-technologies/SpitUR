@@ -140,7 +140,7 @@ public class CreatedGroupDetail extends Fragment {
             binding.publicSelected.setVisibility(View.GONE);
 
             binding.privateLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
-            binding.privateSelected.setVisibility(View.VISIBLE);
+            binding.privateSelected.setVisibility (View.VISIBLE);
 
             updateVisibility(false);
         });
@@ -180,12 +180,12 @@ public class CreatedGroupDetail extends Fragment {
         membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", updated_value, "", false);
         membersViewModel.initEmailUpdate();
         membersViewModel.getUpdate_email_data().observe(getViewLifecycleOwner(), basicModel -> {
-            //if (basicModel.isStatus().equalsIgnoreCase("true")) {
+            if (basicModel.isStatus().equalsIgnoreCase("true")) {
                 Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
                 binding.edUsername.setEnabled(false);
                 binding.editUsername.setText("Edit");
                 binding.editUsername.setTextColor(Color.parseColor("#F7931A"));
-           // }
+            }
         });
     }
 
@@ -193,12 +193,12 @@ public class CreatedGroupDetail extends Fragment {
         membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", "", updated_value, false);
         membersViewModel.initPassUpdate();
         membersViewModel.getUpdate_pass_data().observe(getViewLifecycleOwner(), basicModel -> {
-           // if (basicModel.isStatus().equalsIgnoreCase("true")) {
+            if (basicModel.isStatus().equalsIgnoreCase("true")) {
                 Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
                 binding.edPassword.setEnabled(false);
                 binding.editPass.setText("Edit");
                 binding.editPass .setTextColor(Color.parseColor("#F7931A"));
-          //  }
+            }
         });
     }
 
@@ -297,6 +297,8 @@ public class CreatedGroupDetail extends Fragment {
     }
 
     private void initClickEvents() {
+
+        binding.profileLink.setText("https://play.google.com/store/apps/details?id=split.com.app&referrer="+Constants.ID);
 
         binding.cgdToolbar.back.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigateUp();

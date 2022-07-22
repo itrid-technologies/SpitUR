@@ -32,6 +32,7 @@ import split.com.app.ui.main.adapter.chat.ChatAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.viewmodel.chat_viewmodel.ChatMemberViewModel;
 import split.com.app.ui.main.viewmodel.otp_request_viewmodel.OtpRequestViewModel;
+import split.com.app.utils.Constants;
 import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
@@ -66,7 +67,6 @@ public class MemberChat extends Fragment {
 
         registerMsgReceiver();
 
-        msgs = new ArrayList<>();
 
         clickListeners();
 
@@ -83,8 +83,9 @@ public class MemberChat extends Fragment {
             binding.askOtp.setVisibility(View.GONE);
         }
 
-        MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
-        id = pm.getData(Split.getAppContext(), "Id");
+//        MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+//        id = pm.getData(Split.getAppContext(), "Id");
+        id = Constants.ID;
 
         initChatList();
 
@@ -95,21 +96,27 @@ public class MemberChat extends Fragment {
         viewModel.initGetAllMessage();
         viewModel.getMessages_data().observe(getViewLifecycleOwner(), getMemberMessagesModel -> {
             if (getMemberMessagesModel.isStatus()) {
+
+                msgs = new ArrayList<>();
+
+
                 if (getMemberMessagesModel.getMessages().size() > 0) {
+
+
                     for (int i = 0; i <= getMemberMessagesModel.getMessages().size() - 1; i++) {
 
                         if (String.valueOf(getMemberMessagesModel.getMessages().get(i).getSenderId()).equalsIgnoreCase(id)) {
                             msgs.add(new SenderModel(getMemberMessagesModel.getMessages().get(i).getBody(),
                                     getMemberMessagesModel.getMessages().get(i).getCreatedAt()
                             ));
-                        } else if(getMemberMessagesModel.getMessages().get(i).getSenderId() == getMemberMessagesModel.getMessages().get(i).getReceiverId()) {
-                            msgs.add(new OTpModel(getMemberMessagesModel.getMessages().get(i).getBody(),
-                                    getMemberMessagesModel.getMessages().get(i).getCreatedAt()
-                            ));
+//                        } else if(getMemberMessagesModel.getMessages().get(i).getSenderId() == getMemberMessagesModel.getMessages().get(i).getReceiverId()) {
+//                            msgs.add(new OTpModel(getMemberMessagesModel.getMessages().get(i).getBody(),
+//                                    getMemberMessagesModel.getMessages().get(i).getCreatedAt()
+//                            ));
                         }else {
                             msgs.add(new ReceiverModel(getMemberMessagesModel.getMessages().get(i).getBody(),
                                     getMemberMessagesModel.getMessages().get(i).getCreatedAt(),
-                                    getMemberMessagesModel.getMessages().get(i).getReceiver()));
+                                    null));
                         }
                     }
                     buildChatRv(msgs);

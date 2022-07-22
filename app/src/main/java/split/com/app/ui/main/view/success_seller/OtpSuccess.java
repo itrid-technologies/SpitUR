@@ -45,6 +45,7 @@ public class OtpSuccess extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
+        binding.appLink.setText("https://play.google.com/store/apps/details?id=split.com.app&referrer="+Constants.ID);
 
         Glide.with(Split.getAppContext()).load(R.drawable.success_gif).into(binding.successGif);
 
@@ -76,7 +77,7 @@ public class OtpSuccess extends Fragment {
             Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
             whatsappIntent.setType("text/plain");
             whatsappIntent.setPackage("com.whatsapp");
-            whatsappIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=split.com.app");
+            whatsappIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=split.com.app&referrer=\"+Constants.ID");
             try {
                 requireActivity().startActivity(whatsappIntent);
             } catch (android.content.ActivityNotFoundException ex) {

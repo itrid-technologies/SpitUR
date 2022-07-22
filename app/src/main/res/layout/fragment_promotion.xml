@@ -282,7 +282,6 @@
                 android:textColorHint="@color/hint_color"
                 android:fontFamily="@font/poppin_regular"
                 android:textSize="13sp"
-                android:text="@string/app_link"
                 android:ellipsize="end"
                 android:focusable="false"
                 android:paddingEnd="46dp"

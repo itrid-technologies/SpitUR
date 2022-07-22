@@ -15,6 +15,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/aplit_logo_round"
         android:supportsRtl="true"
+        android:hardwareAccelerated="false"
         android:theme="@style/Theme.Split"
         android:usesCleartextTraffic="true">
 
@@ -76,7 +77,9 @@
 
         <receiver
             android:name=".utils.MyReceiver"
-            android:exported="true"></receiver>
+            android:exported="true">
+
+        </receiver>
 
         <receiver android:name=".utils.OtpReader"
             android:exported="true">
@@ -85,6 +88,14 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".utils.InstallReferrerReceiver"
+            android:exported="true"
+            android:permission="android.permission.INSTALL_PACKAGES">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
 
 
     </application>

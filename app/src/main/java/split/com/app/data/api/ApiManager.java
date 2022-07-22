@@ -21,7 +21,7 @@ import split.com.app.utils.Constants;
 
 public class ApiManager {
     //http://192.168.100.19:4000/http://3.6.7.161:4000/
-    public static final String URL_BASE= "http://3.6.7.161:4000/";
+    public static final String URL_BASE= "http://famger.com:4000/";
 
     private static Retrofit retrofit;
 
@@ -43,7 +43,7 @@ public class ApiManager {
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.URL_BASE)
-//                    .baseUrl("https://testserver.glorek.com/api/")
+//                  .baseUrl("https://testserver.glorek.com/api/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
 //                  .addConverterFactory(NullOrEmptyConverterFactory())
                     .client(httpClient.build())

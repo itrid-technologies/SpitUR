@@ -72,7 +72,7 @@ public class GroupMembersViewModel extends ViewModel {
 
     public void initEmailUpdate() {
         if (this.update_email_data != null) {
-            // ViewModel is created per Fragment so
+            // ViewModel is _gorucreated per Fragment so
             // we know the userId won't change
             return;
         }

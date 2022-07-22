@@ -9,8 +9,8 @@ public class MessagesItem{
 	@SerializedName("createdAt")
 	private String createdAt;
 
-	@SerializedName("group_sender")
-	private GroupSender receiver;
+	@SerializedName("receiver")
+	private Receiver receiver;
 
 	@SerializedName("sender")
 	private Sender sender;
@@ -35,7 +35,7 @@ public class MessagesItem{
 		return createdAt;
 	}
 
-	public GroupSender getReceiver(){
+	public Receiver getReceiver(){
 		return receiver;
 	}
 

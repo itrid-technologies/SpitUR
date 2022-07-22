@@ -37,45 +37,60 @@
             app:layout_constraintTop_toTopOf="@id/user_icons"
             app:layout_constraintBottom_toBottomOf="@id/user_icons"
             android:layout_marginStart="@dimen/_8sdp"
-            android:visibility="gone"
-            android:fontFamily="@font/inter_medium"
+            android:fontFamily="@font/inter_semibold"
             android:textColor="@color/white"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:id="@+id/chat_userName"/>
 
-        <TextView
-            android:id="@+id/tv_receiver_message"
-            style="@style/normalText"
+
+        <LinearLayout
+            android:id="@+id/message_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/rect_bg"
-            android:backgroundTint="@color/profile_bg"
             android:gravity="start"
-            android:paddingLeft="30dp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:paddingTop="10dp"
-            android:textSize="13sp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:textAlignment="textStart"
-            android:textColor="@color/white"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/chat_userName"
             app:layout_constraintStart_toStartOf="@id/chat_userName"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tv_date"
-            tools:text="Receiver here... " />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/tv_receiver_message"
+                style="@style/normalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rect_bg"
+                android:backgroundTint="@color/profile_bg"
+                android:gravity="start"
+                android:paddingStart="25dp"
+                android:paddingTop="8dp"
+                android:textSize="13sp"
+                android:paddingEnd="25dp"
+                android:paddingBottom="8dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/chat_userName"
+                app:layout_constraintStart_toStartOf="@id/chat_userName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_date"
+                tools:text="Receiver here... " />
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tv_date"
-            style="@style/normalText"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="10sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="21:24"
             android:padding="5dp"
             android:textColor="@color/hint_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_receiver_message"
-            app:layout_constraintStart_toEndOf="@id/tv_receiver_message"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/chat_userName"
+            app:layout_constraintBottom_toTopOf="@id/message_layout"
              />
 
 

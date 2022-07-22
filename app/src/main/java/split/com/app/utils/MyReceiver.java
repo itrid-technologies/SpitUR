@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.navigation.Navigation;
+
 import split.com.app.R;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 
@@ -33,7 +35,7 @@ public class MyReceiver extends BroadcastReceiver {
 
       //  View layoutView = getLayoutInflater().inflate(R.layout.otp_request_dialogue, null);
         ImageView close = (ImageView) layoutView.findViewById(R.id.close_dialogue);
-
+        ImageView send = (ImageView) layoutView.findViewById(R.id.send_otp);
 
         dialogBuilder.setView(layoutView);
         alertDialog = dialogBuilder.create();
@@ -42,6 +44,11 @@ public class MyReceiver extends BroadcastReceiver {
         alertDialog.show();
         close.setOnClickListener(view1 -> {
             alertDialog.dismiss();
+        });
+
+        send.setOnClickListener(view1 -> {
+            alertDialog.dismiss();
+            Navigation.findNavController(view1).navigate(R.id.memberChat);
         });
     }
 

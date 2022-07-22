@@ -20,11 +20,13 @@ import split.com.app.R;
 public final class Constants {
 
 
-    public static String URL_BASE = "http://3.109.223.84:4000/";
+    public static String URL_BASE = "http://famger.com:4000/";
 //     public static String URL_BASE = "http://192.168.100.5:4000/";
 
-    public static String IMG_PATH = "http://3.109.223.84:4000";
-    //    public static String IMG_PATH = "http://192.168.100.5:4000";
+    public static String IMG_PATH = "http://famger.com:4000";
+/*
+        public static String IMG_PATH = "http://192.168.100.5:4000";
+*/
     public static String DEVICE_TOKEN = "";
 
 
@@ -51,6 +53,8 @@ public final class Constants {
     public static String USER_ID = "";
     public static String USER_AVATAR = "";
     public static String USER_NUMBER = "";
+
+    public static String Referrer = "";
 
 
     public static final String FACEBOOK_PACKAGE_NAME = "com.facebook.katana";

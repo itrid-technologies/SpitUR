@@ -17,6 +17,7 @@ import split.com.app.R;
 import split.com.app.databinding.ActivityOtpVerificationBinding;
 import split.com.app.service.OTPListener;
 import split.com.app.ui.main.view.dashboard.Dashboard;
+import split.com.app.ui.main.viewmodel.ReferralViewModel;
 import split.com.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel;
 import split.com.app.ui.main.viewmodel.phone_number.PhoneNumberViewModel;
 import split.com.app.utils.ActivityUtil;
@@ -136,8 +137,21 @@ public class OtpVerification extends AppCompatActivity implements OTPListener {
                     pm.saveData(Split.getAppContext(), "userAvatar", authenticationModel.getData().getUser().getAvatar());
 
 
-                    ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    if (!Constants.Referrer.isEmpty()){
+                        ReferralViewModel referralViewModel = new ReferralViewModel(Constants.ID,Constants.Referrer);
+                        referralViewModel.init();
+                        referralViewModel.getData().observe(this,basicModel -> {
+                            if (basicModel.isStatus().equalsIgnoreCase("true")){
+                                Toast.makeText(this, basicModel.getMessage(), Toast.LENGTH_SHORT).show();
+                                ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            }
+                        });
+                    }else {
+                        ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    }
+
 
                 }
 

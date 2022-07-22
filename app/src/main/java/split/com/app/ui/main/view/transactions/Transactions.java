@@ -69,6 +69,8 @@ public class Transactions extends Fragment {
                 }else {
                     binding.noTransactionLayout.setVisibility(View.VISIBLE);
                 }
+            }else {
+
             }
         });
 
