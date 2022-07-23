@@ -166,6 +166,9 @@
         <action
             android:id="@+id/action_contactUs_to_supportChat"
             app:destination="@id/supportChat" />
+        <action
+            android:id="@+id/action_contactUs_to_createdAndJoinedGroups"
+            app:destination="@id/createdAndJoinedGroups" />
     </fragment>
     <fragment
         android:id="@+id/FAQ"
@@ -286,6 +289,9 @@
         <action
             android:id="@+id/action_createdAndJoinedGroups_to_joinSearch"
             app:destination="@id/joinSearch" />
+        <action
+            android:id="@+id/action_createdAndJoinedGroups_to_supportChat"
+            app:destination="@id/supportChat" />
     </fragment>
     <fragment
         android:id="@+id/joinedGroupDetail2"

@@ -2,15 +2,11 @@ package split.com.app.utils;
 
 import android.content.Context;
 import android.os.Build;
-import android.text.format.DateUtils;
 
 import androidx.annotation.RequiresApi;
 
-import com.google.type.DateTime;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -21,12 +17,10 @@ public final class Constants {
 
 
     public static String URL_BASE = "http://famger.com:4000/";
-//     public static String URL_BASE = "http://192.168.100.5:4000/";
+//     public static String URL_BASE = "http://3.110.227.193:4000/";
 
     public static String IMG_PATH = "http://famger.com:4000";
-/*
-        public static String IMG_PATH = "http://192.168.100.5:4000";
-*/
+//        public static String IMG_PATH = "http://3.110.227.193:4000";
     public static String DEVICE_TOKEN = "";
 
 

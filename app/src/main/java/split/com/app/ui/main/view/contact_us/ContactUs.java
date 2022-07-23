@@ -1,15 +1,14 @@
 package split.com.app.ui.main.view.contact_us;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import split.com.app.R;
 import split.com.app.databinding.FragmentContactUsBinding;
@@ -50,7 +49,10 @@ public class ContactUs extends Fragment {
         });
 
         binding.contactLayout.chatLayout.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_contactUs_to_supportChat);
+            //to group created
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("isFromChat", true);
+            Navigation.findNavController(view).navigate(R.id.action_contactUs_to_createdAndJoinedGroups, bundle);
         });
     }
 }

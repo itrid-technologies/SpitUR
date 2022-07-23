@@ -52,8 +52,8 @@ public class Cost extends Fragment {
         String avatar = Constants.USER_AVATAR;
         String slot = Constants.SLOTS;
 
-        binding.costProfile.netflix.setText(user_name);
-        binding.costProfile.userName.setText(user_ID);
+        binding.costProfile.netflix.setText(Constants.SUB_CAT_TITLE);
+        binding.costProfile.userName.setText(String.format("@%s", user_ID));
         binding.costProfile.count.setText(slot + " Slots");
         Glide.with(Split.getAppContext()).load(avatar).into(binding.costProfile.userImage);
     }

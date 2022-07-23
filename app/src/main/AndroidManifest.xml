@@ -10,15 +10,17 @@
     <application
         android:name=".utils.Split"
         android:allowBackup="false"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/aplit_logo"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/aplit_logo_round"
         android:supportsRtl="true"
-        android:hardwareAccelerated="false"
         android:theme="@style/Theme.Split"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".ui.main.view.WebViewActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.main.view.join_plans.CheckoutActivity"
             android:exported="false" />
@@ -35,10 +37,10 @@
             android:exported="true"
             android:screenOrientation="portrait">
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".ui.main.view.terms_conditions.TermsAndConditions"
@@ -77,17 +79,14 @@
 
         <receiver
             android:name=".utils.MyReceiver"
-            android:exported="true">
-
-        </receiver>
-
-        <receiver android:name=".utils.OtpReader"
+            android:exported="true"></receiver>
+        <receiver
+            android:name=".utils.OtpReader"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name=".utils.InstallReferrerReceiver"
             android:exported="true"
@@ -96,8 +95,6 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
-
-
     </application>
 
 </manifest>

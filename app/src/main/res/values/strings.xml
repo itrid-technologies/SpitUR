@@ -22,5 +22,5 @@
     <string name="swap">Swap</string>
     <string name="spiltur_score">Spiltur score</string>
     <string name="str_welcome_text">Share,\nSubscribe,\nEarn</string>
-<!--    <string name="app_link"><![CDATA[https://play.google.com/store/apps/details?id=split.com.app]]></string>-->
+    <!--    <string name="app_link"><![CDATA[https://play.google.com/store/apps/details?id=split.com.app]]></string>-->
 </resources>

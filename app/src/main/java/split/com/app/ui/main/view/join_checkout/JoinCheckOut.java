@@ -23,6 +23,9 @@ import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,8 +41,6 @@ import split.com.app.ui.main.viewmodel.CheckOutViewModel;
 import split.com.app.ui.main.viewmodel.join_checkout_viewmodel.JoinCheckoutViewModel;
 import split.com.app.ui.main.viewmodel.join_group.JoinGroupViewModel;
 import split.com.app.utils.Constants;
-import split.com.app.utils.MySharedPreferences;
-import split.com.app.utils.Split;
 
 
 public class JoinCheckOut extends Fragment {
@@ -80,7 +81,6 @@ public class JoinCheckOut extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         if (getArguments() != null) {
             String data = getArguments().getString("groupDetail");
 
@@ -95,6 +95,31 @@ public class JoinCheckOut extends Fragment {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Call<JsonObject> call = ApiManager.getRestApiService().getGroupAmount(dataItem.getId());
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    try {
+                        final String amount = response.body().get("data").getAsString();
+                        binding.btnJoin.setText(String.format("Join for %s Coins", amount));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                Toast.makeText(requireContext(), "ERROR: Group total not set", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void getCommissionValue() {
         Call<SettingsResponse> call = ApiManager.getRestApiService().getSettings();
         call.enqueue(new Callback<SettingsResponse>() {
@@ -103,9 +128,12 @@ public class JoinCheckOut extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().isSuccess()) {
                         commission = response.body().getData().getCommissionPercentage();
-                        binding.payment.setText(commission);
-                        String totalCoins = String.valueOf(Double.parseDouble(value) + Double.parseDouble(commission));
-                        binding.btnJoin.setText(String.format("Join for %s Coins", totalCoins));
+
+                        final double fee = (Double.parseDouble(value) / 100) * Double.parseDouble(commission);
+                        final String roundedFee = String.format(Locale.getDefault(), "%.2f", fee);
+                        binding.payment.setText(roundedFee);
+//String totalCoins = String.valueOf(Double.parseDouble(value) + Double.parseDouble(commission));
+//binding.btnJoin.setText(String.format("Join for %s Coins", totalCoins));
 
                     } else {
                         Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -139,8 +167,8 @@ public class JoinCheckOut extends Fragment {
 //            final String roundedFee = String.format("%.2f", fee);
 
             binding.payment.setText(commission);
-            String totalCoins = String.valueOf(Math.round(Double.parseDouble(value) + Double.parseDouble(commission)));
-            binding.btnJoin.setText(String.format("Join for %s Coins", totalCoins));
+//            String totalCoins = String.valueOf(Math.round(Double.parseDouble(value) + Double.parseDouble(commission)));
+//            binding.btnJoin.setText(String.format("Join for %s Coins", totalCoins));
 
 //            MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
 //            mySharedPreferences.saveData(Split.getAppContext(), "GroupID", String.valueOf(dataItem.getId()));
@@ -325,7 +353,7 @@ public class JoinCheckOut extends Fragment {
 
                 }
             });
-        }else {
+        } else {
 
         }
     }

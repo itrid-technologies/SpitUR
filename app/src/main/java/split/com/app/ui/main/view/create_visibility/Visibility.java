@@ -1,15 +1,14 @@
 package split.com.app.ui.main.view.create_visibility;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 
@@ -57,17 +56,17 @@ public class Visibility extends Fragment {
         String user_ID = Constants.USER_ID;
         String avatar = Constants.USER_AVATAR;
         slot = Constants.SLOTS;
-        if (!slot.isEmpty()){
+        if (!slot.isEmpty()) {
             Constants.SLOTS = slot;
             slot = Constants.SLOTS;
 
-        }else {
+        } else {
             Constants.SLOTS = "4";
             slot = Constants.SLOTS;
         }
 
-        binding.visibilityProfile.netflix.setText(user_name);
-        binding.visibilityProfile.userName.setText(user_ID);
+        binding.visibilityProfile.netflix.setText(Constants.SUB_CAT_TITLE);
+        binding.visibilityProfile.userName.setText(String.format("@%s", user_ID));
         binding.visibilityProfile.count.setText(slot + " Slots");
         Glide.with(Split.getAppContext()).load(avatar).into(binding.visibilityProfile.userImage);
     }
@@ -105,11 +104,11 @@ public class Visibility extends Fragment {
 
         binding.btnNext.setOnClickListener(view -> {
 
-           // MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
-            if (!slot.isEmpty()){
+            // MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+            if (!slot.isEmpty()) {
                 Constants.SLOTS = slot;
 
-            }else {
+            } else {
                 Constants.SLOTS = "4";
             }
 //            pm.saveBooleanData(Split.getAppContext(), "VISIBILITY", visibility);

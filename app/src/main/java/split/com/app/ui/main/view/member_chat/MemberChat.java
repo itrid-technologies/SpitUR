@@ -24,16 +24,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import split.com.app.data.model.OTpModel;
-import split.com.app.data.model.chat_receiver.ReceiverModel;
 import split.com.app.data.model.chat_sender.SenderModel;
 import split.com.app.databinding.FragmentMemberChatBinding;
-import split.com.app.ui.main.adapter.chat.ChatAdapter;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.viewmodel.chat_viewmodel.ChatMemberViewModel;
 import split.com.app.ui.main.viewmodel.otp_request_viewmodel.OtpRequestViewModel;
 import split.com.app.utils.Constants;
-import split.com.app.utils.MySharedPreferences;
 import split.com.app.utils.Split;
 
 
@@ -44,7 +40,7 @@ public class MemberChat extends Fragment {
     String group_id, receiver_id, id;
     ChatMemberViewModel viewModel;
     private ArrayList<Object> msgs;
-    ChatAdapter adapter;
+    MemberChatAdapter adapter;
     OtpRequestViewModel otpRequestViewModel;
     boolean otp_status;
 
@@ -114,9 +110,9 @@ public class MemberChat extends Fragment {
 //                                    getMemberMessagesModel.getMessages().get(i).getCreatedAt()
 //                            ));
                         }else {
-                            msgs.add(new ReceiverModel(getMemberMessagesModel.getMessages().get(i).getBody(),
+                            msgs.add(new MemberReceiverModel(getMemberMessagesModel.getMessages().get(i).getBody(),
                                     getMemberMessagesModel.getMessages().get(i).getCreatedAt(),
-                                    null));
+                                    getMemberMessagesModel.getMessages().get(i).getSender()));
                         }
                     }
                     buildChatRv(msgs);
@@ -144,7 +140,7 @@ public class MemberChat extends Fragment {
     private void buildChatRv(ArrayList<Object> msgs) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.memberChatRv.setLayoutManager(layoutManager);
-        adapter = new ChatAdapter(Split.getAppContext(), msgs);
+        adapter = new MemberChatAdapter(Split.getAppContext(), msgs);
         binding.memberChatRv.setAdapter(adapter);
         binding.memberChatRv.scrollToPosition(msgs.size() - 1);
 

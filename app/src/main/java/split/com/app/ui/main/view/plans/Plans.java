@@ -90,10 +90,9 @@ public class Plans extends Fragment {
         binding.PlansList.setAdapter(adapter);
 
         adapter.setOnPlanSelectListener(position -> {
-            String plan_id = String.valueOf(planModelList.get(position).getId());
-          //  MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
+            //  MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
           //  pm.saveData(Split.getAppContext(), "PLAN_ID", plan_id);
-            Constants.PLAN_ID = plan_id;
+            Constants.PLAN_ID = String.valueOf(planModelList.get(position).getId());
             Constants.SUB_CAT_TITLE = planModelList.get(position).getName();
            // pm.saveData(Split.getAppContext(), "TITLE", planModelList.get(position).getName());
 

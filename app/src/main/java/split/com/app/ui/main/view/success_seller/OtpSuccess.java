@@ -3,24 +3,21 @@ package split.com.app.ui.main.view.success_seller;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 
 import split.com.app.R;
 import split.com.app.databinding.FragmentOtpSuccessBinding;
 import split.com.app.ui.main.view.dashboard.Dashboard;
-import split.com.app.utils.ActivityUtil;
 import split.com.app.utils.Constants;
 import split.com.app.utils.Split;
 
@@ -45,7 +42,7 @@ public class OtpSuccess extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        binding.appLink.setText("https://play.google.com/store/apps/details?id=split.com.app&referrer="+Constants.ID);
+        binding.appLink.setText("https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
 
         Glide.with(Split.getAppContext()).load(R.drawable.success_gif).into(binding.successGif);
 
@@ -67,7 +64,7 @@ public class OtpSuccess extends Fragment {
 
         binding.copyLink01.setOnClickListener(view -> {
             android.content.ClipboardManager clipboard = (android.content.ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper",binding.appLink.getText().toString());
+            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper", binding.appLink.getText().toString());
             clipboard.setPrimaryClip(clip);
 
             Toast.makeText(Split.getAppContext(), "Copied", Toast.LENGTH_SHORT).show();
@@ -77,7 +74,7 @@ public class OtpSuccess extends Fragment {
             Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
             whatsappIntent.setType("text/plain");
             whatsappIntent.setPackage("com.whatsapp");
-            whatsappIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=split.com.app&referrer=\"+Constants.ID");
+            whatsappIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
             try {
                 requireActivity().startActivity(whatsappIntent);
             } catch (android.content.ActivityNotFoundException ex) {
@@ -86,20 +83,20 @@ public class OtpSuccess extends Fragment {
         });
 
         binding.FB.setOnClickListener(view -> {
-            shareAppWithSocial(requireContext(),Constants.FACEBOOK_PACKAGE_NAME,"","");
+            shareAppWithSocial(requireContext(), Constants.FACEBOOK_PACKAGE_NAME, "", "https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
         });
 
         binding.twitter.setOnClickListener(view -> {
-            shareAppWithSocial(requireContext(),Constants.TWITTER_PACKAGE_NAME,"","");
+            shareAppWithSocial(requireContext(), Constants.TWITTER_PACKAGE_NAME, "", "https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
         });
 
         binding.insta.setOnClickListener(view -> {
-            shareAppWithSocial(requireContext(),Constants.INSTAGRAM_PACKAGE_NAME,"","");
+            shareAppWithSocial(requireContext(), Constants.INSTAGRAM_PACKAGE_NAME, "", "https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
 
         });
 
         binding.discord.setOnClickListener(view -> {
-            shareAppWithSocial(requireContext(),Constants.DISCORD_PACKAGE_NAME,"","");
+            shareAppWithSocial(requireContext(), Constants.DISCORD_PACKAGE_NAME, "", "https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
 
         });
 

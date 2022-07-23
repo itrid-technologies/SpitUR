@@ -200,6 +200,9 @@ public interface ApiService {
     Call<BasicModel> request_otp(@Header("Authorization") String token,
                                  @Path("id") String id);
 
+    @GET("groups/getGroupAmount/{id}")
+    Call<JsonObject> getGroupAmount(@Path("id") int groupId);
+
 
     @GET("groups/left_group/{id}")
     Call<BasicModel1> leftGroup(@Header("Authorization") String token,
