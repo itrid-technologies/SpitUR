@@ -53,6 +53,7 @@
             android:backgroundTint="@color/dark_blue"
             android:padding="4dp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:clickable="false"
             >
 
             <com.hbb20.CountryCodePicker
@@ -62,7 +63,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:ccp_showFlag="false"
+                app:ccp_showFlag="true"
+                app:ccp_showArrow="false"
                 app:ccp_defaultPhoneCode="91"
                 android:layout_marginStart="8dp"
                 app:ccp_textSize="18sp"
@@ -70,8 +72,6 @@
                 app:ccpDialog_backgroundColor="@color/light_blue"
                 app:ccp_showNameCode="false"
                 app:ccp_contentColor="#CED0DE"
-                android:clickable="false"
-
                 />
 
             <EditText
@@ -89,7 +89,7 @@
                 android:gravity="center_vertical"
                 android:paddingStart="20dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:hint="1234567"
+                android:hint="91234571090"
                 android:textColorHint="@color/hint_color"
                 android:cursorVisible="false"
                 android:imeOptions="actionDone"
