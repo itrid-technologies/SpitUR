@@ -95,7 +95,7 @@
                     app:layout_constraintStart_toStartOf="@id/tv_total"
                     style="@style/normalText"
                     android:layout_marginTop="-8dp"
-                    android:text="- Coins"
+                    android:text="143 Coins"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:id="@+id/tv_total_coins"/>

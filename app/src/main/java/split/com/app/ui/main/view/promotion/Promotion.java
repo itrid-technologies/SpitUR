@@ -39,9 +39,7 @@ public class Promotion extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (!Constants.Coins.isEmpty()){
-            binding.tvTotalCoins.setText(Constants.Coins + " Coins");
-        }
+
         initClickListeners();
     }
 
