@@ -95,7 +95,7 @@
                     app:layout_constraintStart_toStartOf="@id/tv_total"
                     style="@style/normalText"
                     android:layout_marginTop="-8dp"
-                    android:text="143 Coins"
+                    android:text="- Coins"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:id="@+id/tv_total_coins"/>
@@ -284,6 +284,7 @@
                 android:textSize="13sp"
                 android:ellipsize="end"
                 android:focusable="false"
+                android:clickable="false"
                 android:paddingEnd="46dp"
                 android:layout_marginTop="16dp"
                 android:drawablePadding="10dp"
@@ -291,7 +292,7 @@
                 android:background="@drawable/round_back"
                 android:backgroundTint="@color/light_blue"
                 android:padding="10dp"
-                android:drawableLeft="@drawable/ic_userid"
+                android:drawableStart="@drawable/ic_userid"
                 android:id="@+id/profile_link1"/>
 
             <ImageView

@@ -117,6 +117,7 @@
                     android:drawableLeft="@drawable/ic_user"
                     android:drawablePadding="10dp"
                     android:focusable="false"
+                    android:clickable="false"
                     android:fontFamily="@font/poppin_regular"
                     android:gravity="start|center"
                     android:textSize="13sp"

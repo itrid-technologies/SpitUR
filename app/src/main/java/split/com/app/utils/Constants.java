@@ -57,6 +57,7 @@ public final class Constants {
     public static final String PINTEREST_PACKAGE_NAME = "com.pinterest";
     public static final String WHATS_PACKAGE_NAME = "com.whatsapp";
     public static final String DISCORD_PACKAGE_NAME = "https://discord.gg";
+    public static String Coins = "";
 
     public static String getDate(String data) {
         String date;
@@ -91,47 +92,47 @@ public final class Constants {
         String date;
         String[] date_value = dateAdded.split("T");
         date = date_value[0];
-//        String inputPattern = "yyyy-mm-dd";
-//        String outputPattern = "dd/mm/yyyy";
-//        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
-//        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
-//        Date date1 = null;
-//        String str = null;
-//        String str1 = null;
-////
-//        try{
-//            date1 = inputFormat.parse(date);
-//            str = outputFormat.format(date1);
-//        }catch(ParseException e){
-//            e.printStackTrace();
-//        }
+        String inputPattern = "yyyy-mm-dd";
+        String outputPattern = "dd/mm/yyyy";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        Date date1 = null;
+        String str = null;
+        String str1 = null;
 //
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(date1);
-//        c.add(Calendar.DATE, 30);
-//        date1 = c.getTime();
-//        str = outputFormat.format(date1);
-//
-////        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-////        Calendar cal = Calendar.getInstance();
-////        try{
-////            cal.setTime(sdf.parse(dateAdded));
-////            sdf.format(cal.getTime());
-////        }catch(ParseException e){
-////            e.printStackTrace();
-////        }
-////        cal.add(Calendar.DATE, 1);
-////        String dateAfter = sdf.format(cal.getTime());
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-        Calendar c = Calendar.getInstance();
-        try {
-            c.setTime(sdf.parse(date));
-        } catch (ParseException e) {
+        try{
+            date1 = inputFormat.parse(date);
+            str = outputFormat.format(date1);
+        }catch(ParseException e){
             e.printStackTrace();
         }
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(date1);
         c.add(Calendar.DATE, 30);
-        String dateAfter = sdf.format(c.getTime());
+        date1 = c.getTime();
+        str = outputFormat.format(date1);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        try{
+            cal.setTime(sdf.parse(dateAdded));
+            sdf.format(cal.getTime());
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
+        cal.add(Calendar.DATE, 30);
+        String dateAfter = sdf.format(cal.getTime());
+
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+//        Calendar c = Calendar.getInstance();
+//        try {
+//            c.setTime(sdf.parse(date));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        c.add(Calendar.DATE, 30);
+//        String dateAfter = sdf.format(c.getTime());
 
         return dateAfter;
     }
