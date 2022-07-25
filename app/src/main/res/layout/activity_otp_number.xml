@@ -70,6 +70,8 @@
                 app:ccpDialog_backgroundColor="@color/light_blue"
                 app:ccp_showNameCode="false"
                 app:ccp_contentColor="#CED0DE"
+                android:clickable="false"
+
                 />
 
             <EditText
