@@ -9,8 +9,8 @@
     <string name="enter_verification_code">Enter Verification Code</string>
     <string name="verify">Verify</string>
     <string name="label_terms"><![CDATA[Terms &\nConditions]]></string>
-    <string name="label_conditions"><![CDATA[Tap the Links Below and Read the Terms of use and Privacy Policy Carefully by scrolling through all the lines, And Click on the “I agree” Button Once you Acknowledge and Understand the Terms of Use and Privacy Policy. If are Unable to read or Understand the Terms of Use or thr Privacy Policy. Do not Click on the “I agree” Button.]]></string>
-    <string name="label_agree"><![CDATA[By continuing you agree Taskez’s Terms of Use & Privacy Policy ]]></string>
+    <string name="label_conditions"><![CDATA[Tap the Links Below and Read the Terms of use and Privacy Policy Carefully by scrolling through all the lines, And Click on the “I agree” Button Once you Acknowledge and Understand the Terms of Use and Privacy Policy. If are Unable to read or Understand the Terms of Use or the Privacy Policy. Do not Click on the “I agree” Button.]]></string>
+    <string name="label_agree"><![CDATA[By continuing you agree Splitur Terms of Use & Privacy Policy ]]></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="subscription_name">Subscription Name</string>
