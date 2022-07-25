@@ -358,7 +358,7 @@
                         android:textColor="@color/hint_color"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="I have read and understand and agree to comply with all tems and conditions, Privacy policy and Subscpace Gurantee and Refund Policy"
+                        android:text="I have read and understood and agree to comply with all the Terms of Use and Privacy policy of Splitur Private Limited."
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/point1"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -382,7 +382,7 @@
                         android:textColor="@color/hint_color"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="I confirm that I understand and comply with the Subscription Platforms sharing terms and conditions"
+                        android:text="I confirm that I understand and comply with the Subscription Platforms sharing terms and conditions."
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/point2"
                         app:layout_constraintTop_toBottomOf="@id/tv_point1" />
@@ -407,7 +407,7 @@
                         android:textColor="@color/hint_color"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="I confirm that I understand and comply with the Subscription Platforms sharing terms and conditions"
+                        android:text="I confirm and understand that Splitur Pvt Limited is not associated or affiliated with the Subscription Platorm You are Sharing."
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/point3"
                         app:layout_constraintTop_toBottomOf="@id/tv_point2" />
@@ -431,7 +431,7 @@
                         android:textColor="@color/hint_color"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="I confirm that I understand and comply with the Subscription Platforms sharing terms and conditions"
+                        android:text="I agree and confirm that the person sharing this subscription is either my family member or is living in the same household."
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/point4"
                         app:layout_constraintTop_toBottomOf="@id/tv_point3" />
@@ -440,16 +440,64 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
+                    android:id="@+id/agree_tv"
                     android:fontFamily="@font/inter_medium"
                     android:textSize="@dimen/_10sdp"
-                    android:padding="@dimen/_4sdp"
                     android:textColor="@color/hint_color"
-                     android:layout_width="match_parent"
+                     android:layout_width="wrap_content"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingTop="@dimen/_10sdp"
                     android:layout_height="wrap_content"
-                    android:text="By clicking on the join button, you agree to the terms and conditions mentioned above"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="By clicking on the join button, You agree to"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/termPoints" />
+
+                <TextView
+                    android:id="@+id/the_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="the"
+                    android:paddingStart="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="@id/agree_tv"
+                    app:layout_constraintTop_toBottomOf="@id/agree_tv"
+                    android:textColor="@color/hint_color" />
+                <TextView
+                    android:id="@+id/terms_use_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="Terms of Use"
+                    app:layout_constraintStart_toEndOf="@id/the_tv"
+                    app:layout_constraintTop_toBottomOf="@id/agree_tv"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/and_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="the"
+                    app:layout_constraintStart_toEndOf="@id/terms_use_text"
+                    app:layout_constraintTop_toBottomOf="@id/agree_tv"
+                    android:textColor="@color/hint_color" />
+                <TextView
+                    android:id="@+id/policy_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="Privacy Policy"
+                    app:layout_constraintStart_toEndOf="@id/and_tv"
+                    app:layout_constraintTop_toBottomOf="@id/agree_tv"
+                    android:textColor="@color/white" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

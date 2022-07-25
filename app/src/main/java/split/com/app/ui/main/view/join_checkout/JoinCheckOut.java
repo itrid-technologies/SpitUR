@@ -35,8 +35,10 @@ import split.com.app.data.api.ApiManager;
 import split.com.app.data.model.group_detail.DataItem;
 import split.com.app.data.model.settings.SettingsResponse;
 import split.com.app.databinding.FragmentJoinCheckOutBinding;
+import split.com.app.ui.main.view.WebViewActivity;
 import split.com.app.ui.main.view.dashboard.Dashboard;
 import split.com.app.ui.main.view.join_plans.CheckoutActivity;
+import split.com.app.ui.main.view.terms_conditions.TermsAndConditions;
 import split.com.app.ui.main.viewmodel.CheckOutViewModel;
 import split.com.app.ui.main.viewmodel.join_checkout_viewmodel.JoinCheckoutViewModel;
 import split.com.app.ui.main.viewmodel.join_group.JoinGroupViewModel;
@@ -61,7 +63,9 @@ public class JoinCheckOut extends Fragment {
 
     JoinGroupViewModel joinGroupViewModel;
     String commission;
-
+    Intent webViewIntent;
+    private String urlTerms = "nil";
+    private String urlPrivacy = "nil";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -89,8 +93,11 @@ public class JoinCheckOut extends Fragment {
 
             setData(dataItem);
         }
+        fetchSettingsFromServer();
+        webViewIntent = new Intent(requireContext(), WebViewActivity.class);
 
         initClickListeners();
+
 
 
     }
@@ -251,6 +258,23 @@ public class JoinCheckOut extends Fragment {
         });
 
 
+        binding.termsUseText.setOnClickListener(view -> {
+            if (!urlTerms.equals("nil")) {
+                webViewIntent.putExtra("url", urlTerms);
+                webViewIntent.putExtra("title", "Terms Of Use");
+                startActivity(webViewIntent);
+            }
+        });
+
+        binding.policyText.setOnClickListener(view -> {
+            if (!urlPrivacy.equals("nil")) {
+                webViewIntent.putExtra("url", urlPrivacy);
+                webViewIntent.putExtra("title", "Privacy Policy");
+                startActivity(webViewIntent);
+            }
+        });
+
+
         binding.btnJoin.setOnClickListener(view -> {
 
             viewModel = new JoinCheckoutViewModel(Constants.ID, "");
@@ -378,5 +402,28 @@ public class JoinCheckOut extends Fragment {
             //ActivityUtil.gotoHome(Split.getAppContext());
         });
     }
+
+    private void fetchSettingsFromServer() {
+        Call<SettingsResponse> call = ApiManager.getRestApiService().getSettings();
+        call.enqueue(new Callback<SettingsResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<SettingsResponse> call, @NonNull Response<SettingsResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().isSuccess()) {
+                        urlTerms = response.body().getData().getTermsAndConditionsUrl();
+                        urlPrivacy = response.body().getData().getPrivayUrl();
+                    } else {
+                        Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SettingsResponse> call, @NonNull Throwable t) {
+                Log.e("ActivityTerms", "onFailure: ", t);
+            }
+        });
+    }
+
 
 }
