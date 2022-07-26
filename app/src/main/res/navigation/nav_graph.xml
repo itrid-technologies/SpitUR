@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home2"
-        android:name="split.com.app.ui.main.view.home.Home"
+        android:name="com.splitur.app.ui.main.view.home.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/search2"
-        android:name="split.com.app.ui.main.view.search_create.Search"
+        android:name="com.splitur.app.ui.main.view.search_create.Search"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -50,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/plans2"
-        android:name="split.com.app.ui.main.view.plans.Plans"
+        android:name="com.splitur.app.ui.main.view.plans.Plans"
         android:label="fragment_plans"
         tools:layout="@layout/fragment_plans" >
         <action
@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/visibility2"
-        android:name="split.com.app.ui.main.view.create_visibility.Visibility"
+        android:name="com.splitur.app.ui.main.view.create_visibility.Visibility"
         android:label="fragment_visibility"
         tools:layout="@layout/fragment_visibility" >
         <action
@@ -68,7 +68,7 @@
     </fragment>
     <fragment
         android:id="@+id/cost2"
-        android:name="split.com.app.ui.main.view.create_cost.Cost"
+        android:name="com.splitur.app.ui.main.view.create_cost.Cost"
         android:label="fragment_cost"
         tools:layout="@layout/fragment_cost" >
         <action
@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/credentials2"
-        android:name="split.com.app.ui.main.view.enter_credentials.Credentials"
+        android:name="com.splitur.app.ui.main.view.enter_credentials.Credentials"
         android:label="fragment_credentials"
         tools:layout="@layout/fragment_credentials" >
         <action
@@ -92,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/phoneCredentials"
-        android:name="split.com.app.ui.main.view.enter_phone_number.PhoneCredentials"
+        android:name="com.splitur.app.ui.main.view.enter_phone_number.PhoneCredentials"
         android:label="fragment_phone_credentials"
         tools:layout="@layout/fragment_phone_credentials" >
 
@@ -102,12 +102,12 @@
     </fragment>
     <fragment
         android:id="@+id/otpSuccess"
-        android:name="split.com.app.ui.main.view.success_seller.OtpSuccess"
+        android:name="com.splitur.app.ui.main.view.success_seller.OtpSuccess"
         android:label="fragment_otp_success"
         tools:layout="@layout/fragment_otp_success" />
     <fragment
         android:id="@+id/profile2"
-        android:name="split.com.app.ui.main.view.profile.Profile"
+        android:name="com.splitur.app.ui.main.view.profile.Profile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -134,7 +134,7 @@
     </fragment>
     <fragment
         android:id="@+id/refund2"
-        android:name="split.com.app.ui.main.view.refund.Refund"
+        android:name="com.splitur.app.ui.main.view.refund.Refund"
         android:label="fragment_refund"
         tools:layout="@layout/fragment_refund" >
         <action
@@ -143,7 +143,7 @@
     </fragment>
     <fragment
         android:id="@+id/enterUpiId"
-        android:name="split.com.app.ui.main.view.refund_upi_id.EnterUpiId"
+        android:name="com.splitur.app.ui.main.view.refund_upi_id.EnterUpiId"
         android:label="fragment_enter_upi_id"
         tools:layout="@layout/fragment_enter_upi_id" >
         <action
@@ -152,12 +152,12 @@
     </fragment>
     <fragment
         android:id="@+id/refundCompletion"
-        android:name="split.com.app.ui.main.view.refund_complete.RefundCompletion"
+        android:name="com.splitur.app.ui.main.view.refund_complete.RefundCompletion"
         android:label="fragment_refund_completion"
         tools:layout="@layout/fragment_refund_completion" />
     <fragment
         android:id="@+id/contactUs"
-        android:name="split.com.app.ui.main.view.contact_us.ContactUs"
+        android:name="com.splitur.app.ui.main.view.contact_us.ContactUs"
         android:label="fragment_contact_us"
         tools:layout="@layout/fragment_contact_us" >
         <action
@@ -172,12 +172,12 @@
     </fragment>
     <fragment
         android:id="@+id/FAQ"
-        android:name="split.com.app.ui.main.view.faq.FAQ"
+        android:name="com.splitur.app.ui.main.view.faq.FAQ"
         android:label="fragment_f_a_q"
         tools:layout="@layout/fragment_f_a_q" />
     <fragment
         android:id="@+id/swapCoins"
-        android:name="split.com.app.ui.main.view.swap.SwapCoins"
+        android:name="com.splitur.app.ui.main.view.swap.SwapCoins"
         android:label="fragment_swap_coins"
         tools:layout="@layout/fragment_swap_coins" >
         <action
@@ -186,14 +186,14 @@
     </fragment>
     <fragment
         android:id="@+id/successfullySwapped"
-        android:name="split.com.app.ui.main.view.SuccessfullySwapped"
+        android:name="com.splitur.app.ui.main.view.SuccessfullySwapped"
         android:label="fragment_sucessfully_swaped"
         tools:layout="@layout/fragment_sucessfully_swaped" >
 
     </fragment>
     <fragment
         android:id="@+id/otpVerifyFragment"
-        android:name="split.com.app.ui.main.view.otp_verify_fragment.OtpVerifyFragment"
+        android:name="com.splitur.app.ui.main.view.otp_verify_fragment.OtpVerifyFragment"
         android:label="fragment_otp_verify"
         tools:layout="@layout/fragment_otp_verify" >
         <action
@@ -202,7 +202,7 @@
     </fragment>
     <fragment
         android:id="@+id/joinSearch"
-        android:name="split.com.app.ui.main.view.join_group_search.JoinSearch"
+        android:name="com.splitur.app.ui.main.view.join_group_search.JoinSearch"
         android:label="fragment_join_search"
         tools:layout="@layout/fragment_join_search" >
         <action
@@ -211,7 +211,7 @@
     </fragment>
     <fragment
         android:id="@+id/groupDetail"
-        android:name="split.com.app.ui.main.view.group_details.GroupDetail"
+        android:name="com.splitur.app.ui.main.view.group_details.GroupDetail"
         android:label="fragment_join_group_plans"
         tools:layout="@layout/fragment_join_group_plans" >
         <action
@@ -220,7 +220,7 @@
     </fragment>
     <fragment
         android:id="@+id/groupInformation"
-        android:name="split.com.app.ui.main.view.group_info.GroupInformation"
+        android:name="com.splitur.app.ui.main.view.group_info.GroupInformation"
         android:label="fragment_group_information"
         tools:layout="@layout/fragment_group_information" >
         <action
@@ -229,7 +229,7 @@
     </fragment>
     <fragment
         android:id="@+id/joinCheckOut"
-        android:name="split.com.app.ui.main.view.join_checkout.JoinCheckOut"
+        android:name="com.splitur.app.ui.main.view.join_checkout.JoinCheckOut"
         android:label="fragment_join_check_out"
         tools:layout="@layout/fragment_join_check_out" >
         <action
@@ -241,7 +241,7 @@
     </fragment>
     <fragment
         android:id="@+id/joinTerms"
-        android:name="split.com.app.ui.main.view.join_checkout_terms.JoinTerms"
+        android:name="com.splitur.app.ui.main.view.join_checkout_terms.JoinTerms"
         android:label="fragment_join_terms"
         tools:layout="@layout/fragment_join_terms" >
         <action
@@ -250,7 +250,7 @@
     </fragment>
     <fragment
         android:id="@+id/joinPayment"
-        android:name="split.com.app.ui.main.view.join_buy_coins.JoinPayment"
+        android:name="com.splitur.app.ui.main.view.join_buy_coins.JoinPayment"
         android:label="fragment_join_payment"
         tools:layout="@layout/fragment_join_payment" >
         <action
@@ -262,7 +262,7 @@
     </fragment>
     <fragment
         android:id="@+id/joinCheckoutComplete"
-        android:name="split.com.app.ui.main.view.join_checkout_complete.JoinCheckoutComplete"
+        android:name="com.splitur.app.ui.main.view.join_checkout_complete.JoinCheckoutComplete"
         android:label="fragment_join_checkout_complete"
         tools:layout="@layout/fragment_join_checkout_complete" >
 
@@ -272,12 +272,12 @@
     </fragment>
     <fragment
         android:id="@+id/chatroom"
-        android:name="split.com.app.ui.main.view.chat.Chatroom"
+        android:name="com.splitur.app.ui.main.view.chat.Chatroom"
         android:label="fragment_chatroom"
         tools:layout="@layout/fragment_chatroom" />
     <fragment
         android:id="@+id/createdAndJoinedGroups"
-        android:name="split.com.app.ui.main.view.group_created_and_joined.CreatedAndJoinedGroups"
+        android:name="com.splitur.app.ui.main.view.group_created_and_joined.CreatedAndJoinedGroups"
         android:label="fragment_created_and_joined_groups"
         tools:layout="@layout/fragment_created_and_joined_groups" >
         <action
@@ -295,7 +295,7 @@
     </fragment>
     <fragment
         android:id="@+id/joinedGroupDetail2"
-        android:name="split.com.app.ui.main.view.joined_detail.JoinedGroupDetail"
+        android:name="com.splitur.app.ui.main.view.joined_detail.JoinedGroupDetail"
         android:label="fragment_joined_group_detail"
         tools:layout="@layout/fragment_joined_group_detail" >
         <action
@@ -307,7 +307,7 @@
     </fragment>
     <fragment
         android:id="@+id/createdGroupDetail"
-        android:name="split.com.app.ui.main.view.created_detail.CreatedGroupDetail"
+        android:name="com.splitur.app.ui.main.view.created_detail.CreatedGroupDetail"
         android:label="fragment_created_group_detail"
         tools:layout="@layout/fragment_created_group_detail" >
         <action
@@ -319,12 +319,12 @@
     </fragment>
     <fragment
         android:id="@+id/friends"
-        android:name="split.com.app.ui.main.view.friends.Friends"
+        android:name="com.splitur.app.ui.main.view.friends.Friends"
         android:label="fragment_friends"
         tools:layout="@layout/fragment_friends" />
     <fragment
         android:id="@+id/subscriptionName"
-        android:name="split.com.app.ui.main.view.subscription_name.SubscriptionName"
+        android:name="com.splitur.app.ui.main.view.subscription_name.SubscriptionName"
         android:label="fragment_subscription_name"
         tools:layout="@layout/fragment_subscription_name" >
         <action
@@ -333,7 +333,7 @@
     </fragment>
     <fragment
         android:id="@+id/slots"
-        android:name="split.com.app.ui.main.view.slots.Slots"
+        android:name="com.splitur.app.ui.main.view.slots.Slots"
         android:label="fragment_slots"
         tools:layout="@layout/fragment_slots" >
         <action
@@ -342,12 +342,12 @@
     </fragment>
     <fragment
         android:id="@+id/promotion"
-        android:name="split.com.app.ui.main.view.promotion.Promotion"
+        android:name="com.splitur.app.ui.main.view.promotion.Promotion"
         android:label="fragment_promotion"
         tools:layout="@layout/fragment_promotion" />
     <fragment
         android:id="@+id/transactions"
-        android:name="split.com.app.ui.main.view.transactions.Transactions"
+        android:name="com.splitur.app.ui.main.view.transactions.Transactions"
         android:label="fragment_transactions"
         tools:layout="@layout/fragment_transactions" >
         <action
@@ -359,17 +359,17 @@
     </fragment>
     <fragment
         android:id="@+id/memberChat"
-        android:name="split.com.app.ui.main.view.member_chat.MemberChat"
+        android:name="com.splitur.app.ui.main.view.member_chat.MemberChat"
         android:label="fragment_member_chat"
         tools:layout="@layout/fragment_member_chat" />
     <fragment
         android:id="@+id/joinPlans"
-        android:name="split.com.app.ui.main.view.join_plans.JoinPlans"
+        android:name="com.splitur.app.ui.main.view.join_plans.JoinPlans"
         android:label="fragment_join_plans"
         tools:layout="@layout/fragment_join_plans" />
     <fragment
         android:id="@+id/legalContactFragment"
-        android:name="split.com.app.ui.main.view.LegalContactFragment"
+        android:name="com.splitur.app.ui.main.view.LegalContactFragment"
         android:label="fragment_legal_contact"
         tools:layout="@layout/fragment_legal_contact" >
         <action
@@ -378,12 +378,12 @@
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
-        android:name="split.com.app.ui.main.view.WebViewFragment"
+        android:name="com.splitur.app.ui.main.view.WebViewFragment"
         android:label="fragment_web_view"
         tools:layout="@layout/fragment_web_view" />
     <fragment
         android:id="@+id/supportChat"
-        android:name="split.com.app.ui.main.view.SupportChat"
+        android:name="com.splitur.app.ui.main.view.SupportChat"
         android:label="fragment_support_chat"
         tools:layout="@layout/fragment_support_chat" />
 

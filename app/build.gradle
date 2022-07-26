@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "split.com.app"
+        applicationId "com.splitur.app"
         minSdk 21
         targetSdk 32
         versionCode 1

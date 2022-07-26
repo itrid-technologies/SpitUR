@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="split.com.app">
+    package="com.splitur.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
-        android:name=".utils.Split"
+        android:name="com.splitur.app.utils.Split"
         android:allowBackup="false"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/aplit_logo"
@@ -19,21 +19,21 @@
         android:theme="@style/Theme.Split"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.main.view.WebViewActivity"
+            android:name="com.splitur.app.ui.main.view.WebViewActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.view.join_plans.CheckoutActivity"
+            android:name="com.splitur.app.ui.main.view.join_plans.CheckoutActivity"
             android:exported="false" />
 
         <service
-            android:name=".service.FirebaseCloudMessagingService"
+            android:name="com.splitur.app.service.FirebaseCloudMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service> <!-- Foreground services in Q+ require type. -->
         <activity
-            android:name=".ui.main.view.dashboard.Dashboard"
+            android:name="com.splitur.app.ui.main.view.dashboard.Dashboard"
             android:exported="true"
             android:screenOrientation="portrait">
 
@@ -43,31 +43,31 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".ui.main.view.terms_conditions.TermsAndConditions"
+            android:name="com.splitur.app.ui.main.view.terms_conditions.TermsAndConditions"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.view.avatar.ChooseAvatar"
+            android:name="com.splitur.app.ui.main.view.avatar.ChooseAvatar"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.view.user_id.UserId"
+            android:name="com.splitur.app.ui.main.view.user_id.UserId"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.view.full_name.Name"
+            android:name="com.splitur.app.ui.main.view.full_name.Name"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.view.otp_verification.OtpVerification"
+            android:name="com.splitur.app.ui.main.view.otp_verification.OtpVerification"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.view.otp_phone_number.OtpNumber"
+            android:name="com.splitur.app.ui.main.view.otp_phone_number.OtpNumber"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main.view.splash.Splash"
+            android:name="com.splitur.app.ui.main.view.splash.Splash"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -78,17 +78,17 @@
         </activity>
 
         <receiver
-            android:name=".utils.MyReceiver"
+            android:name="com.splitur.app.utils.MyReceiver"
             android:exported="true"></receiver>
         <receiver
-            android:name=".utils.OtpReader"
+            android:name="com.splitur.app.utils.OtpReader"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".utils.InstallReferrerReceiver"
+            android:name="com.splitur.app.utils.InstallReferrerReceiver"
             android:exported="true"
             android:permission="android.permission.INSTALL_PACKAGES">
             <intent-filter>

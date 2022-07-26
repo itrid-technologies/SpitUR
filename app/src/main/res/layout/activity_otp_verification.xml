@@ -9,7 +9,7 @@
             name="viewmodel"
             type="OtpVerificationViewModel" />
 
-        <import type="split.com.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel" />
+        <import type="com.splitur.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

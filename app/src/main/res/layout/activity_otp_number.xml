@@ -9,7 +9,7 @@
             name="viewModel"
             type="PhoneNumberViewModel"/>
 
-        <import type="split.com.app.ui.main.viewmodel.phone_number.PhoneNumberViewModel"/>
+        <import type="com.splitur.app.ui.main.viewmodel.phone_number.PhoneNumberViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
