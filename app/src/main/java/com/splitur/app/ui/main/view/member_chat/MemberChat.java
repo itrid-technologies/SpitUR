@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.splitur.app.data.model.OTpModel;
 import com.splitur.app.data.model.chat_sender.SenderModel;
 import com.splitur.app.databinding.FragmentMemberChatBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
@@ -105,10 +106,10 @@ public class MemberChat extends Fragment {
                             msgs.add(new SenderModel(getMemberMessagesModel.getMessages().get(i).getBody(),
                                     getMemberMessagesModel.getMessages().get(i).getCreatedAt()
                             ));
-//                        } else if(getMemberMessagesModel.getMessages().get(i).getSenderId() == getMemberMessagesModel.getMessages().get(i).getReceiverId()) {
-//                            msgs.add(new OTpModel(getMemberMessagesModel.getMessages().get(i).getBody(),
-//                                    getMemberMessagesModel.getMessages().get(i).getCreatedAt()
-//                            ));
+                        } else if(getMemberMessagesModel.getMessages().get(i).getSenderId() == getMemberMessagesModel.getMessages().get(i).getReceiverId()) {
+                            msgs.add(new OTpModel(getMemberMessagesModel.getMessages().get(i).getBody(),
+                                    getMemberMessagesModel.getMessages().get(i).getCreatedAt()
+                            ));
                         }else {
                             msgs.add(new MemberReceiverModel(getMemberMessagesModel.getMessages().get(i).getBody(),
                                     getMemberMessagesModel.getMessages().get(i).getCreatedAt(),
