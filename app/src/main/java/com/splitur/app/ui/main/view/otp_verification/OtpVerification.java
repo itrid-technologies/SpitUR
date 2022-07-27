@@ -26,7 +26,7 @@ import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.OtpReader;
 import com.splitur.app.utils.Split;
 
-public class OtpVerification extends AppCompatActivity implements OTPListener {
+public class OtpVerification extends AppCompatActivity { //otp listener removed
 
     ActivityOtpVerificationBinding binding;
 
@@ -40,7 +40,7 @@ public class OtpVerification extends AppCompatActivity implements OTPListener {
         binding = ActivityOtpVerificationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        OtpReader.bind(this, "SOLV");
+       // OtpReader.bind(this, "SOLV");
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
@@ -128,6 +128,8 @@ public class OtpVerification extends AppCompatActivity implements OTPListener {
                     Constants.USER_ID = authenticationModel.getData().getUser().getUserId();
                     Constants.USER_NAME = authenticationModel.getData().getUser().getName();
                     Constants.USER_AVATAR = Constants.IMG_PATH + authenticationModel.getData().getUser().getAvatar();
+                    Constants.SourceId = authenticationModel.getData().getUser().getSource_id();
+                    Constants.ContactId = authenticationModel.getData().getUser().getContact_id();
                     // Constants.DEVICE_TOKEN = authenticationModel.getData().getToken();
 
                     MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
@@ -160,10 +162,10 @@ public class OtpVerification extends AppCompatActivity implements OTPListener {
 
     }
 
-    @Override
-    public void otpReceived(String messageText) {
-        Toast.makeText(this, "Got " + messageText, Toast.LENGTH_LONG).show();
-        Log.d("Otp", messageText);
-        ;
-    }
+//    @Override
+//    public void otpReceived(String messageText) {
+//        Toast.makeText(this, "Got " + messageText, Toast.LENGTH_LONG).show();
+//        Log.d("Otp", messageText);
+//        ;
+//    }
 }

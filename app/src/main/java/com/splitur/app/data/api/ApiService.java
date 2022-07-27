@@ -14,6 +14,8 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+
+import com.splitur.app.data.model.ChatWootAccountIdModel;
 import com.splitur.app.data.model.GetScoreModel;
 import com.splitur.app.data.model.HomeContentModel;
 import com.splitur.app.data.model.SecretKeyModel;
@@ -47,6 +49,7 @@ import com.splitur.app.data.model.update_user_profile.UserUpdateModel;
 import com.splitur.app.data.model.wallet_balance.WalletBalanceModel;
 
 public interface ApiService {
+
 
     @GET("users/getAvatar")
     Call<AvatarModel> getAvatar();
@@ -254,4 +257,8 @@ public interface ApiService {
     @POST("refer/referal")
     Call<BasicModel1> sendReferral(@Header("Authorization") String token,
                                   @Body JsonObject object);
+
+
+    @GET("groups/get_account_id")
+    Call<ChatWootAccountIdModel> getAccountId();
 }

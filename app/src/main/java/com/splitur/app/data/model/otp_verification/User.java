@@ -28,6 +28,13 @@ public class User{
 	@SerializedName("updatedAt")
 	private String updatedAt;
 
+	@SerializedName("source_id")
+	private String source_id;
+
+
+	@SerializedName("contact_id")
+	private int contact_id;
+
 	public String getCreatedAt(){
 		return createdAt;
 	}
@@ -58,5 +65,13 @@ public class User{
 
 	public String getUpdatedAt(){
 		return updatedAt;
+	}
+
+	public int getContact_id() {
+		return contact_id;
+	}
+
+	public String getSource_id() {
+		return source_id;
 	}
 }

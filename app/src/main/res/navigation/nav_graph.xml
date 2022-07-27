@@ -383,7 +383,7 @@
         tools:layout="@layout/fragment_web_view" />
     <fragment
         android:id="@+id/supportChat"
-        android:name="com.splitur.app.ui.main.view.SupportChat"
+        android:name="com.splitur.app.ui.main.view.support_chat.SupportChat"
         android:label="fragment_support_chat"
         tools:layout="@layout/fragment_support_chat" />
 

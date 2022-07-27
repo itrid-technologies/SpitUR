@@ -16,11 +16,11 @@ import com.splitur.app.R;
 public final class Constants {
 
 
-   // public static String URL_BASE = "http://famger.com:4000/";
-     public static String URL_BASE = "http://3.110.227.193:4000/";
+    public static String URL_BASE = "http://famger.com:4000/";
+//     public static String URL_BASE = "http://3.110.227.193:4000/";
 
-    //public static String IMG_PATH = "http://famger.com:4000";
-        public static String IMG_PATH = "http://3.110.227.193:4000";
+    public static String IMG_PATH = "http://famger.com:4000";
+//        public static String IMG_PATH = "http://3.110.227.193:4000";
     public static String DEVICE_TOKEN = "";
 
 
@@ -49,6 +49,12 @@ public final class Constants {
     public static String USER_NUMBER = "";
 
     public static String Referrer = "";
+    public static int conversation_id = 0;
+    public static String SourceId = "";
+    public static int ContactId = 0;
+    public static int AccountId = 0;
+    public static String ChatApiKey = "";
+    public static int InboxId = 0;
 
 
     public static final String FACEBOOK_PACKAGE_NAME = "com.facebook.katana";

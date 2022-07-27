@@ -41,8 +41,8 @@ public class Splash extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.getStartedBtn.setOnClickListener(view -> {
-
-            requestContactPermission();
+            navToOtpScreen();
+            //requestContactPermission();
 
         });
 
