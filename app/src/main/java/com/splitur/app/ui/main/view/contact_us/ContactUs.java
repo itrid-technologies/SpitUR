@@ -58,8 +58,8 @@ public class ContactUs extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     ChatWootAccountIdModel accountIdModel = response.body();
                     Constants.AccountId = Integer.parseInt(accountIdModel.getChatWootAccountId());
-//                    Constants.ChatApiKey = accountIdModel.getChat_api_key();
-//                    Constants.InboxId = Integer.parseInt(accountIdModel.getInbox_id());
+                    Constants.ChatApiKey = accountIdModel.getChat_api_key();
+                    Constants.InboxId = Integer.parseInt(accountIdModel.getInbox_id());
 
                 }
             }

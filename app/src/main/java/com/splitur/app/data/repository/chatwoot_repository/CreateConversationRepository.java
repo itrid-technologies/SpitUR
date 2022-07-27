@@ -31,16 +31,23 @@ public class CreateConversationRepository {
         final MutableLiveData<ConversationModel> conversationModelMutableLiveData = new MutableLiveData<>();
         apiService = ChatwootApiManager.getRestApiService();
 
-        String api_key = "H5nSYfTLHHCU3YSTgE88pc8V";
-
-        JsonObject object = new JsonObject();
-        object.addProperty("source_id", "789a935b-67d3-44b7-b203-492af2b0e2e6");
-        object.addProperty("inbox_id",17399);
-        object.addProperty("contact_id",22227579);
+//        String api_key = "H5nSYfTLHHCU3YSTgE88pc8V";
 
         String source = Constants.SourceId;
-        int acc = Constants.AccountId;
-        int con = Constants.ContactId;
+        int inbox = Constants.InboxId;
+        int contact = Constants.ContactId;
+        String api_key = Constants.ChatApiKey;
+
+        JsonObject object = new JsonObject();
+        object.addProperty("source_id", source);
+        object.addProperty("inbox_id",inbox);
+        object.addProperty("contact_id",contact);
+
+//        JsonObject object = new JsonObject();
+//        object.addProperty("source_id", "789a935b-67d3-44b7-b203-492af2b0e2e6");
+//        object.addProperty("inbox_id",17399);
+//        object.addProperty("contact_id",22227579);
+
 
         Call<ConversationModel> call = apiService.createConversation(api_key,object);
         call.enqueue(new Callback<ConversationModel>() {
@@ -67,7 +74,8 @@ public class CreateConversationRepository {
         final MutableLiveData<MessagesModel> messagesModelMutableLiveData = new MutableLiveData<>();
         apiService = ChatwootApiManager.getRestApiService();
 
-        String api_key = "H5nSYfTLHHCU3YSTgE88pc8V";
+//        String api_key = "H5nSYfTLHHCU3YSTgE88pc8V";
+        String api_key = Constants.ChatApiKey;
 
 
         Call<MessagesModel> call = apiService.getSupportChat(api_key);
@@ -96,7 +104,10 @@ public class CreateConversationRepository {
         final MutableLiveData<SendSupportMessageModel> liveData = new MutableLiveData<>();
         apiService = ChatwootApiManager.getRestApiService();
 
-        String api_key = "H5nSYfTLHHCU3YSTgE88pc8V";
+//        String api_key = "H5nSYfTLHHCU3YSTgE88pc8V";
+
+        String api_key = Constants.ChatApiKey;
+
 
         JsonObject object = new JsonObject();
         object.addProperty("content", message);

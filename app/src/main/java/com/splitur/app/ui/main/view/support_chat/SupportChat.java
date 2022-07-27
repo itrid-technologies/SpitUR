@@ -9,6 +9,8 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +54,28 @@ public class SupportChat extends Fragment {
         clickEvents();
         msgs = new ArrayList<>();
 
+        new Handler(Looper.myLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getSupportChat();
+            }
+        }, 5000);
+
+
+
+        if (Constants.conversation_id == 0) {
+            viewModel = new SupportChatViewModel(0, "");
+            viewModel.init();
+            viewModel.getData().observe(getViewLifecycleOwner(), conversationModel -> {
+                if (conversationModel.getId() != 0) {
+                    Constants.conversation_id = conversationModel.getId();
+                }
+            });
+        }
+
+    }
+
+    private void getSupportChat() {
         viewModel = new SupportChatViewModel(0, "");
         viewModel.getChat();
         viewModel.getChatData().observe(getViewLifecycleOwner(),messagesModel -> {
@@ -74,17 +98,6 @@ public class SupportChat extends Fragment {
                 buildRec(msgs);
             }
         });
-
-        if (Constants.conversation_id == 0) {
-            viewModel = new SupportChatViewModel(0, "");
-            viewModel.init();
-            viewModel.getData().observe(getViewLifecycleOwner(), conversationModel -> {
-                if (conversationModel.getId() != 0) {
-                    Constants.conversation_id = conversationModel.getId();
-                }
-            });
-        }
-
     }
 
     private void buildRec(ArrayList<Object> msgs) {
