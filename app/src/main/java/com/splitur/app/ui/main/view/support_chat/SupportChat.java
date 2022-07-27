@@ -117,17 +117,19 @@ public class SupportChat extends Fragment {
         binding.sendSupportMessage.setOnClickListener(view -> {
             String query = binding.message.getText().toString();
             if (!query.isEmpty()){
-                viewModel = new SupportChatViewModel(Constants.conversation_id,query);
-                viewModel.initQuery();
-                viewModel.getSend_data().observe(getViewLifecycleOwner(),sendSupportMessageModel -> {
-                    if (sendSupportMessageModel.getSender() != null){
-                        msgs.add(new SenderModel(sendSupportMessageModel.getContent(), Calendar.getInstance().getTime().toString()));
-                        binding.supportChatRv.scrollToPosition(msgs.size() - 1);
-                        adapter.notifyItemInserted(msgs.size() - 1);
-                        adapter.notifyDataSetChanged();
-                        binding.message.setText("");
-                    }
-                });
+                if (Constants.conversation_id != 0) {
+                    viewModel = new SupportChatViewModel(Constants.conversation_id, query);
+                    viewModel.initQuery();
+                    viewModel.getSend_data().observe(getViewLifecycleOwner(), sendSupportMessageModel -> {
+                        if (sendSupportMessageModel.getSender() != null) {
+                            msgs.add(new SenderModel(sendSupportMessageModel.getContent(), Calendar.getInstance().getTime().toString()));
+                            binding.supportChatRv.scrollToPosition(msgs.size() - 1);
+                            adapter.notifyItemInserted(msgs.size() - 1);
+                            adapter.notifyDataSetChanged();
+                            binding.message.setText("");
+                        }
+                    });
+                }
             }
         });
 
