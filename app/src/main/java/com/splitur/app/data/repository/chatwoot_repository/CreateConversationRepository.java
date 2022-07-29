@@ -6,15 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
-import com.splitur.app.data.api.ApiManager;
-import com.splitur.app.data.api.ApiService;
 import com.splitur.app.data.api.ChatApiService;
 import com.splitur.app.data.api.ChatwootApiManager;
-import com.splitur.app.data.model.basic_model.BasicModel;
 import com.splitur.app.data.model.chatwoot_model.ConversationModel;
 import com.splitur.app.data.model.chatwoot_model.MessagesModel;
 import com.splitur.app.data.model.chatwoot_model.SendSupportMessageModel;
 import com.splitur.app.utils.Constants;
+import com.splitur.app.utils.MySharedPreferences;
+import com.splitur.app.utils.Split;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,17 +30,19 @@ public class CreateConversationRepository {
         final MutableLiveData<ConversationModel> conversationModelMutableLiveData = new MutableLiveData<>();
         apiService = ChatwootApiManager.getRestApiService();
 
-//        String api_key = "H5nSYfTLHHCU3YSTgE88pc8V";
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String source = preferences.getData(Split.getAppContext(), "source_id");
+        String contact = preferences.getData(Split.getAppContext(), "contact_id");
 
-        String source = Constants.SourceId;
+//        String source = Constants.SourceId;
         int inbox = Constants.InboxId;
-        int contact = Constants.ContactId;
+//        int contact = Constants.ContactId;
         String api_key = Constants.ChatApiKey;
 
         JsonObject object = new JsonObject();
         object.addProperty("source_id", source);
         object.addProperty("inbox_id",inbox);
-        object.addProperty("contact_id",contact);
+        object.addProperty("contact_id",Integer.valueOf(contact));
 
 //        JsonObject object = new JsonObject();
 //        object.addProperty("source_id", "789a935b-67d3-44b7-b203-492af2b0e2e6");
@@ -78,7 +79,7 @@ public class CreateConversationRepository {
         String api_key = Constants.ChatApiKey;
 
 
-        Call<MessagesModel> call = apiService.getSupportChat(api_key);
+        Call<MessagesModel> call = apiService.getSupportChat(api_key, Constants.conversation_id);
         call.enqueue(new Callback<MessagesModel>() {
             @Override
             public void onResponse(@NonNull Call<MessagesModel> call, @NonNull Response<MessagesModel> response) {

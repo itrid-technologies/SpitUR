@@ -48,7 +48,9 @@ public class Refund extends Fragment {
         viewModel.init();
         viewModel.getBalance().observe(getViewLifecycleOwner(),walletBalanceModel -> {
             if (walletBalanceModel.isStatus()){
-                binding.availableBalanceValue.setText("₹ " + walletBalanceModel.getWalletBalance());
+                int balance_ = Integer.parseInt(walletBalanceModel.getWalletBalance());
+                String final_balance = String.valueOf(Math.round(balance_));
+                binding.availableBalanceValue.setText("₹ " + final_balance );
             }
         });
 
@@ -70,6 +72,8 @@ public class Refund extends Fragment {
 
             }
         });
+
+
 
 
 

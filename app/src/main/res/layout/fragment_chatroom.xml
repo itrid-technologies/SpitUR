@@ -58,14 +58,14 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:src="@drawable/send_btn"
-                    android:id="@+id/send_message"/>
+                    android:id="@+id/send_group_message"/>
 
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/send_message"
+                    app:layout_constraintEnd_toStartOf="@id/send_group_message"
                     app:layout_constraintBottom_toBottomOf="parent"
                     style="@style/normalText"
                     android:textSize="13sp"

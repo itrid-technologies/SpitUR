@@ -135,7 +135,14 @@ public class GroupInformation extends Fragment {
                         binding.verificationStatusList.setVisibility(View.VISIBLE);
 
                         scoreItems.addAll(groupScoreModel.getData().getGroupSplitScore());
-                        buildScoreList(scoreItems);
+                        for (int i=0; i<= scoreItems.size()-1; i++){
+                            if (scoreItems.get(i).getSplitGroupUserId() != null){
+                                buildScoreList(scoreItems);
+                            }else {
+                                binding.noUserLayout.setVisibility(View.VISIBLE);
+                                binding.verificationStatusList.setVisibility(View.GONE);
+                            }
+                        }
                     } else {
                         binding.noUserLayout.setVisibility(View.VISIBLE);
                         binding.verificationStatusList.setVisibility(View.GONE);

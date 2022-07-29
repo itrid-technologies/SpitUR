@@ -1,6 +1,9 @@
 package com.splitur.app.ui.main.view.create_cost;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +44,30 @@ public class Cost extends Fragment {
 
         initClickListeners();
         setProfileData();
+
+        binding.costValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int data = Integer.parseInt(String.valueOf(s.length()));
+                if (data > 3) {
+                    binding.errorMessage.setVisibility(View.VISIBLE);
+                    binding.errorMessage.setText("Max cost is 999");
+                    binding.btnNext.setEnabled(false);
+                    binding.btnNext.setBackgroundColor(R.color.hint_color);
+                }else {
+                    binding.errorMessage.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void setProfileData() {

@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.splitur.app.ui.main.view.dashboard.Dashboard;
+import com.splitur.app.ui.main.view.splash.Splash;
 
 public class Split extends Application {
 
@@ -32,6 +34,15 @@ public class Split extends Application {
 
         //disable dark mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String token = preferences.getData(Split.getAppContext(), "userAccessToken");
+
+        if (!token.isEmpty()){
+            ActivityUtil.gotoHome(this);
+            Log.e("Access Token", token);
+        }
+
 
         getDeviceToken();
 

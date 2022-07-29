@@ -89,8 +89,8 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
             LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
 
             // play notification sound
-            NotificationsUtils NotificationsUtils = new NotificationsUtils(getApplicationContext());
-            NotificationsUtils.playNotificationSound();
+//            NotificationsUtils NotificationsUtils = new NotificationsUtils(getApplicationContext());
+//            NotificationsUtils.playNotificationSound();
         } else {
             // If the app is in background, firebase itself handles the notification
             Log.e(TAG, "handleNotification: app is in background");

@@ -19,8 +19,9 @@ public interface ChatApiService {
                                                @Body JsonObject object);
 
 
-    @GET("api/v1/accounts/73801/conversations/1/messages")
-    Call<MessagesModel> getSupportChat(@Header("api_access_token") String apiKey);
+    @GET("api/v1/accounts/73801/conversations/{conversation_id}/messages")
+    Call<MessagesModel> getSupportChat(@Header("api_access_token") String apiKey,
+                                       @Path("conversation_id") int conversation_id);
 
     @POST("api/v1/accounts/73801/conversations/{conversation_id}/messages")
     Call<SendSupportMessageModel> sendSupportQuery(@Header("api_access_token") String apiKey,

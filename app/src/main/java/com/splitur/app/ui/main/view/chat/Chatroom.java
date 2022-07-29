@@ -20,17 +20,24 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-
+import com.google.gson.JsonObject;
+import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.data.model.chat_receiver.ReceiverModel;
 import com.splitur.app.data.model.chat_sender.SenderModel;
+import com.splitur.app.data.model.send_message.MessageSendModel;
 import com.splitur.app.databinding.FragmentChatroomBinding;
 import com.splitur.app.ui.main.adapter.chat.ChatAdapter;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.viewmodel.chat_viewmodel.ChatViewModel;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class Chatroom extends Fragment {
@@ -62,7 +69,6 @@ public class Chatroom extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         cliclKisteners();
-        msgs = new ArrayList<>();
 
         registerGroupChatReceiver();
 
@@ -82,6 +88,10 @@ public class Chatroom extends Fragment {
         chatViewModel.initGetAllMessage();
         chatViewModel.getMessages_data().observe(getViewLifecycleOwner(), getMessagesModel -> {
             if (getMessagesModel.isStatus()) {
+
+                msgs = new ArrayList<>();
+
+
                 if (getMessagesModel.getMessages().size() > 0) {
                     for (int i = 0; i <= getMessagesModel.getMessages().size() - 1; i++) {
 
@@ -131,22 +141,48 @@ public class Chatroom extends Fragment {
             Navigation.findNavController(view).navigateUp();
         });
 
-        binding.sendMessage.setOnClickListener(view -> {
+        binding.sendGroupMessage.setOnClickListener(view -> {
+
             String message = binding.messgae.getText().toString().trim();
             if (!message.isEmpty()) {
-                chatViewModel = new ChatViewModel(group_id, message);
-                chatViewModel.initSendMessage();
-                chatViewModel.getData().observe(getViewLifecycleOwner(), messageSendModel -> {
+
+                sendMessage(message);
+
+            }
+        });
+    }
+
+    private void sendMessage(String message) {
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String token = preferences.getData(Split.getAppContext(), "userAccessToken");
+
+        JsonObject object = new JsonObject();
+        object.addProperty("body", message);
+        object.addProperty("group_id", group_id);
+
+
+        Call<MessageSendModel> call = ApiManager.getRestApiService().sendGroupMessage("Bearer " + token, object);
+        call.enqueue(new Callback<MessageSendModel>() {
+            @Override
+            public void onResponse(@NonNull Call<MessageSendModel> call, @NonNull Response<MessageSendModel> response) {
+                if (response.body() != null) {
+                    MessageSendModel messageSendModel = response.body();
                     if (messageSendModel.isStatus()) {
                         msgs.add(new SenderModel(message, Calendar.getInstance().getTime().toString()));
+                        binding.messgae.setText("");
                         binding.chatRv.scrollToPosition(msgs.size() - 1);
                         adapter.notifyItemInserted(msgs.size() - 1);
                         adapter.notifyDataSetChanged();
-                        binding.messgae.setText("");
                     }
-                });
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<MessageSendModel> call, @NonNull Throwable t) {
+                Log.e(" Error", t.getMessage());
             }
         });
+
     }
 
     @Override

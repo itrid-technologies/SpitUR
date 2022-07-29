@@ -46,7 +46,8 @@
             android:layout_height="wrap_content"
             android:paddingEnd="10dp"
             android:text="00:00"
-            android:textColor="@color/hint_color"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_bold"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_enter_code"
             app:layout_constraintEnd_toEndOf="parent" />

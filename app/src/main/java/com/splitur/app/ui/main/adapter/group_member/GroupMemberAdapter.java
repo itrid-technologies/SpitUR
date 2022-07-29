@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,23 +56,29 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
     public void onBindViewHolder(@NonNull GroupMemberAdapter.ViewHolder holder, int position) {
         com.splitur.app.data.model.group_member.DataItem current_item = list.get(position);
 
-        Glide.with(context)
-                .load(Constants.IMG_PATH + current_item.getUser().getAvatar())
-                .placeholder(R.color.images_placeholder)
-                .into(holder.image);
+        if (current_item.getUser() != null) {
+            holder.layout.setVisibility(View.VISIBLE);
 
-        holder.name.setText(current_item.getUser().getUserId());
+            Glide.with(context)
+                    .load(Constants.IMG_PATH + current_item.getUser().getAvatar())
+                    .placeholder(R.color.images_placeholder)
+                    .into(holder.image);
 
-        holder.chat.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("receiverId",String.valueOf(current_item.getUser().getId()));
-            bundle.putString("groupId",String.valueOf(current_item.getGroupId()));
+            holder.name.setText(current_item.getUser().getUserId());
 
-            Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_memberChat,bundle);
-        });
+            holder.chat.setOnClickListener(view -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("receiverId", String.valueOf(current_item.getUser().getId()));
+                bundle.putString("groupId", String.valueOf(current_item.getGroupId()));
 
-        String coins_added = Constants.coinsDate(current_item.getUser().getCreatedAt());
-        holder.date.setText(coins_added);
+                Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_memberChat, bundle);
+            });
+
+            String coins_added = Constants.coinsDate(current_item.getUser().getCreatedAt());
+            holder.date.setText(coins_added);
+        }else {
+            holder.layout.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -88,6 +95,7 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
         public CircleImageView image;
         public ImageView remove, admin;
         public TextView name, date , chat;
+        ConstraintLayout layout;
 
         public ViewHolder(@NonNull View itemView, ItemClickListener mListener) {
             super(itemView);
@@ -98,7 +106,7 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
             date = itemView.findViewById(R.id.tv_coins_date);
             chat = itemView.findViewById(R.id.chat_button);
             admin = itemView.findViewById(R.id.adminBg);
-
+            layout = itemView.findViewById(R.id.membersLayoutView);
 
             remove.setOnClickListener(view -> {
                 if(mListener != null){

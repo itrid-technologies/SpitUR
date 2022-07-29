@@ -7,10 +7,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
 import android.text.TextPaint;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,7 @@ import com.splitur.app.R;
 import com.splitur.app.databinding.FragmentSwapCoinsBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.viewmodel.swap_viewmodel.SwapViewModel;
+import com.splitur.app.utils.Split;
 
 
 public class SwapCoins extends Fragment {
@@ -27,6 +31,7 @@ public class SwapCoins extends Fragment {
     FragmentSwapCoinsBinding binding;
     String coins;
     SwapViewModel viewModel;
+    int coins_int;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,9 +53,26 @@ public class SwapCoins extends Fragment {
 
         if (getArguments() != null){
             coins = getArguments().getString("Coins");
-            binding.urCoinsValue.setText(coins);
+            coins_int = Math.round(Float.parseFloat(coins));
+            binding.urCoinsValue.setText(String.valueOf(coins_int));
         }
 
+        binding.inrCoinsValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable data) {
+
+            }
+        });
 
         initClickListeners();
     }
@@ -66,18 +88,6 @@ public class SwapCoins extends Fragment {
                 }, null, Shader.TileMode.CLAMP);
         binding.inrCoinsValue.getPaint().setShader(textShader);
 
-//        TextPaint paint1 = binding.urCoinsValue.getPaint();
-//        float width1 = paint1.measureText("Tianjin, China");
-//
-//        Shader textShader1 = new LinearGradient(0, 0, width1, binding.urCoinsValue.getTextSize(),
-//                new int[]{
-//                        Color.parseColor("#F97C3C"),
-//                        Color.parseColor("#FDB54E"),
-//                        Color.parseColor("#64B678"),
-//                        Color.parseColor("#478AEA"),
-//                        Color.parseColor("#8446CC"),
-//                }, null, Shader.TileMode.CLAMP);
-//        binding.urCoinsValue.getPaint().setShader(textShader1);
     }
 
 
@@ -89,6 +99,10 @@ public class SwapCoins extends Fragment {
 
         binding.swapButton.setOnClickListener(view -> {
             String swapValue = binding.inrCoinsValue.getText().toString();
+            int refund_int = Integer.parseInt(swapValue);
+            if (refund_int >= coins_int){
+                binding.inrCoinsValue.setText(String.valueOf(Math.round(coins_int)));
+            }
             if (!swapValue.isEmpty() && !swapValue.equalsIgnoreCase("0")){
               viewModel = new SwapViewModel(swapValue);
               viewModel.init();

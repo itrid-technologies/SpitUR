@@ -33,6 +33,9 @@ public class ChatRepository {
 
         final MutableLiveData<MessageSendModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
+        try {
+
+
         Call<MessageSendModel> call = apiService.sendGroupMessage("Bearer "+token,object);
         call.enqueue(new Callback<MessageSendModel>() {
             @Override
@@ -48,6 +51,10 @@ public class ChatRepository {
                 Log.e("Avatar Error",t.getMessage());
             }
         });
+
+        }catch (IllegalStateException e){
+            Log.e("",e.getMessage());
+        }
 
         return liveData;
     }

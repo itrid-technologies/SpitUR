@@ -1,5 +1,6 @@
 package com.splitur.app.ui.main.view.otp_verification;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -31,8 +32,10 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
     ActivityOtpVerificationBinding binding;
 
     private OtpVerificationViewModel mViewModel;
+    boolean clicked = false;
 
 
+    @SuppressLint("ResourceAsColor")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,13 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
             String resend = binding.remainingTime.getText().toString();
             if (resend.equalsIgnoreCase("Resend")) {
 
-                resendOtp(number);
+                if (!clicked) {
+                    clicked = true;
+                    resendOtp(number);
+                }else {
+                    binding.remainingTime.setEnabled(false);
+                    binding.remainingTime.setTextColor(R.color.hint_color);
+                }
             }
         });
 
@@ -137,7 +146,8 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
                     pm.saveData(Split.getAppContext(), "userAccessToken", authenticationModel.getData().getToken());
                     pm.saveData(Split.getAppContext(), "userName", String.valueOf(authenticationModel.getData().getUser().getName()));
                     pm.saveData(Split.getAppContext(), "userAvatar", authenticationModel.getData().getUser().getAvatar());
-
+                    pm.saveData(Split.getAppContext(), "source_id", authenticationModel.getData().getUser().getSource_id());
+                    pm.saveData(Split.getAppContext(), "contact_id", String.valueOf(authenticationModel.getData().getUser().getContact_id()));
 
                     if (!Constants.Referrer.isEmpty()){
                         ReferralViewModel referralViewModel = new ReferralViewModel(Constants.ID,Constants.Referrer);

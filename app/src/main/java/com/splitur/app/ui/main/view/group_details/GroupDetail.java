@@ -66,9 +66,14 @@ public class GroupDetail extends Fragment {
 
             if (groupDetailModel.isSuccess()){
 
-                if (groupDetailModel.getData().size() > 0){
-                    detailItems.addAll(groupDetailModel.getData());
-                    buildRec(detailItems);
+                if (groupDetailModel.getData() != null) {
+
+                    if (groupDetailModel.getData().size() > 0) {
+                        detailItems.addAll(groupDetailModel.getData());
+                        buildRec(detailItems);
+                    }
+                }else {
+
                 }
             }
         });

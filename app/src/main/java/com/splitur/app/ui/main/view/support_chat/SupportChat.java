@@ -15,7 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
 import com.splitur.app.data.model.chat_sender.SenderModel;
+import com.splitur.app.data.model.chatwoot_model.MessagesModel;
+import com.splitur.app.data.model.plans.PlanModel;
 import com.splitur.app.databinding.FragmentSupportChatBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.view.member_chat.MemberChatAdapter;
@@ -36,6 +39,8 @@ public class SupportChat extends Fragment {
 
 
     SupportChatAdapter adapter;
+    String msgList;
+    MessagesModel messagesModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -54,50 +59,59 @@ public class SupportChat extends Fragment {
         clickEvents();
         msgs = new ArrayList<>();
 
-        new Handler(Looper.myLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getSupportChat();
+        if (getArguments() != null){
+            String data  = getArguments().getString("support_chat");
+            Gson gson = new Gson();
+            messagesModel = gson.fromJson(data, MessagesModel.class);
+            if (messagesModel.getPayload() != null){
+                buildSupportRv(messagesModel);
             }
-        }, 5000);
-
-
-
-        if (Constants.conversation_id == 0) {
-            viewModel = new SupportChatViewModel(0, "");
-            viewModel.init();
-            viewModel.getData().observe(getViewLifecycleOwner(), conversationModel -> {
-                if (conversationModel.getId() != 0) {
-                    Constants.conversation_id = conversationModel.getId();
-                }
-            });
         }
 
+//        new Handler(Looper.myLooper()).postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                getSupportChat();
+//            }
+//        }, 5000);
+
+
+
+
+
+
     }
+
 
     private void getSupportChat() {
         viewModel = new SupportChatViewModel(0, "");
         viewModel.getChat();
         viewModel.getChatData().observe(getViewLifecycleOwner(),messagesModel -> {
             if (messagesModel.getPayload() != null){
-                for (int i = 0; i<= messagesModel.getPayload().size()-1; i++) {
-
-                    if (messagesModel.getPayload().get(i).getSender() != null) {
-
-                        if (messagesModel.getPayload().get(i).getSender().getType().equalsIgnoreCase("contact")) {
-                            msgs.add(new SenderModel(messagesModel.getPayload().get(i).getContent(),
-                                    ""
-                            ));
-                        } else {
-                            msgs.add(new SupportReceiverModel(messagesModel.getPayload().get(i).getContent(),
-                                    "", messagesModel.getMeta().getAssignee()
-                            ));
-                        }
-                    }
-                }
-                buildRec(msgs);
+                msgs = new ArrayList<>();
+               buildSupportRv(messagesModel);
             }
         });
+    }
+
+
+    private void buildSupportRv(MessagesModel messagesModel) {
+        for (int i = 0; i<= messagesModel.getPayload().size()-1; i++) {
+
+            if (messagesModel.getPayload().get(i).getSender() != null) {
+
+                if (messagesModel.getPayload().get(i).getSender().getType().equalsIgnoreCase("user")) {
+                    msgs.add(new SenderModel(messagesModel.getPayload().get(i).getContent(),
+                            ""
+                    ));
+                } else {
+                    msgs.add(new SupportReceiverModel(messagesModel.getPayload().get(i).getContent(),
+                            "", messagesModel.getMeta().getAssignee()
+                    ));
+                }
+            }
+        }
+        buildRec(msgs);
     }
 
     private void buildRec(ArrayList<Object> msgs) {

@@ -2,6 +2,7 @@ package com.splitur.app.ui.main.view.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.splitur.app.R;
+import com.splitur.app.data.api.ApiManager;
+import com.splitur.app.data.model.ChatWootAccountIdModel;
 import com.splitur.app.data.model.get_avatar.AvatarItem;
 import com.splitur.app.databinding.FragmentProfileBinding;
 import com.splitur.app.ui.main.adapter.avatar_adapter.AdapterAvatars;
@@ -39,6 +42,10 @@ import com.splitur.app.ui.main.viewmodel.profile_viewmodel.ProfileViewModel;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class Profile extends Fragment {
@@ -142,7 +149,8 @@ public class Profile extends Fragment {
         });
 
         binding.contactLayout.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_profile2_to_contactUs);
+            NavToContact();
+
         });
 
         binding.swap.setOnClickListener(view -> {
@@ -326,6 +334,27 @@ public class Profile extends Fragment {
                 });
             }
 
+        });
+    }
+
+    private void NavToContact() {
+        Call<ChatWootAccountIdModel> call = ApiManager.getRestApiService().getAccountId();
+        call.enqueue(new Callback<ChatWootAccountIdModel>() {
+            @Override
+            public void onResponse(@NonNull Call<ChatWootAccountIdModel> call, @NonNull Response<ChatWootAccountIdModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ChatWootAccountIdModel accountIdModel = response.body();
+                    Constants.AccountId = Integer.parseInt(accountIdModel.getChatWootAccountId());
+                    Constants.ChatApiKey = accountIdModel.getChat_api_key();
+                    Constants.InboxId = Integer.parseInt(accountIdModel.getInbox_id());
+                    Navigation.findNavController(requireView()).navigate(R.id.action_profile2_to_contactUs);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ChatWootAccountIdModel> call, @NonNull Throwable t) {
+                Log.e("Account Id", "onFailure: ", t);
+            }
         });
     }
 
