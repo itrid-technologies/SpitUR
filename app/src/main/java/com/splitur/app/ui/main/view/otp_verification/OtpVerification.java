@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,11 +11,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import java.util.Locale;
-
 import com.splitur.app.R;
 import com.splitur.app.databinding.ActivityOtpVerificationBinding;
-import com.splitur.app.service.OTPListener;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.viewmodel.ReferralViewModel;
 import com.splitur.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel;
@@ -24,15 +20,16 @@ import com.splitur.app.ui.main.viewmodel.phone_number.PhoneNumberViewModel;
 import com.splitur.app.utils.ActivityUtil;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
-import com.splitur.app.utils.OtpReader;
 import com.splitur.app.utils.Split;
+
+import java.util.Locale;
 
 public class OtpVerification extends AppCompatActivity { //otp listener removed
 
     ActivityOtpVerificationBinding binding;
 
     private OtpVerificationViewModel mViewModel;
-    boolean clicked = false;
+    boolean hasResendOTP = false;
 
 
     @SuppressLint("ResourceAsColor")
@@ -43,7 +40,7 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
         binding = ActivityOtpVerificationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-       // OtpReader.bind(this, "SOLV");
+        // OtpReader.bind(this, "SOLV");
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
@@ -63,13 +60,15 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
             String resend = binding.remainingTime.getText().toString();
             if (resend.equalsIgnoreCase("Resend")) {
 
-                if (!clicked) {
-                    clicked = true;
-                    resendOtp(number);
-                }else {
-                    binding.remainingTime.setEnabled(false);
-                    binding.remainingTime.setTextColor(R.color.hint_color);
-                }
+                resendOtp(number);
+
+//                if (!clicked) {
+//                    clicked = true;
+//                    resendOtp(number);
+//                } else {
+//                    binding.remainingTime.setEnabled(false);
+//                    binding.remainingTime.setTextColor(R.color.hint_color);
+//                }
             }
         });
 
@@ -106,12 +105,16 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
 
             public void onFinish() {
                 binding.remainingTime.setText("Resend");
+                if (hasResendOTP) {
+                    binding.remainingTime.setVisibility(View.GONE);
+                }
             }
 
         }.start();
     }
 
     private void resendOtp(String number) {
+        hasResendOTP = true;
         PhoneNumberViewModel phoneNumberViewModel = new PhoneNumberViewModel(number);
         phoneNumberViewModel.initOtp();
         phoneNumberViewModel.getOtp_data().observe(this, otpModel -> {
@@ -149,17 +152,17 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
                     pm.saveData(Split.getAppContext(), "source_id", authenticationModel.getData().getUser().getSource_id());
                     pm.saveData(Split.getAppContext(), "contact_id", String.valueOf(authenticationModel.getData().getUser().getContact_id()));
 
-                    if (!Constants.Referrer.isEmpty()){
-                        ReferralViewModel referralViewModel = new ReferralViewModel(Constants.ID,Constants.Referrer);
+                    if (!Constants.Referrer.isEmpty()) {
+                        ReferralViewModel referralViewModel = new ReferralViewModel(Constants.ID, Constants.Referrer);
                         referralViewModel.init();
-                        referralViewModel.getData().observe(this,basicModel -> {
-                            if (basicModel.isStatus().equalsIgnoreCase("true")){
+                        referralViewModel.getData().observe(this, basicModel -> {
+                            if (basicModel.isStatus().equalsIgnoreCase("true")) {
                                 Toast.makeText(this, basicModel.getMessage(), Toast.LENGTH_SHORT).show();
                                 ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                             }
                         });
-                    }else {
+                    } else {
                         ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }

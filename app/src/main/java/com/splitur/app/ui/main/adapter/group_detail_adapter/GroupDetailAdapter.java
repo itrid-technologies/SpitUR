@@ -7,19 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.splitur.app.R;
+import com.splitur.app.data.model.group_detail.DataItem;
+import com.splitur.app.utils.Constants;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import com.splitur.app.R;
-import com.splitur.app.data.model.group_detail.DataItem;
-import com.splitur.app.utils.Constants;
 
 public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.ViewHolder> {
 
@@ -52,7 +53,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
 
         dataItem = data.get(position);
         holder.title.setText(dataItem.getTitle());
-        if (dataItem.getGroupAdmin() != null){
+        if (dataItem.getGroupAdmin() != null) {
             holder.score.setText(String.valueOf(Math.round(dataItem.getGroupAdmin().getSpliturScore())));
             if (dataItem.getGroupAdmin().isOnlineOflineStatus()) {
                 holder.online_offline.setText("Online");
@@ -67,44 +68,110 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
                     .into(holder.user);
             holder.rateOf_id.setText(String.format("@%s", dataItem.getGroupAdmin().getUserId()));
         }
-        String member = String.valueOf(dataItem.getTotalMembers());
-        if (member.equalsIgnoreCase("1")) {
-            holder.one.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-            holder.one.setTextColor(Color.WHITE);
-            holder.one.setAlpha(1);
-        } else if (member.equalsIgnoreCase("2")) {
-            holder.two.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-            holder.two.setTextColor(Color.WHITE);
-            holder.two.setAlpha(1);
 
-        } else if (member.equalsIgnoreCase("3")) {
-            holder.three.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-            holder.three.setTextColor(Color.WHITE);
-            holder.three.setAlpha(1);
+        /*
+         * Handle slots & joined members
+         */
 
-        } else if (member.equalsIgnoreCase("4")) {
-            holder.four.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-            holder.four.setTextColor(Color.WHITE);
-            holder.four.setAlpha(1);
+        final int memberCount = dataItem.getTotalMembers();
+        final int slotsCount = dataItem.getSlots();
 
-        } else if (member.equalsIgnoreCase("5")) {
-            holder.five.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-            holder.five.setTextColor(Color.WHITE);
-            holder.five.setAlpha(1);
+/*        if (slotsCount > 0) {
+            LinearLayout laySlots = holder.llSlots;
+            for (int i = 0; i <= slotsCount; i++) {
 
-        } else if (member.equalsIgnoreCase("6")) {
-            holder.six.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-            holder.six.setTextColor(Color.WHITE);
-            holder.six.setAlpha(1);
+                //add views dynamically
+                TextView tvSlot = new TextView(context);
+                tvSlot.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                tvSlot.setGravity(Gravity.CENTER);
+                tvSlot.setPadding(0, com.intuit.sdp.R.dimen._1sdp, 0, 0);
+                tvSlot.setTextColor(context.getResources().getColor(R.color.white));
+                tvSlot.setTextSize(com.intuit.sdp.R.dimen._7sdp);
+                tvSlot.setBackground(AppCompatResources.getDrawable(context, R.drawable.ic_score_bg));
+                tvSlot.setTypeface(ResourcesCompat.getFont(context, R.font.poppins_semibold));
+                tvSlot.setText(String.valueOf(i));
+                if (i == memberCount) {
+                    //add special bg effect
+                    tvSlot.setAlpha(1F);
+                    tvSlot.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
+                } else {
+                    tvSlot.setAlpha(0.4F);
+                    tvSlot.setBackgroundTintList(AppCompatResources.getColorStateList(context, R.color.transparent));
+                }
 
+                //add view to llSlots
+                laySlots.addView(tvSlot, i);
+
+            }//for
+        }*/
+
+        //jitni slots hn utny hi members hoty hn
+        for (int i = 0; i < slotsCount; i++) {
+            if (i == memberCount) {
+                switch (i) {
+                    case 1:
+                        holder.one.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
+                        holder.one.setTextColor(Color.WHITE);
+                        holder.one.setAlpha(1);
+                        break;
+                    case 2:
+                        holder.two.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
+                        holder.two.setTextColor(Color.WHITE);
+                        holder.two.setAlpha(1);
+                        break;
+                    case 3:
+                        holder.three.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
+                        holder.three.setTextColor(Color.WHITE);
+                        holder.three.setAlpha(1);
+                        break;
+                    case 4:
+                        holder.four.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
+                        holder.four.setTextColor(Color.WHITE);
+                        holder.four.setAlpha(1);
+                        break;
+                    case 5:
+                        holder.five.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
+                        holder.five.setTextColor(Color.WHITE);
+                        holder.five.setAlpha(1);
+                        break;
+                    case 6:
+                        holder.six.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
+                        holder.six.setTextColor(Color.WHITE);
+                        holder.six.setAlpha(1);
+                        break;
+
+                }
+            }
+        }//for
+
+        try {
+            for (int i = slotsCount + 1; i <= 6; i++) {
+                switch (i) {
+                    case 1:
+                        holder.one.setVisibility(View.GONE);
+                        break;
+                    case 2:
+                        holder.two.setVisibility(View.GONE);
+                        break;
+                    case 3:
+                        holder.three.setVisibility(View.GONE);
+                        break;
+                    case 4:
+                        holder.four.setVisibility(View.GONE);
+                        break;
+                    case 5:
+                        holder.five.setVisibility(View.GONE);
+                        break;
+                    case 6:
+                        holder.six.setVisibility(View.GONE);
+                        break;
+                }
+            }
+        } catch (IndexOutOfBoundsException ex) {
+            ex.printStackTrace();
         }
 
-
-
         holder.group_id.setText(String.valueOf(dataItem.getGroupId()));
-
-
-
 
 //        Svg.INSTANCE.loadUrl(Constants.IMG_PATH + dataItem.getSubCategory().getCategory().getIcon(), holder.rate_icon);
 
@@ -134,7 +201,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
         public TextView title, online_offline, group_id, rateOf_id, one, two, three, four, five, six, score, coins;
         ImageView online_icon, rate_icon;
         CircleImageView user;
-
+        LinearLayout llSlots;
 
         public ViewHolder(@NonNull View itemView, ItemClickListener mListener) {
             super(itemView);
@@ -149,6 +216,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
             four = itemView.findViewById(R.id.tv_four);
             five = itemView.findViewById(R.id.tv_five);
             six = itemView.findViewById(R.id.tv_six);
+            llSlots = itemView.findViewById(R.id.slots);
             online_icon = itemView.findViewById(R.id.online_icon);
             rate_icon = itemView.findViewById(R.id.icon);
             score = itemView.findViewById(R.id.tv_score);

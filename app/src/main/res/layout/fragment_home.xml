@@ -84,7 +84,7 @@
                 android:id="@+id/popular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:background="@drawable/round_back"
                 android:backgroundTint="@color/blue"
                 android:fontFamily="@font/inter_semibold"
@@ -115,26 +115,29 @@
                 android:id="@+id/popularLst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_15sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/popular">
+                app:layout_constraintTop_toBottomOf="@+id/popular">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/part1"
-                    android:layout_width="95dp"
-                    android:layout_height="118dp"
+                    android:layout_width="@dimen/_78sdp"
+                    android:layout_height="@dimen/_92sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:background="@drawable/guarantee_term_bg"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
+
                     <TextView
                         android:id="@+id/popular_name"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
+                        android:layout_height="@dimen/_48sdp"
+                        android:ellipsize="end"
                         android:fontFamily="@font/poppins_bold"
+                        android:maxLines="2"
                         android:paddingStart="12dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="12dp"
@@ -145,32 +148,30 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-
                     <TextView
                         android:id="@+id/tv_join"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-6dp"
+                        android:layout_height="@dimen/_28sdp"
                         android:background="@drawable/custom_borders"
                         android:fontFamily="@font/poppins_semibold"
                         android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="6dp"
+                        android:paddingTop="@dimen/_4sdp"
                         android:text="Join Now"
                         android:textColor="@color/white"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/icon_container" />
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/icon_container"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/round_back"
                         android:backgroundTint="@color/icons_bg"
                         android:padding="2dp"
+                        app:layout_constraintBottom_toTopOf="@id/tv_join"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/popular_name">
@@ -179,9 +180,9 @@
                             android:id="@+id/popular_icons"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:padding="3dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/player_icon"
-                            android:padding="3dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -190,13 +191,12 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/part2"
-                    android:layout_width="95dp"
-                    android:layout_height="118dp"
+                    android:layout_width="@dimen/_78sdp"
+                    android:layout_height="@dimen/_92sdp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:background="@drawable/guarantee_term_bg"
@@ -208,8 +208,10 @@
                     <TextView
                         android:id="@+id/popular_name1"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
+                        android:layout_height="@dimen/_48sdp"
+                        android:ellipsize="end"
                         android:fontFamily="@font/poppins_bold"
+                        android:maxLines="2"
                         android:paddingStart="12dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="12dp"
@@ -224,28 +226,27 @@
                     <TextView
                         android:id="@+id/tv_join1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-6dp"
+                        android:layout_height="@dimen/_28sdp"
                         android:background="@drawable/custom_borders"
                         android:fontFamily="@font/poppins_semibold"
                         android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="6dp"
+                        android:paddingTop="@dimen/_4sdp"
                         android:text="Join Now"
                         android:textColor="@color/white"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/icon_container1" />
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/icon_container1"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/round_back"
                         android:backgroundTint="@color/icons_bg"
                         android:padding="2dp"
+                        app:layout_constraintBottom_toTopOf="@id/tv_join1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/popular_name1">
@@ -254,8 +255,8 @@
                             android:id="@+id/popular_icons1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="fitXY"
                             android:padding="3dp"
+                            android:scaleType="fitXY"
                             android:src="@drawable/player_icon"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -270,8 +271,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/part3"
-                    android:layout_width="95dp"
-                    android:layout_height="118dp"
+                    android:layout_width="@dimen/_78sdp"
+                    android:layout_height="@dimen/_92sdp"
                     android:background="@drawable/guarantee_term_bg"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -280,8 +281,10 @@
                     <TextView
                         android:id="@+id/popular_name2"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
+                        android:layout_height="@dimen/_48sdp"
+                        android:ellipsize="end"
                         android:fontFamily="@font/poppins_bold"
+                        android:maxLines="2"
                         android:paddingStart="12dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="12dp"
@@ -296,28 +299,27 @@
                     <TextView
                         android:id="@+id/tv_join2"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-6dp"
+                        android:layout_height="@dimen/_28sdp"
                         android:background="@drawable/custom_borders"
                         android:fontFamily="@font/poppins_semibold"
                         android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="6dp"
+                        android:paddingTop="@dimen/_4sdp"
                         android:text="Join Now"
                         android:textColor="@color/white"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/icon_container2" />
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/icon_container2"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/round_back"
                         android:backgroundTint="@color/icons_bg"
                         android:padding="2dp"
+                        app:layout_constraintBottom_toTopOf="@id/tv_join2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/popular_name2">
@@ -326,8 +328,8 @@
                             android:id="@+id/popular_icons2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="fitXY"
                             android:padding="3dp"
+                            android:scaleType="fitXY"
                             android:src="@drawable/player_icon"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"

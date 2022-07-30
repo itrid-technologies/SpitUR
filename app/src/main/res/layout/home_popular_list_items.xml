@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="95dp"
-    android:layout_height="118dp"
+    android:layout_width="@dimen/_78sdp"
+    android:layout_height="@dimen/_92sdp"
     android:layout_marginStart="10dp"
     android:background="@drawable/guarantee_term_bg">
 
     <TextView
         android:id="@+id/popular_name"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/_48sdp"
         android:fontFamily="@font/poppins_bold"
         android:paddingStart="12dp"
         android:paddingTop="10dp"
         android:paddingEnd="12dp"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:text="-"
         android:textColor="@color/white"
         android:textSize="15sp"
@@ -25,20 +27,17 @@
     <TextView
         android:id="@+id/tv_join"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-6dp"
+        android:layout_height="@dimen/_28sdp"
+        android:paddingTop="@dimen/_4sdp"
         android:background="@drawable/custom_borders"
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center"
-        android:paddingTop="10dp"
-        android:paddingBottom="6dp"
         android:text="Join Now"
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/icon_container" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/icon_container"
@@ -47,6 +46,8 @@
         android:background="@drawable/round_back"
         android:backgroundTint="@color/icons_bg"
         android:padding="2dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintBottom_toTopOf="@id/tv_join"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/popular_name">

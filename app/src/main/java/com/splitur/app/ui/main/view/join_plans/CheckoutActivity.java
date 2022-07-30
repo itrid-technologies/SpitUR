@@ -30,6 +30,7 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
     private String group_id;
     private String groupData;
     String secret_key = "";
+    private String groupAdminId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
             group_id = data.getStringExtra("group_id");
             groupData = data.getStringExtra("group_credentials");
             secret_key = data.getStringExtra("secret_key");
+            groupAdminId = data.getStringExtra("group_admin_id");
             if (!secret_key.isEmpty()) {
                 checkout(subID);
             }
@@ -101,6 +103,7 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
                             Intent intent = new Intent(CheckoutActivity.this, Dashboard.class);
                             intent.putExtra("checkout_complete", true);
                             intent.putExtra("group_credentials", groupData);
+                            intent.putExtra("group_admin_id", groupAdminId);
                             finish();
                             finishAffinity();
                             startActivity(intent);

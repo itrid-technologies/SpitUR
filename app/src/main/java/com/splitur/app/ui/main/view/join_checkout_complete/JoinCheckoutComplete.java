@@ -27,6 +27,7 @@ public class JoinCheckoutComplete extends Fragment {
 
    FragmentJoinCheckoutCompleteBinding binding;
    JoinGroupModel joinGroupModel;
+   private String groupAdminId;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -47,6 +48,7 @@ public class JoinCheckoutComplete extends Fragment {
 
         if (getArguments() != null){
             String response = getArguments().getString("group_credentials");
+            groupAdminId = getArguments().getString("group_admin_id");
             Gson gson = new Gson();
             joinGroupModel = gson.fromJson(response, JoinGroupModel.class);
             setData(joinGroupModel);
@@ -86,6 +88,7 @@ public class JoinCheckoutComplete extends Fragment {
 
             Bundle bundle = new Bundle();
             bundle.putString("groupId", String.valueOf(joinGroupModel.getData().getGroupId()));
+            bundle.putString("receiverId", groupAdminId);
             bundle.putBoolean("ask_otp", true);
             Navigation.findNavController(view).navigate(R.id.action_joinCheckoutComplete_to_memberChat,bundle);
         });

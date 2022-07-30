@@ -148,6 +148,7 @@ public class Dashboard extends AppCompatActivity {
             //group data
             Bundle bundle = new Bundle();
             bundle.putString("group_credentials", data.getStringExtra("group_credentials"));
+            bundle.putString("group_admin_id", data.getStringExtra("group_admin_id"));
             mNavController.navigate(R.id.joinCheckoutComplete, bundle);
         }
 

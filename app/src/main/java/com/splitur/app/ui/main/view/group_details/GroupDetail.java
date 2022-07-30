@@ -136,7 +136,7 @@ public class GroupDetail extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.groupsDetailList.setLayoutManager(layoutManager);
-        GroupDetailAdapter adapter = new GroupDetailAdapter(Split.getAppContext(), detailItems);
+        GroupDetailAdapter adapter = new GroupDetailAdapter(requireContext(), detailItems);
         binding.groupsDetailList.setAdapter(adapter);
 
         adapter.setOnGroupSelectListener(position -> {

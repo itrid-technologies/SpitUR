@@ -24,12 +24,6 @@ import androidx.navigation.Navigation;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
-import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import com.splitur.app.R;
 import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.data.model.group_detail.DataItem;
@@ -42,6 +36,12 @@ import com.splitur.app.ui.main.viewmodel.CheckOutViewModel;
 import com.splitur.app.ui.main.viewmodel.join_checkout_viewmodel.JoinCheckoutViewModel;
 import com.splitur.app.ui.main.viewmodel.join_group.JoinGroupViewModel;
 import com.splitur.app.utils.Constants;
+
+import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class JoinCheckOut extends Fragment {
@@ -96,8 +96,6 @@ public class JoinCheckOut extends Fragment {
         webViewIntent = new Intent(requireContext(), WebViewActivity.class);
 
         initClickListeners();
-
-
 
     }
 
@@ -337,6 +335,7 @@ public class JoinCheckOut extends Fragment {
 //        MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
 //        String group_id = mySharedPreferences.getData(Split.getAppContext(), "GroupID");
         String group_id = String.valueOf(dataItem.getId());
+        String group_admin_id = String.valueOf(dataItem.getGroupAdmin().getId());
         if (!group_id.isEmpty()) {
             joinGroupViewModel = new JoinGroupViewModel(group_id, Constants.USER_EMAIL, code);
             joinGroupViewModel.init();
@@ -360,6 +359,7 @@ public class JoinCheckOut extends Fragment {
                             checkoutIntent.putExtra("subscription_id", joinGroupModel.getSubscriptions().getId());
                             checkoutIntent.putExtra("group_credentials", groupDATA);
                             checkoutIntent.putExtra("secret_key", secret_key);
+                            checkoutIntent.putExtra("group_admin_id", group_admin_id);
 
                             startActivity(checkoutIntent);
                             binding.loadingView.setVisibility(View.GONE);

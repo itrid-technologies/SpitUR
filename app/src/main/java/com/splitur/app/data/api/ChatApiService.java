@@ -14,16 +14,16 @@ import retrofit2.http.Path;
 
 public interface ChatApiService {
 
-    @POST("api/v1/accounts/73801/conversations")
+    @POST("api/v1/accounts/11/conversations")
     Call<ConversationModel> createConversation(@Header("api_access_token") String apiKey,
                                                @Body JsonObject object);
 
 
-    @GET("api/v1/accounts/73801/conversations/{conversation_id}/messages")
+    @GET("api/v1/accounts/11/conversations/{conversation_id}/messages")
     Call<MessagesModel> getSupportChat(@Header("api_access_token") String apiKey,
                                        @Path("conversation_id") int conversation_id);
 
-    @POST("api/v1/accounts/73801/conversations/{conversation_id}/messages")
+    @POST("api/v1/accounts/11/conversations/{conversation_id}/messages")
     Call<SendSupportMessageModel> sendSupportQuery(@Header("api_access_token") String apiKey,
                                                    @Path("conversation_id") int conversation_id,
                                                    @Body JsonObject object);

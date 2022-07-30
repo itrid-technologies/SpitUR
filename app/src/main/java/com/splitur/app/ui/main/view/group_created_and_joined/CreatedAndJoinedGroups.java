@@ -16,10 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.splitur.app.R;
 import com.splitur.app.data.model.all_created_groupx.DataItem;
 import com.splitur.app.data.model.all_joined_groups.AllJoinedGroupModel;
@@ -32,6 +28,9 @@ import com.splitur.app.ui.main.viewmodel.CheckOutViewModel;
 import com.splitur.app.ui.main.viewmodel.created_and_joined.CreatedAndJoinedViewModel;
 import com.splitur.app.utils.Split;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class CreatedAndJoinedGroups extends Fragment {
 
@@ -41,6 +40,7 @@ public class CreatedAndJoinedGroups extends Fragment {
     List<com.splitur.app.data.model.all_joined_groups.DataItem> join_data;
     private boolean shouldGoToSupportChat = false;
 
+    private String msgs;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -85,6 +85,7 @@ public class CreatedAndJoinedGroups extends Fragment {
         if (getArguments() != null) {
             Dashboard.hideNav(true);
             shouldGoToSupportChat = getArguments().getBoolean("isFromChat");
+            msgs = getArguments().getString("support_chat");
         }
     }
 
@@ -182,8 +183,9 @@ public class CreatedAndJoinedGroups extends Fragment {
 
 //          shouldGoToSupportChat
             if (shouldGoToSupportChat) {
-
-                Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_supportChat);
+                Bundle bundle = new Bundle();
+                bundle.putString("support_chat", msgs);
+                Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_supportChat, bundle);
 
             } else {//old flow
                 if (join_data.get(position).getPaymentStatus().equalsIgnoreCase("pending")) {
@@ -227,8 +229,9 @@ public class CreatedAndJoinedGroups extends Fragment {
         adapter.setOnCreatedGroupClickListener(position -> {
             //shouldGoToSupportChat
             if (shouldGoToSupportChat) {
-
-                Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_supportChat);
+                Bundle bundle = new Bundle();
+                bundle.putString("support_chat", msgs);
+                Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_supportChat, bundle);
 
             } else {//old flow
                 Gson gson = new Gson();

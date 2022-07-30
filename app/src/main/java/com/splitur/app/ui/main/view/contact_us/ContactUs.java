@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,16 +13,10 @@ import androidx.navigation.Navigation;
 
 import com.google.gson.Gson;
 import com.splitur.app.R;
-import com.splitur.app.data.api.ApiManager;
-import com.splitur.app.data.api.ChatApiService;
 import com.splitur.app.data.api.ChatwootApiManager;
-import com.splitur.app.data.model.ChatWootAccountIdModel;
-import com.splitur.app.data.model.chat_sender.SenderModel;
 import com.splitur.app.data.model.chatwoot_model.MessagesModel;
-import com.splitur.app.data.model.settings.SettingsResponse;
 import com.splitur.app.databinding.FragmentContactUsBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
-import com.splitur.app.ui.main.view.support_chat.SupportReceiverModel;
 import com.splitur.app.ui.main.viewmodel.chatwoot_viewmodel.SupportChatViewModel;
 import com.splitur.app.utils.Constants;
 
@@ -69,16 +62,14 @@ public class ContactUs extends Fragment {
     }
 
 
-
-
     private void getSupportChat(int conversation_id) {
-        Call<MessagesModel> call = ChatwootApiManager.getRestApiService().getSupportChat(Constants.ChatApiKey,conversation_id);
+        Call<MessagesModel> call = ChatwootApiManager.getRestApiService().getSupportChat(Constants.ChatApiKey, conversation_id);
         call.enqueue(new Callback<MessagesModel>() {
             @Override
             public void onResponse(@NonNull Call<MessagesModel> call, @NonNull Response<MessagesModel> response) {
                 if (response.body() != null) {
                     MessagesModel messagesModel = response.body();
-                    if (messagesModel.getPayload() != null){
+                    if (messagesModel.getPayload() != null) {
 
                         Gson gson = new Gson();
                         msgs = gson.toJson(messagesModel);
@@ -86,7 +77,11 @@ public class ContactUs extends Fragment {
                             Bundle bundle = new Bundle();
                             bundle.putString("support_chat", msgs);
 
-                            Navigation.findNavController(requireView()).navigate(R.id.action_contactUs_to_supportChat,bundle);
+//                            Navigation.findNavController(requireView()).navigate(R.id.action_contactUs_to_supportChat,bundle);
+                            //to group created
+                            bundle.putBoolean("isFromChat", true);
+                            Navigation.findNavController(requireView()).navigate(R.id.action_contactUs_to_createdAndJoinedGroups, bundle);
+
                         }
                     }
                 }
@@ -120,11 +115,9 @@ public class ContactUs extends Fragment {
 
 
         binding.contactLayout.chatLayout.setOnClickListener(view -> {
-            if (Constants.conversation_id != 0){
+            if (Constants.conversation_id != 0) {
                 getSupportChat(Constants.conversation_id);
             }
-
-
         });
     }
 }
