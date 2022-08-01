@@ -21,9 +21,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-
 import com.splitur.app.data.model.OTpModel;
 import com.splitur.app.data.model.chat_sender.SenderModel;
 import com.splitur.app.databinding.FragmentMemberChatBinding;
@@ -32,6 +29,9 @@ import com.splitur.app.ui.main.viewmodel.chat_viewmodel.ChatMemberViewModel;
 import com.splitur.app.ui.main.viewmodel.otp_request_viewmodel.OtpRequestViewModel;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.Split;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class MemberChat extends Fragment {
@@ -74,9 +74,9 @@ public class MemberChat extends Fragment {
             otp_status = getArguments().getBoolean("ask_otp");
         }
 
-        if (otp_status){
+        if (otp_status) {
             binding.askOtp.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             binding.askOtp.setVisibility(View.GONE);
         }
 
@@ -96,24 +96,33 @@ public class MemberChat extends Fragment {
 
                 msgs = new ArrayList<>();
 
+                LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
+                binding.memberChatRv.setLayoutManager(layoutManager);
 
                 if (getMemberMessagesModel.getMessages().size() > 0) {
+
 
 
                     for (int i = 0; i <= getMemberMessagesModel.getMessages().size() - 1; i++) {
 
                         if (String.valueOf(getMemberMessagesModel.getMessages().get(i).getSenderId()).equalsIgnoreCase(id)) {
-                            msgs.add(new SenderModel(getMemberMessagesModel.getMessages().get(i).getBody(),
-                                    getMemberMessagesModel.getMessages().get(i).getCreatedAt()
-                            ));
-                        } else if(getMemberMessagesModel.getMessages().get(i).getSenderId() == getMemberMessagesModel.getMessages().get(i).getReceiverId()) {
-                            msgs.add(new OTpModel(getMemberMessagesModel.getMessages().get(i).getBody(),
-                                    getMemberMessagesModel.getMessages().get(i).getCreatedAt()
-                            ));
-                        }else {
+                            if (getMemberMessagesModel.getMessages().get(i).getSent_by() != 0) {
+                                msgs.add(new SenderModel(getMemberMessagesModel.getMessages().get(i).getBody(),
+                                        getMemberMessagesModel.getMessages().get(i).getCreatedAt()
+                                ));
+                            }
+                        } else if (getMemberMessagesModel.getMessages().get(i).getSenderId() == getMemberMessagesModel.getMessages().get(i).getReceiverId()) {
+                            if (getMemberMessagesModel.getMessages().get(i).getSent_by() == 0) {
+                                msgs.add(new OTpModel(getMemberMessagesModel.getMessages().get(i).getBody(),
+                                        getMemberMessagesModel.getMessages().get(i).getCreatedAt()
+                                ));
+                            }
+                        } else if (String.valueOf(getMemberMessagesModel.getMessages().get(i).getReceiverId()).equalsIgnoreCase(receiver_id)) {
                             msgs.add(new MemberReceiverModel(getMemberMessagesModel.getMessages().get(i).getBody(),
                                     getMemberMessagesModel.getMessages().get(i).getCreatedAt(),
                                     getMemberMessagesModel.getMessages().get(i).getSender()));
+                        } else {
+
                         }
                     }
                     buildChatRv(msgs);
@@ -139,8 +148,7 @@ public class MemberChat extends Fragment {
     }
 
     private void buildChatRv(ArrayList<Object> msgs) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
-        binding.memberChatRv.setLayoutManager(layoutManager);
+
         adapter = new MemberChatAdapter(Split.getAppContext(), msgs);
         binding.memberChatRv.setAdapter(adapter);
         binding.memberChatRv.scrollToPosition(msgs.size() - 1);
@@ -160,11 +168,20 @@ public class MemberChat extends Fragment {
                 viewModel.getData().observe(getViewLifecycleOwner(), messageSendModel -> {
                     if (messageSendModel.isStatus()) {
 
+
                         msgs.add(new SenderModel(message, Calendar.getInstance().getTime().toString()));
-                        binding.memberChatRv.scrollToPosition(msgs.size() - 1);
-                        adapter.notifyItemInserted(msgs.size() - 1);
-                        adapter.notifyDataSetChanged();
-                        binding.messgae.setText("");
+
+                        if (msgs.size() == 1){
+                            adapter = new MemberChatAdapter(Split.getAppContext(), msgs);
+                            binding.memberChatRv.setAdapter(adapter);
+                            binding.memberChatRv.scrollToPosition(msgs.size() - 1);
+                            binding.messgae.setText("");
+                        }else {
+                            binding.memberChatRv.scrollToPosition(msgs.size() - 1);
+                            adapter.notifyItemInserted(msgs.size() - 1);
+                            adapter.notifyDataSetChanged();
+                            binding.messgae.setText("");
+                        }
                     }
                 });
             }

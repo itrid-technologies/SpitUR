@@ -159,9 +159,9 @@ public interface ApiService {
     Call<MessageSendModel> sendMessage(@Header("Authorization") String token,
                                        @Body JsonObject object);
 
-    @GET("messages/getMessages/{id}")
+    @POST("messages/getMessages")
     Call<GetMemberMessagesModel> getMessages(@Header("Authorization") String token,
-                                             @Path("id") String id);
+                                             @Body JsonObject object);
 
 
     @POST("groups/remove_member")

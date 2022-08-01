@@ -71,14 +71,15 @@ public class Transactions extends Fragment {
             }
         });
 
-
     }
 
     private void buildRv(List<DataItem> transactions) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, true);
+        layoutManager.setStackFromEnd(true);
         binding.transactionsList.setLayoutManager(layoutManager);
         TransactionAdapter adapter = new TransactionAdapter(Split.getAppContext(), transactions);
         binding.transactionsList.setAdapter(adapter);
+
     }
 
     private void initClickListeners() {

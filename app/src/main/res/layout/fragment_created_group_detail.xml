@@ -153,7 +153,6 @@
                 android:background="@drawable/terms_bg"
                 android:paddingTop="12dp"
                 android:paddingStart="20dp"
-                android:visibility="gone"
                 android:paddingEnd="20dp"
                 android:paddingBottom="12dp"
                 android:layout_marginTop="19dp"

@@ -43,6 +43,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
     public void onBindViewHolder(@NonNull SearchListAdapter.SearchVH holder, int position) {
         final DataItem current_data = dataItems.get(position);
         if (current_data.getCategory() != null) {
+
 //            Svg.INSTANCE.loadUrl(
 //                    Constants.IMG_PATH + current_data.getCategory().getIcon(),
 //                    holder.icon);

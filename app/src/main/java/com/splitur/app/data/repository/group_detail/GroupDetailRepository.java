@@ -65,10 +65,69 @@ public class GroupDetailRepository {
 
         JsonObject object = new JsonObject();
         object.addProperty("sub_cat_id", id);
+        object.addProperty("query", query);
 
-        Map<String, String> parms = new HashMap<String, String>();
-        parms.put("sub_cat_id", id);
-        parms.put("query", query);
+
+        final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();
+        apiService = ApiManager.getRestApiService();
+        Call<GroupDetailModel> call = apiService.getGroupDetailsSearch(object);
+        call.enqueue(new Callback<GroupDetailModel>() {
+            @Override
+            public void onResponse(@NonNull Call<GroupDetailModel> call, @NonNull Response<GroupDetailModel> response) {
+                if (response.body() != null) {
+                    liveData.setValue(response.body());
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<GroupDetailModel> call, @NonNull Throwable t) {
+                Log.e("Detail Error", t.getMessage());
+            }
+        });
+
+        return liveData;
+    }
+
+    public MutableLiveData<GroupDetailModel> getDetailsBySearchGroupId(String id, String groupId) {
+
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String token = preferences.getData(Split.getAppContext(), "userAccessToken");
+
+        JsonObject object = new JsonObject();
+        object.addProperty("sub_cat_id", id);
+        object.addProperty("group_id", groupId);
+
+
+        final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();
+        apiService = ApiManager.getRestApiService();
+        Call<GroupDetailModel> call = apiService.getGroupDetailsSearch(object);
+        call.enqueue(new Callback<GroupDetailModel>() {
+            @Override
+            public void onResponse(@NonNull Call<GroupDetailModel> call, @NonNull Response<GroupDetailModel> response) {
+                if (response.body() != null) {
+                    liveData.setValue(response.body());
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<GroupDetailModel> call, @NonNull Throwable t) {
+                Log.e("Detail Error", t.getMessage());
+            }
+        });
+
+        return liveData;
+    }
+
+    public MutableLiveData<GroupDetailModel> getDetailsBySearchUserId(String id, String groupId) {
+
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String token = preferences.getData(Split.getAppContext(), "userAccessToken");
+
+        JsonObject object = new JsonObject();
+        object.addProperty("sub_cat_id", id);
+        object.addProperty("user_id", groupId);
 
 
         final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();

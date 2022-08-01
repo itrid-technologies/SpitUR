@@ -103,8 +103,10 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
                 binding.remainingTime.setText(String.format(Locale.ENGLISH, "%d sec", (int) (millisUntilFinished / 1000)));
             }
 
+            @SuppressLint("ResourceAsColor")
             public void onFinish() {
                 binding.remainingTime.setText("Resend");
+                binding.remainingTime.setTextColor(R.color.white);
                 if (hasResendOTP) {
                     binding.remainingTime.setVisibility(View.GONE);
                 }

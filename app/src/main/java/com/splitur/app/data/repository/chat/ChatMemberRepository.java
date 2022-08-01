@@ -53,13 +53,18 @@ public class ChatMemberRepository {
         return liveData;
     }
 
-    public MutableLiveData<GetMemberMessagesModel> getMessages(String id) {
+    public MutableLiveData<GetMemberMessagesModel> getMessages(String receiver_id, String group_id) {
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
         final MutableLiveData<GetMemberMessagesModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GetMemberMessagesModel> call = apiService.getMessages("Bearer "+token,id);
+
+        JsonObject object = new JsonObject();
+        object.addProperty("group_id",group_id);
+        object.addProperty("receiver_id",receiver_id);
+
+        Call<GetMemberMessagesModel> call = apiService.getMessages("Bearer "+token,object);
         call.enqueue(new Callback<GetMemberMessagesModel>() {
             @Override
             public void onResponse(@NonNull Call<GetMemberMessagesModel> call, @NonNull Response<GetMemberMessagesModel> response) {

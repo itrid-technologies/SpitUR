@@ -38,7 +38,7 @@ public class ChatMemberViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        messages_data = chatRepository.getMessages(receiver);
+        messages_data = chatRepository.getMessages(receiver,group);
     }
 
     public MutableLiveData<MessageSendModel> getData() {

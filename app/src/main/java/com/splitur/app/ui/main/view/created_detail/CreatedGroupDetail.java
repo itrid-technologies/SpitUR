@@ -84,7 +84,12 @@ public class CreatedGroupDetail extends Fragment {
         membersViewModel.getPlan().observe(getViewLifecycleOwner(), groupMemberModel -> {
             if (groupMemberModel.isSuccess()) {
                 if (groupMemberModel.getData().size() > 0) {
-                    membersList.addAll(groupMemberModel.getData());
+                    for (int i=0; i<= groupMemberModel.getData().size()-1; i++){
+                        if (groupMemberModel.getData().get(i).getUser() != null){
+                            membersList.add(groupMemberModel.getData().get(i));
+                        }
+                    }
+//                    membersList.addAll(groupMemberModel.getData());
                     buildMembersList(membersList);
                 } else {
                     binding.noMemberLayout.setVisibility(View.VISIBLE);

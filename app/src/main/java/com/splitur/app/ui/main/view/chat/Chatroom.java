@@ -28,6 +28,7 @@ import com.splitur.app.data.model.send_message.MessageSendModel;
 import com.splitur.app.databinding.FragmentChatroomBinding;
 import com.splitur.app.ui.main.adapter.chat.ChatAdapter;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
+import com.splitur.app.ui.main.view.member_chat.MemberChatAdapter;
 import com.splitur.app.ui.main.viewmodel.chat_viewmodel.ChatViewModel;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
@@ -91,6 +92,8 @@ public class Chatroom extends Fragment {
 
                 msgs = new ArrayList<>();
 
+                LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
+                binding.chatRv.setLayoutManager(layoutManager);
 
                 if (getMessagesModel.getMessages().size() > 0) {
                     for (int i = 0; i <= getMessagesModel.getMessages().size() - 1; i++) {
@@ -128,8 +131,7 @@ public class Chatroom extends Fragment {
     }
 
     private void buildChatRv(ArrayList<Object> msgs) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
-        binding.chatRv.setLayoutManager(layoutManager);
+
         adapter = new ChatAdapter(Split.getAppContext(), msgs);
         binding.chatRv.setAdapter(adapter);
         binding.chatRv.scrollToPosition(msgs.size() - 1);
@@ -169,10 +171,18 @@ public class Chatroom extends Fragment {
                     MessageSendModel messageSendModel = response.body();
                     if (messageSendModel.isStatus()) {
                         msgs.add(new SenderModel(message, Calendar.getInstance().getTime().toString()));
-                        binding.messgae.setText("");
-                        binding.chatRv.scrollToPosition(msgs.size() - 1);
-                        adapter.notifyItemInserted(msgs.size() - 1);
-                        adapter.notifyDataSetChanged();
+
+                        if (msgs.size() == 1){
+                            adapter = new ChatAdapter(Split.getAppContext(), msgs);
+                            binding.chatRv.setAdapter(adapter);
+                            binding.chatRv.scrollToPosition(msgs.size() - 1);
+                            binding.messgae.setText("");
+                        }else {
+                            binding.chatRv.scrollToPosition(msgs.size() - 1);
+                            adapter.notifyItemInserted(msgs.size() - 1);
+                            adapter.notifyDataSetChanged();
+                            binding.messgae.setText("");
+                        }
                     }
                 }
             }

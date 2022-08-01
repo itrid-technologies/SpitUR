@@ -10,6 +10,8 @@ public class GroupDetailViewModel extends ViewModel {
 
     private MutableLiveData<GroupDetailModel> detailModelMutableLiveData;
     private MutableLiveData<GroupDetailModel> detailSearchData;
+    private MutableLiveData<GroupDetailModel> detailSearchDataByGroupId;
+    private MutableLiveData<GroupDetailModel> detailSearchDataByUserId;
 
     private GroupDetailRepository groupDetailRepository;
     String  subCategoryId, query;
@@ -38,6 +40,26 @@ public class GroupDetailViewModel extends ViewModel {
         detailSearchData = groupDetailRepository.getDetailsBySearch(subCategoryId,query);
     }
 
+
+    public void initSearchByGroupId() {
+        if (this.detailSearchDataByGroupId != null) {
+            // ViewModel is created per Fragment so
+            // we know the userId won't change
+            return;
+        }
+        detailSearchDataByGroupId = groupDetailRepository.getDetailsBySearchGroupId(subCategoryId,query);
+    }
+
+
+    public void initSearchByUserId() {
+        if (this.detailSearchDataByUserId != null) {
+            // ViewModel is created per Fragment so
+            // we know the userId won't change
+            return;
+        }
+        detailSearchDataByUserId = groupDetailRepository.getDetailsBySearchUserId(subCategoryId,query);
+    }
+
     public MutableLiveData<GroupDetailModel> getDetailData() {
         return this.detailModelMutableLiveData;
     }
@@ -46,7 +68,11 @@ public class GroupDetailViewModel extends ViewModel {
         return this.detailSearchData;
     }
 
+    public MutableLiveData<GroupDetailModel> getDetailSearchDataByGroupId() {
+        return detailSearchDataByGroupId;
+    }
 
-
-
+    public MutableLiveData<GroupDetailModel> getDetailSearchDataByUserId() {
+        return detailSearchDataByUserId;
+    }
 }
