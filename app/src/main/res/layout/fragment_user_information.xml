@@ -174,12 +174,25 @@
                 android:padding="11dp"
                 android:drawableLeft="@drawable/ic_user"
                 android:id="@+id/profile_id"/>
+            <TextView
+                android:id="@+id/errorMessage"
+                style="@style/normalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="-"
+                android:visibility="gone"
+                android:textColor="@color/error"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="@id/profile_id"
+                app:layout_constraintStart_toStartOf="@id/profile_id"
+                app:layout_constraintTop_toBottomOf="@id/profile_id" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profile_id"
+                app:layout_constraintTop_toBottomOf="@id/errorMessage"
                 android:text="Email Id"
                 android:layout_marginTop="10dp"
                 style="@style/semiBoldText"

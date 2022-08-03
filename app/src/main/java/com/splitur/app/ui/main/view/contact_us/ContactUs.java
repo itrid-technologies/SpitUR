@@ -19,6 +19,7 @@ import com.splitur.app.databinding.FragmentContactUsBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.viewmodel.chatwoot_viewmodel.SupportChatViewModel;
 import com.splitur.app.utils.Constants;
+import com.splitur.app.utils.Split;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,7 +64,8 @@ public class ContactUs extends Fragment {
 
 
     private void getSupportChat(int conversation_id) {
-        Call<MessagesModel> call = ChatwootApiManager.getRestApiService().getSupportChat(Constants.ChatApiKey, conversation_id);
+        int account_id = Constants.AccountId;
+        Call<MessagesModel> call = ChatwootApiManager.getRestApiService().getSupportChat(Constants.ChatApiKey,account_id, conversation_id);
         call.enqueue(new Callback<MessagesModel>() {
             @Override
             public void onResponse(@NonNull Call<MessagesModel> call, @NonNull Response<MessagesModel> response) {
@@ -83,6 +85,16 @@ public class ContactUs extends Fragment {
                             Navigation.findNavController(requireView()).navigate(R.id.action_contactUs_to_createdAndJoinedGroups, bundle);
 
                         }
+                    }
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
                     }
                 }
             }

@@ -38,6 +38,7 @@ public class CreateConversationRepository {
         int inbox = Constants.InboxId;
 //        int contact = Constants.ContactId;
         String api_key = Constants.ChatApiKey;
+        int account_id = Constants.AccountId;
 
         JsonObject object = new JsonObject();
         object.addProperty("source_id", source);
@@ -50,12 +51,22 @@ public class CreateConversationRepository {
 //        object.addProperty("contact_id",22227579);
 
 
-        Call<ConversationModel> call = apiService.createConversation(api_key,object);
+        Call<ConversationModel> call = apiService.createConversation(api_key,account_id,object);
         call.enqueue(new Callback<ConversationModel>() {
             @Override
             public void onResponse(@NonNull Call<ConversationModel> call, @NonNull Response<ConversationModel> response) {
                 if (response.body() != null) {
                     conversationModelMutableLiveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
             }
 
@@ -77,14 +88,25 @@ public class CreateConversationRepository {
 
 //        String api_key = "H5nSYfTLHHCU3YSTgE88pc8V";
         String api_key = Constants.ChatApiKey;
+        int account_id = Constants.AccountId;
 
 
-        Call<MessagesModel> call = apiService.getSupportChat(api_key, Constants.conversation_id);
+        Call<MessagesModel> call = apiService.getSupportChat(api_key,account_id ,Constants.conversation_id);
         call.enqueue(new Callback<MessagesModel>() {
             @Override
             public void onResponse(@NonNull Call<MessagesModel> call, @NonNull Response<MessagesModel> response) {
                 if (response.body() != null) {
                     messagesModelMutableLiveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
             }
 
@@ -108,6 +130,7 @@ public class CreateConversationRepository {
 //        String api_key = "H5nSYfTLHHCU3YSTgE88pc8V";
 
         String api_key = Constants.ChatApiKey;
+        int account_id = Constants.AccountId;
 
 
         JsonObject object = new JsonObject();
@@ -115,12 +138,22 @@ public class CreateConversationRepository {
         object.addProperty("message_type","outgoing");
         object.addProperty("private",true);
 
-        Call<SendSupportMessageModel> call = apiService.sendSupportQuery(api_key,conversation_id,object);
+        Call<SendSupportMessageModel> call = apiService.sendSupportQuery(api_key,conversation_id,account_id,object);
         call.enqueue(new Callback<SendSupportMessageModel>() {
             @Override
             public void onResponse(@NonNull Call<SendSupportMessageModel> call, @NonNull Response<SendSupportMessageModel> response) {
                 if (response.body() != null) {
                     liveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
             }
 

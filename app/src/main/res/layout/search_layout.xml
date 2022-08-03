@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/rect_bg"
+        android:id="@+id/group_search">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/remove_letter"
+            app:layout_constraintTop_toTopOf="parent"
+            android:hint="Search"
+            android:textColorHint="@color/hint_color"
+            android:gravity="center|start"
+            android:textColor="@color/white"
+            android:drawableStart="@drawable/search_icon"
+            android:drawablePadding="8dp"
+            android:textSize="14sp"
+            android:background="@color/transparent"
+            android:fontFamily="@font/inter_semibold"
+            android:paddingTop="12dp"
+            android:singleLine="true"
+            android:paddingBottom="12dp"
+            android:paddingEnd="@dimen/_8sdp"
+            android:paddingStart="16dp"
+            android:id="@+id/searchField"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/searchField"
+            app:layout_constraintBottom_toBottomOf="@id/searchField"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_close"
+            android:paddingEnd="14dp"
+            android:visibility="gone"
+            android:id="@+id/remove_letter"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

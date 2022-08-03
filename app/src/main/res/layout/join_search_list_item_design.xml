@@ -14,11 +14,11 @@
         android:layout_width="38dp"
         android:layout_height="38dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/join_search_name"
         android:layout_marginStart="10dp"
         android:background="@drawable/round_back"
         android:backgroundTint="@color/icons_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/users"
         android:id="@+id/icons">
 
 
@@ -39,27 +39,33 @@
 
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/join_search_name"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/icons"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="-"
-        android:textColor="@color/white"
-        android:textSize="16sp"
         android:layout_marginStart="@dimen/_18sdp"
         android:fontFamily="@font/inter_semibold"
-        android:id="@+id/join_search_name"/>
+        android:text="-"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingEnd="@dimen/_8sdp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_join"
+        app:layout_constraintStart_toEndOf="@id/icons"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/join_search_name"
         app:layout_constraintTop_toBottomOf="@id/join_search_name"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:id="@+id/users"
         >
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -68,8 +74,8 @@
             android:id="@+id/member1"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/member2"
             app:layout_constraintStart_toEndOf="@id/member1"
             app:layout_constraintTop_toTopOf="parent"
@@ -81,8 +87,8 @@
             android:src="@drawable/member2"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/member3"
             app:layout_constraintStart_toEndOf="@id/member2"
             app:layout_constraintTop_toTopOf="parent"
@@ -94,8 +100,8 @@
             android:src="@drawable/member3"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/member4"
             app:layout_constraintStart_toEndOf="@id/member3"
             app:layout_constraintTop_toTopOf="parent"
@@ -107,8 +113,8 @@
             android:src="@drawable/member4"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/member5"
             app:layout_constraintStart_toEndOf="@id/member4"
             app:layout_constraintTop_toTopOf="parent"
@@ -128,7 +134,6 @@
             app:layout_constraintBottom_toBottomOf="@id/member5"
             android:textColor="@color/white"
             android:text="+6"
-            android:layout_marginEnd="@dimen/_1sdp"
             android:fontFamily="@font/inter_regular"
             android:textSize="8sp"
             android:gravity="center"

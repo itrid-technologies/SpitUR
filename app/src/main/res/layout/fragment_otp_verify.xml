@@ -104,25 +104,20 @@
                 android:id="@+id/errorMessage"/>
 
 
-
-
-
-
-
             <com.konaire.numerickeyboard.NumericKeyboard
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/verify_button"
                 android:layout_gravity="bottom"
-                app:keySpecial="*"
+                android:layout_marginBottom="20dp"
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginBottom="20dp"
                 app:field="@+id/otp"
-                app:keyTextColor="@color/white" />
+                app:keySpecial="*"
+                app:keyTextColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@id/verify_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/otp" />
 
 
             <Button

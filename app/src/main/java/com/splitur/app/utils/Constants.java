@@ -2,16 +2,24 @@ package com.splitur.app.utils;
 
 import android.content.Context;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.splitur.app.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import okhttp3.ResponseBody;
 
 public final class Constants {
 
@@ -215,5 +223,27 @@ public final class Constants {
                 icon = R.color.images_placeholder;
         }
         return icon;
+    }
+
+
+    public static void getApiError(Split context, ResponseBody errorBody) {
+        String data = null;
+        try {
+            data = errorBody.string();
+            JSONObject jObjError = null;
+            try {
+                jObjError = new JSONObject(data);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                Toast.makeText(context, jObjError.getString("message"),
+                        Toast.LENGTH_LONG).show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 }

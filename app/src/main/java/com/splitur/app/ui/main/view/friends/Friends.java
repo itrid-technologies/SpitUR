@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,14 +94,17 @@ public class Friends extends Fragment {
             Navigation.findNavController(view).navigateUp();
         });
 
+        binding.friendSearchView.removeLetter.setOnClickListener(view -> {
+            binding.friendSearchView.searchField.setText("");
+        });
 
-        binding.searchFriends.addTextChangedListener(new TextWatcher() {
+        binding.friendSearchView.searchField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count > 0) {
-                    binding.searchFriends.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, ContextCompat.getDrawable(Split.getAppContext(), R.drawable.ic_close), null);
+                    binding.friendSearchView.removeLetter.setVisibility(View.VISIBLE);
                 } else {
-                    binding.searchFriends.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, null, null);
+                    binding.friendSearchView.removeLetter.setVisibility(View.GONE);
                 }
             }
 

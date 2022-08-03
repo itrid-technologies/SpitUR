@@ -11,6 +11,7 @@ import retrofit2.Response;
 import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.data.api.ApiService;
 import com.splitur.app.data.model.TransactionsModel;
+import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
 
@@ -35,7 +36,18 @@ public class TransactionRepository {
                 if(response.body()!=null)
                 {
                     TransactionsModelMutableLiveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
+
             }
 
             @Override

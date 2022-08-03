@@ -31,51 +31,14 @@
             android:layout_height="wrap_content"
             android:padding="20dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include
+                android:id="@+id/join_plan_search_view"
+                layout="@layout/search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@drawable/rect_bg"
-                android:id="@+id/group_search">
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/remove_letter"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:hint="Search"
-                    android:textColorHint="@color/hint_color"
-                    android:gravity="center|start"
-                    android:textColor="@color/white"
-                    android:drawableStart="@drawable/search_icon"
-                    android:drawablePadding="8dp"
-                    android:textSize="14sp"
-                    android:background="@color/transparent"
-                    android:fontFamily="@font/inter_semibold"
-                    android:paddingTop="12dp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:paddingBottom="12dp"
-                    android:paddingEnd="@dimen/_8sdp"
-                    android:paddingStart="16sp"
-                    android:id="@+id/planSearchField"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@id/planSearchField"
-                    app:layout_constraintBottom_toBottomOf="@id/planSearchField"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:src="@drawable/ic_close"
-                    android:paddingEnd="14sp"
-                    android:visibility="gone"
-                    android:id="@+id/remove_letter"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -84,7 +47,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/group_search"
+                app:layout_constraintTop_toBottomOf="@id/join_plan_search_view"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:id="@+id/groupsDetailList"/>
 
@@ -95,7 +58,7 @@
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/group_search"
+                app:layout_constraintTop_toBottomOf="@id/join_plan_search_view"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:id="@+id/searchGroupsDetailList"/>
 

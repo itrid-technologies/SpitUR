@@ -12,6 +12,8 @@ import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.data.api.ApiService;
 import com.splitur.app.data.model.basic_model.BasicModel;
 import com.splitur.app.data.model.promo.PromoResponse;
+import com.splitur.app.utils.Constants;
+import com.splitur.app.utils.Split;
 
 public class JoinCheckoutRepository {
     private ApiService apiService;
@@ -28,6 +30,16 @@ public class JoinCheckoutRepository {
             public void onResponse(@NonNull Call<BasicModel> call, @NonNull Response<BasicModel> response) {
                 if (response.body() != null) {
                     BasicModelMutableLiveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
             }
 
@@ -49,6 +61,16 @@ public class JoinCheckoutRepository {
             public void onResponse(@NonNull Call<PromoResponse> call, @NonNull Response<PromoResponse> response) {
                 if (response.body() != null) {
                     mutableLiveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
             }
 

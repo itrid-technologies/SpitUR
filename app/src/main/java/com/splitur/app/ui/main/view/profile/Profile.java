@@ -25,10 +25,6 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.skydoves.elasticviews.ElasticImageView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.splitur.app.R;
 import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.data.model.ChatWootAccountIdModel;
@@ -39,9 +35,13 @@ import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.view.splash.Splash;
 import com.splitur.app.ui.main.viewmodel.avatar_viewmodel.AvatarViewModel;
 import com.splitur.app.ui.main.viewmodel.profile_viewmodel.ProfileViewModel;
+import com.splitur.app.ui.main.viewmodel.user_id.UserIdViewModel;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,7 +85,7 @@ public class Profile extends Fragment {
 
         MySharedPreferences pm = new MySharedPreferences(Split.getAppContext());
         id = pm.getData(Split.getAppContext(), "Id");
-        viewModel = new ProfileViewModel(id, "", "", "");
+        viewModel = new ProfileViewModel(id, "", "", "", "");
         viewModel.initCoins();
         viewModel.getCoins_data().observe(getViewLifecycleOwner(), totalCoinsModel -> {
             if (totalCoinsModel.isStatus()) {
@@ -175,7 +175,7 @@ public class Profile extends Fragment {
                 count = 1;
 
                 //fetch user data
-                viewModel = new ProfileViewModel("", "", "", "");
+                viewModel = new ProfileViewModel("", "", "", "", "");
                 viewModel.initUser();
                 viewModel.getUser_data().observe(getViewLifecycleOwner(), activeUserModel -> {
                     if (activeUserModel.isStatus()) {
@@ -189,6 +189,8 @@ public class Profile extends Fragment {
 
                             EditText name = profileView.findViewById(R.id.profile_name);
                             EditText userid = profileView.findViewById(R.id.profile_id);
+                            TextView message = profileView.findViewById(R.id.errorMessage);
+
                             EditText email = profileView.findViewById(R.id.profile_email);
                             ImageView image = profileView.findViewById(R.id.profile_image);
                             ElasticImageView logout = profileView.findViewById(R.id.logout_icon);
@@ -267,7 +269,7 @@ public class Profile extends Fragment {
 
                                 confirm_logout.setOnClickListener(view2 -> {
 
-                                    viewModel = new ProfileViewModel(String.valueOf(activeUserModel.getData().getId()), "", "", "");
+                                    viewModel = new ProfileViewModel(String.valueOf(activeUserModel.getData().getId()), "", "", "", "");
                                     viewModel.initLogout();
                                     viewModel.getLogout().observe(getViewLifecycleOwner(), basicModel -> {
                                         if (basicModel.isStatus().equalsIgnoreCase("true")) {
@@ -307,24 +309,28 @@ public class Profile extends Fragment {
                             });
 
                             save.setOnClickListener(view1 -> {
+
                                 String updated_name = name.getText().toString().trim();
                                 String updated_id = userid.getText().toString().trim();
+                                String updated_email = email.getText().toString().trim();
                                 final String updatedAvatar = avatars.get(currentIndex);
 
-                                viewModel = new ProfileViewModel("", updated_name, updated_id, updatedAvatar);
-                                viewModel.init();
-                                viewModel.getUpdate_profile().observe(getViewLifecycleOwner(), userUpdateModel -> {
-                                    if (userUpdateModel.isSuccess()) {
-                                        if (userUpdateModel.getData() != null) {
-                                            MySharedPreferences sharedPreferences1 = new MySharedPreferences(Split.getAppContext());
-                                            sharedPreferences1.saveData(Split.getAppContext(), "userAvatar", Constants.IMG_PATH + userUpdateModel.getData().getAvatar());
-                                            sharedPreferences1.saveData(Split.getAppContext(), "userName", userUpdateModel.getData().getName());
-                                            sharedPreferences1.saveData(Split.getAppContext(), "userId", userUpdateModel.getData().getUserId());
+                                if (updated_id.equals(Constants.USER_ID)) {
+                                    updateUserInformation(updated_name,updated_id,updated_email,updatedAvatar);
 
-                                            Toast.makeText(Split.getAppContext(), userUpdateModel.getMessage(), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    UserIdViewModel userIdViewModel = new UserIdViewModel(updated_id);
+                                    userIdViewModel.init();
+                                    userIdViewModel.getData().observe(getViewLifecycleOwner(), basicModel -> {
+                                        if (!basicModel.isStatus()) {
+                                            message.setVisibility(View.GONE);
+                                            updateUserInformation(updated_name,updated_id,updated_email,updatedAvatar);
+                                        }else {
+                                            message.setText(basicModel.getMessage());
+                                            message.setVisibility(View.VISIBLE);
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             });
 
                             bt.setContentView(profileView);
@@ -335,6 +341,24 @@ public class Profile extends Fragment {
             }
 
         });
+    }
+
+    private void updateUserInformation(String updated_name, String updated_id, String updated_email, String updatedAvatar) {
+        viewModel = new ProfileViewModel("", updated_name, updated_id, updatedAvatar, updated_email);
+        viewModel.init();
+        viewModel.getUpdate_profile().observe(getViewLifecycleOwner(), userUpdateModel -> {
+            if (userUpdateModel.isSuccess()) {
+                if (userUpdateModel.getData() != null) {
+                    MySharedPreferences sharedPreferences1 = new MySharedPreferences(Split.getAppContext());
+                    sharedPreferences1.saveData(Split.getAppContext(), "userAvatar", Constants.IMG_PATH + userUpdateModel.getData().getAvatar());
+                    sharedPreferences1.saveData(Split.getAppContext(), "userName", userUpdateModel.getData().getName());
+                    sharedPreferences1.saveData(Split.getAppContext(), "userId", userUpdateModel.getData().getUserId());
+
+                    Toast.makeText(Split.getAppContext(), userUpdateModel.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     private void NavToContact() {

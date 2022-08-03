@@ -1,6 +1,7 @@
 package com.splitur.app.ui.main.view.otp_verification;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -106,7 +107,7 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
             @SuppressLint("ResourceAsColor")
             public void onFinish() {
                 binding.remainingTime.setText("Resend");
-                binding.remainingTime.setTextColor(R.color.white);
+                binding.remainingTime.setTextColor(Color.parseColor("#FFFFFFFF"));
                 if (hasResendOTP) {
                     binding.remainingTime.setVisibility(View.GONE);
                 }

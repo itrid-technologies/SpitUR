@@ -1,26 +1,10 @@
 package com.splitur.app.data.api;
 
 import com.google.gson.JsonObject;
-
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Path;
-
 import com.splitur.app.data.model.ChatWootAccountIdModel;
 import com.splitur.app.data.model.GetScoreModel;
 import com.splitur.app.data.model.HomeContentModel;
 import com.splitur.app.data.model.SecretKeyModel;
-import com.splitur.app.data.model.promo.PromoResponse;
-import com.splitur.app.data.model.settings.SettingsResponse;
 import com.splitur.app.data.model.TransactionsModel;
 import com.splitur.app.data.model.active_user.ActiveUserModel;
 import com.splitur.app.data.model.all_created_groupx.AllCreatedGroupModel;
@@ -41,12 +25,27 @@ import com.splitur.app.data.model.otp_verification.AuthenticationModel;
 import com.splitur.app.data.model.phone_number.NumberModel;
 import com.splitur.app.data.model.plans.PlanModel;
 import com.splitur.app.data.model.popular_subcategory.PopularSubCategoryModel;
+import com.splitur.app.data.model.promo.PromoResponse;
 import com.splitur.app.data.model.receive_message.GetMessagesModel;
 import com.splitur.app.data.model.register.RegisterModel;
 import com.splitur.app.data.model.send_message.MessageSendModel;
+import com.splitur.app.data.model.settings.SettingsResponse;
 import com.splitur.app.data.model.total_coins.TotalCoinsModel;
 import com.splitur.app.data.model.update_user_profile.UserUpdateModel;
 import com.splitur.app.data.model.wallet_balance.WalletBalanceModel;
+
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface ApiService {
 
@@ -110,10 +109,12 @@ public interface ApiService {
     Call<HomeContentModel> getHomeData(@Header("Authorization") String token);
 
     @POST("groups/group_details_search")
-    Call<GroupDetailModel> getGroupDetails(@Body JsonObject object);
+    Call<GroupDetailModel> getGroupDetails(@Header("Authorization") String token,
+                                           @Body JsonObject object);
 
     @POST("groups/group_details_search")
-    Call<GroupDetailModel> getGroupDetailsSearch(@Body JsonObject object);
+    Call<GroupDetailModel> getGroupDetailsSearch(@Header("Authorization") String token,
+                                                 @Body JsonObject object);
 
     @POST("groups/join_group")
     Call<JoinGroupModel> joinGroup(@Header("Authorization") String token,
@@ -170,13 +171,13 @@ public interface ApiService {
 
     @POST("groups/update_group/{id}")
     Call<BasicModel1> updateGroup(@Header("Authorization") String token,
-                                 @Path("id") String id,
-                                 @Body JsonObject object);
+                                  @Path("id") String id,
+                                  @Body JsonObject object);
 
     @POST("groups/update_group/{id}")
     Call<BasicModel> updateGroupVisibility(@Header("Authorization") String token,
-                                  @Path("id") String id,
-                                  @Body JsonObject object);
+                                           @Path("id") String id,
+                                           @Body JsonObject object);
 
     @PUT("users/update")
     Call<UserUpdateModel> updateProfile(@Header("Authorization") String token,
@@ -252,11 +253,11 @@ public interface ApiService {
 
     @GET("users/user_active_status/{status}")
     Call<BasicModel1> setUserOnlineStatus(@Header("Authorization") String token,
-                                         @Path("status") int status);
+                                          @Path("status") int status);
 
     @POST("refer/referal")
     Call<BasicModel1> sendReferral(@Header("Authorization") String token,
-                                  @Body JsonObject object);
+                                   @Body JsonObject object);
 
 
     @GET("groups/get_account_id")

@@ -132,7 +132,7 @@ public class Home extends Fragment {
 
 
     private void getUserDetails() {
-        profileViewModel = new ProfileViewModel("", "", "", "");
+        profileViewModel = new ProfileViewModel("", "", "", "","");
         profileViewModel.initUser();
         profileViewModel.getUser_data().observe(getViewLifecycleOwner(), activeUserModel -> {
             if (activeUserModel.isStatus()) {
@@ -159,7 +159,7 @@ public class Home extends Fragment {
                 count = 1;
 
                 //fetch user data
-                profileViewModel = new ProfileViewModel("", "", "", "");
+                profileViewModel = new ProfileViewModel("", "", "", "","");
                 profileViewModel.initUser();
                 profileViewModel.getUser_data().observe(getViewLifecycleOwner(), activeUserModel -> {
                     if (activeUserModel.isStatus()) {
@@ -247,7 +247,7 @@ public class Home extends Fragment {
 
                                 confirm_logout.setOnClickListener(view2 -> {
 
-                                    profileViewModel = new ProfileViewModel(String.valueOf(activeUserModel.getData().getId()), "", "", "");
+                                    profileViewModel = new ProfileViewModel(String.valueOf(activeUserModel.getData().getId()), "", "", "","");
                                     profileViewModel.initLogout();
                                     profileViewModel.getLogout().observe(getViewLifecycleOwner(), basicModel -> {
                                         if (basicModel.isStatus().equalsIgnoreCase("true")) {
@@ -288,9 +288,11 @@ public class Home extends Fragment {
                             save.setOnClickListener(view1 -> {
                                 String updated_name = name.getText().toString().trim();
                                 String updated_id = userid.getText().toString().trim();
+                                String updated_email = email.getText().toString().trim();
+
                                 final String updatedAvatar = avatars.get(currentIndex);
 
-                                profileViewModel = new ProfileViewModel("", updated_name, updated_id, updatedAvatar);
+                                profileViewModel = new ProfileViewModel("", updated_name, updated_id, updatedAvatar,updated_email);
                                 profileViewModel.init();
                                 profileViewModel.getUpdate_profile().observe(getViewLifecycleOwner(), userUpdateModel -> {
                                     if (userUpdateModel.isSuccess()) {

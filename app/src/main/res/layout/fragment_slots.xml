@@ -64,6 +64,7 @@
                 android:fontFamily="@font/poppin_regular"
                 android:gravity="center"
                 android:hint="Slots"
+                android:maxLength="1"
                 android:paddingStart="24dp"
                 android:paddingTop="14dp"
                 android:paddingEnd="24dp"

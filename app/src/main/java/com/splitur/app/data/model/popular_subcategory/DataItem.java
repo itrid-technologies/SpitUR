@@ -13,6 +13,9 @@ public class DataItem{
 	@SerializedName("id")
 	private int id;
 
+	@SerializedName("numberOfGroups")
+	private String numberOfGroups;
+
 	@SerializedName("sub_cat_title")
 	private String title;
 
@@ -44,5 +47,9 @@ public class DataItem{
 
 	public String getUpdatedAt(){
 		return updatedAt;
+	}
+
+	public String getNumberOfGroups() {
+		return numberOfGroups;
 	}
 }

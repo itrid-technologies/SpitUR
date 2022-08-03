@@ -13,6 +13,7 @@ import retrofit2.Response;
 import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.data.api.ApiService;
 import com.splitur.app.data.model.join_group.JoinGroupModel;
+import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
 
@@ -40,6 +41,16 @@ public class JoinGroupRepository {
             public void onResponse(@NonNull Call<JoinGroupModel> call, @NonNull Response<JoinGroupModel> response) {
                 if (response.body() != null) {
                     BasicModelMutableLiveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
             }
 

@@ -10,7 +10,7 @@ import com.splitur.app.data.model.update_user_profile.UserUpdateModel;
 import com.splitur.app.data.repository.profile.ProfileRepository;
 
 public class ProfileViewModel extends ViewModel {
-    String name , userid, url,id;
+    String name , userid, url,id,email;
 
     private MutableLiveData<UserUpdateModel> update_profile;
     private MutableLiveData<TotalCoinsModel> coins_data;
@@ -21,11 +21,12 @@ public class ProfileViewModel extends ViewModel {
     private ProfileRepository profileRepository;
     private MutableLiveData<ActiveUserModel> user_data;
 
-    public ProfileViewModel(String ID, String name, String userid, String avatar) {
+    public ProfileViewModel(String ID, String name, String userid, String avatar,String mail) {
         this.id = ID;
         this.name = name;
         this.userid = userid;
         this.url = avatar;
+        this.email = mail;
         profileRepository = new ProfileRepository();
     }
 
@@ -35,7 +36,7 @@ public class ProfileViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        update_profile = profileRepository.upDateProfile(name,userid,url);
+        update_profile = profileRepository.upDateProfile(name,userid,url,email);
     }
 
     public void initCoins() {

@@ -87,34 +87,43 @@ public class Search extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void searchTextWatcher() {
-        binding.searchField.addTextChangedListener(new TextWatcher() {
+        binding.categorySearchView.searchField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count > 0) {
-                    binding.searchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, ContextCompat.getDrawable(Split.getAppContext(), R.drawable.ic_close), null);
-                    binding.searchField.setOnTouchListener((v, event) -> {
-                        final int DRAWABLE_LEFT = 0;
-                        final int DRAWABLE_TOP = 1;
-                        final int DRAWABLE_RIGHT = 2;
-                        final int DRAWABLE_BOTTOM = 3;
-
-                        if (event.getAction() == MotionEvent.ACTION_UP) {
-                            if (event.getRawX() >= (binding.searchField.getRight() - binding.searchField.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                                // your action here
-                                binding.searchField.getText().clear();
-                                binding.searchField.clearFocus();
-                                getPopularSubCategory();
-                                return true;
-                            }
-                        }
-                        return false;
-                    });
+                    binding.categorySearchView.removeLetter.setVisibility(View.VISIBLE);
+//                    binding.planSearchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, ContextCompat.getDrawable(Split.getAppContext(), R.drawable.ic_close), null);
                 } else {
-                    binding.searchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, null, null);
-                    binding.searchField.setOnTouchListener(null);
+                    binding.customCreateView.customLayout.setVisibility(View.GONE);
                     getPopularSubCategory();
+                    binding.categorySearchView.removeLetter.setVisibility(View.GONE);
 
                 }
+
+//                    binding.searchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, null, null);
+//                    binding.searchField.setOnTouchListener((v, event) -> {
+//                        final int DRAWABLE_LEFT = 0;
+//                        final int DRAWABLE_TOP = 1;
+//                        final int DRAWABLE_RIGHT = 2;
+//                        final int DRAWABLE_BOTTOM = 3;
+//
+//                        if (event.getAction() == MotionEvent.ACTION_UP) {
+//                            if (event.getRawX() >= (binding.searchField.getRight() - binding.searchField.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+//                                // your action here
+//                                binding.searchField.getText().clear();
+//                                binding.searchField.clearFocus();
+//                                getPopularSubCategory();
+//                                return true;
+//                            }
+//                        }
+//                        return false;
+//                    });
+//                } else {
+//                    binding.searchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, null, null);
+//                    binding.searchField.setOnTouchListener(null);
+//                    getPopularSubCategory();
+//
+//                }
             }
 
             @Override
@@ -159,6 +168,10 @@ public class Search extends Fragment {
     private void initClickListeners() {
         binding.cSearchToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
+        });
+
+        binding.categorySearchView.removeLetter.setOnClickListener(view -> {
+            binding.categorySearchView.searchField.setText("");
         });
 
         binding.customCreateView.customCreate.setOnClickListener(view -> {

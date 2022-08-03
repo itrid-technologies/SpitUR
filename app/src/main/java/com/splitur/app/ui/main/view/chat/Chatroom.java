@@ -30,6 +30,7 @@ import com.splitur.app.ui.main.adapter.chat.ChatAdapter;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.view.member_chat.MemberChatAdapter;
 import com.splitur.app.ui.main.viewmodel.chat_viewmodel.ChatViewModel;
+import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
 
@@ -183,6 +184,16 @@ public class Chatroom extends Fragment {
                             adapter.notifyDataSetChanged();
                             binding.messgae.setText("");
                         }
+                    }
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
                     }
                 }
             }

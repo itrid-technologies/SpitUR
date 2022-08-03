@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
+
+import java.math.BigInteger;
 
 
 public class Slots extends Fragment {
@@ -44,6 +48,33 @@ public class Slots extends Fragment {
     }
 
     private void initClickListeners() {
+
+        binding.slotValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!editable.toString().isEmpty()) {
+                    int slots_int = Integer.parseInt(editable.toString());
+                    if (slots_int > 6) {
+                        binding.errorMessage.setVisibility(View.VISIBLE);
+                        binding.errorMessage.setText("Maximum Slots are 6");
+                        binding.slotValue.setText("6");
+                    } else {
+                        binding.errorMessage.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
+
         binding.slottoolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });

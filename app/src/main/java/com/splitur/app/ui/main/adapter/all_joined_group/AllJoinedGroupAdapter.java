@@ -53,6 +53,8 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
             if (!current_item.getPaymentStatus().isEmpty()){
                 if (current_item.getPaymentStatus().equalsIgnoreCase("paid")){
                     holder.open.setText("Open");
+                    holder.open.setBackgroundResource(R.drawable.rect_blue_bg);
+
                 }else if (current_item.getPaymentStatus().equalsIgnoreCase("pending")){
                     holder.open.setText("Pending");
                     holder.open.setBackgroundResource(R.drawable.pending_bg);
@@ -163,6 +165,21 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
                             mListener.onCategorySelect(getAdapterPosition());
                         }
                     }
+                }
+            });
+
+            itemView.setOnClickListener(view -> {
+                String isOpen = open.getText().toString().trim();
+                if (isOpen.equalsIgnoreCase("Closed")) {
+
+                } else if (isOpen.equalsIgnoreCase("Open")){
+                    if (mListener != null) {
+                        if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                            mListener.onCategorySelect(getAdapterPosition());
+                        }
+                    }
+                }else {
+
                 }
             });
 

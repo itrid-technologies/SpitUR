@@ -16,6 +16,7 @@ import retrofit2.Response;
 import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.data.api.ApiService;
 import com.splitur.app.data.model.group_detail.GroupDetailModel;
+import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
 
@@ -39,12 +40,22 @@ public class GroupDetailRepository {
 
         final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GroupDetailModel> call = apiService.getGroupDetails(object);
+        Call<GroupDetailModel> call = apiService.getGroupDetails("Bearer " + token,object);
         call.enqueue(new Callback<GroupDetailModel>() {
             @Override
             public void onResponse(@NonNull Call<GroupDetailModel> call, @NonNull Response<GroupDetailModel> response) {
                 if (response.body() != null) {
                     liveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
 
             }
@@ -70,12 +81,22 @@ public class GroupDetailRepository {
 
         final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GroupDetailModel> call = apiService.getGroupDetailsSearch(object);
+        Call<GroupDetailModel> call = apiService.getGroupDetailsSearch("Bearer " + token,object);
         call.enqueue(new Callback<GroupDetailModel>() {
             @Override
             public void onResponse(@NonNull Call<GroupDetailModel> call, @NonNull Response<GroupDetailModel> response) {
                 if (response.body() != null) {
                     liveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
 
             }
@@ -101,12 +122,22 @@ public class GroupDetailRepository {
 
         final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GroupDetailModel> call = apiService.getGroupDetailsSearch(object);
+        Call<GroupDetailModel> call = apiService.getGroupDetailsSearch("Bearer " + token,object);
         call.enqueue(new Callback<GroupDetailModel>() {
             @Override
             public void onResponse(@NonNull Call<GroupDetailModel> call, @NonNull Response<GroupDetailModel> response) {
                 if (response.body() != null) {
                     liveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
 
             }
@@ -132,12 +163,22 @@ public class GroupDetailRepository {
 
         final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GroupDetailModel> call = apiService.getGroupDetailsSearch(object);
+        Call<GroupDetailModel> call = apiService.getGroupDetailsSearch("Bearer " + token,object);
         call.enqueue(new Callback<GroupDetailModel>() {
             @Override
             public void onResponse(@NonNull Call<GroupDetailModel> call, @NonNull Response<GroupDetailModel> response) {
                 if (response.body() != null) {
                     liveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
 
             }

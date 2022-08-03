@@ -182,20 +182,20 @@
             <com.konaire.numerickeyboard.NumericKeyboard
                 android:id="@+id/swap_kaypad"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:paddingTop="@dimen/_10sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/swap_coin_layout"
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                app:keySpecial="*"
-                app:keyTextSize="28sp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:paddingTop="@dimen/_10sdp"
+
+                android:paddingBottom="@dimen/_10sdp"
                 app:field="@+id/inr_coins_value"
-                app:keyTextColor="@color/white" />
+                app:keySpecial="*"
+                app:keyTextColor="@color/white"
+                app:keyTextSize="28sp"
+                app:layout_constraintBottom_toTopOf="@+id/swap_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/swap_coin_layout" />
 
 
             <Button
@@ -203,7 +203,6 @@
                 style="@style/buttonStyle"
                 android:layout_width="248dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/button_round_bg"
                 android:gravity="center"
                 android:paddingTop="15dp"
@@ -212,8 +211,7 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/swap_kaypad" />
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

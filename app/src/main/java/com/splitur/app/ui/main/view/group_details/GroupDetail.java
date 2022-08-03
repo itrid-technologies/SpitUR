@@ -57,8 +57,8 @@ public class GroupDetail extends Fragment {
 
         }
 
-        binding.removeLetter.setOnClickListener(view1 -> {
-            binding.planSearchField.setText("");
+        binding.joinPlanSearchView.removeLetter.setOnClickListener(view1 -> {
+            binding.joinPlanSearchView.searchField.setText("");
             getAllDataBack();
         });
 
@@ -74,15 +74,15 @@ public class GroupDetail extends Fragment {
     }
 
     private void searchTextWatcher() {
-        binding.planSearchField.addTextChangedListener(new TextWatcher() {
+        binding.joinPlanSearchView.searchField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count > 0) {
-                    binding.removeLetter.setVisibility(View.VISIBLE);
+                    binding.joinPlanSearchView.removeLetter.setVisibility(View.VISIBLE);
 //                    binding.planSearchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, ContextCompat.getDrawable(Split.getAppContext(), R.drawable.ic_close), null);
                 } else {
                     getAllDataBack();
-                    binding.removeLetter.setVisibility(View.GONE);
+                    binding.joinPlanSearchView.removeLetter.setVisibility(View.GONE);
 
 //                    binding.planSearchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, null, null);
                 }

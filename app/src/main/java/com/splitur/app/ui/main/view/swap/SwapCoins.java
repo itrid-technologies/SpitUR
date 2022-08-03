@@ -103,15 +103,19 @@ public class SwapCoins extends Fragment {
             if (refund_int >= coins_int){
                 binding.inrCoinsValue.setText(String.valueOf(Math.round(coins_int)));
             }
-            if (!swapValue.isEmpty() && !swapValue.equalsIgnoreCase("0")){
-              viewModel = new SwapViewModel(swapValue);
-              viewModel.init();
-              viewModel.getCoins_data().observe(getViewLifecycleOwner(), basicModel -> {
-                  if (basicModel.isStatus()){
-                      Navigation.findNavController(view).navigate(R.id.action_swapCoins_to_successfullySwapped);
-                  }
-              });
+            if (refund_int <= 0){
+                if (!swapValue.isEmpty() && !swapValue.equalsIgnoreCase("0")){
+
+                    viewModel = new SwapViewModel(swapValue);
+                    viewModel.init();
+                    viewModel.getCoins_data().observe(getViewLifecycleOwner(), basicModel -> {
+                        if (basicModel.isStatus()){
+                            Navigation.findNavController(view).navigate(R.id.action_swapCoins_to_successfullySwapped);
+                        }
+                    });
+                }
             }
+
         });
 
         binding.tvMax.setOnClickListener(view -> {

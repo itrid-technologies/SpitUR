@@ -34,31 +34,20 @@
             android:paddingEnd="30dp"
             android:paddingBottom="20dp">
 
-            <EditText
+            <include
+                android:id="@+id/join_search_view"
+                layout="@layout/search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:hint="Search"
-                android:textColorHint="@color/hint_color"
-                android:gravity="center|start"
-                android:textColor="@color/white"
-                android:drawableStart="@drawable/search_icon"
-                android:drawablePadding="12dp"
-                android:textSize="16sp"
-                android:fontFamily="@font/inter_semibold"
-                android:background="@drawable/rect_bg"
-                android:paddingTop="@dimen/_12sdp"
-                android:paddingStart="@dimen/_16sdp"
-                android:paddingBottom="@dimen/_12sdp"
-                android:paddingEnd="@dimen/_16sdp"
-                android:id="@+id/joinSearchField"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/joinSearchField"
+                app:layout_constraintTop_toBottomOf="@id/join_search_view"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="Popular"
                 android:textSize="@dimen/_14sdp"

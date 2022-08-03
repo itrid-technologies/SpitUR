@@ -13,6 +13,7 @@ import retrofit2.Response;
 import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.data.api.ApiService;
 import com.splitur.app.data.model.basic_model.BasicModel1;
+import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
 
@@ -40,6 +41,16 @@ public class ReferralRepository {
             public void onResponse(@NonNull Call<BasicModel1> call, @NonNull Response<BasicModel1> response) {
                 if (response.body() != null) {
                     liveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
             }
 

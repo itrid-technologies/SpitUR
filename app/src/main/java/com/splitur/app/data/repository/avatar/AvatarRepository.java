@@ -11,6 +11,8 @@ import retrofit2.Response;
 import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.data.api.ApiService;
 import com.splitur.app.data.model.get_avatar.AvatarModel;
+import com.splitur.app.utils.Constants;
+import com.splitur.app.utils.Split;
 
 public class AvatarRepository {
     private ApiService apiService;
@@ -33,7 +35,18 @@ public class AvatarRepository {
                 if(response.body()!=null)
                 {
                     avatarModelMutableLiveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
                 }
+
 
 
             }
