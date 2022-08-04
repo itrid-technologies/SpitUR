@@ -79,7 +79,7 @@ public class CreatedGroupDetail extends Fragment {
         }
 
 
-        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getGroupId())), "", "", "", false);
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", "", "", false);
         membersViewModel.init();
         membersViewModel.getPlan().observe(getViewLifecycleOwner(), groupMemberModel -> {
             if (groupMemberModel.isSuccess()) {
@@ -170,7 +170,7 @@ public class CreatedGroupDetail extends Fragment {
     }
 
     private void updateVisibility(boolean visibility) {
-        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getGroupId())), "", "", "", visibility);
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", "", "", visibility);
         membersViewModel.initUpdateVisibility();
         membersViewModel.getUpdate_visibility().observe(getViewLifecycleOwner(), basicModel -> {
             if (basicModel.isStatus()) {
@@ -180,7 +180,7 @@ public class CreatedGroupDetail extends Fragment {
     }
 
     private void updateEmailData(String updated_value) {
-        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getGroupId())), "", updated_value, "", false);
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", updated_value, "", false);
         membersViewModel.initEmailUpdate();
         membersViewModel.getUpdate_email_data().observe(getViewLifecycleOwner(), basicModel -> {
             if (basicModel.isStatus().equalsIgnoreCase("true")) {
@@ -193,7 +193,7 @@ public class CreatedGroupDetail extends Fragment {
     }
 
     private void updatePassData(String updated_value) {
-        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getGroupId())), "", "", updated_value, false);
+        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", "", updated_value, false);
         membersViewModel.initPassUpdate();
         membersViewModel.getUpdate_pass_data().observe(getViewLifecycleOwner(), basicModel -> {
             if (basicModel.isStatus().equalsIgnoreCase("true")) {
@@ -243,7 +243,7 @@ public class CreatedGroupDetail extends Fragment {
                 delete.setOnClickListener(view -> {
 
 
-                    membersViewModel = new GroupMembersViewModel((String.valueOf(data.getGroupId())), String.valueOf(membersList.get(position).getUserId()), "", "", false);
+                    membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), String.valueOf(membersList.get(position).getUserId()), "", "", false);
                     membersViewModel.initRemoveMember();
                     membersViewModel.getMember_remove_data().observe(getViewLifecycleOwner(), basicModel -> {
                         if (basicModel.isStatus().equalsIgnoreCase("true")) {
@@ -340,7 +340,7 @@ public class CreatedGroupDetail extends Fragment {
 
             confirm.setOnClickListener(view -> {
                 bt.cancel();
-                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getGroupId())), "", "", "", false);
+                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", "", "", false);
                 membersViewModel.initRemoveGroup();
                 membersViewModel.getRemove_data().observe(getViewLifecycleOwner(), basicModel -> {
                     if (basicModel.isStatus().equalsIgnoreCase("true")) {

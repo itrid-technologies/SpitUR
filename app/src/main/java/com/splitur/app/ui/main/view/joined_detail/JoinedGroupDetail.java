@@ -175,7 +175,7 @@ public class JoinedGroupDetail extends Fragment {
 
             confirm.setOnClickListener(view -> {
                 bt.cancel();
-                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getGroupId())), "", "", "", false);
+                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getGroup().getId())), "", "", "", false);
                 membersViewModel.initLeftGroup();
                 membersViewModel.getLeft_data().observe(getViewLifecycleOwner(), basicModel -> {
                     if (basicModel.isStatus().equalsIgnoreCase("true")) {
