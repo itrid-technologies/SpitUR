@@ -59,10 +59,12 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
         if (current_item.getUser() != null) {
             holder.layout.setVisibility(View.VISIBLE);
 
-            Glide.with(context)
-                    .load(Constants.IMG_PATH + current_item.getUser().getAvatar())
-                    .placeholder(R.color.images_placeholder)
-                    .into(holder.image);
+            holder.image.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(current_item.getUser().getAvatar())));
+
+//            Glide.with(context)
+//                    .load(Constants.IMG_PATH + current_item.getUser().getAvatar())
+//                    .placeholder(R.color.images_placeholder)
+//                    .into(holder.image);
 
             holder.name.setText(current_item.getUser().getUserId());
 

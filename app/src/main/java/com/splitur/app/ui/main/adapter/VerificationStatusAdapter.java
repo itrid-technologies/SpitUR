@@ -51,30 +51,37 @@ public class VerificationStatusAdapter extends RecyclerView.Adapter<Verification
             holder.constraintLayout.setVisibility(View.VISIBLE);
 
             if (score <= 100 && score >= 80 ){
-                Glide.with(context)
-                        .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
-                        .placeholder(R.color.images_placeholder)
-                        .into(holder.user);
+                holder.user.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(splitScoreItem.getSplitGroupUserId().getAvatar())));
+
+//                Glide.with(context)
+//                        .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
+//                        .placeholder(R.color.images_placeholder)
+//                        .into(holder.user);
 
                 holder.status.setText("Verified");
                 holder.user.setBorderColor(Color.parseColor("#0FB900"));
                 holder.imageView.setImageResource(R.drawable.ic_verify);
                 holder.imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(("#0FB900"))));
             }else if (score < 80 && score >= 50){
-                Glide.with(context)
-                        .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
-                        .placeholder(R.color.images_placeholder)
-                        .into(holder.user);
+                holder.user.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(splitScoreItem.getSplitGroupUserId().getAvatar())));
+
+//                Glide.with(context)
+//                        .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
+//                        .placeholder(R.color.images_placeholder)
+//                        .into(holder.user);
 
                 holder.status.setText("Pending");
                 holder.user.setBorderColor(Color.parseColor("#F7931A"));
                 holder.imageView.setImageResource(R.drawable.ic_attach);
                 holder.imageView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(("#F7931A"))));
             }else if (score < 50 && score >= 0 ){
-                Glide.with(context)
-                        .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
-                        .placeholder(R.color.images_placeholder)
-                        .into(holder.user);
+
+                holder.user.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(splitScoreItem.getSplitGroupUserId().getAvatar())));
+
+//                Glide.with(context)
+//                        .load(Constants.IMG_PATH + splitScoreItem.getSplitGroupUserId().getAvatar())
+//                        .placeholder(R.color.images_placeholder)
+//                        .into(holder.user);
 
                 holder.status.setText("Invalid");
                 holder.user.setBorderColor(Color.parseColor("#FF0000"));

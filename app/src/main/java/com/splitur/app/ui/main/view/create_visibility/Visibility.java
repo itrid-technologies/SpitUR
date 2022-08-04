@@ -68,7 +68,8 @@ public class Visibility extends Fragment {
         binding.visibilityProfile.netflix.setText(Constants.SUB_CAT_TITLE);
         binding.visibilityProfile.userName.setText(String.format("@%s", user_ID));
         binding.visibilityProfile.count.setText(slot + " Slots");
-        Glide.with(Split.getAppContext()).load(avatar).into(binding.visibilityProfile.userImage);
+        binding.visibilityProfile.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
+//        Glide.with(Split.getAppContext()).load(avatar).into(binding.visibilityProfile.userImage);
     }
 
     private void clickListeners() {

@@ -43,7 +43,6 @@ public class TermsAndConditions extends AppCompatActivity {
         mBinding = ActivityTermsAndConditionsBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
         String number = Constants.USER_NUMBER;

@@ -16,6 +16,9 @@ public class DataItem{
 	@SerializedName("user_id")
 	private int userId;
 
+	@SerializedName("enrollment_status")
+	private String enrollment_status;
+
 	@SerializedName("group_id")
 	private int groupId;
 
@@ -79,5 +82,9 @@ public class DataItem{
 
 	public Group getGroup(){
 		return group;
+	}
+
+	public String getEnrollment_status() {
+		return enrollment_status;
 	}
 }

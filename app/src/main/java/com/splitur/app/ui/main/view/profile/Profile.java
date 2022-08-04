@@ -99,7 +99,8 @@ public class Profile extends Fragment {
         String user_name = Constants.USER_NAME;
         String avatar = Constants.USER_AVATAR;
         binding.name.setText(user_name);
-        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.color.images_placeholder).into(binding.userImage);
+        binding.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
+//        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.color.images_placeholder).into(binding.userImage);
 
 //        ReferralViewModel referralViewModel = new ReferralViewModel(Constants.ID,"2");
 //        referralViewModel.init();
@@ -211,13 +212,14 @@ public class Profile extends Fragment {
                             image.setVisibility(View.VISIBLE);
 
                             //Svg.INSTANCE.loadUrl(Constants.IMG_PATH + activeUserModel.getData().getAvatar(), image);
-                            Glide.with(requireContext()).load(Constants.IMG_PATH + activeUserModel.getData().getAvatar()).into(image);
+//                            Glide.with(requireContext()).load(Constants.IMG_PATH + activeUserModel.getData().getAvatar()).into(image);
+                            image.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(activeUserModel.getData().getAvatar())));
 
                             Constants.ID = String.valueOf(activeUserModel.getData().getId());
                             Constants.USER_ID = activeUserModel.getData().getUserId();
                             Constants.USER_NAME = activeUserModel.getData().getName();
                             Constants.USER_EMAIL = activeUserModel.getData().getEmail();
-                            Constants.USER_AVATAR = Constants.IMG_PATH + activeUserModel.getData().getAvatar();
+                            Constants.USER_AVATAR =  activeUserModel.getData().getAvatar();
                             Constants.NUMBER = activeUserModel.getData().getPhone();
 
 //                            MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
@@ -225,19 +227,42 @@ public class Profile extends Fragment {
 //                            sharedPreferences.saveData(Split.getAppContext(), "userName", activeUserModel.getData().getName());
 //                            sharedPreferences.saveData(Split.getAppContext(), "userId", activeUserModel.getData().getUserId());
 
-                            mViewModel.init();
-                            mViewModel.getData().observe(getViewLifecycleOwner(), avatarModel -> {
-                                avatarList.addAll(avatarModel.getAvatar());
-                                for (int i = 0; i <= avatarList.size() - 1; i++) {
-                                    avatars.add(avatarList.get(i).getUrl());
-                                }
-                                avatarRv.setHasFixedSize(true);
-                                avatarRv.setHorizontalScrollBarEnabled(false);
-                                avatarRv.setLayoutManager(new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false));
-                                RecyclerView.OnItemTouchListener disabler = new RecyclerViewDisabler();
-                                avatarRv.addOnItemTouchListener(disabler);// scrolling disable
-                                avatarRv.setAdapter(new AdapterAvatars(getActivity(), avatars));
-                            });
+                            List<Integer> avatars1 = new ArrayList<>();
+                            avatars1.add(1);
+                            avatars1.add(2);
+                            avatars1.add(3);
+                            avatars1.add(4);
+                            avatars1.add(5);
+                            avatars1.add(6);
+                            avatars1.add(7);
+                            avatars1.add(8);
+                            avatars1.add(9);
+                            avatars1.add(10);
+                            avatars1.add(11);
+                            avatars1.add(12);
+                            avatars1.add(13);
+                            avatars1.add(14);
+                            avatars1.add(15);
+                            avatars1.add(16);
+                            avatars1.add(17);
+                            avatars1.add(18);
+                            avatars1.add(19);
+                            avatars1.add(20);
+//                            avatarViewModel = new AvatarViewModel();
+//                            avatarViewModel.init();
+//                            avatarViewModel.getData().observe(getViewLifecycleOwner(), avatarModel -> {
+//                                avatarList.addAll(avatarModel.getAvatar());
+//                                for (int i = 0; i <= avatarList.size() - 1; i++) {
+//                                    avatars.add(avatarList.get(i).getUrl());
+//                                }
+                            avatarRv.setHasFixedSize(true);
+                            avatarRv.setHorizontalScrollBarEnabled(false);
+                            avatarRv.setLayoutManager(new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false));
+                            RecyclerView.OnItemTouchListener disabler = new Profile.RecyclerViewDisabler();
+                            avatarRv.addOnItemTouchListener(disabler);// scrolling disable
+                            avatarRv.setAdapter(new AdapterAvatars(getActivity(), avatars1));
+//                            });
+
 
 
                             logout.setOnClickListener(view1 -> {
@@ -288,7 +313,7 @@ public class Profile extends Fragment {
 
 
                             next.setOnClickListener(view1 -> {
-                                if (currentIndex < avatars.size() - 1) {//in range
+                                if (currentIndex < avatars1.size() - 1) {//in range
 
                                     avatarRv.setVisibility(View.VISIBLE);
                                     image.setVisibility(View.GONE);
@@ -313,10 +338,10 @@ public class Profile extends Fragment {
                                 String updated_name = name.getText().toString().trim();
                                 String updated_id = userid.getText().toString().trim();
                                 String updated_email = email.getText().toString().trim();
-                                final String updatedAvatar = avatars.get(currentIndex);
+                                final Integer updatedAvatar = avatars1.get(currentIndex);
 
                                 if (updated_id.equals(Constants.USER_ID)) {
-                                    updateUserInformation(updated_name,updated_id,updated_email,updatedAvatar);
+                                    updateUserInformation(updated_name,updated_id,updated_email, String.valueOf(updatedAvatar));
 
                                 } else {
                                     UserIdViewModel userIdViewModel = new UserIdViewModel(updated_id);
@@ -324,7 +349,7 @@ public class Profile extends Fragment {
                                     userIdViewModel.getData().observe(getViewLifecycleOwner(), basicModel -> {
                                         if (!basicModel.isStatus()) {
                                             message.setVisibility(View.GONE);
-                                            updateUserInformation(updated_name,updated_id,updated_email,updatedAvatar);
+                                            updateUserInformation(updated_name,updated_id,updated_email, String.valueOf(updatedAvatar));
                                         }else {
                                             message.setText(basicModel.getMessage());
                                             message.setVisibility(View.VISIBLE);
@@ -344,13 +369,16 @@ public class Profile extends Fragment {
     }
 
     private void updateUserInformation(String updated_name, String updated_id, String updated_email, String updatedAvatar) {
+        if (updated_id.equals(Constants.USER_ID)){
+
+        }
         viewModel = new ProfileViewModel("", updated_name, updated_id, updatedAvatar, updated_email);
         viewModel.init();
         viewModel.getUpdate_profile().observe(getViewLifecycleOwner(), userUpdateModel -> {
             if (userUpdateModel.isSuccess()) {
                 if (userUpdateModel.getData() != null) {
                     MySharedPreferences sharedPreferences1 = new MySharedPreferences(Split.getAppContext());
-                    sharedPreferences1.saveData(Split.getAppContext(), "userAvatar", Constants.IMG_PATH + userUpdateModel.getData().getAvatar());
+                    sharedPreferences1.saveData(Split.getAppContext(), "userAvatar", userUpdateModel.getData().getAvatar());
                     sharedPreferences1.saveData(Split.getAppContext(), "userName", userUpdateModel.getData().getName());
                     sharedPreferences1.saveData(Split.getAppContext(), "userId", userUpdateModel.getData().getUserId());
 
@@ -358,7 +386,6 @@ public class Profile extends Fragment {
                 }
             }
         });
-
     }
 
     private void NavToContact() {

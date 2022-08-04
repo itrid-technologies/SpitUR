@@ -18,11 +18,11 @@ import com.splitur.app.utils.Constants;
 
 public class AdapterAvatars extends RecyclerView.Adapter<AdapterAvatars.AvatarsVH> {
 
-    private final List<String> mAvatars;
+    private final List<Integer> mAvatars;
     private final Context ctx;
 
 
-    public AdapterAvatars(Context context,List<String> mAvatars) {
+    public AdapterAvatars(Context context,List<Integer> mAvatars) {
         this.ctx = context;
         this.mAvatars = mAvatars;
     }
@@ -36,8 +36,8 @@ public class AdapterAvatars extends RecyclerView.Adapter<AdapterAvatars.AvatarsV
 
     @Override
     public void onBindViewHolder(@NonNull AvatarsVH holder, int position) {
-        final String currentAvatar = mAvatars.get(position);
-        Glide.with(ctx).load(Constants.IMG_PATH +currentAvatar).into(holder.avatar);
+        final Integer currentAvatar = mAvatars.get(position);
+        holder.avatar.setImageResource(Constants.getAvatarIcon(ctx,currentAvatar));
     }
 
     @Override

@@ -68,7 +68,8 @@ public class MemberChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 rvh.time.setText(rStime);
 
                 if (data.getReceiver() != null){
-                    Glide.with(context).load(Constants.IMG_PATH + data.getReceiver().getAvatar()).placeholder(R.color.images_placeholder).into(((RecieverVH) holder).imageView);
+                    ((RecieverVH) holder).imageView.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(data.getReceiver().getAvatar())));
+//                    Glide.with(context).load(Constants.IMG_PATH + data.getReceiver().getAvatar()).placeholder(R.color.images_placeholder).into(((RecieverVH) holder).imageView);
                     ((RecieverVH) holder).name.setText(data.getReceiver().getName());
                     ((RecieverVH) holder).name.setVisibility(View.VISIBLE);
                     ((RecieverVH) holder).imageView.setVisibility(View.VISIBLE);

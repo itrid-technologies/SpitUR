@@ -103,7 +103,7 @@ public class SwapCoins extends Fragment {
             if (refund_int >= coins_int){
                 binding.inrCoinsValue.setText(String.valueOf(Math.round(coins_int)));
             }
-            if (refund_int <= 0){
+            if (refund_int > 0){
                 if (!swapValue.isEmpty() && !swapValue.equalsIgnoreCase("0")){
 
                     viewModel = new SwapViewModel(swapValue);
@@ -114,6 +114,8 @@ public class SwapCoins extends Fragment {
                         }
                     });
                 }
+            }else {
+
             }
 
         });

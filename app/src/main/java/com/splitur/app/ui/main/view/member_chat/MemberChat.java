@@ -105,19 +105,19 @@ public class MemberChat extends Fragment {
 
                     for (int i = 0; i <= getMemberMessagesModel.getMessages().size() - 1; i++) {
 
-                        if (String.valueOf(getMemberMessagesModel.getMessages().get(i).getSenderId()).equalsIgnoreCase(id)) {
-                            if (getMemberMessagesModel.getMessages().get(i).getSent_by() != 0) {
+                        if (String.valueOf(getMemberMessagesModel.getMessages().get(i).getSenderId()).equalsIgnoreCase(id) && getMemberMessagesModel.getMessages().get(i).getSent_by() != 0) {
+
                                 msgs.add(new SenderModel(getMemberMessagesModel.getMessages().get(i).getBody(),
                                         getMemberMessagesModel.getMessages().get(i).getCreatedAt()
                                 ));
-                            }
-                        } else if (getMemberMessagesModel.getMessages().get(i).getSenderId() == getMemberMessagesModel.getMessages().get(i).getReceiverId()) {
-                            if (getMemberMessagesModel.getMessages().get(i).getSent_by() == 0) {
+
+                        } else if (getMemberMessagesModel.getMessages().get(i).getSenderId() == getMemberMessagesModel.getMessages().get(i).getReceiverId()  && getMemberMessagesModel.getMessages().get(i).getSent_by() == 0) {
+
                                 msgs.add(new OTpModel(getMemberMessagesModel.getMessages().get(i).getBody(),
                                         getMemberMessagesModel.getMessages().get(i).getCreatedAt()
                                 ));
-                            }
-                        } else if (String.valueOf(getMemberMessagesModel.getMessages().get(i).getReceiverId()).equalsIgnoreCase(receiver_id)) {
+
+                        } else if (String.valueOf(getMemberMessagesModel.getMessages().get(i).getReceiverId()).equalsIgnoreCase(id)) {
                             msgs.add(new MemberReceiverModel(getMemberMessagesModel.getMessages().get(i).getBody(),
                                     getMemberMessagesModel.getMessages().get(i).getCreatedAt(),
                                     getMemberMessagesModel.getMessages().get(i).getSender()));

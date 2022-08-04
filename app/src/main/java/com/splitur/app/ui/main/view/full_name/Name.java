@@ -22,7 +22,6 @@ public class Name extends AppCompatActivity {
         binding = ActivityNameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
         binding.back.setOnClickListener(view -> {

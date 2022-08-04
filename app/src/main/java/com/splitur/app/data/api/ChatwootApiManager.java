@@ -38,7 +38,7 @@ public class ChatwootApiManager {
 //                  .baseUrl("https://testserver.glorek.com/api/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
 //                  .addConverterFactory(NullOrEmptyConverterFactory())
-                    .client(getUnsafeOkHttpClient())
+//                    .client(getUnsafeOkHttpClient())
                     .build();
 
             sRestApi = retrofit.create(ChatApiService.class);
@@ -66,6 +66,8 @@ public class ChatwootApiManager {
                         }
                     }
             };
+
+            
 
             // Install the all-trusting trust manager
             final SSLContext sslContext = SSLContext.getInstance("SSL");

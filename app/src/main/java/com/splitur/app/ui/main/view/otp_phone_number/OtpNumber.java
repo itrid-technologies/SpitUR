@@ -28,7 +28,6 @@ public class OtpNumber extends AppCompatActivity {
         binding = ActivityOtpNumberBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
         binding.sendOtpButton.setOnClickListener(view -> {

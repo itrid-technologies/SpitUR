@@ -156,11 +156,13 @@ public class JoinCheckOut extends Fragment {
     private void setData(DataItem dataItem) {
         try {
             binding.profile2.netflix.setText(dataItem.getTitle());
-            Glide.with(requireContext())
-                    .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
-                    .placeholder(R.color.images_placeholder)
-                    .into(binding.profile2.userImage);
-            binding.profile2.userName.setText(String.valueOf(dataItem.getGroupAdmin().getUserId()));
+            binding.profile2.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(dataItem.getGroupAdmin().getAvatar())));
+
+//            Glide.with(requireContext())
+//                    .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
+//                    .placeholder(R.color.images_placeholder)
+//                    .into(binding.profile2.userImage);
+            binding.profile2.userName.setText(String.format("@%s", dataItem.getGroupAdmin().getUserId()));
             String coin = String.valueOf(dataItem.getCostPerMember());
             double coinFloat = Double.parseDouble(coin);
             value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));

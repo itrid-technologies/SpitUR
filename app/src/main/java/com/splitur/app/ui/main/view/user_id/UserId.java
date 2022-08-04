@@ -29,7 +29,6 @@ public class UserId extends AppCompatActivity {
         binding = ActivityUserIdBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
         binding.back.setOnClickListener(view -> {

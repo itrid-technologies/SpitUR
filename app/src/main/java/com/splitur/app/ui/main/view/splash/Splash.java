@@ -21,7 +21,6 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);

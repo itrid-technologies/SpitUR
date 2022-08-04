@@ -62,10 +62,12 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
                 holder.online_offline.setText("Offline");
                 holder.online_icon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
             }
-            Glide.with(context)
-                    .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
-                    .placeholder(R.color.images_placeholder)
-                    .into(holder.user);
+
+            holder.user.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(dataItem.getGroupAdmin().getAvatar())));
+//            Glide.with(context)
+//                    .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
+//                    .placeholder(R.color.images_placeholder)
+//                    .into(holder.user);
             holder.rateOf_id.setText(String.format("@%s", dataItem.getGroupAdmin().getUserId()));
         }
 
@@ -173,18 +175,20 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
 
         holder.group_id.setText(String.valueOf(dataItem.getGroupId()));
 
-//        Svg.INSTANCE.loadUrl(Constants.IMG_PATH + dataItem.getSubCategory().getCategory().getIcon(), holder.rate_icon);
-
         if (dataItem.getSubCategory() != null) {
             holder.rate_icon.setImageResource(
                     Constants.getCategoryIcon(context, dataItem.getSubCategory().getCategory().getId()));
         }
-
-        String coin = String.valueOf(dataItem.getCostPerMember());
-        double coinFloat = Double.parseDouble(coin);
-        String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
-        holder.coins.setText(value + " Coins");
-
+        String id = Constants.ID;
+        if(dataItem.getGroupAdmin().getId() == Integer.parseInt(id)){
+            String coin = String.valueOf(dataItem.getCostPerMember());
+            holder.coins.setText(coin + " Coins");
+        }else {
+            String coin = String.valueOf(dataItem.getCostPerMember());
+            double coinFloat = Double.parseDouble(coin);
+            String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
+            holder.coins.setText(value + " Coins");
+        }
     }
 
 

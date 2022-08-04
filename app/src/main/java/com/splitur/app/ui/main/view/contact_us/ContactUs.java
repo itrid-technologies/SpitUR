@@ -50,15 +50,20 @@ public class ContactUs extends Fragment {
 
         initClickListeners();
 
-        if (Constants.conversation_id == 0) {
-            SupportChatViewModel viewModel = new SupportChatViewModel(0, "");
-            viewModel.init();
-            viewModel.getData().observe(getViewLifecycleOwner(), conversationModel -> {
-                if (conversationModel.getId() != 0) {
-                    Constants.conversation_id = conversationModel.getId();
-                }
-            });
+        try {
+            if (Constants.conversation_id == 0) {
+                SupportChatViewModel viewModel = new SupportChatViewModel(0, "");
+                viewModel.init();
+                viewModel.getData().observe(getViewLifecycleOwner(), conversationModel -> {
+                    if (conversationModel.getId() != 0) {
+                        Constants.conversation_id = conversationModel.getId();
+                    }
+                });
+            }
+        }catch (IllegalStateException e){
+            Log.e("Chatwoot", e.getMessage());
         }
+
 
     }
 

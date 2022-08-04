@@ -62,7 +62,7 @@ public class PhoneCredentials extends Fragment {
         binding.phoneProfile.netflix.setText( Constants.SUB_CAT_TITLE);
         binding.phoneProfile.userName.setText("@"+user_ID);
         binding.phoneProfile.count.setText(slot + " Slots");
-        Glide.with(Split.getAppContext()).load(avatar).into(binding.phoneProfile.userImage);
+        binding.phoneProfile.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
     }
 
 

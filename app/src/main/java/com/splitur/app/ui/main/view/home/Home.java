@@ -46,6 +46,7 @@ import com.splitur.app.ui.main.viewmodel.avatar_viewmodel.AvatarViewModel;
 import com.splitur.app.ui.main.viewmodel.category_viewmodel.CategoryViewModel;
 import com.splitur.app.ui.main.viewmodel.home_viewmodel.HomeViewModel;
 import com.splitur.app.ui.main.viewmodel.profile_viewmodel.ProfileViewModel;
+import com.splitur.app.ui.main.viewmodel.user_id.UserIdViewModel;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.SpanningLinearLayoutManager;
@@ -68,7 +69,7 @@ public class Home extends Fragment {
     ProfileViewModel profileViewModel;
     private AvatarViewModel avatarViewModel;
     private List<AvatarItem> avatarList = new ArrayList<>();
-    private final List<String> avatars = new ArrayList<>();
+//    private final List<String> avatars = new ArrayList<>();
     private int currentIndex = 0;
 
     int count = 0;
@@ -177,6 +178,7 @@ public class Home extends Fragment {
                             EditText email = profileView.findViewById(R.id.profile_email);
                             ImageView image = profileView.findViewById(R.id.profile_image);
                             ElasticImageView logout = profileView.findViewById(R.id.logout_icon);
+                            TextView message = profileView.findViewById(R.id.errorMessage);
 
                             RecyclerView avatarRv = profileView.findViewById(R.id.profile_avatars);
                             ImageView previous = profileView.findViewById(R.id.previous_avatar);
@@ -193,29 +195,51 @@ public class Home extends Fragment {
                             email.setText(activeUserModel.getData().getEmail());
                             avatarRv.setVisibility(View.GONE);
                             image.setVisibility(View.VISIBLE);
-                            Glide.with(Split.getAppContext()).load(Constants.IMG_PATH + activeUserModel.getData().getAvatar()).into(image);
+                            image.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(activeUserModel.getData().getAvatar())));
+//                            Glide.with(Split.getAppContext()).load(Constants.IMG_PATH + activeUserModel.getData().getAvatar()).into(image);
 
 
                             saveUserData(activeUserModel);
                             MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
-                            sharedPreferences.saveData(Split.getAppContext(), "userAvatar", Constants.IMG_PATH + activeUserModel.getData().getAvatar());
+                            sharedPreferences.saveData(Split.getAppContext(), "userAvatar",  activeUserModel.getData().getAvatar());
                             sharedPreferences.saveData(Split.getAppContext(), "userName", activeUserModel.getData().getName());
                             sharedPreferences.saveData(Split.getAppContext(), "userId", activeUserModel.getData().getUserId());
 
-                            avatarViewModel = new AvatarViewModel();
-                            avatarViewModel.init();
-                            avatarViewModel.getData().observe(getViewLifecycleOwner(), avatarModel -> {
-                                avatarList.addAll(avatarModel.getAvatar());
-                                for (int i = 0; i <= avatarList.size() - 1; i++) {
-                                    avatars.add(avatarList.get(i).getUrl());
-                                }
+                            List<Integer> avatars1 = new ArrayList<>();
+                            avatars1.add(1);
+                            avatars1.add(2);
+                            avatars1.add(3);
+                            avatars1.add(4);
+                            avatars1.add(5);
+                            avatars1.add(6);
+                            avatars1.add(7);
+                            avatars1.add(8);
+                            avatars1.add(9);
+                            avatars1.add(10);
+                            avatars1.add(11);
+                            avatars1.add(12);
+                            avatars1.add(13);
+                            avatars1.add(14);
+                            avatars1.add(15);
+                            avatars1.add(16);
+                            avatars1.add(17);
+                            avatars1.add(18);
+                            avatars1.add(19);
+                            avatars1.add(20);
+//                            avatarViewModel = new AvatarViewModel();
+//                            avatarViewModel.init();
+//                            avatarViewModel.getData().observe(getViewLifecycleOwner(), avatarModel -> {
+//                                avatarList.addAll(avatarModel.getAvatar());
+//                                for (int i = 0; i <= avatarList.size() - 1; i++) {
+//                                    avatars.add(avatarList.get(i).getUrl());
+//                                }
                                 avatarRv.setHasFixedSize(true);
                                 avatarRv.setHorizontalScrollBarEnabled(false);
                                 avatarRv.setLayoutManager(new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false));
                                 RecyclerView.OnItemTouchListener disabler = new Profile.RecyclerViewDisabler();
                                 avatarRv.addOnItemTouchListener(disabler);// scrolling disable
-                                avatarRv.setAdapter(new AdapterAvatars(getActivity(), avatars));
-                            });
+                                avatarRv.setAdapter(new AdapterAvatars(getActivity(), avatars1));
+//                            });
 
 
                             logout.setOnClickListener(view1 -> {
@@ -265,7 +289,7 @@ public class Home extends Fragment {
                             });
 
                             next.setOnClickListener(view1 -> {
-                                if (currentIndex < avatars.size() - 1) {//in range
+                                if (currentIndex < avatars1.size() - 1) {//in range
 
                                     avatarRv.setVisibility(View.VISIBLE);
                                     image.setVisibility(View.GONE);
@@ -286,35 +310,32 @@ public class Home extends Fragment {
                             });
 
                             save.setOnClickListener(view1 -> {
+
                                 String updated_name = name.getText().toString().trim();
                                 String updated_id = userid.getText().toString().trim();
                                 String updated_email = email.getText().toString().trim();
+                                final Integer updatedAvatar = avatars1.get(currentIndex);
 
-                                final String updatedAvatar = avatars.get(currentIndex);
+                                if (updated_id.equals(Constants.USER_ID)) {
+                                    updateUserInformation(updated_name,updated_id,updated_email, String.valueOf(updatedAvatar));
 
-                                profileViewModel = new ProfileViewModel("", updated_name, updated_id, updatedAvatar,updated_email);
-                                profileViewModel.init();
-                                profileViewModel.getUpdate_profile().observe(getViewLifecycleOwner(), userUpdateModel -> {
-                                    if (userUpdateModel.isSuccess()) {
-                                        if (userUpdateModel.getData() != null) {
-                                            MySharedPreferences sharedPreferences1 = new MySharedPreferences(Split.getAppContext());
-                                            sharedPreferences1.saveData(Split.getAppContext(), "userAvatar", Constants.IMG_PATH + userUpdateModel.getData().getAvatar());
-                                            sharedPreferences1.saveData(Split.getAppContext(), "userName", userUpdateModel.getData().getName());
-                                            sharedPreferences1.saveData(Split.getAppContext(), "userId", userUpdateModel.getData().getUserId());
-
-                                            Toast.makeText(Split.getAppContext(), userUpdateModel.getMessage(), Toast.LENGTH_SHORT).show();
-                                            bt.dismiss();
-                                            count = 0;
+                                } else {
+                                    UserIdViewModel userIdViewModel = new UserIdViewModel(updated_id);
+                                    userIdViewModel.init();
+                                    userIdViewModel.getData().observe(getViewLifecycleOwner(), basicModel -> {
+                                        if (!basicModel.isStatus()) {
+                                            message.setVisibility(View.GONE);
+                                            updateUserInformation(updated_name,updated_id,updated_email, String.valueOf(updatedAvatar));
+                                        }else {
+                                            message.setText(basicModel.getMessage());
+                                            message.setVisibility(View.VISIBLE);
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             });
-
-
 
                             bt.setContentView(profileView);
                             bt.show();
-
                         }
                     }
 
@@ -325,6 +346,25 @@ public class Home extends Fragment {
         });
 
     }
+
+    private void updateUserInformation(String updated_name, String updated_id, String updated_email, String updatedAvatar) {
+        profileViewModel = new ProfileViewModel("", updated_name, updated_id, updatedAvatar, updated_email);
+        profileViewModel.init();
+        profileViewModel.getUpdate_profile().observe(getViewLifecycleOwner(), userUpdateModel -> {
+            if (userUpdateModel.isSuccess()) {
+                if (userUpdateModel.getData() != null) {
+                    MySharedPreferences sharedPreferences1 = new MySharedPreferences(Split.getAppContext());
+                    sharedPreferences1.saveData(Split.getAppContext(), "userAvatar", userUpdateModel.getData().getAvatar());
+                    sharedPreferences1.saveData(Split.getAppContext(), "userName", userUpdateModel.getData().getName());
+                    sharedPreferences1.saveData(Split.getAppContext(), "userId", userUpdateModel.getData().getUserId());
+
+                    Toast.makeText(Split.getAppContext(), userUpdateModel.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
 
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
@@ -377,7 +417,9 @@ public class Home extends Fragment {
     private void setProfileData() {
 
         binding.name.setText(Constants.USER_NAME);
-        Glide.with(Split.getAppContext()).load(Constants.USER_AVATAR).placeholder(R.color.images_placeholder).into(binding.userImage);
+        String avatar = Constants.USER_AVATAR;
+        binding.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
+//        Glide.with(Split.getAppContext()).load(Constants.USER_AVATAR).placeholder(R.color.images_placeholder).into(binding.userImage);
 
     }
 
@@ -487,7 +529,7 @@ public class Home extends Fragment {
         Constants.USER_ID = activeUserModel.getData().getUserId();
         Constants.USER_NAME = activeUserModel.getData().getName();
         Constants.USER_EMAIL = activeUserModel.getData().getEmail();
-        Constants.USER_AVATAR = Constants.IMG_PATH + activeUserModel.getData().getAvatar();
+        Constants.USER_AVATAR = activeUserModel.getData().getAvatar();
         Constants.NUMBER = activeUserModel.getData().getPhone();
 
         setProfileData();

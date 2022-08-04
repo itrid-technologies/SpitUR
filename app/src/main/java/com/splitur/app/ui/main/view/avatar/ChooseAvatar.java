@@ -25,6 +25,8 @@ public class ChooseAvatar extends AppCompatActivity {
 
     ActivityChooseAvatarBinding binding;
     private final List<String> avatars = new ArrayList<>();
+    private final List<Integer> avatars1 = new ArrayList<>();
+
     private int currentIndex = 0;
 
     private AvatarViewModel mViewModel;
@@ -36,7 +38,6 @@ public class ChooseAvatar extends AppCompatActivity {
         binding = ActivityChooseAvatarBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
 
@@ -48,16 +49,38 @@ public class ChooseAvatar extends AppCompatActivity {
         });
 
 
+        avatars1.add(1);
+        avatars1.add(2);
+        avatars1.add(3);
+        avatars1.add(4);
+        avatars1.add(5);
+        avatars1.add(6);
+        avatars1.add(7);
+        avatars1.add(8);
+        avatars1.add(9);
+        avatars1.add(10);
+        avatars1.add(11);
+        avatars1.add(12);
+        avatars1.add(13);
+        avatars1.add(14);
+        avatars1.add(15);
+        avatars1.add(16);
+        avatars1.add(17);
+        avatars1.add(18);
+        avatars1.add(19);
+        avatars1.add(20);
+        buildAvatarsRV();
 
-        mViewModel = new AvatarViewModel();
-        mViewModel.init();
-        mViewModel.getData().observe(this, avatarModel -> {
-            avatarList.addAll(avatarModel.getAvatar());
-            for (int i=0; i <= avatarList.size()-1; i++){
-                avatars.add(avatarList.get(i).getUrl());
-            }
-            buildAvatarsRV();
-        });
+
+//        mViewModel = new AvatarViewModel();
+//        mViewModel.init();
+//        mViewModel.getData().observe(this, avatarModel -> {
+//            avatarList.addAll(avatarModel.getAvatar());
+//            for (int i=0; i <= avatarList.size()-1; i++){
+//                avatars.add(avatarList.get(i).getUrl());
+//            }
+//            buildAvatarsRV();
+//        });
 
         initClickListeners();
 
@@ -74,7 +97,7 @@ public class ChooseAvatar extends AppCompatActivity {
         RecyclerView.OnItemTouchListener disabler = new RecyclerViewDisabler();
         binding.rvAvatars.addOnItemTouchListener(disabler);// scrolling disable
 
-        binding.rvAvatars.setAdapter(new AdapterAvatars(ChooseAvatar.this,avatars));
+        binding.rvAvatars.setAdapter(new AdapterAvatars(ChooseAvatar.this,avatars1));
     }
 
 
@@ -96,7 +119,7 @@ public class ChooseAvatar extends AppCompatActivity {
             //TODO: here is your selected avatar
             final String selectedAvatar = avatars.get(currentIndex);
 
-           Constants.USER_AVATAR = Constants.IMG_PATH + selectedAvatar;
+           Constants.USER_AVATAR = selectedAvatar;
 
             ActivityUtil.gotoPage(ChooseAvatar.this, TermsAndConditions.class);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

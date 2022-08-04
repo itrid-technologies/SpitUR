@@ -78,6 +78,14 @@ public class JoinSearchListAdapter extends RecyclerView.Adapter<JoinSearchListAd
                     }
                 }
             });
+
+            itemView.setOnClickListener(view -> {
+                if(mListener != null){
+                    if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        mListener.onCreate(getAdapterPosition());
+                    }
+                }
+            });
         }
     }//vh
 }

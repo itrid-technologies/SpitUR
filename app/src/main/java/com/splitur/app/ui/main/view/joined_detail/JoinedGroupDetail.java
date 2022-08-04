@@ -89,10 +89,13 @@ public class JoinedGroupDetail extends Fragment {
         try {
 
             binding.joinedProfile.netflix.setText(data.getGroup().getGroupTitle());
-            Glide.with(Split.getAppContext())
-                    .load(Constants.IMG_PATH + data.getGroup().getGroupAdmin().getAvatar())
-                    .placeholder(R.color.images_placeholder)
-                    .into(binding.joinedProfile.userImage);
+//            Glide.with(Split.getAppContext())
+//                    .load(Constants.IMG_PATH + data.getGroup().getGroupAdmin().getAvatar())
+//                    .placeholder(R.color.images_placeholder)
+//                    .into(binding.joinedProfile.userImage);
+
+            binding.joinedProfile.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(data.getGroup().getGroupAdmin().getAvatar())));
+
 
             binding.joinedProfile.userName.setText("@" + data.getGroup().getGroupAdmin().getUserId());
             String coin = String.valueOf(data.getGroup().getCostPerMember());
@@ -172,7 +175,7 @@ public class JoinedGroupDetail extends Fragment {
 
             confirm.setOnClickListener(view -> {
                 bt.cancel();
-                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), "", "", "", false);
+                membersViewModel = new GroupMembersViewModel((String.valueOf(data.getGroupId())), "", "", "", false);
                 membersViewModel.initLeftGroup();
                 membersViewModel.getLeft_data().observe(getViewLifecycleOwner(), basicModel -> {
                     if (basicModel.isStatus().equalsIgnoreCase("true")) {
@@ -230,7 +233,7 @@ public class JoinedGroupDetail extends Fragment {
 
         binding.send.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putString("receiverId", String.valueOf(data.getGroup().getUserId()));
+            bundle.putString("receiverId", String.valueOf(data.getUserId()));
             bundle.putString("groupId", String.valueOf(data.getGroup().getId()));
             bundle.putBoolean("ask_otp", true);
 

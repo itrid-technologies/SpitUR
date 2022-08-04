@@ -43,7 +43,6 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
 
         // OtpReader.bind(this, "SOLV");
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         startOtpCountDown();
 
@@ -142,7 +141,7 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
                     Constants.ID = String.valueOf(authenticationModel.getData().getUser().getId());
                     Constants.USER_ID = authenticationModel.getData().getUser().getUserId();
                     Constants.USER_NAME = authenticationModel.getData().getUser().getName();
-                    Constants.USER_AVATAR = Constants.IMG_PATH + authenticationModel.getData().getUser().getAvatar();
+                    Constants.USER_AVATAR = authenticationModel.getData().getUser().getAvatar();
                     Constants.SourceId = authenticationModel.getData().getUser().getSource_id();
                     Constants.ContactId = authenticationModel.getData().getUser().getContact_id();
                     // Constants.DEVICE_TOKEN = authenticationModel.getData().getToken();

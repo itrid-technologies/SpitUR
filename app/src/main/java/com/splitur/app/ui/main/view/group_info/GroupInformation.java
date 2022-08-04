@@ -99,10 +99,12 @@ public class GroupInformation extends Fragment {
     private void setData(DataItem dataItem) {
         try {
             binding.netflix.setText(dataItem.getTitle());
-            Glide.with(requireContext())
-                    .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
-                    .placeholder(R.color.images_placeholder)
-                    .into(binding.userImage);
+            binding.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(dataItem.getGroupAdmin().getAvatar())));
+
+//            Glide.with(requireContext())
+//                    .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
+//                    .placeholder(R.color.images_placeholder)
+//                    .into(binding.userImage);
             binding.userName.setText(String.format("@%s", dataItem.getGroupAdmin().getUserId()));
             binding.tvScoreValue.setText(String.valueOf(Math.round(dataItem.getGroupAdmin().getSpliturScore())));
             if (dataItem.getGroupAdmin().getLastActive() != null) {

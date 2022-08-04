@@ -135,6 +135,14 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
                     }
                 }
             });
+
+            itemView.setOnClickListener(view -> {
+                if(mListener != null){
+                    if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        mListener.onCreate(getAdapterPosition());
+                    }
+                }
+            });
         }
     }//vh
 }

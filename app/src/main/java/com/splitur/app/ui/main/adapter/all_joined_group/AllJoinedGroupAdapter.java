@@ -50,73 +50,77 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
             holder.layout.setVisibility(View.VISIBLE);
 
 
-            if (!current_item.getPaymentStatus().isEmpty()){
-                if (current_item.getPaymentStatus().equalsIgnoreCase("paid")){
-                    holder.open.setText("Open");
-                    holder.open.setBackgroundResource(R.drawable.rect_blue_bg);
+                if (!current_item.getPaymentStatus().isEmpty()){
+                    if (current_item.getPaymentStatus().equalsIgnoreCase("paid")){
+                        holder.open.setText("Open");
+                        holder.open.setBackgroundResource(R.drawable.rect_blue_bg);
 
-                }else if (current_item.getPaymentStatus().equalsIgnoreCase("pending")){
-                    holder.open.setText("Pending");
-                    holder.open.setBackgroundResource(R.drawable.pending_bg);
-                }else {
-
-                }
-            }
-
-            holder.icon.setImageResource(
-                    Constants.getCategoryIcon(context,current_item.getGroup().getSubCategory().getCategory().getId()));
-
-            if (!current_item.getGroup().isStatus()){
-                holder.open.setText("Closed");
-                holder.open.setBackgroundResource(R.drawable.closed_bg);
-            }
-
-            holder.name.setText(current_item.getGroup().getGroupTitle());
-
-            if (current_item.getGroup().getTotalMembers() != null){
-                String members = current_item.getGroup().getTotalMembers().toString();
-                if (members.equalsIgnoreCase("0")){
-
-                }else {
-                    if (members.equalsIgnoreCase("1")){
-                        holder.member1.setVisibility(View.VISIBLE);
-                    }else if (members.equalsIgnoreCase("2")){
-                        holder.member1.setVisibility(View.VISIBLE);
-                        holder.member2.setVisibility(View.VISIBLE);
-
-                    }else if (members.equalsIgnoreCase("3")){
-                        holder.member1.setVisibility(View.VISIBLE);
-                        holder.member2.setVisibility(View.VISIBLE);
-                        holder.member3.setVisibility(View.VISIBLE);
-                    }else if (members.equalsIgnoreCase("4")){
-                        holder.member1.setVisibility(View.VISIBLE);
-                        holder.member2.setVisibility(View.VISIBLE);
-                        holder.member3.setVisibility(View.VISIBLE);
-                        holder.member4.setVisibility(View.VISIBLE);
-                    }else if (members.equalsIgnoreCase("5")){
-                        holder.member1.setVisibility(View.VISIBLE);
-                        holder.member2.setVisibility(View.VISIBLE);
-                        holder.member3.setVisibility(View.VISIBLE);
-                        holder.member4.setVisibility(View.VISIBLE);
-                        holder.member5.setVisibility(View.VISIBLE);
-                        holder.remaining.setVisibility(View.VISIBLE);
-
-                        int total  = Integer.parseInt(current_item.getGroup().getTotalMembers()) - 4;
-                        holder.remaining.setText("+"+total);
+                    }else if (current_item.getPaymentStatus().equalsIgnoreCase("pending")){
+                        holder.open.setText("Pending");
+                        holder.open.setBackgroundResource(R.drawable.pending_bg);
                     }else {
-                        holder.member1.setVisibility(View.VISIBLE);
-                        holder.member2.setVisibility(View.VISIBLE);
-                        holder.member3.setVisibility(View.VISIBLE);
-                        holder.member4.setVisibility(View.VISIBLE);
-                        holder.member5.setVisibility(View.VISIBLE);
-                        holder.remaining.setVisibility(View.VISIBLE);
 
-                        int total  = Integer.parseInt(current_item.getGroup().getTotalMembers()) - 4;
-                        holder.remaining.setText("+"+total);
                     }
                 }
 
-            }
+                holder.icon.setImageResource(
+                        Constants.getCategoryIcon(context,current_item.getGroup().getSubCategory().getCategory().getId()));
+
+                if (!current_item.getGroup().isStatus()){
+                    holder.open.setText("Closed");
+                    holder.open.setBackgroundResource(R.drawable.closed_bg);
+                }
+
+                if (current_item.getEnrollment_status().equals("left") ||current_item.getEnrollment_status().equals("removed")){
+                    holder.open.setText("Closed");
+                    holder.open.setBackgroundResource(R.drawable.closed_bg);
+                }
+
+                holder.name.setText(current_item.getGroup().getGroupTitle());
+
+                if (current_item.getGroup().getTotalMembers() != null) {
+                    String members = current_item.getGroup().getTotalMembers().toString();
+                    if (members.equalsIgnoreCase("0")) {
+
+                    } else {
+                        if (members.equalsIgnoreCase("1")) {
+                            holder.member1.setVisibility(View.VISIBLE);
+                        } else if (members.equalsIgnoreCase("2")) {
+                            holder.member1.setVisibility(View.VISIBLE);
+                            holder.member2.setVisibility(View.VISIBLE);
+
+                        } else if (members.equalsIgnoreCase("3")) {
+                            holder.member1.setVisibility(View.VISIBLE);
+                            holder.member2.setVisibility(View.VISIBLE);
+                            holder.member3.setVisibility(View.VISIBLE);
+                        } else if (members.equalsIgnoreCase("4")) {
+                            holder.member1.setVisibility(View.VISIBLE);
+                            holder.member2.setVisibility(View.VISIBLE);
+                            holder.member3.setVisibility(View.VISIBLE);
+                            holder.member4.setVisibility(View.VISIBLE);
+                        } else if (members.equalsIgnoreCase("5")) {
+                            holder.member1.setVisibility(View.VISIBLE);
+                            holder.member2.setVisibility(View.VISIBLE);
+                            holder.member3.setVisibility(View.VISIBLE);
+                            holder.member4.setVisibility(View.VISIBLE);
+                            holder.member5.setVisibility(View.VISIBLE);
+                            holder.remaining.setVisibility(View.VISIBLE);
+
+                            int total = Integer.parseInt(current_item.getGroup().getTotalMembers()) - 4;
+                            holder.remaining.setText("+" + total);
+                        } else {
+                            holder.member1.setVisibility(View.VISIBLE);
+                            holder.member2.setVisibility(View.VISIBLE);
+                            holder.member3.setVisibility(View.VISIBLE);
+                            holder.member4.setVisibility(View.VISIBLE);
+                            holder.member5.setVisibility(View.VISIBLE);
+                            holder.remaining.setVisibility(View.VISIBLE);
+
+                            int total = Integer.parseInt(current_item.getGroup().getTotalMembers()) - 4;
+                            holder.remaining.setText("+" + total);
+                        }
+                    }
+                }
 
         }else {
             holder.layout.setVisibility(View.GONE);
