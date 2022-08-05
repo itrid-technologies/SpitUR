@@ -39,9 +39,9 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         DataItem dataItem = dataItems.get(position);
         if (dataItem.getPaymentType().equalsIgnoreCase("debit")){
-            holder.amount.setText( " -$" + String.valueOf(dataItem.getAmount()));
+            holder.amount.setText( " -₹" + String.valueOf(dataItem.getAmount()));
         }else {
-            holder.amount.setText( " +$" + String.valueOf(dataItem.getAmount()));
+            holder.amount.setText( " +₹" + String.valueOf(dataItem.getAmount()));
         }
 
         holder.date.setText(Constants.getDate(dataItem.getCreatedAt()));

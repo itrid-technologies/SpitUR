@@ -21,6 +21,8 @@ public class MessagesItem{
 	private int sent_by;
 
 
+	@SerializedName("isOtpMessage")
+	private boolean isOtpMessage;
 
 	@SerializedName("id")
 	private int id;
@@ -69,5 +71,9 @@ public class MessagesItem{
 
 	public int getSent_by() {
 		return sent_by;
+	}
+
+	public boolean isOtpMessage() {
+		return isOtpMessage;
 	}
 }

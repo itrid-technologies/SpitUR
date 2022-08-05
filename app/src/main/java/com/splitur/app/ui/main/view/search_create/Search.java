@@ -48,6 +48,8 @@ public class Search extends Fragment {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         Dashboard.hideNav(false);
 
+        binding.customCreateView.customLayout.setVisibility(View.GONE);
+
         binding.cSearchToolbar.title.setText("Search");
         return binding.getRoot();
     }
@@ -64,6 +66,8 @@ public class Search extends Fragment {
     }
 
     private void getPopularSubCategory() {
+
+        binding.customCreateView.customLayout.setVisibility(View.GONE);
 
         mViewModel = new SearchCreateViewModel(null, null);
         mViewModel.init();
@@ -153,7 +157,6 @@ public class Search extends Fragment {
 
                 } else {
                     binding.searchLis.setVisibility(View.VISIBLE);
-
                     binding.customCreateView.customLayout.setVisibility(View.GONE);
                     binding.popularList.setVisibility(View.GONE);
                     popularSubCategoryList = new ArrayList<>();
@@ -184,6 +187,7 @@ public class Search extends Fragment {
 
         binding.popularList.setVisibility(View.VISIBLE);
         binding.searchLis.setVisibility(View.GONE);
+        binding.customCreateView.customLayout.setVisibility(View.GONE);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.popularList.setLayoutManager(layoutManager);

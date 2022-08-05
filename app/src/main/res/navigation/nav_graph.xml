@@ -74,32 +74,19 @@
         <action
             android:id="@+id/action_cost2_to_credentials2"
             app:destination="@id/credentials2" />
-        <action
-            android:id="@+id/action_cost2_to_phoneCredentials"
-            app:destination="@id/phoneCredentials" />
+
     </fragment>
     <fragment
         android:id="@+id/credentials2"
         android:name="com.splitur.app.ui.main.view.enter_credentials.Credentials"
         android:label="fragment_credentials"
         tools:layout="@layout/fragment_credentials" >
-        <action
-            android:id="@+id/action_credentials2_to_phoneCredentials"
-            app:destination="@id/phoneCredentials" />
+
         <action
             android:id="@+id/action_credentials2_to_otpSuccess"
             app:destination="@id/otpSuccess" />
     </fragment>
-    <fragment
-        android:id="@+id/phoneCredentials"
-        android:name="com.splitur.app.ui.main.view.enter_phone_number.PhoneCredentials"
-        android:label="fragment_phone_credentials"
-        tools:layout="@layout/fragment_phone_credentials" >
 
-        <action
-            android:id="@+id/action_phoneCredentials_to_otpVerifyFragment"
-            app:destination="@id/otpVerifyFragment" />
-    </fragment>
     <fragment
         android:id="@+id/otpSuccess"
         android:name="com.splitur.app.ui.main.view.success_seller.OtpSuccess"
@@ -191,15 +178,7 @@
         tools:layout="@layout/fragment_sucessfully_swaped" >
 
     </fragment>
-    <fragment
-        android:id="@+id/otpVerifyFragment"
-        android:name="com.splitur.app.ui.main.view.otp_verify_fragment.OtpVerifyFragment"
-        android:label="fragment_otp_verify"
-        tools:layout="@layout/fragment_otp_verify" >
-        <action
-            android:id="@+id/action_otpVerifyFragment_to_otpSuccess"
-            app:destination="@id/otpSuccess" />
-    </fragment>
+
     <fragment
         android:id="@+id/joinSearch"
         android:name="com.splitur.app.ui.main.view.join_group_search.JoinSearch"

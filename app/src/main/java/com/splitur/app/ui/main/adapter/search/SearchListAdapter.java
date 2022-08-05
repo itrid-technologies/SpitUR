@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -54,9 +55,11 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
         }
         holder.name.setText(current_data.getTitle());
         if (current_data.getNumberOfGroups() != null){
-                String groups = current_data.getNumberOfGroups().toString();
-                if (groups.equalsIgnoreCase("0")){
+            holder.no_memberLayout.setVisibility(View.GONE);
 
+            String groups = current_data.getNumberOfGroups().toString();
+                if (groups.equalsIgnoreCase("0")){
+                    holder.no_memberLayout.setVisibility(View.VISIBLE);
                 }else {
                     if (groups.equalsIgnoreCase("1")){
                         holder.member1.setVisibility(View.VISIBLE);
@@ -95,6 +98,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
                         holder.remaining.setText("+"+total);
                     }
                 }
+        }else {
+            holder.no_memberLayout.setVisibility(View.VISIBLE);
         }
     }
 
@@ -111,6 +116,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
     public static class SearchVH extends RecyclerView.ViewHolder {
         public ImageView icon;
         public TextView name, create;
+        ConstraintLayout no_memberLayout;
         CircleImageView member1,member2, member3 , member4 , member5;
         TextView remaining;
 
@@ -126,6 +132,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
             member4 = itemView.findViewById(R.id.member4);
             member5 = itemView.findViewById(R.id.member5);
             remaining = itemView.findViewById(R.id.count);
+            no_memberLayout = itemView.findViewById(R.id.no_member_view);
 
 
             create.setOnClickListener(view -> {

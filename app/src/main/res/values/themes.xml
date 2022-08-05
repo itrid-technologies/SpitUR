@@ -43,10 +43,10 @@
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="SliderStyle" parent="@style/Widget.MaterialComponents.Slider">
-        <item name="labelStyle">@style/TooltipStyle</item>
-        <item name="materialThemeOverlay">@style/ThemeOverlay.Slider</item>
-    </style>
+<!--    <style name="SliderStyle" parent="@style/Widget.MaterialComponents.Slider">-->
+<!--        <item name="labelStyle">@style/TooltipStyle</item>-->
+<!--        <item name="materialThemeOverlay">@style/ThemeOverlay.Slider</item>-->
+<!--    </style>-->
 
     <style name="TooltipStyle" parent="Widget.MaterialComponents.Tooltip">
         <!-- background color of the Tooltip -->
@@ -56,12 +56,12 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
 
 
-    <style name="ThemeOverlay.Slider" parent="">
-        <!-- color used by the text in the Tooltip -->
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorOnBackground">@color/yellow</item>
-        <item name="colorSurface">@color/purple_200</item>
-    </style>
+<!--    <style name="ThemeOverlay.Slider" parent="">-->
+<!--        &lt;!&ndash; color used by the text in the Tooltip &ndash;&gt;-->
+<!--        <item name="colorOnPrimary">@color/white</item>-->
+<!--        <item name="colorOnBackground">@color/yellow</item>-->
+<!--        <item name="colorSurface">@color/purple_200</item>-->
+<!--    </style>-->
 
     <style name="buttonStyle">
         <item name="fontFamily">@font/inter_bold</item>

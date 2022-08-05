@@ -63,7 +63,7 @@ public class SubscriptionName extends Fragment {
         binding.BTNSUBNEXT.setOnClickListener(view -> {
             String title = binding.edGroupTitle.getText().toString().trim();
             if (!title.isEmpty()){
-                Constants.GROUP_TITLE = title;
+                Constants.SUB_CAT_TITLE = title;
                 Constants.VALIDATION_TYPE = verification_type;
 
 //                MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());

@@ -411,7 +411,6 @@ public class Home extends Fragment {
             bundle.putString("CurrentCatId", String.valueOf(category_list.get(position).getId()));
             Navigation.findNavController(requireView()).navigate(R.id.action_home2_to_joinSearch, bundle);
         });
-
     }
 
     private void setProfileData() {
@@ -429,6 +428,11 @@ public class Home extends Fragment {
         binding.homeSections.setLayoutManager(layoutManager);
         HomeSectionAdapter adapter = new HomeSectionAdapter(Split.getAppContext(), homeDataItems, requireView());
         binding.homeSections.setAdapter(adapter);
+        adapter.setOnViewAllClickListener(position -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("CurrentCatId", String.valueOf(homeDataItems.get(position).getId()));
+            Navigation.findNavController(requireView()).navigate(R.id.action_home2_to_joinSearch, bundle);
+        });
     }
 
 

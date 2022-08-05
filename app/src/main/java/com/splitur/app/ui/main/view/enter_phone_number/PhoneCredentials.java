@@ -110,7 +110,7 @@ public class PhoneCredentials extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("phone_number",phone);
                 Constants.NUMBER = phone;
-                Navigation.findNavController(requireView()).navigate(R.id.action_phoneCredentials_to_otpVerifyFragment,bundle);
+//                Navigation.findNavController(requireView()).navigate(R.id.action_phoneCredentials_to_otpVerifyFragment,bundle);
 
             }else {
                 binding.errorMessage.setVisibility(View.VISIBLE);

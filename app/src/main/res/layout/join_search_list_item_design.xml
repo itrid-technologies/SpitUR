@@ -66,6 +66,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -77,6 +78,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:id="@+id/member2"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@id/member1"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="-12dp"
@@ -90,6 +92,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:id="@+id/member3"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@id/member2"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="-12dp"
@@ -103,6 +106,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:id="@+id/member4"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@id/member3"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="-12dp"
@@ -116,6 +120,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:id="@+id/member5"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@id/member4"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="-12dp"
@@ -134,6 +139,7 @@
             app:layout_constraintBottom_toBottomOf="@id/member5"
             android:textColor="@color/white"
             android:text="+6"
+            android:visibility="invisible"
             android:fontFamily="@font/inter_regular"
             android:textSize="8sp"
             android:gravity="center"
@@ -142,6 +148,30 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/no_member_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/join_search_name"
+        app:layout_constraintTop_toBottomOf="@id/join_search_name"
+        android:layout_marginTop="@dimen/_2sdp"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:civ_circle_background_color="@color/light_grey"
+            android:src="@drawable/avatar_artist"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/dark_grey"
+            android:id="@+id/empty"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:layout_width="wrap_content"

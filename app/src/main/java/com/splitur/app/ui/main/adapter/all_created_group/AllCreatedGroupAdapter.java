@@ -57,6 +57,13 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
             holder.slots.setTextColor(Color.parseColor("#FFDD72"));
         }
 
+
+        if (!current_item.isStatus()){
+            holder.open.setText("Closed");
+            holder.open.setBackgroundResource(R.drawable.closed_bg);
+        }
+
+
         holder.icon.setImageResource(
                 Constants.getCategoryIcon(context,current_item.getSubCategory().getCategory().getId()));
   
@@ -74,7 +81,7 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
 
     public static class GroupVH extends RecyclerView.ViewHolder {
         public ImageView icon;
-        public TextView name,slots;
+        public TextView name,slots, open;
 
         public GroupVH(@NonNull View itemView, AllCreatedGroupAdapter.ItemClickListener mListener) {
             super(itemView);
@@ -82,15 +89,36 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
             name = itemView.findViewById(R.id.group_title);
             slots = itemView.findViewById(R.id.space);
             icon = itemView.findViewById(R.id.search_icons);
+            open = itemView.findViewById(R.id.tv_open);
 
+            open.setOnClickListener(view -> {
+                String isOpen = open.getText().toString().trim();
+                if (isOpen.equalsIgnoreCase("Closed")) {
 
-            itemView.setOnClickListener(view -> {
-                if (mListener != null) {
-                    if (getAdapterPosition() != RecyclerView.NO_POSITION) {
-                        mListener.onCategorySelect(getAdapterPosition());
+                } else{
+                    if (mListener != null) {
+                        if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                            mListener.onCategorySelect(getAdapterPosition());
+                        }
                     }
                 }
             });
+
+            itemView.setOnClickListener(view -> {
+                String isOpen = open.getText().toString().trim();
+                if (isOpen.equalsIgnoreCase("Closed")) {
+
+                } else if (isOpen.equalsIgnoreCase("Open")){
+                    if (mListener != null) {
+                        if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                            mListener.onCategorySelect(getAdapterPosition());
+                        }
+                    }
+                }else {
+
+                }
+            });
+
 
         }
     }

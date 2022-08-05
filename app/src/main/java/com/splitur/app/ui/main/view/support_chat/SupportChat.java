@@ -68,6 +68,16 @@ public class SupportChat extends Fragment {
             }
         }
 
+        binding.supportChatRv.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                if (bottom <= oldBottom) {
+
+                    binding.supportChatRv.smoothScrollToPosition(bottom);
+                }
+            }
+        });
+
 //        new Handler(Looper.myLooper()).postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
@@ -116,6 +126,7 @@ public class SupportChat extends Fragment {
 
     private void buildRec(ArrayList<Object> msgs) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
+        layoutManager.setStackFromEnd(true);
         binding.supportChatRv.setLayoutManager(layoutManager);
         adapter = new SupportChatAdapter(Split.getAppContext(), msgs);
         binding.supportChatRv.setAdapter(adapter);

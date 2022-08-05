@@ -148,6 +148,31 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/no_member_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/search_name"
+        app:layout_constraintTop_toBottomOf="@id/search_name"
+        android:layout_marginTop="@dimen/_2sdp"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:civ_circle_background_color="@color/light_grey"
+            android:src="@drawable/avatar_artist"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/dark_grey"
+            android:id="@+id/empty"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <TextView
         android:layout_width="wrap_content"

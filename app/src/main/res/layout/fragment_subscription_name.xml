@@ -30,8 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
+            android:paddingStart="28dp"
+            android:paddingEnd="28dp"
             android:paddingBottom="20dp">
 
 
@@ -41,7 +41,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:fontFamily="@font/poppins_semibold"
-                    android:textSize="32sp"
+                    android:textSize="29sp"
                     android:textColor="@color/white"
                     android:text="@string/subscription_name"
                     android:id="@+id/sub_name"/>
@@ -92,7 +92,7 @@
                     android:paddingStart="13dp"
                     android:paddingEnd="13dp"
                     android:paddingBottom="15dp"
-                    android:background="@drawable/rect_back_with_grey_stroke">
+                    android:background="@drawable/subscription_bg">
 
 
                     <TextView
@@ -101,7 +101,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         style="@style/semiBoldText"
-                        android:textSize="19sp"
+                        android:textSize="17sp"
                         android:text="@string/password_verification_method"
                         android:id="@+id/verification_method"/>
 
@@ -123,11 +123,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_7sdp"
-                        android:layout_margin="@dimen/_4sdp"
                         app:layout_constraintEnd_toStartOf="@id/otpLayout"
                         app:layout_constraintStart_toStartOf="parent"
                         android:background="@drawable/selected_gradient_stroke"
-                        android:padding="20dp"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:layout_marginEnd="@dimen/_3sdp"
                         app:layout_constraintTop_toBottomOf="@id/verification_text">
 
                         <TextView
@@ -167,9 +170,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_7sdp"
-                        android:layout_margin="@dimen/_4sdp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:padding="20dp"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:layout_marginStart="@dimen/_3sdp"
                         app:layout_constraintStart_toEndOf="@id/authLayout"
                         android:background="@drawable/unselected_bg"
                         app:layout_constraintTop_toBottomOf="@id/verification_text">

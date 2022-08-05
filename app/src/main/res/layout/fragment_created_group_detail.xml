@@ -152,6 +152,7 @@
                 app:layout_constraintEnd_toEndOf="@id/credential_layout"
                 android:background="@drawable/terms_bg"
                 android:paddingTop="12dp"
+                android:visibility="gone"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="12dp"

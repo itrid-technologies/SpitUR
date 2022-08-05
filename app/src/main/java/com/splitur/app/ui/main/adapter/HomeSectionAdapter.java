@@ -23,6 +23,13 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
     private final List<HomeDataItem> homeDataItems;
     private final Context context;
     View adapter_view;
+    private ItemClickListener mListener;
+
+
+
+    public void setOnViewAllClickListener(ItemClickListener listener) {
+        mListener = listener;
+    }
 
     public HomeSectionAdapter(Context appContext, List<HomeDataItem> list, View view) {
         this.context = appContext;
@@ -34,7 +41,7 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
     @Override
     public HomeSectionAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_section_design, parent, false);
-        return new HomeSectionAdapter.ViewHolder(view);
+        return new HomeSectionAdapter.ViewHolder(view,mListener);
     }
 
     @Override
@@ -58,11 +65,11 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
                 Bundle bundle = new Bundle();
                 bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(position1).getId()));
                 bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(position1).getSubCatTitle()));
-
                 Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
             });
 
         }
+
 
     }
 
@@ -71,19 +78,30 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
         return homeDataItems.size();
     }
 
+    public interface ItemClickListener {
+        void onViewAllClick(int position);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
+        public TextView title, view_all;
         RecyclerView list;
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, ItemClickListener mListener) {
             super(itemView);
             //find views
             title = itemView.findViewById(R.id.section_title);
             list = (itemView).findViewById(R.id.section_categories);
+            view_all = (itemView).findViewById(R.id.section_view_all);
 
 
+            view_all.setOnClickListener(view -> {
+                if (mListener != null) {
+                    if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        mListener.onViewAllClick(getAdapterPosition());
+                    }
+                }
+            });
         }
     }
 }

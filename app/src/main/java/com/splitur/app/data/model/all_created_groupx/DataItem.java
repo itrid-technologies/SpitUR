@@ -25,6 +25,9 @@ public class DataItem{
 	@SerializedName("slots")
 	private int slots;
 
+	@SerializedName("status")
+	private boolean status;
+
 	@SerializedName("password")
 	private String password;
 
@@ -114,5 +117,9 @@ public class DataItem{
 
 	public String getUpdatedAt(){
 		return updatedAt;
+	}
+
+	public boolean isStatus() {
+		return status;
 	}
 }

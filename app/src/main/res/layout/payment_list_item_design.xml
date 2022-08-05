@@ -5,21 +5,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/payment_bg"
     android:layout_marginTop="@dimen/_7sdp"
-    android:padding="15dp">
+    android:padding="13dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/payment_icon_bg"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:civ_border_width="2dp"
-        android:layout_marginStart="8dp"
-        android:src="@color/transparent"
-        app:civ_circle_background_color="@color/profile_bg"
-        app:civ_border_color="@color/profile_bg"
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        android:layout_marginStart="5dp"
+        android:background="@drawable/round_back"
+        android:backgroundTint="@color/profile_bg"
+        android:id="@+id/payment_icon_bg">
+
+
+        <ImageView
+            android:id="@+id/join_search_icons"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:src="@drawable/player_icon"
+            android:scaleType="fitXY"
+            android:padding="3dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ImageView
         android:layout_width="30dp"
@@ -60,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="-$12.00"
+        android:text="-₹ 12.00"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:paddingEnd="@dimen/_6sdp"

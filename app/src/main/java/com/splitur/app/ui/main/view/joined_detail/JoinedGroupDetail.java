@@ -233,7 +233,7 @@ public class JoinedGroupDetail extends Fragment {
 
         binding.send.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putString("receiverId", String.valueOf(data.getUserId()));
+            bundle.putString("receiverId", String.valueOf(data.getGroup().getUserId()));
             bundle.putString("groupId", String.valueOf(data.getGroup().getId()));
             bundle.putBoolean("ask_otp", true);
 

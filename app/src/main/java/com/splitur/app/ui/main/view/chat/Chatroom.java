@@ -83,6 +83,16 @@ public class Chatroom extends Fragment {
 
         initChatList();
 
+        binding.chatRv.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                if (bottom <= oldBottom) {
+
+                    binding.chatRv.smoothScrollToPosition(bottom);
+                }
+            }
+        });
+
     }
 
     private void initChatList() {
@@ -94,6 +104,7 @@ public class Chatroom extends Fragment {
                 msgs = new ArrayList<>();
 
                 LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
+//                layoutManager.setStackFromEnd(true);
                 binding.chatRv.setLayoutManager(layoutManager);
 
                 if (getMessagesModel.getMessages().size() > 0) {

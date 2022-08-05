@@ -79,9 +79,11 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
                 holder.name.setText(current_item.getGroup().getGroupTitle());
 
                 if (current_item.getGroup().getTotalMembers() != null) {
+                    holder.no_memberLayout.setVisibility(View.GONE);
+
                     String members = current_item.getGroup().getTotalMembers().toString();
                     if (members.equalsIgnoreCase("0")) {
-
+                        holder.no_memberLayout.setVisibility(View.VISIBLE);
                     } else {
                         if (members.equalsIgnoreCase("1")) {
                             holder.member1.setVisibility(View.VISIBLE);
@@ -120,6 +122,8 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
                             holder.remaining.setText("+" + total);
                         }
                     }
+                }else {
+                    holder.no_memberLayout.setVisibility(View.VISIBLE);
                 }
 
         }else {
@@ -139,7 +143,7 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
 
     public static class GroupVH extends RecyclerView.ViewHolder {
         public TextView name,open;
-        ConstraintLayout layout;
+        ConstraintLayout layout, no_memberLayout;
         ImageView icon;
         CircleImageView member1,member2, member3 , member4 , member5;
         TextView remaining;
@@ -157,6 +161,7 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
             member4 = itemView.findViewById(R.id.member4);
             member5 = itemView.findViewById(R.id.member5);
             remaining = itemView.findViewById(R.id.count);
+            no_memberLayout = itemView.findViewById(R.id.no_member_view);
 
 
             open.setOnClickListener(view -> {

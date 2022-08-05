@@ -97,12 +97,15 @@ public class Cost extends Fragment {
                 if (validation_type.isEmpty()) {
                     Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
                 } else {
-                    if (validation_type.equalsIgnoreCase("otp")) {
 
-                        Navigation.findNavController(view).navigate(R.id.action_cost2_to_phoneCredentials);
-                    } else {
-                        Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
-                    }
+                    Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
+
+//                    if (validation_type.equalsIgnoreCase("otp")) {
+//
+//                        Navigation.findNavController(view).navigate(R.id.action_cost2_to_phoneCredentials);
+//                    } else {
+//                        Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
+//                    }
                 }
             } else {
                 binding.errorMessage.setVisibility(View.VISIBLE);

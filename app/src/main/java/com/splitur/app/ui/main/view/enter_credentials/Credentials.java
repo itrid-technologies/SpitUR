@@ -46,6 +46,15 @@ public class Credentials extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        if (Constants.VALIDATION_TYPE.equals("otp")){
+            binding.tvPassOption.setVisibility(View.VISIBLE);
+            binding.tvService.setVisibility(View.VISIBLE);
+        }else {
+            binding.tvPassOption.setVisibility(View.GONE);
+            binding.tvService.setVisibility(View.GONE);
+        }
+
         initClickListeners();
         setProfileData();
 

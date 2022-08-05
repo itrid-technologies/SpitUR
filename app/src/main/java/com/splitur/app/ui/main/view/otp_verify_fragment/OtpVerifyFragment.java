@@ -101,7 +101,7 @@ public class OtpVerifyFragment extends Fragment {
         customCreateViewModel.initOtp();
         customCreateViewModel.getOtp_data().observe(getViewLifecycleOwner(), createGroupModel -> {
             if (createGroupModel.getMessage().equalsIgnoreCase("Custom Group created successfully")) {
-                Navigation.findNavController(requireView()).navigate(R.id.action_otpVerifyFragment_to_otpSuccess);
+//                Navigation.findNavController(requireView()).navigate(R.id.action_otpVerifyFragment_to_otpSuccess);
             }
         });
     }
@@ -141,7 +141,7 @@ public class OtpVerifyFragment extends Fragment {
                             pm.saveData(Split.getAppContext(), "GROUP_ID", String.valueOf(createGroupModel.getData().getGroupId()));
                             pm.saveData(Split.getAppContext(), "CREATED_AT", String.valueOf(createGroupModel.getData().getCreatedAt()));
 
-                            Navigation.findNavController(requireView()).navigate(R.id.action_otpVerifyFragment_to_otpSuccess);
+//                            Navigation.findNavController(requireView()).navigate(R.id.action_otpVerifyFragment_to_otpSuccess);
                         }
                     }
                 });
