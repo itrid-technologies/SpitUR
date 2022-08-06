@@ -232,7 +232,7 @@ public class MemberChat extends Fragment {
     }
 
     private void threeMinuteTimerStart() {
-        waitTimer = new CountDownTimer(60000, 1000) {//180000
+        waitTimer = new CountDownTimer(180000, 1000) {//180000
             @Override
             public void onTick(long millisUntilFinished) {
 

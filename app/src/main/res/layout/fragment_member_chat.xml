@@ -87,7 +87,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ask_otp"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="0dp"
             app:layout_constraintStart_toEndOf="@id/type_member_message"
             app:layout_constraintEnd_toEndOf="parent"
@@ -102,10 +102,11 @@
 
             <TextView
                 android:id="@+id/tv_timer"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/semiBoldText"
                 android:text="Ask OTP"
+                android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:paddingStart="12dp"
