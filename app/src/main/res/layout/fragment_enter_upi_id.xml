@@ -82,7 +82,7 @@
                 android:paddingEnd="17dp"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:drawableLeft="@drawable/ic_userid"
+                android:drawableStart="@drawable/ic_userid"
                 android:id="@+id/ed_upi_id"/>
 
 
@@ -158,7 +158,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="I have read and understand and agree to comply with all tems and conditions, Privacy policy and Subscpace Gurantee and Refund Policy"
+                        android:text="I understand that once i enter the UPI ID above the transaction is complete and there is no way that the transaciton can be reversed and if there is any mistake in the Information provided, Splitur will not be responsible got any losses or damages."
                         android:fontFamily="@font/inter_medium"
                         android:textSize="12sp"
                         android:textColor="@color/white"
@@ -184,7 +184,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="I confirm that I understand and comply with the Subscription Platforms sharing terms and conditions"
+                        android:text="I verify that the Above UPI Id entered belongs to me and not a third party, If found that the UPI ID belongs to a third person your account may be restricted."
                         android:fontFamily="@font/inter_medium"
                         android:textSize="12sp"
                         android:textColor="@color/white"
@@ -199,19 +199,65 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/termPoints"
-                    app:layout_constraintEnd_toEndOf="@id/termPoints"
-                    app:layout_constraintTop_toBottomOf="@id/termPoints"
-                    android:text="By clicking on the join button, you agree to the terms and conditions mentioned above"
+                    android:id="@+id/agree_tv"
                     android:fontFamily="@font/inter_medium"
-                    android:textSize="12sp"
-                    android:textColor="@color/white"
-                    android:alpha="0.6"
-                    android:paddingStart="@dimen/_5sdp"
-                    android:paddingEnd="@dimen/_5sdp"
-                    android:layout_marginTop="11dp"/>
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/hint_color"
+                    android:layout_width="wrap_content"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:text="By clicking on the Refund button, You agree to"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/termPoints" />
+
+                <TextView
+                    android:id="@+id/the_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="the"
+                    android:paddingStart="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="@id/agree_tv"
+                    app:layout_constraintTop_toBottomOf="@id/agree_tv"
+                    android:textColor="@color/hint_color" />
+                <TextView
+                    android:id="@+id/terms_use_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="Terms of Use"
+                    app:layout_constraintStart_toEndOf="@id/the_tv"
+                    app:layout_constraintTop_toBottomOf="@id/agree_tv"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/and_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="the"
+                    app:layout_constraintStart_toEndOf="@id/terms_use_text"
+                    app:layout_constraintTop_toBottomOf="@id/agree_tv"
+                    android:textColor="@color/hint_color" />
+                <TextView
+                    android:id="@+id/policy_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="Privacy Policy"
+                    app:layout_constraintStart_toEndOf="@id/and_tv"
+                    app:layout_constraintTop_toBottomOf="@id/agree_tv"
+                    android:textColor="@color/white" />
+
 
 
 

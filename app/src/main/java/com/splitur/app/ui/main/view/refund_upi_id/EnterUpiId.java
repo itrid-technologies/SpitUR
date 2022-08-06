@@ -1,5 +1,6 @@
 package com.splitur.app.ui.main.view.refund_upi_id;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.splitur.app.R;
 import com.splitur.app.databinding.FragmentEnterUpiIdBinding;
+import com.splitur.app.ui.main.view.WebViewActivity;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.viewmodel.balance_viewmodel.WalletBalanceViewModel;
 
@@ -22,7 +24,9 @@ public class EnterUpiId extends Fragment {
     FragmentEnterUpiIdBinding binding;
     String refundValue;
     WalletBalanceViewModel viewModel;
-
+    Intent webViewIntent;
+    private String urlTerms = "nil";
+    private String urlPrivacy = "nil";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -43,11 +47,29 @@ public class EnterUpiId extends Fragment {
         if (getArguments() != null){
             refundValue = getArguments().getString("Refund_Amount");
         }
+        webViewIntent = new Intent(requireContext(), WebViewActivity.class);
 
         initClickListeners();
     }
 
     private void initClickListeners() {
+
+        binding.termsUseText.setOnClickListener(view -> {
+            if (!urlTerms.equals("nil")) {
+                webViewIntent.putExtra("url", urlTerms);
+                webViewIntent.putExtra("title", "Terms Of Use");
+                startActivity(webViewIntent);
+            }
+        });
+
+        binding.policyText.setOnClickListener(view -> {
+            if (!urlPrivacy.equals("nil")) {
+                webViewIntent.putExtra("url", urlPrivacy);
+                webViewIntent.putExtra("title", "Privacy Policy");
+                startActivity(webViewIntent);
+            }
+        });
+
 
         binding.btnRefund.setOnClickListener(view -> {
 

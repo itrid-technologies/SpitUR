@@ -21,6 +21,7 @@ import com.splitur.app.data.model.group_member.GroupMemberModel;
 import com.splitur.app.data.model.group_score.GroupScoreModel;
 import com.splitur.app.data.model.home_categories.CategoriesModel;
 import com.splitur.app.data.model.join_group.JoinGroupModel;
+import com.splitur.app.data.model.otp_request.AllOtpRequestModel;
 import com.splitur.app.data.model.otp_verification.AuthenticationModel;
 import com.splitur.app.data.model.phone_number.NumberModel;
 import com.splitur.app.data.model.plans.PlanModel;
@@ -262,4 +263,8 @@ public interface ApiService {
 
     @GET("groups/get_account_id")
     Call<ChatWootAccountIdModel> getAccountId();
+
+    @GET("groups/getAllOtpRequests/{group_id}")
+    Call<AllOtpRequestModel> getAllOtpRequests(@Header("Authorization") String token,
+                                               @Path("group_id") String group_id);
 }

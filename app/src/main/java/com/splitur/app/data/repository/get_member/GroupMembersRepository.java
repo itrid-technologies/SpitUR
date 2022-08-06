@@ -14,6 +14,7 @@ import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.data.api.ApiService;
 import com.splitur.app.data.model.basic_model.BasicModel1;
 import com.splitur.app.data.model.group_member.GroupMemberModel;
+import com.splitur.app.data.model.otp_request.AllOtpRequestModel;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
@@ -101,5 +102,41 @@ public class GroupMembersRepository {
         return liveData;
     }
 
+
+    public MutableLiveData<AllOtpRequestModel> getAllRequests(String group_id) {
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String token = preferences.getData(Split.getAppContext(), "userAccessToken");
+
+        final MutableLiveData<AllOtpRequestModel> liveData = new MutableLiveData<>();
+        apiService = ApiManager.getRestApiService();
+        Call<AllOtpRequestModel> call = apiService.getAllOtpRequests("Bearer "+token,group_id);
+        call.enqueue(new Callback<AllOtpRequestModel>() {
+            @Override
+            public void onResponse(@NonNull Call<AllOtpRequestModel> call, @NonNull Response<AllOtpRequestModel> response) {
+                if(response.body()!=null)
+                {
+                    liveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<AllOtpRequestModel> call, @NonNull Throwable t) {
+                Log.e("Avatar Error",t.getMessage());
+            }
+        });
+
+        return liveData;
+    }
 
 }

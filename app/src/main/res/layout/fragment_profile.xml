@@ -103,7 +103,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/background_image"
                 android:text="-"
                 android:textSize="26sp"
-                android:layout_marginStart="36dp"
+                android:layout_marginStart="26dp"
                 style="@style/semiBoldText"/>
 
             <TextView
@@ -395,7 +395,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="13sp"
                     android:textColor="@color/hint_color"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:text="Open a Support Ticket regarding a group"
                     style="@style/normalText"

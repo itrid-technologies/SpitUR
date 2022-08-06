@@ -75,7 +75,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             super(itemView);
             //find views
             name = itemView.findViewById(R.id.payment_name);
-            icon = itemView.findViewById(R.id.payment_icon);
+            icon = itemView.findViewById(R.id.payment_item_icon);
             date = itemView.findViewById(R.id.payment_date);
             amount = itemView.findViewById(R.id.payment_amount);
 

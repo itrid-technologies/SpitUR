@@ -33,7 +33,7 @@
             android:paddingEnd="15dp"
             android:textSize="10sp"
             android:textAlignment="center"
-            android:textColor="#5E6272"
+            android:textColor="#BCBEC8"
             app:layout_constraintTop_toBottomOf="@id/tv_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

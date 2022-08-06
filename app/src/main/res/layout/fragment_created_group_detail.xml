@@ -144,51 +144,79 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/credential_layout"
+                android:text="OTP Requests"
+                android:textSize="20sp"
+                style="@style/semiBoldText"
+                android:layout_marginTop="18dp"
+                android:id="@+id/tv_requests"/>
+
+            <TextView
+                android:id="@+id/otp_request_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_requests"
+                app:layout_constraintStart_toStartOf="@id/tv_requests"
+                android:text="Answer to Otp Requests to keep your Splitur Score High."
+                android:fontFamily="@font/inter_medium"
+                android:textSize="12sp"
+                android:textColor="@color/hint_color"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/credential_layout"
-                app:layout_constraintTop_toBottomOf="@id/credential_layout"
-                app:layout_constraintEnd_toEndOf="@id/credential_layout"
-                android:background="@drawable/terms_bg"
+                app:layout_constraintStart_toStartOf="@id/otp_request_note"
+                app:layout_constraintTop_toBottomOf="@id/otp_request_note"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/blue_bg_strokked_white1"
                 android:paddingTop="12dp"
-                android:visibility="gone"
-                android:paddingStart="20dp"
+                android:paddingStart="23dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="12dp"
-                android:layout_marginTop="19dp"
-                android:id="@+id/check_mesage_layout">
+                android:layout_marginTop="10dp"
+                android:id="@+id/check_request_layout">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/otp_image"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/user"
+                    app:civ_border_color="@color/light_grey"
+                    app:civ_border_width="2dp"
+                    app:civ_circle_background_color="@color/images_placeholder"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <TextView
-                    android:id="@+id/otp_request_mesage"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/inter_medium"
-                    android:gravity="start|center"
-                    android:text="Regularly Check the App for OTP requests. You may loose Members If you do not respond and your Score may also take a Hit. Be Online Until All slots are Full"
-                    android:textColor="@color/yellow"
-                    android:textSize="10sp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/message_icon"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@id/otp_image"
+                    app:layout_constraintTop_toTopOf="@id/otp_image"
+                    app:layout_constraintBottom_toBottomOf="@id/otp_image"
+                    android:text="OTP Requests"
+                    android:textSize="20sp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/hint_color"
+                    android:id="@+id/tv_no_requests"/>
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.41" />
-
-                <ImageView
-                    android:layout_width="57dp"
-                    android:layout_height="52dp"
-                    android:scaleType="fitXY"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/message_iconn"
-                    android:id="@+id/message_icon"/>
-
-
+                    android:id="@+id/request_list"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -196,7 +224,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/check_mesage_layout"
+                app:layout_constraintTop_toBottomOf="@id/check_request_layout"
                 android:text="Share Group Join Link"
                 android:fontFamily="@font/poppins_bold"
                 android:textColor="@color/white"

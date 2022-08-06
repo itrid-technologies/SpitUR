@@ -29,7 +29,9 @@ import java.util.List;
 
 import com.splitur.app.R;
 import com.splitur.app.data.model.all_created_groupx.DataItem;
+import com.splitur.app.data.model.otp_request.AllOtpRequestModel;
 import com.splitur.app.databinding.FragmentCreatedGroupDetailBinding;
+import com.splitur.app.ui.main.adapter.OtpRequestsAdapter;
 import com.splitur.app.ui.main.adapter.group_member.GroupMemberAdapter;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.viewmodel.memebers_viewmodel.GroupMembersViewModel;
@@ -44,6 +46,7 @@ public class CreatedGroupDetail extends Fragment {
 
     View fragmentViewBack;
 
+    List<com.splitur.app.data.model.otp_request.DataItem> otp_request_data;
     GroupMembersViewModel membersViewModel;
     private List<com.splitur.app.data.model.group_member.DataItem> membersList;
 
@@ -84,8 +87,8 @@ public class CreatedGroupDetail extends Fragment {
         membersViewModel.getPlan().observe(getViewLifecycleOwner(), groupMemberModel -> {
             if (groupMemberModel.isSuccess()) {
                 if (groupMemberModel.getData().size() > 0) {
-                    for (int i=0; i<= groupMemberModel.getData().size()-1; i++){
-                        if (groupMemberModel.getData().get(i).getUser() != null){
+                    for (int i = 0; i <= groupMemberModel.getData().size() - 1; i++) {
+                        if (groupMemberModel.getData().get(i).getUser() != null) {
                             membersList.add(groupMemberModel.getData().get(i));
                         }
                     }
@@ -99,8 +102,52 @@ public class CreatedGroupDetail extends Fragment {
             }
         });
 
+        getAllOtpRequests();
+
 
         textWatcher();
+
+    }
+
+    private void getAllOtpRequests() {
+        membersViewModel = new GroupMembersViewModel(String.valueOf(data.getId()), "", "", "", false);
+        membersViewModel.initOtpRequests();
+        membersViewModel.getOtp_data().observe(getViewLifecycleOwner(), allOtpRequestModel -> {
+            if (allOtpRequestModel.isSuccess()) {
+                if (allOtpRequestModel.getData() != null) {
+                    if (allOtpRequestModel.getData().size() > 0) {
+                        binding.otpImage.setVisibility(View.GONE);
+                        binding.tvNoRequests.setVisibility(View.GONE);
+                        binding.requestList.setVisibility(View.VISIBLE);
+                        otp_request_data = new ArrayList<>();
+                        otp_request_data.addAll(allOtpRequestModel.getData());
+                        buildRequestRv(otp_request_data);
+                    } else {
+                        binding.otpImage.setVisibility(View.VISIBLE);
+                        binding.tvNoRequests.setVisibility(View.VISIBLE);
+                        binding.requestList.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
+    }
+
+    private void buildRequestRv(List<com.splitur.app.data.model.otp_request.DataItem> otp_request_data) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false);
+        binding.requestList.setLayoutManager(layoutManager);
+        OtpRequestsAdapter adapter = new OtpRequestsAdapter(Split.getAppContext(), otp_request_data);
+        binding.requestList.setAdapter(adapter);
+
+        adapter.setOnRequestSelectListener(position -> {
+//            bundle.putString("receiverId", String.valueOf(data.getUserId()));
+//            bundle.putString("groupId", String.valueOf(data.getId()));
+            Bundle bundle = new Bundle();
+            bundle.putString("receiverId", otp_request_data.get(position).getUserId());
+            bundle.putString("groupId", otp_request_data.get(position).getGroupId());
+            bundle.putBoolean("ask_otp", false);
+
+            Navigation.findNavController(requireView()).navigate(R.id.action_createdGroupDetail_to_memberChat, bundle);
+        });
 
     }
 
@@ -115,10 +162,10 @@ public class CreatedGroupDetail extends Fragment {
                 binding.edUsername.setEnabled(true);
                 binding.editUsername.setText("Save");
                 binding.editUsername.setTextColor(Color.parseColor("#9F9DF3"));
-            }else if (binding.editUsername.getText().toString().equalsIgnoreCase("Save")){
+            } else if (binding.editUsername.getText().toString().equalsIgnoreCase("Save")) {
                 String updated_value = binding.edUsername.getText().toString().trim();
                 updateEmailData(updated_value);
-            }else {
+            } else {
 
             }
         });
@@ -128,13 +175,12 @@ public class CreatedGroupDetail extends Fragment {
                 binding.edPassword.setEnabled(true);
                 binding.editPass.setText("Save");
                 binding.editPass.setTextColor(Color.parseColor("#9F9DF3"));
-            }else if (binding.editPass.getText().toString().equalsIgnoreCase("Save")){
+            } else if (binding.editPass.getText().toString().equalsIgnoreCase("Save")) {
                 //String updated_value = binding.editPass.getText().toString().trim();
                 String updated_value = binding.edPassword.getText().toString().trim();
                 updatePassData(updated_value);
             }
         });
-
 
 
         binding.privateLayout.setOnClickListener(view -> {
@@ -143,7 +189,7 @@ public class CreatedGroupDetail extends Fragment {
             binding.publicSelected.setVisibility(View.GONE);
 
             binding.privateLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
-            binding.privateSelected.setVisibility (View.VISIBLE);
+            binding.privateSelected.setVisibility(View.VISIBLE);
 
             updateVisibility(false);
         });
@@ -200,7 +246,7 @@ public class CreatedGroupDetail extends Fragment {
                 Toast.makeText(Split.getAppContext(), basicModel.getMessage(), Toast.LENGTH_SHORT).show();
                 binding.edPassword.setEnabled(false);
                 binding.editPass.setText("Edit");
-                binding.editPass .setTextColor(Color.parseColor("#F7931A"));
+                binding.editPass.setTextColor(Color.parseColor("#F7931A"));
             }
         });
     }
@@ -302,7 +348,7 @@ public class CreatedGroupDetail extends Fragment {
 
     private void initClickEvents() {
 
-        binding.profileLink.setText("https://play.google.com/store/apps/details?id=split.com.app&referrer="+Constants.ID);
+        binding.profileLink.setText("https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
 
         binding.cgdToolbar.back.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigateUp();
@@ -361,14 +407,14 @@ public class CreatedGroupDetail extends Fragment {
             Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_chatroom, bundle);
         });
 
-        binding.checkMesageLayout.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("receiverId", String.valueOf(data.getUserId()));
-            bundle.putString("groupId", String.valueOf(data.getId()));
-            bundle.putBoolean("ask_otp", false);
-
-            Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_memberChat, bundle);
-        });
+//        binding.checkMesageLayout.setOnClickListener(view -> {
+//            Bundle bundle = new Bundle();
+//            bundle.putString("receiverId", String.valueOf(data.getUserId()));
+//            bundle.putString("groupId", String.valueOf(data.getId()));
+//            bundle.putBoolean("ask_otp", false);
+//
+//            Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_memberChat, bundle);
+//        });
     }
 
     private void displayRemovedDialogue(String data) {

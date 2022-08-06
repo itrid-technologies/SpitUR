@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 import com.splitur.app.data.model.basic_model.BasicModel;
 import com.splitur.app.data.model.basic_model.BasicModel1;
 import com.splitur.app.data.model.group_member.GroupMemberModel;
+import com.splitur.app.data.model.otp_request.AllOtpRequestModel;
 import com.splitur.app.data.repository.delete_group.DeleteGroupRepository;
 import com.splitur.app.data.repository.get_member.GroupMembersRepository;
 import com.splitur.app.data.repository.update_group.UpdateGroupRepository;
@@ -22,6 +23,7 @@ public class GroupMembersViewModel extends ViewModel {
     private MutableLiveData<BasicModel1> update_pass_data;
     private MutableLiveData<BasicModel> update_visibility;
     private MutableLiveData<BasicModel1> left_data;
+    private MutableLiveData<AllOtpRequestModel> otp_data;
 
 
     private GroupMembersRepository membersRepository;
@@ -69,6 +71,15 @@ public class GroupMembersViewModel extends ViewModel {
         }
         member_remove_data = membersRepository.removeGroupMember(group_id, user_id);
     }
+
+    public void initOtpRequests() {
+        if (this.otp_data != null) {
+
+            return;
+        }
+        otp_data = membersRepository.getAllRequests(group_id);
+    }
+
 
     public void initEmailUpdate() {
         if (this.update_email_data != null) {
@@ -123,5 +134,9 @@ public class GroupMembersViewModel extends ViewModel {
 
     public MutableLiveData<BasicModel1> getLeft_data() {
         return left_data;
+    }
+
+    public MutableLiveData<AllOtpRequestModel> getOtp_data() {
+        return otp_data;
     }
 }

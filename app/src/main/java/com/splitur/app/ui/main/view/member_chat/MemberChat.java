@@ -35,6 +35,7 @@ import com.splitur.app.utils.Split;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 
 public class MemberChat extends Fragment {
@@ -51,6 +52,7 @@ public class MemberChat extends Fragment {
     private CountDownTimer waitTimer;
     long remaining_millis;
     int i = 0;
+    String timeLeftFormatted;
 
 
     private BroadcastReceiver mChatMsgReceiver;
@@ -237,12 +239,18 @@ public class MemberChat extends Fragment {
                 remaining_millis = millisUntilFinished;
                 Log.v("Log_tag", "Tick of Progress" + i + remaining_millis);
                 i++;
+
+                int minutes = (int) (millisUntilFinished / 1000) / 60;
+                int seconds = (int) (millisUntilFinished / 1000) % 60;
+                timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+                binding.tvTimer.setText(timeLeftFormatted);
             }
 
             @Override
             public void onFinish() {
                 i++;
                 binding.askOtp.setEnabled(true);
+                binding.tvTimer.setText("ASK OTP");
                 binding.askOtp.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#246BFD")));
             }
         };

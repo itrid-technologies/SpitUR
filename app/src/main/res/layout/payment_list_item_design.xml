@@ -22,7 +22,7 @@
 
 
         <ImageView
-            android:id="@+id/join_search_icons"
+            android:id="@+id/payment_item_icon"
             android:layout_width="29dp"
             android:layout_height="29dp"
             android:src="@drawable/player_icon"
@@ -36,16 +36,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintStart_toStartOf="@id/payment_icon_bg"
-        app:layout_constraintEnd_toEndOf="@id/payment_icon_bg"
-        app:layout_constraintTop_toTopOf="@id/payment_icon_bg"
-        app:layout_constraintBottom_toBottomOf="@id/payment_icon_bg"
-        android:src="@drawable/player_icon"
-        android:id="@+id/payment_icon"/>
 
     <TextView
         android:layout_width="wrap_content"

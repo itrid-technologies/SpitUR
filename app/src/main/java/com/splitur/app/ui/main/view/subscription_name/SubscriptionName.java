@@ -64,6 +64,8 @@ public class SubscriptionName extends Fragment {
             String title = binding.edGroupTitle.getText().toString().trim();
             if (!title.isEmpty()){
                 Constants.SUB_CAT_TITLE = title;
+                Constants.GROUP_TITLE = Constants.SUB_CAT_TITLE;
+
                 Constants.VALIDATION_TYPE = verification_type;
 
 //                MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());

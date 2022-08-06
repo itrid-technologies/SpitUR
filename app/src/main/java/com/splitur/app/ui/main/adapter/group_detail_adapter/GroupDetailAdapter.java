@@ -54,6 +54,28 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
         dataItem = data.get(position);
         holder.title.setText(dataItem.getTitle());
         if (dataItem.getGroupAdmin() != null) {
+
+            try {
+                int score_value = Integer.valueOf((int) Math.round(dataItem.getGroupAdmin().getSpliturScore()));
+                if ( score_value < 30 ){
+                    holder.user.setBorderColor(Color.parseColor("#FF3D00"));
+                    holder.score.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF3D00")));
+                }else if (score_value < 70 ){
+                    holder.user.setBorderColor(Color.parseColor("#FFD300"));
+                    holder.score.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFD300")));
+                }else if (score_value > 70){
+                    holder.user.setBorderColor(Color.parseColor("#14FF00"));
+                    holder.score.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#14FF00")));
+                }else {
+
+                }
+
+
+            }catch (NullPointerException e){
+                e.getMessage();
+            }
+
+
             holder.score.setText(String.valueOf(Math.round(dataItem.getGroupAdmin().getSpliturScore())));
             if (dataItem.getGroupAdmin().isOnlineOflineStatus()) {
                 holder.online_offline.setText("Online");
