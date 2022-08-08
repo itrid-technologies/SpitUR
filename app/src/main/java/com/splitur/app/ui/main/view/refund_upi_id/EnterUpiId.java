@@ -8,15 +8,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.splitur.app.R;
+import com.splitur.app.data.api.ApiManager;
+import com.splitur.app.data.model.settings.SettingsResponse;
 import com.splitur.app.databinding.FragmentEnterUpiIdBinding;
 import com.splitur.app.ui.main.view.WebViewActivity;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
+import com.splitur.app.ui.main.view.terms_conditions.TermsAndConditions;
 import com.splitur.app.ui.main.viewmodel.balance_viewmodel.WalletBalanceViewModel;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class EnterUpiId extends Fragment {
@@ -48,6 +57,8 @@ public class EnterUpiId extends Fragment {
             refundValue = getArguments().getString("Refund_Amount");
         }
         webViewIntent = new Intent(requireContext(), WebViewActivity.class);
+
+        fetchSettingsFromServer();
 
         initClickListeners();
     }
@@ -88,6 +99,28 @@ public class EnterUpiId extends Fragment {
 
         binding.refundUpiToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
+        });
+    }
+
+    private void fetchSettingsFromServer() {
+        Call<SettingsResponse> call = ApiManager.getRestApiService().getSettings();
+        call.enqueue(new Callback<SettingsResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<SettingsResponse> call, @NonNull Response<SettingsResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().isSuccess()) {
+                        urlTerms = response.body().getData().getTermsAndConditionsUrl();
+                        urlPrivacy = response.body().getData().getPrivayUrl();
+                    } else {
+                        Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SettingsResponse> call, @NonNull Throwable t) {
+                Log.e("ActivityTerms", "onFailure: ", t);
+            }
         });
     }
 }

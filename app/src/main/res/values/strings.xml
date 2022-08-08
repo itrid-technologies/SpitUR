@@ -20,5 +20,7 @@
     <string name="swap">Swap</string>
     <string name="spiltur_score">Spiltur score</string>
     <string name="str_welcome_text">Share,\nSubscribe,\nEarn</string>
+    <string name="term_1">I understand that once i enter the UPI ID above the transaction is complete and there is no way that the transaciton can be reversed and if there is any mistake in the Information provided, Splitur will not be responsible for any losses or damages.</string>
+    <string name="term_2">I verify that the Above UPI Id entered belongs to me and not a third party, If found that the UPI ID belongs to a third party your account may be restricted.</string>
     <!--    <string name="app_link"><![CDATA[https://play.google.com/store/apps/details?id=split.com.app]]></string>-->
 </resources>

@@ -9,11 +9,11 @@
         android:name=".utils.Split"
         android:allowBackup="false"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/final_square_foreground"
+        android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
         android:windowSoftInputMode="adjustResize"
         android:configChanges="orientation|keyboardHidden|screenSize|layoutDirection"
-        android:roundIcon="@mipmap/final_foreground"
+        android:roundIcon="@mipmap/app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Split"
         android:usesCleartextTraffic="true">

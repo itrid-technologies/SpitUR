@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.splitur.app.R;
+import com.splitur.app.ui.main.view.dashboard.Dashboard;
 
 public final class NotificationsUtils {
 
@@ -95,12 +96,13 @@ public final class NotificationsUtils {
         // notification icon
         final int icon = R.mipmap.ic_launcher;
 
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        Intent mainIntent = new Intent(mContext, Dashboard.class);
+        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         final PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         mContext,
                         0,
-                        intent,
+                        mainIntent,
                         PendingIntent.FLAG_CANCEL_CURRENT
                 );
 

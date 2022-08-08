@@ -56,15 +56,18 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
                 if (notiType.equals("new_message")) {
                     //broadcast new msg value to chat screen 1-1
                     Intent intent = new Intent(Configration.CHAT_MSG_NOTIFICATION);
+                    intent.putExtra("type", remoteMessage.getData().get("type"));
                     LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
                 } else if (notiType.equals("new_group_message")) {
                     //broadcast new msg value to group chat
                     Intent intent = new Intent(Configration.GROUP_CHAT_MSG_NOTIFICATION);
+                    intent.putExtra("type", remoteMessage.getData().get("type"));
                     LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
                 }
                 else if (notiType.equals("otp_request")) {
                     //broadcast new msg value to group chat
                     Intent intent = new Intent(Configration.OTP_NOTIFICATION);
+                    intent.putExtra("type", remoteMessage.getData().get("type"));
                     intent.putExtra("sender_id", remoteMessage.getData().get("sender_id"));
                     intent.putExtra("group_id", remoteMessage.getData().get("group_id"));
                     LocalBroadcastManager.getInstance(this).sendBroadcast(intent);

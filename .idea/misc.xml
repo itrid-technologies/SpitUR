@@ -320,8 +320,18 @@
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/mipmap-anydpi-v26/final_round.xml" value="0.305" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/mipmap-anydpi-v26/final_square.xml" value="0.305" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/xml/device_admin.xml" value="0.371875" />
+        <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.2994791666666667" />
         <entry key="app/src/main/res/layout/activity_otp_number.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2994791666666667" />
+        <entry key="app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.2994791666666667" />
+        <entry key="app/src/main/res/layout/custom_create_group_layout.xml" value="0.33887939453125004" />
+        <entry key="app/src/main/res/layout/fragment_enter_upi_id.xml" value="0.2994791666666667" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2994791666666667" />
+        <entry key="app/src/main/res/layout/fragment_join_search.xml" value="0.2994791666666667" />
         <entry key="app/src/main/res/layout/fragment_phone_credentials.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.2994791666666667" />
+        <entry key="app/src/main/res/layout/search_layout.xml" value="0.2994791666666667" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1755" />
       </map>
     </option>
   </component>

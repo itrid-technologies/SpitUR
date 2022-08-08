@@ -1,59 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/customLayout"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/tv_custom"
+        style="@style/normalText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        style="@style/normalText"
-        android:paddingTop="11dp"
-        android:paddingBottom="11dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-                android:text="The services you are trying to find is not yet added, But you can create your own."
         android:gravity="center"
-        android:id="@+id/tv_custom"/>
+        android:paddingStart="20dp"
+        android:paddingTop="11dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="11dp"
+        android:text="The services you are trying to find is not yet added, But you can create your own."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:paddingTop="11dp"
-        android:paddingBottom="11dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/rect_back_with_grey_stroke"
-        app:layout_constraintTop_toBottomOf="@id/tv_custom"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="20dp"
+        android:paddingTop="11dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="11dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_custom">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/icons"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/custom_name"
             android:background="@drawable/round_back"
             android:backgroundTint="@color/icons_bg"
             app:layout_constraintBottom_toBottomOf="@id/users"
-            android:id="@+id/icons">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/custom_name">
 
 
             <ImageView
                 android:id="@+id/search_icons"
                 android:layout_width="29dp"
                 android:layout_height="29dp"
-                android:src="@drawable/custom_icon"
+                android:importantForAccessibility="no"
+                android:padding="3dp"
                 android:scaleType="fitXY"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/others"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -63,10 +64,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_18sdp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Custom Services"
-            android:maxLines="1"
             android:ellipsize="end"
+            android:fontFamily="@font/poppins_medium"
+            android:maxLines="1"
+            android:text="Custom Services"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/custom_create"
@@ -74,112 +75,110 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/users"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/custom_name"
-            app:layout_constraintTop_toBottomOf="@id/custom_name"
             android:layout_marginTop="@dimen/_2sdp"
-            android:id="@+id/users"
-            >
+            app:layout_constraintStart_toStartOf="@id/custom_name"
+            app:layout_constraintTop_toBottomOf="@id/custom_name">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/member1"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:civ_circle_background_color="#404251"
                 android:src="@drawable/member1"
-                android:id="@+id/member1"/>
+                app:civ_circle_background_color="#404251"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
                 android:id="@+id/member2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="-12dp"
+                android:src="@drawable/member2"
+                app:civ_border_color="#2B2D3E"
+                app:civ_border_width="@dimen/_1sdp"
+                app:civ_circle_background_color="#404251"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/member1"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="-12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:civ_circle_background_color="#404251"
-                app:civ_border_color="#2B2D3E"
-                app:civ_border_width="@dimen/_1sdp"
-                android:src="@drawable/member2"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
                 android:id="@+id/member3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="-12dp"
+                android:src="@drawable/member3"
+                app:civ_border_color="#2B2D3E"
+                app:civ_border_width="@dimen/_1sdp"
+                app:civ_circle_background_color="#404251"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/member2"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="-12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:civ_circle_background_color="#404251"
-                app:civ_border_color="#2B2D3E"
-                app:civ_border_width="@dimen/_1sdp"
-                android:src="@drawable/member3"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
                 android:id="@+id/member4"
-                app:layout_constraintStart_toEndOf="@id/member3"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="-12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:civ_circle_background_color="#404251"
-                app:civ_border_color="#2B2D3E"
-                app:civ_border_width="@dimen/_1sdp"
-                android:src="@drawable/member4"/>
-
-            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:id="@+id/member5"
-                app:layout_constraintStart_toEndOf="@id/member4"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="-12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:civ_circle_background_color="#404251"
+                android:src="@drawable/member4"
                 app:civ_border_color="#2B2D3E"
                 app:civ_border_width="@dimen/_1sdp"
-                android:src="#404251"/>
+                app:civ_circle_background_color="#404251"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/member3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/member5"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="-12dp"
+                android:src="#404251"
+                app:civ_border_color="#2B2D3E"
+                app:civ_border_width="@dimen/_1sdp"
+                app:civ_circle_background_color="#404251"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/member4"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/member5"
-                app:layout_constraintEnd_toEndOf="@id/member5"
-                app:layout_constraintTop_toTopOf="@id/member5"
-                app:layout_constraintBottom_toBottomOf="@id/member5"
-                android:textColor="@color/white"
-                android:text="+6"
                 android:fontFamily="@font/inter_regular"
-                android:textSize="8sp"
                 android:gravity="center"
-                android:id="@+id/count"/>
+                android:text="+6"
+                android:textColor="@color/white"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="@id/member5"
+                app:layout_constraintEnd_toEndOf="@id/member5"
+                app:layout_constraintStart_toStartOf="@id/member5"
+                app:layout_constraintTop_toTopOf="@id/member5" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <TextView
+            android:id="@+id/custom_create"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_38sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="Create"
+            android:background="@drawable/rect_blue_bg"
+            android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:padding="10dp"
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
-            android:textSize="12sp"
-            android:fontFamily="@font/poppins_semibold"
+            android:text="Create"
             android:textAllCaps="false"
-            android:background="@drawable/rect_blue_bg"
-            android:padding="10dp"
-            android:id="@+id/custom_create"/>
-
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

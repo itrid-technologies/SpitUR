@@ -31,6 +31,7 @@ import com.google.gson.JsonObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 import com.splitur.app.R;
 import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.databinding.ActivityDashboardBinding;
@@ -138,7 +139,7 @@ public class Dashboard extends AppCompatActivity {
                     String group_id = intent.getStringExtra("group_id");
 
                     // gcm successfully registered
-                    showDialogue(sender_id,group_id);
+                    showDialogue(sender_id, group_id);
                 }
             }
         };
@@ -150,6 +151,14 @@ public class Dashboard extends AppCompatActivity {
             bundle.putString("group_credentials", data.getStringExtra("group_credentials"));
             bundle.putString("group_admin_id", data.getStringExtra("group_admin_id"));
             mNavController.navigate(R.id.joinCheckoutComplete, bundle);
+        }
+
+        if (data.hasExtra("chat_intent")) {
+            Bundle bundle = new Bundle();
+            bundle.putString("receiverId", data.getStringExtra("sender_id"));
+            bundle.putString("groupId", data.getStringExtra("group_id"));
+            bundle.putBoolean("ask_otp", false);
+            mNavController.navigate(R.id.memberChat, bundle);
         }
 
     }
@@ -179,10 +188,10 @@ public class Dashboard extends AppCompatActivity {
         send.setOnClickListener(view1 -> {
             alertDialog.dismiss();
             Bundle bundle = new Bundle();
-            bundle.putString("receiverId",sender_id);
-            bundle.putString("groupId",group_id);
+            bundle.putString("receiverId", sender_id);
+            bundle.putString("groupId", group_id);
             bundle.putBoolean("ask_otp", false);
-            mNavController.navigate(R.id.memberChat,bundle);
+            mNavController.navigate(R.id.memberChat, bundle);
         });
     }
 
@@ -243,8 +252,8 @@ public class Dashboard extends AppCompatActivity {
         UserOnlineStatusViewModel userOnlineStatusViewModel = new UserOnlineStatusViewModel(0);
         userOnlineStatusViewModel.init();
         userOnlineStatusViewModel.getData().observe(this, basicModel -> {
-            if (basicModel.isStatus().equals("true")){
-                Log.e("user online/offline " , basicModel.getMessage());
+            if (basicModel.isStatus().equals("true")) {
+                Log.e("user online/offline ", basicModel.getMessage());
             }
         });
     }

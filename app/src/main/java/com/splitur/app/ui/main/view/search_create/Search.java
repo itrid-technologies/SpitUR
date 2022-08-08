@@ -48,8 +48,6 @@ public class Search extends Fragment {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         Dashboard.hideNav(false);
 
-        binding.customCreateView.customLayout.setVisibility(View.GONE);
-
         binding.cSearchToolbar.title.setText("Search");
         return binding.getRoot();
     }

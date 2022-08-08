@@ -187,6 +187,9 @@
         <action
             android:id="@+id/action_joinSearch_to_groupDetail"
             app:destination="@id/groupDetail" />
+        <action
+            android:id="@+id/action_joinSearch_to_subscriptionName"
+            app:destination="@id/subscriptionName" />
     </fragment>
     <fragment
         android:id="@+id/groupDetail"

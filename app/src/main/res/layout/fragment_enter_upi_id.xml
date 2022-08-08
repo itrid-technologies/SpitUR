@@ -158,7 +158,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="I understand that once i enter the UPI ID above the transaction is complete and there is no way that the transaciton can be reversed and if there is any mistake in the Information provided, Splitur will not be responsible got any losses or damages."
+                        android:text="@string/term_1"
                         android:fontFamily="@font/inter_medium"
                         android:textSize="12sp"
                         android:textColor="@color/white"
@@ -184,7 +184,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="I verify that the Above UPI Id entered belongs to me and not a third party, If found that the UPI ID belongs to a third person your account may be restricted."
+                        android:text="@string/term_2"
                         android:fontFamily="@font/inter_medium"
                         android:textSize="12sp"
                         android:textColor="@color/white"
