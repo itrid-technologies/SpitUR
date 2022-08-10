@@ -41,15 +41,242 @@
         android:textColor="@color/light_grey"
         android:textSize="14sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/section_categories"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="visible"
-        android:layout_marginStart="-10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/section_title"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/subCatList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/section_title">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cat_part1"
+            android:layout_width="@dimen/_78sdp"
+            android:layout_height="@dimen/_92sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:visibility="visible"
+            android:background="@drawable/guarantee_term_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/cat_part1_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_48sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_bold"
+                android:maxLines="2"
+                android:paddingStart="12dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="12dp"
+                android:text="-"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cat_part1_join"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_28sdp"
+                android:background="@drawable/custom_borders"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:paddingTop="@dimen/_4sdp"
+                android:text="Join Now"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cat_part1_container"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/round_back"
+                android:backgroundTint="@color/icons_bg"
+                android:padding="2dp"
+                app:layout_constraintBottom_toTopOf="@id/cat_part1_join"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cat_part1_name">
+
+                <ImageView
+                    android:id="@+id/cat_part1_icons"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="3dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/player_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cat_part2"
+            android:layout_width="@dimen/_78sdp"
+            android:layout_height="@dimen/_92sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:visibility="visible"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/guarantee_term_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cat_part3"
+            app:layout_constraintStart_toEndOf="@id/cat_part1"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/cat_part2_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_48sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_bold"
+                android:maxLines="2"
+                android:paddingStart="12dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="12dp"
+                android:text="-"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/cat_part2_join"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_28sdp"
+                android:background="@drawable/custom_borders"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:paddingTop="@dimen/_4sdp"
+                android:text="Join Now"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cat_part2_container"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/round_back"
+                android:backgroundTint="@color/icons_bg"
+                android:padding="2dp"
+                app:layout_constraintBottom_toTopOf="@id/cat_part2_join"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cat_part2_name">
+
+                <ImageView
+                    android:id="@+id/cat_part2_icons"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="3dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/player_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cat_part3"
+            android:layout_width="@dimen/_78sdp"
+            android:layout_height="@dimen/_92sdp"
+            android:visibility="visible"
+            android:background="@drawable/guarantee_term_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/cat_part3_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_48sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_bold"
+                android:maxLines="2"
+                android:paddingStart="12dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="12dp"
+                android:text="-"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/cat_part3_join"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_28sdp"
+                android:background="@drawable/custom_borders"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:paddingTop="@dimen/_4sdp"
+                android:text="Join Now"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cat_part3_container"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/round_back"
+                android:backgroundTint="@color/icons_bg"
+                android:padding="2dp"
+                app:layout_constraintBottom_toTopOf="@id/cat_part3_join"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cat_part3_name">
+
+                <ImageView
+                    android:id="@+id/cat_part3_icons"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="3dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/player_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
