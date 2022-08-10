@@ -50,6 +50,7 @@ public class OtpRequestsAdapter extends RecyclerView.Adapter<OtpRequestsAdapter.
     public void onBindViewHolder(@NonNull OtpRequestsAdapter.ViewHolder holder, int position) {
 
       DataItem dataItem = data.get(position);
+//      if(dataItem.getGroupId().isEmpty() )
 
     }
 

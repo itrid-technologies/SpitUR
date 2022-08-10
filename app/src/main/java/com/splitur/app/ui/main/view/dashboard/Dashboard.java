@@ -3,6 +3,7 @@ package com.splitur.app.ui.main.view.dashboard;
 import static com.splitur.app.utils.Configration.OTP_NOTIFICATION;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,8 +15,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -61,6 +64,7 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
@@ -203,6 +207,35 @@ public class Dashboard extends AppCompatActivity {
 
         }
     }
+
+
+
+//    public static void showServerDown(String message) {
+//        try {
+//
+//            AlertDialog.Builder dialogBuilder;
+//            AlertDialog alertDialog;
+//            dialogBuilder = new AlertDialog.Builder(dashboard);
+//            dialogBuilder.setCancelable(false);
+//            View layoutView = dashboard.getLayoutInflater().inflate(R.layout.server_down_dialogue, null);
+//
+//            TextView error_msg = layoutView.findViewById(R.id.error_message);
+//            error_msg.setText(message);
+//
+//            dialogBuilder.setView(layoutView);
+//            alertDialog = dialogBuilder.create();
+//            alertDialog.setCanceledOnTouchOutside(false);
+//            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
+//            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//            alertDialog.show();
+//
+//
+//        }catch (NullPointerException e){
+//            Log.e(TAG, e.getMessage());
+//        }
+//
+//    }
+
 
     @Override
     public void onResume() {

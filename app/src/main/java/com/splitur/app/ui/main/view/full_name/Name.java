@@ -34,8 +34,9 @@ public class Name extends AppCompatActivity {
             String name = binding.edName.getText().toString().trim();
             if (!name.isEmpty()){
 
-                Constants.USER_NAME = name;
+                Constants.USER_NAME = Constants.capitalize(name);
 
+                binding.edName.setText(Constants.USER_NAME);
 
                 ActivityUtil.gotoPage(Name.this, UserId.class);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

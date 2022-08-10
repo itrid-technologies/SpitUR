@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
+import com.splitur.app.data.model.OTpModel;
+import com.splitur.app.data.model.SupportActionModel;
 import com.splitur.app.data.model.chat_sender.SenderModel;
 import com.splitur.app.data.model.chatwoot_model.MessagesModel;
 import com.splitur.app.data.model.plans.PlanModel;
@@ -24,6 +26,7 @@ import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.view.member_chat.MemberChatAdapter;
 import com.splitur.app.ui.main.viewmodel.chatwoot_viewmodel.SupportChatViewModel;
 import com.splitur.app.utils.Constants;
+import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
 
 import java.util.ArrayList;
@@ -114,11 +117,18 @@ public class SupportChat extends Fragment {
                     msgs.add(new SenderModel(messagesModel.getPayload().get(i).getContent(),
                             ""
                     ));
-                } else {
+                } else if (messagesModel.getPayload().get(i).getSender().getType().equalsIgnoreCase("assignee")){
                     msgs.add(new SupportReceiverModel(messagesModel.getPayload().get(i).getContent(),
                             "", messagesModel.getMeta().getAssignee()
                     ));
+                }else {
+
                 }
+            }else {
+                if (!messagesModel.getPayload().get(i).getContent().isEmpty()){
+                    msgs.add(new SupportActionModel(messagesModel.getPayload().get(i).getContent(), ""));
+                }
+
             }
         }
         buildRec(msgs);
@@ -126,7 +136,6 @@ public class SupportChat extends Fragment {
 
     private void buildRec(ArrayList<Object> msgs) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
-        layoutManager.setStackFromEnd(true);
         binding.supportChatRv.setLayoutManager(layoutManager);
         adapter = new SupportChatAdapter(Split.getAppContext(), msgs);
         binding.supportChatRv.setAdapter(adapter);
@@ -142,8 +151,11 @@ public class SupportChat extends Fragment {
         binding.sendSupportMessage.setOnClickListener(view -> {
             String query = binding.message.getText().toString();
             if (!query.isEmpty()){
-                if (Constants.conversation_id != 0) {
-                    viewModel = new SupportChatViewModel(Constants.conversation_id, query);
+                MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
+                String conversation_id = sharedPreferences.getData(Split.getAppContext(),"unique_conversation_id");
+
+                if (Integer.parseInt(conversation_id) != 0) {
+                    viewModel = new SupportChatViewModel(Integer.parseInt(conversation_id), query);
                     viewModel.initQuery();
                     viewModel.getSend_data().observe(getViewLifecycleOwner(), sendSupportMessageModel -> {
                         if (sendSupportMessageModel.getSender() != null) {

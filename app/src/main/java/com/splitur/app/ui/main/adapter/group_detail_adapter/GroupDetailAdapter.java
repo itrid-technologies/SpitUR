@@ -61,11 +61,11 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
                     holder.user.setBorderColor(Color.parseColor("#FF3D00"));
                     holder.score.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF3D00")));
                 }else if (score_value < 70 ){
-                    holder.user.setBorderColor(Color.parseColor("#FFD300"));
-                    holder.score.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFD300")));
+                    holder.user.setBorderColor(Color.parseColor("#F7931A"));
+                    holder.score.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F7931A")));
                 }else if (score_value > 70){
-                    holder.user.setBorderColor(Color.parseColor("#14FF00"));
-                    holder.score.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#14FF00")));
+                    holder.user.setBorderColor(Color.parseColor("#0FB900"));
+                    holder.score.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#0FB900")));
                 }else {
 
                 }

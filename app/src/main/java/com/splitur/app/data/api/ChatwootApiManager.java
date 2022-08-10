@@ -6,11 +6,14 @@ import com.google.gson.GsonBuilder;
 import java.security.cert.CertificateException;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -19,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ChatwootApiManager {
 
     //    public static final String CHAT_URL= "https://app.chatwoot.com/";
-    public static final String CHAT_URL = "https://unream.com/";
+    public static final String CHAT_URL = "https://3.109.223.84/";
 
     private static Retrofit retrofit;
 
@@ -38,7 +41,7 @@ public class ChatwootApiManager {
 //                  .baseUrl("https://testserver.glorek.com/api/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
 //                  .addConverterFactory(NullOrEmptyConverterFactory())
-//                    .client(getUnsafeOkHttpClient())
+                    .client(getUnsafeOkHttpClient())
                     .build();
 
             sRestApi = retrofit.create(ChatApiService.class);
@@ -67,8 +70,9 @@ public class ChatwootApiManager {
                     }
             };
 
-            
 
+//            SSLSocketFactory sf = new CustomSSLSocketFactory(trustStore);
+//            sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
             // Install the all-trusting trust manager
             final SSLContext sslContext = SSLContext.getInstance("SSL");
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
@@ -78,13 +82,18 @@ public class ChatwootApiManager {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            builder.readTimeout(15, TimeUnit.SECONDS);
-            builder.connectTimeout(15, TimeUnit.SECONDS);
-            builder.addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BODY));
-            builder.sslSocketFactory(sslSocketFactory);
-            builder.hostnameVerifier((hostname, session) -> true);
-
+            builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
+            builder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+            builder.connectTimeout(6000, TimeUnit.SECONDS)
+                    .readTimeout(6000, TimeUnit.SECONDS)
+                    .writeTimeout(6000, TimeUnit.SECONDS).connectionPool(new ConnectionPool(50, 50000, TimeUnit.SECONDS));
             return builder.build();
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

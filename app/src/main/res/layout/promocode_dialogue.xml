@@ -77,7 +77,7 @@
             android:layout_marginEnd="10sp"
             android:alpha="0.6"
             android:visibility="gone"
-            android:text="You will receive 43 Coins in your account after you join the group."
+            android:text="."
             android:textSize="10sp"
             android:id="@+id/codeView"/>
 

@@ -58,7 +58,7 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
             HomeSectionSubCategoryAdapter adapter = new HomeSectionSubCategoryAdapter(Split.getAppContext(), dataItem.getSubCategory(),dataItem.getId());
             holder.list.setAdapter(adapter);
 
-            int spacingInPixels = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._11sdp);
+//            int spacingInPixels = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._11sdp);
            // holder.list.addItemDecoration(new SpacingItemDecorator(11));
 
             adapter.setOnSubCategorySelectListener(position1 -> {

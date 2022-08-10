@@ -34,9 +34,7 @@ public class CreateConversationRepository {
         String source = preferences.getData(Split.getAppContext(), "source_id");
         String contact = preferences.getData(Split.getAppContext(), "contact_id");
 
-//        String source = Constants.SourceId;
         int inbox = Constants.InboxId;
-//        int contact = Constants.ContactId;
         String api_key = Constants.ChatApiKey;
         int account_id = Constants.AccountId;
 

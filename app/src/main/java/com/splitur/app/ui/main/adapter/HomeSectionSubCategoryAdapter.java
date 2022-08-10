@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,7 +22,7 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
 
     private final List<SubCategoryItem> homeDataItem;
     int subCat_icon;
-    private int width;
+    private int width,height;
     private final Context context;
 
     private ItemClickListener mListener;
@@ -47,7 +48,10 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
 //        height = parent.getMeasuredHeight() / 4;
 //        width = parent.getMeasuredWidth() / 3;
 //        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        params.setMargins(0,0,12,0);
 //        view.setLayoutParams(params);
+
+
         return new HomeSectionSubCategoryAdapter.PopularVH(view, mListener);
     }
 

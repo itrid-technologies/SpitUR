@@ -1,10 +1,23 @@
 package com.splitur.app.utils;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+
+import com.splitur.app.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -12,12 +25,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import com.google.android.material.snackbar.Snackbar;
-import com.splitur.app.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.ResponseBody;
 
@@ -28,7 +37,7 @@ public final class Constants {
 //     public static String URL_BASE = "http://3.110.227.193:4000/";
 
     public static String IMG_PATH = "http://famger.com:4000";
-//        public static String IMG_PATH = "http://3.110.227.193:4000";
+    //        public static String IMG_PATH = "http://3.110.227.193:4000";
     public static String DEVICE_TOKEN = "";
 
 
@@ -299,8 +308,10 @@ public final class Constants {
                 e.printStackTrace();
             }
             try {
-                Toast.makeText(context, jObjError.getString("message"),
-                        Toast.LENGTH_LONG).show();
+//                Dashboard.showServerDown(jObjError.getString("message"));
+
+                Toast.makeText(context, jObjError.getString("message"), Toast.LENGTH_SHORT).show();
+//                showServerDown(jObjError.getString("message"),getActivity(context));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -308,4 +319,86 @@ public final class Constants {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
+
+    public static void getApiError1(Activity context, ResponseBody errorBody) {
+        String data = null;
+        try {
+            data = errorBody.string();
+            JSONObject jObjError = null;
+            try {
+                jObjError = new JSONObject(data);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                Toast.makeText(context, jObjError.getString("message"), Toast.LENGTH_SHORT).show();
+//                showServerDown(jObjError.getString("message"),context);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private static void showServerDown(String message, Activity context) {
+        try {
+
+            AlertDialog.Builder dialogBuilder;
+            AlertDialog alertDialog;
+            dialogBuilder = new AlertDialog.Builder(context);
+            dialogBuilder.setCancelable(false);
+            View layoutView = LayoutInflater.from(context).inflate(R.layout.server_down_dialogue, null);
+
+            TextView error_msg = layoutView.findViewById(R.id.error_message);
+            error_msg.setText(message);
+
+            dialogBuilder.setView(layoutView);
+            alertDialog = dialogBuilder.create();
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            alertDialog.show();
+        } catch (NullPointerException e) {
+            Log.e("400", e.getMessage());
+        }
+
+    }
+
+
+    public static Activity getActivity(Context context) {
+//        if (context == null)
+//        {
+//            return null;
+//        }
+//        else if (context instanceof ContextWrapper)
+//        {
+//            if (context instanceof Activity)
+//            {
+//                return (Activity) context;
+//            }
+//            else
+//            {
+//                return getActivity(((ContextWrapper) context).getBaseContext());
+//            }
+//        }
+//
+//        return null;
+
+        Activity activity = (Activity) context;
+
+        return activity;
+    }
+
+
+    public static String capitalize(String capString) {
+        StringBuffer capBuffer = new StringBuffer();
+        Matcher capMatcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
+        while (capMatcher.find()) {
+            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
+        }
+
+        return capMatcher.appendTail(capBuffer).toString();
+    }
+
 }

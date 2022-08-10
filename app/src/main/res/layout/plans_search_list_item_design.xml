@@ -21,8 +21,8 @@
 
     <TextView
         android:id="@+id/tv_score"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:background="@drawable/round_back"
         android:backgroundTint="@color/yellow"
         android:fontFamily="@font/poppins_semibold"

@@ -162,8 +162,8 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_requests"
                 app:layout_constraintStart_toStartOf="@id/tv_requests"
                 android:text="Answer to Otp Requests to keep your Splitur Score High."
-                android:fontFamily="@font/inter_medium"
-                android:textSize="12sp"
+                android:fontFamily="@font/poppin_regular"
+                android:textSize="11sp"
                 android:textColor="@color/hint_color"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -173,17 +173,17 @@
                 app:layout_constraintTop_toBottomOf="@id/otp_request_note"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@drawable/blue_bg_strokked_white1"
-                android:paddingTop="12dp"
-                android:paddingStart="23dp"
+                android:paddingTop="15dp"
+                android:paddingStart="25dp"
                 android:paddingEnd="20dp"
-                android:paddingBottom="12dp"
+                android:paddingBottom="14dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/check_request_layout">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/otp_image"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
                     android:src="@drawable/user"
                     app:civ_border_color="@color/light_grey"
                     app:civ_border_width="2dp"
@@ -199,11 +199,11 @@
                     app:layout_constraintStart_toEndOf="@id/otp_image"
                     app:layout_constraintTop_toTopOf="@id/otp_image"
                     app:layout_constraintBottom_toBottomOf="@id/otp_image"
-                    android:text="OTP Requests"
+                    android:text="NO OTP Requests"
                     android:textSize="20sp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textColor="@color/hint_color"
+                    android:layout_marginStart="30dp"
+                    android:fontFamily="@font/poppin_regular"
+                    android:textColor="#A6A6A6"
                     android:id="@+id/tv_no_requests"/>
 
 

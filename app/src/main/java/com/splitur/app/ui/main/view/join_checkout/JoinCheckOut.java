@@ -247,6 +247,8 @@ public class JoinCheckOut extends Fragment {
                             status.setText("Expired!");
                             status.setTextColor(Color.parseColor("#FF5722"));
                             status.setVisibility(View.VISIBLE);
+                            message.setText("This Promocode as expired, Please try a diffrent Promocode.");
+                            message.setVisibility(View.VISIBLE);
                         }
                     });
 

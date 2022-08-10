@@ -164,8 +164,8 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/icon_container"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/round_back"
                         android:backgroundTint="@color/icons_bg"
@@ -239,8 +239,8 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/icon_container1"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/round_back"
                         android:backgroundTint="@color/icons_bg"
@@ -312,8 +312,8 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/icon_container2"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/round_back"
                         android:backgroundTint="@color/icons_bg"

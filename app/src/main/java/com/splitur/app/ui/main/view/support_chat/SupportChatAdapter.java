@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.splitur.app.R;
 import com.splitur.app.data.model.OTpModel;
+import com.splitur.app.data.model.SupportActionModel;
 import com.splitur.app.data.model.chat_sender.SenderModel;
 import com.splitur.app.ui.main.view.member_chat.MemberReceiverModel;
 import com.splitur.app.utils.Constants;
@@ -28,6 +29,8 @@ public class SupportChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private static final int OUTGOING_VIEW_TYPE = 1;
     private static final int INCOMING_VIEW_TYPE = 0;
+    private static final int ACTION_VIEW_TYPE = 2;
+
     private final Context context;
     private final ArrayList<Object> mMessageList;
 
@@ -46,6 +49,9 @@ public class SupportChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.receicer_layout, parent, false);
             return new RecieverVH(view);
 
+        }else if (viewType ==2){
+            View viewSender = LayoutInflater.from(parent.getContext()).inflate(R.layout.otp_request_message_layout, parent, false);
+            return new SupportActionVH(viewSender);
         }else {
             View viewSender = LayoutInflater.from(parent.getContext()).inflate(R.layout.sender_layout, parent, false);
             return new SenderVH(viewSender);
@@ -87,6 +93,15 @@ public class SupportChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
                 break;
 
+            case 2:
+                SupportActionVH Avh = (SupportActionVH) holder;
+                SupportActionModel actionModel = (SupportActionModel) mMessageList.get(position);
+                Log.e("TAG", "onBindViewHolder: " + actionModel.getMessage() );
+                Avh.action_msg.setText(actionModel.getMessage());
+
+
+                break;
+
         }
     }
 
@@ -101,6 +116,8 @@ public class SupportChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         if (obj instanceof SupportReceiverModel) {
             return INCOMING_VIEW_TYPE;
+        }else if (obj instanceof SupportActionModel){
+            return ACTION_VIEW_TYPE;
         }else {
             return OUTGOING_VIEW_TYPE;
         }
@@ -134,6 +151,16 @@ public class SupportChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
+    public static class SupportActionVH extends RecyclerView.ViewHolder {
+        private final TextView action_msg;
+        //  private final TextView time;
+
+        public SupportActionVH(@NonNull View itemView) {
+            super(itemView);
+            action_msg = itemView.findViewById(R.id.otp_message);
+            //  time = itemView.findViewById(R.id.tv_date);
+        }
+    }
 
 
 }

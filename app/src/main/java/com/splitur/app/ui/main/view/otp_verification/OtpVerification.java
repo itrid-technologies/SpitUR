@@ -132,7 +132,7 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
 
     private void authenticateUser(String number, String otp) {
 
-        mViewModel = new OtpVerificationViewModel(number, otp);
+        mViewModel = new OtpVerificationViewModel(number, otp,OtpVerification.this);
         mViewModel.init();
         mViewModel.getData().observe(this, authenticationModel -> {
             if (authenticationModel.isSuccess()) {
