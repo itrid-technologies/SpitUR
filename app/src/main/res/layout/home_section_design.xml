@@ -56,7 +56,7 @@
             android:layout_height="@dimen/_92sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:visibility="visible"
-            android:background="@drawable/guarantee_term_bg"
+            android:background="@drawable/home_content_bg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -131,7 +131,7 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:visibility="visible"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:background="@drawable/guarantee_term_bg"
+            android:background="@drawable/home_content_bg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/cat_part3"
             app:layout_constraintStart_toEndOf="@id/cat_part1"
@@ -206,7 +206,7 @@
             android:layout_width="@dimen/_78sdp"
             android:layout_height="@dimen/_92sdp"
             android:visibility="visible"
-            android:background="@drawable/guarantee_term_bg"
+            android:background="@drawable/home_content_bg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">

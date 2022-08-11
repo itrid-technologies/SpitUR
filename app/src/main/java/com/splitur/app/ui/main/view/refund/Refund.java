@@ -92,7 +92,11 @@ public class Refund extends Fragment {
             Toast.makeText(requireContext(), "Not enough balance", Toast.LENGTH_SHORT).show();
             binding.withdrawAmount.setText(String.valueOf(balance_));
             return false;
-        } else {
+        } else if (amountToWithdraw < 100){
+            Toast.makeText(requireContext(), "₹100 required", Toast.LENGTH_SHORT).show();
+            binding.withdrawAmount.setText("0");
+            return false;
+        }else {
             return true;
         }
     }

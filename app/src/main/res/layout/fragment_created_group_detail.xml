@@ -157,13 +157,14 @@
 
             <TextView
                 android:id="@+id/otp_request_note"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tv_requests"
                 app:layout_constraintStart_toStartOf="@id/tv_requests"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:text="Answer to Otp Requests to keep your Splitur Score High."
                 android:fontFamily="@font/poppin_regular"
-                android:textSize="11sp"
+                android:textSize="10sp"
                 android:textColor="@color/hint_color"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -182,8 +183,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/otp_image"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/user"
                     app:civ_border_color="@color/light_grey"
                     app:civ_border_width="2dp"
@@ -201,8 +202,8 @@
                     app:layout_constraintBottom_toBottomOf="@id/otp_image"
                     android:text="NO OTP Requests"
                     android:textSize="20sp"
-                    android:layout_marginStart="30dp"
-                    android:fontFamily="@font/poppin_regular"
+                    android:layout_marginStart="24dp"
+                    android:fontFamily="@font/poppins_semibold"
                     android:textColor="#A6A6A6"
                     android:id="@+id/tv_no_requests"/>
 
@@ -252,7 +253,7 @@
                 android:gravity="start|center"
                 android:background="@drawable/round_back"
                 android:backgroundTint="@color/light_blue"
-                android:drawableLeft="@drawable/ic_userid"
+                android:drawableLeft="@drawable/ic_user"
                 android:id="@+id/profile_link"/>
 
             <ImageView

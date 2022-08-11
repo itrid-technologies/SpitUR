@@ -24,13 +24,11 @@ import com.splitur.app.utils.Constants;
 public class ChooseAvatar extends AppCompatActivity {
 
     ActivityChooseAvatarBinding binding;
-    private final List<String> avatars = new ArrayList<>();
     private final List<Integer> avatars1 = new ArrayList<>();
 
     private int currentIndex = 0;
 
     private AvatarViewModel mViewModel;
-    private List<AvatarItem> avatarList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +102,7 @@ public class ChooseAvatar extends AppCompatActivity {
 
     private void initClickListeners() {
         binding.next.setOnClickListener(view -> {
-            if (currentIndex < avatars.size() - 1) {//in range
+            if (currentIndex < avatars1.size() - 1) {//in range
                 currentIndex++;
                 binding.rvAvatars.smoothScrollToPosition(currentIndex);
             }
@@ -117,9 +115,9 @@ public class ChooseAvatar extends AppCompatActivity {
         });
         binding.btnSet.setOnClickListener(view -> {
             //TODO: here is your selected avatar
-            final String selectedAvatar = avatars.get(currentIndex);
+            final Integer selectedAvatar = avatars1.get(currentIndex);
 
-           Constants.USER_AVATAR = selectedAvatar;
+           Constants.USER_AVATAR = String.valueOf(selectedAvatar);
 
             ActivityUtil.gotoPage(ChooseAvatar.this, TermsAndConditions.class);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

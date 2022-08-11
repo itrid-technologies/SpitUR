@@ -49,7 +49,6 @@ public class CreatedAndJoinedGroups extends Fragment {
         binding = FragmentCreatedAndJoinedGroupsBinding.inflate(inflater, container, false);
         Dashboard.hideNav(false);
         binding.gToolbar.title.setText("Group Created");
-        binding.gToolbar.back.setVisibility(View.GONE);
         return binding.getRoot();
     }
 
@@ -85,6 +84,11 @@ public class CreatedAndJoinedGroups extends Fragment {
         if (getArguments() != null) {
             Dashboard.hideNav(true);
             shouldGoToSupportChat = getArguments().getBoolean("isFromChat");
+            if (shouldGoToSupportChat){
+                binding.gToolbar.back.setVisibility(View.VISIBLE);
+            }else {
+                binding.gToolbar.back.setVisibility(View.GONE);
+            }
             msgs = getArguments().getString("support_chat");
         }
     }

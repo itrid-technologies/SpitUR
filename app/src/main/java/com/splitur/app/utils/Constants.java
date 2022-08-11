@@ -20,8 +20,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -142,37 +147,6 @@ public final class Constants {
         String date;
         String[] date_value = dateAdded.split("T");
         date = date_value[0];
-//        String inputPattern = "yyyy-mm-dd";
-//        String outputPattern = "dd/mm/yyyy";
-//        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
-//        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
-//        Date date1 = null;
-//        String str = null;
-//        String str1 = null;
-////
-//        try{
-//            date1 = inputFormat.parse(date);
-//            str = outputFormat.format(date1);
-//        }catch(ParseException e){
-//            e.printStackTrace();
-//        }
-//
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(date1);
-//        c.add(Calendar.DATE, 30);
-//        date1 = c.getTime();
-//        str = outputFormat.format(date1);
-//
-////        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-////        Calendar cal = Calendar.getInstance();
-////        try{
-////            cal.setTime(sdf.parse(dateAdded));
-////            sdf.format(cal.getTime());
-////        }catch(ParseException e){
-////            e.printStackTrace();
-////        }
-////        cal.add(Calendar.DATE, 1);
-////        String dateAfter = sdf.format(cal.getTime());
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar calendar = Calendar.getInstance();
@@ -200,173 +174,187 @@ public final class Constants {
         return time;
     }
 
-    public static int getCategoryIcon(Context requireContext, int id) {
-        int icon;
-        switch (id) {
-            case 1:
-                icon = R.drawable.movies;
-                break;
-            case 2:
-                icon = R.drawable.cloud;
-                break;
-            case 3:
-                icon = R.drawable.games;
-                break;
-            case 4:
-                icon = R.drawable.music;
-                break;
-            case 5:
-                icon = R.drawable.others;
-                break;
-            case 6:
-                icon = R.drawable.vpn;
-                break;
-            default:
-                icon = R.color.images_placeholder;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String getTime1(String data) {
+
+        String time;
+        String[] date_value = data.split("T");
+        time = date_value[1];
+
+        SimpleDateFormat sdf = new SimpleDateFormat("KK:mm aaa");
+        Calendar calendar = Calendar.getInstance();
+        time = sdf.format(calendar.getTime()).toString();
+        return time;
         }
-        return icon;
-    }
-
-    public static int getAvatarIcon(Context requireContext, int id) {
-        int icon;
-        switch (id) {
-            case 1:
-                icon = R.drawable.avatar_asian_man;
-                break;
-            case 2:
-                icon = R.drawable.avatar_indian_man;
-                break;
-            case 3:
-                icon = R.drawable.avatar_black_man;
-                break;
-            case 4:
-                icon = R.drawable.avatar_western_man;
-                break;
-            case 5:
-                icon = R.drawable.avatar_college_student;
-                break;
-            case 6:
-                icon = R.drawable.avatar_grand_father;
-                break;
-            case 7:
-                icon = R.drawable.avatar_asia_woman;
-                break;
-            case 8:
-                icon = R.drawable.avatar_black_woman;
-                break;
-            case 9:
-                icon = R.drawable.avatar_west_woman;
-                break;
-            case 10:
-                icon = R.drawable.avatar_muslim_woman;
-                break;
-            case 11:
-                icon = R.drawable.avatar_nerd_woman;
-                break;
-            case 12:
-                icon = R.drawable.avatar_grand_mother;
-                break;
-            case 13:
-                icon = R.drawable.avatar_farmer;
-                break;
-            case 14:
-                icon = R.drawable.avatar_teacher;
-                break;
-            case 15:
-                icon = R.drawable.avatar_astronaut;
-                break;
-            case 16:
-                icon = R.drawable.avatar_doctor;
-                break;
-            case 17:
-                icon = R.drawable.avatar_designer;
-                break;
-            case 18:
-                icon = R.drawable.avatar_artist;
-                break;
-            case 19:
-                icon = R.drawable.avatar_professor;
-                break;
-            case 20:
-                icon = R.drawable.avatar_baby;
-                break;
-            default:
-                icon = R.color.images_placeholder;
-        }
-        return icon;
-    }
 
 
-    public static void getApiError(Split context, ResponseBody errorBody) {
-        String data = null;
-        try {
-            data = errorBody.string();
-            JSONObject jObjError = null;
-            try {
-                jObjError = new JSONObject(data);
-            } catch (JSONException e) {
-                e.printStackTrace();
+        public static int getCategoryIcon (Context requireContext,int id){
+            int icon;
+            switch (id) {
+                case 1:
+                    icon = R.drawable.movies;
+                    break;
+                case 2:
+                    icon = R.drawable.cloud;
+                    break;
+                case 3:
+                    icon = R.drawable.games;
+                    break;
+                case 4:
+                    icon = R.drawable.music;
+                    break;
+                case 5:
+                    icon = R.drawable.others;
+                    break;
+                case 6:
+                    icon = R.drawable.vpn;
+                    break;
+                default:
+                    icon = R.color.images_placeholder;
             }
+            return icon;
+        }
+
+        public static int getAvatarIcon (Context requireContext,int id){
+            int icon;
+            switch (id) {
+                case 1:
+                    icon = R.drawable.avatar_asian_man;
+                    break;
+                case 2:
+                    icon = R.drawable.avatar_indian_man;
+                    break;
+                case 3:
+                    icon = R.drawable.avatar_black_man;
+                    break;
+                case 4:
+                    icon = R.drawable.avatar_western_man;
+                    break;
+                case 5:
+                    icon = R.drawable.avatar_college_student;
+                    break;
+                case 6:
+                    icon = R.drawable.avatar_grand_father;
+                    break;
+                case 7:
+                    icon = R.drawable.avatar_asia_woman;
+                    break;
+                case 8:
+                    icon = R.drawable.avatar_black_woman;
+                    break;
+                case 9:
+                    icon = R.drawable.avatar_west_woman;
+                    break;
+                case 10:
+                    icon = R.drawable.avatar_muslim_woman;
+                    break;
+                case 11:
+                    icon = R.drawable.avatar_nerd_woman;
+                    break;
+                case 12:
+                    icon = R.drawable.avatar_grand_mother;
+                    break;
+                case 13:
+                    icon = R.drawable.avatar_farmer;
+                    break;
+                case 14:
+                    icon = R.drawable.avatar_teacher;
+                    break;
+                case 15:
+                    icon = R.drawable.avatar_astronaut;
+                    break;
+                case 16:
+                    icon = R.drawable.avatar_doctor;
+                    break;
+                case 17:
+                    icon = R.drawable.avatar_designer;
+                    break;
+                case 18:
+                    icon = R.drawable.avatar_artist;
+                    break;
+                case 19:
+                    icon = R.drawable.avatar_professor;
+                    break;
+                case 20:
+                    icon = R.drawable.avatar_baby;
+                    break;
+                default:
+                    icon = R.color.images_placeholder;
+            }
+            return icon;
+        }
+
+
+        public static void getApiError (Split context, ResponseBody errorBody){
+            String data = null;
             try {
+                data = errorBody.string();
+                JSONObject jObjError = null;
+                try {
+                    jObjError = new JSONObject(data);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
 //                Dashboard.showServerDown(jObjError.getString("message"));
 
-                Toast.makeText(context, jObjError.getString("message"), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, jObjError.getString("message"), Toast.LENGTH_SHORT).show();
 //                showServerDown(jObjError.getString("message"),getActivity(context));
-            } catch (JSONException e) {
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
-        } catch (IOException e) {
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-    }
 
-    public static void getApiError1(Activity context, ResponseBody errorBody) {
-        String data = null;
-        try {
-            data = errorBody.string();
-            JSONObject jObjError = null;
+        public static void getApiError1 (Activity context, ResponseBody errorBody){
+            String data = null;
             try {
-                jObjError = new JSONObject(data);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                Toast.makeText(context, jObjError.getString("message"), Toast.LENGTH_SHORT).show();
+                data = errorBody.string();
+                JSONObject jObjError = null;
+                try {
+                    jObjError = new JSONObject(data);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    Toast.makeText(context, jObjError.getString("message"), Toast.LENGTH_SHORT).show();
 //                showServerDown(jObjError.getString("message"),context);
-            } catch (JSONException e) {
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             }
-        } catch (IOException e) {
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private static void showServerDown(String message, Activity context) {
-        try {
-
-            AlertDialog.Builder dialogBuilder;
-            AlertDialog alertDialog;
-            dialogBuilder = new AlertDialog.Builder(context);
-            dialogBuilder.setCancelable(false);
-            View layoutView = LayoutInflater.from(context).inflate(R.layout.server_down_dialogue, null);
-
-            TextView error_msg = layoutView.findViewById(R.id.error_message);
-            error_msg.setText(message);
-
-            dialogBuilder.setView(layoutView);
-            alertDialog = dialogBuilder.create();
-            alertDialog.setCanceledOnTouchOutside(false);
-            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            alertDialog.show();
-        } catch (NullPointerException e) {
-            Log.e("400", e.getMessage());
         }
 
-    }
+        private static void showServerDown (String message, Activity context){
+            try {
+
+                AlertDialog.Builder dialogBuilder;
+                AlertDialog alertDialog;
+                dialogBuilder = new AlertDialog.Builder(context);
+                dialogBuilder.setCancelable(false);
+                View layoutView = LayoutInflater.from(context).inflate(R.layout.server_down_dialogue, null);
+
+                TextView error_msg = layoutView.findViewById(R.id.error_message);
+                error_msg.setText(message);
+
+                dialogBuilder.setView(layoutView);
+                alertDialog = dialogBuilder.create();
+                alertDialog.setCanceledOnTouchOutside(false);
+                alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog.show();
+            } catch (NullPointerException e) {
+                Log.e("400", e.getMessage());
+            }
+
+        }
 
 
-    public static Activity getActivity(Context context) {
+        public static Activity getActivity (Context context){
 //        if (context == null)
 //        {
 //            return null;
@@ -385,20 +373,20 @@ public final class Constants {
 //
 //        return null;
 
-        Activity activity = (Activity) context;
+            Activity activity = (Activity) context;
 
-        return activity;
-    }
-
-
-    public static String capitalize(String capString) {
-        StringBuffer capBuffer = new StringBuffer();
-        Matcher capMatcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
-        while (capMatcher.find()) {
-            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
+            return activity;
         }
 
-        return capMatcher.appendTail(capBuffer).toString();
-    }
 
-}
+        public static String capitalize (String capString){
+            StringBuffer capBuffer = new StringBuffer();
+            Matcher capMatcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
+            while (capMatcher.find()) {
+                capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
+            }
+
+            return capMatcher.appendTail(capBuffer).toString();
+        }
+
+    }

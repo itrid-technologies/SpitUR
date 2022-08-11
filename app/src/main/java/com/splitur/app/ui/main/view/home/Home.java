@@ -415,7 +415,8 @@ public class Home extends Fragment {
 
     private void setProfileData() {
 
-        binding.name.setText(Constants.USER_NAME);
+        String name  = Constants.USER_NAME;
+        binding.name.setText(Constants.capitalize(name));
         String avatar = Constants.USER_AVATAR;
         binding.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
 //        Glide.with(Split.getAppContext()).load(Constants.USER_AVATAR).placeholder(R.color.images_placeholder).into(binding.userImage);

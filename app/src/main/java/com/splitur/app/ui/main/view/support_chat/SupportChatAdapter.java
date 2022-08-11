@@ -70,6 +70,8 @@ public class SupportChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 //                String[] rSentTime = data.getTime().split("T");
 //                rStime = rSentTime[1].substring(0, Math.min(rSentTime[1].length(), 5));
 //                rvh.time.setText(rStime);
+//                rvh.time.setText(Constants.getTime1(data.getTime()));
+
 
                 if (data.getReceiver() != null){
                     ((RecieverVH) holder).imageView.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(data.getReceiver().getAvatarUrl())));

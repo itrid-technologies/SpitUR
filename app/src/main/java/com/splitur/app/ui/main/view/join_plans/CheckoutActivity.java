@@ -63,8 +63,7 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
         // set your id as below
 //        checkout.setKeyID("rzp_test_Z5X8uEVBddGyA5");
         checkout.setKeyID(secret_key);
-
-
+        
 
         // initialize json object
         JSONObject object = new JSONObject();

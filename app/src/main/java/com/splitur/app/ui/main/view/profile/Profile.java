@@ -96,13 +96,13 @@ public class Profile extends Fragment {
     }
 
     private void setProfileData() {
-        String user_name = Constants.USER_NAME;
+        String name  = Constants.USER_NAME;
+        binding.name.setText(Constants.capitalize(name));
         String avatar = Constants.USER_AVATAR;
-        binding.name.setText(user_name);
         binding.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
 //        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.color.images_placeholder).into(binding.userImage);
 
-//        ReferralViewModel referralViewModel = new ReferralViewModel(Constants.ID,"2");
+//        ReferralViewModel referralViewModel = new ReferralViewModel(Constantsr.ID,"2");
 //        referralViewModel.init();
 //        referralViewModel.getData().observe(getViewLifecycleOwner(),basicModel -> {
 //            if (basicModel.isStatus().equalsIgnoreCase("true")){

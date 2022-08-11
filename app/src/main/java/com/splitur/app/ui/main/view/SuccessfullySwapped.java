@@ -31,6 +31,7 @@ public class SuccessfullySwapped extends Fragment {
         binding = FragmentSucessfullySwapedBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
         binding.swapSuccessToolbar.title.setText("Swap");
+        binding.swapSuccessToolbar.back.setVisibility(View.GONE);
 
         return binding.getRoot();
     }
@@ -41,10 +42,6 @@ public class SuccessfullySwapped extends Fragment {
 
         Glide.with(Split.getAppContext()).load(R.drawable.success_gif).into(binding.swapSuccessGif);
 
-
-        binding.swapSuccessToolbar.back.setOnClickListener(view1 -> {
-            Navigation.findNavController(view1).navigateUp();
-        });
 
         binding.btnprofile.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigate(R.id.profile2);

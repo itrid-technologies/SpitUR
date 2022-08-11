@@ -42,10 +42,10 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
         Log.e(TAG, "From: " + remoteMessage.getFrom());
 
         // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
-            Log.e(TAG, "Notification Body: " + remoteMessage.getNotification().getBody());
-            handleNotification(remoteMessage.getNotification().getBody(), remoteMessage.getData().get("type"));
-        }
+//        if (remoteMessage.getNotification() != null) {
+//            Log.e(TAG, "Notification Body: " + remoteMessage.getNotification().getBody());
+//            handleNotification(remoteMessage.getNotification().getBody(), remoteMessage.getData().get("type"));
+//        }
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
@@ -58,6 +58,10 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
                     Intent intent = new Intent(Configration.CHAT_MSG_NOTIFICATION);
                     intent.putExtra("type", remoteMessage.getData().get("type"));
                     LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
+                    Log.e(TAG, "Notification Body: " + remoteMessage.getNotification().getBody());
+                    handleNotification(remoteMessage.getNotification().getBody(), remoteMessage.getData().get("type"));
+
                 } else if (notiType.equals("new_group_message")) {
                     //broadcast new msg value to group chat
                     Intent intent = new Intent(Configration.GROUP_CHAT_MSG_NOTIFICATION);
@@ -71,6 +75,12 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
                     intent.putExtra("sender_id", remoteMessage.getData().get("sender_id"));
                     intent.putExtra("group_id", remoteMessage.getData().get("group_id"));
                     LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
+                    Log.e(TAG, "Notification Body: " + remoteMessage.getNotification().getBody());
+                    handleNotification(remoteMessage.getNotification().getBody(), remoteMessage.getData().get("type"));
+
+                }else {
+
                 }
             }
 
@@ -91,9 +101,9 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
             pushNotification.putExtra("type", logoutType);
             LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
 
-            // play notification sound
-//            NotificationsUtils NotificationsUtils = new NotificationsUtils(getApplicationContext());
-//            NotificationsUtils.playNotificationSound();
+//             play notification sound
+            NotificationsUtils NotificationsUtils = new NotificationsUtils(getApplicationContext());
+            NotificationsUtils.playNotificationSound();
         } else {
             // If the app is in background, firebase itself handles the notification
             Log.e(TAG, "handleNotification: app is in background");

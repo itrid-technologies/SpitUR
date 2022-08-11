@@ -228,13 +228,13 @@ public class JoinCheckOut extends Fragment {
                                 status.setText("Success!");
                                 status.setTextColor(Color.parseColor("#0FB900"));
                                 status.setVisibility(View.VISIBLE);
-                                message.setText("You got " + amount_of_discount + "Coins discount");
+                                message.setText("You will receive " + amount_of_discount + " Coins in your account after you join the group.");
                                 message.setVisibility(View.VISIBLE);
 
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        applyPromo();
+                                        applyPromo(amount_of_discount);
                                         alertDialog.dismiss();
                                     }
                                 }, 3000); //Timer is in ms here.
@@ -321,9 +321,9 @@ public class JoinCheckOut extends Fragment {
         });
     }
 
-    private void applyPromo() {
+    private void applyPromo(int amount_of_discount) {
         if (isPromoValid) {
-            binding.tvDiscount.setText("Discount by using " + code);
+            binding.tvDiscount.setText(amount_of_discount + "% OFF (" + code + ")");
             binding.discountAmount.setText("- " + discount_amount);
             binding.tvCredit.setVisibility(View.VISIBLE);
             binding.tvDiscount.setVisibility(View.VISIBLE);
@@ -391,7 +391,7 @@ public class JoinCheckOut extends Fragment {
         View layoutView = getLayoutInflater().inflate(R.layout.already_member_dialogue, null);
         Button home = (Button) layoutView.findViewById(R.id.back_home);
         TextView reason = (TextView) layoutView.findViewById(R.id.tv_reason);
-        reason.setText(message);
+        reason.setText("You cannot join a group you have created");
 
 
         dialogBuilder.setView(layoutView);

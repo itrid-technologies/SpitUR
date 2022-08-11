@@ -13,12 +13,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:padding="5dp"
+        android:padding="8dp"
         android:background="@drawable/sub_cat_bg"
 >
         <ImageView
-            android:layout_width="29dp"
-            android:layout_height="29dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:src="@drawable/song_icon"
             app:layout_constraintStart_toStartOf="parent"

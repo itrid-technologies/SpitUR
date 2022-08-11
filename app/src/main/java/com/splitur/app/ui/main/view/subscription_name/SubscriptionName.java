@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.splitur.app.R;
 import com.splitur.app.databinding.FragmentSubscriptionNameBinding;
@@ -21,6 +22,7 @@ public class SubscriptionName extends Fragment {
 
     FragmentSubscriptionNameBinding binding;
     String verification_type = "auth";
+    boolean isOtp , isAuth;
 
 
     @Override
@@ -49,29 +51,44 @@ public class SubscriptionName extends Fragment {
 //        });
 
         binding.otpLayout.setOnClickListener(view -> {
-            verification_type = "otp";
-            binding.otpLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
-            binding.authLayout.setBackgroundResource(R.drawable.unselected_bg);
+            if (binding.otpLayout.getTag().equals("unselected")){
+                binding.otpLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
+                binding.otpLayout.setTag("selected");
+                isOtp = true;
+            }else {
+                binding.otpLayout.setBackgroundResource(R.drawable.unselected_bg);
+                binding.otpLayout.setTag("unselected");
+                isOtp = false;
+
+            }
         });
 
         binding.authLayout.setOnClickListener(view -> {
-            verification_type = "auth";
-            binding.otpLayout.setBackgroundResource(R.drawable.unselected_bg);
-            binding.authLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
+            if (binding.authLayout.getTag().equals("unselected")){
+                binding.authLayout.setBackgroundResource(R.drawable.selected_gradient_stroke);
+                binding.authLayout.setTag("selected");
+                isAuth = true;
+
+            }else {
+                binding.authLayout.setBackgroundResource(R.drawable.unselected_bg);
+                binding.authLayout.setTag("unselected");
+                isAuth = false;
+            }
         });
 
         binding.BTNSUBNEXT.setOnClickListener(view -> {
             String title = binding.edGroupTitle.getText().toString().trim();
             if (!title.isEmpty()){
-                Constants.SUB_CAT_TITLE = title;
-                Constants.GROUP_TITLE = Constants.SUB_CAT_TITLE;
+                verification_type = checkVerificationType();
+                if (!verification_type.isEmpty()){
 
-                Constants.VALIDATION_TYPE = verification_type;
-
-//                MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
-//                preferences.saveData(Split.getAppContext(),"GROUP_TITLE",title);
-//                preferences.saveData(Split.getAppContext(),"VALIDATION_TYPE",verification_type);
-                Navigation.findNavController(view).navigate(R.id.action_subscriptionName_to_slots);
+                    Constants.SUB_CAT_TITLE = title;
+                    Constants.GROUP_TITLE = Constants.SUB_CAT_TITLE;
+                    Constants.VALIDATION_TYPE = verification_type;
+                    Navigation.findNavController(view).navigate(R.id.action_subscriptionName_to_slots);
+                }
+            }else {
+                Toast.makeText(requireContext(), "Group Title Required", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -79,5 +96,19 @@ public class SubscriptionName extends Fragment {
             Navigation.findNavController(view).navigateUp();
         });
 
+    }
+
+    private String checkVerificationType() {
+        if (isAuth && isOtp){
+            verification_type = "auth/otp";
+        }else if (isAuth){
+            verification_type = "auth";
+        }else if (isOtp){
+            verification_type = "otp";
+        }else {
+            Toast.makeText(requireContext(), "Verification selection is required", Toast.LENGTH_SHORT).show();
+            verification_type = "";
+        }
+        return verification_type;
     }
 }

@@ -79,7 +79,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
             holder.score.setText(String.valueOf(Math.round(dataItem.getGroupAdmin().getSpliturScore())));
             if (dataItem.getGroupAdmin().isOnlineOflineStatus()) {
                 holder.online_offline.setText("Online");
-                holder.online_icon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#14FF00")));
+                holder.online_icon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#0FB900")));
             } else {
                 holder.online_offline.setText("Offline");
                 holder.online_icon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
@@ -131,7 +131,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
 
         //jitni slots hn utny hi members hoty hn
         for (int i = 0; i < slotsCount; i++) {
-            if (i == memberCount) {
+            if (i == memberCount + 1) {
                 switch (i) {
                     case 1:
                         holder.one.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));

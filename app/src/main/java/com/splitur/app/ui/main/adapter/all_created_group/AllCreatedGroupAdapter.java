@@ -46,7 +46,7 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
     public void onBindViewHolder(@NonNull AllCreatedGroupAdapter.GroupVH holder, int position) {
         DataItem current_item =  dataItems.get(position);
         holder.name.setText(current_item.getGroupTitle());
-        int space = current_item.getSlots() - current_item.getTotalMembers();
+        int space = current_item.getSlots() - current_item.getTotalMembers()-1;
 
         if (space == 0){
             holder.slots.setText("Full");

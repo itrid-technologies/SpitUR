@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -91,26 +92,43 @@ public class Cost extends Fragment {
         binding.btnNext.setOnClickListener(view -> {
             String cost = binding.costValue.getText().toString().trim();
 
-            if (!cost.isEmpty()) {
+            final boolean isValid = validateCost(cost);
+
+            if (isValid) {
                 Constants.COST = cost;
                 String validation_type = Constants.VALIDATION_TYPE;
-                if (validation_type.isEmpty()) {
-                    Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
-                } else {
+                Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
 
-                    Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
-
-//                    if (validation_type.equalsIgnoreCase("otp")) {
+//                    Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
+//                } else {
 //
-//                        Navigation.findNavController(view).navigate(R.id.action_cost2_to_phoneCredentials);
-//                    } else {
-//                        Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
-//                    }
-                }
-            } else {
-                binding.errorMessage.setVisibility(View.VISIBLE);
-                binding.errorMessage.setText("Enter cost per member");
+//                    Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
+//
+////                    if (validation_type.equalsIgnoreCase("otp")) {
+////
+////                        Navigation.findNavController(view).navigate(R.id.action_cost2_to_phoneCredentials);
+////                    } else {
+////                        Navigation.findNavController(view).navigate(R.id.action_cost2_to_credentials2);
+////                    }
             }
         });
+    }
+
+    private boolean validateCost(String cost) {
+        if (cost.isEmpty()) {
+            cost = "0";
+        }
+        final int costPerMember = Integer.parseInt(cost);
+        if (costPerMember == 0) {
+            binding.errorMessage.setVisibility(View.VISIBLE);
+            binding.errorMessage.setText("Enter cost per member");
+            return false;
+        } else if (costPerMember < 20) {
+            binding.errorMessage.setText("20 required");
+            binding.errorMessage.setVisibility(View.VISIBLE);
+            return false;
+        }else {
+            return true;
+        }
     }
 }
