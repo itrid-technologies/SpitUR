@@ -44,6 +44,7 @@ public class SupportChat extends Fragment {
     SupportChatAdapter adapter;
     String msgList;
     MessagesModel messagesModel;
+    String groupID;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -64,6 +65,7 @@ public class SupportChat extends Fragment {
 
         if (getArguments() != null){
             String data  = getArguments().getString("support_chat");
+            groupID = getArguments().getString("chat_group_id");
             Gson gson = new Gson();
             messagesModel = gson.fromJson(data, MessagesModel.class);
             if (messagesModel.getPayload() != null){
@@ -114,15 +116,15 @@ public class SupportChat extends Fragment {
             if (messagesModel.getPayload().get(i).getSender() != null) {
 
                 if (messagesModel.getPayload().get(i).getSender().getType().equalsIgnoreCase("user")) {
+
+                    msgs.add(new SupportReceiverModel(messagesModel.getPayload().get(i).getContent(),
+                            messagesModel.getPayload().get(i).getCreatedAt(), messagesModel.getMeta().getAssignee()
+                    ));
+
+                }else {
                     msgs.add(new SenderModel(messagesModel.getPayload().get(i).getContent(),
                             ""
                     ));
-                } else if (messagesModel.getPayload().get(i).getSender().getType().equalsIgnoreCase("assignee")){
-                    msgs.add(new SupportReceiverModel(messagesModel.getPayload().get(i).getContent(),
-                            "", messagesModel.getMeta().getAssignee()
-                    ));
-                }else {
-
                 }
             }else {
                 if (!messagesModel.getPayload().get(i).getContent().isEmpty()){
@@ -151,6 +153,26 @@ public class SupportChat extends Fragment {
         binding.sendSupportMessage.setOnClickListener(view -> {
             String query = binding.message.getText().toString();
             if (!query.isEmpty()){
+
+                if (msgs.size() == 0) {
+                    MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
+                    String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
+
+                    if (Integer.parseInt(conversation_id) != 0) {
+                        String query1 = "My GroupID is " + groupID;
+                        viewModel = new SupportChatViewModel(Integer.parseInt(conversation_id), query1);
+                        viewModel.initQuery();
+                        viewModel.getSend_data().observe(getViewLifecycleOwner(), sendSupportMessageModel -> {
+                            if (sendSupportMessageModel.getSender() != null) {
+                                msgs.add(new SenderModel(sendSupportMessageModel.getContent(), Calendar.getInstance().getTime().toString()));
+                                binding.supportChatRv.scrollToPosition(msgs.size() - 1);
+                                adapter.notifyItemInserted(msgs.size() - 1);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                    }
+                }
+
                 MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
                 String conversation_id = sharedPreferences.getData(Split.getAppContext(),"unique_conversation_id");
 

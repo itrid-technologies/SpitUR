@@ -1,9 +1,11 @@
 package com.splitur.app.ui.main.view.home;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,7 +20,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -233,13 +237,24 @@ public class Home extends Fragment {
 //                                for (int i = 0; i <= avatarList.size() - 1; i++) {
 //                                    avatars.add(avatarList.get(i).getUrl());
 //                                }
-                                avatarRv.setHasFixedSize(true);
-                                avatarRv.setHorizontalScrollBarEnabled(false);
-                                avatarRv.setLayoutManager(new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false));
-                                RecyclerView.OnItemTouchListener disabler = new Profile.RecyclerViewDisabler();
-                                avatarRv.addOnItemTouchListener(disabler);// scrolling disable
-                                avatarRv.setAdapter(new AdapterAvatars(getActivity(), avatars1));
-//                            });
+                            avatarRv.setHasFixedSize(true);
+//                            avatarRv.setHorizontalScrollBarEnabled(false);
+                            avatarRv.setLayoutManager(new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false));
+                            SnapHelper snapHelper = new PagerSnapHelper();
+                            snapHelper.attachToRecyclerView(avatarRv);
+                            avatarRv.setAdapter(new AdapterAvatars(getActivity(), avatars1));
+
+                            image.setOnTouchListener(new View.OnTouchListener() {
+                                @SuppressLint("ClickableViewAccessibility")
+                                @Override
+                                public boolean onTouch(View view, MotionEvent motionEvent) {
+                                    avatarRv.setVisibility(View.VISIBLE);
+                                    image.setVisibility(View.GONE);
+                                    return false;
+                                }
+
+
+                            });
 
 
                             logout.setOnClickListener(view1 -> {
@@ -431,6 +446,7 @@ public class Home extends Fragment {
         binding.homeSections.setAdapter(adapter);
         adapter.setOnViewAllClickListener(position -> {
             Bundle bundle = new Bundle();
+            bundle.putString("category_name", String.valueOf(homeDataItems.get(position).getTitle()));
             bundle.putString("CurrentCatId", String.valueOf(homeDataItems.get(position).getId()));
             Navigation.findNavController(requireView()).navigate(R.id.action_home2_to_joinSearch, bundle);
         });

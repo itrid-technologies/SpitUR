@@ -1,16 +1,16 @@
 package com.splitur.app.ui.main.view.group_details;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,6 +37,14 @@ public class GroupDetail extends Fragment {
     String sub_categoryId, title;
 
 
+    int pastVisiblesItems, visibleItemCount, totalItemCount;
+    LinearLayoutManager mLayoutManager;
+    ProgressDialog progressDialog;
+    int currentPage;
+    Parcelable recyclerViewState;
+    private boolean flag_loading;
+    int nextPage = 1;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,6 +58,7 @@ public class GroupDetail extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mLayoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         if (getArguments() != null) {
             sub_categoryId = getArguments().getString("join_sub_cat_id");
             title = getArguments().getString("join_sub_cat_title");
@@ -59,10 +68,10 @@ public class GroupDetail extends Fragment {
 
         binding.joinPlanSearchView.removeLetter.setOnClickListener(view1 -> {
             binding.joinPlanSearchView.searchField.setText("");
-            getAllDataBack();
+            getAllDataBack(nextPage);
         });
 
-        getAllDataBack();
+        getAllDataBack(nextPage);
 
 
         searchTextWatcher();
@@ -70,6 +79,46 @@ public class GroupDetail extends Fragment {
         binding.groupDetailToolbar.back.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigateUp();
         });
+
+        binding.groupsDetailList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                recyclerViewState = binding.groupsDetailList.getLayoutManager().onSaveInstanceState(); // save recycleView state
+
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                    visibleItemCount = mLayoutManager.getChildCount();
+                    totalItemCount = mLayoutManager.getItemCount();
+                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+
+                    if (flag_loading) {
+
+                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount ) {
+                            flag_loading = false;
+                            nextPage++;
+//                            getAllDataBack(nextPage);
+
+                            // Do pagination.. i.e. fetch new data
+//                            new Handler().postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//
+////                                    showProgressView();
+//                                }
+//                            }, 1000);
+
+                        }
+                    }
+
+            }
+        });
+
+
 
     }
 
@@ -81,7 +130,7 @@ public class GroupDetail extends Fragment {
                     binding.joinPlanSearchView.removeLetter.setVisibility(View.VISIBLE);
 //                    binding.planSearchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, ContextCompat.getDrawable(Split.getAppContext(), R.drawable.ic_close), null);
                 } else {
-                    getAllDataBack();
+                    getAllDataBack(1);
                     binding.joinPlanSearchView.removeLetter.setVisibility(View.GONE);
 
 //                    binding.planSearchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, null, null);
@@ -114,8 +163,8 @@ public class GroupDetail extends Fragment {
         });
     }
 
-    private void getAllDataBack() {
-        viewModel = new GroupDetailViewModel(sub_categoryId, "");
+    private void getAllDataBack(int page) {
+        viewModel = new GroupDetailViewModel(sub_categoryId, "",String.valueOf(page));
         viewModel.init();
         viewModel.getDetailData().observe(getViewLifecycleOwner(), groupDetailModel -> {
             detailItems = new ArrayList<>();
@@ -124,12 +173,15 @@ public class GroupDetail extends Fragment {
 
                 if (groupDetailModel.getData() != null) {
 
+                    flag_loading = true;
+                    
                     if (groupDetailModel.getData().size() > 0) {
                         detailItems.addAll(groupDetailModel.getData());
                         buildRec(detailItems);
                     }
                 } else {
 
+                    flag_loading = false;
                 }
             }
         });
@@ -137,7 +189,7 @@ public class GroupDetail extends Fragment {
 
     private void getSearchedDataByGroupId(String intData) {
         detailItems = new ArrayList<>();
-        viewModel = new GroupDetailViewModel(sub_categoryId, intData);
+        viewModel = new GroupDetailViewModel(sub_categoryId, intData,"");
         viewModel.initSearchByGroupId();
         viewModel.getDetailSearchDataByGroupId().observe(getViewLifecycleOwner(), groupDetailModel -> {
             if (groupDetailModel.isSuccess()) {
@@ -153,7 +205,7 @@ public class GroupDetail extends Fragment {
 
     private void getSearchedDataByUserId(String originalString) {
         detailItems = new ArrayList<>();
-        viewModel = new GroupDetailViewModel(sub_categoryId, originalString);
+        viewModel = new GroupDetailViewModel(sub_categoryId, originalString,"");
         viewModel.initSearchByUserId();
         viewModel.getDetailSearchDataByUserId().observe(getViewLifecycleOwner(), groupDetailModel -> {
             if (groupDetailModel.isSuccess()) {
@@ -169,7 +221,7 @@ public class GroupDetail extends Fragment {
 
     private void getSearchedData(String data) {
         detailItems = new ArrayList<>();
-        viewModel = new GroupDetailViewModel(sub_categoryId, data);
+        viewModel = new GroupDetailViewModel(sub_categoryId, data,"");
         viewModel.initSearch();
         viewModel.getDetailSearchData().observe(getViewLifecycleOwner(), groupDetailModel -> {
             if (groupDetailModel.isSuccess()) {
@@ -187,9 +239,10 @@ public class GroupDetail extends Fragment {
         binding.groupsDetailList.setVisibility(View.VISIBLE);
         binding.searchGroupsDetailList.setVisibility(View.GONE);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
-        binding.groupsDetailList.setLayoutManager(layoutManager);
+        binding.groupsDetailList.setLayoutManager(mLayoutManager);
         GroupDetailAdapter adapter = new GroupDetailAdapter(requireContext(), detailItems);
+        adapter.notifyDataSetChanged();
+        binding.groupsDetailList.getLayoutManager().onRestoreInstanceState(recyclerViewState);
         binding.groupsDetailList.setAdapter(adapter);
 
         adapter.setOnGroupSelectListener(position -> {
@@ -206,8 +259,7 @@ public class GroupDetail extends Fragment {
         binding.searchGroupsDetailList.setVisibility(View.VISIBLE);
         binding.groupsDetailList.setVisibility(View.GONE);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
-        binding.searchGroupsDetailList.setLayoutManager(layoutManager);
+        binding.searchGroupsDetailList.setLayoutManager(mLayoutManager);
         GroupDetailAdapter adapter = new GroupDetailAdapter(Split.getAppContext(), detailItems);
         binding.searchGroupsDetailList.setAdapter(adapter);
         adapter.setOnGroupSelectListener(position -> {

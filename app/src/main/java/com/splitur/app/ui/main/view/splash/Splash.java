@@ -1,12 +1,17 @@
 package com.splitur.app.ui.main.view.splash;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.splitur.app.R;
 import com.splitur.app.databinding.ActivitySplashBinding;
@@ -57,9 +62,21 @@ public class Splash extends AppCompatActivity {
 
         binding.getStartedBtn.setOnClickListener(view -> {
 
-            navToOtpScreen();
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 100);
+            } else {
+                navToOtpScreen();
+            }
         });
 
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        navToOtpScreen();
     }
 
 

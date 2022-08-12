@@ -18,18 +18,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.InputStream;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.splitur.app.R;
 import com.splitur.app.data.model.contact.ContactModel;
 import com.splitur.app.data.model.friend_list.DataItem;
 import com.splitur.app.databinding.FragmentFriendsBinding;
@@ -37,6 +30,10 @@ import com.splitur.app.ui.main.adapter.friend.FriendListAdapter;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.viewmodel.friend_viewmodel.FriendViewModel;
 import com.splitur.app.utils.Split;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Friends extends Fragment {
@@ -63,29 +60,57 @@ public class Friends extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        friend_data = new ArrayList<>();
         contactList = new ArrayList<>();
+        binding.loadingView.setVisibility(View.VISIBLE);
         initClickListeners();
-      //  contactList.addAll(getContacts(requireContext()));
-        if (contactList.size() > 0){
-//            buildFriendRv1(contactList);
-            binding.noFriendLayout.setVisibility(View.VISIBLE);
-            binding.friendsList.setVisibility(View.GONE);
-        }else {
-            binding.noFriendLayout.setVisibility(View.VISIBLE);
-            binding.friendsList.setVisibility(View.GONE);
+        contactList.addAll(getContacts(requireContext()));
+        if (contactList.size() > 0) {
+
+            getUsers();
         }
 
     }
 
-    private void buildFriendRv1(List<ContactModel> contactList) {
+    private void getUsers() {
+        viewModel = new FriendViewModel();
+        viewModel.init();
+        viewModel.getData().observe(getViewLifecycleOwner(), friendListModel -> {
+            if(friendListModel.isSuccess()) {
 
-        binding.noFriendLayout.setVisibility(View.GONE);
-        binding.friendsList.setVisibility(View.VISIBLE);
+                binding.noFriendLayout.setVisibility(View.GONE);
+                binding.friendsList.setVisibility(View.VISIBLE);
+
+                if (friendListModel.getData() !=null) {
+                    if (friendListModel.getData().size() > 0) {
+                        for (int i = 0; i < friendListModel.getData().size() - 1; i++) {
+                            DataItem dataItem = friendListModel.getData().get(i);
+                            String number = dataItem.getPhone();
+                            for (int j = 0; j < contactList.size() - 1; j++) {
+                                if (contactList.get(j).mobileNumber.equalsIgnoreCase(number)) {
+                                    if (!friend_data.contains(dataItem)) {
+                                        friend_data.add(dataItem);
+                                    }
+                                }
+                            }
+                        }
+                        buildFriendRv1(friend_data);
+                    }
+                }
+            }else {
+            binding.noFriendLayout.setVisibility(View.VISIBLE);
+            binding.friendsList.setVisibility(View.GONE);
+        }
+        });
+    }
+
+    private void buildFriendRv1(List<DataItem> contactList) {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.friendsList.setLayoutManager(layoutManager);
         FriendListAdapter adapter = new FriendListAdapter(Split.getAppContext(), contactList);
         binding.friendsList.setAdapter(adapter);
+        binding.loadingView.setVisibility(View.GONE);
     }
 
     private void initClickListeners() {
@@ -123,22 +148,20 @@ public class Friends extends Fragment {
         });
     }
 
-    private void getSearchedData(String data) {
-        viewModel = new FriendViewModel(data);
-        viewModel.init();
-        viewModel.getData().observe(getViewLifecycleOwner(), friendListModel -> {
-            if (friendListModel.isStatus()) {
-                friend_data = new ArrayList<>();
-                if (friendListModel.getData().size() > 0) {
-                    friend_data.addAll(friendListModel.getData());
-                  //  buildFriendRv(friend_data);
-                } else {
-                    binding.noFriendLayout.setVisibility(View.VISIBLE);
-                    binding.friendsList.setVisibility(View.GONE);
-                }
-            }
-        });
-    }
+//    private void getSearchedData(String data) {
+//
+//        if (friendListModel.isStatus()) {
+//            friend_data = new ArrayList<>();
+//            if (friendListModel.getData().size() > 0) {
+//                friend_data.addAll(friendListModel.getData());
+//                //  buildFriendRv(friend_data);
+//            } else {
+//                binding.noFriendLayout.setVisibility(View.VISIBLE);
+//                binding.friendsList.setVisibility(View.GONE);
+//            }
+//        }
+//    });
+
 //
 //    private void buildFriendRv(List<DataItem> friend_data) {
 //
@@ -150,8 +173,6 @@ public class Friends extends Fragment {
 //        FriendListAdapter adapter = new FriendListAdapter(Split.getAppContext(), friend_data);
 //        binding.friendsList.setAdapter(adapter);
 //    }
-
-
 
 
     @SuppressLint("Range")
@@ -192,4 +213,5 @@ public class Friends extends Fragment {
         }
         return list;
     }
+
 }

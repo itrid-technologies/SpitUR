@@ -35,7 +35,8 @@ public class JoinSearch extends Fragment {
     FragmentJoinSearchBinding binding;
     private SearchCreateViewModel mViewModel;
     private List<DataItem> list;
-    String catID = null;
+    String catID = null ;
+    String category = null;
     private List<DataItem> popularSubCategoryList;
 
 
@@ -56,9 +57,17 @@ public class JoinSearch extends Fragment {
 
         if (getArguments() != null) {
             catID = getArguments().getString("CurrentCatId");
+            category = getArguments().getString("category_name");
         }
 
+//        if (category.isEmpty()){
+//            getPopularSubCategory();
+//        }else {
+//            getSearchedData(category);
+//        }
+
         getPopularSubCategory();
+
 
         initClickListeners();
         searchTextWatcher();

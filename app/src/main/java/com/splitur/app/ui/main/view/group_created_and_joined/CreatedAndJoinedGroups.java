@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.splitur.app.R;
+import com.splitur.app.data.api.ChatwootApiManager;
 import com.splitur.app.data.model.all_created_groupx.DataItem;
 import com.splitur.app.data.model.all_joined_groups.AllJoinedGroupModel;
+import com.splitur.app.data.model.chatwoot_model.MessagesModel;
 import com.splitur.app.databinding.FragmentCreatedAndJoinedGroupsBinding;
 import com.splitur.app.ui.main.adapter.all_created_group.AllCreatedGroupAdapter;
 import com.splitur.app.ui.main.adapter.all_joined_group.AllJoinedGroupAdapter;
@@ -26,10 +29,16 @@ import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.view.join_plans.CheckoutActivity;
 import com.splitur.app.ui.main.viewmodel.CheckOutViewModel;
 import com.splitur.app.ui.main.viewmodel.created_and_joined.CreatedAndJoinedViewModel;
+import com.splitur.app.utils.Constants;
+import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CreatedAndJoinedGroups extends Fragment {
@@ -89,7 +98,10 @@ public class CreatedAndJoinedGroups extends Fragment {
             }else {
                 binding.gToolbar.back.setVisibility(View.GONE);
             }
-            msgs = getArguments().getString("support_chat");
+
+            binding.gToolbar.back.setOnClickListener(view1 -> {
+                Navigation.findNavController(view1).navigateUp();
+            });
         }
     }
 
@@ -101,6 +113,8 @@ public class CreatedAndJoinedGroups extends Fragment {
 
 
             binding.gToolbar.title.setText("Group Joined");
+
+
 
             binding.joinedButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#246BFD")));
             binding.joinedButton.setTextColor(Color.WHITE);
@@ -233,9 +247,8 @@ public class CreatedAndJoinedGroups extends Fragment {
         adapter.setOnCreatedGroupClickListener(position -> {
             //shouldGoToSupportChat
             if (shouldGoToSupportChat) {
-                Bundle bundle = new Bundle();
-                bundle.putString("support_chat", msgs);
-                Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_supportChat, bundle);
+
+                getSupportMessages(data.get(position).getId());;
 
             } else {//old flow
                 Gson gson = new Gson();
@@ -243,6 +256,54 @@ public class CreatedAndJoinedGroups extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("createdGroupData", createdGroupData);
                 Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_createdGroupDetail, bundle);
+            }
+        });
+    }
+
+    private void getSupportMessages(int id) {
+        binding.loadingView.setVisibility(View.VISIBLE);
+        MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
+        String conversation_id = sharedPreferences.getData(Split.getAppContext(),"unique_conversation_id");
+
+        int account_id = Constants.AccountId;
+        Call<MessagesModel> call = ChatwootApiManager.getRestApiService().getSupportChat(Constants.ChatApiKey,account_id, Integer.parseInt(conversation_id));
+        call.enqueue(new Callback<MessagesModel>() {
+            @Override
+            public void onResponse(@NonNull Call<MessagesModel> call, @NonNull Response<MessagesModel> response) {
+                if (response.body() != null) {
+                    MessagesModel messagesModel = response.body();
+                    if (messagesModel.getPayload() != null) {
+                        binding.loadingView.setVisibility(View.GONE);
+
+                        Gson gson = new Gson();
+                        msgs = gson.toJson(messagesModel);
+                        if (Constants.AccountId != 0) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("support_chat", msgs);
+                            bundle.putString("chat_group_id", String.valueOf(id));
+
+                            Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_supportChat, bundle);
+
+                        }
+                    }
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<MessagesModel> call, @NonNull Throwable t) {
+                Log.e("Support Chat Error", t.getMessage());
+                binding.loadingView.setVisibility(View.GONE);
+
             }
         });
     }

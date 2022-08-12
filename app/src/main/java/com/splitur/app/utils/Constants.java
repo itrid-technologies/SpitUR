@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -29,7 +30,9 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -389,4 +392,18 @@ public final class Constants {
             return capMatcher.appendTail(capBuffer).toString();
         }
 
+    public static String getDateFromMiliSeconds(int time) {
+        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+        calendar.setTimeInMillis(time * 1000L);
+        String date = android.text.format.DateFormat.format("KK:mm aaa", calendar).toString();
+
+        return date;
     }
+
+    public static String getDateFromMiliSeconds1(int milliSeconds) {
+        DateFormat formatter = new SimpleDateFormat("HH:mm aaa");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliSeconds);
+        return formatter.format(calendar.getTime());
+    }
+}

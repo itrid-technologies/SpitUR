@@ -78,6 +78,9 @@ public class Credentials extends Fragment {
         });
 
         binding.btnNext.setOnClickListener(view -> {
+
+            binding.loadingView.setVisibility(View.VISIBLE);
+
             String email = binding.edUsername.getText().toString().trim();
             String password = binding.edPassword.getText().toString().trim();
 
@@ -116,6 +119,7 @@ public class Credentials extends Fragment {
                     createGroupViewModel.getData().observe(getViewLifecycleOwner(), createGroupModel -> {
                         if (createGroupModel.isSuccess()) {
                             Toast.makeText(requireContext(), createGroupModel.getMessage(), Toast.LENGTH_SHORT).show();
+                            binding.loadingView.setVisibility(View.GONE);
 
                             if (createGroupModel.getData() != null) {
 
@@ -163,6 +167,7 @@ public class Credentials extends Fragment {
         viewModel.initAuth();
         viewModel.getData().observe(getViewLifecycleOwner(), createGroupModel -> {
             if (createGroupModel.getMessage().equalsIgnoreCase("Custom Group created successfully")) {
+                binding.loadingView.setVisibility(View.GONE);
                 Navigation.findNavController(requireView()).navigate(R.id.action_credentials2_to_otpSuccess);
             }
         });

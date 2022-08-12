@@ -108,7 +108,7 @@ public class SearchCreateRepository {
         apiService = ApiManager.getRestApiService();
 
 
-        Call<PopularSubCategoryModel> call = apiService.getSubCatByCatId(token, data, object);
+        Call<PopularSubCategoryModel> call = apiService.getSubCatByCatId("Bearer "+token, data, object);
 
         call.enqueue(new Callback<PopularSubCategoryModel>() {
             @Override

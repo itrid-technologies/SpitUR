@@ -10,10 +10,8 @@ public class FriendViewModel extends ViewModel {
 
     private MutableLiveData<FriendListModel> data;
     private FriendsRepository friendsRepository;
-    String query;
 
-    public FriendViewModel(String search_data) {
-        this.query = search_data;
+    public FriendViewModel() {
         friendsRepository = new FriendsRepository();
     }
 
@@ -23,7 +21,7 @@ public class FriendViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        data = friendsRepository.getFriendList(query);
+        data = friendsRepository.getFriendList();
     }
 
     public MutableLiveData<FriendListModel> getData() {

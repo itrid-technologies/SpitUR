@@ -114,7 +114,7 @@ public class GroupInformation extends Fragment {
             }
 
 
-            binding.tvDaysValue.setText(Constants.getDate1(dataItem.getGroupAdmin().getCreatedAt()));
+            binding.tvDaysValue.setText(Constants.getDate1(dataItem.getCreatedAt()));
 
             String coin = String.valueOf(dataItem.getCostPerMember());
             double coinFloat = Double.parseDouble(coin);

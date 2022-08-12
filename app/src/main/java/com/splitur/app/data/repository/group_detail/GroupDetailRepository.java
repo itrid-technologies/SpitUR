@@ -26,7 +26,7 @@ public class GroupDetailRepository {
     public GroupDetailRepository() {
     }
 
-    public MutableLiveData<GroupDetailModel> getDetails(String id) {
+    public MutableLiveData<GroupDetailModel> getDetails(String id , String page_no) {
 
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
@@ -40,7 +40,7 @@ public class GroupDetailRepository {
 
         final MutableLiveData<GroupDetailModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<GroupDetailModel> call = apiService.getGroupDetails("Bearer " + token,object);
+        Call<GroupDetailModel> call = apiService.getGroupDetails("Bearer " + token,Integer.parseInt(page_no),object);
         call.enqueue(new Callback<GroupDetailModel>() {
             @Override
             public void onResponse(@NonNull Call<GroupDetailModel> call, @NonNull Response<GroupDetailModel> response) {

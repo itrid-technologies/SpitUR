@@ -4,8 +4,22 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+<!--    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />-->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+
+    <queries>
+        <!-- List of apps which you want to support for Intent pay -->
+        <package android:name="com.google.android.apps.nbu.paisa.user" />
+        <package android:name="com.phonepe.app"/>
+        <!--
+             Specific intents you query for,
+             eg: for a custom share UI
+        -->
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+        </intent>
+    </queries>
 
     <application
         android:name=".utils.Split"
@@ -82,6 +96,8 @@
         <receiver
             android:name=".utils.MyReceiver"
             android:exported="true">
+
+
 
         </receiver>
 <!--        <receiver-->

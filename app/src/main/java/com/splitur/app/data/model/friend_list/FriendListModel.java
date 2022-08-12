@@ -8,21 +8,21 @@ public class FriendListModel{
 	@SerializedName("data")
 	private List<DataItem> data;
 
+	@SerializedName("success")
+	private boolean success;
+
 	@SerializedName("message")
 	private String message;
-
-	@SerializedName("status")
-	private boolean status;
 
 	public List<DataItem> getData(){
 		return data;
 	}
 
-	public String getMessage(){
-		return message;
+	public boolean isSuccess(){
+		return success;
 	}
 
-	public boolean isStatus(){
-		return status;
+	public String getMessage(){
+		return message;
 	}
 }

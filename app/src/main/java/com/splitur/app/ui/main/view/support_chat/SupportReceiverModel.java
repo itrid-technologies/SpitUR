@@ -5,11 +5,11 @@ import com.splitur.app.data.model.receive_message.GroupSender;
 
 public class SupportReceiverModel {
     private String Message;
-    private String time;
+    private int time;
     private Assignee receiver;
 
 
-    public SupportReceiverModel(String message, String time, Assignee receiver1) {
+    public SupportReceiverModel(String message, int time, Assignee receiver1) {
         Message = message;
         this.time = time;
         this.receiver = receiver1;
@@ -19,7 +19,7 @@ public class SupportReceiverModel {
         return Message;
     }
 
-    public String getTime() {
+    public int getTime() {
         return time;
     }
 

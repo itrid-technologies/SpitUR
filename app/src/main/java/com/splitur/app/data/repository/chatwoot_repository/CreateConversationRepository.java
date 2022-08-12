@@ -133,8 +133,8 @@ public class CreateConversationRepository {
 
         JsonObject object = new JsonObject();
         object.addProperty("content", message);
-        object.addProperty("message_type","outgoing");
-        object.addProperty("private",true);
+        object.addProperty("message_type","incoming");
+        object.addProperty("private",false);
 
         Call<SendSupportMessageModel> call = apiService.sendSupportQuery(api_key,conversation_id,account_id,object);
         call.enqueue(new Callback<SendSupportMessageModel>() {

@@ -21,14 +21,14 @@ public class FriendsRepository {
     public FriendsRepository() {
     }
 
-    public MutableLiveData<FriendListModel> getFriendList(String data) {
+    public MutableLiveData<FriendListModel> getFriendList() {
 
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
         final MutableLiveData<FriendListModel> BasicModelMutableLiveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<FriendListModel> call = apiService.friendList("Bearer "+token, data);
+        Call<FriendListModel> call = apiService.friendList("Bearer "+token);
         call.enqueue(new Callback<FriendListModel>() {
             @Override
             public void onResponse(@NonNull Call<FriendListModel> call, @NonNull Response<FriendListModel> response) {

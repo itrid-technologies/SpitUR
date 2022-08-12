@@ -94,12 +94,10 @@ public class ContactUs extends Fragment {
                             } else if (response.code() == 400) {
                                 if (response.errorBody() != null) {
                                     Constants.getApiError(Split.getAppContext(), response.errorBody());
-
                                 }
                             } else if (response.code() == 500) {
                                 if (response.errorBody() != null) {
                                     Constants.getApiError(Split.getAppContext(), response.errorBody());
-
                                 }
                             }
                         }
@@ -120,50 +118,6 @@ public class ContactUs extends Fragment {
     }
 
 
-    private void getSupportChat(int conversation_id) {
-        int account_id = Constants.AccountId;
-        Call<MessagesModel> call = ChatwootApiManager.getRestApiService().getSupportChat(Constants.ChatApiKey,account_id, conversation_id);
-        call.enqueue(new Callback<MessagesModel>() {
-            @Override
-            public void onResponse(@NonNull Call<MessagesModel> call, @NonNull Response<MessagesModel> response) {
-                if (response.body() != null) {
-                    MessagesModel messagesModel = response.body();
-                    if (messagesModel.getPayload() != null) {
-
-                        Gson gson = new Gson();
-                        msgs = gson.toJson(messagesModel);
-                        if (Constants.AccountId != 0) {
-                            Bundle bundle = new Bundle();
-                            bundle.putString("support_chat", msgs);
-
-//                          Navigation.findNavController(requireView()).navigate(R.id.action_contactUs_to_supportChat,bundle);
-                            //to group created
-                            bundle.putBoolean("isFromChat", true);
-                            Navigation.findNavController(requireView()).navigate(R.id.action_contactUs_to_createdAndJoinedGroups, bundle);
-
-                        }
-                    }
-                } else if (response.code() == 400) {
-                    if (response.errorBody() != null) {
-                        Constants.getApiError(Split.getAppContext(),response.errorBody());
-
-                    }
-                } else if (response.code() == 500) {
-                    if (response.errorBody() != null) {
-                        Constants.getApiError(Split.getAppContext(),response.errorBody());
-
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<MessagesModel> call, @NonNull Throwable t) {
-                Log.e("Support Chat Error", t.getMessage());
-            }
-        });
-
-
-    }
 
     private void initClickListeners() {
 
@@ -189,7 +143,10 @@ public class ContactUs extends Fragment {
             String conversation_id = sharedPreferences.getData(Split.getAppContext(),"unique_conversation_id");
             if (!conversation_id.isEmpty()) {
                 if (Integer.parseInt(conversation_id) != 0) {
-                    getSupportChat(Integer.parseInt(conversation_id));
+
+                    Bundle bundle = new Bundle();
+                    bundle.putBoolean("isFromChat", true);
+                    Navigation.findNavController(requireView()).navigate(R.id.action_contactUs_to_createdAndJoinedGroups, bundle);
                 }
             }
         });

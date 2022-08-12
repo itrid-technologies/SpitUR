@@ -1,5 +1,6 @@
 package com.splitur.app.ui.main.view.profile;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,13 +14,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -68,12 +72,24 @@ public class Profile extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         Dashboard.hideNav(false);
+
+
+
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(requireActivity(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+                count = 0;
+            }
+        });
 
         setProfileData();
 
@@ -102,7 +118,7 @@ public class Profile extends Fragment {
         binding.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
 //        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.color.images_placeholder).into(binding.userImage);
 
-//        ReferralViewModel referralViewModel = new ReferralViewModel(Constantsr.ID,"2");
+//        ReferralViewModel referralViewModel = new ReferralViewModel(Constants.ID,"2");
 //        referralViewModel.init();
 //        referralViewModel.getData().observe(getViewLifecycleOwner(),basicModel -> {
 //            if (basicModel.isStatus().equalsIgnoreCase("true")){
@@ -111,6 +127,7 @@ public class Profile extends Fragment {
 //        });
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void initClickListeners() {
 
         binding.friendsLayout.setOnClickListener(view -> {
@@ -256,14 +273,22 @@ public class Profile extends Fragment {
 //                                    avatars.add(avatarList.get(i).getUrl());
 //                                }
                             avatarRv.setHasFixedSize(true);
-                            avatarRv.setHorizontalScrollBarEnabled(false);
+//                            avatarRv.setHorizontalScrollBarEnabled(false);
                             avatarRv.setLayoutManager(new LinearLayoutManager(Split.getAppContext(), RecyclerView.HORIZONTAL, false));
-                            RecyclerView.OnItemTouchListener disabler = new Profile.RecyclerViewDisabler();
-                            avatarRv.addOnItemTouchListener(disabler);// scrolling disable
+                            SnapHelper snapHelper = new PagerSnapHelper();
+                            snapHelper.attachToRecyclerView(avatarRv);
                             avatarRv.setAdapter(new AdapterAvatars(getActivity(), avatars1));
-//                            });
 
-
+                            image.setOnTouchListener(new View.OnTouchListener() {
+                                @SuppressLint("ClickableViewAccessibility")
+                                @Override
+                                public boolean onTouch(View view, MotionEvent motionEvent) {
+                                    avatarRv.setVisibility(View.VISIBLE);
+                                    image.setVisibility(View.GONE);
+                                    return false;
+                                }
+                            });
+                            
 
                             logout.setOnClickListener(view1 -> {
 
@@ -446,4 +471,6 @@ public class Profile extends Fragment {
 
 
     }
+
+
 }

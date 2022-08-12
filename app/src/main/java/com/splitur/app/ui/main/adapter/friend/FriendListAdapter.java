@@ -16,15 +16,17 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import com.splitur.app.R;
 import com.splitur.app.data.model.contact.ContactModel;
+import com.splitur.app.data.model.friend_list.DataItem;
+import com.splitur.app.utils.Constants;
 
 public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.ViewHolder> {
 
-    private final List<ContactModel> list;
+    private final List<DataItem> list;
     private final Context context;
 
 
 
-    public FriendListAdapter(Context appContext, List<ContactModel> friend_data) {
+    public FriendListAdapter(Context appContext, List<DataItem> friend_data) {
         this.context = appContext;
         this.list = friend_data;
     }
@@ -39,17 +41,14 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull FriendListAdapter.ViewHolder holder, int position) {
-        ContactModel current_item = list.get(position);
+        DataItem current_item = list.get(position);
 
-        if (current_item.photoURI != null) {
-            Glide.with(context)
-                    .load(current_item.photoURI)
-                    .placeholder(R.color.images_placeholder)
-                    .into(holder.image);
+        if (current_item.getAvatar() != null) {
+            holder.image.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(current_item.getAvatar())));
         }
 
-        holder.name.setText(current_item.name);
-        holder.userid.setText(current_item.mobileNumber);
+        holder.name.setText(current_item.getName());
+        holder.userid.setText("@" + current_item.getUserId());
     }
 
     @Override

@@ -109,8 +109,9 @@ public interface ApiService {
     @GET("groups/get_home_content")
     Call<HomeContentModel> getHomeData(@Header("Authorization") String token);
 
-    @POST("groups/group_details_search")
+    @POST("groups/group_details_search/{page_no}")
     Call<GroupDetailModel> getGroupDetails(@Header("Authorization") String token,
+                                           @Path("page_no") int page_no,
                                            @Body JsonObject object);
 
     @POST("groups/group_details_search")
@@ -187,10 +188,8 @@ public interface ApiService {
     @GET("faqs/getFAQs")
     Call<FaqListModel> faqList(@Header("Authorization") String token);
 
-    @GET("users/getfriendlist/{data}")
-    Call<FriendListModel> friendList(@Header("Authorization") String token,
-                                     @Path("data") String data);
-
+    @GET("groups/get_all_users")
+    Call<FriendListModel> friendList(@Header("Authorization") String token);
 
     @POST("groups/add_split_score")
     Call<BasicModel> sendScore(@Header("Authorization") String token,

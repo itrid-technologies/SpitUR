@@ -19,11 +19,15 @@ import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+
 import com.splitur.app.R;
 import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
+
+import java.util.List;
 
 public class CheckoutActivity extends AppCompatActivity implements PaymentResultListener {
 
@@ -31,7 +35,7 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
     private String groupData;
     String secret_key = "";
     private String groupAdminId = "";
-
+//    Razorpay razorpay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,10 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
             }
         }
 
+
+
+
+
     }
 
     private void checkout(String subscriptionId) {
@@ -63,13 +71,17 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
         // set your id as below
 //        checkout.setKeyID("rzp_test_Z5X8uEVBddGyA5");
         checkout.setKeyID(secret_key);
-        
+      // razorpay = new Razorpay(CheckoutActivity.this, secret_key);
+
 
         // initialize json object
         JSONObject object = new JSONObject();
         try {
             object.put("subscription_id", subscriptionId);
             object.put("recurring", 1);
+            object.put("method", "card");  //Method specific fields
+            object.put("_[flow]", "intent");
+            object.put("upi_app_package_name", "com.google.android.apps.nbu.paisa.user");
 
             // open razorpay to checkout activity
             checkout.open(CheckoutActivity.this, object);
@@ -129,5 +141,13 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
     @Override
     public void onPaymentError(int i, String s) {
         Log.e("onPaymentError", s);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+//        if(razorpay!=null){
+//            razorpay.onActivityResult(requestCode,resultCode,data);
+//        }
     }
 }
