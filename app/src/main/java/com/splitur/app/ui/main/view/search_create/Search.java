@@ -5,23 +5,17 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.splitur.app.R;
 import com.splitur.app.data.model.popular_subcategory.DataItem;
 import com.splitur.app.databinding.FragmentSearchBinding;
@@ -31,6 +25,9 @@ import com.splitur.app.ui.main.viewmodel.plan_viewmodel.PlansViewModel;
 import com.splitur.app.ui.main.viewmodel.search_create_viewmodel.SearchCreateViewModel;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.Split;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Search extends Fragment {
@@ -68,7 +65,7 @@ public class Search extends Fragment {
         binding.customCreateView.customLayout.setVisibility(View.GONE);
 
         mViewModel = new SearchCreateViewModel(null, null);
-        mViewModel.init();
+        mViewModel.initPopularById();
         mViewModel.getPopularCategoryData().observe(getViewLifecycleOwner(), popularSubCategoryModel -> {
             if (popularSubCategoryModel.isSuccess()) {
                 if (popularSubCategoryModel.getData().size() > 0) {

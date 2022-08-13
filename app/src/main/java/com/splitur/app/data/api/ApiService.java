@@ -89,8 +89,11 @@ public interface ApiService {
     @GET("groups/get_categories")
     Call<CategoriesModel> getAllCategories(@Header("Authorization") String token);
 
-    @GET("groups/get_pouplar_sub_categories")
-    Call<PopularSubCategoryModel> getPopularCategories();
+    @POST("groups/get_pouplar_sub_categories")
+    Call<PopularSubCategoryModel> getPopularCategoriesHome();
+
+    @POST("groups/get_pouplar_sub_categories")
+    Call<PopularSubCategoryModel> getPopularCategoriesById(@Body JsonObject object);
 
     @GET("groups/get_plan/{id}")
     Call<PlanModel> getPlans(@Path("id") String id);
@@ -109,9 +112,8 @@ public interface ApiService {
     @GET("groups/get_home_content")
     Call<HomeContentModel> getHomeData(@Header("Authorization") String token);
 
-    @POST("groups/group_details_search/{page_no}")
+    @POST("groups/group_details_search")
     Call<GroupDetailModel> getGroupDetails(@Header("Authorization") String token,
-                                           @Path("page_no") int page_no,
                                            @Body JsonObject object);
 
     @POST("groups/group_details_search")

@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,7 +35,10 @@ public class GroupDetail extends Fragment {
     FragmentJoinGroupPlansBinding binding;
     private GroupDetailViewModel viewModel;
     private List<DataItem> detailItems;
+    private List<DataItem> pagingDetailItems;
     String sub_categoryId, title;
+
+    private int maxPageLimit;
 
 
     int pastVisiblesItems, visibleItemCount, totalItemCount;
@@ -44,6 +48,7 @@ public class GroupDetail extends Fragment {
     Parcelable recyclerViewState;
     private boolean flag_loading;
     int nextPage = 1;
+    private int searchDataCurrentPage = 0;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -80,6 +85,7 @@ public class GroupDetail extends Fragment {
             Navigation.findNavController(view1).navigateUp();
         });
 
+        pagingDetailItems = new ArrayList<>();
         binding.groupsDetailList.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -92,33 +98,34 @@ public class GroupDetail extends Fragment {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                    visibleItemCount = mLayoutManager.getChildCount();
-                    totalItemCount = mLayoutManager.getItemCount();
-                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+                visibleItemCount = mLayoutManager.getChildCount();
+                totalItemCount = mLayoutManager.getItemCount();
+                pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
 
-                    if (flag_loading) {
+                if (flag_loading) {
 
-                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount ) {
-                            flag_loading = false;
-                            nextPage++;
-//                            getAllDataBack(nextPage);
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        flag_loading = false;
+                        nextPage++;
 
-                            // Do pagination.. i.e. fetch new data
-//                            new Handler().postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
+                        if (nextPage > maxPageLimit) {
+                            Toast.makeText(requireContext(), "No more data!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            getAllDataBack(nextPage);
+                        }
+
+                        // Do pagination.. i.e. fetch new data
+//                        new Handler().postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
 //
 ////                                    showProgressView();
-//                                }
-//                            }, 1000);
-
-                        }
+//                            }
+//                        }, 1000);
                     }
-
+                }
             }
         });
-
-
 
     }
 
@@ -130,6 +137,7 @@ public class GroupDetail extends Fragment {
                     binding.joinPlanSearchView.removeLetter.setVisibility(View.VISIBLE);
 //                    binding.planSearchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, ContextCompat.getDrawable(Split.getAppContext(), R.drawable.ic_close), null);
                 } else {
+                    pagingDetailItems.clear();
                     getAllDataBack(1);
                     binding.joinPlanSearchView.removeLetter.setVisibility(View.GONE);
 
@@ -146,16 +154,17 @@ public class GroupDetail extends Fragment {
             public void afterTextChanged(Editable data) {
 
                 if (!data.toString().isEmpty()) {
-                    if (isNumeric(data.toString())){
+                    if (isNumeric(data.toString())) {
                         getSearchedDataByGroupId(data.toString());
-                    }else {
+                    } else {
 
                         if (data.toString().startsWith("@")) {
                             String originalString = data.toString();
                             originalString = originalString.replaceFirst("@", "");
                             getSearchedDataByUserId(originalString);
                         } else {
-                            getSearchedData(data.toString());
+                            searchDataCurrentPage++;
+                            getSearchedData(data.toString(), searchDataCurrentPage);
                         }
                     }
                 }
@@ -164,7 +173,7 @@ public class GroupDetail extends Fragment {
     }
 
     private void getAllDataBack(int page) {
-        viewModel = new GroupDetailViewModel(sub_categoryId, "",String.valueOf(page));
+        viewModel = new GroupDetailViewModel(sub_categoryId, "", String.valueOf(page));
         viewModel.init();
         viewModel.getDetailData().observe(getViewLifecycleOwner(), groupDetailModel -> {
             detailItems = new ArrayList<>();
@@ -174,10 +183,12 @@ public class GroupDetail extends Fragment {
                 if (groupDetailModel.getData() != null) {
 
                     flag_loading = true;
-                    
+
                     if (groupDetailModel.getData().size() > 0) {
-                        detailItems.addAll(groupDetailModel.getData());
-                        buildRec(detailItems);
+//                        detailItems.addAll(groupDetailModel.getData());
+                        pagingDetailItems.addAll(groupDetailModel.getData());
+                        maxPageLimit = groupDetailModel.getPage();
+                        buildRec(pagingDetailItems);
                     }
                 } else {
 
@@ -189,7 +200,7 @@ public class GroupDetail extends Fragment {
 
     private void getSearchedDataByGroupId(String intData) {
         detailItems = new ArrayList<>();
-        viewModel = new GroupDetailViewModel(sub_categoryId, intData,"");
+        viewModel = new GroupDetailViewModel(sub_categoryId, intData, "1");
         viewModel.initSearchByGroupId();
         viewModel.getDetailSearchDataByGroupId().observe(getViewLifecycleOwner(), groupDetailModel -> {
             if (groupDetailModel.isSuccess()) {
@@ -205,7 +216,7 @@ public class GroupDetail extends Fragment {
 
     private void getSearchedDataByUserId(String originalString) {
         detailItems = new ArrayList<>();
-        viewModel = new GroupDetailViewModel(sub_categoryId, originalString,"");
+        viewModel = new GroupDetailViewModel(sub_categoryId, originalString, "1");
         viewModel.initSearchByUserId();
         viewModel.getDetailSearchDataByUserId().observe(getViewLifecycleOwner(), groupDetailModel -> {
             if (groupDetailModel.isSuccess()) {
@@ -219,9 +230,9 @@ public class GroupDetail extends Fragment {
         });
     }
 
-    private void getSearchedData(String data) {
+    private void getSearchedData(String data, int page) {
         detailItems = new ArrayList<>();
-        viewModel = new GroupDetailViewModel(sub_categoryId, data,"");
+        viewModel = new GroupDetailViewModel(sub_categoryId, data, String.valueOf(page));
         viewModel.initSearch();
         viewModel.getDetailSearchData().observe(getViewLifecycleOwner(), groupDetailModel -> {
             if (groupDetailModel.isSuccess()) {
@@ -259,7 +270,7 @@ public class GroupDetail extends Fragment {
         binding.searchGroupsDetailList.setVisibility(View.VISIBLE);
         binding.groupsDetailList.setVisibility(View.GONE);
 
-        binding.searchGroupsDetailList.setLayoutManager(mLayoutManager);
+        binding.searchGroupsDetailList.setLayoutManager(new LinearLayoutManager(requireContext()));
         GroupDetailAdapter adapter = new GroupDetailAdapter(Split.getAppContext(), detailItems);
         binding.searchGroupsDetailList.setAdapter(adapter);
         adapter.setOnGroupSelectListener(position -> {
@@ -275,7 +286,7 @@ public class GroupDetail extends Fragment {
     public static boolean isNumeric(String string) {
         int intValue;
 
-        if(string == null || string.equals("")) {
+        if (string == null || string.equals("")) {
             System.out.println("String cannot be parsed, it is null or empty.");
             return false;
         }

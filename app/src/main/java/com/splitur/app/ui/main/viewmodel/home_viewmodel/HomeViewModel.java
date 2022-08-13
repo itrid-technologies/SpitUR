@@ -16,7 +16,6 @@ public class HomeViewModel extends ViewModel {
     private HomeContentRepository homeContentRepository;
     private SearchCreateRepository searchCreateRepository;
 
-
     public HomeViewModel() {
         homeContentRepository = new HomeContentRepository();
         searchCreateRepository = new SearchCreateRepository();

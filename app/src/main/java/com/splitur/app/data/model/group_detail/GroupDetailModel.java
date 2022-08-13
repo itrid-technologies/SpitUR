@@ -14,6 +14,13 @@ public class GroupDetailModel{
 	@SerializedName("message")
 	private String message;
 
+	@SerializedName("page")
+	private int page;
+
+	public int getPage() {
+		return page;
+	}
+
 	public List<DataItem> getData() {
 		return data;
 	}

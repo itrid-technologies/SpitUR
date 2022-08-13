@@ -42,7 +42,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/back"
                 app:layout_constraintBottom_toBottomOf="@id/back"
-                android:text="-"
+                android:text="_"
                 android:textSize="18sp"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/white"

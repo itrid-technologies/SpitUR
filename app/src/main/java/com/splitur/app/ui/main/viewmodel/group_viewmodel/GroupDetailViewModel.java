@@ -14,9 +14,9 @@ public class GroupDetailViewModel extends ViewModel {
     private MutableLiveData<GroupDetailModel> detailSearchDataByUserId;
 
     private GroupDetailRepository groupDetailRepository;
-    String  subCategoryId, query, pageNo;
+    String subCategoryId, query, pageNo;
 
-    public GroupDetailViewModel(String id, String data,String page) {
+    public GroupDetailViewModel(String id, String data, String page) {
         this.subCategoryId = id;
         this.query = data;
         this.pageNo = page;
@@ -38,7 +38,7 @@ public class GroupDetailViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        detailSearchData = groupDetailRepository.getDetailsBySearch(subCategoryId,query);
+        detailSearchData = groupDetailRepository.getDetailsBySearch(subCategoryId, query, Integer.parseInt(pageNo));
     }
 
 
@@ -48,7 +48,7 @@ public class GroupDetailViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        detailSearchDataByGroupId = groupDetailRepository.getDetailsBySearchGroupId(subCategoryId,query);
+        detailSearchDataByGroupId = groupDetailRepository.getDetailsBySearchGroupId(subCategoryId, query, Integer.parseInt(pageNo));
     }
 
 
@@ -58,7 +58,7 @@ public class GroupDetailViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        detailSearchDataByUserId = groupDetailRepository.getDetailsBySearchUserId(subCategoryId,query);
+        detailSearchDataByUserId = groupDetailRepository.getDetailsBySearchUserId(subCategoryId, query, Integer.parseInt(pageNo));
     }
 
     public MutableLiveData<GroupDetailModel> getDetailData() {

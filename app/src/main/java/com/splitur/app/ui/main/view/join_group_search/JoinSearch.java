@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,18 +64,18 @@ public class JoinSearch extends Fragment {
 //            getSearchedData(category);
 //        }
 
-        getPopularSubCategory();
+        getPopularSubCategory(catID);
 
 
         initClickListeners();
         searchTextWatcher();
     }
 
-    private void getPopularSubCategory() {
+    private void getPopularSubCategory(String catId) {
 
         binding.customCreateView.customLayout.setVisibility(View.GONE);
-        mViewModel = new SearchCreateViewModel(null, null);
-        mViewModel.init();
+        mViewModel = new SearchCreateViewModel(null, catId);
+        mViewModel.initPopularById();
         mViewModel.getPopularCategoryData().observe(getViewLifecycleOwner(), popularSubCategoryModel -> {
             if (popularSubCategoryModel.isSuccess()) {
                 if (popularSubCategoryModel.getData().size() > 0) {
@@ -108,7 +106,7 @@ public class JoinSearch extends Fragment {
                 } else {
                     binding.customCreateView.customLayout.setVisibility(View.GONE);
                     binding.joinSearchView.removeLetter.setVisibility(View.GONE);
-                    getPopularSubCategory();
+                    getPopularSubCategory(catID);
 //                    binding.joinSearchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, null, null);
                     //  getPopularSubCategory();
 
@@ -179,7 +177,7 @@ public class JoinSearch extends Fragment {
 
         binding.joinSearchView.removeLetter.setOnClickListener(view -> {
             binding.joinSearchView.searchField.setText("");
-            getPopularSubCategory();
+            getPopularSubCategory(catID);
         });
 
         binding.customCreateView.customCreate.setOnClickListener(view -> {

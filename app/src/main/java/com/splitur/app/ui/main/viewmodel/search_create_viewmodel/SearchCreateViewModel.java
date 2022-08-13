@@ -8,9 +8,10 @@ import com.splitur.app.data.repository.create_search.SearchCreateRepository;
 
 public class SearchCreateViewModel extends ViewModel {
 
-    private MutableLiveData<PopularSubCategoryModel> data;
+//    private MutableLiveData<PopularSubCategoryModel> data;
     private MutableLiveData<PopularSubCategoryModel> searchData;
     private MutableLiveData<PopularSubCategoryModel> catSearchData;
+    private MutableLiveData<PopularSubCategoryModel> popularByCatId;
 
     private SearchCreateRepository searchCreateRepository;
     String value, cat_id;
@@ -21,14 +22,14 @@ public class SearchCreateViewModel extends ViewModel {
         searchCreateRepository = new SearchCreateRepository();
     }
 
-    public void init() {
-        if (this.data != null) {
-            // ViewModel is created per Fragment so
-            // we know the userId won't change
-            return;
-        }
-        data = searchCreateRepository.getPopularCategories();
-    }
+//    public void init() {
+//        if (this.data != null) {
+//            // ViewModel is created per Fragment so
+//            // we know the userId won't change
+//            return;
+//        }
+//        data = searchCreateRepository.getPopularCategories();
+//    }
 
     public void initSearch() {
         if (this.searchData != null) {
@@ -48,8 +49,16 @@ public class SearchCreateViewModel extends ViewModel {
         catSearchData = searchCreateRepository.getSearchedSubCategoryByCatId(value,cat_id);
     }
 
+    public void initPopularById() {
+        if (this.popularByCatId != null) {
+            return;
+        }
+        popularByCatId = searchCreateRepository.getPopularCategoriesById(cat_id);
+    }
+
     public MutableLiveData<PopularSubCategoryModel> getPopularCategoryData() {
-        return this.data;
+//        return this.data;
+        return this.popularByCatId;
     }
 
     public MutableLiveData<PopularSubCategoryModel> getSearchData() {

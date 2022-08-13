@@ -168,7 +168,6 @@ public class Profile extends Fragment {
 
         binding.contactLayout.setOnClickListener(view -> {
             NavToContact();
-
         });
 
         binding.swap.setOnClickListener(view -> {

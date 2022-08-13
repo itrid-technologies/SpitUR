@@ -29,7 +29,42 @@ public class SearchCreateRepository {
 
         final MutableLiveData<PopularSubCategoryModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<PopularSubCategoryModel> call = apiService.getPopularCategories();
+        Call<PopularSubCategoryModel> call = apiService.getPopularCategoriesHome();
+        call.enqueue(new Callback<PopularSubCategoryModel>() {
+            @Override
+            public void onResponse(@NonNull Call<PopularSubCategoryModel> call, @NonNull Response<PopularSubCategoryModel> response) {
+                if (response.body() != null) {
+                    liveData.setValue(response.body());
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<PopularSubCategoryModel> call, @NonNull Throwable t) {
+                Log.e("Category Error", t.getMessage());
+            }
+        });
+
+        return liveData;
+    }
+
+    public MutableLiveData<PopularSubCategoryModel> getPopularCategoriesById(String id) {
+
+        final JsonObject obj = new JsonObject();
+        obj.addProperty("category_id",id);
+
+        final MutableLiveData<PopularSubCategoryModel> liveData = new MutableLiveData<>();
+        apiService = ApiManager.getRestApiService();
+        Call<PopularSubCategoryModel> call = apiService.getPopularCategoriesById(obj);
         call.enqueue(new Callback<PopularSubCategoryModel>() {
             @Override
             public void onResponse(@NonNull Call<PopularSubCategoryModel> call, @NonNull Response<PopularSubCategoryModel> response) {
