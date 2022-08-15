@@ -79,7 +79,7 @@ public class SupportChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 //                    ((RecieverVH) holder).imageView.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(data.getReceiver().getAvatarUrl())));
 
                     ((RecieverVH) holder).time.setText(Constants.getDateFromMiliSeconds(data.getTime()));
-                    Glide.with(context).load(Constants.IMG_PATH + data.getReceiver().getAvatarUrl()).placeholder(R.color.images_placeholder).into(((RecieverVH) holder).imageView);
+                    Glide.with(context).load(Constants.IMG_PATH + data.getReceiver().getAvatarUrl()).placeholder(R.drawable.user).into(((RecieverVH) holder).imageView);
                     ((RecieverVH) holder).name.setText(data.getReceiver().getName());
                     ((RecieverVH) holder).name.setVisibility(View.VISIBLE);
                     ((RecieverVH) holder).imageView.setVisibility(View.VISIBLE);

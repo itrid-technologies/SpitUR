@@ -1,8 +1,10 @@
 package com.splitur.app.ui.main.view.contact_us;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -132,6 +134,7 @@ public class ContactUs extends Fragment {
 //        });
 
 
+
         binding.contactLayout.chatLayout.setOnClickListener(view -> {
 
 
@@ -142,9 +145,14 @@ public class ContactUs extends Fragment {
 
                     Bundle bundle = new Bundle();
                     bundle.putBoolean("isFromChat", true);
-                    Navigation.findNavController(requireView()).navigate(R.id.action_contactUs_to_createdAndJoinedGroups, bundle);
+                    navigateToNext(view,bundle);
                 }
             }
         });
+    }
+
+    private void navigateToNext(View view, Bundle bundle) {
+        Navigation.findNavController(view).navigate(R.id.action_contactUs_to_createdAndJoinedGroups, bundle);
+
     }
 }

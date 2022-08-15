@@ -57,7 +57,7 @@ public class JoinCheckOut extends Fragment {
     String value;
 
     boolean isPromoValid = false;
-    String discount_amount;
+    String discount_amount , discount_per;
     String code = "";
 
     JoinGroupViewModel joinGroupViewModel;
@@ -223,6 +223,8 @@ public class JoinCheckOut extends Fragment {
 
                                 isPromoValid = true;
 
+                                discount_per = String.valueOf(Math.round(promoModel.getData().getPromoDiscount()));
+
                                 int amount_of_discount = (int) (Integer.parseInt(value) * Math.round(promoModel.getData().getPromoDiscount()) / 100);
                                 discount_amount = String.valueOf(amount_of_discount);
                                 status.setText("Success!");
@@ -231,13 +233,8 @@ public class JoinCheckOut extends Fragment {
                                 message.setText("You will receive " + amount_of_discount + " Coins in your account after you join the group.");
                                 message.setVisibility(View.VISIBLE);
 
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        applyPromo(amount_of_discount);
-                                        alertDialog.dismiss();
-                                    }
-                                }, 3000); //Timer is in ms here.
+                                applyPromo(discount_amount);
+                                alertDialog.dismiss();
 
                             }
                         } else {
@@ -321,10 +318,10 @@ public class JoinCheckOut extends Fragment {
         });
     }
 
-    private void applyPromo(int amount_of_discount) {
+    private void applyPromo(String amount_of_discount) {
         if (isPromoValid) {
-            binding.tvDiscount.setText(amount_of_discount + "% OFF (" + code + ")");
-            binding.discountAmount.setText("- " + discount_amount);
+            binding.tvDiscount.setText(discount_per + "% OFF (" + code + ")");
+            binding.discountAmount.setText("- " + amount_of_discount);
             binding.tvCredit.setVisibility(View.VISIBLE);
             binding.tvDiscount.setVisibility(View.VISIBLE);
             binding.discountAmount.setVisibility(View.VISIBLE);

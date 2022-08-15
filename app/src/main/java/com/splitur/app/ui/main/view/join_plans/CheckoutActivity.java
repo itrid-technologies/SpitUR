@@ -24,6 +24,7 @@ import retrofit2.Response;
 import com.splitur.app.R;
 import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
+import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
 
@@ -40,6 +41,7 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+        Checkout.preload(CheckoutActivity.this);
 
 
 
@@ -79,9 +81,11 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
         try {
             object.put("subscription_id", subscriptionId);
             object.put("recurring", 1);
-            object.put("method", "card");  //Method specific fields
+//            object.put("method", "UPI");  //Method specific fields
             object.put("_[flow]", "intent");
-            object.put("upi_app_package_name", "com.google.android.apps.nbu.paisa.user");
+            object.put("upi_app_package_name", "net.one97.paytm");
+            object.put("prefill.email", Constants.USER_EMAIL);
+            object.put("prefill.contact",Constants.NUMBER);
 
             // open razorpay to checkout activity
             checkout.open(CheckoutActivity.this, object);

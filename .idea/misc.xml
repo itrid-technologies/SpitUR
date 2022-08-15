@@ -309,7 +309,7 @@
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/fragment_profile.xml" value="0.36205128205128206" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/fragment_promotion.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/fragment_refund.xml" value="0.371875" />
-        <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/fragment_search.xml" value="0.67" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/fragment_search.xml" value="0.2" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/fragment_slots.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/fragment_subscription_name.xml" value="0.5021459227467812" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/fragment_sucessfully_swaped.xml" value="0.371875" />
@@ -332,7 +332,7 @@
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/otp_request_message_layout.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/payment_list_item_design.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/plans_list_item_design.xml" value="0.371875" />
-        <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/plans_search_list_item_design.xml" value="0.5" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/plans_search_list_item_design.xml" value="0.33" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/profile_data_in_create.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/promocode_dialogue.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/receicer_layout.xml" value="0.371875" />
@@ -341,6 +341,7 @@
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/sender_layout.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/layout/toolbar_layout.xml" value="0.371875" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.371875" />
+        <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/mipmap-anydpi-v26/app_logo_round.xml" value="0.2295" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/mipmap-anydpi-v26/final.xml" value="0.305" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/mipmap-anydpi-v26/final_round.xml" value="0.305" />
         <entry key="..\:/Users/Itrid Technologies/Desktop/SplitUR-android/app/src/main/res/mipmap-anydpi-v26/final_square.xml" value="0.305" />

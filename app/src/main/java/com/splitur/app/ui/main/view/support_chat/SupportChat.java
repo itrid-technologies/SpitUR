@@ -1,5 +1,7 @@
 package com.splitur.app.ui.main.view.support_chat;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,13 +11,17 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
+import com.splitur.app.R;
+import com.splitur.app.data.api.ChatwootApiManager;
 import com.splitur.app.data.model.OTpModel;
 import com.splitur.app.data.model.SupportActionModel;
 import com.splitur.app.data.model.chat_sender.SenderModel;
@@ -31,6 +37,13 @@ import com.splitur.app.utils.Split;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class SupportChat extends Fragment {
@@ -45,6 +58,9 @@ public class SupportChat extends Fragment {
     String msgList;
     MessagesModel messagesModel;
     String groupID;
+    private CountDownTimer waitTimer;
+    long remaining_millis;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -83,31 +99,84 @@ public class SupportChat extends Fragment {
             }
         });
 
-//        new Handler(Looper.myLooper()).postDelayed(new Runnable() {
+        countDownStart();
+
+//        Timer myTimer = new Timer();
+//        myTimer.schedule(new TimerTask() {
 //            @Override
 //            public void run() {
 //                getSupportChat();
 //            }
-//        }, 5000);
+//        }, 2000);
+
+    }
+
+    private void countDownStart() {
+        waitTimer = new CountDownTimer((long) 3.6e+6, 2000) {//1 hour
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+                remaining_millis = millisUntilFinished;
+
+                getSupportChat();
+            }
+
+            @Override
+            public void onFinish() {
 
 
-
-
-
-
+            }
+        };
+        waitTimer.start();
     }
 
 
     private void getSupportChat() {
+        MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
+        String conversation_id = sharedPreferences.getData(Split.getAppContext(),"unique_conversation_id");
+
+        int account_id = Constants.AccountId;
+        Call<MessagesModel> call = ChatwootApiManager.getRestApiService().getSupportChat(Constants.ChatApiKey,account_id, Integer.parseInt(conversation_id));
+        call.enqueue(new Callback<MessagesModel>() {
+            @Override
+            public void onResponse(@NonNull Call<MessagesModel> call, @NonNull Response<MessagesModel> response) {
+                if (response.body() != null) {
+                    MessagesModel messagesModel = response.body();
+                    if (messagesModel.getPayload() != null) {
+                        msgs = new ArrayList<>();
+                        buildSupportRv(messagesModel);
+
+
+                    }
+                } else if (response.code() == 400) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                } else if (response.code() == 500) {
+                    if (response.errorBody() != null) {
+                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<MessagesModel> call, @NonNull Throwable t) {
+                Log.e("Support Chat Error", t.getMessage());
+
+            }
+        });
         viewModel = new SupportChatViewModel(0, "");
         viewModel.getChat();
         viewModel.getChatData().observe(getViewLifecycleOwner(),messagesModel -> {
             if (messagesModel.getPayload() != null){
-                msgs = new ArrayList<>();
-               buildSupportRv(messagesModel);
+
             }
         });
     }
+
+
 
 
     private void buildSupportRv(MessagesModel messagesModel) {
@@ -142,6 +211,9 @@ public class SupportChat extends Fragment {
         adapter = new SupportChatAdapter(Split.getAppContext(), msgs);
         binding.supportChatRv.setAdapter(adapter);
         binding.supportChatRv.scrollToPosition(msgs.size() - 1);
+
+
+
     }
 
     private void clickEvents() {
@@ -192,6 +264,20 @@ public class SupportChat extends Fragment {
             }
         });
 
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        waitTimer.cancel();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        waitTimer.cancel();
 
     }
 }

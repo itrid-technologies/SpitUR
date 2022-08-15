@@ -65,11 +65,10 @@
 
             <ImageView
                 android:id="@+id/previous_avatar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:importantForAccessibility="no"
                 android:rotation="180"
-                android:visibility="gone"
                 android:src="@drawable/ic_chevron"
                 app:layout_constraintEnd_toStartOf="@id/avatar_bg_frame"
                 app:layout_constraintBottom_toBottomOf="@id/avatar_bg_frame"
@@ -78,11 +77,10 @@
 
             <ImageView
                 android:id="@+id/next_avatar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:importantForAccessibility="no"
                 android:src="@drawable/ic_chevron"
-                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/avatar_bg_frame"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/avatar_bg_frame"

@@ -10,6 +10,7 @@
         android:name="com.splitur.app.ui.main.view.home.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
+
         <action
             android:id="@+id/action_home2_to_search2"
             app:destination="@id/search2"

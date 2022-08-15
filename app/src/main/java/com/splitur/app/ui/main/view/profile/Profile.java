@@ -83,14 +83,6 @@ public class Profile extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        requireActivity().getOnBackPressedDispatcher().addCallback(requireActivity(), new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-
-                count = 0;
-            }
-        });
-
         setProfileData();
 
         initClickListeners();
@@ -115,7 +107,11 @@ public class Profile extends Fragment {
         String name  = Constants.USER_NAME;
         binding.name.setText(Constants.capitalize(name));
         String avatar = Constants.USER_AVATAR;
-        binding.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
+        if (avatar.isEmpty()){
+            binding.userImage.setImageResource(R.drawable.user);
+        }else {
+            binding.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
+        }
 //        Glide.with(Split.getAppContext()).load(avatar).placeholder(R.color.images_placeholder).into(binding.userImage);
 
 //        ReferralViewModel referralViewModel = new ReferralViewModel(Constants.ID,"2");
@@ -131,7 +127,8 @@ public class Profile extends Fragment {
     private void initClickListeners() {
 
         binding.friendsLayout.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_profile2_to_friends);
+            binding.loadingView.setVisibility(View.VISIBLE);
+            Navigate(view,R.id.action_profile2_to_friends);
         });
 
         binding.transactionLayout.setOnClickListener(view -> {
@@ -390,6 +387,10 @@ public class Profile extends Fragment {
             }
 
         });
+    }
+
+    private void Navigate(View view, int path) {
+        Navigation.findNavController(view).navigate(path);
     }
 
     private void updateUserInformation(String updated_name, String updated_id, String updated_email, String updatedAvatar) {

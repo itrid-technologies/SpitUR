@@ -433,7 +433,11 @@ public class Home extends Fragment {
         String name  = Constants.USER_NAME;
         binding.name.setText(Constants.capitalize(name));
         String avatar = Constants.USER_AVATAR;
-        binding.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
+        if (avatar.isEmpty()){
+            binding.userImage.setImageResource(R.drawable.user);
+        }else {
+            binding.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
+        }
 //        Glide.with(Split.getAppContext()).load(Constants.USER_AVATAR).placeholder(R.color.images_placeholder).into(binding.userImage);
 
     }

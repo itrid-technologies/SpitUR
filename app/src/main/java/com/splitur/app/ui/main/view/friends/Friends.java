@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,9 +63,14 @@ public class Friends extends Fragment {
 
         friend_data = new ArrayList<>();
         contactList = new ArrayList<>();
-        binding.loadingView.setVisibility(View.VISIBLE);
         initClickListeners();
+
+        try {
         contactList.addAll(getContacts(requireContext()));
+        }catch (IllegalStateException e){
+            Log.e("Cntacts List", e.getMessage());
+        }
+
         if (contactList.size() > 0) {
 
             getUsers();
@@ -177,6 +183,8 @@ public class Friends extends Fragment {
 
     @SuppressLint("Range")
     public List<ContactModel> getContacts(Context ctx) {
+        binding.loadingView.setVisibility(View.VISIBLE);
+
         List<ContactModel> list = new ArrayList<>();
         ContentResolver contentResolver = ctx.getContentResolver();
         Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
