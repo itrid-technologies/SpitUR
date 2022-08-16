@@ -1,5 +1,6 @@
 package com.splitur.app.ui.main.view.join_plans;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.google.gson.JsonObject;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,12 +43,14 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
-        Checkout.preload(CheckoutActivity.this);
+
+
 
 
 
         final Intent data = getIntent();
         String subID;
+        Checkout.preload(Split.getAppContext());
 
 
         if (data.hasExtra("subscription_id")) {
@@ -74,24 +78,54 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
 //        checkout.setKeyID("rzp_test_Z5X8uEVBddGyA5");
         checkout.setKeyID(secret_key);
       // razorpay = new Razorpay(CheckoutActivity.this, secret_key);
+        final Activity activity = this;
 
 
-        // initialize json object
-        JSONObject object = new JSONObject();
         try {
-            object.put("subscription_id", subscriptionId);
-            object.put("recurring", 1);
-//            object.put("method", "UPI");  //Method specific fields
-            object.put("_[flow]", "intent");
-            object.put("upi_app_package_name", "net.one97.paytm");
-            object.put("prefill.email", Constants.USER_EMAIL);
-            object.put("prefill.contact",Constants.NUMBER);
 
-            // open razorpay to checkout activity
-            checkout.open(CheckoutActivity.this, object);
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+            JSONArray prefAppsJArray = new JSONArray();
+            prefAppsJArray.put("com.phonepe.app");
+
+            JSONArray otherAppsJArray = new JSONArray();
+            otherAppsJArray.put("net.one97.paytm");
+
+            JSONObject options = new JSONObject();
+            options.put("subscription_id", subscriptionId);
+            options.put("recurring", 1);
+            options.put("prefill.email", Constants.USER_EMAIL);
+            options.put("prefill.contact",Constants.NUMBER);
+            options.put("method", "upi");
+            options.put("_[flow]", "intent");
+            options.put("upi_app_package_name", "com.phonepe.app");
+
+
+            checkout.open(activity, options);
+
+        } catch(Exception e) {
+            Log.e("TAG", "Error in starting Razorpay Checkout", e);
         }
+
+//        // initialize json object
+//        JSONObject object = new JSONObject();
+//        try {
+//            object.put("subscription_id", subscriptionId);
+//            object.put("recurring", 1);
+////            object.put("method", "UPI");  //Method specific fields
+////            object.put("_[flow]", "intent");
+////            object.put("upi_app_package_name", "net.one97.paytm");
+//            object.put("prefill.email", Constants.USER_EMAIL);
+//            object.put("prefill.contact",Constants.NUMBER);
+//            JSONObject retryObj = new JSONObject();
+//            retryObj.put("enabled", true);
+//            retryObj.put("max_count", 4);
+//            object.put("retry", retryObj);
+//
+//            // open razorpay to checkout activity
+//            checkout.open(CheckoutActivity.this, object);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override

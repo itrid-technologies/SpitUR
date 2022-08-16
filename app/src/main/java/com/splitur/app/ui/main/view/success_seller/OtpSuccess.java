@@ -42,7 +42,7 @@ public class OtpSuccess extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        binding.appLink.setText("https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
+        binding.appLink.setText("https://play.google.com/store/apps/details?id=com.splitur.app&referrer=" + Constants.ID);
 
         Glide.with(Split.getAppContext()).load(R.drawable.success_gif).into(binding.successGif);
 
@@ -74,7 +74,7 @@ public class OtpSuccess extends Fragment {
             Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
             whatsappIntent.setType("text/plain");
             whatsappIntent.setPackage("com.whatsapp");
-            whatsappIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
+            whatsappIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.splitur.app&referrer=" + Constants.ID);
             try {
                 requireActivity().startActivity(whatsappIntent);
             } catch (android.content.ActivityNotFoundException ex) {
@@ -83,20 +83,20 @@ public class OtpSuccess extends Fragment {
         });
 
         binding.FB.setOnClickListener(view -> {
-            shareAppWithSocial(requireContext(), Constants.FACEBOOK_PACKAGE_NAME, "", "https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
+            shareAppWithSocial(requireContext(), Constants.FACEBOOK_PACKAGE_NAME, "", "https://play.google.com/store/apps/details?id=com.splitur.app&referrer=" + Constants.ID);
         });
 
         binding.twitter.setOnClickListener(view -> {
-            shareAppWithSocial(requireContext(), Constants.TWITTER_PACKAGE_NAME, "", "https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
+            shareAppWithSocial(requireContext(), Constants.TWITTER_PACKAGE_NAME, "", "https://play.google.com/store/apps/details?id=com.splitur.app&referrer=" + Constants.ID);
         });
 
         binding.insta.setOnClickListener(view -> {
-            shareAppWithSocial(requireContext(), Constants.INSTAGRAM_PACKAGE_NAME, "", "https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
+            shareAppWithSocial(requireContext(), Constants.INSTAGRAM_PACKAGE_NAME, "", "https://play.google.com/store/apps/details?id=com.splitur.app&referrer=" + Constants.ID);
 
         });
 
         binding.discord.setOnClickListener(view -> {
-            shareAppWithSocial(requireContext(), Constants.DISCORD_PACKAGE_NAME, "", "https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
+            shareAppWithSocial(requireContext(), Constants.DISCORD_PACKAGE_NAME, "", "https://play.google.com/store/apps/details?id=com.splitur.app&referrer=" + Constants.ID);
 
         });
 

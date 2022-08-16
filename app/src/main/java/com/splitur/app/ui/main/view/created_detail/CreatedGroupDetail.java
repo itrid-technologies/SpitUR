@@ -348,7 +348,7 @@ public class CreatedGroupDetail extends Fragment {
 
     private void initClickEvents() {
 
-        binding.profileLink.setText("https://play.google.com/store/apps/details?id=split.com.app&referrer=" + Constants.ID);
+        binding.profileLink.setText("https://play.google.com/store/apps/details?id=com.splitur.app&referrer=" + Constants.ID);
 
         binding.cgdToolbar.back.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigateUp();
