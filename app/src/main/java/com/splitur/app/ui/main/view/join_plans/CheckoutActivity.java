@@ -90,14 +90,16 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
             JSONArray otherAppsJArray = new JSONArray();
             otherAppsJArray.put("net.one97.paytm");
 
+
             JSONObject options = new JSONObject();
             options.put("subscription_id", subscriptionId);
             options.put("recurring", 1);
             options.put("prefill.email", Constants.USER_EMAIL);
             options.put("prefill.contact",Constants.NUMBER);
-            options.put("method", "upi");
+            options.put("payment_capture", "1");
+            options.put("method", "wallet");
             options.put("_[flow]", "intent");
-            options.put("upi_app_package_name", "com.phonepe.app");
+            options.put("upi_app_package_name", "net.one97.paytm");
 
 
             checkout.open(activity, options);

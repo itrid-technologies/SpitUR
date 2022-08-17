@@ -210,26 +210,10 @@ public class Home extends Fragment {
                             sharedPreferences.saveData(Split.getAppContext(), "userId", activeUserModel.getData().getUserId());
 
                             List<Integer> avatars1 = new ArrayList<>();
-                            avatars1.add(1);
-                            avatars1.add(2);
-                            avatars1.add(3);
-                            avatars1.add(4);
-                            avatars1.add(5);
-                            avatars1.add(6);
-                            avatars1.add(7);
-                            avatars1.add(8);
-                            avatars1.add(9);
-                            avatars1.add(10);
-                            avatars1.add(11);
-                            avatars1.add(12);
-                            avatars1.add(13);
-                            avatars1.add(14);
-                            avatars1.add(15);
-                            avatars1.add(16);
-                            avatars1.add(17);
-                            avatars1.add(18);
-                            avatars1.add(19);
-                            avatars1.add(20);
+                            for (int i = 1;  i<=20; i++){
+                                avatars1.add(i);
+                            }
+//
 //                            avatarViewModel = new AvatarViewModel();
 //                            avatarViewModel.init();
 //                            avatarViewModel.getData().observe(getViewLifecycleOwner(), avatarModel -> {
@@ -252,8 +236,6 @@ public class Home extends Fragment {
                                     image.setVisibility(View.GONE);
                                     return false;
                                 }
-
-
                             });
 
 
