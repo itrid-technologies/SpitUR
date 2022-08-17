@@ -57,7 +57,7 @@ public class CreatedAndJoinedGroups extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentCreatedAndJoinedGroupsBinding.inflate(inflater, container, false);
         Dashboard.hideNav(false);
-        binding.gToolbar.title.setText("Group Created");
+        binding.gToolbar.title.setText("Groups Created");
         return binding.getRoot();
     }
 
@@ -112,7 +112,7 @@ public class CreatedAndJoinedGroups extends Fragment {
             binding.noGroupLayout.setVisibility(View.GONE);
 
 
-            binding.gToolbar.title.setText("Group Joined");
+            binding.gToolbar.title.setText("Groups Joined");
 
 
 
@@ -151,7 +151,7 @@ public class CreatedAndJoinedGroups extends Fragment {
             binding.joinedGroupslist.setVisibility(View.GONE);
             binding.noGroupLayout.setVisibility(View.GONE);
 
-            binding.gToolbar.title.setText("Group Created");
+            binding.gToolbar.title.setText("Groups Created");
             binding.createdButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#246BFD")));
             binding.createdButton.setTextColor(Color.WHITE);
 
@@ -241,7 +241,7 @@ public class CreatedAndJoinedGroups extends Fragment {
     private void buildRv() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.createdGroupslist.setLayoutManager(layoutManager);
-        AllCreatedGroupAdapter adapter = new AllCreatedGroupAdapter(Split.getAppContext(), data);
+        AllCreatedGroupAdapter adapter = new AllCreatedGroupAdapter(Split.getAppContext(), data , shouldGoToSupportChat);
         binding.createdGroupslist.setAdapter(adapter);
 
         adapter.setOnCreatedGroupClickListener(position -> {

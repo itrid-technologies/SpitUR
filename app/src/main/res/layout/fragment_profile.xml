@@ -395,7 +395,7 @@
                     android:textColor="@color/hint_color"
                     android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="Open a Support Ticket regarding a group"
+                    android:text="24/7 Live Chat Support and FAQ"
                     style="@style/normalText"
                     android:id="@+id/tv_contact_detail"/>
 

@@ -98,30 +98,25 @@ public class GroupDetail extends Fragment {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                visibleItemCount = mLayoutManager.getChildCount();
-                totalItemCount = mLayoutManager.getItemCount();
-                pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+                if (dy > 0) {
 
-                if (flag_loading) {
+                    visibleItemCount = mLayoutManager.getChildCount();
+                    totalItemCount = mLayoutManager.getItemCount();
+                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
 
-                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                        flag_loading = false;
-                        nextPage++;
+                    if (flag_loading) {
 
-                        if (nextPage > maxPageLimit) {
-                            Toast.makeText(requireContext(), "No more data!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            getAllDataBack(nextPage);
+                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount-3) {
+                            flag_loading = false;
+                            nextPage++;
+
+                            if (nextPage > maxPageLimit) {
+                                Toast.makeText(requireContext(), "No more data!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                getAllDataBack(nextPage);
+                            }
+
                         }
-
-                        // Do pagination.. i.e. fetch new data
-//                        new Handler().postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//
-////                                    showProgressView();
-//                            }
-//                        }, 1000);
                     }
                 }
             }
@@ -135,13 +130,10 @@ public class GroupDetail extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count > 0) {
                     binding.joinPlanSearchView.removeLetter.setVisibility(View.VISIBLE);
-//                    binding.planSearchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, ContextCompat.getDrawable(Split.getAppContext(), R.drawable.ic_close), null);
                 } else {
                     pagingDetailItems.clear();
                     getAllDataBack(1);
                     binding.joinPlanSearchView.removeLetter.setVisibility(View.GONE);
-
-//                    binding.planSearchField.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(Split.getAppContext(), R.drawable.search_icon), null, null, null);
                 }
             }
 

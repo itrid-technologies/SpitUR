@@ -21,6 +21,7 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
 
     private final List<DataItem> dataItems;
     private final Context context;
+    private final boolean supportChat;
 
     private AllCreatedGroupAdapter.ItemClickListener mListener;
 
@@ -30,16 +31,17 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
     }
 
 
-    public AllCreatedGroupAdapter(Context appContext, List<DataItem> list) {
+    public AllCreatedGroupAdapter(Context appContext, List<DataItem> list, boolean shouldGoToSupportChat) {
         this.context = appContext;
         this.dataItems = list;
+        this.supportChat = shouldGoToSupportChat;
     }
 
     @NonNull
     @Override
     public AllCreatedGroupAdapter.GroupVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_created_group_design, parent, false);
-        return new AllCreatedGroupAdapter.GroupVH(view,mListener);
+        return new AllCreatedGroupAdapter.GroupVH(view,mListener,supportChat);
     }
 
     @Override
@@ -83,7 +85,7 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
         public ImageView icon;
         public TextView name,slots, open;
 
-        public GroupVH(@NonNull View itemView, AllCreatedGroupAdapter.ItemClickListener mListener) {
+        public GroupVH(@NonNull View itemView, ItemClickListener mListener, boolean supportChat) {
             super(itemView);
             //find views
             name = itemView.findViewById(R.id.group_title);
@@ -93,12 +95,28 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
 
             open.setOnClickListener(view -> {
                 String isOpen = open.getText().toString().trim();
-                if (isOpen.equalsIgnoreCase("Closed")) {
+                if (supportChat) {
+                    if (isOpen.equalsIgnoreCase("Closed")) {
+                        if (mListener != null) {
+                            if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                                mListener.onCategorySelect(getAdapterPosition());
+                            }
+                        }
+                    } else {
+                        if (mListener != null) {
+                            if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                                mListener.onCategorySelect(getAdapterPosition());
+                            }
+                        }
+                    }
+                }else {
+                    if (isOpen.equalsIgnoreCase("Closed")) {
 
-                } else{
-                    if (mListener != null) {
-                        if (getAdapterPosition() != RecyclerView.NO_POSITION) {
-                            mListener.onCategorySelect(getAdapterPosition());
+                    } else {
+                        if (mListener != null) {
+                            if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                                mListener.onCategorySelect(getAdapterPosition());
+                            }
                         }
                     }
                 }
@@ -106,16 +124,34 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
 
             itemView.setOnClickListener(view -> {
                 String isOpen = open.getText().toString().trim();
-                if (isOpen.equalsIgnoreCase("Closed")) {
-
-                } else if (isOpen.equalsIgnoreCase("Open")){
-                    if (mListener != null) {
-                        if (getAdapterPosition() != RecyclerView.NO_POSITION) {
-                            mListener.onCategorySelect(getAdapterPosition());
+                if (supportChat) {
+                    if (isOpen.equalsIgnoreCase("Closed")) {
+                        if (mListener != null) {
+                            if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                                mListener.onCategorySelect(getAdapterPosition());
+                            }
                         }
+                    } else if (isOpen.equalsIgnoreCase("Open")) {
+                        if (mListener != null) {
+                            if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                                mListener.onCategorySelect(getAdapterPosition());
+                            }
+                        }
+                    } else {
+
                     }
                 }else {
+                    if (isOpen.equalsIgnoreCase("Closed")) {
 
+                    } else if (isOpen.equalsIgnoreCase("Open")) {
+                        if (mListener != null) {
+                            if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                                mListener.onCategorySelect(getAdapterPosition());
+                            }
+                        }
+                    } else {
+
+                    }
                 }
             });
 

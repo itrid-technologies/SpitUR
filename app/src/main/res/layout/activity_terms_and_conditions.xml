@@ -25,7 +25,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:gravity="start"
-        android:text="@string/label_terms"
+        android:text="Terms of Use"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/back" />
 
@@ -119,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:fontFamily="@font/inter_medium"
-        android:text="@string/label_agree"
+        android:text="By continuing you agree with Splitur Terms of Use and Privacy Policy"
         android:textAlignment="center"
         android:textColor="#5E6272"
         android:textSize="12sp"

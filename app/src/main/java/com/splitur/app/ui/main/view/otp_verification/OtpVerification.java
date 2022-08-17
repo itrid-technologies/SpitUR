@@ -1,6 +1,8 @@
 package com.splitur.app.ui.main.view.otp_verification;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,9 +10,12 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.splitur.app.R;
 import com.splitur.app.databinding.ActivityOtpVerificationBinding;
@@ -92,6 +97,11 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
             }
 
         });
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 100);
+        } else {
+        }
 
 
     }
@@ -183,4 +193,11 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
 //        Log.d("Otp", messageText);
 //        ;
 //    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
 }

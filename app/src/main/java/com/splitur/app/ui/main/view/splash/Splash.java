@@ -61,23 +61,12 @@ public class Splash extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.getStartedBtn.setOnClickListener(view -> {
-
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 100);
-            } else {
-                navToOtpScreen();
-            }
+            navToOtpScreen();
         });
 
     }
 
 
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        navToOtpScreen();
-    }
 
 
     private void navToOtpScreen() {

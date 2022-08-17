@@ -129,39 +129,36 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
             }//for
         }*/
 
+
         //jitni slots hn utny hi members hoty hn
         for (int i = 0; i < slotsCount; i++) {
             if (i == memberCount + 1) {
                 switch (i) {
                     case 1:
-                        holder.one.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-                        holder.one.setTextColor(Color.WHITE);
-                        holder.one.setAlpha(1);
+
+                        visibleMember(holder.one , holder.two , holder.three , holder.four , holder.five , holder.six);
+
                         break;
                     case 2:
-                        holder.two.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-                        holder.two.setTextColor(Color.WHITE);
-                        holder.two.setAlpha(1);
+
+                        visibleMember(holder.two ,holder.one ,  holder.three , holder.four , holder.five , holder.six);
+
                         break;
                     case 3:
-                        holder.three.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-                        holder.three.setTextColor(Color.WHITE);
-                        holder.three.setAlpha(1);
+                        visibleMember(holder.three ,holder.one ,  holder.two , holder.four , holder.five , holder.six);
+
                         break;
                     case 4:
-                        holder.four.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-                        holder.four.setTextColor(Color.WHITE);
-                        holder.four.setAlpha(1);
+                        visibleMember(holder.four ,holder.one ,  holder.two , holder.three , holder.five , holder.six);
+
                         break;
                     case 5:
-                        holder.five.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-                        holder.five.setTextColor(Color.WHITE);
-                        holder.five.setAlpha(1);
+                        visibleMember(holder.five ,holder.one ,  holder.two , holder.four , holder.three , holder.six);
+
                         break;
                     case 6:
-                        holder.six.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-                        holder.six.setTextColor(Color.WHITE);
-                        holder.six.setAlpha(1);
+                        visibleMember(holder.six ,holder.one ,  holder.two , holder.four , holder.five , holder.three);
+
                         break;
 
                 }
@@ -212,6 +209,25 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
             holder.coins.setText(value + " Coins");
         }
     }
+
+    private void visibleMember(TextView one, TextView two, TextView three, TextView four, TextView five, TextView six) {
+        one.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
+        one.setTextColor(Color.WHITE);
+        one.setAlpha(1);
+
+        two.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00000000")));
+        two.setAlpha((float) 0.4);
+        three.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00000000")));
+        three.setAlpha((float) 0.4);
+        four.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00000000")));
+        four.setAlpha((float) 0.4);
+        five.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00000000")));
+        five.setAlpha((float) 0.4);
+        six.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00000000")));
+        six.setAlpha((float) 0.4);
+    }
+
+
 
 
     @Override
