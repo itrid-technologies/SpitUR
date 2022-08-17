@@ -41,10 +41,10 @@ import okhttp3.ResponseBody;
 public final class Constants {
 
 
-    public static String URL_BASE = "http://famger.com:4000/";
+    public static String URL_BASE = "https://famger.com/";
 //     public static String URL_BASE = "http://3.110.227.193:4000/";
 
-    public static String IMG_PATH = "http://famger.com:4000";
+    public static String IMG_PATH = "https://famger.com";
     //        public static String IMG_PATH = "http://3.110.227.193:4000";
     public static String DEVICE_TOKEN = "";
 
