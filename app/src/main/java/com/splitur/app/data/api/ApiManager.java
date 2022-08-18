@@ -12,7 +12,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import com.splitur.app.utils.Constants;
-import com.splitur.app.utils.HttpsTrustManager;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -33,7 +32,6 @@ public class ApiManager {
     //function to get one time service
     public static ApiService getRestApiService() {
         if (sRestApi == null) {
-            HttpsTrustManager.allowAllSSL();
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.readTimeout(15, TimeUnit.SECONDS);
