@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Terms and Conditions"
+                android:text="Terms of Use"
                 android:textColor="#C8C8C8"
                 android:textSize="@dimen/_10sdp" />
 
