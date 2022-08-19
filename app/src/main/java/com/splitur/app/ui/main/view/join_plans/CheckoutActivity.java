@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.gson.JsonObject;
-import com.razorpay.Checkout;
+import com.razorpay.BaseRazorpay;
 import com.razorpay.PaymentResultListener;
 
 import org.json.JSONArray;
@@ -22,15 +24,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
+import com.razorpay.Razorpay;
+import com.razorpay.ValidationListener;
 import com.splitur.app.R;
 import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
+import com.splitur.app.utils.RazorPayed;
 import com.splitur.app.utils.Split;
 
 import java.util.List;
+import java.util.Map;
 
 public class CheckoutActivity extends AppCompatActivity implements PaymentResultListener {
 
@@ -38,23 +43,36 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
     private String groupData;
     String secret_key = "";
     private String groupAdminId = "";
-//    Razorpay razorpay;
+    Razorpay razorpay;
+    private WebView webView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
 
+        webView = findViewById(R.id.checkOutWebview);
+
+        razorpay = new Razorpay(CheckoutActivity.this);
+
+        razorpay.setWebView(webView);
 
 
 
         final Intent data = getIntent();
         String subID;
-        Checkout.preload(Split.getAppContext());
+//        Checkout.preload(Split.getAppContext());
+
+        BaseRazorpay.getAppsWhichSupportUpi(this, list -> {
+            // List of upi supported app
+            Log.e("UPI APPS " , list.toString());
+        });
+
 
 
         if (data.hasExtra("subscription_id")) {
-            subID = data.getStringExtra("subscription_id");
+            subID = "sub_K6YUA9SxuNPXUs";
             group_id = data.getStringExtra("group_id");
             groupData = data.getStringExtra("group_credentials");
             secret_key = data.getStringExtra("secret_key");
@@ -63,20 +81,19 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
                 checkout(subID);
             }
         }
-
-
-
-
-
     }
 
     private void checkout(String subscriptionId) {
+
+
+
         // initialize Razorpay account.
-        Checkout checkout = new Checkout();
+      //  Checkout checkout = new Checkout();
+      //  razorpay = new RazorPayed(secret_key,webView,CheckoutActivity.this);
 
         // set your id as below
 //        checkout.setKeyID("rzp_test_Z5X8uEVBddGyA5");
-        checkout.setKeyID(secret_key);
+        razorpay.changeApiKey(secret_key);
       // razorpay = new Razorpay(CheckoutActivity.this, secret_key);
         final Activity activity = this;
 
@@ -85,24 +102,24 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
 
 
             JSONArray prefAppsJArray = new JSONArray();
-            prefAppsJArray.put("com.phonepe.app");
-
+            prefAppsJArray.put("net.one97.paytm");
             JSONArray otherAppsJArray = new JSONArray();
-            otherAppsJArray.put("net.one97.paytm");
-
-
+            otherAppsJArray.put("com.phonepe.app");
             JSONObject options = new JSONObject();
+
             options.put("subscription_id", subscriptionId);
+            options.put("amount", 29935);
+            options.put("currency" , "INR");
             options.put("recurring", 1);
-            options.put("prefill.email", Constants.USER_EMAIL);
-            options.put("prefill.contact",Constants.NUMBER);
-            options.put("payment_capture", "1");
-            options.put("method", "wallet");
+            options.put("contact", Constants.NUMBER);
+            options.put("email", Constants.USER_EMAIL);
+            options.put("method", "upi");
             options.put("_[flow]", "intent");
-            options.put("upi_app_package_name", "net.one97.paytm");
+            /// options.put("upi_app_package_name", "com.phonepe.app");
+            options.put("preferred_apps_order", prefAppsJArray);
+            options.put("other_apps_order", otherAppsJArray);
+            sendRequest(options);
 
-
-            checkout.open(activity, options);
 
         } catch(Exception e) {
             Log.e("TAG", "Error in starting Razorpay Checkout", e);
@@ -129,6 +146,27 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
 //            e.printStackTrace();
 //        }
     }
+
+    private void sendRequest(JSONObject options) {
+        razorpay.validateFields(options, new ValidationListener() {
+            @Override
+            public void onValidationSuccess() {
+                try {
+                    webView.setVisibility(View.VISIBLE);
+                    razorpay.submit(options, CheckoutActivity.this);
+                } catch (Exception e) {
+                    Log.e("com.example", "Exception: ", e);
+                }
+            }
+
+            @Override
+            public void onValidationError(Map<String, String> error) {
+                Log.d("com.example", "Validation failed: " + error.get("field") + " " + error.get("description"));
+                Toast.makeText(CheckoutActivity.this, "Validation: " + error.get("field") + " " + error.get("description"), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     @Override
     public void onPaymentSuccess(String s) {
@@ -186,8 +224,10 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-//        if(razorpay!=null){
-//            razorpay.onActivityResult(requestCode,resultCode,data);
-//        }
+        if(requestCode == RazorPayed.UPI_INTENT_REQUEST_CODE){
+            razorpay.onActivityResult(requestCode,resultCode,data);
+        }
     }
+
+
 }

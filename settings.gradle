@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Splitur"
-include ':app' , ':libs'
+include ':app'
