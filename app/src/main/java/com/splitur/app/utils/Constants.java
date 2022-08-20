@@ -48,7 +48,6 @@ public final class Constants {
     //        public static String IMG_PATH = "http://3.110.227.193:4000";
     public static String DEVICE_TOKEN = "";
 
-
     public static String GROUP_TITLE = "";
     public static String COST = "";
     public static Boolean VISIBILITY = false;
@@ -80,7 +79,6 @@ public final class Constants {
     public static int AccountId = 0;
     public static String ChatApiKey = "";
     public static int InboxId = 0;
-
 
     public static final String FACEBOOK_PACKAGE_NAME = "com.facebook.katana";
     public static final String TWITTER_PACKAGE_NAME = "com.twitter.android";
@@ -143,7 +141,6 @@ public final class Constants {
         return str;
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static String coinsDate(String dateAdded) {
 
@@ -189,7 +186,6 @@ public final class Constants {
         time = sdf.format(calendar.getTime()).toString();
         return time;
         }
-
 
         public static int getCategoryIcon (Context requireContext,int id){
             int icon;
