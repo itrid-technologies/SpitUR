@@ -47,6 +47,7 @@ public class ChooseAvatar extends AppCompatActivity {
         });
 
 
+
         avatars1.add(1);
         avatars1.add(2);
         avatars1.add(3);
