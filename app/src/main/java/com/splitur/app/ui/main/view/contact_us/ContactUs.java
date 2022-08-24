@@ -138,16 +138,16 @@ public class ContactUs extends Fragment {
         binding.contactLayout.chatLayout.setOnClickListener(view -> {
 
 
-            MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
-            String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
-            if (!conversation_id.isEmpty()) {
-                if (Integer.parseInt(conversation_id) != 0) {
+           // MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
+          //  String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
+           // if (!conversation_id.isEmpty()) {
+              //  if (Integer.parseInt(conversation_id) != 0) {
 
                     Bundle bundle = new Bundle();
                     bundle.putBoolean("isFromChat", true);
                     navigateToNext(view,bundle);
-                }
-            }
+              //  }
+           // }
         });
     }
 
