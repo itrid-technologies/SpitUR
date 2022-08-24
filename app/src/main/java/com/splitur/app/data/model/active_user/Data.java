@@ -10,6 +10,9 @@ public class Data{
 	@SerializedName("name")
 	private String name;
 
+	@SerializedName("earned_coins")
+	private String earned_coins;
+
 	@SerializedName("id")
 	private int id;
 
@@ -21,6 +24,10 @@ public class Data{
 
 	@SerializedName("email")
 	private String email;
+
+	public String getEarned_coins() {
+		return earned_coins;
+	}
 
 	public String getPhone(){
 		return phone;

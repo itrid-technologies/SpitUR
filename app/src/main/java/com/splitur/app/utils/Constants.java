@@ -54,6 +54,8 @@ public final class Constants {
     public static String SLOTS = "";
     public static String OTP = "";
     public static String NUMBER = "";
+    public static String EARNED_COINS = "";
+
     public static String EMAIL = "";
     public static String PASSWORD = "";
     public static String VALIDATION_TYPE = "";

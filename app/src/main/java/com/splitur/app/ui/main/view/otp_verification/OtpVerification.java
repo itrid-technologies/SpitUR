@@ -13,13 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.android.installreferrer.api.InstallReferrerClient;
-import com.android.installreferrer.api.InstallReferrerStateListener;
-import com.android.installreferrer.api.ReferrerDetails;
 import com.splitur.app.R;
 import com.splitur.app.databinding.ActivityOtpVerificationBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
@@ -145,7 +141,7 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
 
     private void authenticateUser(String number, String otp) {
 
-        mViewModel = new OtpVerificationViewModel(number, otp,OtpVerification.this);
+        mViewModel = new OtpVerificationViewModel(number, otp, OtpVerification.this);
         mViewModel.init();
         mViewModel.getData().observe(this, authenticationModel -> {
             if (authenticationModel.isSuccess()) {
@@ -167,26 +163,26 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
                     pm.saveData(Split.getAppContext(), "source_id", authenticationModel.getData().getUser().getSource_id());
                     pm.saveData(Split.getAppContext(), "contact_id", String.valueOf(authenticationModel.getData().getUser().getContact_id()));
 
-                    String id = pm.getData(OtpVerification.this,"Id");
+                    String id = pm.getData(OtpVerification.this, "Id");
 
 
-                    String refer_code  = pm.getData(OtpVerification.this,"ReferralCode");
-                    if (!refer_code.isEmpty()){
-                        if (!Constants.Referrer.isEmpty()) {
-                            ReferralViewModel referralViewModel = new ReferralViewModel(id,refer_code );
-                            referralViewModel.init();
-                            referralViewModel.getData().observe(this, basicModel -> {
-                                if (basicModel.isStatus().equalsIgnoreCase("true")) {
-                                    Toast.makeText(this, basicModel.getMessage(), Toast.LENGTH_SHORT).show();
-                                    ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
-                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                }
-                            });
-                        } else {
-                            ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        }
+                    String refer_code = pm.getData(OtpVerification.this, "ReferralCode");
+                    Toast.makeText(this, refer_code, Toast.LENGTH_SHORT).show();
+                    if (!refer_code.isEmpty()) {
+                        ReferralViewModel referralViewModel = new ReferralViewModel(id, refer_code);
+                        referralViewModel.init();
+                        referralViewModel.getData().observe(this, basicModel -> {
+                            if (basicModel.isStatus().equalsIgnoreCase("true")) {
+                                Toast.makeText(this, basicModel.getMessage(), Toast.LENGTH_SHORT).show();
+                                ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            }
+                        });
+                    } else {
+                        ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
+
 
                 }
 

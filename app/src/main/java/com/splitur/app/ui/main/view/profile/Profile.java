@@ -234,6 +234,9 @@ public class Profile extends Fragment {
                             Constants.USER_EMAIL = activeUserModel.getData().getEmail();
                             Constants.USER_AVATAR =  activeUserModel.getData().getAvatar();
                             Constants.NUMBER = activeUserModel.getData().getPhone();
+                            if (activeUserModel.getData().getEarned_coins() != null){
+                                Constants.EARNED_COINS = activeUserModel.getData().getEarned_coins();
+                            }
 
 //                            MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
 //                            sharedPreferences.saveData(Split.getAppContext(), "userAvatar", Constants.IMG_PATH + activeUserModel.getData().getAvatar());

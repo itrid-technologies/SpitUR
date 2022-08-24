@@ -142,7 +142,7 @@
 <!--            </intent-filter>-->
 <!--        </receiver>-->
         <receiver
-            android:name=".utils.InstallReferrerReceiver"
+            android:name=".utils.RefererDataReciever"
             android:exported="true"
             android:permission="android.permission.INSTALL_PACKAGES">
             <intent-filter>

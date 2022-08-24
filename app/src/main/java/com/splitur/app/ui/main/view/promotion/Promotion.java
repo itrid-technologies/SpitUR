@@ -39,6 +39,12 @@ public class Promotion extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        String earnedCoins = Constants.EARNED_COINS;
+        if (!earnedCoins.isEmpty()){
+            binding.tvTotalCoins.setText(earnedCoins +" Coins");
+        }else {
+            binding.tvTotalCoins.setText("0 Coins");
+        }
 
         initClickListeners();
     }

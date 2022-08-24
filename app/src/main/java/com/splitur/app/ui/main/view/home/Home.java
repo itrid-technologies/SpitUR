@@ -555,6 +555,9 @@ public class Home extends Fragment {
         Constants.USER_EMAIL = activeUserModel.getData().getEmail();
         Constants.USER_AVATAR = activeUserModel.getData().getAvatar();
         Constants.NUMBER = activeUserModel.getData().getPhone();
+        if (activeUserModel.getData().getEarned_coins() != null){
+            Constants.EARNED_COINS = activeUserModel.getData().getEarned_coins();
+        }
 
         setProfileData();
 

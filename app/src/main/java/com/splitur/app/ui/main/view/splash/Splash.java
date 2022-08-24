@@ -1,7 +1,14 @@
 package com.splitur.app.ui.main.view.splash;
 
+
+import static com.splitur.app.utils.RefererDataReciever.REFERRER_DATA;
+
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Window;
@@ -13,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.PreferenceManager;
 
 import com.android.installreferrer.api.InstallReferrerClient;
 import com.android.installreferrer.api.InstallReferrerStateListener;
@@ -23,12 +32,14 @@ import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.view.otp_phone_number.OtpNumber;
 import com.splitur.app.utils.ActivityUtil;
 import com.splitur.app.utils.MySharedPreferences;
+import com.splitur.app.utils.RefererDataReciever;
 
 public class Splash extends AppCompatActivity {
 
     ActivitySplashBinding binding;
     InstallReferrerClient mReferrerClient;
     MySharedPreferences sharedPreferences;
+    BroadcastReceiver mUpdateReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +75,9 @@ public class Splash extends AppCompatActivity {
         }
 
 
-        getReferralCode();
+        //getReferralCode();
+
+        receiveRefferCode();
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -78,6 +91,25 @@ public class Splash extends AppCompatActivity {
 
 
 
+    }
+
+    private void receiveRefferCode() {
+        mUpdateReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+               String referCode = getReferer(Splash.this);
+                sharedPreferences.saveData(Splash.this,"ReferralCode",referCode);
+                Toast.makeText(Splash.this, referCode, Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
+
+    public static String getReferer(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        if (!sp.contains(REFERRER_DATA)) {
+            return "Didn't got any referrer follow instructions :)";
+        }
+        return sp.getString(REFERRER_DATA, null);
     }
 
     private void getReferralCode() {
@@ -126,5 +158,17 @@ public class Splash extends AppCompatActivity {
         ActivityUtil.gotoPage(Splash.this, OtpNumber.class);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mUpdateReceiver);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        LocalBroadcastManager.getInstance(this).registerReceiver(mUpdateReceiver, new IntentFilter(RefererDataReciever.ACTION_UPDATE_DATA));
+        super.onResume();
     }
 }
