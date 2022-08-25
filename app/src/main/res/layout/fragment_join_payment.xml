@@ -114,6 +114,7 @@
                 android:fontFamily="@font/poppin_regular"
                 android:gravity="start|center"
                 android:hint="rajesh@sbi"
+                android:singleLine="true"
                 android:padding="10dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/hint_color"

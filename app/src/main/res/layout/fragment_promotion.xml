@@ -283,6 +283,8 @@
                 android:fontFamily="@font/poppin_regular"
                 android:textSize="13sp"
                 android:ellipsize="end"
+                android:lines="1"
+                android:singleLine="true"
                 android:focusable="false"
                 android:clickable="false"
                 android:paddingEnd="46dp"
