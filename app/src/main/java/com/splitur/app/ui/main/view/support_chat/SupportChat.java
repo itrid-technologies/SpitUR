@@ -1,8 +1,11 @@
 package com.splitur.app.ui.main.view.support_chat;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,25 +14,13 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.google.gson.Gson;
-import com.splitur.app.R;
 import com.splitur.app.data.api.ChatwootApiManager;
-import com.splitur.app.data.model.OTpModel;
 import com.splitur.app.data.model.SupportActionModel;
 import com.splitur.app.data.model.chat_sender.SenderModel;
 import com.splitur.app.data.model.chatwoot_model.MessagesModel;
-import com.splitur.app.data.model.plans.PlanModel;
 import com.splitur.app.databinding.FragmentSupportChatBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
-import com.splitur.app.ui.main.view.member_chat.MemberChatAdapter;
 import com.splitur.app.ui.main.viewmodel.chatwoot_viewmodel.SupportChatViewModel;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
@@ -37,9 +28,6 @@ import com.splitur.app.utils.Split;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,7 +45,7 @@ public class SupportChat extends Fragment {
     SupportChatAdapter adapter;
     String msgList;
     MessagesModel messagesModel;
-    String groupID;
+    String groupID, userID;
     private CountDownTimer waitTimer;
     long remaining_millis;
 
@@ -79,13 +67,17 @@ public class SupportChat extends Fragment {
         clickEvents();
         msgs = new ArrayList<>();
 
-        if (getArguments() != null){
-            String data  = getArguments().getString("support_chat");
+        if (getArguments() != null) {
+            String data = getArguments().getString("support_chat");
+
+            userID = getArguments().getString("chat_user_id");
             groupID = getArguments().getString("chat_group_id");
             Gson gson = new Gson();
             messagesModel = gson.fromJson(data, MessagesModel.class);
-            if (messagesModel.getPayload() != null){
-                buildSupportRv(messagesModel);
+            if (messagesModel != null) {
+                if (messagesModel.getPayload() != null) {
+                    buildSupportRv(messagesModel);
+                }
             }
         }
 
@@ -133,10 +125,10 @@ public class SupportChat extends Fragment {
 
     private void getSupportChat() {
         MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
-        String conversation_id = sharedPreferences.getData(Split.getAppContext(),"unique_conversation_id");
+        String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
 
         int account_id = Constants.AccountId;
-        Call<MessagesModel> call = ChatwootApiManager.getRestApiService().getSupportChat(Constants.ChatApiKey,account_id, Integer.parseInt(conversation_id));
+        Call<MessagesModel> call = ChatwootApiManager.getRestApiService().getSupportChat(Constants.ChatApiKey, account_id, Integer.parseInt(conversation_id));
         call.enqueue(new Callback<MessagesModel>() {
             @Override
             public void onResponse(@NonNull Call<MessagesModel> call, @NonNull Response<MessagesModel> response) {
@@ -150,12 +142,12 @@ public class SupportChat extends Fragment {
                     }
                 } else if (response.code() == 400) {
                     if (response.errorBody() != null) {
-                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+                        Constants.getApiError(Split.getAppContext(), response.errorBody());
 
                     }
                 } else if (response.code() == 500) {
                     if (response.errorBody() != null) {
-                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+                        Constants.getApiError(Split.getAppContext(), response.errorBody());
 
                     }
                 }
@@ -169,18 +161,16 @@ public class SupportChat extends Fragment {
         });
         viewModel = new SupportChatViewModel(0, "");
         viewModel.getChat();
-        viewModel.getChatData().observe(getViewLifecycleOwner(),messagesModel -> {
-            if (messagesModel.getPayload() != null){
+        viewModel.getChatData().observe(getViewLifecycleOwner(), messagesModel -> {
+            if (messagesModel.getPayload() != null) {
 
             }
         });
     }
 
 
-
-
     private void buildSupportRv(MessagesModel messagesModel) {
-        for (int i = 0; i<= messagesModel.getPayload().size()-1; i++) {
+        for (int i = 0; i <= messagesModel.getPayload().size() - 1; i++) {
 
             if (messagesModel.getPayload().get(i).getSender() != null) {
 
@@ -190,13 +180,13 @@ public class SupportChat extends Fragment {
                             messagesModel.getPayload().get(i).getCreatedAt(), messagesModel.getMeta().getAssignee()
                     ));
 
-                }else {
+                } else {
                     msgs.add(new SenderModel(messagesModel.getPayload().get(i).getContent(),
                             ""
                     ));
                 }
-            }else {
-                if (!messagesModel.getPayload().get(i).getContent().isEmpty()){
+            } else {
+                if (!messagesModel.getPayload().get(i).getContent().isEmpty()) {
                     msgs.add(new SupportActionModel(messagesModel.getPayload().get(i).getContent(), ""));
                 }
 
@@ -213,7 +203,6 @@ public class SupportChat extends Fragment {
         binding.supportChatRv.scrollToPosition(msgs.size() - 1);
 
 
-
     }
 
     private void clickEvents() {
@@ -224,14 +213,20 @@ public class SupportChat extends Fragment {
 
         binding.sendSupportMessage.setOnClickListener(view -> {
             String query = binding.message.getText().toString();
-            if (!query.isEmpty()){
+            if (!query.isEmpty()) {
 
                 if (msgs.size() == 0) {
                     MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
                     String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
 
                     if (Integer.parseInt(conversation_id) != 0) {
-                        String query1 = "My GroupID is " + groupID;
+                        String query1;
+                        if (groupID != null){
+                           query1 = "My GroupID is " + groupID;
+                        }else {
+                            query1 = "My ID is " + userID;
+
+                        }
                         viewModel = new SupportChatViewModel(Integer.parseInt(conversation_id), query1);
                         viewModel.initQuery();
                         viewModel.getSend_data().observe(getViewLifecycleOwner(), sendSupportMessageModel -> {
@@ -246,7 +241,7 @@ public class SupportChat extends Fragment {
                 }
 
                 MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
-                String conversation_id = sharedPreferences.getData(Split.getAppContext(),"unique_conversation_id");
+                String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
 
                 if (Integer.parseInt(conversation_id) != 0) {
                     viewModel = new SupportChatViewModel(Integer.parseInt(conversation_id), query);

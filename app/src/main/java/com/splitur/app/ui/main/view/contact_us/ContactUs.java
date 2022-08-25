@@ -150,7 +150,10 @@ public class ContactUs extends Fragment {
                 if (Integer.parseInt(conversation_id) != 0) {
 
                     if (created == 0 && joined == 0){
-                        Navigation.findNavController(view).navigate(R.id.action_contactUs_to_supportChat);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("chat_user_id", String.valueOf(Constants.ID)); // userid
+                        navigateToChat(view, bundle);
+
                     }else {
 
                         Bundle bundle = new Bundle();
@@ -160,6 +163,11 @@ public class ContactUs extends Fragment {
                 }
             }
         });
+    }
+
+    private void navigateToChat(View view, Bundle bundle) {
+        Navigation.findNavController(view).navigate(R.id.action_contactUs_to_supportChat,bundle);
+
     }
 
     private void checkGroupStatus() {
