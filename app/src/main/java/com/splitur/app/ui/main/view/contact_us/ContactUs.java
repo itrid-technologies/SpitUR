@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.google.gson.JsonObject;
@@ -19,6 +20,7 @@ import com.splitur.app.data.api.ChatwootApiManager;
 import com.splitur.app.data.model.chatwoot_model.ConversationModel;
 import com.splitur.app.databinding.FragmentContactUsBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
+import com.splitur.app.ui.main.viewmodel.created_and_joined.CreatedAndJoinedViewModel;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
@@ -32,7 +34,9 @@ public class ContactUs extends Fragment {
 
 
     FragmentContactUsBinding binding;
-    String msgs;
+    private CreatedAndJoinedViewModel createdAndJoinedViewModel;
+    int created = 1;
+    int joined = 1;
 
 
     @Override
@@ -51,6 +55,8 @@ public class ContactUs extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initClickListeners();
+        checkGroupStatus();
+
 
         try {
 
@@ -138,17 +144,46 @@ public class ContactUs extends Fragment {
         binding.contactLayout.chatLayout.setOnClickListener(view -> {
 
 
-           // MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
-          //  String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
-           // if (!conversation_id.isEmpty()) {
-              //  if (Integer.parseInt(conversation_id) != 0) {
+            MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
+            String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
+            if (!conversation_id.isEmpty()) {
+                if (Integer.parseInt(conversation_id) != 0) {
 
-                    Bundle bundle = new Bundle();
-                    bundle.putBoolean("isFromChat", true);
-                    navigateToNext(view,bundle);
-              //  }
-           // }
+                    if (created == 0 && joined == 0){
+                        Navigation.findNavController(view).navigate(R.id.action_contactUs_to_supportChat);
+                    }else {
+
+                        Bundle bundle = new Bundle();
+                        bundle.putBoolean("isFromChat", true);
+                        navigateToNext(view, bundle);
+                    }
+                }
+            }
         });
+    }
+
+    private void checkGroupStatus() {
+
+        createdAndJoinedViewModel = new CreatedAndJoinedViewModel();
+        createdAndJoinedViewModel.init();
+        createdAndJoinedViewModel.getData().observe(getViewLifecycleOwner(), allCreatedGroupModel -> {
+            if (allCreatedGroupModel.isSuccess()) {
+                if (allCreatedGroupModel.getData().size() == 0) {
+                    created = 0;
+                }
+            }
+        });
+
+
+        createdAndJoinedViewModel.initJoin();
+        createdAndJoinedViewModel.getJoinData().observe(getViewLifecycleOwner(), allJoinedGroupModel -> {
+            if (allJoinedGroupModel.isSuccess()) {
+                if (allJoinedGroupModel.getData().size() == 0) {
+                    joined = 0;
+                }
+            }
+        });
+
     }
 
     private void navigateToNext(View view, Bundle bundle) {

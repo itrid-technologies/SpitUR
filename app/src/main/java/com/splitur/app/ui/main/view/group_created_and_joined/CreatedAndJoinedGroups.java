@@ -49,6 +49,7 @@ public class CreatedAndJoinedGroups extends Fragment {
     List<com.splitur.app.data.model.all_joined_groups.DataItem> join_data;
     private boolean shouldGoToSupportChat = false;
 
+
     private String msgs;
 
     @Override
