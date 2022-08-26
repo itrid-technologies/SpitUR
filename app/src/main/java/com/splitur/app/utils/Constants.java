@@ -203,19 +203,19 @@ public final class Constants {
                     icon = R.drawable.movies;
                     break;
                 case 2:
-                    icon = R.drawable.cloud;
-                    break;
-                case 3:
-                    icon = R.drawable.games;
-                    break;
-                case 4:
                     icon = R.drawable.music;
                     break;
+                case 3:
+                    icon = R.drawable.vpn;
+                    break;
+                case 4:
+                    icon = R.drawable.cloud;
+                    break;
                 case 5:
-                    icon = R.drawable.others;
+                    icon = R.drawable.games;
                     break;
                 case 6:
-                    icon = R.drawable.vpn;
+                    icon = R.drawable.others;
                     break;
                 default:
                     icon = R.color.images_placeholder;
