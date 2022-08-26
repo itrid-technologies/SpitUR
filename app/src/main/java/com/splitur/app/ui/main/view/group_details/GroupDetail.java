@@ -46,7 +46,7 @@ public class GroupDetail extends Fragment {
     ProgressDialog progressDialog;
     int currentPage;
     Parcelable recyclerViewState;
-    private boolean flag_loading;
+    private boolean flag_loading , isApiHit;
     int nextPage = 1;
     private int searchDataCurrentPage = 0;
 
@@ -71,6 +71,8 @@ public class GroupDetail extends Fragment {
 
         }
 
+
+
         binding.joinPlanSearchView.removeLetter.setOnClickListener(view1 -> {
             binding.joinPlanSearchView.searchField.setText("");
             getAllDataBack(nextPage);
@@ -79,7 +81,6 @@ public class GroupDetail extends Fragment {
         getAllDataBack(nextPage);
 
 
-        searchTextWatcher();
 
         binding.groupDetailToolbar.back.setOnClickListener(view1 -> {
             Navigation.findNavController(view1).navigateUp();
@@ -122,17 +123,21 @@ public class GroupDetail extends Fragment {
             }
         });
 
+        searchTextWatcher();
+
     }
 
     private void searchTextWatcher() {
         binding.joinPlanSearchView.searchField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count > 0) {
+                if (start > 0) {
                     binding.joinPlanSearchView.removeLetter.setVisibility(View.VISIBLE);
                 } else {
-                    pagingDetailItems.clear();
-                    getAllDataBack(1);
+                    if (!isApiHit){
+                        pagingDetailItems.clear();
+                        getAllDataBack(1);
+                    }
                     binding.joinPlanSearchView.removeLetter.setVisibility(View.GONE);
                 }
             }
@@ -165,6 +170,8 @@ public class GroupDetail extends Fragment {
     }
 
     private void getAllDataBack(int page) {
+        isApiHit = true;
+
         viewModel = new GroupDetailViewModel(sub_categoryId, "", String.valueOf(page));
         viewModel.init();
         viewModel.getDetailData().observe(getViewLifecycleOwner(), groupDetailModel -> {
@@ -175,6 +182,8 @@ public class GroupDetail extends Fragment {
                 if (groupDetailModel.getData() != null) {
 
                     flag_loading = true;
+                    isApiHit = false;
+
 
                     if (groupDetailModel.getData().size() > 0) {
 //                        detailItems.addAll(groupDetailModel.getData());

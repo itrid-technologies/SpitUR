@@ -180,13 +180,20 @@ public final class Constants {
     public static String getTime1(String data) {
 
         String time;
-        String[] date_value = data.split("T");
-        time = date_value[1];
+        String[] time_value = data.split("T");
+        time = time_value[1].substring(0, Math.min(time_value[1].length(), 8));
 
-        SimpleDateFormat sdf = new SimpleDateFormat("KK:mm aaa");
-        Calendar calendar = Calendar.getInstance();
-        time = sdf.format(calendar.getTime()).toString();
-        return time;
+        String time1 = "";
+        try {
+            SimpleDateFormat t24 = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat t12 = new SimpleDateFormat("hh:mm aaa");
+            Date date = t24.parse(time);
+            time1 = t12.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return time1;
         }
 
         public static int getCategoryIcon (Context requireContext,int id){
