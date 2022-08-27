@@ -48,9 +48,13 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
     public void onBindViewHolder(@NonNull HomeSectionAdapter.ViewHolder holder, int position) {
 
         HomeDataItem dataItem = homeDataItems.get(position);
+
         holder.title.setText(dataItem.getTitle());
+
         if (dataItem.getSubCategory().size() > 0) {
+            holder.title.setVisibility(View.VISIBLE);
             holder.categoryView.setVisibility(View.VISIBLE);
+            holder.view_all.setVisibility(View.VISIBLE);
 
 
             if (dataItem.getSubCategory().size() == 1) {
@@ -163,6 +167,8 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
 
         } else {
             holder.categoryView.setVisibility(View.GONE);
+            holder.title.setVisibility(View.GONE);
+            holder.view_all.setVisibility(View.GONE);
         }
 
 

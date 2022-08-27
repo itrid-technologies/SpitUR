@@ -48,6 +48,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlansVH> {
 
         PlanDataItem dataItem = planDataItems.get(position);
         holder.layout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(dataItem.getColor())));
+        holder.join.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(dataItem.getColor())));
 //        Glide.with(context)
 //                .load(Constants.IMG_PATH + dataItem.getIcon())
 //                .placeholder(R.drawable.plan_icon)
