@@ -92,6 +92,7 @@ public class Plans extends Fragment {
           //  pm.saveData(Split.getAppContext(), "PLAN_ID", plan_id);
             Constants.PLAN_ID = String.valueOf(planModelList.get(position).getId());
             Constants.SUB_CAT_TITLE = planModelList.get(position).getName();
+            Constants.SLOTS = planModelList.get(position).getNoOfSlots();
            // pm.saveData(Split.getAppContext(), "TITLE", planModelList.get(position).getName());
 
             Navigation.findNavController(requireView()).navigate(R.id.action_plans2_to_visibility2);

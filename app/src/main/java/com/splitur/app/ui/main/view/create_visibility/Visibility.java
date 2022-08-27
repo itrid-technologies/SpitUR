@@ -1,6 +1,7 @@
 package com.splitur.app.ui.main.view.create_visibility;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
-import com.bumptech.glide.Glide;
 
 import com.splitur.app.R;
 import com.splitur.app.databinding.FragmentVisibilityBinding;
@@ -51,24 +50,32 @@ public class Visibility extends Fragment {
     }
 
     private void setProfileData() {
-        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
-        String user_name = Constants.USER_NAME;
-        String user_ID = Constants.USER_ID;
-        String avatar = Constants.USER_AVATAR;
-        slot = Constants.SLOTS;
-        if (!slot.isEmpty()) {
-            Constants.SLOTS = slot;
+        try {
+
+            MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+            String user_name = Constants.USER_NAME;
+            String user_ID = Constants.USER_ID;
+            String avatar = Constants.USER_AVATAR;
+            slot = Constants.SLOTS;
+            if (!slot.isEmpty()) {
+                Constants.SLOTS = slot;
+
+            } else {
+                Constants.SLOTS = "4";
+            }
             slot = Constants.SLOTS;
 
-        } else {
-            Constants.SLOTS = "4";
-            slot = Constants.SLOTS;
+            binding.visibilityProfile.netflix.setText(Constants.SUB_CAT_TITLE);
+            binding.visibilityProfile.userName.setText(String.format("@%s", user_ID));
+            binding.visibilityProfile.count.setText(slot + " Slots");
+            binding.visibilityProfile.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
+        } catch (Exception ex) {
+            if (ex instanceof NumberFormatException) {
+                Log.e("TAG", "NumberFormatException: " + ex.getLocalizedMessage());
+            } else {
+                ex.printStackTrace();
+            }
         }
-
-        binding.visibilityProfile.netflix.setText(Constants.SUB_CAT_TITLE);
-        binding.visibilityProfile.userName.setText(String.format("@%s", user_ID));
-        binding.visibilityProfile.count.setText(slot + " Slots");
-        binding.visibilityProfile.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
 //        Glide.with(Split.getAppContext()).load(avatar).into(binding.visibilityProfile.userImage);
     }
 

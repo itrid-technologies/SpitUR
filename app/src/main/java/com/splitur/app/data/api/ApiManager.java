@@ -36,7 +36,8 @@ public class ApiManager {
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.readTimeout(15, TimeUnit.SECONDS);
             httpClient.connectTimeout(15, TimeUnit.SECONDS);
-            httpClient.addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BODY));
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            httpClient.addInterceptor(logging);
 
 
             Gson gson = new GsonBuilder()
@@ -87,6 +88,7 @@ public class ApiManager {
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
@@ -98,7 +100,9 @@ public class ApiManager {
             });
             builder.connectTimeout(6000, TimeUnit.SECONDS)
                     .readTimeout(6000, TimeUnit.SECONDS)
-                    .writeTimeout(6000, TimeUnit.SECONDS).connectionPool(new ConnectionPool(50, 50000, TimeUnit.SECONDS));
+                    .writeTimeout(6000, TimeUnit.SECONDS).connectionPool(new ConnectionPool(50, 50000, TimeUnit.SECONDS))
+                    .addInterceptor(logging);
+
             return builder.build();
 
         } catch (Exception e) {

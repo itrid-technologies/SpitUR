@@ -44,16 +44,6 @@ public class TermsAndConditions extends AppCompatActivity {
         setContentView(mBinding.getRoot());
 
 
-
-        String number = Constants.USER_NUMBER;
-        String name = Constants.USER_NAME;
-        String userid = Constants.USER_ID;
-        String avatar = Constants.USER_AVATAR;
-
-
-        mViewModel = new RegisterViewModel(name, number, userid, avatar);
-        mViewModel.init();
-
         fetchSettingsFromServer();
         initClickListeners();
     }
@@ -71,6 +61,13 @@ public class TermsAndConditions extends AppCompatActivity {
             } else if (!isPrivacyAgreed) {
                 Toast.makeText(this, "Please agree to Privacy Policy.", Toast.LENGTH_SHORT).show();
             } else {
+                String number = Constants.USER_NUMBER;
+                String name = Constants.USER_NAME;
+                String userid = Constants.USER_ID;
+                String avatar = Constants.USER_AVATAR;
+                mViewModel = new RegisterViewModel(name, number, userid, avatar);
+                mViewModel.init();
+
                 mViewModel.getData().observe(this, registerModel -> {
                     if (registerModel.isSuccess()) {
                         ActivityUtil.gotoPage(TermsAndConditions.this, OtpVerification.class);

@@ -3,6 +3,7 @@ package com.splitur.app.ui.main.adapter;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +14,16 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 import com.splitur.app.R;
 import com.splitur.app.data.model.plans.PlanDataItem;
+
+import java.util.List;
 
 public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlansVH> {
 
     private final List<PlanDataItem> planDataItems;
     private final Context context;
     private ItemClickListener mListener;
-
 
 
     public void setOnPlanSelectListener(ItemClickListener listener) {
@@ -40,23 +40,36 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlansVH> {
     @Override
     public PlanAdapter.PlansVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.plans_list_item_design, parent, false);
-        return new PlanAdapter.PlansVH(view,mListener);
+        return new PlanAdapter.PlansVH(view, mListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PlanAdapter.PlansVH holder, int position) {
 
         PlanDataItem dataItem = planDataItems.get(position);
-        holder.layout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(dataItem.getColor())));
-        holder.join.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(dataItem.getColor())));
+
+        String dyColor = dataItem.getColor().toLowerCase();
+        if (!dyColor.contains("#")) {
+            dyColor = "#" + dyColor;
+        }
+        Log.e("TAG", "parsed color: " + dyColor);
+
+        try {
+            holder.layout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(dyColor)));
+            holder.join.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(dyColor)));
+            holder.icon_bg.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(dyColor)));
+            holder.body.setTextColor(Color.parseColor(dyColor));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
 //        Glide.with(context)
 //                .load(Constants.IMG_PATH + dataItem.getIcon())
 //                .placeholder(R.drawable.plan_icon)
 //                .into(holder.icon);
-        holder.icon_bg.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(dataItem.getColor())));
+
         holder.title.setText(dataItem.getName());
         holder.body.setText(dataItem.getDescription());
-        holder.body.setTextColor(Color.parseColor(dataItem.getColor()));
 
     }
 
@@ -65,13 +78,13 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlansVH> {
         return planDataItems.size();
     }
 
-    public interface ItemClickListener{
+    public interface ItemClickListener {
         void onPlanSelect(int position);
     }
 
     public static class PlansVH extends RecyclerView.ViewHolder {
         public ConstraintLayout layout;
-        public TextView title, body ;
+        public TextView title, body;
         TextView join;
         ImageView icon_bg;
         ImageView icon;
