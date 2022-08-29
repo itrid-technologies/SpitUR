@@ -61,7 +61,7 @@ public class JoinCheckOut extends Fragment {
     String code = "";
 
     JoinGroupViewModel joinGroupViewModel;
--payment gatewayfees    String   commission;
+    String   commission;
     Intent webViewIntent;
     private String urlTerms = "nil";
     private String urlPrivacy = "nil";
