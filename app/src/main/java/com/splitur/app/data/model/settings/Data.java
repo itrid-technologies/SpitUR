@@ -10,6 +10,9 @@ public class Data{
 	@SerializedName("commission_percentage")
 	private String commissionPercentage;
 
+	@SerializedName("payment_fee")
+	private String paymentFee;
+
 	@SerializedName("privay_url")
 	private String privayUrl;
 
@@ -29,6 +32,9 @@ public class Data{
 		return createdAt;
 	}
 
+	public String getpaymentFee(){
+		return paymentFee;
+	}
 	public String getCommissionPercentage(){
 		return commissionPercentage;
 	}

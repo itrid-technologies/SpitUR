@@ -61,7 +61,7 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="-"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_18sdp"
+                    android:textSize="@dimen/_17sdp"
                     app:layout_constraintStart_toEndOf="@id/user_image"
                     app:layout_constraintTop_toTopOf="parent" />
 

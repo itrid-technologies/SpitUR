@@ -61,7 +61,7 @@ public class JoinCheckOut extends Fragment {
     String code = "";
 
     JoinGroupViewModel joinGroupViewModel;
-    String commission;
+-payment gatewayfees    String   commission;
     Intent webViewIntent;
     private String urlTerms = "nil";
     private String urlPrivacy = "nil";
@@ -131,11 +131,11 @@ public class JoinCheckOut extends Fragment {
             public void onResponse(@NonNull Call<SettingsResponse> call, @NonNull Response<SettingsResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().isSuccess()) {
-                        commission = response.body().getData().getCommissionPercentage();
+                        commission = response.body().getData().getpaymentFee();
+                            final double fee = (Double.parseDouble(value) / 100) * Double.parseDouble(commission);
+                            final String roundedFee = String.format(Locale.getDefault(), "%.2f", fee);
+                            binding.payment.setText(roundedFee);
 
-                        final double fee = (Double.parseDouble(value) / 100) * Double.parseDouble(commission);
-                        final String roundedFee = String.format(Locale.getDefault(), "%.2f", fee);
-                        binding.payment.setText(roundedFee);
 //String totalCoins = String.valueOf(Double.parseDouble(value) + Double.parseDouble(commission));
 //binding.btnJoin.setText(String.format("Join for %s Coins", totalCoins));
 
