@@ -72,19 +72,14 @@ public class GroupDetail extends Fragment {
         }
 
 
+        clickListeners();
 
-        binding.joinPlanSearchView.removeLetter.setOnClickListener(view1 -> {
-            binding.joinPlanSearchView.searchField.setText("");
-            getAllDataBack(nextPage);
-        });
 
         getAllDataBack(nextPage);
 
 
 
-        binding.groupDetailToolbar.back.setOnClickListener(view1 -> {
-            Navigation.findNavController(view1).navigateUp();
-        });
+
 
         pagingDetailItems = new ArrayList<>();
         binding.groupsDetailList.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -127,11 +122,29 @@ public class GroupDetail extends Fragment {
 
     }
 
+    private void clickListeners() {
+
+        binding.joinPlanSearchView.removeLetter.setOnClickListener(view1 -> {
+            binding.joinPlanSearchView.searchField.setText("");
+            getAllDataBack(nextPage);
+        });
+
+        binding.groupDetailToolbar.back.setOnClickListener(view1 -> {
+            Navigation.findNavController(view1).navigateUp();
+        });
+
+
+        binding.refreshGroupData.setOnClickListener(view -> {
+            getAllDataBack(1);
+        });
+
+    }
+
     private void searchTextWatcher() {
         binding.joinPlanSearchView.searchField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (start > 0) {
+                if (count > 0) {
                     binding.joinPlanSearchView.removeLetter.setVisibility(View.VISIBLE);
                 } else {
                     if (!isApiHit){
@@ -180,18 +193,25 @@ public class GroupDetail extends Fragment {
             if (groupDetailModel.isSuccess()) {
 
                 if (groupDetailModel.getData() != null) {
+                    binding.noGroupAvailable.setVisibility(View.GONE);
 
                     flag_loading = true;
                     isApiHit = false;
-
 
                     if (groupDetailModel.getData().size() > 0) {
 //                        detailItems.addAll(groupDetailModel.getData());
                         pagingDetailItems.addAll(groupDetailModel.getData());
                         maxPageLimit = groupDetailModel.getPage();
                         buildRec(pagingDetailItems);
+                    }else {
+                        binding.noGroupAvailable.setVisibility(View.VISIBLE);
+                        binding.groupsDetailList.setVisibility(View.GONE);
                     }
                 } else {
+
+                    binding.noGroupAvailable.setVisibility(View.VISIBLE);
+                    binding.groupsDetailList.setVisibility(View.GONE);
+
 
                     flag_loading = false;
                 }
@@ -223,9 +243,15 @@ public class GroupDetail extends Fragment {
             if (groupDetailModel.isSuccess()) {
 
                 if (groupDetailModel.getData().size() > 0) {
+                    binding.noGroupAvailable.setVisibility(View.GONE);
+
                     detailItems = new ArrayList<>();
                     detailItems.addAll(groupDetailModel.getData());
                     sarchBuildRec(detailItems);
+                }else {
+                    binding.noGroupAvailable.setVisibility(View.VISIBLE);
+                    binding.groupsDetailList.setVisibility(View.GONE);
+
                 }
             }
         });
@@ -239,9 +265,14 @@ public class GroupDetail extends Fragment {
             if (groupDetailModel.isSuccess()) {
 
                 if (groupDetailModel.getData().size() > 0) {
+                    binding.noGroupAvailable.setVisibility(View.GONE);
+
                     detailItems = new ArrayList<>();
                     detailItems.addAll(groupDetailModel.getData());
                     sarchBuildRec(detailItems);
+                }else {
+                    binding.noGroupAvailable.setVisibility(View.VISIBLE);
+                    binding.groupsDetailList.setVisibility(View.GONE);
                 }
             }
         });
@@ -250,6 +281,8 @@ public class GroupDetail extends Fragment {
     private void buildRec(List<DataItem> detailItems) {
         binding.groupsDetailList.setVisibility(View.VISIBLE);
         binding.searchGroupsDetailList.setVisibility(View.GONE);
+        binding.noGroupAvailable.setVisibility(View.GONE);
+
 
         binding.groupsDetailList.setLayoutManager(mLayoutManager);
         GroupDetailAdapter adapter = new GroupDetailAdapter(requireContext(), detailItems);
@@ -270,6 +303,7 @@ public class GroupDetail extends Fragment {
     private void sarchBuildRec(List<DataItem> detailItems) {
         binding.searchGroupsDetailList.setVisibility(View.VISIBLE);
         binding.groupsDetailList.setVisibility(View.GONE);
+        binding.noGroupAvailable.setVisibility(View.GONE);
 
         binding.searchGroupsDetailList.setLayoutManager(new LinearLayoutManager(requireContext()));
         GroupDetailAdapter adapter = new GroupDetailAdapter(Split.getAppContext(), detailItems);

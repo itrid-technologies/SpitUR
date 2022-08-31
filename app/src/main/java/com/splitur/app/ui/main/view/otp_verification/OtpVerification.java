@@ -167,16 +167,17 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
 
 
                     String refer_code = pm.getData(OtpVerification.this, "ReferralCode");
-                    Toast.makeText(this, refer_code, Toast.LENGTH_SHORT).show();
+
                     if (!refer_code.isEmpty()) {
+                        Toast.makeText(this, refer_code, Toast.LENGTH_SHORT).show();
                         ReferralViewModel referralViewModel = new ReferralViewModel(id, refer_code);
                         referralViewModel.init();
                         referralViewModel.getData().observe(this, basicModel -> {
                             if (basicModel.isStatus().equalsIgnoreCase("true")) {
                                 Toast.makeText(this, basicModel.getMessage(), Toast.LENGTH_SHORT).show();
-                                ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                             }
+                            ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         });
                     } else {
                         ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);

@@ -14,11 +14,12 @@ public class SearchCreateViewModel extends ViewModel {
     private MutableLiveData<PopularSubCategoryModel> popularByCatId;
 
     private SearchCreateRepository searchCreateRepository;
-    String value, cat_id;
+    String value, cat_id,pageNo;
 
-    public SearchCreateViewModel(String data, String id) {
+    public SearchCreateViewModel(String data, String id, String page) {
         this.value = data;
         this.cat_id = id;
+        this.pageNo = page;
         searchCreateRepository = new SearchCreateRepository();
     }
 
@@ -37,7 +38,7 @@ public class SearchCreateViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        searchData = searchCreateRepository.getSearchedSubCategory(value);
+        searchData = searchCreateRepository.getSearchedSubCategory(value,pageNo);
     }
 
     public void initSearchByCat() {
@@ -46,14 +47,14 @@ public class SearchCreateViewModel extends ViewModel {
             // we know the userId won't change
             return;
         }
-        catSearchData = searchCreateRepository.getSearchedSubCategoryByCatId(value,cat_id);
+        catSearchData = searchCreateRepository.getSearchedSubCategoryByCatId(value,cat_id,pageNo);
     }
 
     public void initPopularById() {
         if (this.popularByCatId != null) {
             return;
         }
-        popularByCatId = searchCreateRepository.getPopularCategoriesById(cat_id);
+        popularByCatId = searchCreateRepository.getPopularCategoriesById(cat_id,pageNo);
     }
 
     public MutableLiveData<PopularSubCategoryModel> getPopularCategoryData() {

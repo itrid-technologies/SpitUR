@@ -3,6 +3,7 @@ package com.splitur.app.ui.main.adapter.group_detail_adapter;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,8 +85,12 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
                 holder.online_offline.setText("Offline");
                 holder.online_icon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
             }
-
-            holder.user.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(dataItem.getGroupAdmin().getAvatar())));
+            try {
+                holder.user.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(dataItem.getGroupAdmin().getAvatar())));
+            }catch (NumberFormatException e){
+                Log.e("DataType Error", e.getMessage());
+                holder.user.setImageResource(R.drawable.user);
+            }
 //            Glide.with(context)
 //                    .load(Constants.IMG_PATH + dataItem.getGroupAdmin().getAvatar())
 //                    .placeholder(R.color.images_placeholder)
@@ -132,7 +137,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
 
         //jitni slots hn utny hi members hoty hn
         for (int i = 0; i < slotsCount; i++) {
-            if (i == memberCount + 1) {
+            if (i == memberCount) {
                 switch (i) {
                     case 1:
 

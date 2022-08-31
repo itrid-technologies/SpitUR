@@ -29,7 +29,12 @@ public class SearchCreateRepository {
 
         final MutableLiveData<PopularSubCategoryModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
-        Call<PopularSubCategoryModel> call = apiService.getPopularCategoriesHome();
+
+        final JsonObject obj = new JsonObject();
+        obj.addProperty("page","1");
+
+
+        Call<PopularSubCategoryModel> call = apiService.getPopularCategoriesHome(obj);
         call.enqueue(new Callback<PopularSubCategoryModel>() {
             @Override
             public void onResponse(@NonNull Call<PopularSubCategoryModel> call, @NonNull Response<PopularSubCategoryModel> response) {
@@ -57,10 +62,12 @@ public class SearchCreateRepository {
         return liveData;
     }
 
-    public MutableLiveData<PopularSubCategoryModel> getPopularCategoriesById(String id) {
+    public MutableLiveData<PopularSubCategoryModel> getPopularCategoriesById(String cat_id, String page) {
 
         final JsonObject obj = new JsonObject();
-        obj.addProperty("category_id",id);
+        obj.addProperty("category_id",cat_id);
+        obj.addProperty("page",page);
+
 
         final MutableLiveData<PopularSubCategoryModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
@@ -93,7 +100,7 @@ public class SearchCreateRepository {
     }
 
 
-    public MutableLiveData<PopularSubCategoryModel> getSearchedSubCategory(String data) {
+    public MutableLiveData<PopularSubCategoryModel> getSearchedSubCategory(String value, String page) {
 
 
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
@@ -103,7 +110,7 @@ public class SearchCreateRepository {
         final MutableLiveData<PopularSubCategoryModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();
 
-        Call<PopularSubCategoryModel> call = apiService.getsubCat("Bearer "+token, data);
+        Call<PopularSubCategoryModel> call = apiService.getsubCat("Bearer "+token, value);
         call.enqueue(new Callback<PopularSubCategoryModel>() {
             @Override
             public void onResponse(@NonNull Call<PopularSubCategoryModel> call, @NonNull Response<PopularSubCategoryModel> response) {
@@ -131,13 +138,14 @@ public class SearchCreateRepository {
         return liveData;
     }
 
-    public MutableLiveData<PopularSubCategoryModel> getSearchedSubCategoryByCatId(String data, String id) {
+    public MutableLiveData<PopularSubCategoryModel> getSearchedSubCategoryByCatId(String data, String id, String page) {
 
         MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
         String token = preferences.getData(Split.getAppContext(), "userAccessToken");
 
         JsonObject object = new JsonObject();
         object.addProperty("category_id", id);
+        object.addProperty("page",page);
 
         final MutableLiveData<PopularSubCategoryModel> liveData = new MutableLiveData<>();
         apiService = ApiManager.getRestApiService();

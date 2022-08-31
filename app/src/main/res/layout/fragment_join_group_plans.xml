@@ -40,6 +40,61 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/join_plan_search_view"
+                android:id="@+id/no_group_available">
+
+
+                <ImageView
+                    android:layout_width="224dp"
+                    android:layout_height="240dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:src="@drawable/no_group_available"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/no_group_image"/>
+
+                <TextView
+                    android:layout_width="@dimen/_230sdp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/no_group_image"
+                    app:layout_constraintEnd_toEndOf="@id/no_group_image"
+                    app:layout_constraintTop_toBottomOf="@id/no_group_image"
+                    android:text="Oops!!, Looks like nodbody is sharing in this category."
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:alpha="0.6"
+                    android:gravity="center"
+                    android:id="@+id/tv_no_data_available"/>
+
+                <Button
+                    android:id="@+id/refresh_group_data"
+                    style="@style/buttonStyle"
+                    android:layout_width="162dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_round_bg"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:text="Refresh"
+
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_no_data_available"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

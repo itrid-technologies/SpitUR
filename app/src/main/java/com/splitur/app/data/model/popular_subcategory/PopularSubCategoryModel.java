@@ -14,8 +14,15 @@ public class PopularSubCategoryModel{
 	@SerializedName("message")
 	private String message;
 
+	@SerializedName("page")
+	private int page;
+
 	public List<DataItem> getData(){
 		return data;
+	}
+
+	public int getPage() {
+		return page;
 	}
 
 	public boolean isSuccess(){

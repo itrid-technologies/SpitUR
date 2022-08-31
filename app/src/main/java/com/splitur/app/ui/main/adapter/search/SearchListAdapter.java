@@ -55,12 +55,17 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
         }
         holder.name.setText(current_data.getTitle());
         if (current_data.getNumberOfGroups() != null){
-            holder.no_memberLayout.setVisibility(View.GONE);
+            holder.no_memberLayout.setVisibility(View.VISIBLE);
+            holder.members.setVisibility(View.GONE);
 
             String groups = current_data.getNumberOfGroups().toString();
                 if (groups.equalsIgnoreCase("0")){
                     holder.no_memberLayout.setVisibility(View.VISIBLE);
+                    holder.members.setVisibility(View.GONE);
                 }else {
+                    holder.no_memberLayout.setVisibility(View.GONE);
+                    holder.members.setVisibility(View.VISIBLE);
+
                     if (groups.equalsIgnoreCase("1")){
                         holder.member1.setVisibility(View.VISIBLE);
                     }else if (groups.equalsIgnoreCase("2")){
@@ -100,6 +105,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
                 }
         }else {
             holder.no_memberLayout.setVisibility(View.VISIBLE);
+            holder.members.setVisibility(View.GONE);
+
         }
     }
 
@@ -116,7 +123,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
     public static class SearchVH extends RecyclerView.ViewHolder {
         public ImageView icon;
         public TextView name, create;
-        ConstraintLayout no_memberLayout;
+        ConstraintLayout no_memberLayout, members;
         CircleImageView member1,member2, member3 , member4 , member5;
         TextView remaining;
 
@@ -132,7 +139,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
             member4 = itemView.findViewById(R.id.member4);
             member5 = itemView.findViewById(R.id.member5);
             remaining = itemView.findViewById(R.id.count);
-            no_memberLayout = itemView.findViewById(R.id.no_member_view);
+            no_memberLayout = itemView.findViewById(R.id.no_member_view01);
+            members = itemView.findViewById(R.id.users01);
 
 
             create.setOnClickListener(view -> {

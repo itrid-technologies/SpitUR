@@ -67,6 +67,25 @@ public class CreatedAndJoinedGroups extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
+        if (getArguments() != null) {
+            Dashboard.hideNav(true);
+            shouldGoToSupportChat = getArguments().getBoolean("isFromChat");
+            if (shouldGoToSupportChat){
+                binding.gToolbar.back.setVisibility(View.VISIBLE);
+            }else {
+                binding.gToolbar.back.setVisibility(View.GONE);
+            }
+
+
+        }else {
+            binding.gToolbar.back.setVisibility(View.GONE);
+        }
+
+        binding.gToolbar.back.setOnClickListener(view1 -> {
+            Navigation.findNavController(view1).navigateUp();
+        });
+
+
         data = new ArrayList<>();
         binding.createdGroupslist.setVisibility(View.VISIBLE);
 
@@ -91,19 +110,19 @@ public class CreatedAndJoinedGroups extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (getArguments() != null) {
-            Dashboard.hideNav(true);
-            shouldGoToSupportChat = getArguments().getBoolean("isFromChat");
-            if (shouldGoToSupportChat){
-                binding.gToolbar.back.setVisibility(View.VISIBLE);
-            }else {
-                binding.gToolbar.back.setVisibility(View.GONE);
-            }
-
-            binding.gToolbar.back.setOnClickListener(view1 -> {
-                Navigation.findNavController(view1).navigateUp();
-            });
-        }
+//        if (getArguments() != null) {
+//            Dashboard.hideNav(true);
+//            shouldGoToSupportChat = getArguments().getBoolean("isFromChat");
+//            if (shouldGoToSupportChat){
+//                binding.gToolbar.back.setVisibility(View.VISIBLE);
+//            }else {
+//                binding.gToolbar.back.setVisibility(View.GONE);
+//            }
+//
+//            binding.gToolbar.back.setOnClickListener(view1 -> {
+//                Navigation.findNavController(view1).navigateUp();
+//            });
+//        }
     }
 
     private void initClickListeners() {
@@ -135,8 +154,13 @@ public class CreatedAndJoinedGroups extends Fragment {
                         binding.joinedGroupslist.setVisibility(View.VISIBLE);
                         binding.createdGroupslist.setVisibility(View.GONE);
 
-                        join_data.addAll(groupDetailModel.getData());
-                        buildJoinRv(groupDetailModel);
+                        for (int i = 0; i < groupDetailModel.getData().size()-1; i++) {
+                            if (groupDetailModel.getData().get(i).getGroup() != null){
+                                join_data.add(groupDetailModel.getData().get(i));
+                            }
+
+                        }
+                        buildJoinRv(join_data, groupDetailModel);
                     } else {
                         binding.noGroupLayout.setVisibility(View.VISIBLE);
                         binding.joinedGroupslist.setVisibility(View.GONE);
@@ -186,7 +210,9 @@ public class CreatedAndJoinedGroups extends Fragment {
 
     }
 
-    private void buildJoinRv(AllJoinedGroupModel groupDetailModel) {
+
+
+    private void buildJoinRv(List<com.splitur.app.data.model.all_joined_groups.DataItem> join_data, AllJoinedGroupModel groupDetailModel) {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.joinedGroupslist.setLayoutManager(layoutManager);

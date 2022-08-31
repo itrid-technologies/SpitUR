@@ -73,10 +73,21 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:id="@+id/joinSearchList"/>
 
+            <ProgressBar
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/joinSearchList"
+                android:id="@+id/progressBar"/>
+
+
             <include
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/custom_create_view"
+                android:visibility="gone"
                 layout="@layout/custom_create_group_layout"
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintTop_toBottomOf="@id/joinPopular"

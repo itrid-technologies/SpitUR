@@ -51,11 +51,14 @@ public class JoinSearchListAdapter extends RecyclerView.Adapter<JoinSearchListAd
         }
         holder.name.setText(current_data.getTitle());
         if (current_data.getNumberOfGroups() != null){
-            holder.no_memberLayout.setVisibility(View.GONE);
+            holder.no_memberLayout.setVisibility(View.VISIBLE);
+            holder.members.setVisibility(View.GONE);
+
 
             String groups = current_data.getNumberOfGroups().toString();
             if (groups.equalsIgnoreCase("0")){
                 holder.no_memberLayout.setVisibility(View.VISIBLE);
+                holder.members.setVisibility(View.GONE);
             }else {
                 if (groups.equalsIgnoreCase("1")){
                     holder.member1.setVisibility(View.VISIBLE);
@@ -96,6 +99,7 @@ public class JoinSearchListAdapter extends RecyclerView.Adapter<JoinSearchListAd
             }
         }else {
             holder.no_memberLayout.setVisibility(View.VISIBLE);
+            holder.members.setVisibility(View.GONE);
         }
     }
 
@@ -112,7 +116,7 @@ public class JoinSearchListAdapter extends RecyclerView.Adapter<JoinSearchListAd
     public static class SearchVH extends RecyclerView.ViewHolder {
         public ImageView icon;
         public TextView name, join;
-        ConstraintLayout no_memberLayout;
+        ConstraintLayout no_memberLayout,members;
         CircleImageView member1,member2, member3 , member4 , member5;
         TextView remaining;
 
@@ -124,6 +128,8 @@ public class JoinSearchListAdapter extends RecyclerView.Adapter<JoinSearchListAd
             name = itemView.findViewById(R.id.join_search_name);
             join = itemView.findViewById(R.id.tv_join);
             no_memberLayout = itemView.findViewById(R.id.no_member_view);
+            members = itemView.findViewById(R.id.J_users);
+
             member1 = itemView.findViewById(R.id.member1);
             member2 = itemView.findViewById(R.id.member2);
             member3 = itemView.findViewById(R.id.member3);

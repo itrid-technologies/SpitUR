@@ -167,10 +167,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:civ_circle_background_color="@color/light_grey"
             android:src="@drawable/avatar_artist"
-            app:civ_border_width="1dp"
-            app:civ_border_color="@color/dark_grey"
+            app:civ_circle_background_color="#404251"
             android:id="@+id/empty"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

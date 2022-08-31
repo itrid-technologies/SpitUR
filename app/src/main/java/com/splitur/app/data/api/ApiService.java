@@ -90,7 +90,7 @@ public interface ApiService {
     Call<CategoriesModel> getAllCategories(@Header("Authorization") String token);
 
     @POST("groups/get_pouplar_sub_categories")
-    Call<PopularSubCategoryModel> getPopularCategoriesHome();
+    Call<PopularSubCategoryModel> getPopularCategoriesHome(@Body JsonObject object);
 
     @POST("groups/get_pouplar_sub_categories")
     Call<PopularSubCategoryModel> getPopularCategoriesById(@Body JsonObject object);
