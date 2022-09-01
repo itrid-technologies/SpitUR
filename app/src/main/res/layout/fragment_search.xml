@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
+    android:paddingBottom="70dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.view.search_create.Search">
 
@@ -32,7 +33,7 @@
             android:paddingTop="20dp"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
-            android:paddingBottom="20dp">
+           >
 
             <include
                 android:id="@+id/category_search_view"
