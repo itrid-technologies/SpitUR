@@ -154,11 +154,10 @@ public class CreatedAndJoinedGroups extends Fragment {
                         binding.joinedGroupslist.setVisibility(View.VISIBLE);
                         binding.createdGroupslist.setVisibility(View.GONE);
 
-                        for (int i = 0; i < groupDetailModel.getData().size()-1; i++) {
+                        for (int i = 0; i < groupDetailModel.getData().size(); i++) {
                             if (groupDetailModel.getData().get(i).getGroup() != null){
                                 join_data.add(groupDetailModel.getData().get(i));
                             }
-
                         }
                         buildJoinRv(join_data, groupDetailModel);
                     } else {
