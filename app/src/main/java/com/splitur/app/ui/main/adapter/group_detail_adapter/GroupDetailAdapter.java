@@ -137,7 +137,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
 
         //jitni slots hn utny hi members hoty hn
         for (int i = 0; i < slotsCount; i++) {
-            if (i == memberCount) {
+            if (i == memberCount + 1) {
                 switch (i) {
                     case 1:
 
