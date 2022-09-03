@@ -21,7 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class JoinSearchListAdapter extends RecyclerView.Adapter<JoinSearchListAdapter.SearchVH> {
 
-    private static List<DataItem> dataItems;
+    private final List<DataItem> dataItems;
     private final Context context;
     private JoinSearchListAdapter.ItemClickListener mListener;
 
@@ -60,6 +60,9 @@ public class JoinSearchListAdapter extends RecyclerView.Adapter<JoinSearchListAd
                 holder.no_memberLayout.setVisibility(View.VISIBLE);
                 holder.members.setVisibility(View.GONE);
             }else {
+                holder.no_memberLayout.setVisibility(View.GONE);
+                holder.members.setVisibility(View.VISIBLE);
+
                 if (groups.equalsIgnoreCase("1")){
                     holder.member1.setVisibility(View.VISIBLE);
                 }else if (groups.equalsIgnoreCase("2")){
