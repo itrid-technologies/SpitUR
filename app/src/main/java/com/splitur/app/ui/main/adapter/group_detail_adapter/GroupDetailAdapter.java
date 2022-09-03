@@ -14,7 +14,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.splitur.app.R;
 import com.splitur.app.data.model.group_detail.DataItem;
 import com.splitur.app.utils.Constants;
@@ -58,21 +57,21 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
 
             try {
                 int score_value = Integer.valueOf((int) Math.round(dataItem.getGroupAdmin().getSpliturScore()));
-                if ( score_value < 30 ){
+                if (score_value < 30) {
                     holder.user.setBorderColor(Color.parseColor("#FF3D00"));
                     holder.score.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF3D00")));
-                }else if (score_value < 70 ){
+                } else if (score_value < 70) {
                     holder.user.setBorderColor(Color.parseColor("#F7931A"));
                     holder.score.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F7931A")));
-                }else if (score_value > 70){
+                } else if (score_value > 70) {
                     holder.user.setBorderColor(Color.parseColor("#0FB900"));
                     holder.score.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#0FB900")));
-                }else {
+                } else {
 
                 }
 
 
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 e.getMessage();
             }
 
@@ -87,7 +86,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
             }
             try {
                 holder.user.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(dataItem.getGroupAdmin().getAvatar())));
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 Log.e("DataType Error", e.getMessage());
                 holder.user.setImageResource(R.drawable.user);
             }
@@ -105,97 +104,65 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
         final int memberCount = dataItem.getTotalMembers();
         final int slotsCount = dataItem.getSlots();
 
-/*        if (slotsCount > 0) {
-            LinearLayout laySlots = holder.llSlots;
-            for (int i = 0; i <= slotsCount; i++) {
-
-                //add views dynamically
-                TextView tvSlot = new TextView(context);
-                tvSlot.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                tvSlot.setGravity(Gravity.CENTER);
-                tvSlot.setPadding(0, com.intuit.sdp.R.dimen._1sdp, 0, 0);
-                tvSlot.setTextColor(context.getResources().getColor(R.color.white));
-                tvSlot.setTextSize(com.intuit.sdp.R.dimen._7sdp);
-                tvSlot.setBackground(AppCompatResources.getDrawable(context, R.drawable.ic_score_bg));
-                tvSlot.setTypeface(ResourcesCompat.getFont(context, R.font.poppins_semibold));
-                tvSlot.setText(String.valueOf(i));
-                if (i == memberCount) {
-                    //add special bg effect
-                    tvSlot.setAlpha(1F);
-                    tvSlot.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
-                } else {
-                    tvSlot.setAlpha(0.4F);
-                    tvSlot.setBackgroundTintList(AppCompatResources.getColorStateList(context, R.color.transparent));
-                }
-
-                //add view to llSlots
-                laySlots.addView(tvSlot, i);
-
-            }//for
-        }*/
-
-
         //jitni slots hn utny hi members hoty hn
         for (int i = 0; i < slotsCount; i++) {
-            if (i == memberCount + 1) {
+            if (i == memberCount) {
                 switch (i) {
+                    case 0:
                     case 1:
-
-                        visibleMember(holder.one , holder.two , holder.three , holder.four , holder.five , holder.six);
-
+                        visibleMember(holder.one, holder.two, holder.three, holder.four, holder.five, holder.six);
                         break;
+
                     case 2:
 
-                        visibleMember(holder.two ,holder.one ,  holder.three , holder.four , holder.five , holder.six);
+                        visibleMember(holder.two, holder.one, holder.three, holder.four, holder.five, holder.six);
 
                         break;
                     case 3:
-                        visibleMember(holder.three ,holder.one ,  holder.two , holder.four , holder.five , holder.six);
+                        visibleMember(holder.three, holder.one, holder.two, holder.four, holder.five, holder.six);
 
                         break;
                     case 4:
-                        visibleMember(holder.four ,holder.one ,  holder.two , holder.three , holder.five , holder.six);
+                        visibleMember(holder.four, holder.one, holder.two, holder.three, holder.five, holder.six);
 
                         break;
                     case 5:
-                        visibleMember(holder.five ,holder.one ,  holder.two , holder.four , holder.three , holder.six);
+                        visibleMember(holder.five, holder.one, holder.two, holder.four, holder.three, holder.six);
 
                         break;
                     case 6:
-                        visibleMember(holder.six ,holder.one ,  holder.two , holder.four , holder.five , holder.three);
-
+                        visibleMember(holder.six, holder.one, holder.two, holder.four, holder.five, holder.three);
                         break;
-
                 }
             }
         }//for
 
-        try {
-            for (int i = slotsCount + 1; i <= 6; i++) {
-                switch (i) {
-                    case 1:
-                        holder.one.setVisibility(View.GONE);
-                        break;
-                    case 2:
-                        holder.two.setVisibility(View.GONE);
-                        break;
-                    case 3:
-                        holder.three.setVisibility(View.GONE);
-                        break;
-                    case 4:
-                        holder.four.setVisibility(View.GONE);
-                        break;
-                    case 5:
-                        holder.five.setVisibility(View.GONE);
-                        break;
-                    case 6:
-                        holder.six.setVisibility(View.GONE);
-                        break;
-                }
-            }
-        } catch (IndexOutOfBoundsException ex) {
-            ex.printStackTrace();
-        }
+//        try {
+//            for (int i = slotsCount + 1; i <= 6; i++) {
+//                switch (i) {
+//                    case 1:
+//                        holder.one.setVisibility(View.GONE);
+//                        break;
+//                    case 2:
+//                        holder.two.setVisibility(View.GONE);
+//                        break;
+//                    case 3:
+//                        holder.three.setVisibility(View.GONE);
+//                        break;
+//                    case 4:
+//                        holder.four.setVisibility(View.GONE);
+//                        break;
+//                    case 5:
+//                        holder.five.setVisibility(View.GONE);
+//                        break;
+//                    case 6:
+//                        holder.six.setVisibility(View.GONE);
+//                        break;
+//                }
+//            }
+//        } catch (IndexOutOfBoundsException ex) {
+//            ex.printStackTrace();
+//        }
 
         holder.group_id.setText(String.valueOf(dataItem.getGroupId()));
 
@@ -204,10 +171,10 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
                     Constants.getCategoryIcon(context, dataItem.getSubCategory().getCategory().getId()));
         }
         String id = Constants.ID;
-        if(dataItem.getGroupAdmin().getId() == Integer.parseInt(id)){
+        if (dataItem.getGroupAdmin().getId() == Integer.parseInt(id)) {
             String coin = String.valueOf(dataItem.getCostPerMember());
             holder.coins.setText(coin + " Coins");
-        }else {
+        } else {
             String coin = String.valueOf(dataItem.getCostPerMember());
             double coinFloat = Double.parseDouble(coin);
             String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
@@ -216,6 +183,7 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
     }
 
     private void visibleMember(TextView one, TextView two, TextView three, TextView four, TextView five, TextView six) {
+
         one.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#282C4A")));
         one.setTextColor(Color.WHITE);
         one.setAlpha(1);
@@ -231,8 +199,6 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
         six.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00000000")));
         six.setAlpha((float) 0.4);
     }
-
-
 
 
     @Override
