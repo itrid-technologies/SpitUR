@@ -16,7 +16,9 @@ import androidx.navigation.Navigation;
 
 import com.google.gson.JsonObject;
 import com.splitur.app.R;
+import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.data.api.ChatwootApiManager;
+import com.splitur.app.data.model.ChatWootAccountIdModel;
 import com.splitur.app.data.model.chatwoot_model.ConversationModel;
 import com.splitur.app.databinding.FragmentContactUsBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
@@ -63,6 +65,7 @@ public class ContactUs extends Fragment {
             MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
             String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
             if (conversation_id.isEmpty()) {
+
 
 //                SupportChatViewModel viewModel = new SupportChatViewModel(0, "");
 //                viewModel.init();

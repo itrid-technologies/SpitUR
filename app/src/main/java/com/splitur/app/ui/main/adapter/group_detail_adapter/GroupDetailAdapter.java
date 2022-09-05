@@ -104,11 +104,10 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
         final int memberCount = dataItem.getTotalMembers();
         final int slotsCount = dataItem.getSlots();
 
-        //jitni slots hn utny hi members hoty hn
+
         for (int i = 0; i < slotsCount; i++) {
             if (i == memberCount) {
                 switch (i) {
-                    case 0:
                     case 1:
                         visibleMember(holder.one, holder.two, holder.three, holder.four, holder.five, holder.six);
                         break;
@@ -137,32 +136,32 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
             }
         }//for
 
-//        try {
-//            for (int i = slotsCount + 1; i <= 6; i++) {
-//                switch (i) {
-//                    case 1:
-//                        holder.one.setVisibility(View.GONE);
-//                        break;
-//                    case 2:
-//                        holder.two.setVisibility(View.GONE);
-//                        break;
-//                    case 3:
-//                        holder.three.setVisibility(View.GONE);
-//                        break;
-//                    case 4:
-//                        holder.four.setVisibility(View.GONE);
-//                        break;
-//                    case 5:
-//                        holder.five.setVisibility(View.GONE);
-//                        break;
-//                    case 6:
-//                        holder.six.setVisibility(View.GONE);
-//                        break;
-//                }
-//            }
-//        } catch (IndexOutOfBoundsException ex) {
-//            ex.printStackTrace();
-//        }
+        try {
+            for (int i = slotsCount + 1; i <= 6; i++) {
+                switch (i) {
+                    case 1:
+                        holder.one.setVisibility(View.GONE);
+                        break;
+                    case 2:
+                        holder.two.setVisibility(View.GONE);
+                        break;
+                    case 3:
+                        holder.three.setVisibility(View.GONE);
+                        break;
+                    case 4:
+                        holder.four.setVisibility(View.GONE);
+                        break;
+                    case 5:
+                        holder.five.setVisibility(View.GONE);
+                        break;
+                    case 6:
+                        holder.six.setVisibility(View.GONE);
+                        break;
+                }
+            }
+        } catch (IndexOutOfBoundsException ex) {
+            ex.printStackTrace();
+        }
 
         holder.group_id.setText(String.valueOf(dataItem.getGroupId()));
 

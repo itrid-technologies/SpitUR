@@ -141,6 +141,7 @@ public class Credentials extends Fragment {
                             }
                         } else {
                             Toast.makeText(requireContext(), createGroupModel.getMessage(), Toast.LENGTH_SHORT).show();
+                            binding.loadingView.setVisibility(View.GONE);
                         }
                     });
 //                    Navigation.findNavController(view).navigate(R.id.action_credentials2_to_phoneCredentials);

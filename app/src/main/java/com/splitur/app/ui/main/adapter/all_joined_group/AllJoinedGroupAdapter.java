@@ -138,7 +138,10 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
     }
 
     public interface ItemClickListener{
-        void onCategorySelect(int position);
+        void onOpen(int position);
+        void onPending(int position);
+        void onClose(int position);
+
     }
 
     public static class GroupVH extends RecyclerView.ViewHolder {
@@ -164,30 +167,27 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
             no_memberLayout = itemView.findViewById(R.id.no_member_view);
 
 
-            open.setOnClickListener(view -> {
-                String isOpen = open.getText().toString().trim();
-                if (isOpen.equalsIgnoreCase("Closed")) {
-
-                } else{
-                    if (mListener != null) {
-                        if (getAdapterPosition() != RecyclerView.NO_POSITION) {
-                            mListener.onCategorySelect(getAdapterPosition());
-                        }
-                    }
-                }
-            });
-
             itemView.setOnClickListener(view -> {
                 String isOpen = open.getText().toString().trim();
                 if (isOpen.equalsIgnoreCase("Closed")) {
-
+                    if (mListener != null) {
+                        if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                            mListener.onClose(getAdapterPosition());
+                        }
+                    }
                 } else if (isOpen.equalsIgnoreCase("Open")){
                     if (mListener != null) {
                         if (getAdapterPosition() != RecyclerView.NO_POSITION) {
-                            mListener.onCategorySelect(getAdapterPosition());
+                            mListener.onOpen(getAdapterPosition());
                         }
                     }
-                }else {
+                }else if (isOpen.equalsIgnoreCase("Pending")){
+                    if (mListener != null) {
+                        if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                            mListener.onPending(getAdapterPosition());
+                        }
+                    }
+                } else{
 
                 }
             });

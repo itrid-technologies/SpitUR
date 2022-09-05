@@ -54,7 +54,7 @@ public class Splash extends AppCompatActivity {
             //bundle must contain all info sent in "data" field of the notification
             final String type = bundle.getString("type", "nil");
             if (!type.equals("nil")) {
-                if (type.equalsIgnoreCase("otp_request")) {
+                if (type.equalsIgnoreCase("otp_request") || type.equalsIgnoreCase("new_message") ) {
                     String si = bundle.getString("sender_id", "nil");
                     String gi = bundle.getString("group_id", "nil");
                     Intent chatInt = new Intent(this, Dashboard.class);
@@ -63,12 +63,13 @@ public class Splash extends AppCompatActivity {
                     chatInt.putExtra("group_id", gi);
                     startActivity(chatInt);
                     finish();
-                } else if (type.equalsIgnoreCase("new_message") ||
-                        type.equalsIgnoreCase("new_group_message")
-                ) {
+                } else if (type.equalsIgnoreCase("new_group_message")){
+                    String gi = bundle.getString("group_id", "nil");
                     Intent chatInt = new Intent(this, Dashboard.class);
-//                    chatInt.putExtra("chat_intent", "ci"); TODO;//data
+                    chatInt.putExtra("groupChat_intent", "ci");
+                    chatInt.putExtra("group_id", gi);
                     startActivity(chatInt);
+                    finish();
                     finish();
                 }
             }

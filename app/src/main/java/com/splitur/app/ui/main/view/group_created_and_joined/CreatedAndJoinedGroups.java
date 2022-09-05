@@ -1,13 +1,18 @@
 package com.splitur.app.ui.main.view.group_created_and_joined;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,9 +23,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.splitur.app.R;
+import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.data.api.ChatwootApiManager;
 import com.splitur.app.data.model.all_created_groupx.DataItem;
 import com.splitur.app.data.model.all_joined_groups.AllJoinedGroupModel;
+import com.splitur.app.data.model.basic_model.BasicModel;
 import com.splitur.app.data.model.chatwoot_model.MessagesModel;
 import com.splitur.app.databinding.FragmentCreatedAndJoinedGroupsBinding;
 import com.splitur.app.ui.main.adapter.all_created_group.AllCreatedGroupAdapter;
@@ -70,14 +77,14 @@ public class CreatedAndJoinedGroups extends Fragment {
         if (getArguments() != null) {
             Dashboard.hideNav(true);
             shouldGoToSupportChat = getArguments().getBoolean("isFromChat");
-            if (shouldGoToSupportChat){
+            if (shouldGoToSupportChat) {
                 binding.gToolbar.back.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 binding.gToolbar.back.setVisibility(View.GONE);
             }
 
 
-        }else {
+        } else {
             binding.gToolbar.back.setVisibility(View.GONE);
         }
 
@@ -135,7 +142,6 @@ public class CreatedAndJoinedGroups extends Fragment {
             binding.gToolbar.title.setText("Groups Joined");
 
 
-
             binding.joinedButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#246BFD")));
             binding.joinedButton.setTextColor(Color.WHITE);
 
@@ -155,7 +161,7 @@ public class CreatedAndJoinedGroups extends Fragment {
                         binding.createdGroupslist.setVisibility(View.GONE);
 
                         for (int i = 0; i < groupDetailModel.getData().size(); i++) {
-                            if (groupDetailModel.getData().get(i).getGroup() != null){
+                            if (groupDetailModel.getData().get(i).getGroup() != null) {
                                 join_data.add(groupDetailModel.getData().get(i));
                             }
                         }
@@ -210,7 +216,6 @@ public class CreatedAndJoinedGroups extends Fragment {
     }
 
 
-
     private void buildJoinRv(List<com.splitur.app.data.model.all_joined_groups.DataItem> join_data, AllJoinedGroupModel groupDetailModel) {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
@@ -218,41 +223,20 @@ public class CreatedAndJoinedGroups extends Fragment {
         AllJoinedGroupAdapter adapter = new AllJoinedGroupAdapter(Split.getAppContext(), join_data);
         binding.joinedGroupslist.setAdapter(adapter);
 
-        adapter.setOnJoinedClixkListener(position -> {
-            Gson gson = new Gson();
-            String joinData = gson.toJson(join_data.get(position));
+        adapter.setOnJoinedClixkListener(new AllJoinedGroupAdapter.ItemClickListener() {
+            @Override
+            public void onOpen(int position) {
 
-            Gson gson1 = new Gson();
-            String groupDATA = gson1.toJson(groupDetailModel);
+                Gson gson = new Gson();
+                String joinData = gson.toJson(join_data.get(position));
 
-//          shouldGoToSupportChat
-            if (shouldGoToSupportChat) {
-                Bundle bundle = new Bundle();
-                bundle.putString("support_chat", msgs);
-                Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_supportChat, bundle);
+                Gson gson1 = new Gson();
+                String groupDATA = gson1.toJson(groupDetailModel);
 
-            } else {//old flow
-                if (join_data.get(position).getPaymentStatus().equalsIgnoreCase("pending")) {
-
-
-                    CheckOutViewModel checkOutViewModel = new CheckOutViewModel();
-                    checkOutViewModel.init();
-                    checkOutViewModel.getData().observe(getViewLifecycleOwner(), secretKeyModel -> {
-                        if (secretKeyModel.isStatus()) {
-                            String secret_key = secretKeyModel.getKey();
-
-                            Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
-                            checkoutIntent.putExtra("group_id", String.valueOf(join_data.get(position).getGroupId()));
-                            checkoutIntent.putExtra("upi_id", join_data.get(position).getUpiId());
-                            checkoutIntent.putExtra("subscription_id", join_data.get(position).getSubscriptionId());
-                            checkoutIntent.putExtra("group_credentials", groupDATA);
-                            checkoutIntent.putExtra("secret_key", secret_key);
-                            startActivity(checkoutIntent);
-                            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-                        }
-                    });
-
+                if (shouldGoToSupportChat) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("support_chat", msgs);
+                    Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_supportChat, bundle);
 
                 } else {
                     Bundle bundle = new Bundle();
@@ -261,20 +245,150 @@ public class CreatedAndJoinedGroups extends Fragment {
                 }
             }
 
+            @Override
+            public void onPending(int position) {
+
+                Gson gson = new Gson();
+                String joinData = gson.toJson(join_data.get(position));
+
+                Gson gson1 = new Gson();
+                String groupDATA = gson1.toJson(groupDetailModel);
+
+                try {
+
+                Call<BasicModel> call = ApiManager.getRestApiService().isGroupFull(join_data.get(position).getGroupId());
+                call.enqueue(new Callback<BasicModel>() {
+                    @Override
+                    public void onResponse(@NonNull Call<BasicModel> call, @NonNull Response<BasicModel> response) {
+                        BasicModel basicModel = response.body();
+                        if (basicModel != null) {
+                            if (basicModel.isStatus()) {
+                                checkout(groupDATA, position);
+                            } else {
+                                displayDialogue();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<BasicModel> call, @NonNull Throwable t) {
+
+                    }
+                });
+
+                }catch (NullPointerException e){
+                    Log.e("isGroupFull",e.getMessage());
+                }
+
+
+            }
+
+            @Override
+            public void onClose(int position) {
+//                Toast.makeText(requireContext(), "Group closed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        adapter.setOnJoinedClixkListener(position -> {
+//            Gson gson = new Gson();
+//            String joinData = gson.toJson(join_data.get(position));
+//
+//            Gson gson1 = new Gson();
+//            String groupDATA = gson1.toJson(groupDetailModel);
+//
+////          shouldGoToSupportChat
+//            if (shouldGoToSupportChat) {
+//                Bundle bundle = new Bundle();
+//                bundle.putString("support_chat", msgs);
+//                Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_supportChat, bundle);
+//
+//            } else {//old flow
+//                if (join_data.get(position).getPaymentStatus().equalsIgnoreCase("pending")) {
+//
+//
+//                    CheckOutViewModel checkOutViewModel = new CheckOutViewModel();
+//                    checkOutViewModel.init();
+//                    checkOutViewModel.getData().observe(getViewLifecycleOwner(), secretKeyModel -> {
+//                        if (secretKeyModel.isStatus()) {
+//                            String secret_key = secretKeyModel.getKey();
+//
+//                            Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
+//                            checkoutIntent.putExtra("group_id", String.valueOf(join_data.get(position).getGroupId()));
+//                            checkoutIntent.putExtra("upi_id", join_data.get(position).getUpiId());
+//                            checkoutIntent.putExtra("subscription_id", join_data.get(position).getSubscriptionId());
+//                            checkoutIntent.putExtra("group_credentials", groupDATA);
+//                            checkoutIntent.putExtra("secret_key", secret_key);
+//                            startActivity(checkoutIntent);
+//                            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//
+//                        }
+//                    });
+//
+//
+//                } else {
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("joinedGroupData", joinData);
+//                    Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_joinedGroupDetail2, bundle);
+//                }
+//            }
+//
+//        });
+    }
+
+    private void displayDialogue() {
+        AlertDialog.Builder dialogBuilder;
+        AlertDialog alertDialog;
+        dialogBuilder = new AlertDialog.Builder(requireContext());
+        dialogBuilder.setCancelable(false);
+        View layoutView = getLayoutInflater().inflate(R.layout.already_member_dialogue, null);
+        Button home = (Button) layoutView.findViewById(R.id.back_home);
+        TextView reason = (TextView) layoutView.findViewById(R.id.tv_reason);
+        reason.setText("Group is already Full");
+        home.setText("Cancel");
+
+
+        dialogBuilder.setView(layoutView);
+        alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+        home.setOnClickListener(view1 -> {
+            alertDialog.dismiss();
+        });
+    }
+
+    private void checkout(String groupDATA, int position) {
+        CheckOutViewModel checkOutViewModel = new CheckOutViewModel();
+        checkOutViewModel.init();
+        checkOutViewModel.getData().observe(getViewLifecycleOwner(), secretKeyModel -> {
+            if (secretKeyModel.isStatus()) {
+                String secret_key = secretKeyModel.getKey();
+
+                Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
+                checkoutIntent.putExtra("group_id", String.valueOf(join_data.get(position).getGroupId()));
+                checkoutIntent.putExtra("upi_id", join_data.get(position).getUpiId());
+                checkoutIntent.putExtra("subscription_id", join_data.get(position).getSubscriptionId());
+                checkoutIntent.putExtra("group_credentials", groupDATA);
+                checkoutIntent.putExtra("secret_key", secret_key);
+                startActivity(checkoutIntent);
+                requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+            }
         });
     }
 
     private void buildRv() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
         binding.createdGroupslist.setLayoutManager(layoutManager);
-        AllCreatedGroupAdapter adapter = new AllCreatedGroupAdapter(Split.getAppContext(), data , shouldGoToSupportChat);
+        AllCreatedGroupAdapter adapter = new AllCreatedGroupAdapter(Split.getAppContext(), data, shouldGoToSupportChat);
         binding.createdGroupslist.setAdapter(adapter);
 
         adapter.setOnCreatedGroupClickListener(position -> {
             //shouldGoToSupportChat
             if (shouldGoToSupportChat) {
 
-                getSupportMessages(data.get(position).getId());;
+                getSupportMessages(data.get(position).getId());
+                ;
 
             } else {//old flow
                 Gson gson = new Gson();
@@ -289,10 +403,10 @@ public class CreatedAndJoinedGroups extends Fragment {
     private void getSupportMessages(int id) {
         binding.loadingView.setVisibility(View.VISIBLE);
         MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
-        String conversation_id = sharedPreferences.getData(Split.getAppContext(),"unique_conversation_id");
+        String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
 
         int account_id = Constants.AccountId;
-        Call<MessagesModel> call = ChatwootApiManager.getRestApiService().getSupportChat(Constants.ChatApiKey,account_id, Integer.parseInt(conversation_id));
+        Call<MessagesModel> call = ChatwootApiManager.getRestApiService().getSupportChat(Constants.ChatApiKey, account_id, Integer.parseInt(conversation_id));
         call.enqueue(new Callback<MessagesModel>() {
             @Override
             public void onResponse(@NonNull Call<MessagesModel> call, @NonNull Response<MessagesModel> response) {
@@ -307,19 +421,18 @@ public class CreatedAndJoinedGroups extends Fragment {
                             Bundle bundle = new Bundle();
                             bundle.putString("support_chat", msgs);
                             bundle.putString("chat_group_id", String.valueOf(id));
-
                             Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_supportChat, bundle);
 
                         }
                     }
                 } else if (response.code() == 400) {
                     if (response.errorBody() != null) {
-                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+                        Constants.getApiError(Split.getAppContext(), response.errorBody());
 
                     }
                 } else if (response.code() == 500) {
                     if (response.errorBody() != null) {
-                        Constants.getApiError(Split.getAppContext(),response.errorBody());
+                        Constants.getApiError(Split.getAppContext(), response.errorBody());
 
                     }
                 }

@@ -165,6 +165,12 @@ public class Dashboard extends AppCompatActivity {
             mNavController.navigate(R.id.memberChat, bundle);
         }
 
+        if (data.hasExtra("groupChat_intent")) {
+            Bundle bundle = new Bundle();
+            bundle.putString("groupId", data.getStringExtra("group_id"));
+            mNavController.navigate(R.id.chatroom, bundle);
+        }
+
     }
 
 

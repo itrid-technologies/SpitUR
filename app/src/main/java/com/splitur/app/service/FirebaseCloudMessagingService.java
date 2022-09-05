@@ -56,6 +56,8 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
                     //broadcast new msg value to chat screen 1-1
                     Intent intent = new Intent(Configration.CHAT_MSG_NOTIFICATION);
                     intent.putExtra("type", remoteMessage.getData().get("type"));
+                    intent.putExtra("sender_id", remoteMessage.getData().get("sender_id"));
+                    intent.putExtra("group_id", remoteMessage.getData().get("group_id"));
                     LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 
                     Log.e(TAG, "Notification Body: " + remoteMessage.getNotification().getBody());

@@ -344,7 +344,12 @@
         android:id="@+id/memberChat"
         android:name="com.splitur.app.ui.main.view.member_chat.MemberChat"
         android:label="fragment_member_chat"
-        tools:layout="@layout/fragment_member_chat" />
+        tools:layout="@layout/fragment_member_chat" >
+
+        <action
+            android:id="@+id/action_memberChat_to_supportChat"
+            app:destination="@id/supportChat" />
+    </fragment>
     <fragment
         android:id="@+id/joinPlans"
         android:name="com.splitur.app.ui.main.view.join_plans.JoinPlans"

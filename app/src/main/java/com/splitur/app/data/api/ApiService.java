@@ -268,4 +268,6 @@ public interface ApiService {
     @GET("groups/getAllOtpRequests/{group_id}")
     Call<AllOtpRequestModel> getAllOtpRequests(@Header("Authorization") String token,
                                                @Path("group_id") String group_id);
+    @GET("groups/is_group_full/{group_id}")
+    Call<BasicModel> isGroupFull(@Path("group_id") int group_id);
 }

@@ -24,18 +24,29 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.JsonObject;
+import com.splitur.app.R;
+import com.splitur.app.data.api.ApiManager;
+import com.splitur.app.data.api.ChatwootApiManager;
+import com.splitur.app.data.model.ChatWootAccountIdModel;
 import com.splitur.app.data.model.OTpModel;
 import com.splitur.app.data.model.chat_sender.SenderModel;
+import com.splitur.app.data.model.chatwoot_model.ConversationModel;
 import com.splitur.app.databinding.FragmentMemberChatBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.viewmodel.chat_viewmodel.ChatMemberViewModel;
 import com.splitur.app.ui.main.viewmodel.otp_request_viewmodel.OtpRequestViewModel;
 import com.splitur.app.utils.Constants;
+import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MemberChat extends Fragment {
@@ -63,7 +74,7 @@ public class MemberChat extends Fragment {
         binding = FragmentMemberChatBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
 
-        binding.mcrToolbar.title.setText("Chat Member");
+        binding.title.setText("Chat Member");
 
         return binding.getRoot();
     }
@@ -74,6 +85,8 @@ public class MemberChat extends Fragment {
 
         registerMsgReceiver();
 
+
+        getConversationId();
 
         clickListeners();
 
@@ -180,8 +193,22 @@ public class MemberChat extends Fragment {
     }
 
     private void clickListeners() {
-        binding.mcrToolbar.back.setOnClickListener(view -> {
+        binding.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
+        });
+
+        binding.liveChat.setOnClickListener(view -> {
+
+            MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
+            String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
+            if (!conversation_id.isEmpty()) {
+                if (Integer.parseInt(conversation_id) != 0) {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("chat_user_id", String.valueOf(Constants.ID)); // userid
+                    Navigation.findNavController(view).navigate(R.id.action_memberChat_to_supportChat,bundle);
+                }
+            }
         });
 
         binding.sendMemberMessage.setOnClickListener(view -> {
@@ -191,7 +218,6 @@ public class MemberChat extends Fragment {
                 viewModel.initSendMessage();
                 viewModel.getData().observe(getViewLifecycleOwner(), messageSendModel -> {
                     if (messageSendModel.isStatus()) {
-
 
                         msgs.add(new SenderModel(message, Calendar.getInstance().getTime().toString()));
 
@@ -229,6 +255,83 @@ public class MemberChat extends Fragment {
 
 
         });
+    }
+
+    private void getConversationId() {
+
+        Call<ChatWootAccountIdModel> call1 = ApiManager.getRestApiService().getAccountId();
+        call1.enqueue(new Callback<ChatWootAccountIdModel>() {
+            @Override
+            public void onResponse(@NonNull Call<ChatWootAccountIdModel> call, @NonNull Response<ChatWootAccountIdModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ChatWootAccountIdModel accountIdModel = response.body();
+                    Constants.AccountId = Integer.parseInt(accountIdModel.getChatWootAccountId());
+                    Constants.ChatApiKey = accountIdModel.getChat_api_key();
+                    Constants.InboxId = Integer.parseInt(accountIdModel.getInbox_id());
+                    HitApi();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ChatWootAccountIdModel> call, @NonNull Throwable t) {
+                Log.e("Account Id", "onFailure: ", t);
+            }
+        });
+
+    }
+
+    private void HitApi() {
+
+        try {
+
+            MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
+            String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
+            if (conversation_id.isEmpty()) {
+
+                MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+                String source = preferences.getData(Split.getAppContext(), "source_id");
+                String contact = preferences.getData(Split.getAppContext(), "contact_id");
+
+                int inbox = Constants.InboxId;
+                String api_key = Constants.ChatApiKey;
+                int account_id = Constants.AccountId;
+
+                JsonObject object = new JsonObject();
+                object.addProperty("source_id", source);
+                object.addProperty("inbox_id", inbox);
+                object.addProperty("contact_id", Integer.valueOf(contact));
+
+                Call<ConversationModel> call = ChatwootApiManager.getRestApiService().createConversation(api_key, account_id, object);
+                call.enqueue(new Callback<ConversationModel>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ConversationModel> call, @NonNull Response<ConversationModel> response) {
+                        if (response.body() != null) {
+                            ConversationModel conversationModel = response.body();
+                            MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
+                            mySharedPreferences.saveData(Split.getAppContext(), "unique_conversation_id", String.valueOf(conversationModel.getId()));
+
+                        } else if (response.code() == 400) {
+                            if (response.errorBody() != null) {
+                                Constants.getApiError(Split.getAppContext(), response.errorBody());
+                            }
+                        } else if (response.code() == 500) {
+                            if (response.errorBody() != null) {
+                                Constants.getApiError(Split.getAppContext(), response.errorBody());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ConversationModel> call, @NonNull Throwable t) {
+                        Log.e("Conversation Error", t.getMessage());
+                    }
+                });
+
+
+            }
+        } catch (IllegalStateException e) {
+            Log.e("Chatwoot", e.getMessage());
+        }
     }
 
     private void threeMinuteTimerStart() {
