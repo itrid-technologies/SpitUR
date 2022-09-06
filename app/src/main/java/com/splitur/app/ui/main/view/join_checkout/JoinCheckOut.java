@@ -330,13 +330,18 @@ public class JoinCheckOut extends Fragment {
     }
 
     private void nAV() {
-//        Navigation.findNavController(requireView()).navigate(R.id.action_joinCheckOut_to_joinPayment);
+
+
+
         binding.loadingView.setVisibility(View.VISIBLE);
 
 //        MySharedPreferences mySharedPreferences = new MySharedPreferences(Split.getAppContext());
 //        String group_id = mySharedPreferences.getData(Split.getAppContext(), "GroupID");
         String group_id = String.valueOf(dataItem.getId());
         String group_admin_id = String.valueOf(dataItem.getGroupAdmin().getId());
+
+
+
         if (!group_id.isEmpty()) {
             joinGroupViewModel = new JoinGroupViewModel(group_id, Constants.USER_EMAIL, code);
             joinGroupViewModel.init();
@@ -354,6 +359,12 @@ public class JoinCheckOut extends Fragment {
                     checkOutViewModel.getData().observe(getViewLifecycleOwner(), secretKeyModel -> {
                         if (secretKeyModel.isStatus()) {
                             String secret_key = secretKeyModel.getKey();
+
+
+//                            Bundle bundle1 = new Bundle();
+//                            bundle1.putString("group_credentials", groupDATA);
+//                            bundle1.putString("group_admin_id", group_admin_id);
+//                            Navigation.findNavController(requireView()).navigate(R.id.action_joinCheckOut_to_joinCheckoutComplete,bundle);
 
                             Intent checkoutIntent = new Intent(requireContext(), CheckoutActivity.class);
                             checkoutIntent.putExtra("group_id", group_id);

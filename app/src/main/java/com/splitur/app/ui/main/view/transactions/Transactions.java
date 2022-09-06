@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.splitur.app.R;
-import com.splitur.app.data.model.DataItem;
+import com.splitur.app.data.model.transaction.DataItem;
 import com.splitur.app.databinding.FragmentTransactionsBinding;
 import com.splitur.app.ui.main.adapter.transactions.TransactionAdapter;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;

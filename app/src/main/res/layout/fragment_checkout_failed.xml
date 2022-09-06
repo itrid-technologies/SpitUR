@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#181A20"
-    tools:context=".ui.main.view.join_plans.CheckoutFailed">
+
+    tools:context=".ui.main.view.group_created_and_joined.CheckoutFailed">
 
     <include
         android:layout_width="match_parent"
@@ -38,7 +39,7 @@
             <ImageView
                 android:id="@+id/payment_failure_gif"
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
+                android:layout_height="260dp"
                 android:background="@color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +49,7 @@
                 android:id="@+id/tv_failed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="start"
                 android:text="Payment Failed"
@@ -92,7 +93,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="05:00"
+                    android:text="5:00"
                     android:fontFamily="@font/inter_regular"
                     android:textColor="@color/white"
                     android:textSize="30sp"
@@ -123,15 +124,16 @@
                 style="@style/buttonStyle"
                 android:layout_width="248dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/button_round_bg"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="Home"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/retryLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

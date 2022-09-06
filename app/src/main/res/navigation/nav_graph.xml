@@ -33,6 +33,9 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
            />
+        <action
+            android:id="@+id/action_home2_to_notifications"
+            app:destination="@id/notifications" />
     </fragment>
     <fragment
         android:id="@+id/search2"
@@ -221,6 +224,9 @@
         <action
             android:id="@+id/action_joinCheckOut_to_joinPayment"
             app:destination="@id/joinPayment" />
+        <action
+            android:id="@+id/action_joinCheckOut_to_joinCheckoutComplete"
+            app:destination="@id/joinCheckoutComplete" />
     </fragment>
     <fragment
         android:id="@+id/joinTerms"
@@ -275,6 +281,9 @@
         <action
             android:id="@+id/action_createdAndJoinedGroups_to_supportChat"
             app:destination="@id/supportChat" />
+        <action
+            android:id="@+id/action_createdAndJoinedGroups_to_checkoutFailed"
+            app:destination="@id/checkoutFailed" />
     </fragment>
     <fragment
         android:id="@+id/joinedGroupDetail2"
@@ -374,5 +383,15 @@
         android:name="com.splitur.app.ui.main.view.support_chat.SupportChat"
         android:label="fragment_support_chat"
         tools:layout="@layout/fragment_support_chat" />
+    <fragment
+        android:id="@+id/checkoutFailed"
+        android:name="com.splitur.app.ui.main.view.group_created_and_joined.CheckoutFailed"
+        android:label="fragment_checkout_failed"
+        tools:layout="@layout/fragment_checkout_failed" />
+    <fragment
+        android:id="@+id/notifications"
+        android:name="com.splitur.app.ui.main.view.notifications.Notifications"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
 
 </navigation>

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import com.splitur.app.R;
-import com.splitur.app.data.model.DataItem;
+import com.splitur.app.data.model.transaction.DataItem;
 import com.splitur.app.utils.Constants;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {

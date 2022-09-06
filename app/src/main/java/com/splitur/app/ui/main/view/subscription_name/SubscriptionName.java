@@ -79,7 +79,8 @@ public class SubscriptionName extends Fragment {
         binding.BTNSUBNEXT.setOnClickListener(view -> {
             String title = binding.edGroupTitle.getText().toString().trim();
             if (!title.isEmpty()){
-                verification_type = checkVerificationType();
+                //verification_type = checkVerificationType();
+                verification_type = "auth";
                 if (!verification_type.isEmpty()){
 
                     Constants.SUB_CAT_TITLE = title;

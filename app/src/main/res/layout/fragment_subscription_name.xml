@@ -92,6 +92,7 @@
                     android:layout_marginTop="18dp"
                     android:paddingTop="13dp"
                     android:paddingStart="13dp"
+                    android:visibility="gone"
                     android:paddingEnd="13dp"
                     android:paddingBottom="15dp"
                     android:background="@drawable/subscription_bg">

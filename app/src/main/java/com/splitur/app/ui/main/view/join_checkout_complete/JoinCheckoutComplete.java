@@ -1,6 +1,9 @@
 package com.splitur.app.ui.main.view.join_checkout_complete;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,19 +11,30 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
+import com.google.gson.JsonObject;
 import com.splitur.app.R;
+import com.splitur.app.data.api.ApiManager;
+import com.splitur.app.data.model.basic_model.BasicModel;
 import com.splitur.app.data.model.join_group.JoinGroupModel;
 import com.splitur.app.databinding.FragmentJoinCheckoutCompleteBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
+import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class JoinCheckoutComplete extends Fragment {
@@ -91,6 +105,79 @@ public class JoinCheckoutComplete extends Fragment {
             bundle.putString("receiverId", groupAdminId);
             bundle.putBoolean("ask_otp", true);
             Navigation.findNavController(view).navigate(R.id.action_joinCheckoutComplete_to_memberChat,bundle);
+        });
+
+        binding.workingIcon.setOnClickListener(view -> {
+            isGroupWorking(true);
+        });
+
+        binding.notWorkingIcon.setOnClickListener(view -> {
+            isGroupWorking(false);
+        });
+
+        binding.btnAskAdmin.setOnClickListener(this::callAdminContactDialogue);
+    }
+
+    private void callAdminContactDialogue(View view) {
+        AlertDialog.Builder dialogBuilder;
+        AlertDialog alertDialog;
+        dialogBuilder = new AlertDialog.Builder(requireContext());
+        dialogBuilder.setCancelable(false);
+        View layoutView = getLayoutInflater().inflate(R.layout.contact_admin_dialogue, null);
+        Button contactBtn = (Button) layoutView.findViewById(R.id.btn_contact_admin);
+
+
+        dialogBuilder.setView(layoutView);
+        alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.show();
+
+        contactBtn.setOnClickListener(view1 -> {
+            try {
+            alertDialog.dismiss();
+            Bundle bundle = new Bundle();
+            bundle.putString("groupId", String.valueOf(joinGroupModel.getData().getGroupId()));
+            bundle.putString("receiverId", groupAdminId);
+            bundle.putBoolean("ask_otp", true);
+            moveToMemberChat(bundle,view);
+
+            }catch (IllegalStateException e){
+                Log.e("MemberChat",e.getMessage());
+            }
+        });
+
+    }
+
+    private void moveToMemberChat(Bundle bundle, View view) {
+        Navigation.findNavController(view).navigate(R.id.action_joinCheckoutComplete_to_memberChat,bundle);
+
+    }
+
+    private void isGroupWorking(boolean status) {
+        MySharedPreferences preferences = new MySharedPreferences(Split.getAppContext());
+        String token = preferences.getData(Split.getAppContext(), "userAccessToken");
+
+        JsonObject object = new JsonObject();
+        object.addProperty("group_id", String.valueOf(joinGroupModel.getData().getGroupId()));
+        object.addProperty("is_working",status);
+
+        Call<BasicModel> call = ApiManager.getRestApiService().checkGroupCredentialsStatus("Bearer "+token,object);
+        call.enqueue(new Callback<BasicModel>() {
+            @Override
+            public void onResponse(@NonNull Call<BasicModel> call, @NonNull Response<BasicModel> response) {
+                BasicModel basicModel =  response.body();
+              //  if (basicModel.isStatus()){
+                    binding.workingIcon.setVisibility(View.GONE);
+                    binding.notWorkingIcon.setVisibility(View.GONE);
+                    binding.btnAskAdmin.setVisibility(View.VISIBLE);
+                //}
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<BasicModel> call, @NonNull Throwable t) {
+
+            }
         });
     }
 

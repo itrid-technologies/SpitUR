@@ -1,9 +1,9 @@
-package com.splitur.app.data.model;
+package com.splitur.app.data.model.transaction;
 
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class TransactionsModel{
+public class TransactionModel{
 
 	@SerializedName("data")
 	private List<DataItem> data;

@@ -1,4 +1,4 @@
-package com.splitur.app.data.model;
+package com.splitur.app.data.model.transaction;
 
 import com.google.gson.annotations.SerializedName;
 

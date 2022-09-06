@@ -4,8 +4,8 @@ import com.google.gson.JsonObject;
 import com.splitur.app.data.model.ChatWootAccountIdModel;
 import com.splitur.app.data.model.GetScoreModel;
 import com.splitur.app.data.model.HomeContentModel;
+import com.splitur.app.data.model.notification.NotificationModel;
 import com.splitur.app.data.model.SecretKeyModel;
-import com.splitur.app.data.model.TransactionsModel;
 import com.splitur.app.data.model.active_user.ActiveUserModel;
 import com.splitur.app.data.model.all_created_groupx.AllCreatedGroupModel;
 import com.splitur.app.data.model.all_joined_groups.AllJoinedGroupModel;
@@ -32,8 +32,10 @@ import com.splitur.app.data.model.register.RegisterModel;
 import com.splitur.app.data.model.send_message.MessageSendModel;
 import com.splitur.app.data.model.settings.SettingsResponse;
 import com.splitur.app.data.model.total_coins.TotalCoinsModel;
+import com.splitur.app.data.model.transaction.TransactionModel;
 import com.splitur.app.data.model.update_user_profile.UserUpdateModel;
 import com.splitur.app.data.model.wallet_balance.WalletBalanceModel;
+import com.splitur.app.ui.main.view.home.NotificationCountModel;
 
 import java.util.Map;
 
@@ -245,7 +247,7 @@ public interface ApiService {
                                  @Path("id") String id);
 
     @GET("groups/get_payment_transaction")
-    Call<TransactionsModel> getAllTransactions(@Header("Authorization") String token);
+    Call<TransactionModel> getAllTransactions(@Header("Authorization") String token);
 
     @GET("promotions/get_promo_code_details/{code}")
     Call<PromoResponse> applyPromoCode(@Path("code") String code);
@@ -270,4 +272,16 @@ public interface ApiService {
                                                @Path("group_id") String group_id);
     @GET("groups/is_group_full/{group_id}")
     Call<BasicModel> isGroupFull(@Path("group_id") int group_id);
+
+
+    @GET("groups/get_notifications/{page}")
+    Call<NotificationModel> getNotifications(@Header("Authorization") String token,
+                                             @Path("page") int page);
+
+    @GET("groups/get_notifications_count")
+    Call<NotificationCountModel> getNotificationCount(@Header("Authorization") String token);
+
+    @POST("groups/group_is_working")
+    Call<BasicModel> checkGroupCredentialsStatus(@Header("Authorization") String token,
+                                                 @Body JsonObject object);
 }

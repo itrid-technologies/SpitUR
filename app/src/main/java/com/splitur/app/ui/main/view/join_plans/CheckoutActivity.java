@@ -169,8 +169,6 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Intent intent = new Intent(CheckoutActivity.this, CheckoutFailed.class);
-                startActivity(intent);
                 finish();
                 Log.e("APi Error", t.getMessage());
             }
@@ -181,9 +179,6 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
     @Override
     public void onPaymentError(int i, String s) {
         Log.e("onPaymentError", s);
-        Intent intent = new Intent(CheckoutActivity.this, CheckoutFailed.class);
-        startActivity(intent);
-        finish();
     }
 
     @Override

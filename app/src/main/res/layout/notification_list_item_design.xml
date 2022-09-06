@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/_5sdp"
+    android:paddingBottom="@dimen/_5sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Benjamin Poole requested an otp In Netflix Premium"
+        android:textColor="#5E6272"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="12sp"
+        android:id="@+id/notification_title"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/notificationUserImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/dummy_user"
+        app:civ_circle_background_color="#94F0F0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/notification_title"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/notificationUserImage"
+        app:layout_constraintTop_toTopOf="@id/notificationUserImage"
+        android:text="Benjamin Poole"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="14sp"
+        android:id="@+id/notification_userrname"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/notificationUserImage"
+        android:text="Today 5:41 Pm "
+        android:layout_marginStart="20dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="13sp"
+        android:id="@+id/notification_time"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/notification_userrname"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="@id/notification_userrname"
+        android:text="Hi, Your group member Benjamin Poole is requesting for an OTP, Click on this message to Answer his call"
+        android:textColor="#5E6272"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="13sp"
+        android:id="@+id/notification_detail"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/notification_detail"
+        android:background="#5E6272"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:alpha="0.3"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

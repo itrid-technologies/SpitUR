@@ -1,0 +1,20 @@
+package com.splitur.app.data.model.transaction;
+
+import com.google.gson.annotations.SerializedName;
+
+public class SubCategory{
+
+	@SerializedName("sub_cat_title")
+	private String subCatTitle;
+
+	@SerializedName("category")
+	private Category category;
+
+	public String getSubCatTitle(){
+		return subCatTitle;
+	}
+
+	public Category getCategory(){
+		return category;
+	}
+}

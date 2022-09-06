@@ -112,13 +112,20 @@ public class Home extends Fragment {
 
         mViewModel = new CategoryViewModel();
         getCategories();
-
-
+        getNotificationCount();
         getUserDetails();
 
 
         initClickListeners();
         getPopularList();
+    }
+
+    private void getNotificationCount() {
+        NotificationViewModel notificationViewModel = new NotificationViewModel(0);
+        notificationViewModel.initCount();
+        notificationViewModel.getNotificationsCount().observe(getViewLifecycleOwner() , notificationCountModel -> {
+            binding.notificationCount.setText(String.valueOf(notificationCountModel.getCount()));
+        });
     }
 
     @Override
@@ -152,6 +159,10 @@ public class Home extends Fragment {
     private void initClickListeners() {
         binding.search.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_home2_to_joinSearch);
+        });
+
+        binding.notificationIcon.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_home2_to_notifications);
         });
 
         binding.viewAll.setOnClickListener(view -> {
@@ -562,4 +573,6 @@ public class Home extends Fragment {
         setProfileData();
 
     }
+
+
 }

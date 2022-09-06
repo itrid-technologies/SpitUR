@@ -262,8 +262,15 @@ public class CreatedAndJoinedGroups extends Fragment {
                     public void onResponse(@NonNull Call<BasicModel> call, @NonNull Response<BasicModel> response) {
                         BasicModel basicModel = response.body();
                         if (basicModel != null) {
-                            if (basicModel.isStatus()) {
-                                checkout(groupDATA, position);
+                            if (!basicModel.isStatus()) {
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString("group_id",String.valueOf(join_data.get(position).getGroupId()));
+                                bundle.putString("upi_id", join_data.get(position).getUpiId());
+                                bundle.putString("subscription_id", join_data.get(position).getSubscriptionId());
+                                bundle.putString("group_credentials", groupDATA);
+                                Navigation.findNavController(requireView()).navigate(R.id.action_createdAndJoinedGroups_to_checkoutFailed,bundle);
+
                             } else {
                                 displayDialogue();
                             }

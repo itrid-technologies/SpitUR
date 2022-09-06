@@ -51,7 +51,6 @@ public class Search extends Fragment {
     Parcelable recyclerViewState;
     private boolean flag_loading , isApiHit;
     int nextPage = 1;
-    private int searchDataCurrentPage = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

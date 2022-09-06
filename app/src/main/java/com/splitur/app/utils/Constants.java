@@ -41,8 +41,8 @@ import okhttp3.ResponseBody;
 public final class Constants {
 
 
-    public static String URL_BASE = "https://famger.com/";
-    //public static String URL_BASE = "http://192.168.100.3:4000/";
+   public static String URL_BASE = "https://famger.com/";
+   // public static String URL_BASE = "http://192.168.100.3:4000/";
 
     public static String IMG_PATH = "https://famger.com";
 
