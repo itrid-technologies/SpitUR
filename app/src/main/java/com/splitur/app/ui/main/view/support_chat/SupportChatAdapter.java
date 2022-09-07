@@ -52,7 +52,7 @@ public class SupportChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             return new RecieverVH(view);
 
         }else if (viewType ==2){
-            View viewSender = LayoutInflater.from(parent.getContext()).inflate(R.layout.otp_request_message_layout, parent, false);
+            View viewSender = LayoutInflater.from(parent.getContext()).inflate(R.layout.support_message_layout, parent, false);
             return new SupportActionVH(viewSender);
         }else {
             View viewSender = LayoutInflater.from(parent.getContext()).inflate(R.layout.sender_layout, parent, false);
@@ -162,7 +162,7 @@ public class SupportChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         public SupportActionVH(@NonNull View itemView) {
             super(itemView);
-            action_msg = itemView.findViewById(R.id.otp_message);
+            action_msg = itemView.findViewById(R.id.support_message);
             //  time = itemView.findViewById(R.id.tv_date);
         }
     }
