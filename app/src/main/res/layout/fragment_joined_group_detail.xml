@@ -406,17 +406,119 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chatAdminLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/credential_layout"
+                android:paddingTop="18dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="18dp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/light_blue"
+                android:background="@drawable/otp_number_bg">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_user"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@drawable/dummy_user"
+                    app:civ_circle_background_color="#94F0F0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/iv_user"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/poppin_regular"
+                    android:hint="Email"
+                    android:textColor="@color/hint_color"
+                    android:text="Rajesh2022"
+                    app:layout_constraintTop_toTopOf="@id/iv_user"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_user"
+                    android:id="@+id/tv_userid"/>
+
+                <ImageView
+                    android:id="@+id/online_icon"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginEnd="3dp"
+                    android:background="@drawable/round_back"
+                    android:backgroundTint="#0FB900"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_userid"
+                    app:layout_constraintEnd_toStartOf="@id/tv_online"
+                    app:layout_constraintTop_toTopOf="@+id/tv_userid" />
+
+                <TextView
+                    android:id="@+id/tv_online"
+                    style="@style/normalText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.6"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="Online"
+                    android:textColor="@color/hint_color"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/online_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/online_icon" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_user"
+                    android:paddingTop="8dp"
+                    android:text="Chat with Admin"
+                    android:paddingBottom="8dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@color/hint_color"
+                    android:fontFamily="@font/poppin_regular"
+                    android:textSize="15sp"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:paddingStart="8dp"
+                    android:background="@drawable/otp_number_bg"
+                    android:backgroundTint="@color/black"
+                    android:drawableStart="@drawable/ic_msg"
+                    android:id="@+id/tv_chat_with_admin"/>
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintEnd_toEndOf="@id/tv_chat_with_admin"
+                    app:layout_constraintTop_toTopOf="@id/tv_chat_with_admin"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_chat_with_admin"
+                    android:src="@drawable/send_btn"
+                    android:scaleType="fitXY"
+                    android:id="@+id/iv_chat_admin"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             <Button
                 android:id="@+id/btn_group_chat"
                 style="@style/buttonStyle"
                 android:layout_width="213dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/button_round_bg"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="Group Chat"
-                app:layout_constraintTop_toBottomOf="@id/credential_layout"
+                app:layout_constraintTop_toBottomOf="@id/chatAdminLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 

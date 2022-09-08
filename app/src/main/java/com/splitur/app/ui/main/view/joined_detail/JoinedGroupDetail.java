@@ -120,18 +120,18 @@ public class JoinedGroupDetail extends Fragment {
             }
             binding.groupEmail.setText(data.getGroup().getEmail());
             binding.groupPass.setText(data.getGroup().getPassword());
-            if (data.getGroup().getSubCategory().getValidationType() != null){
-                String otpAuth = data.getGroup().getSubCategory().getValidationType();
-                if (otpAuth.equalsIgnoreCase("otp")){
-                    binding.tvRequest.setVisibility(View.VISIBLE);
-                    binding.send.setVisibility(View.VISIBLE);
-                    binding.view1.setVisibility(View.VISIBLE);
-                }else {
-                    binding.tvRequest.setVisibility(View.GONE);
-                    binding.send.setVisibility(View.GONE);
-                    binding.view1.setVisibility(View.GONE);
-                }
-            }
+//            if (data.getGroup().getSubCategory().getValidationType() != null){
+//                String otpAuth = data.getGroup().getSubCategory().getValidationType();
+//                if (otpAuth.equalsIgnoreCase("otp")){
+//                    binding.tvRequest.setVisibility(View.VISIBLE);
+//                    binding.send.setVisibility(View.VISIBLE);
+//                    binding.view1.setVisibility(View.VISIBLE);
+//                }else {
+//                    binding.tvRequest.setVisibility(View.GONE);
+//                    binding.send.setVisibility(View.GONE);
+//                    binding.view1.setVisibility(View.GONE);
+//                }
+//            }
 
         } catch (NullPointerException e) {
             Log.e("null", e.getMessage());
@@ -189,6 +189,15 @@ public class JoinedGroupDetail extends Fragment {
             bt.show();
         });
 
+
+        binding.tvChatWithAdmin.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("receiverId", String.valueOf(data.getGroup().getUserId()));
+            bundle.putString("groupId", String.valueOf(data.getGroup().getId()));
+            bundle.putBoolean("ask_otp", true);
+
+            Navigation.findNavController(requireView()).navigate(R.id.action_joinedGroupDetail2_to_memberChat, bundle);
+        });
 
         binding.slider.addOnChangeListener(new Slider.OnChangeListener() {
             @Override

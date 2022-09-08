@@ -184,18 +184,18 @@ public class JoinCheckoutComplete extends Fragment {
     private void setData(JoinGroupModel data) {
         binding.groupEmail.setText(data.getData().getEmail());
         binding.groupPass.setText(data.getData().getPassword());
-        if (data.getData().getSubCategory().getValidationType() != null){
-            String otpAuth = data.getData().getSubCategory().getValidationType();
-            if (otpAuth.equalsIgnoreCase("otp")){
-                binding.tvRequest.setVisibility(View.VISIBLE);
-                binding.send.setVisibility(View.VISIBLE);
-                binding.view1.setVisibility(View.VISIBLE);
-            }else {
-                binding.tvRequest.setVisibility(View.GONE);
-                binding.send.setVisibility(View.GONE);
-                binding.view1.setVisibility(View.GONE);
-            }
-        }
+//        if (data.getData().getSubCategory().getValidationType() != null){
+//            String otpAuth = data.getData().getSubCategory().getValidationType();
+//            if (otpAuth.equalsIgnoreCase("otp")){
+//                binding.tvRequest.setVisibility(View.VISIBLE);
+//                binding.send.setVisibility(View.VISIBLE);
+//                binding.view1.setVisibility(View.VISIBLE);
+//            }else {
+//                binding.tvRequest.setVisibility(View.GONE);
+//                binding.send.setVisibility(View.GONE);
+//                binding.view1.setVisibility(View.GONE);
+//            }
+//        }
 
     }
 }
