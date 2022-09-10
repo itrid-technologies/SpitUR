@@ -111,5 +111,8 @@ dependencies {
 
    // implementation files('libs/razorpay_upi_intent_sdk.jar')
 
+
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

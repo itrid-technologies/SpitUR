@@ -3,6 +3,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
         maven { url 'https://jitpack.io' }
         maven {
             url  "https://dl.bintray.com/pratheepchowdhary/maven"
@@ -14,7 +15,6 @@ buildscript {
         classpath 'com.google.gms:google-services:4.3.12'
 
     }
-
 
 }
 
