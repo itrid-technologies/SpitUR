@@ -33,9 +33,11 @@ import com.splitur.app.ui.main.view.otp_phone_number.OtpNumber;
 import com.splitur.app.utils.ActivityUtil;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.RefererDataReciever;
+import com.tenjin.android.TenjinSDK;
 
 public class Splash extends AppCompatActivity {
 
+    TenjinSDK instance;
     ActivitySplashBinding binding;
     InstallReferrerClient mReferrerClient;
     MySharedPreferences sharedPreferences;
@@ -48,6 +50,11 @@ public class Splash extends AppCompatActivity {
 
 
         sharedPreferences = new MySharedPreferences(Splash.this);
+        instance = TenjinSDK.getInstance(this, "BDICVUPRNFQOGJR4AIAV2UDKWGZTMFYI");
+        instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
+        instance.connect();
+
+
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

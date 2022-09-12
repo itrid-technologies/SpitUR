@@ -10,7 +10,7 @@ public class Configration {
         public static final String CHAT_MSG_NOTIFICATION = "chatMessageNotification";
         public static final String GROUP_CHAT_MSG_NOTIFICATION = "groupChatMessageNotification";
         public static final String OTP_NOTIFICATION = "otpNotification";
-
+        public static final String NO_TYPE_NOTIFICATION = "NoTypeNotification";
         public static final String CHANNEL_1_ID = "CHANNEL_1_ID";
 
 }

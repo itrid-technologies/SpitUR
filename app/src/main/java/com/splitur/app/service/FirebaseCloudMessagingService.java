@@ -11,8 +11,10 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.utils.Configration;
 import com.splitur.app.utils.NotificationsUtils;
+import com.splitur.app.utils.Split;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,6 +70,7 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
                     Intent intent = new Intent(Configration.GROUP_CHAT_MSG_NOTIFICATION);
                     intent.putExtra("type", remoteMessage.getData().get("type"));
                     LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
                 } else if (notiType.equals("otp_request")) {
                     //broadcast new msg value to group chat
                     Intent intent = new Intent(Configration.OTP_NOTIFICATION);
@@ -80,8 +83,12 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
                     handleNotification(remoteMessage.getNotification().getBody(), remoteMessage.getData().get("type"));
 
                 } else {
-
+                    Intent intent = new Intent(Split.getAppContext(), Dashboard.class);
+                    startActivity(intent);
                 }
+            }else {
+                Intent intent = new Intent(Split.getAppContext(), Dashboard.class);
+                startActivity(intent);
             }
 
             try {
