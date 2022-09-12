@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 
 import com.splitur.app.R;
 import com.splitur.app.databinding.ActivityOtpVerificationBinding;
+import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.view.working_slider.GroupWorkingSlider;
 import com.splitur.app.ui.main.viewmodel.ReferralViewModel;
 import com.splitur.app.ui.main.viewmodel.otp_verification_viewmodel.OtpVerificationViewModel;
@@ -176,11 +177,10 @@ public class OtpVerification extends AppCompatActivity { //otp listener removed
                             if (basicModel.isStatus().equalsIgnoreCase("true")) {
                                 Toast.makeText(this, basicModel.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                            ActivityUtil.gotoPage(OtpVerification.this, GroupWorkingSlider.class);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        });
+                            ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);                        });
                     } else {
-                        ActivityUtil.gotoPage(OtpVerification.this, GroupWorkingSlider.class);
+                        ActivityUtil.gotoPage(OtpVerification.this, Dashboard.class);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
 
