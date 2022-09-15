@@ -1,6 +1,7 @@
 package com.splitur.app.ui.main.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,12 +59,17 @@ public class HomeSectionSubCategoryAdapter extends RecyclerView.Adapter<HomeSect
     @Override
     public void onBindViewHolder(@NonNull HomeSectionSubCategoryAdapter.PopularVH holder, int position) {
 
+        try {
+
 //        Svg.INSTANCE.loadUrl(Constants.IMG_PATH + subCat_icon, holder.icon);
         holder.icon.setImageResource(
                 Constants.getCategoryIcon(context,subCat_icon));
         SubCategoryItem subCategoryItem = homeDataItem.get(position);
         holder.name.setText(subCategoryItem.getSubCatTitle());
 
+        }catch (NullPointerException e){
+            Log.e("home_section", e.getMessage());
+        }
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.splitur.app.ui.main.adapter.group_member;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,9 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull GroupMemberAdapter.ViewHolder holder, int position) {
+
+        try {
+
         com.splitur.app.data.model.group_member.DataItem current_item = list.get(position);
 
         if (current_item.getUser() != null) {
@@ -80,6 +84,10 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
             holder.date.setText(coins_added);
         }else {
             holder.layout.setVisibility(View.GONE);
+        }
+
+        }catch (NullPointerException e){
+            Log.e("group_member", e.getMessage());
         }
     }
 

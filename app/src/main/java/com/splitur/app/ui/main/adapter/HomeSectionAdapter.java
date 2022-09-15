@@ -2,6 +2,7 @@ package com.splitur.app.ui.main.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,106 +48,125 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
     @Override
     public void onBindViewHolder(@NonNull HomeSectionAdapter.ViewHolder holder, int position) {
 
-        HomeDataItem dataItem = homeDataItems.get(position);
+        try {
 
-        holder.title.setText(dataItem.getTitle());
+            HomeDataItem dataItem = homeDataItems.get(position);
 
-        if (dataItem.getSubCategory().size() > 0) {
-            holder.title.setVisibility(View.VISIBLE);
-            holder.categoryView.setVisibility(View.VISIBLE);
-            holder.view_all.setVisibility(View.VISIBLE);
+            holder.title.setText(dataItem.getTitle());
 
-
-            if (dataItem.getSubCategory().size() == 1) {
-                holder.catPart1.setVisibility(View.VISIBLE);
-                holder.catPart2.setVisibility(View.INVISIBLE);
-                holder.catPart3.setVisibility(View.INVISIBLE);
-
-                holder.icon1.setImageResource(
-                        Constants.getCategoryIcon(context, dataItem.getId()));
-                holder.name1.setText(dataItem.getSubCategory().get(0).getSubCatTitle());
+            if (dataItem.getSubCategory().size() > 0) {
+                holder.title.setVisibility(View.VISIBLE);
+                holder.categoryView.setVisibility(View.VISIBLE);
+                holder.view_all.setVisibility(View.VISIBLE);
 
 
-                holder.join1.setOnClickListener(view -> {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(0).getId()));
-                    bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(0).getSubCatTitle()));
-                    Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
-                });
+                if (dataItem.getSubCategory().size() == 1) {
+                    holder.catPart1.setVisibility(View.VISIBLE);
+                    holder.catPart2.setVisibility(View.INVISIBLE);
+                    holder.catPart3.setVisibility(View.INVISIBLE);
+
+                    holder.icon1.setImageResource(
+                            Constants.getCategoryIcon(context, dataItem.getId()));
+                    holder.name1.setText(dataItem.getSubCategory().get(0).getSubCatTitle());
 
 
-
-            } else if (dataItem.getSubCategory().size() == 2) {
-                holder.catPart1.setVisibility(View.VISIBLE);
-                holder.catPart2.setVisibility(View.VISIBLE);
-                holder.catPart3.setVisibility(View.INVISIBLE);
-
-                holder.icon1.setImageResource(
-                        Constants.getCategoryIcon(context, dataItem.getId()));
-                holder.name1.setText(dataItem.getSubCategory().get(0).getSubCatTitle());
-
-                holder.icon2.setImageResource(
-                        Constants.getCategoryIcon(context, dataItem.getId()));
-                holder.name2.setText(dataItem.getSubCategory().get(1).getSubCatTitle());
+                    holder.join1.setOnClickListener(view -> {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(0).getId()));
+                        bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(0).getSubCatTitle()));
+                        Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
+                    });
 
 
-                holder.join1.setOnClickListener(view -> {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(0).getId()));
-                    bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(0).getSubCatTitle()));
-                    Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
-                });
+                } else if (dataItem.getSubCategory().size() == 2) {
+                    holder.catPart1.setVisibility(View.VISIBLE);
+                    holder.catPart2.setVisibility(View.VISIBLE);
+                    holder.catPart3.setVisibility(View.INVISIBLE);
+
+                    holder.icon1.setImageResource(
+                            Constants.getCategoryIcon(context, dataItem.getId()));
+                    holder.name1.setText(dataItem.getSubCategory().get(0).getSubCatTitle());
+
+                    holder.icon2.setImageResource(
+                            Constants.getCategoryIcon(context, dataItem.getId()));
+                    holder.name2.setText(dataItem.getSubCategory().get(1).getSubCatTitle());
 
 
-                holder.join2.setOnClickListener(view -> {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(1).getId()));
-                    bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(1).getSubCatTitle()));
-                    Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
-                });
-
-            } else if (dataItem.getSubCategory().size() == 3) {
-                holder.catPart1.setVisibility(View.VISIBLE);
-                holder.catPart2.setVisibility(View.VISIBLE);
-                holder.catPart3.setVisibility(View.VISIBLE);
-
-                holder.icon1.setImageResource(
-                        Constants.getCategoryIcon(context, dataItem.getId()));
-                holder.name1.setText(dataItem.getSubCategory().get(0).getSubCatTitle());
-
-                holder.icon2.setImageResource(
-                        Constants.getCategoryIcon(context, dataItem.getId()));
-                holder.name2.setText(dataItem.getSubCategory().get(1).getSubCatTitle());
-
-                holder.icon3.setImageResource(
-                        Constants.getCategoryIcon(context, dataItem.getId()));
-                holder.name3.setText(dataItem.getSubCategory().get(2).getSubCatTitle());
+                    holder.join1.setOnClickListener(view -> {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(0).getId()));
+                        bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(0).getSubCatTitle()));
+                        Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
+                    });
 
 
-                holder.join1.setOnClickListener(view -> {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(0).getId()));
-                    bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(0).getSubCatTitle()));
-                    Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
-                });
+                    holder.join2.setOnClickListener(view -> {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(1).getId()));
+                        bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(1).getSubCatTitle()));
+                        Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
+                    });
+
+                } else if (dataItem.getSubCategory().size() == 3) {
+                    holder.catPart1.setVisibility(View.VISIBLE);
+                    holder.catPart2.setVisibility(View.VISIBLE);
+                    holder.catPart3.setVisibility(View.VISIBLE);
+
+                    holder.icon1.setImageResource(
+                            Constants.getCategoryIcon(context, dataItem.getId()));
+                    holder.name1.setText(dataItem.getSubCategory().get(0).getSubCatTitle());
+
+                    holder.icon2.setImageResource(
+                            Constants.getCategoryIcon(context, dataItem.getId()));
+                    holder.name2.setText(dataItem.getSubCategory().get(1).getSubCatTitle());
+
+                    holder.icon3.setImageResource(
+                            Constants.getCategoryIcon(context, dataItem.getId()));
+                    holder.name3.setText(dataItem.getSubCategory().get(2).getSubCatTitle());
 
 
-                holder.join2.setOnClickListener(view -> {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(1).getId()));
-                    bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(1).getSubCatTitle()));
-                    Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
-                });
+                    holder.join1.setOnClickListener(view -> {
+
+                        if (Constants.isNewUser_Join) {
+                            Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
+                        } else {
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(0).getId()));
+                            bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(0).getSubCatTitle()));
+                            Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
+                        }
+                    });
 
 
-                holder.join3.setOnClickListener(view -> {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(2).getId()));
-                    bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(2).getSubCatTitle()));
-                    Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
-                });
+                    holder.join2.setOnClickListener(view -> {
 
-            }
+                        if (Constants.isNewUser_Join) {
+                            Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
+                        } else {
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(1).getId()));
+                            bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(1).getSubCatTitle()));
+                            Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
+                        }
+                    });
+
+
+                    holder.join3.setOnClickListener(view -> {
+
+                        if (Constants.isNewUser_Join) {
+                            Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
+                        } else {
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(2).getId()));
+                            bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(2).getSubCatTitle()));
+                            Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
+                        }
+                    });
+
+                }
 
 
 //
@@ -156,7 +176,7 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
 //            holder.list.setAdapter(adapter);
 
 //            int spacingInPixels = context.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._11sdp);
-            // holder.list.addItemDecoration(new SpacingItemDecorator(11));
+                // holder.list.addItemDecoration(new SpacingItemDecorator(11));
 
 //            adapter.setOnSubCategorySelectListener(position1 -> {
 //                Bundle bundle = new Bundle();
@@ -165,10 +185,14 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
 //                Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
 //            });
 
-        } else {
-            holder.categoryView.setVisibility(View.GONE);
-            holder.title.setVisibility(View.GONE);
-            holder.view_all.setVisibility(View.GONE);
+            } else {
+                holder.categoryView.setVisibility(View.GONE);
+                holder.title.setVisibility(View.GONE);
+                holder.view_all.setVisibility(View.GONE);
+            }
+
+        } catch (NullPointerException e) {
+            Log.e("Home", e.getMessage());
         }
 
 

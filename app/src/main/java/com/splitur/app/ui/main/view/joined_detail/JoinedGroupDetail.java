@@ -120,6 +120,7 @@ public class JoinedGroupDetail extends Fragment {
             }
             binding.groupEmail.setText(data.getGroup().getEmail());
             binding.groupPass.setText(data.getGroup().getPassword());
+
 //            if (data.getGroup().getSubCategory().getValidationType() != null){
 //                String otpAuth = data.getGroup().getSubCategory().getValidationType();
 //                if (otpAuth.equalsIgnoreCase("otp")){

@@ -1,6 +1,7 @@
 package com.splitur.app.ui.main.adapter.friend;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,9 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull FriendListAdapter.ViewHolder holder, int position) {
+
+        try {
+
         DataItem current_item = list.get(position);
 
         if (current_item.getAvatar() != null) {
@@ -49,6 +53,10 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.Vi
 
         holder.name.setText(current_item.getName());
         holder.userid.setText("@" + current_item.getUserId());
+
+        }catch (NullPointerException e){
+            Log.e("friend", e.getMessage());
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.splitur.app.ui.main.adapter.join_search;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,9 @@ public class JoinSearchListAdapter extends RecyclerView.Adapter<JoinSearchListAd
 
     @Override
     public void onBindViewHolder(@NonNull JoinSearchListAdapter.SearchVH holder, int position) {
+
+        try {
+
         final DataItem current_data = dataItems.get(position);
         if (current_data.getCategory() != null) {
             holder.icon.setImageResource(
@@ -103,6 +107,10 @@ public class JoinSearchListAdapter extends RecyclerView.Adapter<JoinSearchListAd
         }else {
             holder.no_memberLayout.setVisibility(View.VISIBLE);
             holder.members.setVisibility(View.GONE);
+        }
+
+        }catch (NullPointerException e){
+            Log.e("join_search", e.getMessage());
         }
     }
 

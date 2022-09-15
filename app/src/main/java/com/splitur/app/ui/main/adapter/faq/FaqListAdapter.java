@@ -1,6 +1,7 @@
 package com.splitur.app.ui.main.adapter.faq;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,8 @@ public class FaqListAdapter extends RecyclerView.Adapter<FaqListAdapter.FaqVH> {
     @Override
     public void onBindViewHolder(@NonNull FaqListAdapter.FaqVH holder, int position) {
 
+        try {
+
         DataItem faqQuery = faqListData.get(position);
         holder.query.setText(faqQuery.getQuestion());
         holder.answer.setText(faqQuery.getAnswer());
@@ -53,6 +56,11 @@ public class FaqListAdapter extends RecyclerView.Adapter<FaqListAdapter.FaqVH> {
                 holder.view.setTag("closed");
             }
         });
+
+        }catch (NullPointerException e){
+            Log.e("faq", e.getMessage());
+        }
+
     }
 
     @Override

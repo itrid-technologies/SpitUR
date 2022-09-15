@@ -2,6 +2,7 @@ package com.splitur.app.ui.main.view.notifications;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(@NonNull NotificationAdapter.NotificationVH holder, int position) {
 
+        try {
+
         NotificationDataItem dataItem = data.get(position);
         if (dataItem.getUserNotification() != null){
             holder.image.setImageResource(Constants.getAvatarIcon(context, Integer.parseInt(dataItem.getUserNotification().getAvatar())));
@@ -59,7 +62,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         holder.nTime.setText(Constants.getTime1(dataItem.getCreatedAt()));
 
-
+        }catch (NullPointerException e){
+            Log.e("Notification", e.getMessage());
+        }
 
     }
 

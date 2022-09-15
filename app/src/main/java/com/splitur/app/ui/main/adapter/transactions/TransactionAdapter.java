@@ -1,6 +1,7 @@
 package com.splitur.app.ui.main.adapter.transactions;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public void onBindViewHolder(@NonNull TransactionAdapter.ViewHolder holder, int position) {
 
+        try {
+
         DataItem dataItem = dataItems.get(position);
         if (dataItem.getPaymentType().equalsIgnoreCase("debit")){
             holder.amount.setText( " -₹" + String.valueOf(dataItem.getAmount()));
@@ -57,6 +60,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             holder.icon.setImageResource(
                     Constants.getCategoryIcon(context, dataItem.getGroupsPaymentTransactions().getSubCategory().getCategory().getId()));
 
+        }
+
+        }catch (NullPointerException e){
+            Log.e("TRANSACTION", e.getMessage());
         }
     }
 

@@ -253,6 +253,7 @@ public interface ApiService {
     Call<PromoResponse> applyPromoCode(@Path("code") String code);
 
     @GET("groups/get_razor_pay_secret")
+
     Call<SecretKeyModel> getRozarSecretKey();
 
     @GET("users/user_active_status/{status}")

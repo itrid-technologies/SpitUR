@@ -2,6 +2,7 @@ package com.splitur.app.ui.main.adapter.all_created_group;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,9 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
 
     @Override
     public void onBindViewHolder(@NonNull AllCreatedGroupAdapter.GroupVH holder, int position) {
+
+        try {
+
         DataItem current_item =  dataItems.get(position);
         holder.name.setText(current_item.getGroupTitle());
 
@@ -69,8 +73,10 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
 
         holder.icon.setImageResource(
                 Constants.getCategoryIcon(context,current_item.getSubCategory().getCategory().getId()));
-  
 
+        }catch (NullPointerException e){
+            Log.e("all_created_group", e.getMessage());
+        }
     }
 
     @Override

@@ -24,14 +24,9 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.skydoves.elasticviews.ElasticImageView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.splitur.app.R;
 import com.splitur.app.data.model.HomeDataItem;
 import com.splitur.app.data.model.active_user.ActiveUserModel;
@@ -43,7 +38,6 @@ import com.splitur.app.ui.main.adapter.HomeSectionAdapter;
 import com.splitur.app.ui.main.adapter.avatar_adapter.AdapterAvatars;
 import com.splitur.app.ui.main.adapter.category_adapter.CategoryAdapter;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
-import com.splitur.app.ui.main.view.profile.Profile;
 import com.splitur.app.ui.main.view.splash.Splash;
 import com.splitur.app.ui.main.viewmodel.UserOnlineStatusViewModel;
 import com.splitur.app.ui.main.viewmodel.avatar_viewmodel.AvatarViewModel;
@@ -55,6 +49,9 @@ import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.SpanningLinearLayoutManager;
 import com.splitur.app.utils.Split;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Home extends Fragment {
@@ -73,7 +70,7 @@ public class Home extends Fragment {
     ProfileViewModel profileViewModel;
     private AvatarViewModel avatarViewModel;
     private List<AvatarItem> avatarList = new ArrayList<>();
-//    private final List<String> avatars = new ArrayList<>();
+    //    private final List<String> avatars = new ArrayList<>();
     private int currentIndex = 0;
 
     int count = 0;
@@ -123,7 +120,7 @@ public class Home extends Fragment {
     private void getNotificationCount() {
         NotificationViewModel notificationViewModel = new NotificationViewModel(0);
         notificationViewModel.initCount();
-        notificationViewModel.getNotificationsCount().observe(getViewLifecycleOwner() , notificationCountModel -> {
+        notificationViewModel.getNotificationsCount().observe(getViewLifecycleOwner(), notificationCountModel -> {
             binding.notificationCount.setText(String.valueOf(notificationCountModel.getCount()));
         });
     }
@@ -135,16 +132,15 @@ public class Home extends Fragment {
         UserOnlineStatusViewModel userOnlineStatusViewModel = new UserOnlineStatusViewModel(1);
         userOnlineStatusViewModel.init();
         userOnlineStatusViewModel.getData().observe(getViewLifecycleOwner(), basicModel -> {
-            if (basicModel.isStatus().equals("true")){
-                Log.e("user online/offline " , basicModel.getMessage());
+            if (basicModel.isStatus().equals("true")) {
+                Log.e("user online/offline ", basicModel.getMessage());
             }
         });
     }
 
 
-
     private void getUserDetails() {
-        profileViewModel = new ProfileViewModel("", "", "", "","");
+        profileViewModel = new ProfileViewModel("", "", "", "", "");
         profileViewModel.initUser();
         profileViewModel.getUser_data().observe(getViewLifecycleOwner(), activeUserModel -> {
             if (activeUserModel.isStatus()) {
@@ -175,7 +171,7 @@ public class Home extends Fragment {
                 count = 1;
 
                 //fetch user data
-                profileViewModel = new ProfileViewModel("", "", "", "","");
+                profileViewModel = new ProfileViewModel("", "", "", "", "");
                 profileViewModel.initUser();
                 profileViewModel.getUser_data().observe(getViewLifecycleOwner(), activeUserModel -> {
                     if (activeUserModel.isStatus()) {
@@ -216,7 +212,7 @@ public class Home extends Fragment {
 
                             saveUserData(activeUserModel);
                             MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
-                            sharedPreferences.saveData(Split.getAppContext(), "userAvatar",  activeUserModel.getData().getAvatar());
+                            sharedPreferences.saveData(Split.getAppContext(), "userAvatar", activeUserModel.getData().getAvatar());
                             sharedPreferences.saveData(Split.getAppContext(), "userName", activeUserModel.getData().getName());
                             sharedPreferences.saveData(Split.getAppContext(), "userId", activeUserModel.getData().getUserId());
 
@@ -296,7 +292,7 @@ public class Home extends Fragment {
 
                                 confirm_logout.setOnClickListener(view2 -> {
 
-                                    profileViewModel = new ProfileViewModel(String.valueOf(activeUserModel.getData().getId()), "", "", "","");
+                                    profileViewModel = new ProfileViewModel(String.valueOf(activeUserModel.getData().getId()), "", "", "", "");
                                     profileViewModel.initLogout();
                                     profileViewModel.getLogout().observe(getViewLifecycleOwner(), basicModel -> {
                                         if (basicModel.isStatus().equalsIgnoreCase("true")) {
@@ -342,7 +338,7 @@ public class Home extends Fragment {
                                 final Integer updatedAvatar = avatars1.get(currentIndex);
 
                                 if (updated_id.equals(Constants.USER_ID)) {
-                                    updateUserInformation(updated_name,updated_id,updated_email, String.valueOf(updatedAvatar));
+                                    updateUserInformation(updated_name, updated_id, updated_email, String.valueOf(updatedAvatar));
 
                                 } else {
                                     UserIdViewModel userIdViewModel = new UserIdViewModel(updated_id);
@@ -350,8 +346,8 @@ public class Home extends Fragment {
                                     userIdViewModel.getData().observe(getViewLifecycleOwner(), basicModel -> {
                                         if (!basicModel.isStatus()) {
                                             message.setVisibility(View.GONE);
-                                            updateUserInformation(updated_name,updated_id,updated_email, String.valueOf(updatedAvatar));
-                                        }else {
+                                            updateUserInformation(updated_name, updated_id, updated_email, String.valueOf(updatedAvatar));
+                                        } else {
                                             message.setText(basicModel.getMessage());
                                             message.setVisibility(View.VISIBLE);
                                         }
@@ -440,12 +436,12 @@ public class Home extends Fragment {
 
     private void setProfileData() {
 
-        String name  = Constants.USER_NAME;
+        String name = Constants.USER_NAME;
         binding.name.setText(Constants.capitalize(name));
         String avatar = Constants.USER_AVATAR;
-        if (avatar.isEmpty()){
+        if (avatar.isEmpty()) {
             binding.userImage.setImageResource(R.drawable.user);
-        }else {
+        } else {
             binding.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
         }
 //        Glide.with(Split.getAppContext()).load(Constants.USER_AVATAR).placeholder(R.color.images_placeholder).into(binding.userImage);
@@ -517,27 +513,42 @@ public class Home extends Fragment {
         }
 
         binding.tvJoin.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("join_sub_cat_id", String.valueOf(popularSubCategoryList.get(0).getId()));//absolute adopter position
-            bundle.putString("join_sub_cat_title", String.valueOf(popularSubCategoryList.get(0).getTitle()));
 
-            Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail, bundle);
+            if (Constants.isNewUser_Join) {
+                Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
+            } else {
+
+                Bundle bundle = new Bundle();
+                bundle.putString("join_sub_cat_id", String.valueOf(popularSubCategoryList.get(0).getId()));//absolute adopter position
+                bundle.putString("join_sub_cat_title", String.valueOf(popularSubCategoryList.get(0).getTitle()));
+
+                Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail, bundle);
+            }
         });
 
         binding.tvJoin1.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("join_sub_cat_id", String.valueOf(popularSubCategoryList.get(1).getId()));//absolute adopter position
-            bundle.putString("join_sub_cat_title", String.valueOf(popularSubCategoryList.get(1).getTitle()));
+            if (Constants.isNewUser_Join) {
+                Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
+            } else {
+                Bundle bundle = new Bundle();
+                bundle.putString("join_sub_cat_id", String.valueOf(popularSubCategoryList.get(1).getId()));//absolute adopter position
+                bundle.putString("join_sub_cat_title", String.valueOf(popularSubCategoryList.get(1).getTitle()));
 
-            Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail, bundle);
+                Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail, bundle);
+            }
         });
 
         binding.tvJoin2.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("join_sub_cat_id", String.valueOf(popularSubCategoryList.get(2).getId()));//absolute adopter position
-            bundle.putString("join_sub_cat_title", String.valueOf(popularSubCategoryList.get(2).getTitle()));
 
-            Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail, bundle);
+            if (Constants.isNewUser_Join) {
+                Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
+            } else {
+                Bundle bundle = new Bundle();
+                bundle.putString("join_sub_cat_id", String.valueOf(popularSubCategoryList.get(2).getId()));//absolute adopter position
+                bundle.putString("join_sub_cat_title", String.valueOf(popularSubCategoryList.get(2).getTitle()));
+
+                Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail, bundle);
+            }
         });
 
 
@@ -566,7 +577,7 @@ public class Home extends Fragment {
         Constants.USER_EMAIL = activeUserModel.getData().getEmail();
         Constants.USER_AVATAR = activeUserModel.getData().getAvatar();
         Constants.NUMBER = activeUserModel.getData().getPhone();
-        if (activeUserModel.getData().getEarned_coins() != null){
+        if (activeUserModel.getData().getEarned_coins() != null) {
             Constants.EARNED_COINS = activeUserModel.getData().getEarned_coins();
         }
 

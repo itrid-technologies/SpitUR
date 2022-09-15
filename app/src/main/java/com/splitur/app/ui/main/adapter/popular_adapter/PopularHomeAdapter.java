@@ -2,6 +2,7 @@ package com.splitur.app.ui.main.adapter.popular_adapter;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class PopularHomeAdapter extends RecyclerView.Adapter<PopularHomeAdapter.
     @Override
     public void onBindViewHolder(@NonNull PopularVH holder, int position) {
 
+        try {
 
             final DataItem current_data = dataItems.get(position);
             if (current_data.getCategory() != null){
@@ -52,6 +54,10 @@ public class PopularHomeAdapter extends RecyclerView.Adapter<PopularHomeAdapter.
                // Svg.INSTANCE.loadUrl(Constants.IMG_PATH+current_data.getCategory().getIcon() , holder.icon);
             }
             holder.name.setText(current_data.getTitle());
+
+        }catch (NullPointerException e){
+            Log.e("popular_home", e.getMessage());
+        }
 
     }
 

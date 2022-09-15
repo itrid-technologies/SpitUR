@@ -46,6 +46,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlansVH> {
     @Override
     public void onBindViewHolder(@NonNull PlanAdapter.PlansVH holder, int position) {
 
+        try {
+
         PlanDataItem dataItem = planDataItems.get(position);
 
         String dyColor = dataItem.getColor().toLowerCase();
@@ -70,6 +72,10 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlansVH> {
 
         holder.title.setText(dataItem.getName());
         holder.body.setText(dataItem.getDescription());
+
+        }catch (NullPointerException e){
+            Log.e("Plan", e.getMessage());
+        }
 
     }
 

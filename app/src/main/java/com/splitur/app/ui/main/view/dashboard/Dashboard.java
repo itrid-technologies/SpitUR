@@ -40,6 +40,7 @@ import com.splitur.app.data.api.ApiManager;
 import com.splitur.app.databinding.ActivityDashboardBinding;
 import com.splitur.app.ui.main.viewmodel.UserOnlineStatusViewModel;
 import com.splitur.app.utils.Configration;
+import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.MyReceiver;
 import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
@@ -105,7 +106,11 @@ public class Dashboard extends AppCompatActivity {
 
                     case 1:
                         // i.getIcon().setTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
-                        mNavController.navigate(R.id.search2, null);
+                        if (Constants.isNewUser_Create){
+                            mNavController.navigate(R.id.groupCreateFlow,null);
+                        }else {
+                            mNavController.navigate(R.id.search2, null);
+                        }
                         break;
                     case 2:
                         //  i.setIconTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));

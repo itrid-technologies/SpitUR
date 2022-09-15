@@ -1,6 +1,7 @@
 package com.splitur.app.ui.main.adapter.search;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,9 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
 
     @Override
     public void onBindViewHolder(@NonNull SearchListAdapter.SearchVH holder, int position) {
+
+        try {
+
         final DataItem current_data = dataItems.get(position);
         if (current_data.getCategory() != null) {
 
@@ -107,6 +111,10 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Se
             holder.no_memberLayout.setVisibility(View.VISIBLE);
             holder.members.setVisibility(View.GONE);
 
+        }
+
+        }catch (NullPointerException e){
+            Log.e("search", e.getMessage());
         }
     }
 

@@ -35,7 +35,25 @@
            />
         <action
             android:id="@+id/action_home2_to_notifications"
-            app:destination="@id/notifications" />
+            app:destination="@id/notifications"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_home2_to_groupCreateFlow"
+            app:destination="@id/groupCreateFlow"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_home2_to_joinGroupFlow"
+            app:destination="@id/joinGroupFlow"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/search2"
@@ -393,5 +411,15 @@
         android:name="com.splitur.app.ui.main.view.notifications.Notifications"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/groupCreateFlow"
+        android:name="com.splitur.app.ui.main.view.flow.GroupCreateFlow"
+        android:label="fragment_group_create_flow"
+        tools:layout="@layout/fragment_group_create_flow" />
+    <fragment
+        android:id="@+id/joinGroupFlow"
+        android:name="com.splitur.app.ui.main.view.flow.JoinGroupFlow"
+        android:label="fragment_join_group_flow"
+        tools:layout="@layout/fragment_join_group_flow" />
 
 </navigation>

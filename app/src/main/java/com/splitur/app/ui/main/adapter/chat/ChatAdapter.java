@@ -65,6 +65,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
             case 0:
+
+                try {
+
                 RecieverVH rvh = (RecieverVH) holder;
                 ReceiverModel data = (ReceiverModel) mMessageList.get(position);
                 rvh.message.setText(data.getMessage());
@@ -82,9 +85,15 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     ((RecieverVH) holder).name.setVisibility(View.VISIBLE);
                     ((RecieverVH) holder).imageView.setVisibility(View.VISIBLE);
                 }
+                }catch (NullPointerException e){
+                    Log.e("chat", e.getMessage());
+                }
 
                 break;
             case 1:
+
+                try {
+
                 SenderVH svh = (SenderVH) holder;
                 SenderModel data2 = (SenderModel) mMessageList.get(position);
                 Log.e("TAG", "onBindViewHolder: " + data2.get_message() );
@@ -93,15 +102,23 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 String[] sSentTime = data2.getTime().split("T");
                 sSTime = sSentTime[1].substring(0, Math.min(sSentTime[1].length(), 5));
                // svh.time.setText(sSTime);
-
+                }catch (NullPointerException e){
+                    Log.e("chat", e.getMessage());
+                }
                 break;
 
             case 2:
+
+                try {
+
                 OTPVH otpvh = (OTPVH) holder;
                 OTpModel tpModel = (OTpModel) mMessageList.get(position);
                 Log.e("TAG", "onBindViewHolder: " + tpModel.get_message() );
                 otpvh.senderMessage.setText(tpModel.get_message());
 
+                }catch (NullPointerException e){
+                    Log.e("chat", e.getMessage());
+                }
 
                 break;
         }

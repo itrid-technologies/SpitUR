@@ -51,6 +51,8 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
     @Override
     public void onBindViewHolder(@NonNull GroupDetailAdapter.ViewHolder holder, int position) {
 
+        try {
+
         dataItem = data.get(position);
         holder.title.setText(dataItem.getTitle());
         if (dataItem.getGroupAdmin() != null) {
@@ -179,6 +181,10 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
             String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
             holder.coins.setText(value + " Coins");
         }
+
+        }catch (NullPointerException e){
+            Log.e("group_detail", e.getMessage());
+        }
     }
 
     private void visibleMember(TextView one, TextView two, TextView three, TextView four, TextView five, TextView six) {
@@ -197,6 +203,8 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
         five.setAlpha((float) 0.4);
         six.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00000000")));
         six.setAlpha((float) 0.4);
+
+
     }
 
 

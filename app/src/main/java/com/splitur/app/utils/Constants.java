@@ -88,6 +88,9 @@ public final class Constants {
     public static final String PINTEREST_PACKAGE_NAME = "com.pinterest";
     public static final String WHATS_PACKAGE_NAME = "com.whatsapp";
     public static final String DISCORD_PACKAGE_NAME = "https://discord.gg";
+    public static boolean isNewUser_Create = true;
+    public static boolean isNewUser_Join = true;
+
 
     public static String getDate(String data) {
         String date;

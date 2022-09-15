@@ -1,6 +1,7 @@
 package com.splitur.app.ui.main.adapter.all_joined_group;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,9 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
 
     @Override
     public void onBindViewHolder(@NonNull AllJoinedGroupAdapter.GroupVH holder, int position) {
+
+        try {
+
         com.splitur.app.data.model.all_joined_groups.DataItem current_item = dataItems.get(position);
         if (current_item.getGroup() != null) {
             holder.layout.setVisibility(View.VISIBLE);
@@ -130,6 +134,10 @@ public class AllJoinedGroupAdapter extends RecyclerView.Adapter<AllJoinedGroupAd
             holder.layout.setVisibility(View.GONE);
         }
 
+
+        }catch (NullPointerException e){
+            Log.e("all_joined_groups", e.getMessage());
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.splitur.app.ui.main.adapter.category_adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.CategoryVH holder, int position) {
+
+       try {
+
         CategoryDataItems current_item =  categoryDataItems.get(position);
 //        Svg.INSTANCE.loadUrl(
 //                Constants.IMG_PATH + current_item.getIcon(),
@@ -52,6 +56,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.icon.setImageResource(
                 Constants.getCategoryIcon(context,current_item.getId()));
         holder.name.setText(current_item.getTitle());
+
+       }catch (NullPointerException e){
+           Log.e("category", e.getMessage());
+       }
     }
 
     @Override
