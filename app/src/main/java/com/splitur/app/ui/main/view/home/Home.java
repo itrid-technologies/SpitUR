@@ -24,8 +24,12 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
 import com.skydoves.elasticviews.ElasticImageView;
 import com.splitur.app.R;
 import com.splitur.app.data.model.HomeDataItem;
@@ -91,6 +95,15 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+
+        MySharedPreferences mySharedPreferences = new MySharedPreferences(requireContext());
+        boolean isNewUser_Join = mySharedPreferences.getBooleanData(requireContext() , "isNewUser_Join");
+
+        if (!isNewUser_Join) {
+            Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
+        }
+
         category_list = new ArrayList<>();
         homeDataItems = new ArrayList<>();
 
@@ -115,7 +128,11 @@ public class Home extends Fragment {
 
         initClickListeners();
         getPopularList();
+
+
+
     }
+
 
     private void getNotificationCount() {
         NotificationViewModel notificationViewModel = new NotificationViewModel(0);
@@ -514,41 +531,27 @@ public class Home extends Fragment {
 
         binding.tvJoin.setOnClickListener(view -> {
 
-            if (Constants.isNewUser_Join) {
-                Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
-            } else {
-
                 Bundle bundle = new Bundle();
                 bundle.putString("join_sub_cat_id", String.valueOf(popularSubCategoryList.get(0).getId()));//absolute adopter position
                 bundle.putString("join_sub_cat_title", String.valueOf(popularSubCategoryList.get(0).getTitle()));
-
                 Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail, bundle);
-            }
         });
 
         binding.tvJoin1.setOnClickListener(view -> {
-            if (Constants.isNewUser_Join) {
-                Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
-            } else {
+
                 Bundle bundle = new Bundle();
                 bundle.putString("join_sub_cat_id", String.valueOf(popularSubCategoryList.get(1).getId()));//absolute adopter position
                 bundle.putString("join_sub_cat_title", String.valueOf(popularSubCategoryList.get(1).getTitle()));
-
                 Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail, bundle);
-            }
         });
 
         binding.tvJoin2.setOnClickListener(view -> {
 
-            if (Constants.isNewUser_Join) {
-                Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
-            } else {
                 Bundle bundle = new Bundle();
                 bundle.putString("join_sub_cat_id", String.valueOf(popularSubCategoryList.get(2).getId()));//absolute adopter position
                 bundle.putString("join_sub_cat_title", String.valueOf(popularSubCategoryList.get(2).getTitle()));
-
                 Navigation.findNavController(view).navigate(R.id.action_home2_to_groupDetail, bundle);
-            }
+
         });
 
 

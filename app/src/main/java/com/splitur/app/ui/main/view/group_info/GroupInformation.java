@@ -12,12 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.splitur.app.R;
 import com.splitur.app.data.model.group_detail.DataItem;
 import com.splitur.app.data.model.group_score.GroupSplitScoreItem;
@@ -29,6 +24,9 @@ import com.splitur.app.ui.main.viewmodel.join_group.JoinGroupViewModel;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.Split;
 import com.splitur.app.utils.TimeAgo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GroupInformation extends Fragment {
@@ -119,7 +117,7 @@ public class GroupInformation extends Fragment {
             String coin = String.valueOf(dataItem.getCostPerMember());
             double coinFloat = Double.parseDouble(coin);
             String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
-            binding.count.setText(value + " Coins");
+            binding.count.setText(String.format("%s %s", value, requireContext().getString(R.string.inr_sign)));
             // binding.tvDaysValue.setText(dataItem.);
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -137,10 +135,10 @@ public class GroupInformation extends Fragment {
                         binding.verificationStatusList.setVisibility(View.VISIBLE);
 
                         scoreItems.addAll(groupScoreModel.getData().getGroupSplitScore());
-                        for (int i=0; i<= scoreItems.size()-1; i++){
-                            if (scoreItems.get(i).getSplitGroupUserId() != null){
+                        for (int i = 0; i <= scoreItems.size() - 1; i++) {
+                            if (scoreItems.get(i).getSplitGroupUserId() != null) {
                                 buildScoreList(scoreItems);
-                            }else {
+                            } else {
                                 binding.noUserLayout.setVisibility(View.VISIBLE);
                                 binding.verificationStatusList.setVisibility(View.GONE);
                             }

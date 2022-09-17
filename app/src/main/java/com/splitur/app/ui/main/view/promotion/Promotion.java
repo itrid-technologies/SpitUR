@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.splitur.app.R;
 import com.splitur.app.databinding.FragmentPromotionBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.utils.Constants;
@@ -41,9 +42,9 @@ public class Promotion extends Fragment {
 
         String earnedCoins = Constants.EARNED_COINS;
         if (!earnedCoins.isEmpty()){
-            binding.tvTotalCoins.setText(earnedCoins +" Coins");
+            binding.tvTotalCoins.setText(String.format("%s %s", earnedCoins, getString(R.string.inr_sign)));
         }else {
-            binding.tvTotalCoins.setText("0 Coins");
+            binding.tvTotalCoins.setText(String.format("%s %s", 0, getString(R.string.inr_sign)));
         }
 
         initClickListeners();

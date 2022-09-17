@@ -17,11 +17,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.slider.Slider;
 import com.google.gson.Gson;
-
 import com.splitur.app.R;
 import com.splitur.app.data.model.all_joined_groups.DataItem;
 import com.splitur.app.databinding.FragmentJoinedGroupDetailBinding;
@@ -101,7 +99,7 @@ public class JoinedGroupDetail extends Fragment {
             String coin = String.valueOf(data.getGroup().getCostPerMember());
             double coinFloat = Double.parseDouble(coin);
             String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
-            binding.joinedProfile.count.setText(value + " Coins");
+            binding.joinedProfile.count.setText(String.format("%s %s", value, getString(R.string.inr_sign)));
             binding.tvScoreValue.setText(String.valueOf(data.getGroup().getGroupAdmin().getSpliturScore()));
 
 

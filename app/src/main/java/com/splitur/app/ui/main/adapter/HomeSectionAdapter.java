@@ -126,44 +126,30 @@ public class HomeSectionAdapter extends RecyclerView.Adapter<HomeSectionAdapter.
 
 
                     holder.join1.setOnClickListener(view -> {
-
-                        if (Constants.isNewUser_Join) {
-                            Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
-                        } else {
-
                             Bundle bundle = new Bundle();
                             bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(0).getId()));
                             bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(0).getSubCatTitle()));
                             Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
-                        }
+
                     });
 
 
                     holder.join2.setOnClickListener(view -> {
 
-                        if (Constants.isNewUser_Join) {
-                            Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
-                        } else {
-
                             Bundle bundle = new Bundle();
                             bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(1).getId()));
                             bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(1).getSubCatTitle()));
                             Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
-                        }
+
                     });
 
 
                     holder.join3.setOnClickListener(view -> {
 
-                        if (Constants.isNewUser_Join) {
-                            Navigation.findNavController(view).navigate(R.id.joinGroupFlow);
-                        } else {
-
                             Bundle bundle = new Bundle();
                             bundle.putString("join_sub_cat_id", String.valueOf(dataItem.getSubCategory().get(2).getId()));
                             bundle.putString("join_sub_cat_title", String.valueOf(dataItem.getSubCategory().get(2).getSubCatTitle()));
                             Navigation.findNavController(adapter_view).navigate(R.id.action_home2_to_groupDetail, bundle);
-                        }
                     });
 
                 }

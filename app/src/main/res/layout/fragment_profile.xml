@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/coinValue"
                 app:layout_constraintBottom_toBottomOf="@id/coinValue"
-                android:text="Coins"
+                android:text="@string/inr_sign"
                 android:padding="5dp"
                 android:textSize="18sp"
                 style="@style/semiBoldText"/>

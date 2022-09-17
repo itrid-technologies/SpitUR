@@ -109,7 +109,8 @@ public class JoinCheckOut extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     try {
                         final String amount = response.body().get("data").getAsString();
-                        binding.btnJoin.setText(String.format("Join for %s Coins", amount));
+                        binding.btnJoin.setText(String.format
+                                ("Join for %s %s", value, requireContext().getString(R.string.inr_sign)));
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -166,8 +167,9 @@ public class JoinCheckOut extends Fragment {
             String coin = String.valueOf(dataItem.getCostPerMember());
             double coinFloat = Double.parseDouble(coin);
             value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
-            binding.profile2.count.setText(String.format("%s Coins", value));
-            binding.priceValue.setText(String.format("%s Coins", value));
+            binding.profile2.count.setText(String.format("%s %s", value, requireContext().getString(R.string.inr_sign)));
+            binding.priceValue.setText(String.format("%s %s", value, requireContext().getString(R.string.inr_sign)));
+
 
 //            final double fee = (Double.parseDouble(value) / 100) * 2.5;
 //            final String roundedFee = String.format("%.2f", fee);

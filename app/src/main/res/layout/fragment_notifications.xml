@@ -35,74 +35,69 @@
             android:paddingEnd="20dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/no_dataavailable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/no_dataavailable">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
 
                 <TextView
+                    android:id="@+id/tv_no_notification_available"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/no_group_image"
-                    app:layout_constraintEnd_toEndOf="@id/no_group_image"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="Thats Strange you dont have any Notifications!!"
-                    android:fontFamily="@font/inter_regular"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
                     android:alpha="0.6"
+                    android:fontFamily="@font/inter_regular"
                     android:gravity="center"
-                    android:id="@+id/tv_no_notification_available"/>
+                    android:text="Thats Strange you dont have any Notifications!!"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@id/no_group_image"
+                    app:layout_constraintStart_toStartOf="@id/no_group_image"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <ImageView
+                    android:id="@+id/no_group_image"
                     android:layout_width="272dp"
                     android:layout_height="272dp"
                     android:layout_marginTop="@dimen/_8sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:src="@drawable/no_notification"
-                    app:layout_constraintTop_toBottomOf="@id/tv_no_notification_available"
-                    android:id="@+id/no_group_image"/>
-
-
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_no_notification_available" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notificationsList"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:id="@+id/notificationsList"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ProgressBar
+                android:id="@+id/progressBar"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/notificationsList"
-                android:id="@+id/progressBar"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/loadingView"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
+                android:layout_marginBottom="@dimen/_100sdp"
                 android:scaleType="fitXY"
                 android:visibility="visible"
-                android:layout_marginBottom="@dimen/_100sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

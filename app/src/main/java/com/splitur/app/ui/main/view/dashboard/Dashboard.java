@@ -106,7 +106,9 @@ public class Dashboard extends AppCompatActivity {
 
                     case 1:
                         // i.getIcon().setTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFFFF")));
-                        if (Constants.isNewUser_Create){
+                        MySharedPreferences mySharedPreferences = new MySharedPreferences(Dashboard.this);
+                        boolean isNewUser_Create = mySharedPreferences.getBooleanData(Dashboard.this , "isNewUser_Create");
+                        if (!isNewUser_Create){
                             mNavController.navigate(R.id.groupCreateFlow,null);
                         }else {
                             mNavController.navigate(R.id.search2, null);

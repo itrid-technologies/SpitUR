@@ -22,6 +22,7 @@ import com.splitur.app.ui.main.view.working_slider.GroupWorkingSlider;
 import com.splitur.app.ui.main.view.working_slider.SliderAdapter;
 import com.splitur.app.utils.ActivityUtil;
 import com.splitur.app.utils.Constants;
+import com.splitur.app.utils.MySharedPreferences;
 import com.splitur.app.utils.Split;
 
 import java.util.ArrayList;
@@ -40,42 +41,36 @@ public class GroupCreateFlow extends Fragment {
         binding = FragmentGroupCreateFlowBinding.inflate(inflater, container, false);
         Dashboard.hideNav(true);
         binding.createFlow.tvGroupCreateFlow.setText("How to Create");
-
-        Constants.isNewUser_Create = false;
-        
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Constants.isNewUser_Create = false;
-
         createGroup = new ArrayList<>();
         createGroupSlider();
         clickListeners();
     }
 
     private void clickListeners() {
-        binding.createFlow.nextImageButton.setOnClickListener(view -> {
-            Intent intent = new Intent(requireContext(),Dashboard.class);
-            startActivity(intent);
-            requireActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-
-
-//            if (binding.createFlow.nextImageButton.getText().toString().equalsIgnoreCase("Home")){
-//                Navigation.findNavController(view).navigateUp();
-//            }else {
-//                if (currentIndex < createGroup.size() - 1) {
-//                    currentIndex++;
-//                    binding.createFlow.imageSlider.setCurrentPagePosition(currentIndex);
-//                }else {
-//                    binding.createFlow.nextImageButton.setText("Home");
-//                }
-//            }
-
-        });
+//        binding.createFlow.nextImageButton.setOnClickListener(view -> {
+//            Intent intent = new Intent(requireContext(),Dashboard.class);
+//            startActivity(intent);
+//            requireActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+//
+//
+////            if (binding.createFlow.nextImageButton.getText().toString().equalsIgnoreCase("Home")){
+////                Navigation.findNavController(view).navigateUp();
+////            }else {
+////                if (currentIndex < createGroup.size() - 1) {
+////                    currentIndex++;
+////                    binding.createFlow.imageSlider.setCurrentPagePosition(currentIndex);
+////                }else {
+////                    binding.createFlow.nextImageButton.setText("Home");
+////                }
+////            }
+//
+//        });
 
 //        binding.createFlow.previousImageButton.setOnClickListener(view -> {
 //            if (currentIndex > 0) {
@@ -100,10 +95,42 @@ public class GroupCreateFlow extends Fragment {
 
         SliderAdapter sliderAdapter = new SliderAdapter(Split.getAppContext(), createGroup);
         binding.createFlow.imageSlider.setSliderAdapter(sliderAdapter);
-        binding.createFlow.imageSlider.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
+//        binding.createFlow.imageSlider.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
         binding.createFlow.imageSlider.setIndicatorAnimation(IndicatorAnimationType.WORM);
         binding.createFlow.imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        binding.createFlow.imageSlider.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
-        binding.createFlow.imageSlider.setAutoCycle(true);
+//        binding.createFlow.imageSlider.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
+        binding.createFlow.imageSlider.setAutoCycle(false);
+
+
+        binding.createFlow.nextImageButton.setOnClickListener(v -> {
+            final int pos = binding.createFlow.imageSlider.getCurrentPagePosition();
+            if (pos == 5) {
+                binding.createFlow.nextImageButton.setText("Home");
+            }
+
+            if (pos == 6) {
+                MySharedPreferences mySharedPreferences = new MySharedPreferences(requireContext());
+                mySharedPreferences.saveBooleanData(requireContext() , "isNewUser_Create" , true);
+                Intent intent = new Intent(requireContext(), Dashboard.class);
+                startActivity(intent);
+                requireActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            } else {
+                binding.createFlow.imageSlider.slideToNextPosition();
+            }
+
+        });
+
+        binding.createFlow.previousImageButton.setOnClickListener(v -> {
+            final int page = binding.createFlow.imageSlider.getCurrentPagePosition();
+            if (page != 5) {
+                binding.createFlow.nextImageButton.setText("Next");
+            }
+            if (page > 0) {
+                binding.createFlow.imageSlider.setCurrentPagePosition(
+                        binding.createFlow.imageSlider.getCurrentPagePosition() - 1
+                );
+            }
+        });
+        
     }
 }

@@ -2,6 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="@dimen/_30sdp"
+    android:paddingEnd="@dimen/_30sdp"
+    android:paddingBottom="@dimen/_20sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -42,6 +45,34 @@
         app:sliderScrollTimeInSec="1" />
 
 
+<!--    <ImageView-->
+<!--        android:id="@+id/previous_image_button"-->
+<!--        android:layout_width="74dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/back_arrow"-->
+<!--        android:background="@drawable/rect_24dp"-->
+<!--        android:backgroundTint="@color/blue"-->
+<!--        android:paddingTop="@dimen/_18sdp"-->
+<!--        android:visibility="gone"-->
+<!--        android:paddingBottom="@dimen/_18sdp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+
+<!--    <Button-->
+<!--        android:id="@+id/next_image_button"-->
+<!--        style="@style/buttonStyle"-->
+<!--        android:layout_width="248dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/button_round_bg"-->
+<!--        android:paddingTop="16dp"-->
+<!--        android:paddingBottom="15dp"-->
+<!--        android:text="Home"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@id/previous_image_button"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginStart="@dimen/_10sdp"/>-->
+
     <ImageView
         android:id="@+id/previous_image_button"
         android:layout_width="74dp"
@@ -50,7 +81,6 @@
         android:background="@drawable/rect_24dp"
         android:backgroundTint="@color/blue"
         android:paddingTop="@dimen/_18sdp"
-        android:visibility="gone"
         android:paddingBottom="@dimen/_18sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -59,12 +89,12 @@
     <Button
         android:id="@+id/next_image_button"
         style="@style/buttonStyle"
-        android:layout_width="248dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_round_bg"
         android:paddingTop="16dp"
         android:paddingBottom="15dp"
-        android:text="Home"
+        android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/previous_image_button"
         app:layout_constraintEnd_toEndOf="parent"

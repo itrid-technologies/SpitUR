@@ -174,12 +174,12 @@ public class GroupDetailAdapter extends RecyclerView.Adapter<GroupDetailAdapter.
         String id = Constants.ID;
         if (dataItem.getGroupAdmin().getId() == Integer.parseInt(id)) {
             String coin = String.valueOf(dataItem.getCostPerMember());
-            holder.coins.setText(coin + " Coins");
+            holder.coins.setText(String.format("%s %s", coin, context.getString(R.string.inr_sign)));
         } else {
             String coin = String.valueOf(dataItem.getCostPerMember());
             double coinFloat = Double.parseDouble(coin);
             String value = String.valueOf(Math.round(((coinFloat * 30) / 100) + coinFloat));
-            holder.coins.setText(value + " Coins");
+            holder.coins.setText(String.format("%s %s", value, context.getString(R.string.inr_sign)));
         }
 
         }catch (NullPointerException e){

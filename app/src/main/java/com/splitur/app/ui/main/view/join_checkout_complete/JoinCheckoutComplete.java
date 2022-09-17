@@ -5,23 +5,26 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Task;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
 import com.google.gson.Gson;
-
 import com.google.gson.JsonObject;
 import com.splitur.app.R;
 import com.splitur.app.data.api.ApiManager;
@@ -39,9 +42,9 @@ import retrofit2.Response;
 
 public class JoinCheckoutComplete extends Fragment {
 
-   FragmentJoinCheckoutCompleteBinding binding;
-   JoinGroupModel joinGroupModel;
-   private String groupAdminId;
+    FragmentJoinCheckoutCompleteBinding binding;
+    JoinGroupModel joinGroupModel;
+    private String groupAdminId;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -60,7 +63,7 @@ public class JoinCheckoutComplete extends Fragment {
         Glide.with(Split.getAppContext()).load(R.drawable.success_gif).into(binding.successGif);
 
 
-        if (getArguments() != null){
+        if (getArguments() != null) {
             String response = getArguments().getString("group_credentials");
             groupAdminId = getArguments().getString("group_admin_id");
             Gson gson = new Gson();
@@ -79,7 +82,7 @@ public class JoinCheckoutComplete extends Fragment {
 
         binding.copyEmail.setOnClickListener(view -> {
             android.content.ClipboardManager clipboard = (android.content.ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper",binding.groupEmail.getText().toString());
+            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper", binding.groupEmail.getText().toString());
             clipboard.setPrimaryClip(clip);
 
             Toast.makeText(Split.getAppContext(), "Copied", Toast.LENGTH_SHORT).show();
@@ -87,7 +90,7 @@ public class JoinCheckoutComplete extends Fragment {
 
         binding.copyPass.setOnClickListener(view -> {
             android.content.ClipboardManager clipboard = (android.content.ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper",binding.groupPass.getText().toString());
+            android.content.ClipData clip = android.content.ClipData.newPlainText("WordKeeper", binding.groupPass.getText().toString());
             clipboard.setPrimaryClip(clip);
 
             Toast.makeText(Split.getAppContext(), "Copied", Toast.LENGTH_SHORT).show();
@@ -104,7 +107,7 @@ public class JoinCheckoutComplete extends Fragment {
             bundle.putString("groupId", String.valueOf(joinGroupModel.getData().getGroupId()));
             bundle.putString("receiverId", groupAdminId);
             bundle.putBoolean("ask_otp", true);
-            Navigation.findNavController(view).navigate(R.id.action_joinCheckoutComplete_to_memberChat,bundle);
+            Navigation.findNavController(view).navigate(R.id.action_joinCheckoutComplete_to_memberChat, bundle);
         });
 
         binding.workingIcon.setOnClickListener(view -> {
@@ -135,22 +138,22 @@ public class JoinCheckoutComplete extends Fragment {
 
         contactBtn.setOnClickListener(view1 -> {
             try {
-            alertDialog.dismiss();
-            Bundle bundle = new Bundle();
-            bundle.putString("groupId", String.valueOf(joinGroupModel.getData().getGroupId()));
-            bundle.putString("receiverId", groupAdminId);
-            bundle.putBoolean("ask_otp", true);
-            moveToMemberChat(bundle,view);
+                alertDialog.dismiss();
+                Bundle bundle = new Bundle();
+                bundle.putString("groupId", String.valueOf(joinGroupModel.getData().getGroupId()));
+                bundle.putString("receiverId", groupAdminId);
+                bundle.putBoolean("ask_otp", true);
+                moveToMemberChat(bundle, view);
 
-            }catch (IllegalStateException e){
-                Log.e("MemberChat",e.getMessage());
+            } catch (IllegalStateException e) {
+                Log.e("MemberChat", e.getMessage());
             }
         });
 
     }
 
     private void moveToMemberChat(Bundle bundle, View view) {
-        Navigation.findNavController(view).navigate(R.id.action_joinCheckoutComplete_to_memberChat,bundle);
+        Navigation.findNavController(view).navigate(R.id.action_joinCheckoutComplete_to_memberChat, bundle);
 
     }
 
@@ -160,23 +163,50 @@ public class JoinCheckoutComplete extends Fragment {
 
         JsonObject object = new JsonObject();
         object.addProperty("group_id", String.valueOf(joinGroupModel.getData().getGroupId()));
-        object.addProperty("is_working",status);
+        object.addProperty("is_working", status);
 
-        Call<BasicModel> call = ApiManager.getRestApiService().checkGroupCredentialsStatus("Bearer "+token,object);
+        Call<BasicModel> call = ApiManager.getRestApiService().checkGroupCredentialsStatus("Bearer " + token, object);
         call.enqueue(new Callback<BasicModel>() {
             @Override
             public void onResponse(@NonNull Call<BasicModel> call, @NonNull Response<BasicModel> response) {
-                BasicModel basicModel =  response.body();
-              //  if (basicModel.isStatus()){
-                    binding.workingIcon.setVisibility(View.GONE);
-                    binding.notWorkingIcon.setVisibility(View.GONE);
-                    binding.btnAskAdmin.setVisibility(View.VISIBLE);
+                BasicModel basicModel = response.body();
+                //  if (basicModel.isStatus()){
+                binding.workingIcon.setVisibility(View.GONE);
+                binding.notWorkingIcon.setVisibility(View.GONE);
+                binding.btnAskAdmin.setVisibility(View.VISIBLE);
+                new Handler(Looper.getMainLooper()).postDelayed(() -> initInAppReviewFlow(), 1000);
                 //}
             }
 
             @Override
             public void onFailure(@NonNull Call<BasicModel> call, @NonNull Throwable t) {
 
+            }
+        });
+    }
+
+    private void initInAppReviewFlow() {
+        ReviewManager manager = ReviewManagerFactory.create(requireContext());
+
+        Task<ReviewInfo> request = manager.requestReviewFlow();
+        request.addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // We can get the ReviewInfo object
+                ReviewInfo reviewInfo = task.getResult();
+                Log.e("ReviewInfo", "initReviewFlow: " + reviewInfo);
+
+                //inAppFlow
+                Task<Void> flow = manager.launchReviewFlow(requireActivity(), reviewInfo);
+                flow.addOnCompleteListener(flowTask -> {
+                    // The flow has finished. The API does not indicate whether the user
+                    // reviewed or not, or even whether the review dialog was shown. Thus, no
+                    // matter the result, we continue our app flow.
+                    Log.e("flowTask", "initReviewFlow: completed");
+                });
+
+            } else {
+                // There was some problem, log or handle the error code.
+                Log.e("REVIEW_MANAGER", "initReviewFlow: error occurred");
             }
         });
     }

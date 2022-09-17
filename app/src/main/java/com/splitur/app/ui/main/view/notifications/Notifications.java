@@ -1,6 +1,11 @@
 package com.splitur.app.ui.main.view.notifications;
 
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,12 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Parcelable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.splitur.app.R;
 import com.splitur.app.data.model.notification.NotificationDataItem;
@@ -32,7 +31,7 @@ public class Notifications extends Fragment {
     ArrayList<NotificationDataItem> notificationData;
 
     Parcelable recyclerViewState;
-    private boolean flag_loading , isApiHit;
+    private boolean flag_loading, isApiHit;
     int nextPage = 1;
     private int maxPageLimit;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
@@ -102,22 +101,25 @@ public class Notifications extends Fragment {
 
         mViewModel = new NotificationViewModel(nextPage);
         mViewModel.init();
-        mViewModel.getNotifications().observe(getViewLifecycleOwner(),notificationModel -> {
-            if (notificationModel.isSuccess()){
-                if (notificationModel.getData() != null){
-                    if (notificationModel.getData().size() > 0){
+        mViewModel.getNotifications().observe(getViewLifecycleOwner(), notificationModel -> {
+            if (notificationModel.isSuccess()) {
+                if (notificationModel.getData() != null) {
+                    if (notificationModel.getData().size() > 0) {
                         flag_loading = true;
                         notificationData = new ArrayList<>();
                         notificationData.addAll(notificationModel.getData());
                         maxPageLimit = notificationModel.getPage();
                         buildRv(notificationData);
-                    }else {
+                        binding.noDataavailable.setVisibility(View.GONE);
+                    } else {
                         binding.loadingView.setVisibility(View.GONE);
-                        binding.noDataavailable.setVisibility(View.VISIBLE);
+                        if (nextPage == 1) {
+                            binding.noDataavailable.setVisibility(View.VISIBLE);
+                        }
                         flag_loading = false;
 
                     }
-                }else {
+                } else {
                     binding.loadingView.setVisibility(View.GONE);
                 }
             }
@@ -141,14 +143,13 @@ public class Notifications extends Fragment {
         binding.notificationsList.setAdapter(adapter);
 
         adapter.setOnNotificationClickListener(position -> {
-            if (notificationData.get(position).getType().equalsIgnoreCase("memmber_chat")){
+            if (notificationData.get(position).getType().equalsIgnoreCase("memmber_chat")) {
                 Bundle bundle = new Bundle();
                 bundle.putString("receiverId", String.valueOf(notificationData.get(position).getUserId()));
                 bundle.putString("groupId", notificationData.get(position).getGroupId());
                 bundle.putBoolean("ask_otp", false);
                 Navigation.findNavController(requireView()).navigate(R.id.memberChat, bundle);
-            }
-            else if (notificationData.get(position).getType().equalsIgnoreCase("group_chat")){
+            } else if (notificationData.get(position).getType().equalsIgnoreCase("group_chat")) {
                 Bundle bundle = new Bundle();
                 bundle.putString("groupId", notificationData.get(position).getGroupId());
                 Navigation.findNavController(requireView()).navigate(R.id.chatroom, bundle);
