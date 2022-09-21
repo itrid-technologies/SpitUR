@@ -23,6 +23,7 @@ import com.splitur.app.data.model.group_detail.DataItem;
 import com.splitur.app.databinding.FragmentJoinGroupPlansBinding;
 import com.splitur.app.ui.main.adapter.group_detail_adapter.GroupDetailAdapter;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
+import com.splitur.app.ui.main.view.working_slider.GroupWorkingSlider;
 import com.splitur.app.ui.main.viewmodel.group_viewmodel.GroupDetailViewModel;
 import com.splitur.app.utils.Split;
 
@@ -193,7 +194,6 @@ public class GroupDetail extends Fragment {
             if (groupDetailModel.isSuccess()) {
 
                 if (groupDetailModel.getData() != null) {
-                    binding.noGroupAvailable.setVisibility(View.GONE);
 
                     flag_loading = true;
                     isApiHit = false;
@@ -204,19 +204,24 @@ public class GroupDetail extends Fragment {
                         maxPageLimit = groupDetailModel.getPage();
                         buildRec(pagingDetailItems);
                     }else {
-                        binding.noGroupAvailable.setVisibility(View.VISIBLE);
-                        binding.groupsDetailList.setVisibility(View.GONE);
+                        checkPreviousData();
                     }
                 } else {
-
-                    binding.noGroupAvailable.setVisibility(View.VISIBLE);
-                    binding.groupsDetailList.setVisibility(View.GONE);
-
-
                     flag_loading = false;
+                    checkPreviousData();
                 }
             }
         });
+    }
+
+    private void checkPreviousData() {
+        if (pagingDetailItems.size() > 0){
+            binding.groupsDetailList.setVisibility(View.VISIBLE);
+            binding.noGroupAvailable.setVisibility(View.GONE);
+        }else {
+            binding.groupsDetailList.setVisibility(View.GONE);
+            binding.noGroupAvailable.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getSearchedDataByGroupId(String intData) {
@@ -227,11 +232,18 @@ public class GroupDetail extends Fragment {
             if (groupDetailModel.isSuccess()) {
 
                 if (groupDetailModel.getData().size() > 0) {
+                    binding.noGroupAvailable.setVisibility(View.GONE);
+
                     detailItems = new ArrayList<>();
                     detailItems.addAll(groupDetailModel.getData());
                     sarchBuildRec(detailItems);
+                }else {
+                    binding.noGroupAvailable.setVisibility(View.VISIBLE);
+                    binding.groupsDetailList.setVisibility(View.GONE);
+
                 }
             }
+
         });
     }
 
@@ -282,7 +294,6 @@ public class GroupDetail extends Fragment {
         binding.groupsDetailList.setVisibility(View.VISIBLE);
         binding.searchGroupsDetailList.setVisibility(View.GONE);
         binding.noGroupAvailable.setVisibility(View.GONE);
-
 
         binding.groupsDetailList.setLayoutManager(mLayoutManager);
         GroupDetailAdapter adapter = new GroupDetailAdapter(requireContext(), detailItems);

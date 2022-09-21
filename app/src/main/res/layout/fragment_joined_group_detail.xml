@@ -440,7 +440,7 @@
                     android:fontFamily="@font/poppin_regular"
                     android:hint="Email"
                     android:textColor="@color/hint_color"
-                    android:text="Rajesh2022"
+                    android:text="-"
                     app:layout_constraintTop_toTopOf="@id/iv_user"
                     app:layout_constraintBottom_toBottomOf="@id/iv_user"
                     android:id="@+id/tv_userid"/>

@@ -68,6 +68,7 @@ public class ChooseAvatar extends AppCompatActivity {
         avatars1.add(18);
         avatars1.add(19);
         avatars1.add(20);
+        avatars1.add(21);
         buildAvatarsRV();
 
 

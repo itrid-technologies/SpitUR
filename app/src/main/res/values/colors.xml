@@ -10,7 +10,8 @@
 
     <color name="background">#141629</color>
     <color name="blue">#246BFD</color>
-    <color name="images_placeholder">#94F0F0</color>
+    <color name="images_placeholder">#133c85</color>
+<!--    //#94F0F0 image placeholder-->
     <color name="dark_blue">#0F1122</color>
     <color name="popular_bg">#1E2242</color>
 <!--    <color name="light_blue">#282C4A</color>-->

@@ -10,7 +10,7 @@
         android:id="@+id/otp_list_image"
         android:layout_width="46dp"
         android:layout_height="46dp"
-        android:src="@drawable/user"
+        android:src="@drawable/avatar9"
         app:civ_border_color="#FF3D00"
         app:civ_border_width="2dp"
         app:civ_circle_background_color="@color/images_placeholder"

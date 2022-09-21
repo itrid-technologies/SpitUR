@@ -108,7 +108,7 @@ public class Profile extends Fragment {
         binding.name.setText(Constants.capitalize(name));
         String avatar = Constants.USER_AVATAR;
         if (avatar.isEmpty()){
-            binding.userImage.setImageResource(R.drawable.user);
+            binding.userImage.setImageResource(R.color.images_placeholder);
         }else {
             binding.userImage.setImageResource(Constants.getAvatarIcon(requireContext(), Integer.parseInt(avatar)));
         }
@@ -264,6 +264,8 @@ public class Profile extends Fragment {
                             avatars1.add(18);
                             avatars1.add(19);
                             avatars1.add(20);
+                            avatars1.add(21);
+
 //                            avatarViewModel = new AvatarViewModel();
 //                            avatarViewModel.init();
 //                            avatarViewModel.getData().observe(getViewLifecycleOwner(), avatarModel -> {

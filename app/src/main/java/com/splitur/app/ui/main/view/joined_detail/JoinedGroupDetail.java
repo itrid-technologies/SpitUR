@@ -1,6 +1,8 @@
 package com.splitur.app.ui.main.view.joined_detail;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -118,6 +120,15 @@ public class JoinedGroupDetail extends Fragment {
             }
             binding.groupEmail.setText(data.getGroup().getEmail());
             binding.groupPass.setText(data.getGroup().getPassword());
+
+            binding.tvUserid.setText(data.getGroup().getGroupAdmin().getUserId());
+            if (data.getGroup().getGroupAdmin().isOnlineOflineStatus()) {
+                binding.tvOnline.setText("Online");
+                binding.onlineIcon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#0FB900")));
+            } else {
+                binding.tvOnline.setText("Offline");
+                binding.onlineIcon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
+            }
 
 //            if (data.getGroup().getSubCategory().getValidationType() != null){
 //                String otpAuth = data.getGroup().getSubCategory().getValidationType();

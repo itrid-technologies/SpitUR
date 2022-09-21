@@ -118,6 +118,12 @@ public class JoinCheckoutComplete extends Fragment {
             isGroupWorking(false);
         });
 
+        binding.btnGroupChat.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("groupId", String.valueOf(joinGroupModel.getData().getGroupId()));
+            Navigation.findNavController(view).navigate(R.id.chatroom, bundle);
+        });
+
         binding.btnAskAdmin.setOnClickListener(this::callAdminContactDialogue);
     }
 
@@ -173,9 +179,11 @@ public class JoinCheckoutComplete extends Fragment {
                 //  if (basicModel.isStatus()){
                 binding.workingIcon.setVisibility(View.GONE);
                 binding.notWorkingIcon.setVisibility(View.GONE);
-                binding.btnAskAdmin.setVisibility(View.VISIBLE);
-                new Handler(Looper.getMainLooper()).postDelayed(() -> initInAppReviewFlow(), 1000);
-                //}
+                if (status) {
+                    new Handler(Looper.getMainLooper()).postDelayed(() -> initInAppReviewFlow(), 1000);
+                }else {
+                    binding.btnAskAdmin.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override

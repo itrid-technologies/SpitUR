@@ -94,7 +94,7 @@ public final class NotificationsUtils {
 
 
         // notification icon
-        final int icon = R.mipmap.ic_launcher;
+        final int icon = R.mipmap.updated_app_logo;
 
         Intent mainIntent = new Intent(mContext, Dashboard.class);
         mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

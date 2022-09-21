@@ -228,64 +228,67 @@ public final class Constants {
             int icon;
             switch (id) {
                 case 1:
-                    icon = R.drawable.avatar_asian_man;
+                    icon = R.drawable.avatar1;
                     break;
                 case 2:
-                    icon = R.drawable.avatar_indian_man;
+                    icon = R.drawable.avatar2;
                     break;
                 case 3:
-                    icon = R.drawable.avatar_black_man;
+                    icon = R.drawable.avatar3;
                     break;
                 case 4:
-                    icon = R.drawable.avatar_western_man;
+                    icon = R.drawable.avatar4;
                     break;
                 case 5:
-                    icon = R.drawable.avatar_college_student;
+                    icon = R.drawable.avatar5;
                     break;
                 case 6:
-                    icon = R.drawable.avatar_grand_father;
+                    icon = R.drawable.avatar6;
                     break;
                 case 7:
-                    icon = R.drawable.avatar_asia_woman;
+                    icon = R.drawable.avatar7;
                     break;
                 case 8:
-                    icon = R.drawable.avatar_black_woman;
+                    icon = R.drawable.avatar8;
                     break;
                 case 9:
-                    icon = R.drawable.avatar_west_woman;
+                    icon = R.drawable.avatar9;
                     break;
                 case 10:
-                    icon = R.drawable.avatar_muslim_woman;
+                    icon = R.drawable.avatar10;
                     break;
                 case 11:
-                    icon = R.drawable.avatar_nerd_woman;
+                    icon = R.drawable.avatar11;
                     break;
                 case 12:
-                    icon = R.drawable.avatar_grand_mother;
+                    icon = R.drawable.avatar12;
                     break;
                 case 13:
-                    icon = R.drawable.avatar_farmer;
+                    icon = R.drawable.avatar13;
                     break;
                 case 14:
-                    icon = R.drawable.avatar_teacher;
+                    icon = R.drawable.avatar14;
                     break;
                 case 15:
-                    icon = R.drawable.avatar_astronaut;
+                    icon = R.drawable.avatar15;
                     break;
                 case 16:
-                    icon = R.drawable.avatar_doctor;
+                    icon = R.drawable.avatar16;
                     break;
                 case 17:
-                    icon = R.drawable.avatar_designer;
+                    icon = R.drawable.avatar17;
                     break;
                 case 18:
-                    icon = R.drawable.avatar_artist;
+                    icon = R.drawable.avatar18;
                     break;
                 case 19:
-                    icon = R.drawable.avatar_professor;
+                    icon = R.drawable.avatar19;
                     break;
                 case 20:
-                    icon = R.drawable.avatar_baby;
+                    icon = R.drawable.avatar20;
+                    break;
+                case 21:
+                    icon = R.drawable.avatar21;
                     break;
                 default:
                     icon = R.color.images_placeholder;
