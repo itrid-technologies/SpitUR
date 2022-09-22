@@ -190,15 +190,15 @@
 
     <TextView
         android:id="@+id/coins_value"
-        android:layout_width="@dimen/_70sdp"
+        android:layout_width="@dimen/_68sdp"
         android:layout_height="46dp"
         android:background="@drawable/rect_blue_bg"
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center"
-        android:text="143 Coins"
+        android:text="143 $"
         android:paddingTop="3dp"
         android:textColor="@color/white"
-        android:textSize="@dimen/_11sdp"
+        android:textSize="@dimen/_13sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

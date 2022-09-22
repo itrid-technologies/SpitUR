@@ -55,7 +55,8 @@
                 android:src="@drawable/avatar9"
                 app:civ_circle_background_color="#133c85"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/hello"
+                app:layout_constraintBottom_toBottomOf="@id/name"
                 />
 
 
