@@ -81,13 +81,13 @@ public final class NotificationsUtils {
         return 0;
     }
 
-    public void showNotificationMessage(String title, String message, String timeStamp, Intent intent) {
-        showNotificationMessage(title, message, timeStamp, intent, null);
+    public void showNotificationMessage(String title, String message, String timeStamp) {
+        showNotificationMessage(title, message, timeStamp, null);
     }
 
 
 
-    public void showNotificationMessage(final String title, final String message, final String timeStamp, Intent intent, String imageUrl) {
+    public void showNotificationMessage(final String title, final String message, final String timeStamp, String imageUrl) {
         // Check for empty push message
         if (TextUtils.isEmpty(message))
             return;
@@ -106,7 +106,8 @@ public final class NotificationsUtils {
                         PendingIntent.FLAG_CANCEL_CURRENT
                 );
 
-        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext, Configration.CHANNEL_1_ID);
+        final NotificationCompat.Builder mBuilder = new NotificationCompat
+                .Builder(mContext, Configration.CHANNEL_1_ID);
 
 //        final Uri alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
 //                + "://" + mContext.getPackageName() + "/raw/notification");
@@ -136,14 +137,14 @@ public final class NotificationsUtils {
         inboxStyle.addLine(message);
 
         Notification notification;
-        notification = mBuilder.setSmallIcon(icon).setTicker(title).setWhen(0)
+        notification = mBuilder.setTicker(title).setWhen(0)
+                .setSmallIcon(R.mipmap.updated_app_logo)
                 .setAutoCancel(true)
                 .setContentTitle(title)
                 .setContentIntent(resultPendingIntent)
 //                .setSound(alarmSound)
                 .setStyle(inboxStyle)
                 .setWhen(getTimeMilliSec(timeStamp))
-                .setSmallIcon(R.mipmap.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), icon))
                 .setContentText(message)
                 .build();

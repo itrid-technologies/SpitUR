@@ -156,12 +156,10 @@ public class Chatroom extends Fragment {
         });
 
         binding.sendGroupMessage.setOnClickListener(view -> {
-
             String message = binding.messgae.getText().toString().trim();
             if (!message.isEmpty()) {
-
+                binding.sendGroupMessage.setEnabled(false);
                 sendMessage(message);
-
             }
         });
     }
@@ -189,32 +187,30 @@ public class Chatroom extends Fragment {
                             binding.chatRv.setAdapter(adapter);
                             binding.chatRv.scrollToPosition(msgs.size() - 1);
                             binding.messgae.setText("");
+                            binding.sendGroupMessage.setEnabled(true);
                         }else {
                             binding.chatRv.scrollToPosition(msgs.size() - 1);
                             adapter.notifyItemInserted(msgs.size() - 1);
                             adapter.notifyDataSetChanged();
                             binding.messgae.setText("");
+                            binding.sendGroupMessage.setEnabled(true);
                         }
                     }
                 } else if (response.code() == 400) {
                     if (response.errorBody() != null) {
                         Constants.getApiError(Split.getAppContext(),response.errorBody());
-
                     }
                 } else if (response.code() == 500) {
                     if (response.errorBody() != null) {
                         Constants.getApiError(Split.getAppContext(),response.errorBody());
-
                     }
                 }
             }
-
             @Override
             public void onFailure(@NonNull Call<MessageSendModel> call, @NonNull Throwable t) {
                 Log.e(" Error", t.getMessage());
             }
         });
-
     }
 
     @Override

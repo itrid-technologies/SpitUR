@@ -86,7 +86,7 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
                     Intent intent = new Intent(Split.getAppContext(), Dashboard.class);
                     startActivity(intent);
                 }
-            }else {
+            } else {
                 Intent intent = new Intent(Split.getAppContext(), Dashboard.class);
                 startActivity(intent);
             }
@@ -98,6 +98,13 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
                 Log.e(TAG, "Exception: " + e.getMessage());
             }
         }
+
+//        try {
+//            JSONObject json = new JSONObject(remoteMessage.getData().toString());
+//            handleDataMessage(json);
+//        } catch (Exception e) {
+//            Log.e(TAG, "Exception: " + e.getMessage());
+//        }
     }//onMessageReceived
 
     private void handleNotification(String message, String logoutType) {
@@ -144,6 +151,9 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
             }
 
 
+            //showNotificationMessage(getApplicationContext(), json.get("title").toString(), json.get("message").toString(), json.get("timestamp").toString());
+
+
             // app is in background, show the notification in notification tray
 //                Intent resultIntent = new Intent(getApplicationContext(), Dashboard.class);
 //                resultIntent.putExtra("message", json.get("message").toString());
@@ -168,19 +178,18 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
     /**
      * Showing notification with text only
      */
-    private void showNotificationMessage(Context context, String title, String message, String timeStamp, Intent intent) {
+    private void showNotificationMessage(Context context, String title, String message, String timeStamp) {
         notificationUtils = new NotificationsUtils(context);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        notificationUtils.showNotificationMessage(title, message, timeStamp, intent);
+        notificationUtils.showNotificationMessage(title, message, timeStamp);
     }
 
     /**
      * Showing notification with text and image
      */
-    private void showNotificationMessageWithBigImage(Context context, String title, String message, String timeStamp, Intent intent, String imageUrl) {
-        notificationUtils = new NotificationsUtils(context);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        notificationUtils.showNotificationMessage(title, message, timeStamp, intent, imageUrl);
-    }
+//    private void showNotificationMessageWithBigImage(Context context, String title, String message, String timeStamp, Intent intent, String imageUrl) {
+//        notificationUtils = new NotificationsUtils(context);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        notificationUtils.showNotificationMessage(title, message, timeStamp, intent, imageUrl);
+//    }
 
 }//end class

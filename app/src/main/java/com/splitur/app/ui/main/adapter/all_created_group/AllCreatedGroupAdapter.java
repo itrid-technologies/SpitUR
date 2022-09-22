@@ -69,7 +69,11 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
             holder.open.setText("Closed");
             holder.open.setBackgroundResource(R.drawable.closed_bg);
         }
-
+        if (current_item.isMessage_seen()){
+            holder.messages_status.setVisibility(View.GONE);
+        }else {
+            holder.messages_status.setVisibility(View.VISIBLE);
+        }
 
         holder.icon.setImageResource(
                 Constants.getCategoryIcon(context,current_item.getSubCategory().getCategory().getId()));
@@ -89,7 +93,7 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
     }
 
     public static class GroupVH extends RecyclerView.ViewHolder {
-        public ImageView icon;
+        public ImageView icon, messages_status;
         public TextView name,slots, open;
 
         public GroupVH(@NonNull View itemView, ItemClickListener mListener, boolean supportChat) {
@@ -99,6 +103,7 @@ public class AllCreatedGroupAdapter extends RecyclerView.Adapter<AllCreatedGroup
             slots = itemView.findViewById(R.id.space);
             icon = itemView.findViewById(R.id.search_icons);
             open = itemView.findViewById(R.id.tv_open);
+            messages_status = itemView.findViewById(R.id.chat_status);
 
             open.setOnClickListener(view -> {
                 String isOpen = open.getText().toString().trim();

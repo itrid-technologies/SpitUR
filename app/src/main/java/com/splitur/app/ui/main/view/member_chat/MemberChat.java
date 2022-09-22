@@ -214,6 +214,7 @@ public class MemberChat extends Fragment {
         binding.sendMemberMessage.setOnClickListener(view -> {
             String message = binding.messgae.getText().toString().trim();
             if (!message.isEmpty()) {
+                binding.sendMemberMessage.setEnabled(false);
                 viewModel = new ChatMemberViewModel(group_id, receiver_id, message);
                 viewModel.initSendMessage();
                 viewModel.getData().observe(getViewLifecycleOwner(), messageSendModel -> {
@@ -226,11 +227,15 @@ public class MemberChat extends Fragment {
                             binding.memberChatRv.setAdapter(adapter);
                             binding.memberChatRv.scrollToPosition(msgs.size() - 1);
                             binding.messgae.setText("");
+                            binding.sendMemberMessage.setEnabled(true);
+
                         } else {
                             binding.memberChatRv.scrollToPosition(msgs.size() - 1);
                             adapter.notifyItemInserted(msgs.size() - 1);
                             adapter.notifyDataSetChanged();
                             binding.messgae.setText("");
+                            binding.sendMemberMessage.setEnabled(true);
+
                         }
                         initChatList();
 

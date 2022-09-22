@@ -215,6 +215,7 @@ public class SupportChat extends Fragment {
             String query = binding.message.getText().toString();
             if (!query.isEmpty()) {
 
+                binding.sendSupportMessage.setEnabled(false);
                 if (msgs.size() == 0) {
                     MySharedPreferences sharedPreferences = new MySharedPreferences(Split.getAppContext());
                     String conversation_id = sharedPreferences.getData(Split.getAppContext(), "unique_conversation_id");
@@ -253,6 +254,7 @@ public class SupportChat extends Fragment {
                             adapter.notifyItemInserted(msgs.size() - 1);
                             adapter.notifyDataSetChanged();
                             binding.message.setText("");
+                            binding.sendSupportMessage.setEnabled(true);
                         }
                     });
                 }

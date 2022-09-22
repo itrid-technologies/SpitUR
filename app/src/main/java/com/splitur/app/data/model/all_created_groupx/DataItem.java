@@ -52,6 +52,9 @@ public class DataItem{
 	@SerializedName("plans_id")
 	private int plansId;
 
+	@SerializedName("message_seen")
+	private boolean message_seen;
+
 	@SerializedName("updatedAt")
 	private String updatedAt;
 
@@ -121,5 +124,9 @@ public class DataItem{
 
 	public boolean isStatus() {
 		return status;
+	}
+
+	public boolean isMessage_seen() {
+		return message_seen;
 	}
 }

@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.splitur.app.data.model.otp_verification.AuthenticationModel;
 import com.splitur.app.data.repository.otp_verification.OtpVerificationRepository;
-import com.splitur.app.ui.main.view.otp_verification.OtpVerification;
 
 public class OtpVerificationViewModel extends ViewModel {
 

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.splitur.app.R;
 import com.splitur.app.databinding.ActivityGroupWorkingSliderBinding;
 import com.splitur.app.ui.main.view.dashboard.Dashboard;
-import com.splitur.app.ui.main.view.otp_verification.OtpVerification;
 import com.splitur.app.utils.ActivityUtil;
 import com.splitur.app.utils.Split;
 
@@ -33,10 +32,7 @@ public class GroupWorkingSlider extends AppCompatActivity {
         list = new ArrayList<>();
 
         buildSliderList();
-
         clickListeners();
-
-
     }
 
     private void clickListeners() {

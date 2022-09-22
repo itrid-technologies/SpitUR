@@ -37,9 +37,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Split"
         android:windowSoftInputMode="adjustResize">
-        <activity
-            android:name=".ui.main.view.working_slider.GroupWorkingSlider"
-            android:exported="false" />
+
 
         <activity
             android:name=".ui.main.view.WebViewActivity"

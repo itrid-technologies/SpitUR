@@ -53,6 +53,7 @@ public class Notifications extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        notificationData = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(Split.getAppContext(), RecyclerView.VERTICAL, false);
 
         clickListeners();
@@ -106,7 +107,6 @@ public class Notifications extends Fragment {
                 if (notificationModel.getData() != null) {
                     if (notificationModel.getData().size() > 0) {
                         flag_loading = true;
-                        notificationData = new ArrayList<>();
                         notificationData.addAll(notificationModel.getData());
                         maxPageLimit = notificationModel.getPage();
                         buildRv(notificationData);
@@ -117,7 +117,6 @@ public class Notifications extends Fragment {
                             binding.noDataavailable.setVisibility(View.VISIBLE);
                         }
                         flag_loading = false;
-
                     }
                 } else {
                     binding.loadingView.setVisibility(View.GONE);
