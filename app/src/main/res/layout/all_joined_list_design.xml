@@ -73,7 +73,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:civ_circle_background_color="#404251"
-            android:src="@drawable/avatar1"
+            android:src="@drawable/member1"
             android:id="@+id/member1"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -88,7 +88,7 @@
             app:civ_circle_background_color="#404251"
             app:civ_border_color="#2B2D3E"
             app:civ_border_width="@dimen/_1sdp"
-            android:src="@drawable/avatar2"/>
+            android:src="@drawable/member2"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="25dp"
@@ -102,7 +102,7 @@
             app:civ_circle_background_color="#404251"
             app:civ_border_color="#2B2D3E"
             app:civ_border_width="@dimen/_1sdp"
-            android:src="@drawable/avatar3"/>
+            android:src="@drawable/member3"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="25dp"
@@ -116,7 +116,7 @@
             app:civ_circle_background_color="#404251"
             app:civ_border_color="#2B2D3E"
             app:civ_border_width="@dimen/_1sdp"
-            android:src="@drawable/avatar4"/>
+            android:src="@drawable/member4"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="25dp"
@@ -167,7 +167,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/avatar9"
+            android:src="@drawable/avatar_artist"
             app:civ_circle_background_color="#404251"
             android:id="@+id/empty"/>
 
