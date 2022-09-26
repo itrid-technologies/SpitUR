@@ -20,16 +20,10 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.splitur.app.R;
 import com.splitur.app.data.model.all_created_groupx.DataItem;
-import com.splitur.app.data.model.otp_request.AllOtpRequestModel;
 import com.splitur.app.databinding.FragmentCreatedGroupDetailBinding;
 import com.splitur.app.ui.main.adapter.OtpRequestsAdapter;
 import com.splitur.app.ui.main.adapter.group_member.GroupMemberAdapter;
@@ -37,6 +31,9 @@ import com.splitur.app.ui.main.view.dashboard.Dashboard;
 import com.splitur.app.ui.main.viewmodel.memebers_viewmodel.GroupMembersViewModel;
 import com.splitur.app.utils.Constants;
 import com.splitur.app.utils.Split;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CreatedGroupDetail extends Fragment {
@@ -101,7 +98,6 @@ public class CreatedGroupDetail extends Fragment {
                 }
             }
         });
-
 
 
         getAllOtpRequests();
@@ -265,47 +261,57 @@ public class CreatedGroupDetail extends Fragment {
             GroupMemberAdapter adapter = new GroupMemberAdapter(Split.getAppContext(), membersList);
             binding.groupMembersList.setAdapter(adapter);
 
-            adapter.setOnRemoveListener(position -> {
+            adapter.setOnMembersActionListener(new GroupMemberAdapter.ItemClickListener() {
+                @Override
+                public void onRemove(int position) {
+                    final BottomSheetDialog bt = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
+                    View carDetailView = LayoutInflater.from(requireContext()).inflate(R.layout.ask_to_remove_dialogue, null, false);
+                    ConstraintLayout deleteLayout = carDetailView.findViewById(R.id.deleteLAYOUT);
+                    TextView remove = carDetailView.findViewById(R.id.tv_remove);
+                    ImageView delete = carDetailView.findViewById(R.id.confirm_remove);
+                    ConstraintLayout confirm_layout = carDetailView.findViewById(R.id.delete_layout);
 
-                final BottomSheetDialog bt = new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme);
-                View carDetailView = LayoutInflater.from(requireContext()).inflate(R.layout.ask_to_remove_dialogue, null, false);
-                ConstraintLayout deleteLayout = carDetailView.findViewById(R.id.deleteLAYOUT);
-                TextView remove = carDetailView.findViewById(R.id.tv_remove);
-                ImageView delete = carDetailView.findViewById(R.id.confirm_remove);
-                ConstraintLayout confirm_layout = carDetailView.findViewById(R.id.delete_layout);
-
-                deleteLayout.setOnClickListener(view -> {
-                    if (confirm_layout.getTag().equals("hidden")) {
-                        confirm_layout.setVisibility(View.VISIBLE);
-                        confirm_layout.setTag("visible");
-                    } else {
-                        confirm_layout.setVisibility(View.GONE);
-                        confirm_layout.setTag("hidden");
-                    }
-
-                });
-
-                remove.setText("Remove Member");
-
-
-                delete.setOnClickListener(view -> {
-
-
-                    membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), String.valueOf(membersList.get(position).getUserId()), "", "", false);
-                    membersViewModel.initRemoveMember();
-                    membersViewModel.getMember_remove_data().observe(getViewLifecycleOwner(), basicModel -> {
-                        if (basicModel.isStatus().equalsIgnoreCase("true")) {
-                            adapter.removeAt(position);
-                            bt.cancel();
-                            displayRemovedDialogue("Group member Removed");
+                    deleteLayout.setOnClickListener(view -> {
+                        if (confirm_layout.getTag().equals("hidden")) {
+                            confirm_layout.setVisibility(View.VISIBLE);
+                            confirm_layout.setTag("visible");
+                        } else {
+                            confirm_layout.setVisibility(View.GONE);
+                            confirm_layout.setTag("hidden");
                         }
+
                     });
-                });
 
-                bt.setContentView(carDetailView);
-                bt.show();
+                    remove.setText("Remove Member");
+
+
+                    delete.setOnClickListener(view -> {
+
+
+                        membersViewModel = new GroupMembersViewModel((String.valueOf(data.getId())), String.valueOf(membersList.get(position).getUserId()), "", "", false);
+                        membersViewModel.initRemoveMember();
+                        membersViewModel.getMember_remove_data().observe(getViewLifecycleOwner(), basicModel -> {
+                            if (basicModel.isStatus().equalsIgnoreCase("true")) {
+                                adapter.removeAt(position);
+                                bt.cancel();
+                                displayRemovedDialogue("Group member Removed");
+                            }
+                        });
+                    });
+
+                    bt.setContentView(carDetailView);
+                    bt.show();
+                }
+
+                @Override
+                public void onChat(int position) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("receiverId", String.valueOf(membersList.get(position).getUser().getId()));
+                    bundle.putString("groupId", String.valueOf(membersList.get(position).getGroupId()));
+
+                    Navigation.findNavController(requireView()).navigate(R.id.action_createdGroupDetail_to_memberChat, bundle);
+                }
             });
-
         }
     }
 

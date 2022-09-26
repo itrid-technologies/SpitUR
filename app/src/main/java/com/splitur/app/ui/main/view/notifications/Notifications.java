@@ -126,7 +126,6 @@ public class Notifications extends Fragment {
     }
 
     private void clickListeners() {
-
         binding.nToolbar.back.setOnClickListener(view -> {
             Navigation.findNavController(view).navigateUp();
         });

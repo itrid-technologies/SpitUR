@@ -34,7 +34,7 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
     String adminId;
 
 
-    public void setOnRemoveListener(ItemClickListener listener) {
+    public void setOnMembersActionListener(ItemClickListener listener) {
         mListener = listener;
     }
 
@@ -72,13 +72,6 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
 
             holder.name.setText(current_item.getUser().getUserId());
 
-            holder.chat.setOnClickListener(view -> {
-                Bundle bundle = new Bundle();
-                bundle.putString("receiverId", String.valueOf(current_item.getUser().getId()));
-                bundle.putString("groupId", String.valueOf(current_item.getGroupId()));
-
-                Navigation.findNavController(view).navigate(R.id.action_createdGroupDetail_to_memberChat, bundle);
-            });
 
             String coins_added = Constants.coinsDate(current_item.getCreatedAt());
             holder.date.setText(coins_added);
@@ -98,6 +91,7 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
 
     public interface ItemClickListener {
         void onRemove(int position);
+        void onChat(int position);
     }
 
 
@@ -122,6 +116,14 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<GroupMemberAdapter.
                 if(mListener != null){
                     if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                         mListener.onRemove(getAdapterPosition());
+                    }
+                }
+            });
+
+            chat.setOnClickListener(view -> {
+                if(mListener != null){
+                    if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        mListener.onChat(getAdapterPosition());
                     }
                 }
             });

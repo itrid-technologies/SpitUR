@@ -24,6 +24,7 @@ import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -147,22 +148,26 @@ public final class Constants {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static String coinsDate(String dateAdded) {
 
+
         String date;
         String[] date_value = dateAdded.split("T");
         date = date_value[0];
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar calendar = Calendar.getInstance();
+        LocalDate today = LocalDate.parse(date); //Today
+        LocalDate tomorrow = today.plusDays(30); //Plus 1 day
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return tomorrow.format(formatter);
 
-        try {
-            calendar.setTime(sdf.parse(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        calendar.add(Calendar.DATE, 30);
-        String dateAfter = sdf.format(calendar.getTime());
-
-        return dateAfter;
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//        Calendar calendar = Calendar.getInstance();
+//
+//        try {
+//            calendar.setTime(sdf.parse(date));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        calendar.add(Calendar.DATE, 30);
+//        String dateAfter = sdf.format(calendar.getTime());
     }
 
     public static String getFormattedDateTimeNow() {
