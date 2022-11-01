@@ -50,7 +50,7 @@ public class Splash extends AppCompatActivity {
 
 
         sharedPreferences = new MySharedPreferences(Splash.this);
-        instance = TenjinSDK.getInstance(this, "BDICVUPRNFQOGJR4AIAV2UDKWGZTMFYI");
+        instance = TenjinSDK.getInstance(this, "2EGFJZAMRKEJT16YVSVVD5ASGRGJWWWR");
         instance.setAppStore(TenjinSDK.AppStoreType.googleplay);
         instance.connect();
 

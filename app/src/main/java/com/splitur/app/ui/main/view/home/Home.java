@@ -254,7 +254,6 @@ public class Home extends Fragment {
                             avatars1.add(18);
                             avatars1.add(19);
                             avatars1.add(20);
-                            
 //
 //                            avatarViewModel = new AvatarViewModel();
 //                            avatarViewModel.init();
