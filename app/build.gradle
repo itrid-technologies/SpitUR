@@ -11,8 +11,8 @@ android {
         applicationId "com.splitur.app"
         minSdk 21
         targetSdk 32
-        versionCode 1
-        versionName "0.2"
+        versionCode 17
+        versionName "0.8152"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
